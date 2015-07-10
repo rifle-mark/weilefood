@@ -3,25 +3,25 @@ platform :ios, '7.0'
 
 target 'Weilefood' do
   # 友盟统计
-  pod 'UMengAnalytics', '~> 3.5.8'
+  pod 'UMengAnalytics'
   # 友盟分享
-  ##pod 'UMengSocial', '~> 4.2.3'
+  ##pod 'UMengSocial'
 
   # 网络请求库
-  pod 'AFNetworking', '~> 2.5.4'
-  pod 'AFNetworkActivityLogger', '~> 2.0'
+  pod 'AFNetworking'
+  pod 'AFNetworkActivityLogger', :configurations => ['Debug']
   # AutoLayout库
-  pod 'Masonry', '~> 0.6.1'
+  pod 'Masonry'
   # JSON与Model对象互转库
-  pod 'MJExtension', '~> 2.3.5'
+  pod 'MJExtension'
   # 网络图片显示，以及缓存
-  pod 'SDWebImage', '~> 3.7.2'
+  pod 'SDWebImage'
   # HUD提示组件
-  pod 'MBProgressHUD', '~> 0.9.1'
+  pod 'MBProgressHUD'
   # 下拉、上拉刷新功能
-  pod 'MJRefresh', '~> 2.0.1'
+  pod 'MJRefresh'
   # CoreData扩展
-  pod 'MagicalRecord', '~> 2.3.0'
+  pod 'MagicalRecord'
 
 end
 

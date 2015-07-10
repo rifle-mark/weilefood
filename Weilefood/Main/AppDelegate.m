@@ -17,13 +17,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // 友盟统计
+    [MobClick startWithAppkey:UMengAnalyticsAppKey reportPolicy:BATCH channelId:UMengAnalyticsChannelId];
+    
+#ifdef DEBUG
     // 开启AFNetworking日志
     AFNetworkActivityLogger *networkActivityLogger = [AFNetworkActivityLogger sharedLogger];
     networkActivityLogger.level = AFLoggerLevelInfo;
     [networkActivityLogger startLogging];
-    
-    // 友盟统计
-    [MobClick startWithAppkey:UMengAnalyticsAppKey reportPolicy:BATCH channelId:UMengAnalyticsChannelId];
+#endif
     
     // UI入口
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
