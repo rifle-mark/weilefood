@@ -23,36 +23,39 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - Aspects (1.4.1)
   - MagicalRecord (2.3.0)
   - Masonry (0.6.2)
   - MBProgressHUD (0.9.1)
-  - MJExtension (2.3.8)
-  - MJRefresh (2.0.4)
+  - MJExtension (2.4.4)
+  - MJRefresh (2.2.0)
   - SDWebImage (3.7.2):
     - SDWebImage/Core (= 3.7.2)
   - SDWebImage/Core (3.7.2)
   - UMengAnalytics (3.5.8)
 
 DEPENDENCIES:
-  - AFNetworkActivityLogger (~> 2.0)
-  - AFNetworking (~> 2.5.4)
-  - MagicalRecord (~> 2.3.0)
-  - Masonry (~> 0.6.1)
-  - MBProgressHUD (~> 0.9.1)
-  - MJExtension (~> 2.3.5)
-  - MJRefresh (~> 2.0.1)
-  - SDWebImage (~> 3.7.2)
-  - UMengAnalytics (~> 3.5.8)
+  - AFNetworkActivityLogger
+  - AFNetworking
+  - Aspects
+  - MagicalRecord
+  - Masonry
+  - MBProgressHUD
+  - MJExtension
+  - MJRefresh
+  - SDWebImage
+  - UMengAnalytics
 
 SPEC CHECKSUMS:
   AFNetworkActivityLogger: 121486778117d53b3ab1c61d264b88081d0c3eee
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   MagicalRecord: 89eb7d7ead39fb37f01c3d010665ee94d17f8dba
   Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  MJExtension: d83b55e6cb95c6274388539c782386b56f394a6d
-  MJRefresh: ea153717001d3c02444bd22b75c111d2937d2104
+  MJExtension: fabc9e6084f14363ed6828490a98ee516c9cbbfe
+  MJRefresh: 65a2bf14abb6feeaed8696aa1551f70e15ab0a08
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
   UMengAnalytics: 020551718ba37da017bd85ac4c38ffba2774f3ce
 
-COCOAPODS: 0.37.0
+COCOAPODS: 0.37.2

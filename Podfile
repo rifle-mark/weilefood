@@ -22,6 +22,8 @@ target 'Weilefood' do
   pod 'MJRefresh'
   # CoreData扩展
   pod 'MagicalRecord'
+  # 方法拦截
+  pod 'Aspects'
 
 end
 

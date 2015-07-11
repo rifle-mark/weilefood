@@ -290,7 +290,7 @@ for (Ad *ad in result.ads) {
                @"desc" : @"desciption",
                @"oldName" : @"name.oldName",
                @"nowName" : @"name.newName",
-               @"nameChangedTime" : @"name.info.nameChangedTime",
+               @"nameChangedTime" : @"name.info[1].nameChangedTime",
                @"bag" : @"other.bag"
            };
 }];
@@ -302,9 +302,12 @@ NSDictionary *dict = @{
     @"name" : @{
         @"newName" : @"lufy",
         @"oldName" : @"kitty",
-        @"info" : @{
-            @"nameChangedTime" : @"2013-08"
-        }
+        @"info" : @[
+        		 @"test-data",
+        		 @{
+            		@"nameChangedTime" : @"2013-08"
+            }
+        }]
     },
     @"other" : @{
         @"bag" : @{
@@ -391,23 +394,17 @@ stu.bag = bag;
 NSDictionary *stuDict = stu.keyValues;
 NSLog(@"%@", stuDict);
 /*
- {
- desciption = handsome;
- id = 123;
- name =     {
- info =         {
- nameChangedTime = "2018-09-08";
- };
- newName = jack;
- oldName = rose;
- };
- other =     {
- bag =         {
- name = "a red bag";
- price = 205;
- };
- };
- }
+{
+    ID = 123;
+    bag =     {
+        name = "\U5c0f\U4e66\U5305";
+        price = 205;
+    };
+    desc = handsome;
+    nameChangedTime = "2018-09-08";
+    nowName = jack;
+    oldName = rose;
+}
  */
 ```
 

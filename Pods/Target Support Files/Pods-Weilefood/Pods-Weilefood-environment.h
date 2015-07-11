@@ -6,12 +6,6 @@
 // project.
 
 
-// AFNetworkActivityLogger
-#define COCOAPODS_POD_AVAILABLE_AFNetworkActivityLogger
-#define COCOAPODS_VERSION_MAJOR_AFNetworkActivityLogger 2
-#define COCOAPODS_VERSION_MINOR_AFNetworkActivityLogger 0
-#define COCOAPODS_VERSION_PATCH_AFNetworkActivityLogger 4
-
 // AFNetworking
 #define COCOAPODS_POD_AVAILABLE_AFNetworking
 #define COCOAPODS_VERSION_MAJOR_AFNetworking 2
@@ -54,6 +48,12 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 5
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 4
 
+// Aspects
+#define COCOAPODS_POD_AVAILABLE_Aspects
+#define COCOAPODS_VERSION_MAJOR_Aspects 1
+#define COCOAPODS_VERSION_MINOR_Aspects 4
+#define COCOAPODS_VERSION_PATCH_Aspects 1
+
 // MBProgressHUD
 #define COCOAPODS_POD_AVAILABLE_MBProgressHUD
 #define COCOAPODS_VERSION_MAJOR_MBProgressHUD 0
@@ -63,14 +63,14 @@
 // MJExtension
 #define COCOAPODS_POD_AVAILABLE_MJExtension
 #define COCOAPODS_VERSION_MAJOR_MJExtension 2
-#define COCOAPODS_VERSION_MINOR_MJExtension 3
-#define COCOAPODS_VERSION_PATCH_MJExtension 8
+#define COCOAPODS_VERSION_MINOR_MJExtension 4
+#define COCOAPODS_VERSION_PATCH_MJExtension 4
 
 // MJRefresh
 #define COCOAPODS_POD_AVAILABLE_MJRefresh
 #define COCOAPODS_VERSION_MAJOR_MJRefresh 2
-#define COCOAPODS_VERSION_MINOR_MJRefresh 0
-#define COCOAPODS_VERSION_PATCH_MJRefresh 4
+#define COCOAPODS_VERSION_MINOR_MJRefresh 2
+#define COCOAPODS_VERSION_PATCH_MJRefresh 0
 
 // MagicalRecord
 #define COCOAPODS_POD_AVAILABLE_MagicalRecord
@@ -102,3 +102,13 @@
 #define COCOAPODS_VERSION_MINOR_UMengAnalytics 5
 #define COCOAPODS_VERSION_PATCH_UMengAnalytics 8
 
+// Debug build configuration
+#ifdef DEBUG
+
+  // AFNetworkActivityLogger
+  #define COCOAPODS_POD_AVAILABLE_AFNetworkActivityLogger
+  #define COCOAPODS_VERSION_MAJOR_AFNetworkActivityLogger 2
+  #define COCOAPODS_VERSION_MINOR_AFNetworkActivityLogger 0
+  #define COCOAPODS_VERSION_PATCH_AFNetworkActivityLogger 4
+
+#endif

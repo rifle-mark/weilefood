@@ -15,6 +15,18 @@
 
 @implementation NSObject (MJKeyValue)
 
+static const char MJIgnoreReplacedKeyWhenGettingKeyValuesKey = '\0';
+
+- (void)setIgnoreReplacedKeyWhenGettingKeyValues:(BOOL)ignoreReplacedKeyWhenGettingKeyValues
+{
+    objc_setAssociatedObject(self, &MJIgnoreReplacedKeyWhenGettingKeyValuesKey, @(ignoreReplacedKeyWhenGettingKeyValues), OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (BOOL)isIgnoreReplacedKeyWhenGettingKeyValues
+{
+    return [objc_getAssociatedObject(self, &MJIgnoreReplacedKeyWhenGettingKeyValuesKey) boolValue];
+}
+
 #pragma mark - --常用的对象--
 static NSNumberFormatter *_numberFormatter;
 + (void)load
@@ -99,7 +111,7 @@ static NSNumberFormatter *_numberFormatter;
         keyValues = [NSJSONSerialization JSONObjectWithData:keyValues options:kNilOptions error:nil];
     }
     
-    MJAssertError([keyValues isKindOfClass:[NSDictionary class]], self, error, @"keyValues参数不是一个字典");
+    MJAssertError([keyValues isKindOfClass:[NSDictionary class]] || [keyValues isKindOfClass:[NSArray class]], self, error, @"keyValues参数不是一个字典或者数组");
     
     @try {
         Class aClass = [self class];
@@ -114,10 +126,9 @@ static NSNumberFormatter *_numberFormatter;
             
             // 1.取出属性值
             id value = keyValues ;
-            NSArray *keys = [property keysFromClass:[self class]];
-            for (NSString *key in keys) {
-                if (![value isKindOfClass:[NSDictionary class]]) continue;
-                value = value[key];
+            NSArray *propertyKeys = [property propertyKeysFromClass:[self class]];
+            for (MJPropertyKey *propertyKey in propertyKeys) {
+                value = [propertyKey valueForObject:value];
             }
             
             // 值的过滤
@@ -294,7 +305,7 @@ static NSNumberFormatter *_numberFormatter;
     // 如果自己不是模型类
     if ([MJFoundation isClassFromFoundation:[self class]]) return (NSMutableDictionary *)self;
     
-    __block NSMutableDictionary *keyValues = [NSMutableDictionary dictionary];
+    id keyValues = [NSMutableDictionary dictionary];
     
     @try {
         Class aClass = [self class];
@@ -309,7 +320,7 @@ static NSNumberFormatter *_numberFormatter;
             if ([ignoredKeys containsObject:property.name]) return;
             
             // 1.取出属性值
-            id value = [property valueFromObject:self];
+            id value = [property valueForObject:self];
             if (!value) return;
             
             // 2.如果是模型属性
@@ -325,26 +336,13 @@ static NSNumberFormatter *_numberFormatter;
             }
             
             // 4.赋值
-            NSArray *keys = [property keysFromClass:[self class]];
-            NSUInteger keyCount = keys.count;
-            // 创建字典
-            __block NSMutableDictionary *innerDict = keyValues;
-            [keys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
-                if (idx == keyCount - 1) { // 最后一个属性
-                    innerDict[key] = value;
-                } else { // 字典
-                    NSMutableDictionary *tempDict = innerDict[key];
-                    if (tempDict == nil) {
-                        tempDict = [NSMutableDictionary dictionary];
-                        innerDict[key] = tempDict;
-                    }
-                    innerDict = tempDict;
-                }
-            }];
+            keyValues[property.name] = value;
         }];
         
         // 去除系统自动增加的元素
-        [keyValues removeObjectsForKeys:@[@"superclass", @"debugDescription", @"description", @"hash"]];
+        if ([keyValues isKindOfClass:[NSMutableDictionary class]]) {
+            [keyValues removeObjectsForKeys:@[@"superclass", @"debugDescription", @"description", @"hash"]];
+        }
         
         // 转换完毕
         if ([self respondsToSelector:@selector(objectDidFinishConvertingToKeyValues)]) {
@@ -416,10 +414,6 @@ static NSNumberFormatter *_numberFormatter;
 
 - (id)JSONObject
 {
-    if ([self isKindOfClass:[NSDictionary class]] || [self isKindOfClass:[NSArray class]]) {
-        return self;
-    }
-    
     if ([self isKindOfClass:[NSString class]]) {
         return [NSJSONSerialization JSONObjectWithData:[((NSString *)self) dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
     }
