@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "BPushHelper.h"
 
 @interface AppDelegate ()
 
@@ -17,15 +18,16 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // 友盟统计
-    [MobClick startWithAppkey:UMengAnalyticsAppKey reportPolicy:BATCH channelId:UMengAnalyticsChannelId];
-    
 #ifdef DEBUG
     // 开启AFNetworking日志
     AFNetworkActivityLogger *networkActivityLogger = [AFNetworkActivityLogger sharedLogger];
     networkActivityLogger.level = AFLoggerLevelInfo;
     [networkActivityLogger startLogging];
 #endif
+    // 友盟统计
+    [MobClick startWithAppkey:UMengAnalyticsAppKey reportPolicy:BATCH channelId:UMengAnalyticsChannelId];
+    // 百度推送
+    [BPushHelper registerAppDelegate:self launchOptions:launchOptions apiKey:BPushApiKey pushMode:BPushModeDevelopment withFirstAction:nil withSecondAction:nil withCategory:nil isDebug:YES isClearBadgeNumber:YES];
     
     // UI入口
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -59,6 +61,24 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
+}
+
+#pragma mark - RemoteNotification
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    // BPushHelper要求实现此方法(空内容及可)
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    // BPushHelper要求实现此方法(空内容及可)
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    // BPushHelper要求实现此方法(空内容及可)
+    NSLog(@"App Received Remote Notification:\n%@", userInfo);
 }
 
 @end

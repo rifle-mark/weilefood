@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2467B71C1B50D06F001202A4 /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2467B71B1B50D06F001202A4 /* libBPush.a */; };
+		2467B71E1B50D134001202A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2467B71D1B50D134001202A4 /* Foundation.framework */; };
+		2467B7201B50D13B001202A4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2467B71F1B50D13B001202A4 /* CoreTelephony.framework */; };
+		2467B7221B50D140001202A4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2467B7211B50D140001202A4 /* libz.dylib */; };
+		2467B7241B50D146001202A4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2467B7231B50D146001202A4 /* SystemConfiguration.framework */; };
+		2467B7271B50E30E001202A4 /* BPushHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2467B7261B50E30E001202A4 /* BPushHelper.m */; };
 		24CDCBD71B4F792E00BDE8CB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CDCB2C1B4F792D00BDE8CB /* LaunchScreen.xib */; };
 		24CDCBD91B4F792E00BDE8CB /* UIViewController+LifetimeLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB321B4F792D00BDE8CB /* UIViewController+LifetimeLog.m */; };
 		24CDCBDA1B4F792E00BDE8CB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB3A1B4F792D00BDE8CB /* AppDelegate.m */; };
@@ -83,6 +89,14 @@
 
 /* Begin PBXFileReference section */
 		060F4AADF217CE753F362849 /* Pods-Weilefood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weilefood.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weilefood/Pods-Weilefood.release.xcconfig"; sourceTree = "<group>"; };
+		2467B71A1B50D06F001202A4 /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
+		2467B71B1B50D06F001202A4 /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
+		2467B71D1B50D134001202A4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2467B71F1B50D13B001202A4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		2467B7211B50D140001202A4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		2467B7231B50D146001202A4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2467B7251B50E30E001202A4 /* BPushHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPushHelper.h; sourceTree = "<group>"; };
+		2467B7261B50E30E001202A4 /* BPushHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPushHelper.m; sourceTree = "<group>"; };
 		24CDCAFF1B4F773900BDE8CB /* Weilefood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weilefood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24CDCB2D1B4F792D00BDE8CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		24CDCB311B4F792D00BDE8CB /* UIViewController+LifetimeLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LifetimeLog.h"; sourceTree = "<group>"; };
@@ -241,7 +255,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2467B7241B50D146001202A4 /* SystemConfiguration.framework in Frameworks */,
+				2467B7221B50D140001202A4 /* libz.dylib in Frameworks */,
+				2467B7201B50D13B001202A4 /* CoreTelephony.framework in Frameworks */,
+				2467B71E1B50D134001202A4 /* Foundation.framework in Frameworks */,
 				24CDCC2C1B4FA34B00BDE8CB /* CoreData.framework in Frameworks */,
+				2467B71C1B50D06F001202A4 /* libBPush.a in Frameworks */,
 				E02DC6C27427F1714243E3AE /* libPods-Weilefood.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,6 +275,15 @@
 				060F4AADF217CE753F362849 /* Pods-Weilefood.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		2467B7191B50D06F001202A4 /* BPush */ = {
+			isa = PBXGroup;
+			children = (
+				2467B71A1B50D06F001202A4 /* BPush.h */,
+				2467B71B1B50D06F001202A4 /* libBPush.a */,
+			);
+			path = BPush;
 			sourceTree = "<group>";
 		};
 		24CDCAF61B4F773900BDE8CB = {
@@ -304,6 +332,8 @@
 			isa = PBXGroup;
 			children = (
 				24CDCB341B4F792D00BDE8CB /* Network */,
+				2467B7251B50E30E001202A4 /* BPushHelper.h */,
+				2467B7261B50E30E001202A4 /* BPushHelper.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -365,6 +395,7 @@
 			isa = PBXGroup;
 			children = (
 				24CDCB441B4F792D00BDE8CB /* GCExtension */,
+				2467B7191B50D06F001202A4 /* BPush */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -609,6 +640,10 @@
 		610C5F99515E558BBD5D2B02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2467B7231B50D146001202A4 /* SystemConfiguration.framework */,
+				2467B7211B50D140001202A4 /* libz.dylib */,
+				2467B71F1B50D13B001202A4 /* CoreTelephony.framework */,
+				2467B71D1B50D134001202A4 /* Foundation.framework */,
 				24CDCC2B1B4FA34B00BDE8CB /* CoreData.framework */,
 				27B0DAFB8AFA7EC3AE1728AE /* libPods-Weilefood.a */,
 			);
@@ -784,6 +819,7 @@
 				24CDCBE31B4F792E00BDE8CB /* AVAudioPlayerDelegateImplementationProxy.m in Sources */,
 				24CDCBFE1B4F792E00BDE8CB /* UITabBar+GCDelegateBlock.m in Sources */,
 				24CDCC061B4F792E00BDE8CB /* AVAudioRecorder+GCDelegate.m in Sources */,
+				2467B7271B50E30E001202A4 /* BPushHelper.m in Sources */,
 				24CDCC0A1B4F792E00BDE8CB /* UINavigationBar+GCDelegate.m in Sources */,
 				24CDCBEC1B4F792E00BDE8CB /* UIScrollViewDelegateImplementationProxy.m in Sources */,
 				24CDCBF71B4F792E00BDE8CB /* UIImagePickerController+GCDelegateBlock.m in Sources */,
@@ -903,6 +939,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = Weilefood/Main/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Weilefood/Vendor/BPush",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -915,6 +955,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Weilefood/Main/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Weilefood/Vendor/BPush",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

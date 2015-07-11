@@ -18,6 +18,7 @@
 #import <Masonry/Masonry.h>
 #import <SDWebImage/SDWebImageManager.h>
 #import <UMengAnalytics/MobClick.h>
+#import <Aspects/Aspects.h>
 
 #import "UtilsMacro.h"
 #import "VendorMacro.h"
