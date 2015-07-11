@@ -37,6 +37,12 @@ __官方邮箱__:2917188331@qq.com
 用户:3262791991@qq.com<br>
 密码:duangduangwei123<br>
 Duang123
+####友盟 http://www.umeng.com/ <br>
+用户:3262791991@qq.com<br>
+密码:duangduangwei<br>
+####百度 http://developer.baidu.com/ <br>
+用户:3262791991@qq.com<br>
+密码:Rikki1234%<br>
 
 
 ## 项目结构
