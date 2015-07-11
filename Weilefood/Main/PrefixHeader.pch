@@ -1,0 +1,25 @@
+//
+//  PrefixHeader.pch
+//  Weilefood
+//
+//  Created by kelei on 15/7/10.
+//  Copyright (c) 2015年 kelei. All rights reserved.
+//
+
+#ifndef Weilefood_PrefixHeader_pch
+#define Weilefood_PrefixHeader_pch
+
+#import <AFNetworkActivityLogger/AFNetworkActivityLogger.h>
+#import <AFNetworking/AFNetworking.h>
+#import <MBProgressHUD/MBProgressHUD.h>
+#import <MJRefresh/MJRefresh.h>
+#import <MJExtension/MJExtension.h>
+#import <MagicalRecord/MagicalRecord.h>
+#import <Masonry/Masonry.h>
+#import <SDWebImage/SDWebImageManager.h>
+#import <UMengAnalytics/MobClick.h>
+
+#import "UtilsMacro.h"
+#import "VendorMacro.h"
+
+#endif
