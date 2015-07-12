@@ -13,8 +13,20 @@
 		2467B7221B50D140001202A4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2467B7211B50D140001202A4 /* libz.dylib */; };
 		2467B7241B50D146001202A4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2467B7231B50D146001202A4 /* SystemConfiguration.framework */; };
 		2467B7271B50E30E001202A4 /* BPushHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2467B7261B50E30E001202A4 /* BPushHelper.m */; };
+		24B8C0641B5242BC001C5722 /* AGImagePickerController+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C04B1B5242BC001C5722 /* AGImagePickerController+Helper.m */; };
+		24B8C0651B5242BC001C5722 /* AGImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 24B8C04C1B5242BC001C5722 /* AGImagePickerController.bundle */; };
+		24B8C0661B5242BC001C5722 /* AGImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C04E1B5242BC001C5722 /* AGImagePickerController.m */; };
+		24B8C0671B5242BC001C5722 /* AGImagePreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C0511B5242BC001C5722 /* AGImagePreviewController.m */; };
+		24B8C0681B5242BC001C5722 /* AGIPCAlbumsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C0531B5242BC001C5722 /* AGIPCAlbumsController.m */; };
+		24B8C0691B5242BC001C5722 /* AGIPCAssetsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C0551B5242BC001C5722 /* AGIPCAssetsController.m */; };
+		24B8C06A1B5242BC001C5722 /* AGIPCGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C0571B5242BC001C5722 /* AGIPCGridCell.m */; };
+		24B8C06B1B5242BC001C5722 /* AGIPCGridItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C0591B5242BC001C5722 /* AGIPCGridItem.m */; };
+		24B8C06C1B5242BC001C5722 /* AGIPCPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C05B1B5242BC001C5722 /* AGIPCPreviewController.m */; };
+		24B8C06D1B5242BC001C5722 /* AGIPCToolbarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C05D1B5242BC001C5722 /* AGIPCToolbarItem.m */; };
+		24B8C06E1B5242BC001C5722 /* AGPreviewScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C05F1B5242BC001C5722 /* AGPreviewScrollView.m */; };
+		24B8C06F1B5242BC001C5722 /* ALAsset+AGIPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C0611B5242BC001C5722 /* ALAsset+AGIPC.m */; };
+		24B8C0701B5242BC001C5722 /* UIButton+AGIPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C0631B5242BC001C5722 /* UIButton+AGIPC.m */; };
 		24CDCBD71B4F792E00BDE8CB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CDCB2C1B4F792D00BDE8CB /* LaunchScreen.xib */; };
-		24CDCBD91B4F792E00BDE8CB /* UIViewController+LifetimeLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB321B4F792D00BDE8CB /* UIViewController+LifetimeLog.m */; };
 		24CDCBDA1B4F792E00BDE8CB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB3A1B4F792D00BDE8CB /* AppDelegate.m */; };
 		24CDCBDC1B4F792E00BDE8CB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB3C1B4F792D00BDE8CB /* main.m */; };
 		24CDCBDD1B4F792E00BDE8CB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24CDCB3F1B4F792D00BDE8CB /* Images.xcassets */; };
@@ -97,10 +109,38 @@
 		2467B7231B50D146001202A4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2467B7251B50E30E001202A4 /* BPushHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPushHelper.h; sourceTree = "<group>"; };
 		2467B7261B50E30E001202A4 /* BPushHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPushHelper.m; sourceTree = "<group>"; };
+		24B8C04A1B5242BC001C5722 /* AGImagePickerController+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AGImagePickerController+Helper.h"; sourceTree = "<group>"; };
+		24B8C04B1B5242BC001C5722 /* AGImagePickerController+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AGImagePickerController+Helper.m"; sourceTree = "<group>"; };
+		24B8C04C1B5242BC001C5722 /* AGImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AGImagePickerController.bundle; sourceTree = "<group>"; };
+		24B8C04D1B5242BC001C5722 /* AGImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGImagePickerController.h; sourceTree = "<group>"; };
+		24B8C04E1B5242BC001C5722 /* AGImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGImagePickerController.m; sourceTree = "<group>"; };
+		24B8C04F1B5242BC001C5722 /* AGImagePickerControllerDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGImagePickerControllerDefines.h; sourceTree = "<group>"; };
+		24B8C0501B5242BC001C5722 /* AGImagePreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGImagePreviewController.h; sourceTree = "<group>"; };
+		24B8C0511B5242BC001C5722 /* AGImagePreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGImagePreviewController.m; sourceTree = "<group>"; };
+		24B8C0521B5242BC001C5722 /* AGIPCAlbumsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGIPCAlbumsController.h; sourceTree = "<group>"; };
+		24B8C0531B5242BC001C5722 /* AGIPCAlbumsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGIPCAlbumsController.m; sourceTree = "<group>"; };
+		24B8C0541B5242BC001C5722 /* AGIPCAssetsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGIPCAssetsController.h; sourceTree = "<group>"; };
+		24B8C0551B5242BC001C5722 /* AGIPCAssetsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGIPCAssetsController.m; sourceTree = "<group>"; };
+		24B8C0561B5242BC001C5722 /* AGIPCGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGIPCGridCell.h; sourceTree = "<group>"; };
+		24B8C0571B5242BC001C5722 /* AGIPCGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGIPCGridCell.m; sourceTree = "<group>"; };
+		24B8C0581B5242BC001C5722 /* AGIPCGridItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGIPCGridItem.h; sourceTree = "<group>"; };
+		24B8C0591B5242BC001C5722 /* AGIPCGridItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGIPCGridItem.m; sourceTree = "<group>"; };
+		24B8C05A1B5242BC001C5722 /* AGIPCPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGIPCPreviewController.h; sourceTree = "<group>"; };
+		24B8C05B1B5242BC001C5722 /* AGIPCPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGIPCPreviewController.m; sourceTree = "<group>"; };
+		24B8C05C1B5242BC001C5722 /* AGIPCToolbarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGIPCToolbarItem.h; sourceTree = "<group>"; };
+		24B8C05D1B5242BC001C5722 /* AGIPCToolbarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGIPCToolbarItem.m; sourceTree = "<group>"; };
+		24B8C05E1B5242BC001C5722 /* AGPreviewScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGPreviewScrollView.h; sourceTree = "<group>"; };
+		24B8C05F1B5242BC001C5722 /* AGPreviewScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPreviewScrollView.m; sourceTree = "<group>"; };
+		24B8C0601B5242BC001C5722 /* ALAsset+AGIPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+AGIPC.h"; sourceTree = "<group>"; };
+		24B8C0611B5242BC001C5722 /* ALAsset+AGIPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+AGIPC.m"; sourceTree = "<group>"; };
+		24B8C0621B5242BC001C5722 /* UIButton+AGIPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AGIPC.h"; sourceTree = "<group>"; };
+		24B8C0631B5242BC001C5722 /* UIButton+AGIPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AGIPC.m"; sourceTree = "<group>"; };
+		24B8C0711B52477C001C5722 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		24B8C0731B52478C001C5722 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		24B8C0751B524795001C5722 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		24B8C0771B5247A2001C5722 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		24CDCAFF1B4F773900BDE8CB /* Weilefood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weilefood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24CDCB2D1B4F792D00BDE8CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
-		24CDCB311B4F792D00BDE8CB /* UIViewController+LifetimeLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LifetimeLog.h"; sourceTree = "<group>"; };
-		24CDCB321B4F792D00BDE8CB /* UIViewController+LifetimeLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LifetimeLog.m"; sourceTree = "<group>"; };
 		24CDCB361B4F792D00BDE8CB /* UtilsMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilsMacro.h; sourceTree = "<group>"; };
 		24CDCB371B4F792D00BDE8CB /* VendorMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VendorMacro.h; sourceTree = "<group>"; };
 		24CDCB391B4F792D00BDE8CB /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -286,6 +326,39 @@
 			path = BPush;
 			sourceTree = "<group>";
 		};
+		24B8C0491B5242BC001C5722 /* AGImagePickerController */ = {
+			isa = PBXGroup;
+			children = (
+				24B8C04A1B5242BC001C5722 /* AGImagePickerController+Helper.h */,
+				24B8C04B1B5242BC001C5722 /* AGImagePickerController+Helper.m */,
+				24B8C04C1B5242BC001C5722 /* AGImagePickerController.bundle */,
+				24B8C04D1B5242BC001C5722 /* AGImagePickerController.h */,
+				24B8C04E1B5242BC001C5722 /* AGImagePickerController.m */,
+				24B8C04F1B5242BC001C5722 /* AGImagePickerControllerDefines.h */,
+				24B8C0501B5242BC001C5722 /* AGImagePreviewController.h */,
+				24B8C0511B5242BC001C5722 /* AGImagePreviewController.m */,
+				24B8C0521B5242BC001C5722 /* AGIPCAlbumsController.h */,
+				24B8C0531B5242BC001C5722 /* AGIPCAlbumsController.m */,
+				24B8C0541B5242BC001C5722 /* AGIPCAssetsController.h */,
+				24B8C0551B5242BC001C5722 /* AGIPCAssetsController.m */,
+				24B8C0561B5242BC001C5722 /* AGIPCGridCell.h */,
+				24B8C0571B5242BC001C5722 /* AGIPCGridCell.m */,
+				24B8C0581B5242BC001C5722 /* AGIPCGridItem.h */,
+				24B8C0591B5242BC001C5722 /* AGIPCGridItem.m */,
+				24B8C05A1B5242BC001C5722 /* AGIPCPreviewController.h */,
+				24B8C05B1B5242BC001C5722 /* AGIPCPreviewController.m */,
+				24B8C05C1B5242BC001C5722 /* AGIPCToolbarItem.h */,
+				24B8C05D1B5242BC001C5722 /* AGIPCToolbarItem.m */,
+				24B8C05E1B5242BC001C5722 /* AGPreviewScrollView.h */,
+				24B8C05F1B5242BC001C5722 /* AGPreviewScrollView.m */,
+				24B8C0601B5242BC001C5722 /* ALAsset+AGIPC.h */,
+				24B8C0611B5242BC001C5722 /* ALAsset+AGIPC.m */,
+				24B8C0621B5242BC001C5722 /* UIButton+AGIPC.h */,
+				24B8C0631B5242BC001C5722 /* UIButton+AGIPC.m */,
+			);
+			path = AGImagePickerController;
+			sourceTree = "<group>";
+		};
 		24CDCAF61B4F773900BDE8CB = {
 			isa = PBXGroup;
 			children = (
@@ -322,8 +395,6 @@
 		24CDCB301B4F792D00BDE8CB /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				24CDCB311B4F792D00BDE8CB /* UIViewController+LifetimeLog.h */,
-				24CDCB321B4F792D00BDE8CB /* UIViewController+LifetimeLog.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -394,6 +465,7 @@
 		24CDCB431B4F792D00BDE8CB /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				24B8C0491B5242BC001C5722 /* AGImagePickerController */,
 				24CDCB441B4F792D00BDE8CB /* GCExtension */,
 				2467B7191B50D06F001202A4 /* BPush */,
 			);
@@ -640,6 +712,10 @@
 		610C5F99515E558BBD5D2B02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				24B8C0771B5247A2001C5722 /* AssetsLibrary.framework */,
+				24B8C0751B524795001C5722 /* CoreLocation.framework */,
+				24B8C0731B52478C001C5722 /* QuartzCore.framework */,
+				24B8C0711B52477C001C5722 /* CoreGraphics.framework */,
 				2467B7231B50D146001202A4 /* SystemConfiguration.framework */,
 				2467B7211B50D140001202A4 /* libz.dylib */,
 				2467B71F1B50D13B001202A4 /* CoreTelephony.framework */,
@@ -715,6 +791,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24CDCBD71B4F792E00BDE8CB /* LaunchScreen.xib in Resources */,
+				24B8C0651B5242BC001C5722 /* AGImagePickerController.bundle in Resources */,
 				24CDCBDD1B4F792E00BDE8CB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -765,6 +842,7 @@
 				24CDCC131B4F792E00BDE8CB /* UITextField+GCDelegate.m in Sources */,
 				24CDCC001B4F792E00BDE8CB /* UITableView+GCDelegateAndDataSourceBlock.m in Sources */,
 				24CDCC1E1B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m in Sources */,
+				24B8C0671B5242BC001C5722 /* AGImagePreviewController.m in Sources */,
 				24CDCBF81B4F792E00BDE8CB /* UINavigationBar+GCDelegateBlock.m in Sources */,
 				24CDCBDA1B4F792E00BDE8CB /* AppDelegate.m in Sources */,
 				24CDCBE71B4F792E00BDE8CB /* UIImagePickerControllerDelegateImplementationProxy.m in Sources */,
@@ -772,24 +850,31 @@
 				24CDCC0F1B4F792E00BDE8CB /* UISearchBar+GCDelegate.m in Sources */,
 				24CDCBE11B4F792E00BDE8CB /* AVAudioPlayer+GCDelegateBlock.m in Sources */,
 				24CDCC0E1B4F792E00BDE8CB /* UIScrollView+GCDelegate.m in Sources */,
+				24B8C06C1B5242BC001C5722 /* AGIPCPreviewController.m in Sources */,
 				24CDCC031B4F792E00BDE8CB /* UIToolbar+GCDelegateBlock.m in Sources */,
 				24CDCC021B4F792E00BDE8CB /* UITextView+GCDelegateBlock.m in Sources */,
 				24CDCBF51B4F792E00BDE8CB /* UICollectionView+GCDelegateAndDataSourceBlock.m in Sources */,
 				24CDCBF11B4F792E00BDE8CB /* UITextFieldDelegateImplementationProxy.m in Sources */,
+				24B8C0681B5242BC001C5722 /* AGIPCAlbumsController.m in Sources */,
 				24CDCC051B4F792E00BDE8CB /* AVAudioPlayer+GCDelegate.m in Sources */,
 				24CDCBF31B4F792E00BDE8CB /* UIToolbarDelegateImplementationProxy.m in Sources */,
+				24B8C06F1B5242BC001C5722 /* ALAsset+AGIPC.m in Sources */,
+				24B8C0661B5242BC001C5722 /* AGImagePickerController.m in Sources */,
 				24CDCBFD1B4F792E00BDE8CB /* UISearchBar+GCDelegateBlock.m in Sources */,
 				24CDCBF61B4F792E00BDE8CB /* UIGestureRecognizer+GCDelegateBlock.m in Sources */,
 				24CDCC1B1B4F792E00BDE8CB /* NSObject+GCNotificationObserver.m in Sources */,
 				24CDCBE81B4F792E00BDE8CB /* UINavigationBarDelegateImpletationProxy.m in Sources */,
+				24B8C06D1B5242BC001C5722 /* AGIPCToolbarItem.m in Sources */,
 				24CDCBE21B4F792E00BDE8CB /* AVAudioRecorder+GCDelegateBlock.m in Sources */,
 				24CDCC171B4F792E00BDE8CB /* GCAOPProxy.m in Sources */,
 				24CDCBE01B4F792E00BDE8CB /* NSObject+GCProxyRegister.m in Sources */,
+				24B8C0691B5242BC001C5722 /* AGIPCAssetsController.m in Sources */,
 				24CDCBDC1B4F792E00BDE8CB /* main.m in Sources */,
 				24CDCC101B4F792E00BDE8CB /* UITabBar+GCDelegate.m in Sources */,
 				24CDCC1D1B4F792E00BDE8CB /* UIControl+GCEvent.m in Sources */,
 				24CDCC121B4F792E00BDE8CB /* UITableView+GCDelegateAndDataSource.m in Sources */,
 				24CDCC081B4F792E00BDE8CB /* UIGestureRecognizer+GCDelegate.m in Sources */,
+				24B8C06E1B5242BC001C5722 /* AGPreviewScrollView.m in Sources */,
 				24CDCC191B4F792E00BDE8CB /* NSObject+GCAOP.m in Sources */,
 				24CDCC0B1B4F792E00BDE8CB /* UINavigationController+GCDelegate.m in Sources */,
 				24CDCBFB1B4F792E00BDE8CB /* UIPopoverController+GCDelegateBlock.m in Sources */,
@@ -803,13 +888,14 @@
 				24CDCBDE1B4F792E00BDE8CB /* ViewController.m in Sources */,
 				24CDCC091B4F792E00BDE8CB /* UIImagePickerController+GCDelegate.m in Sources */,
 				24CDCBDF1B4F792E00BDE8CB /* GCImplementationProxy.m in Sources */,
+				24B8C0641B5242BC001C5722 /* AGImagePickerController+Helper.m in Sources */,
 				24CDCC011B4F792E00BDE8CB /* UITextField+GCDelegateBlock.m in Sources */,
 				24CDCC141B4F792E00BDE8CB /* UITextView+GCDelegate.m in Sources */,
-				24CDCBD91B4F792E00BDE8CB /* UIViewController+LifetimeLog.m in Sources */,
 				24CDCC071B4F792E00BDE8CB /* UICollectionView+GCDelegateAndDataSource.m in Sources */,
 				24CDCBEA1B4F792E00BDE8CB /* UIPickerViewDelegateImplementationProxy.m in Sources */,
 				24CDCC151B4F792E00BDE8CB /* UIToolbar+GCDelegate.m in Sources */,
 				24CDCBFF1B4F792E00BDE8CB /* UITabBarController+GCDelegateBlock.m in Sources */,
+				24B8C0701B5242BC001C5722 /* UIButton+AGIPC.m in Sources */,
 				24CDCBFA1B4F792E00BDE8CB /* UIPickerView+GCDelegateAndDataSourceBlock.m in Sources */,
 				24CDCBED1B4F792E00BDE8CB /* UISearchBarDelegateImplementationProxy.m in Sources */,
 				24CDCC0C1B4F792E00BDE8CB /* UIPickerView+GCDelegateAndDataSource.m in Sources */,
@@ -821,9 +907,11 @@
 				24CDCC061B4F792E00BDE8CB /* AVAudioRecorder+GCDelegate.m in Sources */,
 				2467B7271B50E30E001202A4 /* BPushHelper.m in Sources */,
 				24CDCC0A1B4F792E00BDE8CB /* UINavigationBar+GCDelegate.m in Sources */,
+				24B8C06A1B5242BC001C5722 /* AGIPCGridCell.m in Sources */,
 				24CDCBEC1B4F792E00BDE8CB /* UIScrollViewDelegateImplementationProxy.m in Sources */,
 				24CDCBF71B4F792E00BDE8CB /* UIImagePickerController+GCDelegateBlock.m in Sources */,
 				24CDCC111B4F792E00BDE8CB /* UITabBarController+GCDelegate.m in Sources */,
+				24B8C06B1B5242BC001C5722 /* AGIPCGridItem.m in Sources */,
 				24CDCC1C1B4F792E00BDE8CB /* NSTimer+GCBlock.m in Sources */,
 				24CDCBEE1B4F792E00BDE8CB /* UITabbarControllerDelegateImplementationProxy.m in Sources */,
 				24CDCBF91B4F792E00BDE8CB /* UINavigationController+GCDelegateBlock.m in Sources */,

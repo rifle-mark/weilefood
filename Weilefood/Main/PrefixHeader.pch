@@ -21,6 +21,8 @@
 #import <UMengSocial/UMSocial.h>
 #import <Aspects/Aspects.h>
 
+#import "GCExtension.h"
+
 #import "UtilsMacro.h"
 #import "VendorMacro.h"
 
