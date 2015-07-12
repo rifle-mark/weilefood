@@ -96,11 +96,17 @@
 #define COCOAPODS_VERSION_MINOR_SDWebImage_Core 7
 #define COCOAPODS_VERSION_PATCH_SDWebImage_Core 2
 
-// UMengAnalytics
-#define COCOAPODS_POD_AVAILABLE_UMengAnalytics
-#define COCOAPODS_VERSION_MAJOR_UMengAnalytics 3
-#define COCOAPODS_VERSION_MINOR_UMengAnalytics 5
-#define COCOAPODS_VERSION_PATCH_UMengAnalytics 8
+// UMengAnalytics-NO-IDFA
+#define COCOAPODS_POD_AVAILABLE_UMengAnalytics_NO_IDFA
+#define COCOAPODS_VERSION_MAJOR_UMengAnalytics_NO_IDFA 3
+#define COCOAPODS_VERSION_MINOR_UMengAnalytics_NO_IDFA 5
+#define COCOAPODS_VERSION_PATCH_UMengAnalytics_NO_IDFA 9
+
+// UMengSocial
+#define COCOAPODS_POD_AVAILABLE_UMengSocial
+#define COCOAPODS_VERSION_MAJOR_UMengSocial 4
+#define COCOAPODS_VERSION_MINOR_UMengSocial 2
+#define COCOAPODS_VERSION_PATCH_UMengSocial 3
 
 // Debug build configuration
 #ifdef DEBUG

@@ -17,7 +17,8 @@
 #import <MagicalRecord/MagicalRecord.h>
 #import <Masonry/Masonry.h>
 #import <SDWebImage/SDWebImageManager.h>
-#import <UMengAnalytics/MobClick.h>
+#import <UMengAnalytics-NO-IDFA/MobClick.h>
+#import <UMengSocial/UMSocial.h>
 #import <Aspects/Aspects.h>
 
 #import "UtilsMacro.h"

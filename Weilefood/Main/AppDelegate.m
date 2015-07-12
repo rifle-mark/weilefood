@@ -25,7 +25,9 @@
     [networkActivityLogger startLogging];
 #endif
     // 友盟统计
-    [MobClick startWithAppkey:UMengAnalyticsAppKey reportPolicy:BATCH channelId:UMengAnalyticsChannelId];
+    [MobClick startWithAppkey:UMengAppKey reportPolicy:BATCH channelId:UMengAnalyticsChannelId];
+    // 友盟分享
+    [UMSocialData setAppKey:UMengAppKey];
     // 百度推送
     [BPushHelper registerAppDelegate:self launchOptions:launchOptions apiKey:BPushApiKey pushMode:BPushModeDevelopment withFirstAction:nil withSecondAction:nil withCategory:nil isDebug:YES isClearBadgeNumber:YES];
     

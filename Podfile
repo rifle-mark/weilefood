@@ -3,9 +3,9 @@ platform :ios, '7.0'
 
 target 'Weilefood' do
   # 友盟统计
-  pod 'UMengAnalytics'
+  pod 'UMengAnalytics-NO-IDFA'
   # 友盟分享
-  ##pod 'UMengSocial'
+  pod 'UMengSocial'
 
   # 网络请求库
   pod 'AFNetworking'
