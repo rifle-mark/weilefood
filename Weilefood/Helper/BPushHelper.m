@@ -42,7 +42,7 @@
     [appDelegate aspect_hookSelector:@selector(application:didRegisterUserNotificationSettings:) withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo, UIApplication *application, UIUserNotificationSettings *notificationSettings) {
         [application registerForRemoteNotifications];
     } error:&err];
-    NSAssert(!err, @"%@", err);
+    NSAssert(!err, @"appDlegate未实现application:didRegisterUserNotificationSettings:方法");
     
     err = nil;
     [appDelegate aspect_hookSelector:@selector(application:didRegisterForRemoteNotificationsWithDeviceToken:) withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo, UIApplication *application, NSData *deviceToken) {
@@ -52,14 +52,14 @@
             NSLog(@"%@ | %@ | %@", selfClassName, BPushRequestMethodBind, result);
         }];
     } error:&err];
-    NSAssert(!err, @"%@", err);
+    NSAssert(!err, @"appDlegate未实现application:didRegisterForRemoteNotificationsWithDeviceToken:方法");
     
     err = nil;
     [appDelegate aspect_hookSelector:@selector(application:didReceiveRemoteNotification:) withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo, UIApplication *application, NSDictionary *userInfo) {
         NSLog(@"%@ | 收到运程通知 | %@", selfClassName, userInfo);
         [BPush handleNotification:userInfo];
     } error:&err];
-    NSAssert(!err, @"%@", err);
+    NSAssert(!err, @"appDlegate未实现application:didReceiveRemoteNotification:方法");
 }
 
 @end

@@ -13,6 +13,13 @@
 		2467B7221B50D140001202A4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2467B7211B50D140001202A4 /* libz.dylib */; };
 		2467B7241B50D146001202A4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2467B7231B50D146001202A4 /* SystemConfiguration.framework */; };
 		2467B7271B50E30E001202A4 /* BPushHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2467B7261B50E30E001202A4 /* BPushHelper.m */; };
+		246F07821B56A6210086CD28 /* NSString+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 246F07811B56A6210086CD28 /* NSString+Ext.m */; };
+		249A73BC1B569D2300F46F3D /* WLServerHelper+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73B41B569D2300F46F3D /* WLServerHelper+User.m */; };
+		249A73BD1B569D2300F46F3D /* WLServerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73B61B569D2300F46F3D /* WLServerHelper.m */; };
+		249A73BE1B569D2300F46F3D /* WLDictionaryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73B91B569D2300F46F3D /* WLDictionaryHelper.m */; };
+		249A73CE1B569D4100F46F3D /* WLApiInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73C31B569D4100F46F3D /* WLApiInfoModel.m */; };
+		249A73D11B569D4100F46F3D /* WLUploadImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73CA1B569D4100F46F3D /* WLUploadImageModel.m */; };
+		249A73D21B569D4100F46F3D /* WLUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73CC1B569D4100F46F3D /* WLUserModel.m */; };
 		24B8C0641B5242BC001C5722 /* AGImagePickerController+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C04B1B5242BC001C5722 /* AGImagePickerController+Helper.m */; };
 		24B8C0651B5242BC001C5722 /* AGImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 24B8C04C1B5242BC001C5722 /* AGImagePickerController.bundle */; };
 		24B8C0661B5242BC001C5722 /* AGImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C04E1B5242BC001C5722 /* AGImagePickerController.m */; };
@@ -109,6 +116,22 @@
 		2467B7231B50D146001202A4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2467B7251B50E30E001202A4 /* BPushHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPushHelper.h; sourceTree = "<group>"; };
 		2467B7261B50E30E001202A4 /* BPushHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPushHelper.m; sourceTree = "<group>"; };
+		246F07801B56A6210086CD28 /* NSString+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Ext.h"; sourceTree = "<group>"; };
+		246F07811B56A6210086CD28 /* NSString+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Ext.m"; sourceTree = "<group>"; };
+		249A73B31B569D2300F46F3D /* WLServerHelper+User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+User.h"; sourceTree = "<group>"; };
+		249A73B41B569D2300F46F3D /* WLServerHelper+User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+User.m"; sourceTree = "<group>"; };
+		249A73B51B569D2300F46F3D /* WLServerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLServerHelper.h; sourceTree = "<group>"; };
+		249A73B61B569D2300F46F3D /* WLServerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLServerHelper.m; sourceTree = "<group>"; };
+		249A73B71B569D2300F46F3D /* WLServerHelperHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLServerHelperHeader.h; sourceTree = "<group>"; };
+		249A73B81B569D2300F46F3D /* WLDictionaryHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLDictionaryHelper.h; sourceTree = "<group>"; };
+		249A73B91B569D2300F46F3D /* WLDictionaryHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLDictionaryHelper.m; sourceTree = "<group>"; };
+		249A73C21B569D4100F46F3D /* WLApiInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLApiInfoModel.h; sourceTree = "<group>"; };
+		249A73C31B569D4100F46F3D /* WLApiInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLApiInfoModel.m; sourceTree = "<group>"; };
+		249A73C81B569D4100F46F3D /* WLModelHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLModelHeader.h; sourceTree = "<group>"; };
+		249A73C91B569D4100F46F3D /* WLUploadImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLUploadImageModel.h; sourceTree = "<group>"; };
+		249A73CA1B569D4100F46F3D /* WLUploadImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLUploadImageModel.m; sourceTree = "<group>"; };
+		249A73CB1B569D4100F46F3D /* WLUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLUserModel.h; sourceTree = "<group>"; };
+		249A73CC1B569D4100F46F3D /* WLUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLUserModel.m; sourceTree = "<group>"; };
 		24B8C04A1B5242BC001C5722 /* AGImagePickerController+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AGImagePickerController+Helper.h"; sourceTree = "<group>"; };
 		24B8C04B1B5242BC001C5722 /* AGImagePickerController+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AGImagePickerController+Helper.m"; sourceTree = "<group>"; };
 		24B8C04C1B5242BC001C5722 /* AGImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AGImagePickerController.bundle; sourceTree = "<group>"; };
@@ -326,6 +349,32 @@
 			path = BPush;
 			sourceTree = "<group>";
 		};
+		249A73AE1B569D2300F46F3D /* ServerHelper */ = {
+			isa = PBXGroup;
+			children = (
+				249A73B71B569D2300F46F3D /* WLServerHelperHeader.h */,
+				249A73B51B569D2300F46F3D /* WLServerHelper.h */,
+				249A73B61B569D2300F46F3D /* WLServerHelper.m */,
+				249A73B31B569D2300F46F3D /* WLServerHelper+User.h */,
+				249A73B41B569D2300F46F3D /* WLServerHelper+User.m */,
+			);
+			path = ServerHelper;
+			sourceTree = "<group>";
+		};
+		249A73BF1B569D4100F46F3D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				249A73C81B569D4100F46F3D /* WLModelHeader.h */,
+				249A73C21B569D4100F46F3D /* WLApiInfoModel.h */,
+				249A73C31B569D4100F46F3D /* WLApiInfoModel.m */,
+				249A73C91B569D4100F46F3D /* WLUploadImageModel.h */,
+				249A73CA1B569D4100F46F3D /* WLUploadImageModel.m */,
+				249A73CB1B569D4100F46F3D /* WLUserModel.h */,
+				249A73CC1B569D4100F46F3D /* WLUserModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		24B8C0491B5242BC001C5722 /* AGImagePickerController */ = {
 			isa = PBXGroup;
 			children = (
@@ -383,7 +432,7 @@
 				24CDCB381B4F792D00BDE8CB /* Main */,
 				24CDCB401B4F792D00BDE8CB /* UI */,
 				24CDCB331B4F792D00BDE8CB /* Helper */,
-				24CDCB3D1B4F792D00BDE8CB /* Model */,
+				249A73BF1B569D4100F46F3D /* Model */,
 				24CDCB351B4F792D00BDE8CB /* Macro */,
 				24CDCB301B4F792D00BDE8CB /* Category */,
 				24CDCB431B4F792D00BDE8CB /* Vendor */,
@@ -395,6 +444,8 @@
 		24CDCB301B4F792D00BDE8CB /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				246F07801B56A6210086CD28 /* NSString+Ext.h */,
+				246F07811B56A6210086CD28 /* NSString+Ext.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -402,18 +453,13 @@
 		24CDCB331B4F792D00BDE8CB /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				24CDCB341B4F792D00BDE8CB /* Network */,
+				249A73AE1B569D2300F46F3D /* ServerHelper */,
+				249A73B81B569D2300F46F3D /* WLDictionaryHelper.h */,
+				249A73B91B569D2300F46F3D /* WLDictionaryHelper.m */,
 				2467B7251B50E30E001202A4 /* BPushHelper.h */,
 				2467B7261B50E30E001202A4 /* BPushHelper.m */,
 			);
 			path = Helper;
-			sourceTree = "<group>";
-		};
-		24CDCB341B4F792D00BDE8CB /* Network */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 		24CDCB351B4F792D00BDE8CB /* Macro */ = {
@@ -435,13 +481,6 @@
 				24CDCC1F1B4F7B7000BDE8CB /* PrefixHeader.pch */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		24CDCB3D1B4F792D00BDE8CB /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		24CDCB3E1B4F792D00BDE8CB /* Resource */ = {
@@ -857,6 +896,7 @@
 				24CDCBF11B4F792E00BDE8CB /* UITextFieldDelegateImplementationProxy.m in Sources */,
 				24B8C0681B5242BC001C5722 /* AGIPCAlbumsController.m in Sources */,
 				24CDCC051B4F792E00BDE8CB /* AVAudioPlayer+GCDelegate.m in Sources */,
+				246F07821B56A6210086CD28 /* NSString+Ext.m in Sources */,
 				24CDCBF31B4F792E00BDE8CB /* UIToolbarDelegateImplementationProxy.m in Sources */,
 				24B8C06F1B5242BC001C5722 /* ALAsset+AGIPC.m in Sources */,
 				24B8C0661B5242BC001C5722 /* AGImagePickerController.m in Sources */,
@@ -866,6 +906,7 @@
 				24CDCBE81B4F792E00BDE8CB /* UINavigationBarDelegateImpletationProxy.m in Sources */,
 				24B8C06D1B5242BC001C5722 /* AGIPCToolbarItem.m in Sources */,
 				24CDCBE21B4F792E00BDE8CB /* AVAudioRecorder+GCDelegateBlock.m in Sources */,
+				249A73BC1B569D2300F46F3D /* WLServerHelper+User.m in Sources */,
 				24CDCC171B4F792E00BDE8CB /* GCAOPProxy.m in Sources */,
 				24CDCBE01B4F792E00BDE8CB /* NSObject+GCProxyRegister.m in Sources */,
 				24B8C0691B5242BC001C5722 /* AGIPCAssetsController.m in Sources */,
@@ -875,12 +916,14 @@
 				24CDCC121B4F792E00BDE8CB /* UITableView+GCDelegateAndDataSource.m in Sources */,
 				24CDCC081B4F792E00BDE8CB /* UIGestureRecognizer+GCDelegate.m in Sources */,
 				24B8C06E1B5242BC001C5722 /* AGPreviewScrollView.m in Sources */,
+				249A73BD1B569D2300F46F3D /* WLServerHelper.m in Sources */,
 				24CDCC191B4F792E00BDE8CB /* NSObject+GCAOP.m in Sources */,
 				24CDCC0B1B4F792E00BDE8CB /* UINavigationController+GCDelegate.m in Sources */,
 				24CDCBFB1B4F792E00BDE8CB /* UIPopoverController+GCDelegateBlock.m in Sources */,
 				24CDCC041B4F792E00BDE8CB /* UIWebView+GCDelegateBlock.m in Sources */,
 				24CDCC0D1B4F792E00BDE8CB /* UIPopoverController+GCDelegate.m in Sources */,
 				24CDCBE91B4F792E00BDE8CB /* UINavigationControllerDelegateImplementionProxy.m in Sources */,
+				249A73CE1B569D4100F46F3D /* WLApiInfoModel.m in Sources */,
 				24CDCC181B4F792E00BDE8CB /* NSObject+GCAccessor.m in Sources */,
 				24CDCBF21B4F792E00BDE8CB /* UITextViewDelegateImplementationProxy.m in Sources */,
 				24CDCBE51B4F792E00BDE8CB /* UICollectionViewDelegateAndDataSourceImplementationProxy.m in Sources */,
@@ -890,6 +933,7 @@
 				24CDCBDF1B4F792E00BDE8CB /* GCImplementationProxy.m in Sources */,
 				24B8C0641B5242BC001C5722 /* AGImagePickerController+Helper.m in Sources */,
 				24CDCC011B4F792E00BDE8CB /* UITextField+GCDelegateBlock.m in Sources */,
+				249A73BE1B569D2300F46F3D /* WLDictionaryHelper.m in Sources */,
 				24CDCC141B4F792E00BDE8CB /* UITextView+GCDelegate.m in Sources */,
 				24CDCC071B4F792E00BDE8CB /* UICollectionView+GCDelegateAndDataSource.m in Sources */,
 				24CDCBEA1B4F792E00BDE8CB /* UIPickerViewDelegateImplementationProxy.m in Sources */,
@@ -907,9 +951,11 @@
 				24CDCC061B4F792E00BDE8CB /* AVAudioRecorder+GCDelegate.m in Sources */,
 				2467B7271B50E30E001202A4 /* BPushHelper.m in Sources */,
 				24CDCC0A1B4F792E00BDE8CB /* UINavigationBar+GCDelegate.m in Sources */,
+				249A73D21B569D4100F46F3D /* WLUserModel.m in Sources */,
 				24B8C06A1B5242BC001C5722 /* AGIPCGridCell.m in Sources */,
 				24CDCBEC1B4F792E00BDE8CB /* UIScrollViewDelegateImplementationProxy.m in Sources */,
 				24CDCBF71B4F792E00BDE8CB /* UIImagePickerController+GCDelegateBlock.m in Sources */,
+				249A73D11B569D4100F46F3D /* WLUploadImageModel.m in Sources */,
 				24CDCC111B4F792E00BDE8CB /* UITabBarController+GCDelegate.m in Sources */,
 				24B8C06B1B5242BC001C5722 /* AGIPCGridItem.m in Sources */,
 				24CDCC1C1B4F792E00BDE8CB /* NSTimer+GCBlock.m in Sources */,

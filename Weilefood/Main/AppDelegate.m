@@ -9,10 +9,8 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "BPushHelper.h"
-
-@interface AppDelegate ()
-
-@end
+#import "WLServerHelperHeader.h"
+#import "WLModelHeader.h"
 
 @implementation AppDelegate
 
@@ -21,7 +19,7 @@
 #ifdef DEBUG
     // 开启AFNetworking日志
     AFNetworkActivityLogger *networkActivityLogger = [AFNetworkActivityLogger sharedLogger];
-    networkActivityLogger.level = AFLoggerLevelInfo;
+    networkActivityLogger.level = AFLoggerLevelDebug;
     [networkActivityLogger startLogging];
 #endif
     // 友盟统计
@@ -30,6 +28,20 @@
     [UMSocialData setAppKey:UMengAppKey];
     // 百度推送
     [BPushHelper registerAppDelegate:self launchOptions:launchOptions apiKey:BPushApiKey pushMode:BPushModeDevelopment withFirstAction:nil withSecondAction:nil withCategory:nil isDebug:YES isClearBadgeNumber:YES];
+    
+    [[WLServerHelper sharedInstance] regUserWithUserName:@"kl2" password:@"kl2" callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
+        if (error) {
+            DLog(@"%@", error);
+            return;
+        }
+        if (apiInfo.isSuc) {
+            [WLServerHelper sharedInstance].token = apiResult.token;
+            DLog(@"%@", apiResult.keyValues);
+        }
+        else {
+            DLog(@"%@", apiInfo.message);
+        }
+    }];
     
     // UI入口
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
