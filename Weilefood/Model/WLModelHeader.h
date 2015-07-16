@@ -13,5 +13,11 @@
 #import "WLUploadImageModel.h"
 #import "WLUserModel.h"
 #import "WLShareModel.h"
+#import "WLChannelModel.h"
+#import "WLProductModel.h"
+#import "WLForwardBuyModel.h"
+#import "WLVideoModel.h"
+#import "WLActivityModel.h"
+#import "WLCommentModel.h"
 
 #endif
