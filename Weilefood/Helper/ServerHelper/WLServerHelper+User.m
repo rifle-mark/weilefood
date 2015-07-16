@@ -13,23 +13,39 @@
 @implementation WLServerHelper (User)
 
 - (void)user_regWithUserName:(NSString *)userName password:(NSString *)password callback:(void (^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback {
-    AFHTTPRequestOperationManager *manager = [self httpManager];
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"user", @"reg"]];
     NSDictionary *parameters = @{@"regUser": @{@"UserName": userName,
                                                @"Password": password,
                                                }};
-    [manager POST:apiUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *responseDic = [WLDictionaryHelper validModelDictionary:responseObject];
-        WLApiInfoModel *apiInfo = [WLApiInfoModel objectWithKeyValues:responseDic];
-        WLUserModel *apiResult = nil;
-        if (apiInfo.isSuc) {
-            NSDictionary *dic = responseDic[kServerResultKey];
-            apiResult = [WLUserModel objectWithKeyValues:dic];
-        }
-        GCBlockInvoke(callback, apiInfo, apiResult, nil);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        GCBlockInvoke(callback, nil, nil, error);
-    }];
+    [self httpMode:WLServerHelperModePOST url:apiUrl parameters:parameters resultClass:[WLUserModel class] callback:callback];
+}
+
+- (void)user_loginWithUserName:(NSString *)userName password:(NSString *)password callback:(void (^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"user", @"login"]];
+    NSDictionary *parameters = @{@"userName": userName,
+                                 @"password": password,
+                                 };
+    [self httpMode:WLServerHelperModePOST url:apiUrl parameters:parameters resultClass:[WLUserModel class] callback:callback];
+}
+
+- (void)user_socialLoginWithPlatform:(WLUserPlatform)platform openId:(NSString *)openId token:(NSString *)token avatar:(NSString *)avatar appId:(NSString *)appId nickName:(NSString *)nickName callback:(void (^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"user", @"social", @"login"]];
+    NSDictionary *parameters = @{@"socialuser": @{@"Platform"   : @(platform),
+                                                  @"OpenId"     : openId,
+                                                  @"Token"      : token,
+                                                  @"Avatar"     : avatar,
+                                                  @"AppId"      : appId,
+                                                  @"NickName"   : nickName,
+                                                  }};
+    [self httpMode:WLServerHelperModePOST url:apiUrl parameters:parameters resultClass:[WLUserModel class] callback:callback];
+}
+
+- (void)user_resetPasswordWithUserName:(NSString *)userName password:(NSString *)password callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"user", @"setpass"]];
+    NSDictionary *parameters = @{@"username": userName,
+                                 @"password": password,
+                                 };
+    [self httpMode:WLServerHelperModePOST url:apiUrl parameters:parameters callback:callback];
 }
 
 @end

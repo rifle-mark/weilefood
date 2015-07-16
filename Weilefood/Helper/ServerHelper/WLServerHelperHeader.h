@@ -10,6 +10,8 @@
 #define Weilefood_WLServerHelperHeader_h
 
 #import "WLServerHelper.h"
+#import "WLServerHelper+UploadImage.h"
 #import "WLServerHelper+User.h"
+#import "WLServerHelper+Share.h"
 
 #endif

@@ -12,5 +12,6 @@
 #import "WLApiInfoModel.h"
 #import "WLUploadImageModel.h"
 #import "WLUserModel.h"
+#import "WLShareModel.h"
 
 #endif

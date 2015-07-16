@@ -29,7 +29,7 @@
     // 百度推送
     [BPushHelper registerAppDelegate:self launchOptions:launchOptions apiKey:BPushApiKey pushMode:BPushModeDevelopment withFirstAction:nil withSecondAction:nil withCategory:nil isDebug:YES isClearBadgeNumber:YES];
     
-    [[WLServerHelper sharedInstance] regUserWithUserName:@"kl2" password:@"kl2" callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
+    [[WLServerHelper sharedInstance] user_regWithUserName:@"kl3" password:@"kl3" callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
         if (error) {
             DLog(@"%@", error);
             return;

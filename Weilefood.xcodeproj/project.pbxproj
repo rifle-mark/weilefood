@@ -34,6 +34,8 @@
 		24B8C06F1B5242BC001C5722 /* ALAsset+AGIPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C0611B5242BC001C5722 /* ALAsset+AGIPC.m */; };
 		24B8C0701B5242BC001C5722 /* UIButton+AGIPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C0631B5242BC001C5722 /* UIButton+AGIPC.m */; };
 		24CAC42F1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC42E1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m */; };
+		24CAC4331B57E9D800E3C4D5 /* WLServerHelper+Share.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC4321B57E9D700E3C4D5 /* WLServerHelper+Share.m */; };
+		24CAC4361B57EA5F00E3C4D5 /* WLShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC4351B57EA5F00E3C4D5 /* WLShareModel.m */; };
 		24CDCBD71B4F792E00BDE8CB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CDCB2C1B4F792D00BDE8CB /* LaunchScreen.xib */; };
 		24CDCBDA1B4F792E00BDE8CB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB3A1B4F792D00BDE8CB /* AppDelegate.m */; };
 		24CDCBDC1B4F792E00BDE8CB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB3C1B4F792D00BDE8CB /* main.m */; };
@@ -166,6 +168,10 @@
 		24CAC42D1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+UploadImage.h"; sourceTree = "<group>"; };
 		24CAC42E1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+UploadImage.m"; sourceTree = "<group>"; };
 		24CAC4301B57DF8100E3C4D5 /* AppMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppMacro.h; sourceTree = "<group>"; };
+		24CAC4311B57E9D700E3C4D5 /* WLServerHelper+Share.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Share.h"; sourceTree = "<group>"; };
+		24CAC4321B57E9D700E3C4D5 /* WLServerHelper+Share.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Share.m"; sourceTree = "<group>"; };
+		24CAC4341B57EA5F00E3C4D5 /* WLShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLShareModel.h; sourceTree = "<group>"; };
+		24CAC4351B57EA5F00E3C4D5 /* WLShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLShareModel.m; sourceTree = "<group>"; };
 		24CDCAFF1B4F773900BDE8CB /* Weilefood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weilefood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24CDCB2D1B4F792D00BDE8CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		24CDCB361B4F792D00BDE8CB /* UtilsMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilsMacro.h; sourceTree = "<group>"; };
@@ -363,6 +369,8 @@
 				24CAC42E1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m */,
 				249A73B31B569D2300F46F3D /* WLServerHelper+User.h */,
 				249A73B41B569D2300F46F3D /* WLServerHelper+User.m */,
+				24CAC4311B57E9D700E3C4D5 /* WLServerHelper+Share.h */,
+				24CAC4321B57E9D700E3C4D5 /* WLServerHelper+Share.m */,
 			);
 			path = ServerHelper;
 			sourceTree = "<group>";
@@ -377,6 +385,8 @@
 				249A73CA1B569D4100F46F3D /* WLUploadImageModel.m */,
 				249A73CB1B569D4100F46F3D /* WLUserModel.h */,
 				249A73CC1B569D4100F46F3D /* WLUserModel.m */,
+				24CAC4341B57EA5F00E3C4D5 /* WLShareModel.h */,
+				24CAC4351B57EA5F00E3C4D5 /* WLShareModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -472,8 +482,8 @@
 			isa = PBXGroup;
 			children = (
 				24CAC4301B57DF8100E3C4D5 /* AppMacro.h */,
-				24CDCB361B4F792D00BDE8CB /* UtilsMacro.h */,
 				24CDCB371B4F792D00BDE8CB /* VendorMacro.h */,
+				24CDCB361B4F792D00BDE8CB /* UtilsMacro.h */,
 			);
 			path = Macro;
 			sourceTree = "<group>";
@@ -894,6 +904,7 @@
 				24CDCBE71B4F792E00BDE8CB /* UIImagePickerControllerDelegateImplementationProxy.m in Sources */,
 				24CDCC1A1B4F792E00BDE8CB /* NSObject+GCKVO.m in Sources */,
 				24CDCC0F1B4F792E00BDE8CB /* UISearchBar+GCDelegate.m in Sources */,
+				24CAC4331B57E9D800E3C4D5 /* WLServerHelper+Share.m in Sources */,
 				24CDCBE11B4F792E00BDE8CB /* AVAudioPlayer+GCDelegateBlock.m in Sources */,
 				24CDCC0E1B4F792E00BDE8CB /* UIScrollView+GCDelegate.m in Sources */,
 				24B8C06C1B5242BC001C5722 /* AGIPCPreviewController.m in Sources */,
@@ -947,6 +958,7 @@
 				24CDCBEA1B4F792E00BDE8CB /* UIPickerViewDelegateImplementationProxy.m in Sources */,
 				24CDCC151B4F792E00BDE8CB /* UIToolbar+GCDelegate.m in Sources */,
 				24CDCBFF1B4F792E00BDE8CB /* UITabBarController+GCDelegateBlock.m in Sources */,
+				24CAC4361B57EA5F00E3C4D5 /* WLShareModel.m in Sources */,
 				24B8C0701B5242BC001C5722 /* UIButton+AGIPC.m in Sources */,
 				24CDCBFA1B4F792E00BDE8CB /* UIPickerView+GCDelegateAndDataSourceBlock.m in Sources */,
 				24CDCBED1B4F792E00BDE8CB /* UISearchBarDelegateImplementationProxy.m in Sources */,

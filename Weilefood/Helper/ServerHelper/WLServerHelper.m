@@ -7,6 +7,8 @@
 //
 
 #import "WLServerHelper.h"
+#import "WLModelHeader.h"
+#import "WLDictionaryHelper.h"
 
 @implementation WLServerHelper
 
@@ -35,6 +37,73 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:self.token forHTTPHeaderField:@"token"];
     return manager;
+}
+
+- (void)httpMode:(WLServerHelperMode)mode url:(NSString *)url parameters:(NSDictionary *)parameters callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback {
+    void (^success)(AFHTTPRequestOperation *, id) = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *responseDic = [WLDictionaryHelper validModelDictionary:responseObject];
+        WLApiInfoModel *apiInfo = [WLApiInfoModel objectWithKeyValues:responseDic];
+        GCBlockInvoke(callback, apiInfo, nil);
+    };
+    void (^failure)(AFHTTPRequestOperation *, NSError *) = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        GCBlockInvoke(callback, nil, error);
+    };
+    
+    AFHTTPRequestOperationManager *manager = [self httpManager];
+    if (mode == WLServerHelperModeGET) {
+        [manager GET:url parameters:parameters success:success failure:failure];
+    }
+    else {
+        [manager POST:url parameters:parameters success:success failure:failure];
+    }
+}
+
+- (void)httpMode:(WLServerHelperMode)mode url:(NSString *)url parameters:(NSDictionary *)parameters resultClass:(Class)resultClass callback:(void (^)(WLApiInfoModel *apiInfo, id apiResult, NSError *error))callback {
+    void (^success)(AFHTTPRequestOperation *, id) = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *responseDic = [WLDictionaryHelper validModelDictionary:responseObject];
+        WLApiInfoModel *apiInfo = [WLApiInfoModel objectWithKeyValues:responseDic];
+        id apiResult = nil;
+        if (apiInfo.isSuc) {
+            NSDictionary *dic = responseDic[kServerResultKey];
+            apiResult = [resultClass objectWithKeyValues:dic];
+        }
+        GCBlockInvoke(callback, apiInfo, apiResult, nil);
+    };
+    void (^failure)(AFHTTPRequestOperation *, NSError *) = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        GCBlockInvoke(callback, nil, nil, error);
+    };
+    
+    AFHTTPRequestOperationManager *manager = [self httpManager];
+    if (mode == WLServerHelperModeGET) {
+        [manager GET:url parameters:parameters success:success failure:failure];
+    }
+    else {
+        [manager POST:url parameters:parameters success:success failure:failure];
+    }
+}
+
+- (void)httpMode:(WLServerHelperMode)mode url:(NSString *)url parameters:(NSDictionary *)parameters resultItemsClass:(Class)resultItemsClass callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
+    void (^success)(AFHTTPRequestOperation *, id) = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *responseDic = [WLDictionaryHelper validModelDictionary:responseObject];
+        WLApiInfoModel *apiInfo = [WLApiInfoModel objectWithKeyValues:responseDic];
+        NSArray *apiResult = nil;
+        if (apiInfo.isSuc) {
+            NSDictionary *dic = responseDic[kServerResultKey][kServerResultItemsKey];
+            apiResult = [resultItemsClass objectArrayWithKeyValuesArray:dic];
+        }
+        GCBlockInvoke(callback, apiInfo, apiResult, nil);
+    };
+    void (^failure)(AFHTTPRequestOperation *, NSError *) = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        GCBlockInvoke(callback, nil, nil, error);
+    };
+    
+    AFHTTPRequestOperationManager *manager = [self httpManager];
+    if (mode == WLServerHelperModeGET) {
+        [manager GET:url parameters:parameters success:success failure:failure];
+    }
+    else {
+        [manager POST:url parameters:parameters success:success failure:failure];
+    }
 }
 
 @end

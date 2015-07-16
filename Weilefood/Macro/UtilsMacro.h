@@ -75,4 +75,11 @@
 #define _weak(x)    __weak typeof(x) weak##x = x
 #define _strong(x)  typeof(weak##x) x = weak##x; if (!weak##x) return;
 
+/**
+ *  将属性名着字母大写。对应MJExtension setupReplacedKeyFromPropertyName121方法的block
+ */
+#define CapitalizedPropertyName ^NSString *(NSString *propertyName) { \
+    return [NSString stringWithFormat:@"%@%@", [[propertyName substringToIndex:1] uppercaseString], [propertyName substringFromIndex:1]]; \
+}
+
 #endif
