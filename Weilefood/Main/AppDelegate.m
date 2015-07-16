@@ -34,13 +34,12 @@
             DLog(@"%@", error);
             return;
         }
-        if (apiInfo.isSuc) {
-            [WLServerHelper sharedInstance].token = apiResult.token;
-            DLog(@"%@", apiResult.keyValues);
-        }
-        else {
+        if (!apiInfo.isSuc) {
             DLog(@"%@", apiInfo.message);
+            return;
         }
+        [WLServerHelper sharedInstance].token = apiResult.token;
+        DLog(@"%@", apiResult.keyValues);
     }];
     
     // UI入口

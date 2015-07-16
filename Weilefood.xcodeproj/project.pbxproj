@@ -33,6 +33,7 @@
 		24B8C06E1B5242BC001C5722 /* AGPreviewScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C05F1B5242BC001C5722 /* AGPreviewScrollView.m */; };
 		24B8C06F1B5242BC001C5722 /* ALAsset+AGIPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C0611B5242BC001C5722 /* ALAsset+AGIPC.m */; };
 		24B8C0701B5242BC001C5722 /* UIButton+AGIPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C0631B5242BC001C5722 /* UIButton+AGIPC.m */; };
+		24CAC42F1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC42E1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m */; };
 		24CDCBD71B4F792E00BDE8CB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CDCB2C1B4F792D00BDE8CB /* LaunchScreen.xib */; };
 		24CDCBDA1B4F792E00BDE8CB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB3A1B4F792D00BDE8CB /* AppDelegate.m */; };
 		24CDCBDC1B4F792E00BDE8CB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB3C1B4F792D00BDE8CB /* main.m */; };
@@ -162,6 +163,9 @@
 		24B8C0731B52478C001C5722 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		24B8C0751B524795001C5722 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		24B8C0771B5247A2001C5722 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		24CAC42D1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+UploadImage.h"; sourceTree = "<group>"; };
+		24CAC42E1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+UploadImage.m"; sourceTree = "<group>"; };
+		24CAC4301B57DF8100E3C4D5 /* AppMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppMacro.h; sourceTree = "<group>"; };
 		24CDCAFF1B4F773900BDE8CB /* Weilefood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weilefood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24CDCB2D1B4F792D00BDE8CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		24CDCB361B4F792D00BDE8CB /* UtilsMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilsMacro.h; sourceTree = "<group>"; };
@@ -355,6 +359,8 @@
 				249A73B71B569D2300F46F3D /* WLServerHelperHeader.h */,
 				249A73B51B569D2300F46F3D /* WLServerHelper.h */,
 				249A73B61B569D2300F46F3D /* WLServerHelper.m */,
+				24CAC42D1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.h */,
+				24CAC42E1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m */,
 				249A73B31B569D2300F46F3D /* WLServerHelper+User.h */,
 				249A73B41B569D2300F46F3D /* WLServerHelper+User.m */,
 			);
@@ -465,6 +471,7 @@
 		24CDCB351B4F792D00BDE8CB /* Macro */ = {
 			isa = PBXGroup;
 			children = (
+				24CAC4301B57DF8100E3C4D5 /* AppMacro.h */,
 				24CDCB361B4F792D00BDE8CB /* UtilsMacro.h */,
 				24CDCB371B4F792D00BDE8CB /* VendorMacro.h */,
 			);
@@ -927,6 +934,7 @@
 				24CDCC181B4F792E00BDE8CB /* NSObject+GCAccessor.m in Sources */,
 				24CDCBF21B4F792E00BDE8CB /* UITextViewDelegateImplementationProxy.m in Sources */,
 				24CDCBE51B4F792E00BDE8CB /* UICollectionViewDelegateAndDataSourceImplementationProxy.m in Sources */,
+				24CAC42F1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m in Sources */,
 				24CDCBE61B4F792E00BDE8CB /* UIGestureRecognizerDelegateImplementProxy.m in Sources */,
 				24CDCBDE1B4F792E00BDE8CB /* ViewController.m in Sources */,
 				24CDCC091B4F792E00BDE8CB /* UIImagePickerController+GCDelegate.m in Sources */,

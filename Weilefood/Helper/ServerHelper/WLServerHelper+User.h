@@ -19,6 +19,6 @@
  *  @param password 密码明文
  *  @param callback 完成时回调
  */
-- (void)regUserWithUserName:(NSString *)userName password:(NSString *)password callback:(void (^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback;
+- (void)user_regWithUserName:(NSString *)userName password:(NSString *)password callback:(void (^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback;
 
 @end

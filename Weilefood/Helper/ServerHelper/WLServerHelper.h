@@ -8,27 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
-static NSString * const API_RESULT_KEYNAME = @"result";
-
-@class WLUploadImageModel;
-
-
-/**
- *  服务端上传的图片类型
- */
-typedef NS_ENUM(NSInteger, WLServerUploadImageType){
-    /**
-     *  PNG图片
-     */
-    WLServerUploadImageTypePNG,
-    /**
-     *  JPEG图片
-     */
-    WLServerUploadImageTypeJPEG,
-};
-
-
 /**
  *  服务端HTTP接口对象
  */
@@ -55,13 +34,5 @@ typedef NS_ENUM(NSInteger, WLServerUploadImageType){
  *  @return AFNetworking实例
  */
 - (AFHTTPRequestOperationManager *)httpManager;
-
-/**
- *  上传图片
- *
- *  @param imageData 图片NSData数据
- *  @param callback  完成时回调
- */
-- (void)uploadImageWithImageData:(NSData *)imageData type:(WLServerUploadImageType)type callback:(void (^)(WLUploadImageModel *apiInfo, NSError *error))callback;
 
 @end

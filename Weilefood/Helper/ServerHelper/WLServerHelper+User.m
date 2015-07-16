@@ -12,7 +12,7 @@
 
 @implementation WLServerHelper (User)
 
-- (void)regUserWithUserName:(NSString *)userName password:(NSString *)password callback:(void (^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback {
+- (void)user_regWithUserName:(NSString *)userName password:(NSString *)password callback:(void (^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback {
     AFHTTPRequestOperationManager *manager = [self httpManager];
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"user", @"reg"]];
     NSDictionary *parameters = @{@"regUser": @{@"UserName": userName,
@@ -23,7 +23,7 @@
         WLApiInfoModel *apiInfo = [WLApiInfoModel objectWithKeyValues:responseDic];
         WLUserModel *apiResult = nil;
         if (apiInfo.isSuc) {
-            NSDictionary *dic = responseDic[API_RESULT_KEYNAME];
+            NSDictionary *dic = responseDic[kServerResultKey];
             apiResult = [WLUserModel objectWithKeyValues:dic];
         }
         GCBlockInvoke(callback, apiInfo, apiResult, nil);

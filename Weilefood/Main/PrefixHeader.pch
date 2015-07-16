@@ -23,6 +23,7 @@
 
 #import "GCExtension.h"
 
+#import "AppMacro.h"
 #import "UtilsMacro.h"
 #import "VendorMacro.h"
 

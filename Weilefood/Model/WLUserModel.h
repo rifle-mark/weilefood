@@ -23,7 +23,7 @@ typedef NS_ENUM(NSUInteger, WLUserSex){
 /// Email
 @property (nonatomic, copy) NSString *email;
 /// 登录的时间 （有效30天）
-@property (nonatomic, copy) NSString *loginDate;
+@property (nonatomic, copy) NSDate *loginDate;
 /// 头像地址
 @property (nonatomic, copy) NSString *avatar;
 /// 创建时间
@@ -31,7 +31,7 @@ typedef NS_ENUM(NSUInteger, WLUserSex){
 /// 密码
 @property (nonatomic, copy) NSString *password;
 /// 用户编号
-@property (nonatomic, assign) NSInteger userId;
+@property (nonatomic, assign) NSUInteger userId;
 /// 昵称
 @property (nonatomic, copy) NSString *nickName;
 /// 设备ID
@@ -43,9 +43,9 @@ typedef NS_ENUM(NSUInteger, WLUserSex){
 /// 是否为VIP
 @property (nonatomic, assign) BOOL isVip;
 /// Vip过期时间
-@property (nonatomic, copy) NSString *vipEndDate;
+@property (nonatomic, copy) NSDate *vipEndDate;
 /// VIP有效天数
-@property (nonatomic, assign) NSInteger validDays;
+@property (nonatomic, assign) NSUInteger validDays;
 /// 登录成功后服务器返回的
 @property (nonatomic, copy) NSString *token;
 
