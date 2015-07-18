@@ -38,7 +38,7 @@
             DLog(@"%@", apiInfo.message);
             return;
         }
-        [WLServerHelper sharedInstance].token = apiResult.token;
+        [WLServerHelper sharedInstance].userToken = apiResult.token;
         DLog(@"%@", apiResult.keyValues);
     }];
     

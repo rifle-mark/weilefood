@@ -17,7 +17,7 @@
     NSDictionary *parameters = @{@"regUser": @{@"UserName": userName,
                                                @"Password": password,
                                                }};
-    [self httpMode:WLServerHelperModePOST url:apiUrl parameters:parameters resultClass:[WLUserModel class] callback:callback];
+    [self httpPOST:apiUrl parameters:parameters resultClass:[WLUserModel class] callback:callback];
 }
 
 - (void)user_loginWithUserName:(NSString *)userName password:(NSString *)password callback:(void (^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback {
@@ -25,7 +25,7 @@
     NSDictionary *parameters = @{@"userName": userName,
                                  @"password": password,
                                  };
-    [self httpMode:WLServerHelperModePOST url:apiUrl parameters:parameters resultClass:[WLUserModel class] callback:callback];
+    [self httpPOST:apiUrl parameters:parameters resultClass:[WLUserModel class] callback:callback];
 }
 
 - (void)user_socialLoginWithPlatform:(WLUserPlatform)platform openId:(NSString *)openId token:(NSString *)token avatar:(NSString *)avatar appId:(NSString *)appId nickName:(NSString *)nickName callback:(void (^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback {
@@ -37,7 +37,7 @@
                                                   @"AppId"      : appId,
                                                   @"NickName"   : nickName,
                                                   }};
-    [self httpMode:WLServerHelperModePOST url:apiUrl parameters:parameters resultClass:[WLUserModel class] callback:callback];
+    [self httpPOST:apiUrl parameters:parameters resultClass:[WLUserModel class] callback:callback];
 }
 
 - (void)user_resetPasswordWithUserName:(NSString *)userName password:(NSString *)password callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback {
@@ -45,7 +45,7 @@
     NSDictionary *parameters = @{@"username": userName,
                                  @"password": password,
                                  };
-    [self httpMode:WLServerHelperModePOST url:apiUrl parameters:parameters callback:callback];
+    [self httpPOST:apiUrl parameters:parameters callback:callback];
 }
 
 @end

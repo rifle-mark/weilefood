@@ -17,19 +17,19 @@
     NSDictionary *parameters = @{@"share": @{@"Content": content,
                                              @"Images": images
                                              }};
-    [self httpMode:WLServerHelperModePOST url:apiUrl parameters:parameters resultClass:[WLShareModel class] callback:callback];
+    [self httpPOST:apiUrl parameters:parameters resultClass:[WLShareModel class] callback:callback];
 }
 
 - (void)share_deleteWithShareId:(NSUInteger)shareId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"share", @"delete"]];
     NSDictionary *parameters = @{@"share": @(shareId)};
-    [self httpMode:WLServerHelperModePOST url:apiUrl parameters:parameters callback:callback];
+    [self httpPOST:apiUrl parameters:parameters callback:callback];
 }
 
 - (void)share_policeWithShareId:(NSUInteger)shareId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"share", @"police"]];
     NSDictionary *parameters = @{@"share": @(shareId)};
-    [self httpMode:WLServerHelperModePOST url:apiUrl parameters:parameters callback:callback];
+    [self httpPOST:apiUrl parameters:parameters callback:callback];
 }
 
 - (void)share_getListWithMaxDate:(NSDate *)maxDate pagesize:(NSUInteger)pagesize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
@@ -38,7 +38,7 @@
                                  @"pagesize": @(pagesize),
                                  @"maxdate": @([maxDate timeIntervalSince1970]),
                                  };
-    [self httpMode:WLServerHelperModePOST url:apiUrl parameters:parameters resultItemsClass:[WLShareModel class] callback:callback];
+    [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLShareModel class] callback:callback];
 }
 
 - (void)share_getMyListWithMaxDate:(NSDate *)maxDate pagesize:(NSUInteger)pagesize callback:(void (^)(WLApiInfoModel *, NSArray *, NSError *))callback {
@@ -47,7 +47,7 @@
                                  @"pagesize": @(pagesize),
                                  @"maxdate": @([maxDate timeIntervalSince1970]),
                                  };
-    [self httpMode:WLServerHelperModePOST url:apiUrl parameters:parameters resultItemsClass:[WLShareModel class] callback:callback];
+    [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLShareModel class] callback:callback];
 }
 
 @end
