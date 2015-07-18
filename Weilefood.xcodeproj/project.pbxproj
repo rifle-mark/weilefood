@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		245936A31B5A2C62008FFAB8 /* WLServerHelper+Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A21B5A2C62008FFAB8 /* WLServerHelper+Channel.m */; };
+		245936A61B5A2ECF008FFAB8 /* WLServerHelper+Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A51B5A2ECF008FFAB8 /* WLServerHelper+Product.m */; };
+		245936A91B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A81B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m */; };
+		245936AC1B5A3943008FFAB8 /* WLServerHelper+Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936AB1B5A3943008FFAB8 /* WLServerHelper+Video.m */; };
+		245936AF1B5A3AB3008FFAB8 /* WLServerHelper+Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936AE1B5A3AB3008FFAB8 /* WLServerHelper+Activity.m */; };
+		245936B21B5A3CAF008FFAB8 /* WLServerHelper+Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936B11B5A3CAF008FFAB8 /* WLServerHelper+Comment.m */; };
+		245936B51B5A4015008FFAB8 /* WLAdModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936B41B5A4015008FFAB8 /* WLAdModel.m */; };
+		245936B81B5A42F4008FFAB8 /* WLServerHelper+Ad.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936B71B5A42F4008FFAB8 /* WLServerHelper+Ad.m */; };
 		2467B71C1B50D06F001202A4 /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2467B71B1B50D06F001202A4 /* libBPush.a */; };
 		2467B71E1B50D134001202A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2467B71D1B50D134001202A4 /* Foundation.framework */; };
 		2467B7201B50D13B001202A4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2467B71F1B50D13B001202A4 /* CoreTelephony.framework */; };
@@ -117,6 +125,22 @@
 
 /* Begin PBXFileReference section */
 		060F4AADF217CE753F362849 /* Pods-Weilefood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weilefood.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weilefood/Pods-Weilefood.release.xcconfig"; sourceTree = "<group>"; };
+		245936A11B5A2C62008FFAB8 /* WLServerHelper+Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Channel.h"; sourceTree = "<group>"; };
+		245936A21B5A2C62008FFAB8 /* WLServerHelper+Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Channel.m"; sourceTree = "<group>"; };
+		245936A41B5A2ECF008FFAB8 /* WLServerHelper+Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Product.h"; sourceTree = "<group>"; };
+		245936A51B5A2ECF008FFAB8 /* WLServerHelper+Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Product.m"; sourceTree = "<group>"; };
+		245936A71B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+ForwardBuy.h"; sourceTree = "<group>"; };
+		245936A81B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+ForwardBuy.m"; sourceTree = "<group>"; };
+		245936AA1B5A3943008FFAB8 /* WLServerHelper+Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Video.h"; sourceTree = "<group>"; };
+		245936AB1B5A3943008FFAB8 /* WLServerHelper+Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Video.m"; sourceTree = "<group>"; };
+		245936AD1B5A3AB3008FFAB8 /* WLServerHelper+Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Activity.h"; sourceTree = "<group>"; };
+		245936AE1B5A3AB3008FFAB8 /* WLServerHelper+Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Activity.m"; sourceTree = "<group>"; };
+		245936B01B5A3CAF008FFAB8 /* WLServerHelper+Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Comment.h"; sourceTree = "<group>"; };
+		245936B11B5A3CAF008FFAB8 /* WLServerHelper+Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Comment.m"; sourceTree = "<group>"; };
+		245936B31B5A4015008FFAB8 /* WLAdModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLAdModel.h; sourceTree = "<group>"; };
+		245936B41B5A4015008FFAB8 /* WLAdModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLAdModel.m; sourceTree = "<group>"; };
+		245936B61B5A42F4008FFAB8 /* WLServerHelper+Ad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Ad.h"; sourceTree = "<group>"; };
+		245936B71B5A42F4008FFAB8 /* WLServerHelper+Ad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Ad.m"; sourceTree = "<group>"; };
 		2467B71A1B50D06F001202A4 /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
 		2467B71B1B50D06F001202A4 /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
 		2467B71D1B50D134001202A4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -389,6 +413,20 @@
 				249A73B41B569D2300F46F3D /* WLServerHelper+User.m */,
 				24CAC4311B57E9D700E3C4D5 /* WLServerHelper+Share.h */,
 				24CAC4321B57E9D700E3C4D5 /* WLServerHelper+Share.m */,
+				245936A11B5A2C62008FFAB8 /* WLServerHelper+Channel.h */,
+				245936A21B5A2C62008FFAB8 /* WLServerHelper+Channel.m */,
+				245936A41B5A2ECF008FFAB8 /* WLServerHelper+Product.h */,
+				245936A51B5A2ECF008FFAB8 /* WLServerHelper+Product.m */,
+				245936A71B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.h */,
+				245936A81B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m */,
+				245936AA1B5A3943008FFAB8 /* WLServerHelper+Video.h */,
+				245936AB1B5A3943008FFAB8 /* WLServerHelper+Video.m */,
+				245936AD1B5A3AB3008FFAB8 /* WLServerHelper+Activity.h */,
+				245936AE1B5A3AB3008FFAB8 /* WLServerHelper+Activity.m */,
+				245936B01B5A3CAF008FFAB8 /* WLServerHelper+Comment.h */,
+				245936B11B5A3CAF008FFAB8 /* WLServerHelper+Comment.m */,
+				245936B61B5A42F4008FFAB8 /* WLServerHelper+Ad.h */,
+				245936B71B5A42F4008FFAB8 /* WLServerHelper+Ad.m */,
 			);
 			path = ServerHelper;
 			sourceTree = "<group>";
@@ -417,6 +455,8 @@
 				24CAC4441B5808B900E3C4D5 /* WLActivityModel.m */,
 				24CAC4461B580A5800E3C4D5 /* WLCommentModel.h */,
 				24CAC4471B580A5800E3C4D5 /* WLCommentModel.m */,
+				245936B31B5A4015008FFAB8 /* WLAdModel.h */,
+				245936B41B5A4015008FFAB8 /* WLAdModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -927,11 +967,15 @@
 				24CDCBFC1B4F792E00BDE8CB /* UIScrollView+GCDelegateBlock.m in Sources */,
 				24CDCC131B4F792E00BDE8CB /* UITextField+GCDelegate.m in Sources */,
 				24CAC43C1B58050900E3C4D5 /* WLProductModel.m in Sources */,
+				245936AF1B5A3AB3008FFAB8 /* WLServerHelper+Activity.m in Sources */,
 				24CDCC001B4F792E00BDE8CB /* UITableView+GCDelegateAndDataSourceBlock.m in Sources */,
+				245936B51B5A4015008FFAB8 /* WLAdModel.m in Sources */,
 				24CDCC1E1B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m in Sources */,
 				24B8C0671B5242BC001C5722 /* AGImagePreviewController.m in Sources */,
+				245936B21B5A3CAF008FFAB8 /* WLServerHelper+Comment.m in Sources */,
 				24CDCBF81B4F792E00BDE8CB /* UINavigationBar+GCDelegateBlock.m in Sources */,
 				24CDCBDA1B4F792E00BDE8CB /* AppDelegate.m in Sources */,
+				245936A31B5A2C62008FFAB8 /* WLServerHelper+Channel.m in Sources */,
 				24CDCBE71B4F792E00BDE8CB /* UIImagePickerControllerDelegateImplementationProxy.m in Sources */,
 				24CDCC1A1B4F792E00BDE8CB /* NSObject+GCKVO.m in Sources */,
 				24CDCC0F1B4F792E00BDE8CB /* UISearchBar+GCDelegate.m in Sources */,
@@ -962,6 +1006,7 @@
 				24CDCBDC1B4F792E00BDE8CB /* main.m in Sources */,
 				24CDCC101B4F792E00BDE8CB /* UITabBar+GCDelegate.m in Sources */,
 				24CDCC1D1B4F792E00BDE8CB /* UIControl+GCEvent.m in Sources */,
+				245936AC1B5A3943008FFAB8 /* WLServerHelper+Video.m in Sources */,
 				24CDCC121B4F792E00BDE8CB /* UITableView+GCDelegateAndDataSource.m in Sources */,
 				24CDCC081B4F792E00BDE8CB /* UIGestureRecognizer+GCDelegate.m in Sources */,
 				24B8C06E1B5242BC001C5722 /* AGPreviewScrollView.m in Sources */,
@@ -973,6 +1018,7 @@
 				24CDCC0D1B4F792E00BDE8CB /* UIPopoverController+GCDelegate.m in Sources */,
 				24CDCBE91B4F792E00BDE8CB /* UINavigationControllerDelegateImplementionProxy.m in Sources */,
 				24CAC4421B5807ED00E3C4D5 /* WLVideoModel.m in Sources */,
+				245936B81B5A42F4008FFAB8 /* WLServerHelper+Ad.m in Sources */,
 				249A73CE1B569D4100F46F3D /* WLApiInfoModel.m in Sources */,
 				24CDCC181B4F792E00BDE8CB /* NSObject+GCAccessor.m in Sources */,
 				24CDCBF21B4F792E00BDE8CB /* UITextViewDelegateImplementationProxy.m in Sources */,
@@ -980,6 +1026,7 @@
 				24CAC42F1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m in Sources */,
 				24CAC4451B5808B900E3C4D5 /* WLActivityModel.m in Sources */,
 				24CDCBE61B4F792E00BDE8CB /* UIGestureRecognizerDelegateImplementProxy.m in Sources */,
+				245936A61B5A2ECF008FFAB8 /* WLServerHelper+Product.m in Sources */,
 				24CDCBDE1B4F792E00BDE8CB /* ViewController.m in Sources */,
 				24CDCC091B4F792E00BDE8CB /* UIImagePickerController+GCDelegate.m in Sources */,
 				24CAC43F1B5806BF00E3C4D5 /* WLForwardBuyModel.m in Sources */,
@@ -1001,6 +1048,7 @@
 				24CDCC161B4F792E00BDE8CB /* UIWebView+GCDelegate.m in Sources */,
 				24CDCBF01B4F792E00BDE8CB /* UITableViewDelegateAndDataSourceImplementationProxy.m in Sources */,
 				24CDCBE31B4F792E00BDE8CB /* AVAudioPlayerDelegateImplementationProxy.m in Sources */,
+				245936A91B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m in Sources */,
 				24CAC4391B58044C00E3C4D5 /* WLChannelModel.m in Sources */,
 				24CDCBFE1B4F792E00BDE8CB /* UITabBar+GCDelegateBlock.m in Sources */,
 				24CDCC061B4F792E00BDE8CB /* AVAudioRecorder+GCDelegate.m in Sources */,

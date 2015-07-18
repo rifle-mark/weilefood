@@ -10,7 +10,7 @@
 
 @implementation WLVideoModel
 
-+ (void)load {
++ (void)initialize {
     [self setupReplacedKeyFromPropertyName121:^NSString *(NSString *propertyName) {
         if ([propertyName isEqualToString:@"desc"]) {
             return @"Description";

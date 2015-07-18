@@ -79,6 +79,26 @@ extern NSString * const API_RESULT_ITEMS_KEYNAME;
 - (void)httpPOST:(NSString *)url parameters:(NSDictionary *)parameters resultClass:(Class)resultClass callback:(void (^)(WLApiInfoModel *apiInfo, id apiResult, NSError *error))callback;
 
 /**
+ *  GET访问列表接口，返回 ApiInfo 和 指定数组元素类型的result数组
+ *
+ *  @param url              请求地址
+ *  @param parameters       请求参数
+ *  @param resultArrayClass 指定数组元素类型
+ *  @param callback
+ */
+- (void)httpGET:(NSString *)url parameters:(NSDictionary *)parameters resultArrayClass:(Class)resultArrayClass callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
+
+/**
+ *  POST访问列表接口，返回 ApiInfo 和 指定数组元素类型的result数组
+ *
+ *  @param url              请求地址
+ *  @param parameters       请求参数
+ *  @param resultArrayClass 指定数组元素类型
+ *  @param callback
+ */
+- (void)httpPOST:(NSString *)url parameters:(NSDictionary *)parameters resultArrayClass:(Class)resultArrayClass callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
+
+/**
  *  GET访问列表接口，返回 ApiInfo 和 指定数组元素类型的result.items数组
  *
  *  @param url              请求地址

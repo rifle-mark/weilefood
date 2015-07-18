@@ -10,7 +10,7 @@
 
 @implementation WLCommentModel
 
-+ (void)load {
++ (void)initialize {
     [self setupReplacedKeyFromPropertyName121:CapitalizedPropertyName];
 }
 

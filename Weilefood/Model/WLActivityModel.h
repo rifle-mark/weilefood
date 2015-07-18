@@ -10,6 +10,7 @@
 
 /// 线上线下活动
 @interface WLActivityModel : NSObject
+
 /// ID
 @property (nonatomic, assign) NSUInteger activityId;
 /// 活动介绍

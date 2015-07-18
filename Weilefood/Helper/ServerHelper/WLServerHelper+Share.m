@@ -8,7 +8,6 @@
 
 #import "WLServerHelper+Share.h"
 #import "WLModelHeader.h"
-#import "WLDictionaryHelper.h"
 
 @implementation WLServerHelper (Share)
 
@@ -32,19 +31,19 @@
     [self httpPOST:apiUrl parameters:parameters callback:callback];
 }
 
-- (void)share_getListWithMaxDate:(NSDate *)maxDate pagesize:(NSUInteger)pagesize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
+- (void)share_getListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"share", @"list"]];
     NSDictionary *parameters = @{@"pageindex": @(1),
-                                 @"pagesize": @(pagesize),
+                                 @"pagesize": @(pageSize),
                                  @"maxdate": @([maxDate timeIntervalSince1970]),
                                  };
     [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLShareModel class] callback:callback];
 }
 
-- (void)share_getMyListWithMaxDate:(NSDate *)maxDate pagesize:(NSUInteger)pagesize callback:(void (^)(WLApiInfoModel *, NSArray *, NSError *))callback {
+- (void)share_getMyListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *, NSArray *, NSError *))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"share", @"mylist"]];
     NSDictionary *parameters = @{@"pageindex": @(1),
-                                 @"pagesize": @(pagesize),
+                                 @"pagesize": @(pageSize),
                                  @"maxdate": @([maxDate timeIntervalSince1970]),
                                  };
     [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLShareModel class] callback:callback];

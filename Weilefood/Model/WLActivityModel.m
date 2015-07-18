@@ -10,7 +10,7 @@
 
 @implementation WLActivityModel
 
-+ (void)load {
++ (void)initialize {
     [self setupReplacedKeyFromPropertyName121:CapitalizedPropertyName];
 }
 

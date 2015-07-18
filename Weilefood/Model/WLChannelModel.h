@@ -8,18 +8,27 @@
 
 #import <Foundation/Foundation.h>
 
-/// 市集栏目信息
+/// 栏目类型
+typedef NS_ENUM(NSUInteger, WLChannelType) {
+    /// 市集产品栏目
+    WLChannelTypeProduct    = 1,
+    /// 预购栏目
+    WLChannelTypeForwardBuy = 2,
+};
+
+/// 栏目
 @interface WLChannelModel : NSObject
+
 /// 栏目ID
 @property (nonatomic, assign) NSUInteger channelId;
 /// 栏目名
 @property (nonatomic, copy) NSString *name;
 /// 子栏目
 @property (nonatomic, strong) NSArray *childChannel;
+/// 类型
+@property (nonatomic, assign) WLChannelType type;
 ///
 @property (nonatomic, assign) NSUInteger parentId;
-///
-@property (nonatomic, assign) NSInteger type;
 ///
 @property (nonatomic, copy) NSString *ico;
 

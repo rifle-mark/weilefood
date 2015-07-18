@@ -19,5 +19,6 @@
 #import "WLVideoModel.h"
 #import "WLActivityModel.h"
 #import "WLCommentModel.h"
+#import "WLAdModel.h"
 
 #endif

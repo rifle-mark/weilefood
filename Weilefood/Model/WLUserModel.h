@@ -18,8 +18,9 @@ typedef NS_ENUM(NSUInteger, WLUserSex){
     WLUserSexFemale,
 };
 
-/// 用户信息
+/// 用户
 @interface WLUserModel : NSObject
+
 /// Email
 @property (nonatomic, copy) NSString *email;
 /// 登录的时间 （有效30天）

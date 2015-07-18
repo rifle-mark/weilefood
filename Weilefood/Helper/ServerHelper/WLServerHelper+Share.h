@@ -8,7 +8,7 @@
 
 #import "WLServerHelper.h"
 
-@class WLApiInfoModel, WLShareModel;
+@class WLShareModel;
 
 @interface WLServerHelper (Share)
 
@@ -38,22 +38,21 @@
 - (void)share_policeWithShareId:(NSUInteger)shareId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback;
 
 /**
- *  获取分享列表
+ *  获取分享列表。(NSArray<WLShareModel>)apiResult
  *
  *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
- *  @param pagesize 返回的最大记录数
+ *  @param pageSize 返回的最大记录数
  *  @param callback
  */
-- (void)share_getListWithMaxDate:(NSDate *)maxDate pagesize:(NSUInteger)pagesize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
+- (void)share_getListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
 
 /**
- *  获取我的分享列表
+ *  获取我的分享列表。(NSArray<WLShareModel>)apiResult
  *
  *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
- *  @param pagesize 返回的最大记录数
+ *  @param pageSize 返回的最大记录数
  *  @param callback
  */
-- (void)share_getMyListWithMaxDate:(NSDate *)maxDate pagesize:(NSUInteger)pagesize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
-
+- (void)share_getMyListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
 
 @end

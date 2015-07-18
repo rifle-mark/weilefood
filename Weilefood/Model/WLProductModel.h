@@ -10,6 +10,7 @@
 
 /// 市集产品
 @interface WLProductModel : NSObject
+
 /// ID
 @property (nonatomic, assign) NSUInteger productId;
 /// 名称

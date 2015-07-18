@@ -10,6 +10,7 @@
 
 /// 预购
 @interface WLForwardBuyModel : NSObject
+
 /// ID
 @property (nonatomic, assign) NSUInteger forwardBuyId;
 /// 开始时间

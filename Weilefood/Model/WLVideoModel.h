@@ -10,6 +10,7 @@
 
 /// 主题视频
 @interface WLVideoModel : NSObject
+
 /// ID
 @property (nonatomic, assign) NSUInteger videoId;
 /// 标题

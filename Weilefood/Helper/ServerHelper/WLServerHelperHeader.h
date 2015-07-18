@@ -13,5 +13,12 @@
 #import "WLServerHelper+UploadImage.h"
 #import "WLServerHelper+User.h"
 #import "WLServerHelper+Share.h"
+#import "WLServerHelper+Channel.h"
+#import "WLServerHelper+Product.h"
+#import "WLServerHelper+ForwardBuy.h"
+#import "WLServerHelper+Video.h"
+#import "WLServerHelper+Activity.h"
+#import "WLServerHelper+Comment.h"
+#import "WLServerHelper+Ad.h"
 
 #endif

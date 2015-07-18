@@ -10,7 +10,10 @@
 
 @implementation WLChannelModel
 
-+ (void)load {
++ (void)initialize {
+    [self setupObjectClassInArray:^NSDictionary *{
+        return @{@"childChannel": @"WLChannelModel"};
+    }];
     [self setupReplacedKeyFromPropertyName121:CapitalizedPropertyName];
 }
 

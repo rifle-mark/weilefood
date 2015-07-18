@@ -8,7 +8,7 @@
 
 #import "WLServerHelper.h"
 
-@class WLApiInfoModel, WLUserModel;
+@class WLUserModel;
 
 /// 第三方账号平台
 typedef NS_ENUM(NSUInteger, WLUserPlatform){

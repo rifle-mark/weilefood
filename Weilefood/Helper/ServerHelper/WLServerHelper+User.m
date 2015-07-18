@@ -8,7 +8,6 @@
 
 #import "WLServerHelper+User.h"
 #import "WLModelHeader.h"
-#import "WLDictionaryHelper.h"
 
 @implementation WLServerHelper (User)
 

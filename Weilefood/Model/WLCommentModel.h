@@ -19,13 +19,14 @@ typedef NS_ENUM(NSUInteger, WLCommentType) {
     /// 预购
     WLCommentTypeForwardBuy = 4,
     /// 课堂
-//    WLCommentType = 5,
+    WLCommentTypeClass = 5,
     /// 主题视频
     WLCommentTypeVideo = 6,
 };
 
 /// 评论
 @interface WLCommentModel : NSObject
+
 /// ID
 @property (nonatomic, assign) NSUInteger commentId;
 /// 头像

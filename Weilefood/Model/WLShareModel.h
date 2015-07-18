@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-/// 分享信息
+/// 分享
 @interface WLShareModel : NSObject
+
 /// 头像
 @property (nonatomic, copy) NSString *avatar;
 /// 赞数
