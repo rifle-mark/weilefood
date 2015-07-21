@@ -25,5 +25,7 @@
 #import "WLOrderDeliverModel.h"
 #import "WLOrderAddressModel.h"
 #import "WLOrderProductModel.h"
+#import "WLDialogModel.h"
+#import "WLMessageModel.h"
 
 #endif

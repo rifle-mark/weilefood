@@ -17,7 +17,6 @@
     for (WLOrderProductModel *product in productList) {
         [detailList addObject:@{@"Type" : @(product.type),
                                 @"RefId": @(product.refId),
-                                @"Price": @(product.price),
                                 @"Count": @(product.count),
                                 }];
     }

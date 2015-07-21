@@ -29,6 +29,9 @@
 		2482E6381B5E7CB1005815E8 /* WLOrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6371B5E7CB1005815E8 /* WLOrderDetailModel.m */; };
 		2482E63B1B5E8285005815E8 /* WLOrderProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E63A1B5E8285005815E8 /* WLOrderProductModel.m */; };
 		2482E63E1B5E844B005815E8 /* WLServerHelper+Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E63D1B5E844B005815E8 /* WLServerHelper+Order.m */; };
+		2482E6411B5E9482005815E8 /* WLDialogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6401B5E9482005815E8 /* WLDialogModel.m */; };
+		2482E6441B5E949D005815E8 /* WLMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6431B5E949D005815E8 /* WLMessageModel.m */; };
+		2482E6471B5E96FE005815E8 /* WLServerHelper+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6461B5E96FE005815E8 /* WLServerHelper+Message.m */; };
 		249A73BC1B569D2300F46F3D /* WLServerHelper+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73B41B569D2300F46F3D /* WLServerHelper+User.m */; };
 		249A73BD1B569D2300F46F3D /* WLServerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73B61B569D2300F46F3D /* WLServerHelper.m */; };
 		249A73BE1B569D2300F46F3D /* WLDictionaryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73B91B569D2300F46F3D /* WLDictionaryHelper.m */; };
@@ -172,6 +175,12 @@
 		2482E63A1B5E8285005815E8 /* WLOrderProductModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLOrderProductModel.m; sourceTree = "<group>"; };
 		2482E63C1B5E844B005815E8 /* WLServerHelper+Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Order.h"; sourceTree = "<group>"; };
 		2482E63D1B5E844B005815E8 /* WLServerHelper+Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Order.m"; sourceTree = "<group>"; };
+		2482E63F1B5E9482005815E8 /* WLDialogModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLDialogModel.h; sourceTree = "<group>"; };
+		2482E6401B5E9482005815E8 /* WLDialogModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLDialogModel.m; sourceTree = "<group>"; };
+		2482E6421B5E949D005815E8 /* WLMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLMessageModel.h; sourceTree = "<group>"; };
+		2482E6431B5E949D005815E8 /* WLMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLMessageModel.m; sourceTree = "<group>"; };
+		2482E6451B5E96FE005815E8 /* WLServerHelper+Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Message.h"; sourceTree = "<group>"; };
+		2482E6461B5E96FE005815E8 /* WLServerHelper+Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Message.m"; sourceTree = "<group>"; };
 		249A73B31B569D2300F46F3D /* WLServerHelper+User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+User.h"; sourceTree = "<group>"; };
 		249A73B41B569D2300F46F3D /* WLServerHelper+User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+User.m"; sourceTree = "<group>"; };
 		249A73B51B569D2300F46F3D /* WLServerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLServerHelper.h; sourceTree = "<group>"; };
@@ -452,6 +461,8 @@
 				2482E62B1B5E7864005815E8 /* WLServerHelper+Action.m */,
 				2482E63C1B5E844B005815E8 /* WLServerHelper+Order.h */,
 				2482E63D1B5E844B005815E8 /* WLServerHelper+Order.m */,
+				2482E6451B5E96FE005815E8 /* WLServerHelper+Message.h */,
+				2482E6461B5E96FE005815E8 /* WLServerHelper+Message.m */,
 			);
 			path = ServerHelper;
 			sourceTree = "<group>";
@@ -492,6 +503,10 @@
 				2482E6341B5E7CA2005815E8 /* WLOrderAddressModel.m */,
 				2482E6391B5E8285005815E8 /* WLOrderProductModel.h */,
 				2482E63A1B5E8285005815E8 /* WLOrderProductModel.m */,
+				2482E63F1B5E9482005815E8 /* WLDialogModel.h */,
+				2482E6401B5E9482005815E8 /* WLDialogModel.m */,
+				2482E6421B5E949D005815E8 /* WLMessageModel.h */,
+				2482E6431B5E949D005815E8 /* WLMessageModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1007,6 +1022,7 @@
 				245936AF1B5A3AB3008FFAB8 /* WLServerHelper+Activity.m in Sources */,
 				24CDCC001B4F792E00BDE8CB /* UITableView+GCDelegateAndDataSourceBlock.m in Sources */,
 				245936B51B5A4015008FFAB8 /* WLAdModel.m in Sources */,
+				2482E6441B5E949D005815E8 /* WLMessageModel.m in Sources */,
 				24CDCC1E1B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m in Sources */,
 				24B8C0671B5242BC001C5722 /* AGImagePreviewController.m in Sources */,
 				245936B21B5A3CAF008FFAB8 /* WLServerHelper+Comment.m in Sources */,
@@ -1059,6 +1075,7 @@
 				24CDCBE91B4F792E00BDE8CB /* UINavigationControllerDelegateImplementionProxy.m in Sources */,
 				24CAC4421B5807ED00E3C4D5 /* WLVideoModel.m in Sources */,
 				245936B81B5A42F4008FFAB8 /* WLServerHelper+Ad.m in Sources */,
+				2482E6411B5E9482005815E8 /* WLDialogModel.m in Sources */,
 				249A73CE1B569D4100F46F3D /* WLApiInfoModel.m in Sources */,
 				24CDCC181B4F792E00BDE8CB /* NSObject+GCAccessor.m in Sources */,
 				24CDCBF21B4F792E00BDE8CB /* UITextViewDelegateImplementationProxy.m in Sources */,
@@ -1070,6 +1087,7 @@
 				24CDCBDE1B4F792E00BDE8CB /* ViewController.m in Sources */,
 				24CDCC091B4F792E00BDE8CB /* UIImagePickerController+GCDelegate.m in Sources */,
 				24CAC43F1B5806BF00E3C4D5 /* WLForwardBuyModel.m in Sources */,
+				2482E6471B5E96FE005815E8 /* WLServerHelper+Message.m in Sources */,
 				24CDCBDF1B4F792E00BDE8CB /* GCImplementationProxy.m in Sources */,
 				24B8C0641B5242BC001C5722 /* AGImagePickerController+Helper.m in Sources */,
 				24CDCC011B4F792E00BDE8CB /* UITextField+GCDelegateBlock.m in Sources */,

@@ -29,10 +29,10 @@ typedef NS_ENUM(NSUInteger, WLOrderProductType) {
 @property (nonatomic, assign) WLOrderProductType type;
 /// 商品对象ID(生成订单时必填)
 @property (nonatomic, assign) NSUInteger refId;
-/// 单价(生成订单时必填)
-@property (nonatomic, assign) CGFloat price;
 /// 数量(生成订单时必填)
 @property (nonatomic, assign) NSUInteger count;
+/// 单价
+@property (nonatomic, assign) CGFloat price;
 /// 名称
 @property (nonatomic, copy) NSString *title;
 /// 图片URL
