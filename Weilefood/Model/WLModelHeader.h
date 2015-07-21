@@ -20,5 +20,10 @@
 #import "WLActivityModel.h"
 #import "WLCommentModel.h"
 #import "WLAdModel.h"
+#import "WLOrderModel.h"
+#import "WLOrderDetailModel.h"
+#import "WLOrderDeliverModel.h"
+#import "WLOrderAddressModel.h"
+#import "WLOrderProductModel.h"
 
 #endif

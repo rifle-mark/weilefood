@@ -62,6 +62,15 @@ typedef NS_ENUM(NSUInteger, WLUserPlatform){
 - (void)user_socialLoginWithPlatform:(WLUserPlatform)platform openId:(NSString *)openId token:(NSString *)token avatar:(NSString *)avatar appId:(NSString *)appId nickName:(NSString *)nickName callback:(void (^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback;
 
 /**
+ *  修改用户昵称和头像
+ *
+ *  @param nickName 昵称
+ *  @param avatar   头像URL
+ *  @param callback 完成时回调
+ */
+- (void)user_updateWithNickName:(NSString *)nickName avatar:(NSString *)avatar callback:(void (^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback;
+
+/**
  *  重置密码
  *
  *  @param userName 登录名

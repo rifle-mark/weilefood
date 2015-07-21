@@ -22,6 +22,13 @@
 		2467B7241B50D146001202A4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2467B7231B50D146001202A4 /* SystemConfiguration.framework */; };
 		2467B7271B50E30E001202A4 /* BPushHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2467B7261B50E30E001202A4 /* BPushHelper.m */; };
 		246F07821B56A6210086CD28 /* NSString+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 246F07811B56A6210086CD28 /* NSString+Ext.m */; };
+		2482E62C1B5E7864005815E8 /* WLServerHelper+Action.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E62B1B5E7864005815E8 /* WLServerHelper+Action.m */; };
+		2482E62F1B5E7C72005815E8 /* WLOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E62E1B5E7C72005815E8 /* WLOrderModel.m */; };
+		2482E6321B5E7C92005815E8 /* WLOrderDeliverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6311B5E7C92005815E8 /* WLOrderDeliverModel.m */; };
+		2482E6351B5E7CA2005815E8 /* WLOrderAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6341B5E7CA2005815E8 /* WLOrderAddressModel.m */; };
+		2482E6381B5E7CB1005815E8 /* WLOrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6371B5E7CB1005815E8 /* WLOrderDetailModel.m */; };
+		2482E63B1B5E8285005815E8 /* WLOrderProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E63A1B5E8285005815E8 /* WLOrderProductModel.m */; };
+		2482E63E1B5E844B005815E8 /* WLServerHelper+Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E63D1B5E844B005815E8 /* WLServerHelper+Order.m */; };
 		249A73BC1B569D2300F46F3D /* WLServerHelper+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73B41B569D2300F46F3D /* WLServerHelper+User.m */; };
 		249A73BD1B569D2300F46F3D /* WLServerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73B61B569D2300F46F3D /* WLServerHelper.m */; };
 		249A73BE1B569D2300F46F3D /* WLDictionaryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73B91B569D2300F46F3D /* WLDictionaryHelper.m */; };
@@ -151,6 +158,20 @@
 		2467B7261B50E30E001202A4 /* BPushHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPushHelper.m; sourceTree = "<group>"; };
 		246F07801B56A6210086CD28 /* NSString+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Ext.h"; sourceTree = "<group>"; };
 		246F07811B56A6210086CD28 /* NSString+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Ext.m"; sourceTree = "<group>"; };
+		2482E62A1B5E7864005815E8 /* WLServerHelper+Action.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Action.h"; sourceTree = "<group>"; };
+		2482E62B1B5E7864005815E8 /* WLServerHelper+Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Action.m"; sourceTree = "<group>"; };
+		2482E62D1B5E7C72005815E8 /* WLOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLOrderModel.h; sourceTree = "<group>"; };
+		2482E62E1B5E7C72005815E8 /* WLOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLOrderModel.m; sourceTree = "<group>"; };
+		2482E6301B5E7C92005815E8 /* WLOrderDeliverModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLOrderDeliverModel.h; sourceTree = "<group>"; };
+		2482E6311B5E7C92005815E8 /* WLOrderDeliverModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLOrderDeliverModel.m; sourceTree = "<group>"; };
+		2482E6331B5E7CA2005815E8 /* WLOrderAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLOrderAddressModel.h; sourceTree = "<group>"; };
+		2482E6341B5E7CA2005815E8 /* WLOrderAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLOrderAddressModel.m; sourceTree = "<group>"; };
+		2482E6361B5E7CB1005815E8 /* WLOrderDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLOrderDetailModel.h; sourceTree = "<group>"; };
+		2482E6371B5E7CB1005815E8 /* WLOrderDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLOrderDetailModel.m; sourceTree = "<group>"; };
+		2482E6391B5E8285005815E8 /* WLOrderProductModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLOrderProductModel.h; sourceTree = "<group>"; };
+		2482E63A1B5E8285005815E8 /* WLOrderProductModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLOrderProductModel.m; sourceTree = "<group>"; };
+		2482E63C1B5E844B005815E8 /* WLServerHelper+Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Order.h"; sourceTree = "<group>"; };
+		2482E63D1B5E844B005815E8 /* WLServerHelper+Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Order.m"; sourceTree = "<group>"; };
 		249A73B31B569D2300F46F3D /* WLServerHelper+User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+User.h"; sourceTree = "<group>"; };
 		249A73B41B569D2300F46F3D /* WLServerHelper+User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+User.m"; sourceTree = "<group>"; };
 		249A73B51B569D2300F46F3D /* WLServerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLServerHelper.h; sourceTree = "<group>"; };
@@ -427,6 +448,10 @@
 				245936B11B5A3CAF008FFAB8 /* WLServerHelper+Comment.m */,
 				245936B61B5A42F4008FFAB8 /* WLServerHelper+Ad.h */,
 				245936B71B5A42F4008FFAB8 /* WLServerHelper+Ad.m */,
+				2482E62A1B5E7864005815E8 /* WLServerHelper+Action.h */,
+				2482E62B1B5E7864005815E8 /* WLServerHelper+Action.m */,
+				2482E63C1B5E844B005815E8 /* WLServerHelper+Order.h */,
+				2482E63D1B5E844B005815E8 /* WLServerHelper+Order.m */,
 			);
 			path = ServerHelper;
 			sourceTree = "<group>";
@@ -457,6 +482,16 @@
 				24CAC4471B580A5800E3C4D5 /* WLCommentModel.m */,
 				245936B31B5A4015008FFAB8 /* WLAdModel.h */,
 				245936B41B5A4015008FFAB8 /* WLAdModel.m */,
+				2482E62D1B5E7C72005815E8 /* WLOrderModel.h */,
+				2482E62E1B5E7C72005815E8 /* WLOrderModel.m */,
+				2482E6361B5E7CB1005815E8 /* WLOrderDetailModel.h */,
+				2482E6371B5E7CB1005815E8 /* WLOrderDetailModel.m */,
+				2482E6301B5E7C92005815E8 /* WLOrderDeliverModel.h */,
+				2482E6311B5E7C92005815E8 /* WLOrderDeliverModel.m */,
+				2482E6331B5E7CA2005815E8 /* WLOrderAddressModel.h */,
+				2482E6341B5E7CA2005815E8 /* WLOrderAddressModel.m */,
+				2482E6391B5E8285005815E8 /* WLOrderProductModel.h */,
+				2482E63A1B5E8285005815E8 /* WLOrderProductModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -962,7 +997,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2482E62C1B5E7864005815E8 /* WLServerHelper+Action.m in Sources */,
 				24CDCBE41B4F792E00BDE8CB /* AVAudioRecordDelegateImplementationProxy.m in Sources */,
+				2482E6351B5E7CA2005815E8 /* WLOrderAddressModel.m in Sources */,
 				24CDCBEF1B4F792E00BDE8CB /* UITabbarDelegateImplementationProxy.m in Sources */,
 				24CDCBFC1B4F792E00BDE8CB /* UIScrollView+GCDelegateBlock.m in Sources */,
 				24CDCC131B4F792E00BDE8CB /* UITextField+GCDelegate.m in Sources */,
@@ -982,6 +1019,7 @@
 				24CAC4331B57E9D800E3C4D5 /* WLServerHelper+Share.m in Sources */,
 				24CDCBE11B4F792E00BDE8CB /* AVAudioPlayer+GCDelegateBlock.m in Sources */,
 				24CDCC0E1B4F792E00BDE8CB /* UIScrollView+GCDelegate.m in Sources */,
+				2482E6381B5E7CB1005815E8 /* WLOrderDetailModel.m in Sources */,
 				24B8C06C1B5242BC001C5722 /* AGIPCPreviewController.m in Sources */,
 				24CDCC031B4F792E00BDE8CB /* UIToolbar+GCDelegateBlock.m in Sources */,
 				24CDCC021B4F792E00BDE8CB /* UITextView+GCDelegateBlock.m in Sources */,
@@ -997,6 +1035,7 @@
 				24CDCBF61B4F792E00BDE8CB /* UIGestureRecognizer+GCDelegateBlock.m in Sources */,
 				24CDCC1B1B4F792E00BDE8CB /* NSObject+GCNotificationObserver.m in Sources */,
 				24CDCBE81B4F792E00BDE8CB /* UINavigationBarDelegateImpletationProxy.m in Sources */,
+				2482E63E1B5E844B005815E8 /* WLServerHelper+Order.m in Sources */,
 				24B8C06D1B5242BC001C5722 /* AGIPCToolbarItem.m in Sources */,
 				24CDCBE21B4F792E00BDE8CB /* AVAudioRecorder+GCDelegateBlock.m in Sources */,
 				249A73BC1B569D2300F46F3D /* WLServerHelper+User.m in Sources */,
@@ -1016,6 +1055,7 @@
 				24CDCBFB1B4F792E00BDE8CB /* UIPopoverController+GCDelegateBlock.m in Sources */,
 				24CDCC041B4F792E00BDE8CB /* UIWebView+GCDelegateBlock.m in Sources */,
 				24CDCC0D1B4F792E00BDE8CB /* UIPopoverController+GCDelegate.m in Sources */,
+				2482E62F1B5E7C72005815E8 /* WLOrderModel.m in Sources */,
 				24CDCBE91B4F792E00BDE8CB /* UINavigationControllerDelegateImplementionProxy.m in Sources */,
 				24CAC4421B5807ED00E3C4D5 /* WLVideoModel.m in Sources */,
 				245936B81B5A42F4008FFAB8 /* WLServerHelper+Ad.m in Sources */,
@@ -1059,10 +1099,12 @@
 				24B8C06A1B5242BC001C5722 /* AGIPCGridCell.m in Sources */,
 				24CDCBEC1B4F792E00BDE8CB /* UIScrollViewDelegateImplementationProxy.m in Sources */,
 				24CDCBF71B4F792E00BDE8CB /* UIImagePickerController+GCDelegateBlock.m in Sources */,
+				2482E63B1B5E8285005815E8 /* WLOrderProductModel.m in Sources */,
 				249A73D11B569D4100F46F3D /* WLUploadImageModel.m in Sources */,
 				24CDCC111B4F792E00BDE8CB /* UITabBarController+GCDelegate.m in Sources */,
 				24B8C06B1B5242BC001C5722 /* AGIPCGridItem.m in Sources */,
 				24CDCC1C1B4F792E00BDE8CB /* NSTimer+GCBlock.m in Sources */,
+				2482E6321B5E7C92005815E8 /* WLOrderDeliverModel.m in Sources */,
 				24CDCBEE1B4F792E00BDE8CB /* UITabbarControllerDelegateImplementationProxy.m in Sources */,
 				24CDCBF91B4F792E00BDE8CB /* UINavigationController+GCDelegateBlock.m in Sources */,
 				24CDCBF41B4F792E00BDE8CB /* UIWebViewDelegateImplementationProxy.m in Sources */,

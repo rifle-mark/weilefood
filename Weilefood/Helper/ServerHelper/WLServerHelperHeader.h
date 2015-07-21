@@ -20,5 +20,7 @@
 #import "WLServerHelper+Activity.h"
 #import "WLServerHelper+Comment.h"
 #import "WLServerHelper+Ad.h"
+#import "WLServerHelper+Action.h"
+#import "WLServerHelper+Order.h"
 
 #endif

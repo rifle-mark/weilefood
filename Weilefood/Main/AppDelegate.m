@@ -9,8 +9,6 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import "BPushHelper.h"
-#import "WLServerHelperHeader.h"
-#import "WLModelHeader.h"
 
 @implementation AppDelegate
 
@@ -35,19 +33,6 @@
     [UMSocialData setAppKey:UMengAppKey];
     // 百度推送
     [BPushHelper registerAppDelegate:self launchOptions:launchOptions apiKey:BPushApiKey pushMode:BPushModeDevelopment withFirstAction:nil withSecondAction:nil withCategory:nil isDebug:YES isClearBadgeNumber:YES];
-    
-    [[WLServerHelper sharedInstance] user_regWithUserName:@"kl3" password:@"kl3" callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            DLog(@"%@", apiInfo.message);
-            return;
-        }
-        [WLServerHelper sharedInstance].userToken = apiResult.token;
-        DLog(@"%@", apiResult.keyValues);
-    }];
     
     // UI入口
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
