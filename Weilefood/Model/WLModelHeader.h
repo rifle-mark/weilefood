@@ -27,5 +27,6 @@
 #import "WLOrderProductModel.h"
 #import "WLDialogModel.h"
 #import "WLMessageModel.h"
+#import "WLPointsModel.h"
 
 #endif

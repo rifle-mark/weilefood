@@ -32,6 +32,8 @@
 		2482E6411B5E9482005815E8 /* WLDialogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6401B5E9482005815E8 /* WLDialogModel.m */; };
 		2482E6441B5E949D005815E8 /* WLMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6431B5E949D005815E8 /* WLMessageModel.m */; };
 		2482E6471B5E96FE005815E8 /* WLServerHelper+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6461B5E96FE005815E8 /* WLServerHelper+Message.m */; };
+		2482E64A1B5E9B6E005815E8 /* WLPointsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6491B5E9B6E005815E8 /* WLPointsModel.m */; };
+		2482E64D1B5E9CBB005815E8 /* WLServerHelper+Points.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E64C1B5E9CBB005815E8 /* WLServerHelper+Points.m */; };
 		249A73BC1B569D2300F46F3D /* WLServerHelper+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73B41B569D2300F46F3D /* WLServerHelper+User.m */; };
 		249A73BD1B569D2300F46F3D /* WLServerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73B61B569D2300F46F3D /* WLServerHelper.m */; };
 		249A73BE1B569D2300F46F3D /* WLDictionaryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73B91B569D2300F46F3D /* WLDictionaryHelper.m */; };
@@ -181,6 +183,10 @@
 		2482E6431B5E949D005815E8 /* WLMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLMessageModel.m; sourceTree = "<group>"; };
 		2482E6451B5E96FE005815E8 /* WLServerHelper+Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Message.h"; sourceTree = "<group>"; };
 		2482E6461B5E96FE005815E8 /* WLServerHelper+Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Message.m"; sourceTree = "<group>"; };
+		2482E6481B5E9B6E005815E8 /* WLPointsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLPointsModel.h; sourceTree = "<group>"; };
+		2482E6491B5E9B6E005815E8 /* WLPointsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLPointsModel.m; sourceTree = "<group>"; };
+		2482E64B1B5E9CBB005815E8 /* WLServerHelper+Points.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Points.h"; sourceTree = "<group>"; };
+		2482E64C1B5E9CBB005815E8 /* WLServerHelper+Points.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Points.m"; sourceTree = "<group>"; };
 		249A73B31B569D2300F46F3D /* WLServerHelper+User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+User.h"; sourceTree = "<group>"; };
 		249A73B41B569D2300F46F3D /* WLServerHelper+User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+User.m"; sourceTree = "<group>"; };
 		249A73B51B569D2300F46F3D /* WLServerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLServerHelper.h; sourceTree = "<group>"; };
@@ -463,6 +469,8 @@
 				2482E63D1B5E844B005815E8 /* WLServerHelper+Order.m */,
 				2482E6451B5E96FE005815E8 /* WLServerHelper+Message.h */,
 				2482E6461B5E96FE005815E8 /* WLServerHelper+Message.m */,
+				2482E64B1B5E9CBB005815E8 /* WLServerHelper+Points.h */,
+				2482E64C1B5E9CBB005815E8 /* WLServerHelper+Points.m */,
 			);
 			path = ServerHelper;
 			sourceTree = "<group>";
@@ -507,6 +515,8 @@
 				2482E6401B5E9482005815E8 /* WLDialogModel.m */,
 				2482E6421B5E949D005815E8 /* WLMessageModel.h */,
 				2482E6431B5E949D005815E8 /* WLMessageModel.m */,
+				2482E6481B5E9B6E005815E8 /* WLPointsModel.h */,
+				2482E6491B5E9B6E005815E8 /* WLPointsModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1040,6 +1050,7 @@
 				24CDCC031B4F792E00BDE8CB /* UIToolbar+GCDelegateBlock.m in Sources */,
 				24CDCC021B4F792E00BDE8CB /* UITextView+GCDelegateBlock.m in Sources */,
 				24CDCBF51B4F792E00BDE8CB /* UICollectionView+GCDelegateAndDataSourceBlock.m in Sources */,
+				2482E64D1B5E9CBB005815E8 /* WLServerHelper+Points.m in Sources */,
 				24CDCBF11B4F792E00BDE8CB /* UITextFieldDelegateImplementationProxy.m in Sources */,
 				24B8C0681B5242BC001C5722 /* AGIPCAlbumsController.m in Sources */,
 				24CDCC051B4F792E00BDE8CB /* AVAudioPlayer+GCDelegate.m in Sources */,
@@ -1055,6 +1066,7 @@
 				24B8C06D1B5242BC001C5722 /* AGIPCToolbarItem.m in Sources */,
 				24CDCBE21B4F792E00BDE8CB /* AVAudioRecorder+GCDelegateBlock.m in Sources */,
 				249A73BC1B569D2300F46F3D /* WLServerHelper+User.m in Sources */,
+				2482E64A1B5E9B6E005815E8 /* WLPointsModel.m in Sources */,
 				24CDCC171B4F792E00BDE8CB /* GCAOPProxy.m in Sources */,
 				24CDCBE01B4F792E00BDE8CB /* NSObject+GCProxyRegister.m in Sources */,
 				24B8C0691B5242BC001C5722 /* AGIPCAssetsController.m in Sources */,
