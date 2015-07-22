@@ -79,4 +79,12 @@ typedef NS_ENUM(NSUInteger, WLUserPlatform){
  */
 - (void)user_resetPasswordWithUserName:(NSString *)userName password:(NSString *)password callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback;
 
+/**
+ *  获取手机验证码
+ *
+ *  @param phoneNum 手机号
+ *  @param callback
+ */
+- (void)user_getPhoneCodeWithPhoneNum:(NSString *)phoneNum callback:(void (^)(WLApiInfoModel *apiInfo, NSString *phoneCode, NSError *error))callback;
+
 @end

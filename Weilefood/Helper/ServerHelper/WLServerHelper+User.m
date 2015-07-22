@@ -8,6 +8,7 @@
 
 #import "WLServerHelper+User.h"
 #import "WLModelHeader.h"
+#import "WLDictionaryHelper.h"
 
 @implementation WLServerHelper (User)
 
@@ -53,6 +54,23 @@
                                  @"password": password,
                                  };
     [self httpPOST:apiUrl parameters:parameters callback:callback];
+}
+
+- (void)user_getPhoneCodeWithPhoneNum:(NSString *)phoneNum callback:(void (^)(WLApiInfoModel *apiInfo, NSString *phoneCode, NSError *error))callback {
+    AFHTTPRequestOperationManager *manager = [self httpManager];
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"user", @"phonecode"]];
+    NSDictionary *parameters = @{@"phonenum" : phoneNum};
+    [manager POST:apiUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *responseDic = [WLDictionaryHelper validModelDictionary:responseObject];
+        WLApiInfoModel *apiInfo = [WLApiInfoModel objectWithKeyValues:responseDic];
+        NSString *phoneCode = nil;
+        if (apiInfo.isSuc) {
+            phoneCode = responseDic[API_RESULT_KEYNAME];
+        }
+        GCBlockInvoke(callback, apiInfo, phoneCode, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        GCBlockInvoke(callback, nil, nil, error);
+    }];
 }
 
 @end
