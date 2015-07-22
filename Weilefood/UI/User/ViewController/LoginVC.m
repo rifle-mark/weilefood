@@ -92,12 +92,12 @@
         make.top.equalTo(self.separateView.mas_bottom).offset(40);
         make.left.equalTo(self.separateView);
         make.width.equalTo(self.weixinLoginButton);
-        make.bottomMargin.equalTo(@-15);
     }];
     [self.weixinLoginButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.width.equalTo(self.weiboLoginButton);
         make.right.equalTo(self.separateView);
         make.left.equalTo(self.weiboLoginButton.mas_right).offset(15);
+        make.bottomMargin.equalTo(@-15);
     }];
 }
 
