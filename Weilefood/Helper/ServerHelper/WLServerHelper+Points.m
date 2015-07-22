@@ -11,7 +11,13 @@
 
 @implementation WLServerHelper (Points)
 
-- (void)porints_getListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
+- (void)points_addWithType:(WLPointsType)type callback:(void (^)(WLApiInfoModel *apiInfo, WLPointsModel *apiResult, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"points", @"add"]];
+    NSDictionary *parameters = @{@"type" : @(type)};
+    [self httpPOST:apiUrl parameters:parameters resultClass:[WLPointsModel class] callback:callback];
+}
+
+- (void)points_getListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"points", @"list", @(pageSize), @([maxDate timeIntervalSince1970])]];
     [self httpGET:apiUrl parameters:nil resultItemsClass:[WLPointsModel class] callback:callback];
 }
