@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		240D79A51B5FECFB007E2E43 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240D79A41B5FECFB007E2E43 /* LoginVC.m */; };
 		245936A31B5A2C62008FFAB8 /* WLServerHelper+Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A21B5A2C62008FFAB8 /* WLServerHelper+Channel.m */; };
 		245936A61B5A2ECF008FFAB8 /* WLServerHelper+Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A51B5A2ECF008FFAB8 /* WLServerHelper+Product.m */; };
 		245936A91B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A81B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m */; };
@@ -66,7 +67,6 @@
 		24CDCBDA1B4F792E00BDE8CB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB3A1B4F792D00BDE8CB /* AppDelegate.m */; };
 		24CDCBDC1B4F792E00BDE8CB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB3C1B4F792D00BDE8CB /* main.m */; };
 		24CDCBDD1B4F792E00BDE8CB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24CDCB3F1B4F792D00BDE8CB /* Images.xcassets */; };
-		24CDCBDE1B4F792E00BDE8CB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB421B4F792D00BDE8CB /* ViewController.m */; };
 		24CDCBDF1B4F792E00BDE8CB /* GCImplementationProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB4A1B4F792D00BDE8CB /* GCImplementationProxy.m */; };
 		24CDCBE01B4F792E00BDE8CB /* NSObject+GCProxyRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB4C1B4F792D00BDE8CB /* NSObject+GCProxyRegister.m */; };
 		24CDCBE11B4F792E00BDE8CB /* AVAudioPlayer+GCDelegateBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB4F1B4F792D00BDE8CB /* AVAudioPlayer+GCDelegateBlock.m */; };
@@ -137,6 +137,8 @@
 
 /* Begin PBXFileReference section */
 		060F4AADF217CE753F362849 /* Pods-Weilefood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weilefood.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weilefood/Pods-Weilefood.release.xcconfig"; sourceTree = "<group>"; };
+		240D79A31B5FECFB007E2E43 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
+		240D79A41B5FECFB007E2E43 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 		245936A11B5A2C62008FFAB8 /* WLServerHelper+Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Channel.h"; sourceTree = "<group>"; };
 		245936A21B5A2C62008FFAB8 /* WLServerHelper+Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Channel.m"; sourceTree = "<group>"; };
 		245936A41B5A2ECF008FFAB8 /* WLServerHelper+Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Product.h"; sourceTree = "<group>"; };
@@ -259,8 +261,6 @@
 		24CDCB3B1B4F792D00BDE8CB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24CDCB3C1B4F792D00BDE8CB /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		24CDCB3F1B4F792D00BDE8CB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		24CDCB411B4F792D00BDE8CB /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		24CDCB421B4F792D00BDE8CB /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		24CDCB451B4F792D00BDE8CB /* GCExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCExtension.h; sourceTree = "<group>"; };
 		24CDCB461B4F792D00BDE8CB /* GCMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCMacro.h; sourceTree = "<group>"; };
 		24CDCB491B4F792D00BDE8CB /* GCImplementationProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCImplementationProxy.h; sourceTree = "<group>"; };
@@ -426,6 +426,199 @@
 				060F4AADF217CE753F362849 /* Pods-Weilefood.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		240D798A1B5FEB42007E2E43 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				240D798B1B5FEB42007E2E43 /* View */,
+				240D798C1B5FEB42007E2E43 /* ViewController */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
+		240D798B1B5FEB42007E2E43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		240D798C1B5FEB42007E2E43 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		240D798D1B5FEB42007E2E43 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		240D798E1B5FEB42007E2E43 /* ForwardBuy */ = {
+			isa = PBXGroup;
+			children = (
+				240D798F1B5FEB42007E2E43 /* View */,
+				240D79901B5FEB42007E2E43 /* ViewController */,
+			);
+			path = ForwardBuy;
+			sourceTree = "<group>";
+		};
+		240D798F1B5FEB42007E2E43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		240D79901B5FEB42007E2E43 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		240D79911B5FEB42007E2E43 /* MainPage */ = {
+			isa = PBXGroup;
+			children = (
+				240D79921B5FEB42007E2E43 /* View */,
+				240D79931B5FEB42007E2E43 /* ViewController */,
+			);
+			path = MainPage;
+			sourceTree = "<group>";
+		};
+		240D79921B5FEB42007E2E43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		240D79931B5FEB42007E2E43 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		240D79941B5FEB42007E2E43 /* Market */ = {
+			isa = PBXGroup;
+			children = (
+				240D79951B5FEB42007E2E43 /* View */,
+				240D79961B5FEB42007E2E43 /* ViewController */,
+			);
+			path = Market;
+			sourceTree = "<group>";
+		};
+		240D79951B5FEB42007E2E43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		240D79961B5FEB42007E2E43 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		240D79971B5FEB42007E2E43 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				240D79981B5FEB42007E2E43 /* View */,
+				240D79991B5FEB42007E2E43 /* ViewController */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
+		240D79981B5FEB42007E2E43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		240D79991B5FEB42007E2E43 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		240D799A1B5FEB42007E2E43 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				240D799B1B5FEB42007E2E43 /* View */,
+				240D799C1B5FEB42007E2E43 /* ViewController */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
+		240D799B1B5FEB42007E2E43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		240D799C1B5FEB42007E2E43 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		240D799D1B5FEB42007E2E43 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				240D799E1B5FEB42007E2E43 /* View */,
+				240D799F1B5FEB42007E2E43 /* ViewController */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		240D799E1B5FEB42007E2E43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		240D799F1B5FEB42007E2E43 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				240D79A31B5FECFB007E2E43 /* LoginVC.h */,
+				240D79A41B5FECFB007E2E43 /* LoginVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		240D79A01B5FEB42007E2E43 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				240D79A11B5FEB42007E2E43 /* View */,
+				240D79A21B5FEB42007E2E43 /* ViewController */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
+		240D79A11B5FEB42007E2E43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		240D79A21B5FEB42007E2E43 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		2467B7191B50D06F001202A4 /* BPush */ = {
@@ -641,9 +834,16 @@
 		24CDCB401B4F792D00BDE8CB /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				240D798A1B5FEB42007E2E43 /* Activity */,
+				240D798D1B5FEB42007E2E43 /* Common */,
+				240D798E1B5FEB42007E2E43 /* ForwardBuy */,
+				240D79911B5FEB42007E2E43 /* MainPage */,
+				240D79941B5FEB42007E2E43 /* Market */,
+				240D79971B5FEB42007E2E43 /* Order */,
+				240D799A1B5FEB42007E2E43 /* Share */,
+				240D799D1B5FEB42007E2E43 /* User */,
+				240D79A01B5FEB42007E2E43 /* Video */,
 				24CDCB2C1B4F792D00BDE8CB /* LaunchScreen.xib */,
-				24CDCB411B4F792D00BDE8CB /* ViewController.h */,
-				24CDCB421B4F792D00BDE8CB /* ViewController.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1096,7 +1296,6 @@
 				24CAC4451B5808B900E3C4D5 /* WLActivityModel.m in Sources */,
 				24CDCBE61B4F792E00BDE8CB /* UIGestureRecognizerDelegateImplementProxy.m in Sources */,
 				245936A61B5A2ECF008FFAB8 /* WLServerHelper+Product.m in Sources */,
-				24CDCBDE1B4F792E00BDE8CB /* ViewController.m in Sources */,
 				24CDCC091B4F792E00BDE8CB /* UIImagePickerController+GCDelegate.m in Sources */,
 				24CAC43F1B5806BF00E3C4D5 /* WLForwardBuyModel.m in Sources */,
 				2482E6471B5E96FE005815E8 /* WLServerHelper+Message.m in Sources */,
@@ -1114,6 +1313,7 @@
 				24CDCBFA1B4F792E00BDE8CB /* UIPickerView+GCDelegateAndDataSourceBlock.m in Sources */,
 				24CDCBED1B4F792E00BDE8CB /* UISearchBarDelegateImplementationProxy.m in Sources */,
 				24CDCC0C1B4F792E00BDE8CB /* UIPickerView+GCDelegateAndDataSource.m in Sources */,
+				240D79A51B5FECFB007E2E43 /* LoginVC.m in Sources */,
 				24CDCBEB1B4F792E00BDE8CB /* UIPopoverControllerImplementationProxy.m in Sources */,
 				24CDCC161B4F792E00BDE8CB /* UIWebView+GCDelegate.m in Sources */,
 				24CDCBF01B4F792E00BDE8CB /* UITableViewDelegateAndDataSourceImplementationProxy.m in Sources */,
