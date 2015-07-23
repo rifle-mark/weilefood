@@ -7,6 +7,7 @@
 //
 
 #import "LoginVC.h"
+#import "WLServerHelperHeader.h"
 
 @interface LoginVC ()
 
@@ -104,19 +105,44 @@
 #pragma mark - private methons
 
 - (void)_registerAction {
-    
+    DLog(@"");
 }
 
 - (void)_loginAction {
-    
+    DLog(@"");
 }
 
 - (void)_weiboLoginAction {
-    
+    [self _socialLoginWithUMType:UMShareToSina];
 }
 
 - (void)_weixinLoginAction {
+    [self _socialLoginWithUMType:UMShareToWechatSession];
+}
+
+- (void)_socialLoginWithUMType:(NSString *)type {
+    WLUserPlatform platform;
     
+    if ([type isEqualToString:UMShareToSina]) {
+        platform = WLUserPlatformSinaWeibo;
+    }
+    else if ([type isEqualToString:UMShareToWechatSession]) {
+        platform = WLUserPlatformWechat;
+    }
+    else
+        NSAssert(NO, @"不支持此平台登录");
+    
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:type];
+    snsPlatform.loginClickHandler(self, [UMSocialControllerService defaultControllerService], YES, ^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:type];
+            NSLog(@"昵称:%@, uid:%@, token:%@, 头像链接:%@", snsAccount.userName, snsAccount.usid, snsAccount.accessToken, snsAccount.iconURL);
+            
+            [[WLServerHelper sharedInstance] user_socialLoginWithPlatform:platform openId:snsAccount.usid token:snsAccount.accessToken avatar:snsAccount.iconURL appId:@"" nickName:snsAccount.userName callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
+                // TODO: 第三方平台登录成功
+            }];
+        }
+    });
 }
 
 #pragma mark - private property methons
