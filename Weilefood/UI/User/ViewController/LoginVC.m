@@ -7,6 +7,8 @@
 //
 
 #import "LoginVC.h"
+#import "RegisterVC.h"
+
 #import "WLServerHelperHeader.h"
 
 @interface LoginVC ()
@@ -105,7 +107,7 @@
 #pragma mark - private methons
 
 - (void)_registerAction {
-    DLog(@"");
+    [self.navigationController pushViewController:[[RegisterVC alloc] init] animated:YES];
 }
 
 - (void)_loginAction {

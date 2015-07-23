@@ -54,6 +54,7 @@
 		24B8C06E1B5242BC001C5722 /* AGPreviewScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C05F1B5242BC001C5722 /* AGPreviewScrollView.m */; };
 		24B8C06F1B5242BC001C5722 /* ALAsset+AGIPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C0611B5242BC001C5722 /* ALAsset+AGIPC.m */; };
 		24B8C0701B5242BC001C5722 /* UIButton+AGIPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C0631B5242BC001C5722 /* UIButton+AGIPC.m */; };
+		24C32EBE1B61229D00D509A4 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C32EBD1B61229D00D509A4 /* RegisterVC.m */; };
 		24CAC42F1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC42E1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m */; };
 		24CAC4331B57E9D800E3C4D5 /* WLServerHelper+Share.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC4321B57E9D700E3C4D5 /* WLServerHelper+Share.m */; };
 		24CAC4361B57EA5F00E3C4D5 /* WLShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC4351B57EA5F00E3C4D5 /* WLShareModel.m */; };
@@ -233,6 +234,8 @@
 		24B8C0731B52478C001C5722 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		24B8C0751B524795001C5722 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		24B8C0771B5247A2001C5722 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		24C32EBC1B61229D00D509A4 /* RegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterVC.h; sourceTree = "<group>"; };
+		24C32EBD1B61229D00D509A4 /* RegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterVC.m; sourceTree = "<group>"; };
 		24CAC42D1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+UploadImage.h"; sourceTree = "<group>"; };
 		24CAC42E1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+UploadImage.m"; sourceTree = "<group>"; };
 		24CAC4301B57DF8100E3C4D5 /* AppMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppMacro.h; sourceTree = "<group>"; };
@@ -594,6 +597,8 @@
 			children = (
 				240D79A31B5FECFB007E2E43 /* LoginVC.h */,
 				240D79A41B5FECFB007E2E43 /* LoginVC.m */,
+				24C32EBC1B61229D00D509A4 /* RegisterVC.h */,
+				24C32EBD1B61229D00D509A4 /* RegisterVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1228,6 +1233,7 @@
 				24CDCBEF1B4F792E00BDE8CB /* UITabbarDelegateImplementationProxy.m in Sources */,
 				24CDCBFC1B4F792E00BDE8CB /* UIScrollView+GCDelegateBlock.m in Sources */,
 				24CDCC131B4F792E00BDE8CB /* UITextField+GCDelegate.m in Sources */,
+				24C32EBE1B61229D00D509A4 /* RegisterVC.m in Sources */,
 				24CAC43C1B58050900E3C4D5 /* WLProductModel.m in Sources */,
 				245936AF1B5A3AB3008FFAB8 /* WLServerHelper+Activity.m in Sources */,
 				24CDCC001B4F792E00BDE8CB /* UITableView+GCDelegateAndDataSourceBlock.m in Sources */,
