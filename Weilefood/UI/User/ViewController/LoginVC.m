@@ -10,6 +10,7 @@
 #import "RegisterVC.h"
 
 #import "WLServerHelperHeader.h"
+#import "WLModelHeader.h"
 
 @interface LoginVC ()
 
@@ -111,7 +112,32 @@
 }
 
 - (void)_loginAction {
-    DLog(@"");
+    if (![self.phoneTextField.text length]) {
+        DLog(@"请输入手机号");
+        return;
+    }
+    if (![self.passwordTextField.text length]) {
+        DLog(@"请输入密码");
+        return;
+    }
+    
+    _weak(self);
+    self.loginButton.enabled = NO;
+    [[WLServerHelper sharedInstance] user_loginWithUserName:self.phoneTextField.text password:self.passwordTextField.text callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
+        _strong_check(self);
+        self.loginButton.enabled = YES;
+        if (error) {
+            DLog(@"%@", error);
+            return;
+        }
+        if (!apiInfo.isSuc) {
+            DLog(@"%@", apiInfo.message);
+            return;
+        }
+        
+        [WLServerHelper sharedInstance].userToken = apiResult.token;
+        DLog(@"登录成功");
+    }];
 }
 
 - (void)_weiboLoginAction {
@@ -174,6 +200,7 @@
     if (!_phoneTextField) {
         _phoneTextField = [[UITextField alloc] init];
         _phoneTextField.placeholder = @"请输入手机号";
+        _phoneTextField.keyboardType = UIKeyboardTypePhonePad;
     }
     return _phoneTextField;
 }
