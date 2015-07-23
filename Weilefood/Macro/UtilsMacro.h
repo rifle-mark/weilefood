@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 kelei. All rights reserved.
 //
 
-#ifndef LawyerCenter_UtilsMacro_h
-#define LawyerCenter_UtilsMacro_h
+#ifndef Weilefood_UtilsMacro_h
+#define Weilefood_UtilsMacro_h
 
 /*
  *  System Versioning Preprocessor Macros

@@ -86,3 +86,36 @@ typedef NS_ENUM(NSUInteger, WLUserAudit){
 @property (nonatomic, assign) NSInteger couponCount;
 
 @end
+
+
+/// CoreData使用
+@interface WLMOUser : NSManagedObject
+
+@property (nonatomic, retain) NSString * email;
+@property (nonatomic, retain) NSNumber * isVip;
+@property (nonatomic, retain) NSDate * loginDate;
+@property (nonatomic, retain) NSNumber * userId;
+@property (nonatomic, retain) NSString * avatar;
+@property (nonatomic, retain) NSString * password;
+@property (nonatomic, retain) NSString * nickName;
+@property (nonatomic, retain) NSString * trueName;
+@property (nonatomic, retain) NSString * udid;
+@property (nonatomic, retain) NSString * userName;
+@property (nonatomic, retain) NSString * token;
+@property (nonatomic, retain) NSString * infoExtent;
+@property (nonatomic, retain) NSString * room;
+@property (nonatomic, retain) NSString * unit;
+@property (nonatomic, retain) NSString * building;
+@property (nonatomic, retain) NSString * communityName;
+@property (nonatomic, retain) NSDate * createDate;
+@property (nonatomic, retain) NSDate * vipEndDate;
+@property (nonatomic, retain) NSDate * auditDate;
+@property (nonatomic, retain) NSNumber * sex;
+@property (nonatomic, retain) NSNumber * validDays;
+@property (nonatomic, retain) NSNumber * points;
+@property (nonatomic, retain) NSNumber * isAudit;
+@property (nonatomic, retain) NSNumber * type;
+@property (nonatomic, retain) NSNumber * communityId;
+@property (nonatomic, retain) NSNumber * couponCount;
+
+@end

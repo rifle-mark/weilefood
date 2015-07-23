@@ -20,3 +20,35 @@
 }
 
 @end
+
+
+@implementation WLMOUser
+
+@dynamic email;
+@dynamic isVip;
+@dynamic loginDate;
+@dynamic userId;
+@dynamic avatar;
+@dynamic password;
+@dynamic nickName;
+@dynamic trueName;
+@dynamic udid;
+@dynamic userName;
+@dynamic token;
+@dynamic infoExtent;
+@dynamic room;
+@dynamic unit;
+@dynamic building;
+@dynamic communityName;
+@dynamic createDate;
+@dynamic vipEndDate;
+@dynamic auditDate;
+@dynamic sex;
+@dynamic validDays;
+@dynamic points;
+@dynamic isAudit;
+@dynamic type;
+@dynamic communityId;
+@dynamic couponCount;
+
+@end

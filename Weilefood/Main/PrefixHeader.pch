@@ -26,5 +26,6 @@
 #import "AppMacro.h"
 #import "UtilsMacro.h"
 #import "VendorMacro.h"
+#import "NotificationMacro.h"
 
 #endif

@@ -10,6 +10,7 @@
 #import "RegisterVC.h"
 
 #import "WLServerHelperHeader.h"
+#import "WLDatabaseHelperHeader.h"
 #import "WLModelHeader.h"
 
 @interface LoginVC ()
@@ -134,9 +135,8 @@
             DLog(@"%@", apiInfo.message);
             return;
         }
-        
-        [WLServerHelper sharedInstance].userToken = apiResult.token;
         DLog(@"登录成功");
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserLoginSucc object:apiResult];
     }];
 }
 
@@ -167,7 +167,16 @@
             NSLog(@"昵称:%@, uid:%@, token:%@, 头像链接:%@", snsAccount.userName, snsAccount.usid, snsAccount.accessToken, snsAccount.iconURL);
             
             [[WLServerHelper sharedInstance] user_socialLoginWithPlatform:platform openId:snsAccount.usid token:snsAccount.accessToken avatar:snsAccount.iconURL appId:@"" nickName:snsAccount.userName callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
-                // TODO: 第三方平台登录成功
+                if (error) {
+                    DLog(@"%@", error);
+                    return;
+                }
+                if (!apiInfo.isSuc) {
+                    DLog(@"%@", apiInfo.message);
+                    return;
+                }
+                DLog(@"第三方平台登录成功");
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserLoginSucc object:apiResult];
             }];
         }
     });

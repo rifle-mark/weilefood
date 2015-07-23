@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 kelei. All rights reserved.
 //
 
-#ifndef LawyerCenter_VendorMacro_h
-#define LawyerCenter_VendorMacro_h
+#ifndef Weilefood_VendorMacro_h
+#define Weilefood_VendorMacro_h
 
 /**
  *  友盟

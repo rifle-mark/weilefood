@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import <UMengSocial/UMSocialWechatHandler.h>
 #import "BPushHelper.h"
+#import "WLServerHelperHeader.h"
+#import "WLDatabaseHelperHeader.h"
+#import "WLModelHeader.h"
 
 #import "LoginVC.h"
 
@@ -38,6 +41,25 @@
     // 百度推送
     [BPushHelper registerAppDelegate:self launchOptions:launchOptions apiKey:BPushApiKey pushMode:BPushModeDevelopment withFirstAction:nil withSecondAction:nil withCategory:nil isDebug:YES isClearBadgeNumber:YES];
     
+    // 加载CoreData数据库
+    [MagicalRecord setupCoreDataStackWithStoreNamed:kCoreDataStoreName];
+    
+    // 加载本地登录用户token
+    WLUserModel *user = [WLDatabaseHelper findUser];
+    if (user) {
+        [WLServerHelper sharedInstance].userToken = user.token;
+    }
+    
+    // 监听用户登录消息
+    [self addObserverForNotificationName:kNotificationUserLoginSucc usingBlock:^(NSNotification *notification) {
+        WLUserModel *user = notification.object;
+        if (!user) {
+            return;
+        }
+        [WLServerHelper sharedInstance].userToken = user.token;
+        [WLDatabaseHelper saveWithUser:user];
+    }];
+    
     // UI入口
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -55,8 +77,8 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    // 保存CoreData
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -68,8 +90,9 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    // Saves changes in the application's managed object context before the application terminates.
+    // 保存CoreData
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+    [MagicalRecord cleanUp];
 }
 
 #pragma mark - RemoteNotification

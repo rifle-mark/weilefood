@@ -8,6 +8,7 @@
 
 #import "RegisterVC.h"
 #import "WLServerHelperHeader.h"
+#import "WLDatabaseHelperHeader.h"
 #import "WLModelHeader.h"
 
 @interface RegisterVC ()
@@ -192,9 +193,8 @@
             DLog(@"%@", apiInfo.message);
             return;
         }
-        
-        [WLServerHelper sharedInstance].userToken = apiResult.token;
         DLog(@"注册成功");
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserLoginSucc object:apiResult];
     }];
 }
 

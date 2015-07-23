@@ -55,6 +55,9 @@
 		24B8C06F1B5242BC001C5722 /* ALAsset+AGIPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C0611B5242BC001C5722 /* ALAsset+AGIPC.m */; };
 		24B8C0701B5242BC001C5722 /* UIButton+AGIPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C0631B5242BC001C5722 /* UIButton+AGIPC.m */; };
 		24C32EBE1B61229D00D509A4 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C32EBD1B61229D00D509A4 /* RegisterVC.m */; };
+		24C32EC21B613BDC00D509A4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 24C32EC01B613BDC00D509A4 /* Model.xcdatamodeld */; };
+		24C32EC91B613F6100D509A4 /* WLDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C32EC81B613F6100D509A4 /* WLDatabaseHelper.m */; };
+		24C32ECD1B613FD400D509A4 /* WLDatabaseHelper+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C32ECC1B613FD400D509A4 /* WLDatabaseHelper+User.m */; };
 		24CAC42F1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC42E1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m */; };
 		24CAC4331B57E9D800E3C4D5 /* WLServerHelper+Share.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC4321B57E9D700E3C4D5 /* WLServerHelper+Share.m */; };
 		24CAC4361B57EA5F00E3C4D5 /* WLShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC4351B57EA5F00E3C4D5 /* WLShareModel.m */; };
@@ -236,6 +239,13 @@
 		24B8C0771B5247A2001C5722 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		24C32EBC1B61229D00D509A4 /* RegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterVC.h; sourceTree = "<group>"; };
 		24C32EBD1B61229D00D509A4 /* RegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterVC.m; sourceTree = "<group>"; };
+		24C32EC11B613BDC00D509A4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		24C32EC71B613F6100D509A4 /* WLDatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLDatabaseHelper.h; sourceTree = "<group>"; };
+		24C32EC81B613F6100D509A4 /* WLDatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLDatabaseHelper.m; sourceTree = "<group>"; };
+		24C32ECA1B613FA400D509A4 /* WLDatabaseHelperHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WLDatabaseHelperHeader.h; sourceTree = "<group>"; };
+		24C32ECB1B613FD400D509A4 /* WLDatabaseHelper+User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLDatabaseHelper+User.h"; sourceTree = "<group>"; };
+		24C32ECC1B613FD400D509A4 /* WLDatabaseHelper+User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLDatabaseHelper+User.m"; sourceTree = "<group>"; };
+		24C32ECE1B6141D200D509A4 /* NotificationMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationMacro.h; sourceTree = "<group>"; };
 		24CAC42D1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+UploadImage.h"; sourceTree = "<group>"; };
 		24CAC42E1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+UploadImage.m"; sourceTree = "<group>"; };
 		24CAC4301B57DF8100E3C4D5 /* AppMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppMacro.h; sourceTree = "<group>"; };
@@ -676,6 +686,7 @@
 		249A73BF1B569D4100F46F3D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				24C32EC01B613BDC00D509A4 /* Model.xcdatamodeld */,
 				249A73C81B569D4100F46F3D /* WLModelHeader.h */,
 				249A73C21B569D4100F46F3D /* WLApiInfoModel.h */,
 				249A73C31B569D4100F46F3D /* WLApiInfoModel.m */,
@@ -752,6 +763,18 @@
 			path = AGImagePickerController;
 			sourceTree = "<group>";
 		};
+		24C32EC61B613F4A00D509A4 /* DatabaseHelper */ = {
+			isa = PBXGroup;
+			children = (
+				24C32ECA1B613FA400D509A4 /* WLDatabaseHelperHeader.h */,
+				24C32EC71B613F6100D509A4 /* WLDatabaseHelper.h */,
+				24C32EC81B613F6100D509A4 /* WLDatabaseHelper.m */,
+				24C32ECB1B613FD400D509A4 /* WLDatabaseHelper+User.h */,
+				24C32ECC1B613FD400D509A4 /* WLDatabaseHelper+User.m */,
+			);
+			path = DatabaseHelper;
+			sourceTree = "<group>";
+		};
 		24CDCAF61B4F773900BDE8CB = {
 			isa = PBXGroup;
 			children = (
@@ -797,6 +820,7 @@
 		24CDCB331B4F792D00BDE8CB /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				24C32EC61B613F4A00D509A4 /* DatabaseHelper */,
 				249A73AE1B569D2300F46F3D /* ServerHelper */,
 				249A73B81B569D2300F46F3D /* WLDictionaryHelper.h */,
 				249A73B91B569D2300F46F3D /* WLDictionaryHelper.m */,
@@ -812,6 +836,7 @@
 				24CAC4301B57DF8100E3C4D5 /* AppMacro.h */,
 				24CDCB371B4F792D00BDE8CB /* VendorMacro.h */,
 				24CDCB361B4F792D00BDE8CB /* UtilsMacro.h */,
+				24C32ECE1B6141D200D509A4 /* NotificationMacro.h */,
 			);
 			path = Macro;
 			sourceTree = "<group>";
@@ -1228,6 +1253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2482E62C1B5E7864005815E8 /* WLServerHelper+Action.m in Sources */,
+				24C32EC21B613BDC00D509A4 /* Model.xcdatamodeld in Sources */,
 				24CDCBE41B4F792E00BDE8CB /* AVAudioRecordDelegateImplementationProxy.m in Sources */,
 				2482E6351B5E7CA2005815E8 /* WLOrderAddressModel.m in Sources */,
 				24CDCBEF1B4F792E00BDE8CB /* UITabbarDelegateImplementationProxy.m in Sources */,
@@ -1256,6 +1282,7 @@
 				24CDCC031B4F792E00BDE8CB /* UIToolbar+GCDelegateBlock.m in Sources */,
 				24CDCC021B4F792E00BDE8CB /* UITextView+GCDelegateBlock.m in Sources */,
 				24CDCBF51B4F792E00BDE8CB /* UICollectionView+GCDelegateAndDataSourceBlock.m in Sources */,
+				24C32EC91B613F6100D509A4 /* WLDatabaseHelper.m in Sources */,
 				2482E64D1B5E9CBB005815E8 /* WLServerHelper+Points.m in Sources */,
 				24CDCBF11B4F792E00BDE8CB /* UITextFieldDelegateImplementationProxy.m in Sources */,
 				24B8C0681B5242BC001C5722 /* AGIPCAlbumsController.m in Sources */,
@@ -1309,6 +1336,7 @@
 				24B8C0641B5242BC001C5722 /* AGImagePickerController+Helper.m in Sources */,
 				24CDCC011B4F792E00BDE8CB /* UITextField+GCDelegateBlock.m in Sources */,
 				249A73BE1B569D2300F46F3D /* WLDictionaryHelper.m in Sources */,
+				24C32ECD1B613FD400D509A4 /* WLDatabaseHelper+User.m in Sources */,
 				24CDCC141B4F792E00BDE8CB /* UITextView+GCDelegate.m in Sources */,
 				24CDCC071B4F792E00BDE8CB /* UICollectionView+GCDelegateAndDataSource.m in Sources */,
 				24CDCBEA1B4F792E00BDE8CB /* UIPickerViewDelegateImplementationProxy.m in Sources */,
@@ -1501,6 +1529,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		24C32EC01B613BDC00D509A4 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				24C32EC11B613BDC00D509A4 /* Model.xcdatamodel */,
+			);
+			currentVersion = 24C32EC11B613BDC00D509A4 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 24CDCAF71B4F773900BDE8CB /* Project object */;
 }
