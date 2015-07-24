@@ -51,6 +51,8 @@
     [self.contentView addSubview:self.separateView];
     [self.contentView addSubview:self.weiboLoginButton];
     [self.contentView addSubview:self.weixinLoginButton];
+    
+    [self.scrollView handleKeyboard];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -114,11 +116,12 @@
 
 - (void)_loginAction {
     if (![self.phoneTextField.text length]) {
-        DLog(@"请输入手机号");
+        [MBProgressHUD showErrorWithView:self.view message:@"请输入手机号"];
+        DLog();
         return;
     }
     if (![self.passwordTextField.text length]) {
-        DLog(@"请输入密码");
+        [MBProgressHUD showErrorWithView:self.view message:@"请输入密码"];
         return;
     }
     
@@ -132,7 +135,7 @@
             return;
         }
         if (!apiInfo.isSuc) {
-            DLog(@"%@", apiInfo.message);
+            [MBProgressHUD showErrorWithView:self.view message:apiInfo.message];
             return;
         }
         DLog(@"登录成功");
@@ -172,7 +175,7 @@
                     return;
                 }
                 if (!apiInfo.isSuc) {
-                    DLog(@"%@", apiInfo.message);
+                    [MBProgressHUD showErrorWithView:self.view message:apiInfo.message];
                     return;
                 }
                 DLog(@"第三方平台登录成功");

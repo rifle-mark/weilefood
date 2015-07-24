@@ -24,8 +24,13 @@
 #import "GCExtension.h"
 
 #import "AppMacro.h"
+#import "ColorMacro.h"
 #import "UtilsMacro.h"
 #import "VendorMacro.h"
 #import "NotificationMacro.h"
+
+#import "NSString+Ext.h"
+#import "UIScrollView+Keyboard.h"
+#import "MBProgressHUD+Message.h"
 
 #endif

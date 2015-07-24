@@ -136,6 +136,9 @@
 		24CDCC1D1B4F792E00BDE8CB /* UIControl+GCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCBD31B4F792E00BDE8CB /* UIControl+GCEvent.m */; };
 		24CDCC1E1B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCBD61B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m */; };
 		24CDCC2C1B4FA34B00BDE8CB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24CDCC2B1B4FA34B00BDE8CB /* CoreData.framework */; };
+		24E66DBF1B62717A0081324A /* UIScrollView+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DBE1B62717A0081324A /* UIScrollView+Keyboard.m */; };
+		24E66DC21B6271810081324A /* MBProgressHUD+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DC11B6271810081324A /* MBProgressHUD+Message.m */; };
+		24E66DC41B6271870081324A /* MBProgressHUDImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24E66DC31B6271870081324A /* MBProgressHUDImage.xcassets */; };
 		E02DC6C27427F1714243E3AE /* libPods-Weilefood.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B0DAFB8AFA7EC3AE1728AE /* libPods-Weilefood.a */; };
 /* End PBXBuildFile section */
 
@@ -410,6 +413,12 @@
 		24CDCBD61B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+GCAction.m"; sourceTree = "<group>"; };
 		24CDCC1F1B4F7B7000BDE8CB /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		24CDCC2B1B4FA34B00BDE8CB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		24E66DBD1B62717A0081324A /* UIScrollView+Keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Keyboard.h"; sourceTree = "<group>"; };
+		24E66DBE1B62717A0081324A /* UIScrollView+Keyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Keyboard.m"; sourceTree = "<group>"; };
+		24E66DC01B6271810081324A /* MBProgressHUD+Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Message.h"; sourceTree = "<group>"; };
+		24E66DC11B6271810081324A /* MBProgressHUD+Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Message.m"; sourceTree = "<group>"; };
+		24E66DC31B6271870081324A /* MBProgressHUDImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MBProgressHUDImage.xcassets; sourceTree = "<group>"; };
+		24E66DC51B6271900081324A /* ColorMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorMacro.h; sourceTree = "<group>"; };
 		27B0DAFB8AFA7EC3AE1728AE /* libPods-Weilefood.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weilefood.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBCCE652BC72BE081355B32A /* Pods-Weilefood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weilefood.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weilefood/Pods-Weilefood.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -813,6 +822,10 @@
 			children = (
 				246F07801B56A6210086CD28 /* NSString+Ext.h */,
 				246F07811B56A6210086CD28 /* NSString+Ext.m */,
+				24E66DC01B6271810081324A /* MBProgressHUD+Message.h */,
+				24E66DC11B6271810081324A /* MBProgressHUD+Message.m */,
+				24E66DBD1B62717A0081324A /* UIScrollView+Keyboard.h */,
+				24E66DBE1B62717A0081324A /* UIScrollView+Keyboard.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -834,6 +847,7 @@
 			isa = PBXGroup;
 			children = (
 				24CAC4301B57DF8100E3C4D5 /* AppMacro.h */,
+				24E66DC51B6271900081324A /* ColorMacro.h */,
 				24CDCB371B4F792D00BDE8CB /* VendorMacro.h */,
 				24CDCB361B4F792D00BDE8CB /* UtilsMacro.h */,
 				24C32ECE1B6141D200D509A4 /* NotificationMacro.h */,
@@ -857,6 +871,7 @@
 			isa = PBXGroup;
 			children = (
 				24CDCB3F1B4F792D00BDE8CB /* Images.xcassets */,
+				24E66DC31B6271870081324A /* MBProgressHUDImage.xcassets */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -1209,6 +1224,7 @@
 				24CDCBD71B4F792E00BDE8CB /* LaunchScreen.xib in Resources */,
 				24B8C0651B5242BC001C5722 /* AGImagePickerController.bundle in Resources */,
 				24CDCBDD1B4F792E00BDE8CB /* Images.xcassets in Resources */,
+				24E66DC41B6271870081324A /* MBProgressHUDImage.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1300,6 +1316,7 @@
 				24CDCBE21B4F792E00BDE8CB /* AVAudioRecorder+GCDelegateBlock.m in Sources */,
 				249A73BC1B569D2300F46F3D /* WLServerHelper+User.m in Sources */,
 				2482E64A1B5E9B6E005815E8 /* WLPointsModel.m in Sources */,
+				24E66DBF1B62717A0081324A /* UIScrollView+Keyboard.m in Sources */,
 				24CDCC171B4F792E00BDE8CB /* GCAOPProxy.m in Sources */,
 				24CDCBE01B4F792E00BDE8CB /* NSObject+GCProxyRegister.m in Sources */,
 				24B8C0691B5242BC001C5722 /* AGIPCAssetsController.m in Sources */,
@@ -1336,6 +1353,7 @@
 				24B8C0641B5242BC001C5722 /* AGImagePickerController+Helper.m in Sources */,
 				24CDCC011B4F792E00BDE8CB /* UITextField+GCDelegateBlock.m in Sources */,
 				249A73BE1B569D2300F46F3D /* WLDictionaryHelper.m in Sources */,
+				24E66DC21B6271810081324A /* MBProgressHUD+Message.m in Sources */,
 				24C32ECD1B613FD400D509A4 /* WLDatabaseHelper+User.m in Sources */,
 				24CDCC141B4F792E00BDE8CB /* UITextView+GCDelegate.m in Sources */,
 				24CDCC071B4F792E00BDE8CB /* UICollectionView+GCDelegateAndDataSource.m in Sources */,
