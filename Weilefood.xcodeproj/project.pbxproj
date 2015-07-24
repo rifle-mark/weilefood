@@ -139,6 +139,7 @@
 		24E66DBF1B62717A0081324A /* UIScrollView+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DBE1B62717A0081324A /* UIScrollView+Keyboard.m */; };
 		24E66DC21B6271810081324A /* MBProgressHUD+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DC11B6271810081324A /* MBProgressHUD+Message.m */; };
 		24E66DC41B6271870081324A /* MBProgressHUDImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24E66DC31B6271870081324A /* MBProgressHUDImage.xcassets */; };
+		24E66DC81B6277190081324A /* ResetPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DC71B6277190081324A /* ResetPasswordVC.m */; };
 		E02DC6C27427F1714243E3AE /* libPods-Weilefood.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B0DAFB8AFA7EC3AE1728AE /* libPods-Weilefood.a */; };
 /* End PBXBuildFile section */
 
@@ -419,6 +420,8 @@
 		24E66DC11B6271810081324A /* MBProgressHUD+Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Message.m"; sourceTree = "<group>"; };
 		24E66DC31B6271870081324A /* MBProgressHUDImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MBProgressHUDImage.xcassets; sourceTree = "<group>"; };
 		24E66DC51B6271900081324A /* ColorMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorMacro.h; sourceTree = "<group>"; };
+		24E66DC61B6277190081324A /* ResetPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPasswordVC.h; sourceTree = "<group>"; };
+		24E66DC71B6277190081324A /* ResetPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPasswordVC.m; sourceTree = "<group>"; };
 		27B0DAFB8AFA7EC3AE1728AE /* libPods-Weilefood.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weilefood.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBCCE652BC72BE081355B32A /* Pods-Weilefood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weilefood.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weilefood/Pods-Weilefood.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -618,6 +621,8 @@
 				240D79A41B5FECFB007E2E43 /* LoginVC.m */,
 				24C32EBC1B61229D00D509A4 /* RegisterVC.h */,
 				24C32EBD1B61229D00D509A4 /* RegisterVC.m */,
+				24E66DC61B6277190081324A /* ResetPasswordVC.h */,
+				24E66DC71B6277190081324A /* ResetPasswordVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1373,6 +1378,7 @@
 				245936A91B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m in Sources */,
 				24CAC4391B58044C00E3C4D5 /* WLChannelModel.m in Sources */,
 				24CDCBFE1B4F792E00BDE8CB /* UITabBar+GCDelegateBlock.m in Sources */,
+				24E66DC81B6277190081324A /* ResetPasswordVC.m in Sources */,
 				24CDCC061B4F792E00BDE8CB /* AVAudioRecorder+GCDelegate.m in Sources */,
 				24CAC4481B580A5800E3C4D5 /* WLCommentModel.m in Sources */,
 				2467B7271B50E30E001202A4 /* BPushHelper.m in Sources */,

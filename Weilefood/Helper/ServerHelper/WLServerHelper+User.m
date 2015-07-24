@@ -48,9 +48,9 @@
     [self httpPOST:apiUrl parameters:parameters resultClass:[WLUserModel class] callback:callback];
 }
 
-- (void)user_resetPasswordWithUserName:(NSString *)userName password:(NSString *)password callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback {
+- (void)user_resetPasswordWithPhoneNum:(NSString *)phoneNum password:(NSString *)password callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"user", @"setpass"]];
-    NSDictionary *parameters = @{@"username": userName,
+    NSDictionary *parameters = @{@"phonenum": phoneNum,
                                  @"password": password,
                                  };
     [self httpPOST:apiUrl parameters:parameters callback:callback];

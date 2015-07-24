@@ -1,17 +1,17 @@
 //
-//  RegisterVC.m
+//  ResetPasswordVC.m
 //  Weilefood
 //
-//  Created by kelei on 15/7/23.
+//  Created by kelei on 15/7/24.
 //  Copyright (c) 2015年 kelei. All rights reserved.
 //
 
-#import "RegisterVC.h"
+#import "ResetPasswordVC.h"
 #import "WLServerHelperHeader.h"
 #import "WLDatabaseHelperHeader.h"
 #import "WLModelHeader.h"
 
-@interface RegisterVC ()
+@interface ResetPasswordVC ()
 
 @property (nonatomic, strong) UIView       *fixView;
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -30,14 +30,12 @@
 
 @end
 
-#define kPhoneNumberRegex @"^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$"
-
-@implementation RegisterVC
+@implementation ResetPasswordVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"注册";
+    self.title = @"找回密码";
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:self.fixView];
@@ -56,7 +54,7 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-
+    
     [self.scrollView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
         make.top.equalTo(@(self.topLayoutGuide.length));
@@ -65,7 +63,7 @@
         make.edges.equalTo(self.scrollView);
         make.width.equalTo(self.view);
     }];
-
+    
     [self.phoneTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self.contentView).insets(UIEdgeInsetsMake(15, 15, 0, 15));
         make.height.equalTo(@40);
@@ -101,11 +99,6 @@
     NSString *phoneNum = self.phoneTextField.text;
     if (![phoneNum length]) {
         [MBProgressHUD showErrorWithView:self.view message:@"请输入手机号"];
-        return;
-    }
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", kPhoneNumberRegex];
-    if (![predicate evaluateWithObject:phoneNum]) {
-        [MBProgressHUD showErrorWithView:self.view message:@"手机号无效，请确认手机号是否输入正确"];
         return;
     }
     
@@ -144,7 +137,7 @@
         return NO;
     }
     if (![self.passwordTextField.text length]) {
-        [MBProgressHUD showErrorWithView:self.view message:@"请输入密码"];
+        [MBProgressHUD showErrorWithView:self.view message:@"请输入新密码"];
         return NO;
     }
     if (![self.passwordConfirmTextField.text length]) {
@@ -152,11 +145,6 @@
         return NO;
     }
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", kPhoneNumberRegex];
-    if (![predicate evaluateWithObject:self.phoneTextField.text]) {
-        [MBProgressHUD showErrorWithView:self.view message:@"手机号无效，请确认手机号是否输入正确"];
-        return NO;
-    }
     if (!self.lastSecurityCode) {
         [MBProgressHUD showErrorWithView:self.view message:@"请获取手机验证码"];
         return NO;
@@ -184,7 +172,7 @@
     
     _weak(self);
     self.submitButton.enabled = NO;
-    [[WLServerHelper sharedInstance] user_regWithUserName:self.phoneTextField.text password:self.passwordTextField.text callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
+    [[WLServerHelper sharedInstance] user_resetPasswordWithPhoneNum:self.phoneTextField.text password:self.passwordTextField.text callback:^(WLApiInfoModel *apiInfo, NSError *error) {
         _strong_check(self);
         self.submitButton.enabled = YES;
         if (error) {
@@ -195,8 +183,7 @@
             [MBProgressHUD showErrorWithView:self.view message:apiInfo.message];
             return;
         }
-        DLog(@"注册成功");
-        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserLoginSucc object:apiResult];
+        [MBProgressHUD showSuccessWithView:self.view message:@"新密码设置成功！"];
     }];
 }
 
@@ -271,7 +258,7 @@
 - (UIButton *)submitButton {
     if (!_submitButton) {
         _submitButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_submitButton setTitle:@"注册" forState:UIControlStateNormal];
+        [_submitButton setTitle:@"完成" forState:UIControlStateNormal];
         [_submitButton addTarget:self action:@selector(_registerAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _submitButton;

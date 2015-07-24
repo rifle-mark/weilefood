@@ -8,6 +8,7 @@
 
 #import "LoginVC.h"
 #import "RegisterVC.h"
+#import "ResetPasswordVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLDatabaseHelperHeader.h"
@@ -21,6 +22,7 @@
 
 @property (nonatomic, strong) UITextField  *phoneTextField;
 @property (nonatomic, strong) UITextField  *passwordTextField;
+@property (nonatomic, strong) UIButton     *resetPasswordButton;
 @property (nonatomic, strong) UIButton     *registerButton;
 @property (nonatomic, strong) UIButton     *loginButton;
 
@@ -45,6 +47,7 @@
     
     [self.contentView addSubview:self.phoneTextField];
     [self.contentView addSubview:self.passwordTextField];
+    [self.contentView addSubview:self.resetPasswordButton];
     [self.contentView addSubview:self.registerButton];
     [self.contentView addSubview:self.loginButton];
     [self.contentView addSubview:self.hintLabel];
@@ -75,9 +78,13 @@
         make.top.equalTo(self.phoneTextField.mas_bottom).offset(5);
         make.left.right.height.equalTo(self.phoneTextField);
     }];
+    [self.resetPasswordButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.passwordTextField.mas_bottom);
+        make.left.equalTo(self.phoneTextField);
+    }];
     [self.registerButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.passwordTextField);
-        make.top.equalTo(self.passwordTextField.mas_bottom).offset(15);
+        make.left.equalTo(self.phoneTextField);
+        make.top.equalTo(self.resetPasswordButton.mas_bottom).offset(15);
         make.height.equalTo(@40);
         make.width.equalTo(self.loginButton);
     }];
@@ -110,6 +117,10 @@
 
 #pragma mark - private methons
 
+- (void)_resetPasswordAction {
+    [self.navigationController pushViewController:[[ResetPasswordVC alloc] init] animated:YES];
+}
+
 - (void)_registerAction {
     [self.navigationController pushViewController:[[RegisterVC alloc] init] animated:YES];
 }
@@ -117,7 +128,6 @@
 - (void)_loginAction {
     if (![self.phoneTextField.text length]) {
         [MBProgressHUD showErrorWithView:self.view message:@"请输入手机号"];
-        DLog();
         return;
     }
     if (![self.passwordTextField.text length]) {
@@ -224,6 +234,15 @@
         _passwordTextField.secureTextEntry = YES;
     }
     return _passwordTextField;
+}
+
+- (UIButton *)resetPasswordButton {
+    if (!_resetPasswordButton) {
+        _resetPasswordButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [_resetPasswordButton setTitle:@"忘记密码？" forState:UIControlStateNormal];
+        [_resetPasswordButton addTarget:self action:@selector(_resetPasswordAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _resetPasswordButton;
 }
 
 - (UIButton *)registerButton {

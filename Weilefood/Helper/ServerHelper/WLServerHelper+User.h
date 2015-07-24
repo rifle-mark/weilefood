@@ -73,11 +73,11 @@ typedef NS_ENUM(NSUInteger, WLUserPlatform){
 /**
  *  重置密码
  *
- *  @param userName 登录名
+ *  @param phoneNum 用户手机号
  *  @param password 新密码
  *  @param callback 完成时回调
  */
-- (void)user_resetPasswordWithUserName:(NSString *)userName password:(NSString *)password callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback;
+- (void)user_resetPasswordWithPhoneNum:(NSString *)phoneNum password:(NSString *)password callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback;
 
 /**
  *  获取手机验证码
