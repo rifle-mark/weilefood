@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+/// 活动状态
+typedef NS_ENUM(NSInteger, WLActivityState) {
+    /// 已开始
+    WLActivityStateStarted = 0,
+    /// 未开始
+    WLActivityStateNotStarted = 1,
+    /// 已结束
+    WLActivityStateEnded = 2,
+};
+
 /// 线上线下活动
 @interface WLActivityModel : NSObject
 
@@ -31,10 +41,14 @@
 @property (nonatomic, assign) NSUInteger commentCount;
 /// 线下活动城市
 @property (nonatomic, copy) NSString *city;
+/// 所属栏目ID
+@property (nonatomic, assign) NSUInteger channelId;
+/// 当前用户是否已参加
+@property (nonatomic, assign) BOOL isJoin;
+/// 活动状态
+@property (nonatomic, assign) WLActivityState state;
 ///
 @property (nonatomic, copy) NSDate *createDate;
-///
-@property (nonatomic, assign) NSUInteger channelId;
 ///
 @property (nonatomic, assign) NSInteger isDeleted;
 

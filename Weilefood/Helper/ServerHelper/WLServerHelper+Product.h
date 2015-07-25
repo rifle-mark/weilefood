@@ -21,7 +21,7 @@
 - (void)product_getInfoWithProductId:(NSUInteger)productId callback:(void (^)(WLApiInfoModel *apiInfo, WLProductModel *apiResult, NSError *error))callback;
 
 /**
- *  获取市集首页推荐产品列表
+ *  获取市集首页推荐产品列表。(NSArray<WLProductModel>)apiResult
  *
  *  @param pageIndex 获取第几页数据，从1开始
  *  @param pageSize  返回的最大记录数
@@ -38,5 +38,15 @@
  *  @param callback
  */
 - (void)product_getListWithChannelId:(NSUInteger)channelId maxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
+
+/**
+ *  搜索市集栏目产品。(NSArray<WLProductModel>)apiResult
+ *
+ *  @param keyword  搜索关键字
+ *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param pageSize 返回的最大记录数
+ *  @param callback
+ */
+- (void)product_searchWithKeyword:(NSString *)keyword maxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
 
 @end

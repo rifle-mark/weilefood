@@ -26,4 +26,13 @@
     [self httpGET:apiUrl parameters:nil resultItemsClass:[WLProductModel class] callback:callback];
 }
 
+- (void)product_searchWithKeyword:(NSString *)keyword maxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"product", @"search"]];
+    NSDictionary *parameters = @{@"keyword" : keyword,
+                                 @"maxdate" : @([maxDate timeIntervalSince1970]),
+                                 @"pagesize" : @(pageSize),
+                                 };
+    [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLProductModel class] callback:callback];
+}
+
 @end

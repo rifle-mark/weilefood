@@ -27,10 +27,12 @@
 @property (nonatomic, assign) NSUInteger commentCount;
 /// 描述
 @property (nonatomic, copy) NSString *desc;
+/// 所属栏目ID
+@property (nonatomic, assign) NSUInteger channelId;
+/// 所属栏目名称
+@property (nonatomic, copy) NSString *channelName;
 ///
 @property (nonatomic, copy) NSDate *createDate;
-///
-@property (nonatomic, assign) NSUInteger channelId;
 ///
 @property (nonatomic, assign) NSInteger isRecommend;
 ///
