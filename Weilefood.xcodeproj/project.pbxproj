@@ -41,6 +41,7 @@
 		249A73CE1B569D4100F46F3D /* WLApiInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73C31B569D4100F46F3D /* WLApiInfoModel.m */; };
 		249A73D11B569D4100F46F3D /* WLUploadImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73CA1B569D4100F46F3D /* WLUploadImageModel.m */; };
 		249A73D21B569D4100F46F3D /* WLUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73CC1B569D4100F46F3D /* WLUserModel.m */; };
+		249B9B291B6340C3000A85B0 /* MainPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249B9B281B6340C3000A85B0 /* MainPageVC.m */; };
 		24B8C0641B5242BC001C5722 /* AGImagePickerController+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C04B1B5242BC001C5722 /* AGImagePickerController+Helper.m */; };
 		24B8C0651B5242BC001C5722 /* AGImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 24B8C04C1B5242BC001C5722 /* AGImagePickerController.bundle */; };
 		24B8C0661B5242BC001C5722 /* AGImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C04E1B5242BC001C5722 /* AGImagePickerController.m */; };
@@ -140,6 +141,8 @@
 		24E66DC21B6271810081324A /* MBProgressHUD+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DC11B6271810081324A /* MBProgressHUD+Message.m */; };
 		24E66DC41B6271870081324A /* MBProgressHUDImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24E66DC31B6271870081324A /* MBProgressHUDImage.xcassets */; };
 		24E66DC81B6277190081324A /* ResetPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DC71B6277190081324A /* ResetPasswordVC.m */; };
+		24E8DD391B648DF4007F137E /* MainPageCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E8DD381B648DF4007F137E /* MainPageCollectionHeaderView.m */; };
+		24E8DD3C1B6491B5007F137E /* MainPageCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E8DD3B1B6491B5007F137E /* MainPageCollectionCell.m */; };
 		E02DC6C27427F1714243E3AE /* libPods-Weilefood.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B0DAFB8AFA7EC3AE1728AE /* libPods-Weilefood.a */; };
 /* End PBXBuildFile section */
 
@@ -211,6 +214,8 @@
 		249A73CA1B569D4100F46F3D /* WLUploadImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLUploadImageModel.m; sourceTree = "<group>"; };
 		249A73CB1B569D4100F46F3D /* WLUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLUserModel.h; sourceTree = "<group>"; };
 		249A73CC1B569D4100F46F3D /* WLUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLUserModel.m; sourceTree = "<group>"; };
+		249B9B271B6340C3000A85B0 /* MainPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageVC.h; sourceTree = "<group>"; };
+		249B9B281B6340C3000A85B0 /* MainPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageVC.m; sourceTree = "<group>"; };
 		24B8C04A1B5242BC001C5722 /* AGImagePickerController+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AGImagePickerController+Helper.h"; sourceTree = "<group>"; };
 		24B8C04B1B5242BC001C5722 /* AGImagePickerController+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AGImagePickerController+Helper.m"; sourceTree = "<group>"; };
 		24B8C04C1B5242BC001C5722 /* AGImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AGImagePickerController.bundle; sourceTree = "<group>"; };
@@ -422,6 +427,10 @@
 		24E66DC51B6271900081324A /* ColorMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorMacro.h; sourceTree = "<group>"; };
 		24E66DC61B6277190081324A /* ResetPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPasswordVC.h; sourceTree = "<group>"; };
 		24E66DC71B6277190081324A /* ResetPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPasswordVC.m; sourceTree = "<group>"; };
+		24E8DD371B648DF4007F137E /* MainPageCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageCollectionHeaderView.h; sourceTree = "<group>"; };
+		24E8DD381B648DF4007F137E /* MainPageCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageCollectionHeaderView.m; sourceTree = "<group>"; };
+		24E8DD3A1B6491B5007F137E /* MainPageCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageCollectionCell.h; sourceTree = "<group>"; };
+		24E8DD3B1B6491B5007F137E /* MainPageCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageCollectionCell.m; sourceTree = "<group>"; };
 		27B0DAFB8AFA7EC3AE1728AE /* libPods-Weilefood.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weilefood.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBCCE652BC72BE081355B32A /* Pods-Weilefood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weilefood.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weilefood/Pods-Weilefood.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -518,6 +527,10 @@
 		240D79921B5FEB42007E2E43 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				24E8DD371B648DF4007F137E /* MainPageCollectionHeaderView.h */,
+				24E8DD381B648DF4007F137E /* MainPageCollectionHeaderView.m */,
+				24E8DD3A1B6491B5007F137E /* MainPageCollectionCell.h */,
+				24E8DD3B1B6491B5007F137E /* MainPageCollectionCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -525,6 +538,8 @@
 		240D79931B5FEB42007E2E43 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				249B9B271B6340C3000A85B0 /* MainPageVC.h */,
+				249B9B281B6340C3000A85B0 /* MainPageVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1280,6 +1295,7 @@
 				24CDCBEF1B4F792E00BDE8CB /* UITabbarDelegateImplementationProxy.m in Sources */,
 				24CDCBFC1B4F792E00BDE8CB /* UIScrollView+GCDelegateBlock.m in Sources */,
 				24CDCC131B4F792E00BDE8CB /* UITextField+GCDelegate.m in Sources */,
+				24E8DD391B648DF4007F137E /* MainPageCollectionHeaderView.m in Sources */,
 				24C32EBE1B61229D00D509A4 /* RegisterVC.m in Sources */,
 				24CAC43C1B58050900E3C4D5 /* WLProductModel.m in Sources */,
 				245936AF1B5A3AB3008FFAB8 /* WLServerHelper+Activity.m in Sources */,
@@ -1341,6 +1357,7 @@
 				2482E62F1B5E7C72005815E8 /* WLOrderModel.m in Sources */,
 				24CDCBE91B4F792E00BDE8CB /* UINavigationControllerDelegateImplementionProxy.m in Sources */,
 				24CAC4421B5807ED00E3C4D5 /* WLVideoModel.m in Sources */,
+				24E8DD3C1B6491B5007F137E /* MainPageCollectionCell.m in Sources */,
 				245936B81B5A42F4008FFAB8 /* WLServerHelper+Ad.m in Sources */,
 				2482E6411B5E9482005815E8 /* WLDialogModel.m in Sources */,
 				249A73CE1B569D4100F46F3D /* WLApiInfoModel.m in Sources */,
@@ -1395,6 +1412,7 @@
 				2482E6321B5E7C92005815E8 /* WLOrderDeliverModel.m in Sources */,
 				24CDCBEE1B4F792E00BDE8CB /* UITabbarControllerDelegateImplementationProxy.m in Sources */,
 				24CDCBF91B4F792E00BDE8CB /* UINavigationController+GCDelegateBlock.m in Sources */,
+				249B9B291B6340C3000A85B0 /* MainPageVC.m in Sources */,
 				24CDCBF41B4F792E00BDE8CB /* UIWebViewDelegateImplementationProxy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

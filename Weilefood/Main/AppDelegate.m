@@ -13,7 +13,7 @@
 #import "WLDatabaseHelperHeader.h"
 #import "WLModelHeader.h"
 
-#import "LoginVC.h"
+#import "MainPageVC.h"
 
 @implementation AppDelegate
 
@@ -64,7 +64,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    LoginVC *vc = [[LoginVC alloc] init];
+    MainPageVC *vc = [[MainPageVC alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
     self.window.rootViewController = navController;
     
