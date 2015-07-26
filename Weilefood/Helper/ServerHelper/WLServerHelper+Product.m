@@ -17,7 +17,7 @@
 }
 
 - (void)product_getListWithPageIndex:(NSUInteger)pageIndex pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
-    NSString *apiUrl = [self getApiUrlWithPaths:@[@"product", @"list", @(pageIndex), @(pageSize)]];
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"product", @"reclist", @(pageIndex), @(pageSize)]];
     [self httpGET:apiUrl parameters:nil resultItemsClass:[WLProductModel class] callback:callback];
 }
 

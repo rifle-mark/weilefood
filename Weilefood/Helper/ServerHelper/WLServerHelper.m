@@ -12,7 +12,7 @@
 
 
 NSString * const API_RESULT_KEYNAME = @"result";
-NSString * const API_RESULT_ITEMS_KEYNAME = @"items";
+NSString * const API_RESULT_ITEMS_KEYNAME = @"Items";
 
 
 @interface WLServerHelper ()
