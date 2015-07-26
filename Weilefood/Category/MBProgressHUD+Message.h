@@ -13,17 +13,15 @@
 /**
  *  显示成功消息
  *
- *  @param view    消息框容器
  *  @param message 消息内容。可以为nil
  */
-+ (void)showSuccessWithView:(UIView *)view message:(NSString *)message;
++ (void)showSuccessWithMessage:(NSString *)message;
 
 /**
  *  显示错误消息
  *
- *  @param view    消息框容器
  *  @param message 消息内容。不能为nil
  */
-+ (void)showErrorWithView:(UIView *)view message:(NSString *)message;
++ (void)showErrorWithMessage:(NSString *)message;
 
 @end

@@ -10,12 +10,11 @@
 
 @implementation MBProgressHUD (Message)
 
-+ (void)showSuccessWithView:(UIView *)view message:(NSString *)message {
-    if (!view) {
-        return;
-    }
-    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:view];
-    [view addSubview:hud];
++ (void)showSuccessWithMessage:(NSString *)message {
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithWindow:window];
+    [window addSubview:hud];
+    hud.userInteractionEnabled = NO;
     hud.mode = MBProgressHUDModeCustomView;
     hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
     hud.labelText = message;
@@ -23,13 +22,12 @@
     [hud hide:YES afterDelay:3];
 }
 
-+ (void)showErrorWithView:(UIView *)view message:(NSString *)message {
++ (void)showErrorWithMessage:(NSString *)message {
     NSParameterAssert(message);
-    if (!view) {
-        return;
-    }
-    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:view];
-    [view addSubview:hud];
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithWindow:window];
+    [window addSubview:hud];
+    hud.userInteractionEnabled = NO;
     hud.mode = MBProgressHUDModeText;
     hud.labelText = message;
     [hud show:YES];

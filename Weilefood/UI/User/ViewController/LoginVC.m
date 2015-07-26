@@ -127,11 +127,11 @@
 
 - (void)_loginAction {
     if (![self.phoneTextField.text length]) {
-        [MBProgressHUD showErrorWithView:self.view message:@"请输入手机号"];
+        [MBProgressHUD showErrorWithMessage:@"请输入手机号"];
         return;
     }
     if (![self.passwordTextField.text length]) {
-        [MBProgressHUD showErrorWithView:self.view message:@"请输入密码"];
+        [MBProgressHUD showErrorWithMessage:@"请输入密码"];
         return;
     }
     
@@ -145,7 +145,7 @@
             return;
         }
         if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithView:self.view message:apiInfo.message];
+            [MBProgressHUD showErrorWithMessage:apiInfo.message];
             return;
         }
         DLog(@"登录成功");
@@ -185,7 +185,7 @@
                     return;
                 }
                 if (!apiInfo.isSuc) {
-                    [MBProgressHUD showErrorWithView:self.view message:apiInfo.message];
+                    [MBProgressHUD showErrorWithMessage:apiInfo.message];
                     return;
                 }
                 DLog(@"第三方平台登录成功");

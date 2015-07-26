@@ -100,12 +100,12 @@
 - (void)_securityCodeAction {
     NSString *phoneNum = self.phoneTextField.text;
     if (![phoneNum length]) {
-        [MBProgressHUD showErrorWithView:self.view message:@"请输入手机号"];
+        [MBProgressHUD showErrorWithMessage:@"请输入手机号"];
         return;
     }
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", kPhoneNumberRegex];
     if (![predicate evaluateWithObject:phoneNum]) {
-        [MBProgressHUD showErrorWithView:self.view message:@"手机号无效，请确认手机号是否输入正确"];
+        [MBProgressHUD showErrorWithMessage:@"手机号无效，请确认手机号是否输入正确"];
         return;
     }
     
@@ -119,7 +119,7 @@
             return;
         }
         if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithView:self.view message:apiInfo.message];
+            [MBProgressHUD showErrorWithMessage:apiInfo.message];
             return;
         }
         
@@ -136,41 +136,41 @@
 
 - (BOOL)_checkInput {
     if (![self.phoneTextField.text length]) {
-        [MBProgressHUD showErrorWithView:self.view message:@"请输入手机号"];
+        [MBProgressHUD showErrorWithMessage:@"请输入手机号"];
         return NO;
     }
     if (![self.securityCodeTextField.text length]) {
-        [MBProgressHUD showErrorWithView:self.view message:@"请输入验证码"];
+        [MBProgressHUD showErrorWithMessage:@"请输入验证码"];
         return NO;
     }
     if (![self.passwordTextField.text length]) {
-        [MBProgressHUD showErrorWithView:self.view message:@"请输入密码"];
+        [MBProgressHUD showErrorWithMessage:@"请输入密码"];
         return NO;
     }
     if (![self.passwordConfirmTextField.text length]) {
-        [MBProgressHUD showErrorWithView:self.view message:@"请输入重复密码"];
+        [MBProgressHUD showErrorWithMessage:@"请输入重复密码"];
         return NO;
     }
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", kPhoneNumberRegex];
     if (![predicate evaluateWithObject:self.phoneTextField.text]) {
-        [MBProgressHUD showErrorWithView:self.view message:@"手机号无效，请确认手机号是否输入正确"];
+        [MBProgressHUD showErrorWithMessage:@"手机号无效，请确认手机号是否输入正确"];
         return NO;
     }
     if (!self.lastSecurityCode) {
-        [MBProgressHUD showErrorWithView:self.view message:@"请获取手机验证码"];
+        [MBProgressHUD showErrorWithMessage:@"请获取手机验证码"];
         return NO;
     }
     if (![[self.securityCodeTextField.text uppercaseString] isEqualToString:self.lastSecurityCode]) {
-        [MBProgressHUD showErrorWithView:self.view message:@"验证码错误"];
+        [MBProgressHUD showErrorWithMessage:@"验证码错误"];
         return NO;
     }
     if (self.passwordTextField.text.length < 6) {
-        [MBProgressHUD showErrorWithView:self.view message:@"密码不能少于6个字符"];
+        [MBProgressHUD showErrorWithMessage:@"密码不能少于6个字符"];
         return NO;
     }
     if (![self.passwordTextField.text isEqualToString:self.passwordConfirmTextField.text]) {
-        [MBProgressHUD showErrorWithView:self.view message:@"两次密码输入不一致"];
+        [MBProgressHUD showErrorWithMessage:@"两次密码输入不一致"];
         return NO;
     }
     
@@ -192,7 +192,7 @@
             return;
         }
         if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithView:self.view message:apiInfo.message];
+            [MBProgressHUD showErrorWithMessage:apiInfo.message];
             return;
         }
         DLog(@"注册成功");
