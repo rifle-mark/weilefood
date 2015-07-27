@@ -42,6 +42,7 @@
 		249A73D11B569D4100F46F3D /* WLUploadImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73CA1B569D4100F46F3D /* WLUploadImageModel.m */; };
 		249A73D21B569D4100F46F3D /* WLUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73CC1B569D4100F46F3D /* WLUserModel.m */; };
 		249B9B291B6340C3000A85B0 /* MainPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249B9B281B6340C3000A85B0 /* MainPageVC.m */; };
+		249EF30D1B64BEDA00AAEBE0 /* MarketIndexPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249EF30C1B64BEDA00AAEBE0 /* MarketIndexPageVC.m */; };
 		24B8C0641B5242BC001C5722 /* AGImagePickerController+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C04B1B5242BC001C5722 /* AGImagePickerController+Helper.m */; };
 		24B8C0651B5242BC001C5722 /* AGImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 24B8C04C1B5242BC001C5722 /* AGImagePickerController.bundle */; };
 		24B8C0661B5242BC001C5722 /* AGImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C04E1B5242BC001C5722 /* AGImagePickerController.m */; };
@@ -59,6 +60,7 @@
 		24C32EC21B613BDC00D509A4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 24C32EC01B613BDC00D509A4 /* Model.xcdatamodeld */; };
 		24C32EC91B613F6100D509A4 /* WLDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C32EC81B613F6100D509A4 /* WLDatabaseHelper.m */; };
 		24C32ECD1B613FD400D509A4 /* WLDatabaseHelper+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C32ECC1B613FD400D509A4 /* WLDatabaseHelper+User.m */; };
+		24C792681B666B4E007DCB30 /* MarketProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C792671B666B4E007DCB30 /* MarketProductCell.m */; };
 		24CAC42F1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC42E1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m */; };
 		24CAC4331B57E9D800E3C4D5 /* WLServerHelper+Share.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC4321B57E9D700E3C4D5 /* WLServerHelper+Share.m */; };
 		24CAC4361B57EA5F00E3C4D5 /* WLShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC4351B57EA5F00E3C4D5 /* WLShareModel.m */; };
@@ -216,6 +218,8 @@
 		249A73CC1B569D4100F46F3D /* WLUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLUserModel.m; sourceTree = "<group>"; };
 		249B9B271B6340C3000A85B0 /* MainPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageVC.h; sourceTree = "<group>"; };
 		249B9B281B6340C3000A85B0 /* MainPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageVC.m; sourceTree = "<group>"; };
+		249EF30B1B64BEDA00AAEBE0 /* MarketIndexPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketIndexPageVC.h; sourceTree = "<group>"; };
+		249EF30C1B64BEDA00AAEBE0 /* MarketIndexPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketIndexPageVC.m; sourceTree = "<group>"; };
 		24B8C04A1B5242BC001C5722 /* AGImagePickerController+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AGImagePickerController+Helper.h"; sourceTree = "<group>"; };
 		24B8C04B1B5242BC001C5722 /* AGImagePickerController+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AGImagePickerController+Helper.m"; sourceTree = "<group>"; };
 		24B8C04C1B5242BC001C5722 /* AGImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AGImagePickerController.bundle; sourceTree = "<group>"; };
@@ -255,6 +259,8 @@
 		24C32ECB1B613FD400D509A4 /* WLDatabaseHelper+User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLDatabaseHelper+User.h"; sourceTree = "<group>"; };
 		24C32ECC1B613FD400D509A4 /* WLDatabaseHelper+User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLDatabaseHelper+User.m"; sourceTree = "<group>"; };
 		24C32ECE1B6141D200D509A4 /* NotificationMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationMacro.h; sourceTree = "<group>"; };
+		24C792661B666B4E007DCB30 /* MarketProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketProductCell.h; sourceTree = "<group>"; };
+		24C792671B666B4E007DCB30 /* MarketProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketProductCell.m; sourceTree = "<group>"; };
 		24CAC42D1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+UploadImage.h"; sourceTree = "<group>"; };
 		24CAC42E1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+UploadImage.m"; sourceTree = "<group>"; };
 		24CAC4301B57DF8100E3C4D5 /* AppMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppMacro.h; sourceTree = "<group>"; };
@@ -556,6 +562,8 @@
 		240D79951B5FEB42007E2E43 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				24C792661B666B4E007DCB30 /* MarketProductCell.h */,
+				24C792671B666B4E007DCB30 /* MarketProductCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -563,6 +571,8 @@
 		240D79961B5FEB42007E2E43 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				249EF30B1B64BEDA00AAEBE0 /* MarketIndexPageVC.h */,
+				249EF30C1B64BEDA00AAEBE0 /* MarketIndexPageVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1337,6 +1347,7 @@
 				24CDCBE21B4F792E00BDE8CB /* AVAudioRecorder+GCDelegateBlock.m in Sources */,
 				249A73BC1B569D2300F46F3D /* WLServerHelper+User.m in Sources */,
 				2482E64A1B5E9B6E005815E8 /* WLPointsModel.m in Sources */,
+				249EF30D1B64BEDA00AAEBE0 /* MarketIndexPageVC.m in Sources */,
 				24E66DBF1B62717A0081324A /* UIScrollView+Keyboard.m in Sources */,
 				24CDCC171B4F792E00BDE8CB /* GCAOPProxy.m in Sources */,
 				24CDCBE01B4F792E00BDE8CB /* NSObject+GCProxyRegister.m in Sources */,
@@ -1402,6 +1413,7 @@
 				24CDCC0A1B4F792E00BDE8CB /* UINavigationBar+GCDelegate.m in Sources */,
 				249A73D21B569D4100F46F3D /* WLUserModel.m in Sources */,
 				24B8C06A1B5242BC001C5722 /* AGIPCGridCell.m in Sources */,
+				24C792681B666B4E007DCB30 /* MarketProductCell.m in Sources */,
 				24CDCBEC1B4F792E00BDE8CB /* UIScrollViewDelegateImplementationProxy.m in Sources */,
 				24CDCBF71B4F792E00BDE8CB /* UIImagePickerController+GCDelegateBlock.m in Sources */,
 				2482E63B1B5E8285005815E8 /* WLOrderProductModel.m in Sources */,

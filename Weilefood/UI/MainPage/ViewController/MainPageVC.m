@@ -10,6 +10,8 @@
 #import "MainPageCollectionHeaderView.h"
 #import "MainPageCollectionCell.h"
 
+#import "MarketIndexPageVC.h"
+
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
@@ -138,11 +140,13 @@ static NSInteger const kSectionIndexActivity   = 3;
     MainPageCollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
                                                                                   withReuseIdentifier:kHeaderIdentifier
                                                                                          forIndexPath:indexPath];
+    _weak(self);
     switch (indexPath.section) {
         case kSectionIndexProduct: {
             headerView.title = @"市集";
             headerView.allButtonActionBlock = ^(){
-                [MBProgressHUD showErrorWithMessage:@"查看市集"];
+                _strong_check(self);
+                [self.navigationController pushViewController:[[MarketIndexPageVC alloc] init] animated:YES];
             };
             break;
         }
