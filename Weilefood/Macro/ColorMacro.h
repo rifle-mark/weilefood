@@ -13,18 +13,21 @@
 #define RGBA(r, g, b, a)    [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)/255.0]
 
 // colors definations
-#define k_COLOR_SCIENCE_BLUE    RGB(58,  138, 255)
-#define k_COLOR_FLAMINGO        RGB(255, 102, 52)
-#define k_COLOR_MINE_SHAFT      RGB(51,  51,  51)
-#define k_COLOR_DAVY_GREY       RGB(85,  85,  85)
-#define k_COLOR_GRAY            RGB(127, 127, 127)
-#define k_COLOR_IRONSIDE_GRAY   RGB(102, 102, 102)
-#define k_COLOR_NOBEL           RGB(182, 182, 182)
-#define k_COLOR_MERCURY         RGB(229, 229, 229)
-#define k_COLOR_HIT_GRAY        RGB(211, 218, 222)
-#define k_COLOR_GIN             RGB(244, 245, 245)
+#define k_COLOR_TURQUOISE       RGB(49, 195, 186)
+#define k_COLOR_ORANGE          RGB(249, 152, 46)
+#define k_COLOR_GOLDENROD       RGB(233, 145, 20)
+#define k_COLOR_WHITESMOKE      RGB(242, 242, 242)
+#define k_COLOR_LAVENDER        RGB(236, 239, 239)
+#define k_COLOR_DARKGRAY        RGB(208, 208, 208)
+#define k_COLOR_MAROOM          RGB(64, 64, 64)
+#define k_COLOR_DIMGRAY         RGB(91, 91, 91)
 #define k_COLOR_CLEAR           [UIColor clearColor]
 #define k_COLOR_WHITE           [UIColor whiteColor]
 #define k_COLOR_BLACK           [UIColor blackColor]
+
+/// 导航栏背景色
+#define k_COLOR_THEME_NAVIGATIONBAR         k_COLOR_TURQUOISE
+/// 导航栏文字色
+#define k_COLOR_THEME_NAVIGATIONBAR_TEXT    [UIColor whiteColor]
 
 #endif

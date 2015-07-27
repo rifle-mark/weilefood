@@ -60,11 +60,12 @@
         [WLDatabaseHelper saveWithUser:user];
     }];
     
-    // 自定义NavigationBar样式
+    // 自定义BackButton样式，移除按钮文字
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -100) forBarMetrics:UIBarMetricsDefault];
+    // 自定义NavigationBar样式
     [UINavigationBar appearance].barStyle = UIBarStyleBlack;
-    [UINavigationBar appearance].barTintColor = RGB(52, 195, 186);
-    [UINavigationBar appearance].tintColor = [UIColor whiteColor];
+    [UINavigationBar appearance].barTintColor = k_COLOR_THEME_NAVIGATIONBAR;
+    [UINavigationBar appearance].tintColor = k_COLOR_THEME_NAVIGATIONBAR_TEXT;
     [UINavigationBar appearance].translucent = NO;
     
     // UI入口
