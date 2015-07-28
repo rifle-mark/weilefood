@@ -17,9 +17,17 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView       *contentView;
 
+@property (nonatomic, strong) UIView       *phoneBGView;
+@property (nonatomic, strong) UILabel      *phoneNameLabel;
 @property (nonatomic, strong) UITextField  *phoneTextField;
+@property (nonatomic, strong) UIView       *securityCodeBGView;
+@property (nonatomic, strong) UILabel      *securityCodeNameLabel;
 @property (nonatomic, strong) UITextField  *securityCodeTextField;
+@property (nonatomic, strong) UIView       *passwordBGView;
+@property (nonatomic, strong) UILabel      *passwordNameLabel;
 @property (nonatomic, strong) UITextField  *passwordTextField;
+@property (nonatomic, strong) UIView       *passwordConfirmBGView;
+@property (nonatomic, strong) UILabel      *passwordConfirmNameLabel;
 @property (nonatomic, strong) UITextField  *passwordConfirmTextField;
 
 @property (nonatomic, strong) UIButton     *securityCodeButton;
@@ -42,9 +50,17 @@
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.contentView];
     
+    [self.contentView addSubview:self.phoneBGView];
+    [self.contentView addSubview:self.phoneNameLabel];
     [self.contentView addSubview:self.phoneTextField];
+    [self.contentView addSubview:self.securityCodeBGView];
+    [self.contentView addSubview:self.securityCodeNameLabel];
     [self.contentView addSubview:self.securityCodeTextField];
+    [self.contentView addSubview:self.passwordBGView];
+    [self.contentView addSubview:self.passwordNameLabel];
     [self.contentView addSubview:self.passwordTextField];
+    [self.contentView addSubview:self.passwordConfirmBGView];
+    [self.contentView addSubview:self.passwordConfirmNameLabel];
     [self.contentView addSubview:self.passwordConfirmTextField];
     [self.contentView addSubview:self.securityCodeButton];
     [self.contentView addSubview:self.submitButton];
@@ -64,31 +80,54 @@
         make.width.equalTo(self.view);
     }];
     
-    [self.phoneTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.equalTo(self.contentView).insets(UIEdgeInsetsMake(15, 15, 0, 15));
-        make.height.equalTo(@40);
-    }];
-    [self.securityCodeTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.phoneTextField.mas_bottom).offset(5);
-        make.left.height.equalTo(self.phoneTextField);
-        make.right.equalTo(self.securityCodeButton.mas_left).offset(-5);
-    }];
+    NSArray *textFieldViews = @[@[self.phoneBGView, self.phoneNameLabel, self.phoneTextField],
+                                @[self.securityCodeBGView, self.securityCodeNameLabel, self.securityCodeTextField],
+                                @[self.passwordBGView, self.passwordNameLabel, self.passwordTextField],
+                                @[self.passwordConfirmBGView, self.passwordConfirmNameLabel, self.passwordConfirmTextField],
+                                ];
+    UIView *prevView = nil;
+    for (NSArray *array in textFieldViews) {
+        UIView *bgView = array[0];
+        UILabel *nameLabel = array[1];
+        UITextField *textField = array[2];
+        if (prevView) {
+            [bgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.height.equalTo(prevView);
+                make.top.equalTo(prevView.mas_bottom).offset(5);
+            }];
+        }
+        else {
+            [bgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.top.right.equalTo(self.contentView).insets(UIEdgeInsetsMake(15, 15, 0, 15));
+                make.height.equalTo(@40);
+            }];
+        }
+        [nameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(bgView).offset(15);
+            make.centerY.equalTo(bgView);
+            make.width.equalTo(@85);
+        }];
+        [textField mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(nameLabel.mas_right).offset(15);
+            make.right.equalTo(bgView).offset(-15);
+            make.centerY.height.equalTo(bgView);
+        }];
+        prevView = bgView;
+    }
     [self.securityCodeButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.securityCodeTextField);
-        make.right.height.equalTo(self.phoneTextField);
+        make.top.bottom.equalTo(self.securityCodeBGView);
+        make.right.equalTo(self.phoneBGView);
         make.width.equalTo(@100);
     }];
-    [self.passwordTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.securityCodeTextField.mas_bottom).offset(5);
-        make.left.right.height.equalTo(self.phoneTextField);
+    [self.securityCodeTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.securityCodeNameLabel.mas_right).offset(15);
+        make.right.equalTo(self.securityCodeButton.mas_left);
+        make.centerY.height.equalTo(self.securityCodeBGView);
     }];
-    [self.passwordConfirmTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.passwordTextField.mas_bottom).offset(5);
-        make.left.right.height.equalTo(self.phoneTextField);
-    }];
+    
     [self.submitButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.passwordConfirmTextField.mas_bottom).offset(15);
-        make.left.right.height.equalTo(self.phoneTextField);
+        make.left.right.height.equalTo(self.phoneBGView);
         make.bottom.equalTo(self.submitButton.superview).offset(-15);
     }];
 }
@@ -210,37 +249,110 @@
     return _contentView;
 }
 
+- (UIView *)phoneBGView {
+    if (!_phoneBGView) {
+        _phoneBGView = [[UIView alloc] init];
+        _phoneBGView.backgroundColor = k_COLOR_WHITESMOKE;
+        _phoneBGView.layer.cornerRadius = 4;
+    }
+    return _phoneBGView;
+}
+
+- (UILabel *)phoneNameLabel {
+    if (!_phoneNameLabel) {
+        _phoneNameLabel = [[UILabel alloc] init];
+        _phoneNameLabel.text = @"用户名";
+        _phoneNameLabel.textColor = k_COLOR_DIMGRAY;
+        _phoneNameLabel.font = [UIFont systemFontOfSize:14];
+    }
+    return _phoneNameLabel;
+}
+
 - (UITextField *)phoneTextField {
     if (!_phoneTextField) {
         _phoneTextField = [[UITextField alloc] init];
-        _phoneTextField.placeholder = @"请输入手机号";
+        _phoneTextField.placeholder = @"请输入手机号码";
         _phoneTextField.keyboardType = UIKeyboardTypePhonePad;
     }
     return _phoneTextField;
 }
 
+- (UIView *)securityCodeBGView {
+    if (!_securityCodeBGView) {
+        _securityCodeBGView = [[UIView alloc] init];
+        _securityCodeBGView.backgroundColor = k_COLOR_WHITESMOKE;
+        _securityCodeBGView.layer.cornerRadius = 4;
+    }
+    return _securityCodeBGView;
+}
+
+- (UILabel *)securityCodeNameLabel {
+    if (!_securityCodeNameLabel) {
+        _securityCodeNameLabel = [[UILabel alloc] init];
+        _securityCodeNameLabel.text = @"验证码";
+        _securityCodeNameLabel.textColor = k_COLOR_DIMGRAY;
+        _securityCodeNameLabel.font = [UIFont systemFontOfSize:14];
+    }
+    return _securityCodeNameLabel;
+}
+
 - (UITextField *)securityCodeTextField {
     if (!_securityCodeTextField) {
         _securityCodeTextField = [[UITextField alloc] init];
-        _securityCodeTextField.placeholder = @"请输入短信验证码";
         _securityCodeTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     }
     return _securityCodeTextField;
 }
 
+- (UIView *)passwordBGView {
+    if (!_passwordBGView) {
+        _passwordBGView = [[UIView alloc] init];
+        _passwordBGView.backgroundColor = k_COLOR_WHITESMOKE;
+        _passwordBGView.layer.cornerRadius = 4;
+    }
+    return _passwordBGView;
+}
+
+- (UILabel *)passwordNameLabel {
+    if (!_passwordNameLabel) {
+        _passwordNameLabel = [[UILabel alloc] init];
+        _passwordNameLabel.text = @"新密码";
+        _passwordNameLabel.textColor = k_COLOR_DIMGRAY;
+        _passwordNameLabel.font = [UIFont systemFontOfSize:14];
+    }
+    return _passwordNameLabel;
+}
+
 - (UITextField *)passwordTextField {
     if (!_passwordTextField) {
         _passwordTextField = [[UITextField alloc] init];
-        _passwordTextField.placeholder = @"请输入密码";
         _passwordTextField.secureTextEntry = YES;
     }
     return _passwordTextField;
 }
 
+- (UIView *)passwordConfirmBGView {
+    if (!_passwordConfirmBGView) {
+        _passwordConfirmBGView = [[UIView alloc] init];
+        _passwordConfirmBGView.backgroundColor = k_COLOR_WHITESMOKE;
+        _passwordConfirmBGView.layer.cornerRadius = 4;
+    }
+    return _passwordConfirmBGView;
+}
+
+- (UILabel *)passwordConfirmNameLabel {
+    if (!_passwordConfirmNameLabel) {
+        _passwordConfirmNameLabel = [[UILabel alloc] init];
+        _passwordConfirmNameLabel.text = @"再次输入密码";
+        _passwordConfirmNameLabel.textColor = k_COLOR_DIMGRAY;
+        _passwordConfirmNameLabel.font = [UIFont systemFontOfSize:14];
+    }
+    return _passwordConfirmNameLabel;
+}
+
 - (UITextField *)passwordConfirmTextField {
     if (!_passwordConfirmTextField) {
         _passwordConfirmTextField = [[UITextField alloc] init];
-        _passwordConfirmTextField.placeholder = @"再次输入密码";
         _passwordConfirmTextField.secureTextEntry = YES;
     }
     return _passwordConfirmTextField;
@@ -248,7 +360,11 @@
 
 - (UIButton *)securityCodeButton {
     if (!_securityCodeButton) {
-        _securityCodeButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        _securityCodeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _securityCodeButton.layer.cornerRadius = 4;
+        _securityCodeButton.backgroundColor = k_COLOR_ORANGE;
+        _securityCodeButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_securityCodeButton setTitleColor:k_COLOR_WHITE forState:UIControlStateNormal];
         [_securityCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
         [_securityCodeButton addTarget:self action:@selector(_securityCodeAction) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -258,6 +374,10 @@
 - (UIButton *)submitButton {
     if (!_submitButton) {
         _submitButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        _submitButton.layer.cornerRadius = 4;
+        _submitButton.backgroundColor = k_COLOR_THEME_NAVIGATIONBAR;
+        _submitButton.titleLabel.font = [UIFont systemFontOfSize:15];
+        [_submitButton setTitleColor:k_COLOR_THEME_NAVIGATIONBAR_TEXT forState:UIControlStateNormal];
         [_submitButton setTitle:@"完成" forState:UIControlStateNormal];
         [_submitButton addTarget:self action:@selector(_registerAction) forControlEvents:UIControlEventTouchUpInside];
     }
