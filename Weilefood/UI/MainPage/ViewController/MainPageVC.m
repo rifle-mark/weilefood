@@ -17,14 +17,21 @@
 
 @interface MainPageVC () <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, strong) UIView   *headerView;
-@property (nonatomic, strong) UIView   *bannerView;
-@property (nonatomic, strong) UIButton *leftButton;
-@property (nonatomic, strong) UIButton *middleButton;
-@property (nonatomic, strong) UIButton *rightButton;
-@property (nonatomic, strong) UIView   *adView;
+@property (nonatomic, strong) UIView      *headerView;
+@property (nonatomic, strong) UIView      *bannerView;
+@property (nonatomic, strong) UIImageView *leftImageView;
+@property (nonatomic, strong) UILabel     *leftLabel;
+@property (nonatomic, strong) UIButton    *leftButton;
+@property (nonatomic, strong) UIImageView *middleImageView;
+@property (nonatomic, strong) UILabel     *middleLabel;
+@property (nonatomic, strong) UIButton    *middleButton;
+@property (nonatomic, strong) UIImageView *rightImageView;
+@property (nonatomic, strong) UILabel     *rightLabel;
+@property (nonatomic, strong) UIButton    *rightButton;
+@property (nonatomic, strong) UIView      *adView;
 
-@property (nonatomic, strong) UIView   *fixView;
+@property (nonatomic, strong) UIBarButtonItem  *userButtonItem;
+@property (nonatomic, strong) UIView           *fixView;
 @property (nonatomic, strong) UICollectionView *collectionView;
 
 @property (nonatomic, strong) NSArray *sectionDataProducts;
@@ -34,10 +41,10 @@
 
 @end
 
-static NSInteger const kHeaderBannerHeight  = 100;
+static NSInteger const kHeaderBannerHeight  = 160;
 static NSInteger const kHeaderButtonWidth   = 80;
-static NSInteger const kHeaderButtonHeight  = 80;
-static NSInteger const kHeaderAdHeight      = 80;
+static NSInteger const kHeaderButtonHeight  = 126;
+static NSInteger const kHeaderAdHeight      = 88;
 
 static NSString *const kCellIdentifier      = @"MYCELL";
 static NSString *const kHeaderIdentifier    = @"HEADER";
@@ -53,14 +60,21 @@ static NSInteger const kSectionIndexActivity   = 3;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:22]};
     self.title = @"味了";
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = self.userButtonItem;
     
-    [self.headerView addSubview:self.bannerView];
-    [self.headerView addSubview:self.leftButton];
-    [self.headerView addSubview:self.middleButton];
-    [self.headerView addSubview:self.rightButton];
-    [self.headerView addSubview:self.adView];
+    
+    NSArray *array = @[self.bannerView,
+                       self.leftImageView, self.leftLabel, self.leftButton,
+                       self.middleImageView, self.middleLabel, self.middleButton,
+                       self.rightImageView, self.rightLabel, self.rightButton,
+                       self.adView,
+                       ];
+    for (UIView *view in array) {
+        [self.headerView addSubview:view];
+    }
     
     [self.collectionView addSubview:self.headerView];
     
@@ -100,6 +114,24 @@ static NSInteger const kSectionIndexActivity   = 3;
         make.top.width.height.equalTo(self.middleButton);
         make.right.equalTo(@(-buttonMargin));
     }];
+    NSArray *views = @[@[self.leftImageView, self.leftLabel, self.leftButton],
+                       @[self.middleImageView, self.middleLabel, self.middleButton],
+                       @[self.rightImageView, self.rightLabel, self.rightButton],
+                       ];
+    for (NSArray *array in views) {
+        UIImageView *imgView = array[0];
+        UILabel *label = array[1];
+        UIButton *btn = array[2];
+        [imgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(btn);
+            make.centerY.equalTo(btn).offset(-10);
+        }];
+        [label mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(imgView);
+            make.top.equalTo(imgView.mas_bottom).offset(10);
+        }];
+    }
+    
     [self.adView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.middleButton.mas_bottom);
         make.left.right.equalTo(self.adView.superview);
@@ -221,7 +253,6 @@ static NSInteger const kSectionIndexActivity   = 3;
     cell.imageUrl = imageUrl;
     cell.title = title;
     cell.money = money;
-    cell.backgroundColor = [UIColor redColor];
     return cell;
 }
 
@@ -299,6 +330,15 @@ static NSInteger const kSectionIndexActivity   = 3;
     }];
 }
 
+- (UILabel *)_createButtonLabel {
+    return ({
+        UILabel *v = [[UILabel alloc] init];
+        v.font = [UIFont systemFontOfSize:15];
+        v.textColor = k_COLOR_MAROOM;
+        v;
+    });
+}
+
 #pragma mark - private property methons
 
 - (UIView *)headerView {
@@ -316,29 +356,71 @@ static NSInteger const kSectionIndexActivity   = 3;
     return _bannerView;
 }
 
+- (UIImageView *)leftImageView {
+    if (!_leftImageView) {
+        _leftImageView = [[UIImageView alloc] init];
+        _leftImageView.image = [UIImage imageNamed:@"mainpage_market_icon"];
+    }
+    return _leftImageView;
+}
+
+- (UILabel *)leftLabel {
+    if (!_leftLabel) {
+        _leftLabel = [self _createButtonLabel];
+        _leftLabel.text = @"集市";
+    }
+    return _leftLabel;
+}
+
 - (UIButton *)leftButton {
     if (!_leftButton) {
         _leftButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        _leftButton.backgroundColor = [UIColor greenColor];
-        [_leftButton setTitle:@"集市" forState:UIControlStateNormal];
     }
     return _leftButton;
+}
+
+- (UIImageView *)middleImageView {
+    if (!_middleImageView) {
+        _middleImageView = [[UIImageView alloc] init];
+        _middleImageView.image = [UIImage imageNamed:@"mainpage_forwardbuy_icon"];
+    }
+    return _middleImageView;
+}
+
+- (UILabel *)middleLabel {
+    if (!_middleLabel) {
+        _middleLabel = [self _createButtonLabel];
+        _middleLabel.text = @"预购";
+    }
+    return _middleLabel;
 }
 
 - (UIButton *)middleButton {
     if (!_middleButton) {
         _middleButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        _middleButton.backgroundColor = [UIColor greenColor];
-        [_middleButton setTitle:@"预购" forState:UIControlStateNormal];
     }
     return _middleButton;
+}
+
+- (UIImageView *)rightImageView {
+    if (!_rightImageView) {
+        _rightImageView = [[UIImageView alloc] init];
+        _rightImageView.image = [UIImage imageNamed:@"mainpage_right_icon"];
+    }
+    return _rightImageView;
+}
+
+- (UILabel *)rightLabel {
+    if (!_rightLabel) {
+        _rightLabel = [self _createButtonLabel];
+        _rightLabel.text = @"课堂";
+    }
+    return _rightLabel;
 }
 
 - (UIButton *)rightButton {
     if (!_rightButton) {
         _rightButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        _rightButton.backgroundColor = [UIColor greenColor];
-        [_rightButton setTitle:@"课堂" forState:UIControlStateNormal];
     }
     return _rightButton;
 }
@@ -351,6 +433,17 @@ static NSInteger const kSectionIndexActivity   = 3;
     return _adView;
 }
 
+- (UIBarButtonItem *)userButtonItem {
+    if (!_userButtonItem) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(0, 0, 26, 44);
+        [btn setImage:[UIImage imageNamed:@"mainpage_user_icon_n"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"mainpage_user_icon_h"] forState:UIControlStateHighlighted];
+        _userButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    }
+    return _userButtonItem;
+}
+
 - (UIView *)fixView {
     if (!_fixView) {
         _fixView = [[UIView alloc] init];
@@ -361,9 +454,9 @@ static NSInteger const kSectionIndexActivity   = 3;
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.headerReferenceSize = CGSizeMake(0, 40);
+        layout.headerReferenceSize = CGSizeMake(0, [MainPageCollectionHeaderView viewHeight]);
         CGFloat cellWidth = ([UIApplication sharedApplication].keyWindow.bounds.size.width - kCellMargin * 3) / 2.0;
-        layout.itemSize = CGSizeMake(cellWidth, cellWidth + 50);
+        layout.itemSize = CGSizeMake(cellWidth, cellWidth * kMainPageCollectionCellImageHeightScale + 42);
         layout.sectionInset = UIEdgeInsetsMake(0, kCellMargin, kCellMargin, kCellMargin);
         layout.minimumLineSpacing = kCellMargin;
         

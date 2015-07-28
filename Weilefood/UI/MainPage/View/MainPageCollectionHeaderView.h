@@ -16,4 +16,11 @@
 /// "全部"按钮回调
 @property (nonatomic, copy) void (^allButtonActionBlock)();
 
+/**
+ *  展示所需要的高度
+ *
+ *  @return
+ */
++ (NSInteger)viewHeight;
+
 @end

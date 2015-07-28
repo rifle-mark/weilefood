@@ -51,14 +51,14 @@
 - (void)_makeConstraints {
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.contentView);
-        make.height.equalTo(self.imageView.mas_width);
+        make.height.equalTo(self.imageView.mas_width).multipliedBy(kMainPageCollectionCellImageHeightScale);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.imageView.mas_bottom).offset(5);
+        make.top.equalTo(self.imageView.mas_bottom).offset(8);
         make.left.right.equalTo(self.contentView);
     }];
     [self.moneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleLabel.mas_baseline).offset(5);
+        make.top.equalTo(self.titleLabel.mas_baseline).offset(4);
         make.left.right.equalTo(self.contentView);
     }];
 }
@@ -77,6 +77,8 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
+        _titleLabel.font = [UIFont systemFontOfSize:13];
+        _titleLabel.textColor = k_COLOR_DIMGRAY;
     }
     return _titleLabel;
 }
@@ -84,7 +86,8 @@
 - (UILabel *)moneyLabel {
     if (!_moneyLabel) {
         _moneyLabel = [[UILabel alloc] init];
-        _moneyLabel.textColor = [UIColor yellowColor];
+        _moneyLabel.font = [UIFont boldSystemFontOfSize:13];
+        _moneyLabel.textColor = k_COLOR_GOLDENROD;
     }
     return _moneyLabel;
 }

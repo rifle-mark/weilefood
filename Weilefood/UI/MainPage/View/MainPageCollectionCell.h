@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+/// Cell中图片高度=图片宽度*此数据
+static CGFloat const kMainPageCollectionCellImageHeightScale = 0.788;
+
 /// 首页CollectionCell
 @interface MainPageCollectionCell : UICollectionViewCell
 
