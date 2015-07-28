@@ -24,4 +24,13 @@
  */
 + (void)showErrorWithMessage:(NSString *)message;
 
+/**
+ *  显示正在加载消息
+ *
+ *  @param message 消息内容。可以为nil
+ */
++ (void)showLoadingWithMessage:(NSString *)message;
++ (void)hideLoading;
+
+
 @end
