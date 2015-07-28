@@ -21,6 +21,9 @@
 #define k_COLOR_DARKGRAY        RGB(208, 208, 208)
 #define k_COLOR_MAROOM          RGB(64, 64, 64)
 #define k_COLOR_DIMGRAY         RGB(91, 91, 91)
+#define k_COLOR_MEDIUMTURQUOISE RGB(23, 177, 167)
+#define k_COLOR_SLATEGRAY       RGB(109, 109, 109)
+#define k_COLOR_TEAL            RGB(5, 107, 101)
 #define k_COLOR_CLEAR           [UIColor clearColor]
 #define k_COLOR_WHITE           [UIColor whiteColor]
 #define k_COLOR_BLACK           [UIColor blackColor]

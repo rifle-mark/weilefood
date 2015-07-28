@@ -32,6 +32,7 @@
 
 #import "NSString+Ext.h"
 #import "UIScrollView+Keyboard.h"
+#import "UINavigationController+UserBarButtonItem.h"
 #import "MBProgressHUD+Message.h"
 
 #endif

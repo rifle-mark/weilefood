@@ -11,11 +11,12 @@
 
 @interface MarketIndexPageVC ()
 
+@property (nonatomic, strong) UIBarButtonItem *searchButtonItem;
+
 @property (nonatomic, strong) UIView   *channelsView;
 @property (nonatomic, strong) UIButton *channelButton1;
 @property (nonatomic, strong) UIButton *channelButton2;
 @property (nonatomic, strong) UIButton *channelButton3;
-@property (nonatomic, strong) UILabel  *arrowLabel;
 
 @property (nonatomic, strong) UIView   *childChannelsView;
 @property (nonatomic, strong) UIButton *childChannelAllButton;
@@ -45,8 +46,8 @@ static NSString *const kCellIdentifier = @"MYCELL";
     [super viewDidLoad];
     self.title = @"集市";
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItems = @[[self.navigationController createUserBarButtonItem], self.searchButtonItem];
     
-    [self.channelButton1 addSubview:self.arrowLabel];
     [self.channelsView addSubview:self.channelButton1];
     [self.channelsView addSubview:self.channelButton2];
     [self.channelsView addSubview:self.channelButton3];
@@ -83,7 +84,8 @@ static NSString *const kCellIdentifier = @"MYCELL";
     }];
     
     [self.channelButton1 mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.bottom.equalTo(self.channelsView);
+        make.top.equalTo(self.channelsView).offset(1);
+        make.left.bottom.equalTo(self.channelsView);
         make.width.equalTo(self.channelButton2);
     }];
     [self.channelButton2 mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -94,9 +96,6 @@ static NSString *const kCellIdentifier = @"MYCELL";
         make.top.bottom.width.equalTo(self.channelButton2);
         make.left.equalTo(self.channelButton2.mas_right);
         make.right.equalTo(self.channelsView);
-    }];
-    [self.arrowLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.channelButton1).centerOffset(CGPointMake(30, 0));
     }];
     
     [self.childChannelAllButton mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -148,12 +147,14 @@ static NSString *const kCellIdentifier = @"MYCELL";
     if (animated) {
         [UIView animateWithDuration:0.3 animations:^{
             self.isShowChildChannelsView = isShowChildChannelsView;
+            self.channelButton1.imageView.transform = isShowChildChannelsView ? CGAffineTransformMakeRotation(M_PI) : CGAffineTransformIdentity;
             [self.view setNeedsLayout];
             [self.view layoutIfNeeded];
         }];
     }
     else {
         self.isShowChildChannelsView = isShowChildChannelsView;
+        self.channelButton1.imageView.transform = isShowChildChannelsView ? CGAffineTransformMakeRotation(M_PI) : CGAffineTransformIdentity;
         [self.view setNeedsLayout];
     }
 }
@@ -210,21 +211,51 @@ static NSString *const kCellIdentifier = @"MYCELL";
 //    }];
 }
 
+- (void)_setTextColorWithChannelButton:(UIButton *)button isSelected:(BOOL)isSelected {
+    [button setTitleColor:isSelected ? k_COLOR_THEME_NAVIGATIONBAR_TEXT : k_COLOR_TEAL forState:UIControlStateNormal];
+}
+
+- (UIButton *)_createChannelButton {
+    return ({
+        UIButton *v = [UIButton buttonWithType:UIButtonTypeCustom];
+        v.backgroundColor = k_COLOR_THEME_NAVIGATIONBAR;
+        v.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+        v;
+    });
+}
+
 #pragma mark - private property methons
+
+- (UIBarButtonItem *)searchButtonItem {
+    if (!_searchButtonItem) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(0, 0, 44, 44);
+        [btn setImage:[UIImage imageNamed:@"market_search_icon_n"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"market_search_icon_n"] forState:UIControlStateHighlighted];
+//        [btn addTarget:self action:@selector(_userAction) forControlEvents:UIControlEventTouchUpInside];
+        _searchButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    }
+    return _searchButtonItem;
+}
 
 - (UIView *)channelsView {
     if (!_channelsView) {
         _channelsView = [[UIView alloc] init];
-        _channelsView.backgroundColor = k_COLOR_THEME_NAVIGATIONBAR;
+        _channelsView.backgroundColor = k_COLOR_MEDIUMTURQUOISE;
     }
     return _channelsView;
 }
 
 - (UIButton *)channelButton1 {
     if (!_channelButton1) {
-        _channelButton1 = [UIButton buttonWithType:UIButtonTypeSystem];
+        _channelButton1 = [self _createChannelButton];
         [_channelButton1 setTitle:@"优选" forState:UIControlStateNormal];
-        [_channelButton1 setTitleColor:k_COLOR_THEME_NAVIGATIONBAR_TEXT forState:UIControlStateNormal];
+        [self _setTextColorWithChannelButton:_channelButton1 isSelected:YES];
+        [_channelButton1 setImage:[UIImage imageNamed:@"market_arrow_down"] forState:UIControlStateNormal];
+        [_channelButton1 setImage:[UIImage imageNamed:@"market_arrow_down"] forState:UIControlStateHighlighted];
+        [_channelButton1 sizeToFit];
+        _channelButton1.titleEdgeInsets = UIEdgeInsetsMake(0, -_channelButton1.imageView.frame.size.width + 5, 0, _channelButton1.imageView.frame.size.width - 5);
+        _channelButton1.imageEdgeInsets = UIEdgeInsetsMake(0, _channelButton1.titleLabel.frame.size.width, 0, -_channelButton1.titleLabel.frame.size.width);
         
         _weak(self);
         [_channelButton1 addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
@@ -237,29 +268,20 @@ static NSString *const kCellIdentifier = @"MYCELL";
 
 - (UIButton *)channelButton2 {
     if (!_channelButton2) {
-        _channelButton2 = [UIButton buttonWithType:UIButtonTypeSystem];
+        _channelButton2 = [self _createChannelButton];
         [_channelButton2 setTitle:@"洋货" forState:UIControlStateNormal];
-        [_channelButton2 setTitleColor:k_COLOR_THEME_NAVIGATIONBAR_TEXT forState:UIControlStateNormal];
+        [self _setTextColorWithChannelButton:_channelButton2 isSelected:NO];
     }
     return _channelButton2;
 }
 
 - (UIButton *)channelButton3 {
     if (!_channelButton3) {
-        _channelButton3 = [UIButton buttonWithType:UIButtonTypeSystem];
+        _channelButton3 = [self _createChannelButton];
         [_channelButton3 setTitle:@"餐具" forState:UIControlStateNormal];
-        [_channelButton3 setTitleColor:k_COLOR_THEME_NAVIGATIONBAR_TEXT forState:UIControlStateNormal];
+        [self _setTextColorWithChannelButton:_channelButton3 isSelected:NO];
     }
     return _channelButton3;
-}
-
-- (UILabel *)arrowLabel {
-    if (!_arrowLabel) {
-        _arrowLabel = [[UILabel alloc] init];
-        _arrowLabel.text = @"⌄";
-        _arrowLabel.textColor = k_COLOR_THEME_NAVIGATIONBAR_TEXT;
-    }
-    return _arrowLabel;
 }
 
 - (UIView *)childChannelsView {
@@ -305,7 +327,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (UIButton *)childChannelButton4 {
     if (!_childChannelButton4) {
         _childChannelButton4 = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_childChannelButton4 setTitle:@"精选菜品" forState:UIControlStateNormal];
+        [_childChannelButton4 setTitle:@"精选茶品" forState:UIControlStateNormal];
     }
     return _childChannelButton4;
 }
@@ -313,7 +335,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _tableView.estimatedRowHeight = 150;
+        _tableView.estimatedRowHeight = 340;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[MarketProductCell class] forCellReuseIdentifier:kCellIdentifier];
         
@@ -328,6 +350,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
             cell.price = 123.12;
             cell.actionCount = 10;
             cell.commentCount = 9;
+            cell.tagType = path.row % 5;
             return cell;
         }];
     }

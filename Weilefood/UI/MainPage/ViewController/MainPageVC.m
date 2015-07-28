@@ -30,7 +30,6 @@
 @property (nonatomic, strong) UIButton    *rightButton;
 @property (nonatomic, strong) UIView      *adView;
 
-@property (nonatomic, strong) UIBarButtonItem  *userButtonItem;
 @property (nonatomic, strong) UIView           *fixView;
 @property (nonatomic, strong) UICollectionView *collectionView;
 
@@ -63,7 +62,7 @@ static NSInteger const kSectionIndexActivity   = 3;
 //    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:22]};
     self.title = @"味了";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItem = self.userButtonItem;
+    self.navigationItem.rightBarButtonItem = [self.navigationController createUserBarButtonItem];
     
     
     NSArray *array = @[self.bannerView,
@@ -431,17 +430,6 @@ static NSInteger const kSectionIndexActivity   = 3;
         _adView.backgroundColor = [UIColor yellowColor];
     }
     return _adView;
-}
-
-- (UIBarButtonItem *)userButtonItem {
-    if (!_userButtonItem) {
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(0, 0, 26, 44);
-        [btn setImage:[UIImage imageNamed:@"mainpage_user_icon_n"] forState:UIControlStateNormal];
-        [btn setImage:[UIImage imageNamed:@"mainpage_user_icon_h"] forState:UIControlStateHighlighted];
-        _userButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    }
-    return _userButtonItem;
 }
 
 - (UIView *)fixView {

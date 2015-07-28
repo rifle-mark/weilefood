@@ -139,6 +139,8 @@
 		24CDCC1D1B4F792E00BDE8CB /* UIControl+GCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCBD31B4F792E00BDE8CB /* UIControl+GCEvent.m */; };
 		24CDCC1E1B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCBD61B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m */; };
 		24CDCC2C1B4FA34B00BDE8CB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24CDCC2B1B4FA34B00BDE8CB /* CoreData.framework */; };
+		24D55DE31B67EA1100EC6373 /* UINavigationController+UserBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D55DE21B67EA1100EC6373 /* UINavigationController+UserBarButtonItem.m */; };
+		24D55DE61B67EB2400EC6373 /* UIBarButtonItem+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */; };
 		24E66DBF1B62717A0081324A /* UIScrollView+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DBE1B62717A0081324A /* UIScrollView+Keyboard.m */; };
 		24E66DC21B6271810081324A /* MBProgressHUD+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DC11B6271810081324A /* MBProgressHUD+Message.m */; };
 		24E66DC41B6271870081324A /* MBProgressHUDImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24E66DC31B6271870081324A /* MBProgressHUDImage.xcassets */; };
@@ -425,6 +427,10 @@
 		24CDCBD61B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+GCAction.m"; sourceTree = "<group>"; };
 		24CDCC1F1B4F7B7000BDE8CB /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		24CDCC2B1B4FA34B00BDE8CB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		24D55DE11B67EA1100EC6373 /* UINavigationController+UserBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+UserBarButtonItem.h"; sourceTree = "<group>"; };
+		24D55DE21B67EA1100EC6373 /* UINavigationController+UserBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+UserBarButtonItem.m"; sourceTree = "<group>"; };
+		24D55DE41B67EB2400EC6373 /* UIBarButtonItem+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Ext.h"; sourceTree = "<group>"; };
+		24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Ext.m"; sourceTree = "<group>"; };
 		24E66DBD1B62717A0081324A /* UIScrollView+Keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Keyboard.h"; sourceTree = "<group>"; };
 		24E66DBE1B62717A0081324A /* UIScrollView+Keyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Keyboard.m"; sourceTree = "<group>"; };
 		24E66DC01B6271810081324A /* MBProgressHUD+Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Message.h"; sourceTree = "<group>"; };
@@ -856,6 +862,10 @@
 				24E66DC11B6271810081324A /* MBProgressHUD+Message.m */,
 				24E66DBD1B62717A0081324A /* UIScrollView+Keyboard.h */,
 				24E66DBE1B62717A0081324A /* UIScrollView+Keyboard.m */,
+				24D55DE11B67EA1100EC6373 /* UINavigationController+UserBarButtonItem.h */,
+				24D55DE21B67EA1100EC6373 /* UINavigationController+UserBarButtonItem.m */,
+				24D55DE41B67EB2400EC6373 /* UIBarButtonItem+Ext.h */,
+				24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1415,10 +1425,12 @@
 				24B8C06A1B5242BC001C5722 /* AGIPCGridCell.m in Sources */,
 				24C792681B666B4E007DCB30 /* MarketProductCell.m in Sources */,
 				24CDCBEC1B4F792E00BDE8CB /* UIScrollViewDelegateImplementationProxy.m in Sources */,
+				24D55DE31B67EA1100EC6373 /* UINavigationController+UserBarButtonItem.m in Sources */,
 				24CDCBF71B4F792E00BDE8CB /* UIImagePickerController+GCDelegateBlock.m in Sources */,
 				2482E63B1B5E8285005815E8 /* WLOrderProductModel.m in Sources */,
 				249A73D11B569D4100F46F3D /* WLUploadImageModel.m in Sources */,
 				24CDCC111B4F792E00BDE8CB /* UITabBarController+GCDelegate.m in Sources */,
+				24D55DE61B67EB2400EC6373 /* UIBarButtonItem+Ext.m in Sources */,
 				24B8C06B1B5242BC001C5722 /* AGIPCGridItem.m in Sources */,
 				24CDCC1C1B4F792E00BDE8CB /* NSTimer+GCBlock.m in Sources */,
 				2482E6321B5E7C92005815E8 /* WLOrderDeliverModel.m in Sources */,
