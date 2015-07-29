@@ -24,4 +24,11 @@
  */
 - (NSString *)base64DecodedString;
 
+/**
+ *  获取当前字符串内容的小写32位md5码
+ *
+ *  @return 小写32位md5码
+ */
+- (NSString *)md5string;
+
 @end

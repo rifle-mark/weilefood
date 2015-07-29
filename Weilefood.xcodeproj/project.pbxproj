@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		240D79A51B5FECFB007E2E43 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240D79A41B5FECFB007E2E43 /* LoginVC.m */; };
+		240FB7031B69025900DF5CE4 /* UIButton+ImagePosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 240FB7021B69025900DF5CE4 /* UIButton+ImagePosition.m */; };
 		245936A31B5A2C62008FFAB8 /* WLServerHelper+Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A21B5A2C62008FFAB8 /* WLServerHelper+Channel.m */; };
 		245936A61B5A2ECF008FFAB8 /* WLServerHelper+Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A51B5A2ECF008FFAB8 /* WLServerHelper+Product.m */; };
 		245936A91B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A81B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m */; };
@@ -154,6 +155,9 @@
 		060F4AADF217CE753F362849 /* Pods-Weilefood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weilefood.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weilefood/Pods-Weilefood.release.xcconfig"; sourceTree = "<group>"; };
 		240D79A31B5FECFB007E2E43 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		240D79A41B5FECFB007E2E43 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		240FB7001B69024F00DF5CE4 /* ViewFrameMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewFrameMacro.h; sourceTree = "<group>"; };
+		240FB7011B69025900DF5CE4 /* UIButton+ImagePosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+ImagePosition.h"; sourceTree = "<group>"; };
+		240FB7021B69025900DF5CE4 /* UIButton+ImagePosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+ImagePosition.m"; sourceTree = "<group>"; };
 		245936A11B5A2C62008FFAB8 /* WLServerHelper+Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Channel.h"; sourceTree = "<group>"; };
 		245936A21B5A2C62008FFAB8 /* WLServerHelper+Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Channel.m"; sourceTree = "<group>"; };
 		245936A41B5A2ECF008FFAB8 /* WLServerHelper+Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Product.h"; sourceTree = "<group>"; };
@@ -860,6 +864,8 @@
 				246F07811B56A6210086CD28 /* NSString+Ext.m */,
 				24E66DC01B6271810081324A /* MBProgressHUD+Message.h */,
 				24E66DC11B6271810081324A /* MBProgressHUD+Message.m */,
+				240FB7011B69025900DF5CE4 /* UIButton+ImagePosition.h */,
+				240FB7021B69025900DF5CE4 /* UIButton+ImagePosition.m */,
 				24E66DBD1B62717A0081324A /* UIScrollView+Keyboard.h */,
 				24E66DBE1B62717A0081324A /* UIScrollView+Keyboard.m */,
 				24D55DE11B67EA1100EC6373 /* UINavigationController+UserBarButtonItem.h */,
@@ -891,6 +897,7 @@
 				24CDCB371B4F792D00BDE8CB /* VendorMacro.h */,
 				24CDCB361B4F792D00BDE8CB /* UtilsMacro.h */,
 				24C32ECE1B6141D200D509A4 /* NotificationMacro.h */,
+				240FB7001B69024F00DF5CE4 /* ViewFrameMacro.h */,
 			);
 			path = Macro;
 			sourceTree = "<group>";
@@ -1332,6 +1339,7 @@
 				24CDCC1A1B4F792E00BDE8CB /* NSObject+GCKVO.m in Sources */,
 				24CDCC0F1B4F792E00BDE8CB /* UISearchBar+GCDelegate.m in Sources */,
 				24CAC4331B57E9D800E3C4D5 /* WLServerHelper+Share.m in Sources */,
+				240FB7031B69025900DF5CE4 /* UIButton+ImagePosition.m in Sources */,
 				24CDCBE11B4F792E00BDE8CB /* AVAudioPlayer+GCDelegateBlock.m in Sources */,
 				24CDCC0E1B4F792E00BDE8CB /* UIScrollView+GCDelegate.m in Sources */,
 				2482E6381B5E7CB1005815E8 /* WLOrderDetailModel.m in Sources */,

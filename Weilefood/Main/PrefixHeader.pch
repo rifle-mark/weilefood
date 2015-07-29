@@ -28,9 +28,12 @@
 #import "ColorMacro.h"
 #import "UtilsMacro.h"
 #import "VendorMacro.h"
+#import "ViewFrameMacro.h"
 #import "NotificationMacro.h"
 
 #import "NSString+Ext.h"
+#import "UIBarButtonItem+Ext.h"
+#import "UIButton+ImagePosition.h"
 #import "UIScrollView+Keyboard.h"
 #import "UINavigationController+UserBarButtonItem.h"
 #import "MBProgressHUD+Message.h"
