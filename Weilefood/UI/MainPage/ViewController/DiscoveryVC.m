@@ -391,6 +391,11 @@ static NSInteger const kSectionIndexActivity   = 3;
 - (UIButton *)leftButton {
     if (!_leftButton) {
         _leftButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        _weak(self);
+        [_leftButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            _strong_check(self);
+            [self.navigationController pushViewController:[[MarketIndexPageVC alloc] init] animated:YES];
+        }];
     }
     return _leftButton;
 }

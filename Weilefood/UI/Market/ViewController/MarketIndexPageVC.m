@@ -9,6 +9,8 @@
 #import "MarketIndexPageVC.h"
 #import "MarketProductCell.h"
 
+#import "MarketSearchVC.h"
+
 @interface MarketIndexPageVC ()
 
 @property (nonatomic, strong) UIBarButtonItem *searchButtonItem;
@@ -231,8 +233,11 @@ static NSString *const kCellIdentifier = @"MYCELL";
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.frame = CGRectMake(0, 0, 44, 44);
         [btn setImage:[UIImage imageNamed:@"market_search_icon_n"] forState:UIControlStateNormal];
-        [btn setImage:[UIImage imageNamed:@"market_search_icon_n"] forState:UIControlStateHighlighted];
-//        [btn addTarget:self action:@selector(_userAction) forControlEvents:UIControlEventTouchUpInside];
+        _weak(self);
+        [btn addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            _strong_check(self);
+            [self.navigationController pushViewController:[[MarketSearchVC alloc] init] animated:YES];
+        }];
         _searchButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     }
     return _searchButtonItem;

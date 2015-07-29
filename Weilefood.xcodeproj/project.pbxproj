@@ -11,6 +11,7 @@
 		240FB7031B69025900DF5CE4 /* UIButton+ImagePosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 240FB7021B69025900DF5CE4 /* UIButton+ImagePosition.m */; };
 		240FB7061B69063900DF5CE4 /* DiscoveryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240FB7051B69063900DF5CE4 /* DiscoveryVC.m */; };
 		240FB7091B690D5B00DF5CE4 /* SharedAllListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240FB7081B690D5B00DF5CE4 /* SharedAllListVC.m */; };
+		240FB70C1B6921F800DF5CE4 /* MarketSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240FB70B1B6921F800DF5CE4 /* MarketSearchVC.m */; };
 		245936A31B5A2C62008FFAB8 /* WLServerHelper+Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A21B5A2C62008FFAB8 /* WLServerHelper+Channel.m */; };
 		245936A61B5A2ECF008FFAB8 /* WLServerHelper+Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A51B5A2ECF008FFAB8 /* WLServerHelper+Product.m */; };
 		245936A91B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A81B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m */; };
@@ -164,6 +165,8 @@
 		240FB7051B69063900DF5CE4 /* DiscoveryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryVC.m; sourceTree = "<group>"; };
 		240FB7071B690D5B00DF5CE4 /* SharedAllListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedAllListVC.h; sourceTree = "<group>"; };
 		240FB7081B690D5B00DF5CE4 /* SharedAllListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedAllListVC.m; sourceTree = "<group>"; };
+		240FB70A1B6921F800DF5CE4 /* MarketSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketSearchVC.h; sourceTree = "<group>"; };
+		240FB70B1B6921F800DF5CE4 /* MarketSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketSearchVC.m; sourceTree = "<group>"; };
 		245936A11B5A2C62008FFAB8 /* WLServerHelper+Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Channel.h"; sourceTree = "<group>"; };
 		245936A21B5A2C62008FFAB8 /* WLServerHelper+Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Channel.m"; sourceTree = "<group>"; };
 		245936A41B5A2ECF008FFAB8 /* WLServerHelper+Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Product.h"; sourceTree = "<group>"; };
@@ -591,6 +594,8 @@
 			children = (
 				249EF30B1B64BEDA00AAEBE0 /* MarketIndexPageVC.h */,
 				249EF30C1B64BEDA00AAEBE0 /* MarketIndexPageVC.m */,
+				240FB70A1B6921F800DF5CE4 /* MarketSearchVC.h */,
+				240FB70B1B6921F800DF5CE4 /* MarketSearchVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1369,6 +1374,7 @@
 				240FB7091B690D5B00DF5CE4 /* SharedAllListVC.m in Sources */,
 				24B8C0661B5242BC001C5722 /* AGImagePickerController.m in Sources */,
 				24CDCBFD1B4F792E00BDE8CB /* UISearchBar+GCDelegateBlock.m in Sources */,
+				240FB70C1B6921F800DF5CE4 /* MarketSearchVC.m in Sources */,
 				24CDCBF61B4F792E00BDE8CB /* UIGestureRecognizer+GCDelegateBlock.m in Sources */,
 				24CDCC1B1B4F792E00BDE8CB /* NSObject+GCNotificationObserver.m in Sources */,
 				24CDCBE81B4F792E00BDE8CB /* UINavigationBarDelegateImpletationProxy.m in Sources */,

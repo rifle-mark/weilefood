@@ -11,15 +11,15 @@
 /// Cell上要显示的标签
 typedef NS_ENUM(NSInteger, MarketProductCellTag) {
     /// 无
-    MarketProductCellTagNone,
+    MarketProductCellTagNone = 0,
     /// 精选茶品
-    MarketProductCellTagJXCP,
+    MarketProductCellTagJXCP = 1,
     /// 粮油调料
-    MarketProductCellTagLYTL,
-    /// 特色美食
-    MarketProductCellTagTSMS,
+    MarketProductCellTagLYTL = 2,
     /// 养生煲汤
-    MarketProductCellTagYSBT,
+    MarketProductCellTagYSBT = 3,
+    /// 特色美食
+    MarketProductCellTagTSMS = 4,
 };
 
 /// 集市列表商品Cell
