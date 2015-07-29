@@ -26,10 +26,13 @@
     [networkActivityLogger startLogging];
     // UIViewController生命期日志，方便排查未释放的界面
     [UIViewController aspect_hookSelector:NSSelectorFromString(@"init") withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo) {
-        NSLog(@"%@ >>> init", aspectInfo.instance);
+        NSLog(@"%@ 被创建", aspectInfo.instance);
+    } error:NULL];
+    [UINavigationController aspect_hookSelector:NSSelectorFromString(@"initWithRootViewController:") withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo) {
+        NSLog(@"%@ 被创建", aspectInfo.instance);
     } error:NULL];
     [UIViewController aspect_hookSelector:NSSelectorFromString(@"dealloc") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo) {
-        NSLog(@"%@ <<< dealloc", aspectInfo.instance);
+        NSLog(@"%@ 已释放", aspectInfo.instance);
     } error:NULL];
 #endif
     // 友盟统计
