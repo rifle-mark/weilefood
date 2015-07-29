@@ -116,7 +116,6 @@
     [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nameLabel);
         make.top.equalTo(self.nameLabel.mas_baseline).offset(7);
-        make.height.equalTo(@(self.priceLabel.font.lineHeight));
     }];
     
     [self.commentCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
