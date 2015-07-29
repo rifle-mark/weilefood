@@ -1,5 +1,5 @@
 //
-//  MainPageCollectionCell.h
+//  DiscoveryCollectionCell.h
 //  Weilefood
 //
 //  Created by kelei on 15/7/26.
@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 /// Cell中图片高度=图片宽度*此数据
-static CGFloat const kMainPageCollectionCellImageHeightScale = 0.788;
+static CGFloat const kDiscoveryCollectionCellImageHeightScale = 0.788;
 
 /// 首页CollectionCell
-@interface MainPageCollectionCell : UICollectionViewCell
+@interface DiscoveryCollectionCell : UICollectionViewCell
 
 /// 图片URL
 @property (nonatomic, copy  ) NSString *imageUrl;

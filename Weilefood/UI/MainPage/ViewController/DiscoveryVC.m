@@ -1,21 +1,22 @@
 //
-//  MainPageVC.m
+//  DiscoveryVC.m
 //  Weilefood
 //
-//  Created by kelei on 15/7/25.
+//  Created by kelei on 15/7/29.
 //  Copyright (c) 2015年 kelei. All rights reserved.
 //
 
-#import "MainPageVC.h"
-#import "MainPageCollectionHeaderView.h"
-#import "MainPageCollectionCell.h"
+#import "DiscoveryVC.h"
+
+#import "DiscoveryCollectionHeaderView.h"
+#import "DiscoveryCollectionCell.h"
 
 #import "MarketIndexPageVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
-@interface MainPageVC () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface DiscoveryVC () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) UIView      *headerView;
 @property (nonatomic, strong) UIView      *bannerView;
@@ -55,15 +56,14 @@ static NSInteger const kSectionIndexForwardBuy = 1;
 static NSInteger const kSectionIndexVideo      = 2;
 static NSInteger const kSectionIndexActivity   = 3;
 
-@implementation MainPageVC
+@implementation DiscoveryVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:22]};
-    self.title = @"味了";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItem = [self.navigationController createUserBarButtonItem];
-    
+    self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"发现"
+                                                    image:[UIImage imageNamed:@"discovery_baritem_icon_n"]
+                                            selectedImage:[UIImage imageNamed:@"discovery_baritem_icon_h"]];
     
     NSArray *array = @[self.bannerView,
                        self.leftImageView, self.leftLabel, self.leftButton,
@@ -88,7 +88,7 @@ static NSInteger const kSectionIndexActivity   = 3;
     [super viewDidLayoutSubviews];
     
     [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0));
+        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(self.topLayoutGuide.length, 0, self.bottomLayoutGuide.length, 0));
     }];
     [self.headerView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
@@ -168,7 +168,7 @@ static NSInteger const kSectionIndexActivity   = 3;
     if (![kind isEqualToString:UICollectionElementKindSectionHeader]) {
         return nil;
     }
-    MainPageCollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+    DiscoveryCollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
                                                                                   withReuseIdentifier:kHeaderIdentifier
                                                                                          forIndexPath:indexPath];
     _weak(self);
@@ -247,8 +247,8 @@ static NSInteger const kSectionIndexActivity   = 3;
             break;
     }
     
-    MainPageCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier
-                                                                             forIndexPath:indexPath];
+    DiscoveryCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier
+                                                                              forIndexPath:indexPath];
     cell.imageUrl = imageUrl;
     cell.title = title;
     cell.money = money;
@@ -358,7 +358,7 @@ static NSInteger const kSectionIndexActivity   = 3;
 - (UIImageView *)leftImageView {
     if (!_leftImageView) {
         _leftImageView = [[UIImageView alloc] init];
-        _leftImageView.image = [UIImage imageNamed:@"mainpage_market_icon"];
+        _leftImageView.image = [UIImage imageNamed:@"discovery_market_icon"];
     }
     return _leftImageView;
 }
@@ -381,7 +381,7 @@ static NSInteger const kSectionIndexActivity   = 3;
 - (UIImageView *)middleImageView {
     if (!_middleImageView) {
         _middleImageView = [[UIImageView alloc] init];
-        _middleImageView.image = [UIImage imageNamed:@"mainpage_forwardbuy_icon"];
+        _middleImageView.image = [UIImage imageNamed:@"discovery_forwardbuy_icon"];
     }
     return _middleImageView;
 }
@@ -404,7 +404,7 @@ static NSInteger const kSectionIndexActivity   = 3;
 - (UIImageView *)rightImageView {
     if (!_rightImageView) {
         _rightImageView = [[UIImageView alloc] init];
-        _rightImageView.image = [UIImage imageNamed:@"mainpage_right_icon"];
+        _rightImageView.image = [UIImage imageNamed:@"discovery_right_icon"];
     }
     return _rightImageView;
 }
@@ -442,9 +442,9 @@ static NSInteger const kSectionIndexActivity   = 3;
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.headerReferenceSize = CGSizeMake(0, [MainPageCollectionHeaderView viewHeight]);
+        layout.headerReferenceSize = CGSizeMake(0, [DiscoveryCollectionHeaderView viewHeight]);
         CGFloat cellWidth = ([UIApplication sharedApplication].keyWindow.bounds.size.width - kCellMargin * 3) / 2.0;
-        layout.itemSize = CGSizeMake(cellWidth, cellWidth * kMainPageCollectionCellImageHeightScale + 42);
+        layout.itemSize = CGSizeMake(cellWidth, cellWidth * kDiscoveryCollectionCellImageHeightScale + 42);
         layout.sectionInset = UIEdgeInsetsMake(0, kCellMargin, kCellMargin, kCellMargin);
         layout.minimumLineSpacing = kCellMargin;
         
@@ -453,8 +453,8 @@ static NSInteger const kSectionIndexActivity   = 3;
         _collectionView.delegate = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.contentInset = UIEdgeInsetsMake(kHeaderBannerHeight + kHeaderButtonHeight + kHeaderAdHeight, 0, 0, 0);
-        [_collectionView registerClass:[MainPageCollectionCell class] forCellWithReuseIdentifier:kCellIdentifier];
-        [_collectionView registerClass:[MainPageCollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kHeaderIdentifier];
+        [_collectionView registerClass:[DiscoveryCollectionCell class] forCellWithReuseIdentifier:kCellIdentifier];
+        [_collectionView registerClass:[DiscoveryCollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kHeaderIdentifier];
     }
     return _collectionView;
 }

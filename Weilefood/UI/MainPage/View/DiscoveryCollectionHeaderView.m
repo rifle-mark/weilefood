@@ -1,14 +1,14 @@
 //
-//  MainPageCollectionHeaderView.m
+//  DiscoveryCollectionHeaderView.m
 //  Weilefood
 //
 //  Created by kelei on 15/7/26.
 //  Copyright (c) 2015年 kelei. All rights reserved.
 //
 
-#import "MainPageCollectionHeaderView.h"
+#import "DiscoveryCollectionHeaderView.h"
 
-@interface MainPageCollectionHeaderView ()
+@interface DiscoveryCollectionHeaderView ()
 
 @property (nonatomic, strong) UIView   *lineView;
 @property (nonatomic, strong) UILabel  *titleLabel;
@@ -19,7 +19,7 @@
 static NSInteger const kLineHieght  = 8;
 static NSInteger const kTitleHeight = 45;
 
-@implementation MainPageCollectionHeaderView
+@implementation DiscoveryCollectionHeaderView
 
 + (NSInteger)viewHeight {
     return kLineHieght + kTitleHeight;
@@ -90,8 +90,8 @@ static NSInteger const kTitleHeight = 45;
         _allButton.titleLabel.font = [UIFont systemFontOfSize:13];
         [_allButton setTitle:@"全部" forState:UIControlStateNormal];
         [_allButton setTitleColor:k_COLOR_DARKGRAY forState:UIControlStateNormal];
-        [_allButton setImage:[UIImage imageNamed:@"mainpage_all_icon_n"] forState:UIControlStateNormal];
-        [_allButton setImage:[UIImage imageNamed:@"mainpage_all_icon_h"] forState:UIControlStateHighlighted];
+        [_allButton setImage:[UIImage imageNamed:@"discovery_all_icon_n"] forState:UIControlStateNormal];
+        [_allButton setImage:[UIImage imageNamed:@"discovery_all_icon_h"] forState:UIControlStateHighlighted];
         // 图标居右
         [_allButton sizeToFit];
         _allButton.titleEdgeInsets = UIEdgeInsetsMake(0, -_allButton.imageView.frame.size.width - 4, 0, _allButton.imageView.frame.size.width + 4);

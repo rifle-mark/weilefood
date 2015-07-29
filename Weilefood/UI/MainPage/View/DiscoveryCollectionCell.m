@@ -1,14 +1,14 @@
 //
-//  MainPageCollectionCell.m
+//  DiscoveryCollectionCell.m
 //  Weilefood
 //
 //  Created by kelei on 15/7/26.
 //  Copyright (c) 2015年 kelei. All rights reserved.
 //
 
-#import "MainPageCollectionCell.h"
+#import "DiscoveryCollectionCell.h"
 
-@interface MainPageCollectionCell ()
+@interface DiscoveryCollectionCell ()
 
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel     *titleLabel;
@@ -16,7 +16,7 @@
 
 @end
 
-@implementation MainPageCollectionCell
+@implementation DiscoveryCollectionCell
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -51,7 +51,7 @@
 - (void)_makeConstraints {
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.contentView);
-        make.height.equalTo(self.imageView.mas_width).multipliedBy(kMainPageCollectionCellImageHeightScale);
+        make.height.equalTo(self.imageView.mas_width).multipliedBy(kDiscoveryCollectionCellImageHeightScale);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.imageView.mas_bottom).offset(8);
