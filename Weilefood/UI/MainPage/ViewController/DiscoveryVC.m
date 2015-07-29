@@ -29,15 +29,16 @@
 @property (nonatomic, strong) UIImageView *rightImageView;
 @property (nonatomic, strong) UILabel     *rightLabel;
 @property (nonatomic, strong) UIButton    *rightButton;
-@property (nonatomic, strong) UIView      *adView;
+@property (nonatomic, strong) UIImageView *videoImageView;
 
 @property (nonatomic, strong) UIView           *fixView;
 @property (nonatomic, strong) UICollectionView *collectionView;
 
-@property (nonatomic, strong) NSArray *sectionDataProducts;
-@property (nonatomic, strong) NSArray *sectionDataForwardBuys;
-@property (nonatomic, strong) NSArray *sectionDataVideos;
-@property (nonatomic, strong) NSArray *sectionDataActivitys;
+@property (nonatomic, strong) WLVideoModel *videoData;
+@property (nonatomic, strong) NSArray      *sectionDataProducts;
+@property (nonatomic, strong) NSArray      *sectionDataForwardBuys;
+@property (nonatomic, strong) NSArray      *sectionDataVideos;
+@property (nonatomic, strong) NSArray      *sectionDataActivitys;
 
 @end
 
@@ -69,7 +70,7 @@ static NSInteger const kSectionIndexActivity   = 3;
                        self.leftImageView, self.leftLabel, self.leftButton,
                        self.middleImageView, self.middleLabel, self.middleButton,
                        self.rightImageView, self.rightLabel, self.rightButton,
-                       self.adView,
+                       self.videoImageView,
                        ];
     for (UIView *view in array) {
         [self.headerView addSubview:view];
@@ -131,9 +132,9 @@ static NSInteger const kSectionIndexActivity   = 3;
         }];
     }
     
-    [self.adView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.videoImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.middleButton.mas_bottom);
-        make.left.right.equalTo(self.adView.superview);
+        make.left.right.equalTo(self.videoImageView.superview);
         make.bottomMargin.equalTo(@0);
     }];
 }
@@ -259,6 +260,10 @@ static NSInteger const kSectionIndexActivity   = 3;
 
 - (void)_addObserve {
     _weak(self);
+    [self startObserveObject:self forKeyPath:@"videoData" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
+        _strong_check(self);
+        [self.videoImageView sd_setImageWithURL:[NSURL URLWithString:self.videoData.images]];
+    }];
     [self startObserveObject:self forKeyPath:@"sectionDataProducts" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
         [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:kSectionIndexProduct]];
@@ -279,6 +284,18 @@ static NSInteger const kSectionIndexActivity   = 3;
 
 - (void)_loadData {
     _weak(self);
+    [[WLServerHelper sharedInstance] video_getListWithPageIndex:1 pageSize:1 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
+        _strong_check(self);
+        if (error) {
+            DLog(@"%@", error);
+            return;
+        }
+        if (!apiInfo.isSuc) {
+            [MBProgressHUD showErrorWithMessage:apiInfo.message];
+            return;
+        }
+        self.videoData = [apiResult firstObject];
+    }];
     [[WLServerHelper sharedInstance] product_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         if (error) {
@@ -424,12 +441,12 @@ static NSInteger const kSectionIndexActivity   = 3;
     return _rightButton;
 }
 
-- (UIView *)adView {
-    if (!_adView) {
-        _adView = [[UIView alloc] init];
-        _adView.backgroundColor = [UIColor yellowColor];
+- (UIImageView *)videoImageView {
+    if (!_videoImageView) {
+        _videoImageView = [[UIImageView alloc] init];
+        _videoImageView.contentMode = UIViewContentModeScaleAspectFill;
     }
-    return _adView;
+    return _videoImageView;
 }
 
 - (UIView *)fixView {
