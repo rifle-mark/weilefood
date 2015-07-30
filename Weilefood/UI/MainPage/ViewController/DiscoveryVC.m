@@ -12,6 +12,7 @@
 #import "DiscoveryCollectionCell.h"
 
 #import "MarketIndexPageVC.h"
+#import "ForwardBuyListVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -185,7 +186,9 @@ static NSInteger const kSectionIndexActivity   = 3;
         case kSectionIndexForwardBuy: {
             headerView.title = @"预购";
             headerView.allButtonActionBlock = ^(){
-                [MBProgressHUD showErrorWithMessage:@"查看预购"];
+                _strong_check(self);
+                [self.navigationController pushViewController:[[ForwardBuyListVC alloc] init] animated:YES];
+                
             };
             break;
         }
@@ -419,6 +422,11 @@ static NSInteger const kSectionIndexActivity   = 3;
 - (UIButton *)middleButton {
     if (!_middleButton) {
         _middleButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        _weak(self);
+        [_middleButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            _strong_check(self);
+            [self.navigationController pushViewController:[[ForwardBuyListVC alloc] init] animated:YES];
+        }];
     }
     return _middleButton;
 }

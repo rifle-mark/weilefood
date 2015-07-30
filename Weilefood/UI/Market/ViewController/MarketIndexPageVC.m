@@ -69,6 +69,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
     
     [self.channelsView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.right.left.equalTo(self.view).insets(UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0));
+        make.height.equalTo(@37);
     }];
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.channelsView.mas_bottom);
@@ -131,18 +132,6 @@ static NSString *const kCellIdentifier = @"MYCELL";
 //        _strong_check(self);
 //        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:kSectionIndexProduct]];
 //    }];
-//    [self startObserveObject:self forKeyPath:@"sectionDataForwardBuys" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
-//        _strong_check(self);
-//        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:kSectionIndexForwardBuy]];
-//    }];
-//    [self startObserveObject:self forKeyPath:@"sectionDataVideos" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
-//        _strong_check(self);
-//        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:kSectionIndexVideo]];
-//    }];
-//    [self startObserveObject:self forKeyPath:@"sectionDataActivitys" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
-//        _strong_check(self);
-//        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:kSectionIndexActivity]];
-//    }];
 }
 
 - (void)setIsShowChildChannelsView:(BOOL)isShowChildChannelsView animated:(BOOL)animated {
@@ -161,7 +150,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
     }
 }
 
-- (void)_loadData {
+- (void)_loadLatestData {
 //    _weak(self);
 //    [[WLServerHelper sharedInstance] product_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
 //        _strong_check(self);
@@ -175,42 +164,10 @@ static NSString *const kCellIdentifier = @"MYCELL";
 //        }
 //        self.sectionDataProducts = apiResult;
 //    }];
-//    [[WLServerHelper sharedInstance] forwardBuy_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
-//        _strong_check(self);
-//        if (error) {
-//            DLog(@"%@", error);
-//            return;
-//        }
-//        if (!apiInfo.isSuc) {
-//            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-//            return;
-//        }
-//        self.sectionDataForwardBuys = apiResult;
-//    }];
-//    [[WLServerHelper sharedInstance] video_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
-//        _strong_check(self);
-//        if (error) {
-//            DLog(@"%@", error);
-//            return;
-//        }
-//        if (!apiInfo.isSuc) {
-//            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-//            return;
-//        }
-//        self.sectionDataVideos = apiResult;
-//    }];
-//    [[WLServerHelper sharedInstance] activity_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
-//        _strong_check(self);
-//        if (error) {
-//            DLog(@"%@", error);
-//            return;
-//        }
-//        if (!apiInfo.isSuc) {
-//            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-//            return;
-//        }
-//        self.sectionDataActivitys = apiResult;
-//    }];
+}
+
+- (void)_loadMoreData {
+//    _weak(self);
 }
 
 - (void)_setTextColorWithChannelButton:(UIButton *)button isSelected:(BOOL)isSelected {

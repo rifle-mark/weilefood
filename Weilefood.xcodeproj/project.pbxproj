@@ -39,6 +39,9 @@
 		2482E6471B5E96FE005815E8 /* WLServerHelper+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6461B5E96FE005815E8 /* WLServerHelper+Message.m */; };
 		2482E64A1B5E9B6E005815E8 /* WLPointsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6491B5E9B6E005815E8 /* WLPointsModel.m */; };
 		2482E64D1B5E9CBB005815E8 /* WLServerHelper+Points.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E64C1B5E9CBB005815E8 /* WLServerHelper+Points.m */; };
+		249745F61B6A5E190019ADDA /* ProductInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249745F51B6A5E190019ADDA /* ProductInfoVC.m */; };
+		249745F91B6A63360019ADDA /* ForwardBuyListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249745F81B6A63360019ADDA /* ForwardBuyListVC.m */; };
+		249745FC1B6A656F0019ADDA /* ForwardBuyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 249745FB1B6A656F0019ADDA /* ForwardBuyCell.m */; };
 		249A73BC1B569D2300F46F3D /* WLServerHelper+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73B41B569D2300F46F3D /* WLServerHelper+User.m */; };
 		249A73BD1B569D2300F46F3D /* WLServerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73B61B569D2300F46F3D /* WLServerHelper.m */; };
 		249A73BE1B569D2300F46F3D /* WLDictionaryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73B91B569D2300F46F3D /* WLDictionaryHelper.m */; };
@@ -217,6 +220,12 @@
 		2482E6491B5E9B6E005815E8 /* WLPointsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLPointsModel.m; sourceTree = "<group>"; };
 		2482E64B1B5E9CBB005815E8 /* WLServerHelper+Points.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Points.h"; sourceTree = "<group>"; };
 		2482E64C1B5E9CBB005815E8 /* WLServerHelper+Points.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Points.m"; sourceTree = "<group>"; };
+		249745F41B6A5E190019ADDA /* ProductInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductInfoVC.h; sourceTree = "<group>"; };
+		249745F51B6A5E190019ADDA /* ProductInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductInfoVC.m; sourceTree = "<group>"; };
+		249745F71B6A63360019ADDA /* ForwardBuyListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForwardBuyListVC.h; sourceTree = "<group>"; };
+		249745F81B6A63360019ADDA /* ForwardBuyListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForwardBuyListVC.m; sourceTree = "<group>"; };
+		249745FA1B6A656F0019ADDA /* ForwardBuyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForwardBuyCell.h; sourceTree = "<group>"; };
+		249745FB1B6A656F0019ADDA /* ForwardBuyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForwardBuyCell.m; sourceTree = "<group>"; };
 		249A73B31B569D2300F46F3D /* WLServerHelper+User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+User.h"; sourceTree = "<group>"; };
 		249A73B41B569D2300F46F3D /* WLServerHelper+User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+User.m"; sourceTree = "<group>"; };
 		249A73B51B569D2300F46F3D /* WLServerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLServerHelper.h; sourceTree = "<group>"; };
@@ -529,6 +538,8 @@
 		240D798F1B5FEB42007E2E43 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				249745FA1B6A656F0019ADDA /* ForwardBuyCell.h */,
+				249745FB1B6A656F0019ADDA /* ForwardBuyCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -536,6 +547,8 @@
 		240D79901B5FEB42007E2E43 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				249745F71B6A63360019ADDA /* ForwardBuyListVC.h */,
+				249745F81B6A63360019ADDA /* ForwardBuyListVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -596,6 +609,8 @@
 				249EF30C1B64BEDA00AAEBE0 /* MarketIndexPageVC.m */,
 				240FB70A1B6921F800DF5CE4 /* MarketSearchVC.h */,
 				240FB70B1B6921F800DF5CE4 /* MarketSearchVC.m */,
+				249745F41B6A5E190019ADDA /* ProductInfoVC.h */,
+				249745F51B6A5E190019ADDA /* ProductInfoVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -941,15 +956,15 @@
 		24CDCB401B4F792D00BDE8CB /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				240D798A1B5FEB42007E2E43 /* Activity */,
 				240D798D1B5FEB42007E2E43 /* Common */,
-				240D798E1B5FEB42007E2E43 /* ForwardBuy */,
 				240D79911B5FEB42007E2E43 /* MainPage */,
 				240D79941B5FEB42007E2E43 /* Market */,
+				240D798E1B5FEB42007E2E43 /* ForwardBuy */,
+				240D79A01B5FEB42007E2E43 /* Video */,
+				240D798A1B5FEB42007E2E43 /* Activity */,
 				240D79971B5FEB42007E2E43 /* Order */,
 				240D799A1B5FEB42007E2E43 /* Share */,
 				240D799D1B5FEB42007E2E43 /* User */,
-				240D79A01B5FEB42007E2E43 /* Video */,
 				24CDCB2C1B4F792D00BDE8CB /* LaunchScreen.xib */,
 			);
 			path = UI;
@@ -1349,6 +1364,7 @@
 				24B8C0671B5242BC001C5722 /* AGImagePreviewController.m in Sources */,
 				245936B21B5A3CAF008FFAB8 /* WLServerHelper+Comment.m in Sources */,
 				24CDCBF81B4F792E00BDE8CB /* UINavigationBar+GCDelegateBlock.m in Sources */,
+				249745FC1B6A656F0019ADDA /* ForwardBuyCell.m in Sources */,
 				24CDCBDA1B4F792E00BDE8CB /* AppDelegate.m in Sources */,
 				245936A31B5A2C62008FFAB8 /* WLServerHelper+Channel.m in Sources */,
 				24CDCBE71B4F792E00BDE8CB /* UIImagePickerControllerDelegateImplementationProxy.m in Sources */,
@@ -1382,6 +1398,7 @@
 				24B8C06D1B5242BC001C5722 /* AGIPCToolbarItem.m in Sources */,
 				24CDCBE21B4F792E00BDE8CB /* AVAudioRecorder+GCDelegateBlock.m in Sources */,
 				249A73BC1B569D2300F46F3D /* WLServerHelper+User.m in Sources */,
+				249745F61B6A5E190019ADDA /* ProductInfoVC.m in Sources */,
 				2482E64A1B5E9B6E005815E8 /* WLPointsModel.m in Sources */,
 				249EF30D1B64BEDA00AAEBE0 /* MarketIndexPageVC.m in Sources */,
 				24E66DBF1B62717A0081324A /* UIScrollView+Keyboard.m in Sources */,
@@ -1397,6 +1414,7 @@
 				24B8C06E1B5242BC001C5722 /* AGPreviewScrollView.m in Sources */,
 				249A73BD1B569D2300F46F3D /* WLServerHelper.m in Sources */,
 				24CDCC191B4F792E00BDE8CB /* NSObject+GCAOP.m in Sources */,
+				249745F91B6A63360019ADDA /* ForwardBuyListVC.m in Sources */,
 				24CDCC0B1B4F792E00BDE8CB /* UINavigationController+GCDelegate.m in Sources */,
 				24CDCBFB1B4F792E00BDE8CB /* UIPopoverController+GCDelegateBlock.m in Sources */,
 				24CDCC041B4F792E00BDE8CB /* UIWebView+GCDelegateBlock.m in Sources */,

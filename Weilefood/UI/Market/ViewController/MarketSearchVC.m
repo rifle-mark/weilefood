@@ -9,6 +9,8 @@
 #import "MarketSearchVC.h"
 #import "MarketProductCell.h"
 
+#import "ProductInfoVC.h"
+
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
@@ -166,6 +168,11 @@ static NSString *const kCellIdentifier = @"MYCELL";
             cell.actionCount = product.actionCount;
             cell.commentCount = product.commentCount;
             return cell;
+        }];
+        [_tableView withBlockForRowDidSelect:^(UITableView *view, NSIndexPath *path) {
+            _strong_check(self);
+            WLProductModel *product = self.productList[path.row];
+            [self.navigationController pushViewController:[[ProductInfoVC alloc] initWithProduct:product] animated:YES];
         }];
     }
     return _tableView;
