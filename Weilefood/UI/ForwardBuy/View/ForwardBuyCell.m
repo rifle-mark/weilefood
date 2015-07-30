@@ -139,7 +139,17 @@
 }
 
 - (void)_refeashDateAndStatusLabel {
-//    self.beginEndDateLabel.text = 
+    self.beginEndDateLabel.text = [NSString stringWithFormat:@"%@ 到 %@", [self.beginDate formattedDateWithFormat:@"yyyy-MM-dd"], [self.endDate formattedDateWithFormat:@"yyyy-MM-dd"]];
+    NSDate *now = [NSDate date];
+    if ([now isEarlierThan:self.beginDate]) {
+        self.statusLabel.text = @"未开始";
+    }
+    else if ([now isLaterThan:self.endDate]) {
+        self.statusLabel.text = @"已结束";
+    }
+    else {
+        self.statusLabel.text = @"进行中";
+    }
 }
 
 #pragma mark - private property methods

@@ -149,6 +149,23 @@ static NSString *const kCellIdentifier = @"MYCELL";
             cell.price = 123.12;
             cell.actionCount = 10;
             cell.commentCount = 9;
+            switch (path.row % 3) {
+                case 0: {
+                    cell.beginDate = [NSDate dateWithYear:2015 month:8 day:5];
+                    break;
+                }
+                case 1: {
+                    cell.beginDate = [NSDate dateWithYear:2015 month:7 day:30];
+                    break;
+                }
+                case 2: {
+                    cell.beginDate = [NSDate dateWithYear:2015 month:7 day:1];
+                    break;
+                }
+                default:
+                    break;
+            }
+            cell.endDate = [cell.beginDate dateByAddingDays:2];
             return cell;
         }];
     }
