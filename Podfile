@@ -24,6 +24,8 @@ target 'Weilefood' do
   pod 'MagicalRecord'
   # 方法拦截
   pod 'Aspects'
+  # NSDate扩展
+  pod 'DateTools'
 
 end
 

@@ -8,11 +8,11 @@
 
 #import "MJProperty.h"
 #import "MJFoundation.h"
-#import "MJConst.h"
+#import "MJExtensionConst.h"
 
 @implementation MJPropertyKey
 
-- (id)valueForObject:(id)object
+- (id)valueInObject:(id)object
 {
     if ([object isKindOfClass:[NSDictionary class]] && self.type == MJPropertyKeyTypeDictionary) {
         return object[self.name];
@@ -25,8 +25,10 @@
 @end
 
 @interface MJProperty()
+
 @property (strong, nonatomic) NSMutableDictionary *propertyKeysDict;
 @property (strong, nonatomic) NSMutableDictionary *objectClassInArrayDict;
+
 @end
 
 @implementation MJProperty
@@ -62,7 +64,7 @@
 {
     _property = property;
     
-    MJAssertParamNotNil(property);
+    MJExtensionAssertParamNotNil(property);
     
     // 1.属性名
     _name = @(property_getName(property));

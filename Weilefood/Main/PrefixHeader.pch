@@ -21,6 +21,7 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import <UMengSocial/UMSocial.h>
 #import <Aspects/Aspects.h>
+#import <DateTools/NSDate+DateTools.h>
 
 #import "GCExtension.h"
 
