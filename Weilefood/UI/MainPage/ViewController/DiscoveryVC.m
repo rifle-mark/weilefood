@@ -13,6 +13,8 @@
 
 #import "MarketIndexPageVC.h"
 #import "ForwardBuyListVC.h"
+#import "ActivityListVC.h"
+#import "VideoListVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -195,14 +197,16 @@ static NSInteger const kSectionIndexActivity   = 3;
         case kSectionIndexVideo: {
             headerView.title = @"课堂";
             headerView.allButtonActionBlock = ^(){
-                [MBProgressHUD showErrorWithMessage:@"查看课堂"];
+                _strong_check(self);
+                [self.navigationController pushViewController:[[VideoListVC alloc] init] animated:YES];
             };
             break;
         }
         case kSectionIndexActivity: {
             headerView.title = @"活动";
             headerView.allButtonActionBlock = ^(){
-                [MBProgressHUD showErrorWithMessage:@"查看活动"];
+                _strong_check(self);
+                [self.navigationController pushViewController:[[ActivityListVC alloc] init] animated:YES];
             };
             break;
         }
@@ -450,6 +454,11 @@ static NSInteger const kSectionIndexActivity   = 3;
 - (UIButton *)rightButton {
     if (!_rightButton) {
         _rightButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        _weak(self);
+        [_rightButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            _strong_check(self);
+            [self.navigationController pushViewController:[[VideoListVC alloc] init] animated:YES];
+        }];
     }
     return _rightButton;
 }

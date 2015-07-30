@@ -12,6 +12,10 @@
 		240FB7061B69063900DF5CE4 /* DiscoveryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240FB7051B69063900DF5CE4 /* DiscoveryVC.m */; };
 		240FB7091B690D5B00DF5CE4 /* SharedAllListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240FB7081B690D5B00DF5CE4 /* SharedAllListVC.m */; };
 		240FB70C1B6921F800DF5CE4 /* MarketSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240FB70B1B6921F800DF5CE4 /* MarketSearchVC.m */; };
+		24134EB61B6A711900E5BE07 /* ActivityListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24134EB51B6A711900E5BE07 /* ActivityListVC.m */; };
+		24134EB91B6A712F00E5BE07 /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24134EB81B6A712F00E5BE07 /* ActivityCell.m */; };
+		24134EBC1B6A717600E5BE07 /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24134EBB1B6A717600E5BE07 /* VideoCell.m */; };
+		24134EBF1B6A718500E5BE07 /* VideoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24134EBE1B6A718500E5BE07 /* VideoListVC.m */; };
 		245936A31B5A2C62008FFAB8 /* WLServerHelper+Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A21B5A2C62008FFAB8 /* WLServerHelper+Channel.m */; };
 		245936A61B5A2ECF008FFAB8 /* WLServerHelper+Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A51B5A2ECF008FFAB8 /* WLServerHelper+Product.m */; };
 		245936A91B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A81B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m */; };
@@ -170,6 +174,14 @@
 		240FB7081B690D5B00DF5CE4 /* SharedAllListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedAllListVC.m; sourceTree = "<group>"; };
 		240FB70A1B6921F800DF5CE4 /* MarketSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketSearchVC.h; sourceTree = "<group>"; };
 		240FB70B1B6921F800DF5CE4 /* MarketSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketSearchVC.m; sourceTree = "<group>"; };
+		24134EB41B6A711900E5BE07 /* ActivityListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityListVC.h; sourceTree = "<group>"; };
+		24134EB51B6A711900E5BE07 /* ActivityListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityListVC.m; sourceTree = "<group>"; };
+		24134EB71B6A712F00E5BE07 /* ActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCell.h; sourceTree = "<group>"; };
+		24134EB81B6A712F00E5BE07 /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
+		24134EBA1B6A717600E5BE07 /* VideoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCell.h; sourceTree = "<group>"; };
+		24134EBB1B6A717600E5BE07 /* VideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCell.m; sourceTree = "<group>"; };
+		24134EBD1B6A718500E5BE07 /* VideoListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoListVC.h; sourceTree = "<group>"; };
+		24134EBE1B6A718500E5BE07 /* VideoListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoListVC.m; sourceTree = "<group>"; };
 		245936A11B5A2C62008FFAB8 /* WLServerHelper+Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Channel.h"; sourceTree = "<group>"; };
 		245936A21B5A2C62008FFAB8 /* WLServerHelper+Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Channel.m"; sourceTree = "<group>"; };
 		245936A41B5A2ECF008FFAB8 /* WLServerHelper+Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Product.h"; sourceTree = "<group>"; };
@@ -508,6 +520,8 @@
 		240D798B1B5FEB42007E2E43 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				24134EB71B6A712F00E5BE07 /* ActivityCell.h */,
+				24134EB81B6A712F00E5BE07 /* ActivityCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -515,6 +529,8 @@
 		240D798C1B5FEB42007E2E43 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				24134EB41B6A711900E5BE07 /* ActivityListVC.h */,
+				24134EB51B6A711900E5BE07 /* ActivityListVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -704,6 +720,8 @@
 		240D79A11B5FEB42007E2E43 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				24134EBA1B6A717600E5BE07 /* VideoCell.h */,
+				24134EBB1B6A717600E5BE07 /* VideoCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -711,6 +729,8 @@
 		240D79A21B5FEB42007E2E43 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				24134EBD1B6A718500E5BE07 /* VideoListVC.h */,
+				24134EBE1B6A718500E5BE07 /* VideoListVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -960,8 +980,8 @@
 				240D79911B5FEB42007E2E43 /* MainPage */,
 				240D79941B5FEB42007E2E43 /* Market */,
 				240D798E1B5FEB42007E2E43 /* ForwardBuy */,
-				240D79A01B5FEB42007E2E43 /* Video */,
 				240D798A1B5FEB42007E2E43 /* Activity */,
+				240D79A01B5FEB42007E2E43 /* Video */,
 				240D79971B5FEB42007E2E43 /* Order */,
 				240D799A1B5FEB42007E2E43 /* Share */,
 				240D799D1B5FEB42007E2E43 /* User */,
@@ -1346,6 +1366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2482E62C1B5E7864005815E8 /* WLServerHelper+Action.m in Sources */,
+				24134EBC1B6A717600E5BE07 /* VideoCell.m in Sources */,
 				24C32EC21B613BDC00D509A4 /* Model.xcdatamodeld in Sources */,
 				24CDCBE41B4F792E00BDE8CB /* AVAudioRecordDelegateImplementationProxy.m in Sources */,
 				2482E6351B5E7CA2005815E8 /* WLOrderAddressModel.m in Sources */,
@@ -1385,6 +1406,7 @@
 				24B8C0681B5242BC001C5722 /* AGIPCAlbumsController.m in Sources */,
 				24CDCC051B4F792E00BDE8CB /* AVAudioPlayer+GCDelegate.m in Sources */,
 				246F07821B56A6210086CD28 /* NSString+Ext.m in Sources */,
+				24134EBF1B6A718500E5BE07 /* VideoListVC.m in Sources */,
 				24CDCBF31B4F792E00BDE8CB /* UIToolbarDelegateImplementationProxy.m in Sources */,
 				24B8C06F1B5242BC001C5722 /* ALAsset+AGIPC.m in Sources */,
 				240FB7091B690D5B00DF5CE4 /* SharedAllListVC.m in Sources */,
@@ -1406,6 +1428,7 @@
 				24CDCBE01B4F792E00BDE8CB /* NSObject+GCProxyRegister.m in Sources */,
 				24B8C0691B5242BC001C5722 /* AGIPCAssetsController.m in Sources */,
 				24CDCBDC1B4F792E00BDE8CB /* main.m in Sources */,
+				24134EB91B6A712F00E5BE07 /* ActivityCell.m in Sources */,
 				24CDCC101B4F792E00BDE8CB /* UITabBar+GCDelegate.m in Sources */,
 				24CDCC1D1B4F792E00BDE8CB /* UIControl+GCEvent.m in Sources */,
 				245936AC1B5A3943008FFAB8 /* WLServerHelper+Video.m in Sources */,
@@ -1464,6 +1487,7 @@
 				24CDCC061B4F792E00BDE8CB /* AVAudioRecorder+GCDelegate.m in Sources */,
 				24CAC4481B580A5800E3C4D5 /* WLCommentModel.m in Sources */,
 				2467B7271B50E30E001202A4 /* BPushHelper.m in Sources */,
+				24134EB61B6A711900E5BE07 /* ActivityListVC.m in Sources */,
 				24CDCC0A1B4F792E00BDE8CB /* UINavigationBar+GCDelegate.m in Sources */,
 				249A73D21B569D4100F46F3D /* WLUserModel.m in Sources */,
 				24B8C06A1B5242BC001C5722 /* AGIPCGridCell.m in Sources */,
