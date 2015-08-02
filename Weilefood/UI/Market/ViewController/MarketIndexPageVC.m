@@ -7,33 +7,36 @@
 //
 
 #import "MarketIndexPageVC.h"
+#import "MarketChildChannelView.h"
 #import "MarketProductCell.h"
 
 #import "MarketSearchVC.h"
+#import "ProductInfoVC.h"
+
+#import "WLServerHelperHeader.h"
+#import "WLModelHeader.h"
 
 @interface MarketIndexPageVC ()
 
 @property (nonatomic, strong) UIBarButtonItem *searchButtonItem;
 
-@property (nonatomic, strong) UIView   *channelsView;
-@property (nonatomic, strong) UIButton *channelButton1;
-@property (nonatomic, strong) UIButton *channelButton2;
-@property (nonatomic, strong) UIButton *channelButton3;
+@property (nonatomic, strong) UIView                 *channelsView;
+@property (nonatomic, strong) UIButton               *channelButton1;
+@property (nonatomic, strong) UIButton               *channelButton2;
+@property (nonatomic, strong) UIButton               *channelButton3;
 
-@property (nonatomic, strong) UIView   *childChannelsView;
-@property (nonatomic, strong) UIButton *childChannelAllButton;
-@property (nonatomic, strong) UIButton *childChannelButton1;
-@property (nonatomic, strong) UIButton *childChannelButton2;
-@property (nonatomic, strong) UIButton *childChannelButton3;
-@property (nonatomic, strong) UIButton *childChannelButton4;
+@property (nonatomic, strong) MarketChildChannelView *childChannelsView;
 
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UITableView            *tableView;
 
-@property (nonatomic, assign) BOOL isShowChildChannelsView;
+@property (nonatomic, assign) kChannelID selectChanneID;
+@property (nonatomic, assign) BOOL       isShowChildChannelsView;
+@property (nonatomic, strong) NSArray    *productList;
 
 @end
 
 static NSString *const kCellIdentifier = @"MYCELL";
+static NSInteger const kPageSize = 10;
 
 @implementation MarketIndexPageVC
 
@@ -53,15 +56,14 @@ static NSString *const kCellIdentifier = @"MYCELL";
     [self.channelsView addSubview:self.channelButton1];
     [self.channelsView addSubview:self.channelButton2];
     [self.channelsView addSubview:self.channelButton3];
-    [self.childChannelsView addSubview:self.childChannelAllButton];
-    [self.childChannelsView addSubview:self.childChannelButton1];
-    [self.childChannelsView addSubview:self.childChannelButton2];
-    [self.childChannelsView addSubview:self.childChannelButton3];
-    [self.childChannelsView addSubview:self.childChannelButton4];
     
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.childChannelsView];
     [self.view addSubview:self.channelsView];
+    
+    [self _addObserve];
+    self.selectChanneID = kChannelID_YX;
+    [self.tableView.header beginRefreshing];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -77,7 +79,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
     }];
     [self.childChannelsView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
-        make.height.equalTo(@80);
+        make.height.equalTo(@([MarketChildChannelView viewHeight]));
         if (self.isShowChildChannelsView) {
             make.top.equalTo(self.channelsView.mas_bottom);
         }
@@ -100,39 +102,57 @@ static NSString *const kCellIdentifier = @"MYCELL";
         make.left.equalTo(self.channelButton2.mas_right);
         make.right.equalTo(self.channelsView);
     }];
-    
-    [self.childChannelAllButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.bottom.equalTo(self.childChannelsView);
-        make.width.equalTo(self.childChannelButton1);
-    }];
-    [self.childChannelButton1 mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.width.top.bottom.equalTo(self.childChannelAllButton);
-        make.left.equalTo(self.childChannelAllButton.mas_right);
-    }];
-    [self.childChannelButton2 mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.width.top.bottom.equalTo(self.childChannelButton1);
-        make.left.equalTo(self.childChannelButton1.mas_right);
-    }];
-    [self.childChannelButton3 mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.width.top.bottom.equalTo(self.childChannelButton2);
-        make.left.equalTo(self.childChannelButton2.mas_right);
-    }];
-    [self.childChannelButton4 mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.width.top.bottom.equalTo(self.childChannelButton3);
-        make.left.equalTo(self.childChannelButton3.mas_right);
-        make.right.equalTo(self.childChannelsView);
-    }];
 }
 
 #pragma mark - private methons
 
 - (void)_addObserve {
-//    _weak(self);
-//    [self startObserveObject:self forKeyPath:@"sectionDataProducts" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
-//        _strong_check(self);
-//        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:kSectionIndexProduct]];
-//    }];
+    _weak(self);
+    [self startObserveObject:self forKeyPath:@"productList" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
+        _strong_check(self);
+        [self.tableView reloadData];
+    }];
 }
+
+- (void)_loadDataWithIsLatest:(BOOL)isLatest {
+    _weak(self);
+    NSInteger pageIndex = [self.productList count] / kPageSize + 1;
+    NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLProductModel *)[self.productList lastObject]).createDate;
+    [[WLServerHelper sharedInstance] product_getListWithChannelId:self.selectChanneID maxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
+        _strong_check(self);
+        if (self.tableView.header.isRefreshing) {
+            [self.tableView.header endRefreshing];
+        }
+        if (self.tableView.footer.isRefreshing) {
+            [self.tableView.footer endRefreshing];
+        }
+        if (error) {
+            DLog(@"%@", error);
+            return;
+        }
+        if (!apiInfo.isSuc) {
+            [MBProgressHUD showErrorWithMessage:apiInfo.message];
+            return;
+        }
+        self.productList = isLatest ? apiResult : [self.productList arrayByAddingObjectsFromArray:apiResult];
+        self.tableView.footer.hidden = !apiResult || apiResult.count <= pageIndex;
+    }];
+}
+
+- (void)_setTextColorWithChannelButton:(UIButton *)button isSelected:(BOOL)isSelected {
+    [button setTitleColor:isSelected ? k_COLOR_THEME_NAVIGATIONBAR_TEXT : k_COLOR_TEAL forState:UIControlStateNormal];
+}
+
+- (UIButton *)_createChannelButton {
+    return ({
+        UIButton *v = [UIButton buttonWithType:UIButtonTypeCustom];
+        v.backgroundColor = k_COLOR_THEME_NAVIGATIONBAR;
+        v.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+        v;
+    });
+}
+
+#pragma mark - private property methons
 
 - (void)setIsShowChildChannelsView:(BOOL)isShowChildChannelsView animated:(BOOL)animated {
     if (animated) {
@@ -150,40 +170,13 @@ static NSString *const kCellIdentifier = @"MYCELL";
     }
 }
 
-- (void)_loadLatestData {
-//    _weak(self);
-//    [[WLServerHelper sharedInstance] product_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
-//        _strong_check(self);
-//        if (error) {
-//            DLog(@"%@", error);
-//            return;
-//        }
-//        if (!apiInfo.isSuc) {
-//            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-//            return;
-//        }
-//        self.sectionDataProducts = apiResult;
-//    }];
+- (void)setSelectChanneID:(kChannelID)selectChanneID {
+    _selectChanneID = selectChanneID;
+    self.childChannelsView.selectChanneID = selectChanneID;
+    [self _setTextColorWithChannelButton:self.channelButton1 isSelected:[self.childChannelsView supportThisChannelID:selectChanneID]];
+    [self _setTextColorWithChannelButton:self.channelButton2 isSelected:self.channelButton2.tag == selectChanneID];
+    [self _setTextColorWithChannelButton:self.channelButton3 isSelected:self.channelButton3.tag == selectChanneID];
 }
-
-- (void)_loadMoreData {
-//    _weak(self);
-}
-
-- (void)_setTextColorWithChannelButton:(UIButton *)button isSelected:(BOOL)isSelected {
-    [button setTitleColor:isSelected ? k_COLOR_THEME_NAVIGATIONBAR_TEXT : k_COLOR_TEAL forState:UIControlStateNormal];
-}
-
-- (UIButton *)_createChannelButton {
-    return ({
-        UIButton *v = [UIButton buttonWithType:UIButtonTypeCustom];
-        v.backgroundColor = k_COLOR_THEME_NAVIGATIONBAR;
-        v.titleLabel.font = [UIFont boldSystemFontOfSize:15];
-        v;
-    });
-}
-
-#pragma mark - private property methons
 
 - (UIBarButtonItem *)searchButtonItem {
     if (!_searchButtonItem) {
@@ -231,8 +224,15 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (UIButton *)channelButton2 {
     if (!_channelButton2) {
         _channelButton2 = [self _createChannelButton];
+        _channelButton2.tag = kChannelID_YH;
         [_channelButton2 setTitle:@"洋货" forState:UIControlStateNormal];
-        [self _setTextColorWithChannelButton:_channelButton2 isSelected:NO];
+        _weak(self);
+        [_channelButton2 addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            _strong_check(self);
+            self.selectChanneID = control.tag;
+            [self setIsShowChildChannelsView:NO animated:YES];
+            [self.tableView.header beginRefreshing];
+        }];
     }
     return _channelButton2;
 }
@@ -240,58 +240,36 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (UIButton *)channelButton3 {
     if (!_channelButton3) {
         _channelButton3 = [self _createChannelButton];
+        _channelButton3.tag = kChannelID_CJ;
         [_channelButton3 setTitle:@"餐具" forState:UIControlStateNormal];
-        [self _setTextColorWithChannelButton:_channelButton3 isSelected:NO];
+        _weak(self);
+        [_channelButton3 addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            _strong_check(self);
+            self.selectChanneID = control.tag;
+            [self setIsShowChildChannelsView:NO animated:YES];
+            [self.tableView.header beginRefreshing];
+        }];
     }
     return _channelButton3;
 }
 
-- (UIView *)childChannelsView {
+- (MarketChildChannelView *)childChannelsView {
     if (!_childChannelsView) {
-        _childChannelsView = [[UIView alloc] init];
+        _childChannelsView = [[MarketChildChannelView alloc] init];
         _childChannelsView.backgroundColor = k_COLOR_WHITE;
+        _weak(self);
+        [_childChannelsView selectBlock:^(MarketChildChannelView *view) {
+            _strong_check(self);
+            self.selectChanneID = view.selectChanneID;
+            [self setIsShowChildChannelsView:NO animated:YES];
+            [self.tableView.header beginRefreshing];
+        }];
+        [_childChannelsView collapseBlock:^(MarketChildChannelView *view) {
+            _strong_check(self);
+            [self setIsShowChildChannelsView:NO animated:YES];
+        }];
     }
     return _childChannelsView;
-}
-
-- (UIButton *)childChannelAllButton {
-    if (!_childChannelAllButton) {
-        _childChannelAllButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_childChannelAllButton setTitle:@"全部" forState:UIControlStateNormal];
-    }
-    return _childChannelAllButton;
-}
-
-- (UIButton *)childChannelButton1 {
-    if (!_childChannelButton1) {
-        _childChannelButton1 = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_childChannelButton1 setTitle:@"粮油调料" forState:UIControlStateNormal];
-    }
-    return _childChannelButton1;
-}
-
-- (UIButton *)childChannelButton2 {
-    if (!_childChannelButton2) {
-        _childChannelButton2 = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_childChannelButton2 setTitle:@"养生煲汤" forState:UIControlStateNormal];
-    }
-    return _childChannelButton2;
-}
-
-- (UIButton *)childChannelButton3 {
-    if (!_childChannelButton3) {
-        _childChannelButton3 = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_childChannelButton3 setTitle:@"特色美食" forState:UIControlStateNormal];
-    }
-    return _childChannelButton3;
-}
-
-- (UIButton *)childChannelButton4 {
-    if (!_childChannelButton4) {
-        _childChannelButton4 = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_childChannelButton4 setTitle:@"精选茶品" forState:UIControlStateNormal];
-    }
-    return _childChannelButton4;
 }
 
 - (UITableView *)tableView {
@@ -300,20 +278,49 @@ static NSString *const kCellIdentifier = @"MYCELL";
         _tableView.estimatedRowHeight = 340;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[MarketProductCell class] forCellReuseIdentifier:kCellIdentifier];
-        
+        _weak(self);
+        _tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            _strong_check(self);
+            [self _loadDataWithIsLatest:YES];
+        }];
+        _tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            _strong_check(self);
+            [self _loadDataWithIsLatest:NO];
+        }];
         [_tableView withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {
-            return 10;
+            _strong(self);
+            if (!self) {
+                return 0;
+            }
+            return self.productList ? self.productList.count : 0;
         }];
         [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
+            _strong(self);
+            if (!self) {
+                return nil;
+            }
             MarketProductCell *cell = [view dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:path];
-            cell.imageUrl = @"http://c.hiphotos.baidu.com/image/pic/item/a8014c086e061d95a0e7763979f40ad162d9ca0a.jpg";
-            cell.name = @"魂牵梦萦影响力；影响力；影响力；影响力；";
-            cell.number = 50;
-            cell.price = 123.12;
-            cell.actionCount = 10;
-            cell.commentCount = 9;
-            cell.tagType = path.row % 5;
+            WLProductModel *produect = self.productList[path.row];
+            cell.imageUrl = produect.images;
+            cell.name = produect.productName;
+            cell.number = produect.count;
+            cell.price = produect.price;
+            cell.actionCount = produect.actionCount;
+            cell.commentCount = produect.commentCount;
+            cell.tagType = produect.channelId;
+//            cell.imageUrl = @"http://c.hiphotos.baidu.com/image/pic/item/a8014c086e061d95a0e7763979f40ad162d9ca0a.jpg";
+//            cell.name = @"魂牵梦萦影响力；影响力；影响力；影响力；";
+//            cell.number = 50;
+//            cell.price = 123.12;
+//            cell.actionCount = 10;
+//            cell.commentCount = 9;
+//            cell.tagType = path.row % 5;
             return cell;
+        }];
+        [_tableView withBlockForRowDidSelect:^(UITableView *view, NSIndexPath *path) {
+            _strong_check(self);
+            WLProductModel *produect = self.productList[path.row];
+            [self.navigationController pushViewController:[[ProductInfoVC alloc] initWithProduct:produect] animated:YES];
         }];
     }
     return _tableView;

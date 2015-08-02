@@ -19,4 +19,27 @@
 /// CoreData数据库文件名
 #define kCoreDataStoreName      @"Weilefood.sqlite"
 
+/*
+ 栏目本是接口返回的，第一版先在本地固定，之后再考虑动态获取。
+ */
+/// 市集栏目ID
+typedef NS_ENUM(NSInteger, kChannelID) {
+    /// 无，未选中
+    kChannelID_None = 0,
+    /// 一级栏目 - 优选
+    kChannelID_YX = 1,
+    /// 优选子栏目 - 粮油调料
+    kChannelID_YX_LYTL = 2,
+    /// 优选子栏目 - 养生煲汤
+    kChannelID_YX_YSBT = 3,
+    /// 优选子栏目 - 特色美食
+    kChannelID_YX_TSMS = 4,
+    /// 优选子栏目 - 精选茶品
+    kChannelID_YX_JXCP = 5,
+    /// 一级栏目 - 洋货
+    kChannelID_YH = 6,
+    /// 一级栏目 - 餐具
+    kChannelID_CJ = 7,
+};
+
 #endif
