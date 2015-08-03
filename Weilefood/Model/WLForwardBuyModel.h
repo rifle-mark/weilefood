@@ -14,7 +14,7 @@
 /// ID
 @property (nonatomic, assign) NSUInteger forwardBuyId;
 /// 开始时间
-@property (nonatomic, copy) NSString *startDate;
+@property (nonatomic, copy) NSDate *startDate;
 /// 结束时间
 @property (nonatomic, copy) NSDate *endDate;
 /// 图片

@@ -22,10 +22,14 @@
 /*
  栏目本是接口返回的，第一版先在本地固定，之后再考虑动态获取。
  */
-/// 市集栏目ID
+/// 栏目ID
 typedef NS_ENUM(NSInteger, kChannelID) {
     /// 无，未选中
     kChannelID_None = 0,
+    
+    /*
+     * 市集栏目
+     */
     /// 一级栏目 - 优选
     kChannelID_YX = 1,
     /// 优选子栏目 - 粮油调料
@@ -40,6 +44,14 @@ typedef NS_ENUM(NSInteger, kChannelID) {
     kChannelID_YH = 6,
     /// 一级栏目 - 餐具
     kChannelID_CJ = 7,
+    
+    /*
+     * 预购栏目
+     */
+    /// 一级栏目 - 私房菜
+    kChannelID_SFC = 8,
+    /// 一级栏目 - 季节性商品
+    kChannelID_JJXSP = 9,
 };
 
 #endif

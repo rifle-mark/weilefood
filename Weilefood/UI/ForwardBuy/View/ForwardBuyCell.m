@@ -11,10 +11,11 @@
 @interface ForwardBuyCell ()
 
 @property (nonatomic, strong) UIImageView *picImageView;
-@property (nonatomic, strong) UILabel     *statusLabel;
+@property (nonatomic, strong) UIImageView *statusImageView;
+@property (nonatomic, strong) UIView      *timeView;
+@property (nonatomic, strong) UIImageView *timeIconImageView;
 @property (nonatomic, strong) UILabel     *beginEndDateLabel;
 @property (nonatomic, strong) UILabel     *nameLabel;
-//@property (nonatomic, strong) UILabel     *numberLabel;
 @property (nonatomic, strong) UILabel     *priceLabel;
 @property (nonatomic, strong) UIImageView *actionImageView;
 @property (nonatomic, strong) UILabel     *actionCountLabel;
@@ -30,16 +31,18 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self.contentView addSubview:self.picImageView];
-        [self.contentView addSubview:self.statusLabel];
-        [self.contentView addSubview:self.beginEndDateLabel];
+        [self.contentView addSubview:self.statusImageView];
+        [self.contentView addSubview:self.timeView];
         [self.contentView addSubview:self.nameLabel];
-//        [self.contentView addSubview:self.numberLabel];
         [self.contentView addSubview:self.priceLabel];
         [self.contentView addSubview:self.actionImageView];
         [self.contentView addSubview:self.actionCountLabel];
         [self.contentView addSubview:self.commentImageView];
         [self.contentView addSubview:self.commentCountLabel];
         [self.contentView addSubview:self.footerView];
+        
+        [self.timeView addSubview:self.timeIconImageView];
+        [self.timeView addSubview:self.beginEndDateLabel];
         
         [self _makeConstraints];
     }
@@ -68,11 +71,6 @@
     self.nameLabel.text = name;
 }
 
-- (void)setNumber:(NSInteger)number {
-    _number = number;
-//    self.numberLabel.text = [NSString stringWithFormat:@" 剩余：%ld份 ", number];
-}
-
 - (void)setPrice:(CGFloat)price {
     _price = price;
     self.priceLabel.text = [NSString stringWithFormat:@"￥%.2f", price];
@@ -93,18 +91,27 @@
 - (void)_makeConstraints {
     [self.picImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self.contentView).insets(UIEdgeInsetsMake(10, 10, 0, 10));
-        make.height.equalTo(self.picImageView.mas_width).multipliedBy(1.0 / 2.0);
+        make.height.equalTo(self.picImageView.mas_width).multipliedBy(2.0 / 3.0);
     }];
-    [self.statusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.statusImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.equalTo(self.picImageView).offset(10);
     }];
+    [self.timeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.picImageView);
+        make.top.equalTo(self.picImageView.mas_bottom);
+        make.height.equalTo(@27);
+    }];
+    [self.timeIconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.beginEndDateLabel.mas_left);
+        make.centerY.equalTo(self.timeView);
+    }];
     [self.beginEndDateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.picImageView).offset(10);
-        make.bottom.equalTo(self.picImageView).offset(-10);
+        make.centerX.equalTo(self.timeView).offset(self.timeIconImageView.image.size.width / 2);
+        make.centerY.equalTo(self.timeView);
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.picImageView);
-        make.top.equalTo(self.picImageView.mas_bottom).offset(7);
+        make.top.equalTo(self.timeView.mas_bottom).offset(7);
         make.height.equalTo(@(self.nameLabel.font.lineHeight));
     }];
     [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -139,16 +146,19 @@
 }
 
 - (void)_refeashDateAndStatusLabel {
-    self.beginEndDateLabel.text = [NSString stringWithFormat:@"%@ 到 %@", [self.beginDate formattedDateWithFormat:@"yyyy-MM-dd"], [self.endDate formattedDateWithFormat:@"yyyy-MM-dd"]];
+    self.beginEndDateLabel.text = [NSString stringWithFormat:@"购买时间：%@ — %@", [self.beginDate formattedDateWithFormat:@"MM.dd"], [self.endDate formattedDateWithFormat:@"MM.dd"]];
     NSDate *now = [NSDate date];
     if ([now isEarlierThan:self.beginDate]) {
-        self.statusLabel.text = @"未开始";
+        self.statusImageView.image = [UIImage imageNamed:@"item_state_notStarted"];
+        self.timeView.backgroundColor = k_COLOR_MEDIUM_AQUAMARINE;
     }
     else if ([now isLaterThan:self.endDate]) {
-        self.statusLabel.text = @"已结束";
+        self.statusImageView.image = [UIImage imageNamed:@"item_state_ended"];
+        self.timeView.backgroundColor = k_COLOR_DARKGRAY;
     }
     else {
-        self.statusLabel.text = @"进行中";
+        self.statusImageView.image = [UIImage imageNamed:@"item_state_started"];
+        self.timeView.backgroundColor = k_COLOR_ANZAC;
     }
 }
 
@@ -163,19 +173,32 @@
     return _picImageView;
 }
 
-- (UILabel *)statusLabel {
-    if (!_statusLabel) {
-        _statusLabel = [[UILabel alloc] init];
-        _statusLabel.font = [UIFont systemFontOfSize:12];
-        _statusLabel.textColor = k_COLOR_WHITE;
+- (UIImageView *)statusImageView {
+    if (!_statusImageView) {
+        _statusImageView = [[UIImageView alloc] init];
     }
-    return _statusLabel;
+    return _statusImageView;
+}
+
+- (UIView *)timeView {
+    if (!_timeView) {
+        _timeView = [[UIView alloc] init];
+    }
+    return _timeView;
+}
+
+- (UIImageView *)timeIconImageView {
+    if (!_timeIconImageView) {
+        _timeIconImageView = [[UIImageView alloc] init];
+        _timeIconImageView.image = [UIImage imageNamed:@"fy_icon_time"];
+    }
+    return _timeIconImageView;
 }
 
 - (UILabel *)beginEndDateLabel {
     if (!_beginEndDateLabel) {
         _beginEndDateLabel = [[UILabel alloc] init];
-        _beginEndDateLabel.font = [UIFont systemFontOfSize:14];
+        _beginEndDateLabel.font = [UIFont systemFontOfSize:13];
         _beginEndDateLabel.textColor = k_COLOR_WHITE;
     }
     return _beginEndDateLabel;
@@ -189,17 +212,6 @@
     }
     return _nameLabel;
 }
-
-//- (UILabel *)numberLabel {
-//    if (!_numberLabel) {
-//        _numberLabel = [[UILabel alloc] init];
-//        _numberLabel.font = [UIFont systemFontOfSize:12];
-//        _numberLabel.textColor = [UIColor whiteColor];
-//        _numberLabel.backgroundColor = [UIColor blueColor];
-//        _numberLabel.layer.cornerRadius = 10;
-//    }
-//    return _numberLabel;
-//}
 
 - (UILabel *)priceLabel {
     if (!_priceLabel) {

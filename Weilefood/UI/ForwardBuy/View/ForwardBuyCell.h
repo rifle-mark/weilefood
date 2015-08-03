@@ -15,8 +15,6 @@
 @property (nonatomic, copy  ) NSString   *imageUrl;
 /// 名称
 @property (nonatomic, copy  ) NSString   *name;
-/// 剩余数量
-@property (nonatomic, assign) NSInteger  number;
 /// 单价
 @property (nonatomic, assign) CGFloat    price;
 /// 赞数

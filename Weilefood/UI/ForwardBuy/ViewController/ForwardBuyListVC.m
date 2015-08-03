@@ -9,6 +9,9 @@
 #import "ForwardBuyListVC.h"
 #import "ForwardBuyCell.h"
 
+#import "WLServerHelperHeader.h"
+#import "WLModelHeader.h"
+
 @interface ForwardBuyListVC ()
 
 @property (nonatomic, strong) UIView   *channelsView;
@@ -17,9 +20,13 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 
+@property (nonatomic, assign) kChannelID selectChanneID;
+@property (nonatomic, strong) NSArray    *forwardBuyList;
+
 @end
 
 static NSString *const kCellIdentifier = @"MYCELL";
+static NSInteger const kPageSize       = 10;
 
 @implementation ForwardBuyListVC
 
@@ -34,6 +41,11 @@ static NSString *const kCellIdentifier = @"MYCELL";
     
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.channelsView];
+    
+    [self _addObserve];
+    
+    self.selectChanneID = kChannelID_SFC;
+    [self.tableView.header beginRefreshing];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -63,31 +75,36 @@ static NSString *const kCellIdentifier = @"MYCELL";
 #pragma mark - private methons
 
 - (void)_addObserve {
-    //    _weak(self);
-    //    [self startObserveObject:self forKeyPath:@"sectionDataProducts" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
-    //        _strong_check(self);
-    //        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:kSectionIndexProduct]];
-    //    }];
+        _weak(self);
+        [self startObserveObject:self forKeyPath:@"forwardBuyList" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
+            _strong_check(self);
+            [self.tableView reloadData];
+        }];
 }
 
-- (void)_loadData {
-    //    _weak(self);
-    //    [[WLServerHelper sharedInstance] product_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
-    //        _strong_check(self);
-    //        if (error) {
-    //            DLog(@"%@", error);
-    //            return;
-    //        }
-    //        if (!apiInfo.isSuc) {
-    //            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-    //            return;
-    //        }
-    //        self.sectionDataProducts = apiResult;
-    //    }];
-}
-
-- (void)_loadMoreData {
-    //    _weak(self);
+- (void)_loadDataWithIsLatest:(BOOL)isLatest {
+    _weak(self);
+    NSInteger pageIndex = [self.forwardBuyList count] / kPageSize + 1;
+    NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLForwardBuyModel *)[self.forwardBuyList lastObject]).createDate;
+    [[WLServerHelper sharedInstance] forwardBuy_getListWithChannelId:self.selectChanneID maxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
+        _strong_check(self);
+        if (self.tableView.header.isRefreshing) {
+            [self.tableView.header endRefreshing];
+        }
+        if (self.tableView.footer.isRefreshing) {
+            [self.tableView.footer endRefreshing];
+        }
+        if (error) {
+            DLog(@"%@", error);
+            return;
+        }
+        if (!apiInfo.isSuc) {
+            [MBProgressHUD showErrorWithMessage:apiInfo.message];
+            return;
+        }
+        self.forwardBuyList = isLatest ? apiResult : [self.forwardBuyList arrayByAddingObjectsFromArray:apiResult];
+        self.tableView.footer.hidden = !apiResult || apiResult.count <= pageIndex;
+    }];
 }
 
 - (void)_setTextColorWithChannelButton:(UIButton *)button isSelected:(BOOL)isSelected {
@@ -105,6 +122,12 @@ static NSString *const kCellIdentifier = @"MYCELL";
 
 #pragma mark - private property methons
 
+- (void)setSelectChanneID:(kChannelID)selectChanneID {
+    _selectChanneID = selectChanneID;
+    [self _setTextColorWithChannelButton:self.channelButton1 isSelected:self.channelButton1.tag == selectChanneID];
+    [self _setTextColorWithChannelButton:self.channelButton2 isSelected:self.channelButton2.tag == selectChanneID];
+}
+
 - (UIView *)channelsView {
     if (!_channelsView) {
         _channelsView = [[UIView alloc] init];
@@ -116,8 +139,14 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (UIButton *)channelButton1 {
     if (!_channelButton1) {
         _channelButton1 = [self _createChannelButton];
+        _channelButton1.tag = kChannelID_SFC;
         [_channelButton1 setTitle:@"私房菜" forState:UIControlStateNormal];
-        [self _setTextColorWithChannelButton:_channelButton1 isSelected:YES];
+        _weak(self);
+        [_channelButton1 addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            _strong_check(self);
+            self.selectChanneID = control.tag;
+            [self.tableView.header beginRefreshing];
+        }];
     }
     return _channelButton1;
 }
@@ -125,8 +154,14 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (UIButton *)channelButton2 {
     if (!_channelButton2) {
         _channelButton2 = [self _createChannelButton];
+        _channelButton2.tag = kChannelID_JJXSP;
         [_channelButton2 setTitle:@"季节性商品" forState:UIControlStateNormal];
-        [self _setTextColorWithChannelButton:_channelButton2 isSelected:NO];
+        _weak(self);
+        [_channelButton2 addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            _strong_check(self);
+            self.selectChanneID = control.tag;
+            [self.tableView.header beginRefreshing];
+        }];
     }
     return _channelButton2;
 }
@@ -137,35 +172,30 @@ static NSString *const kCellIdentifier = @"MYCELL";
         _tableView.estimatedRowHeight = 280;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[ForwardBuyCell class] forCellReuseIdentifier:kCellIdentifier];
-        
+        _weak(self);
+        _tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            _strong_check(self);
+            [self _loadDataWithIsLatest:YES];
+        }];
+        _tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            _strong_check(self);
+            [self _loadDataWithIsLatest:NO];
+        }];
         [_tableView withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {
-            return 5;
+            _strong_check(self, 0);
+            return self.forwardBuyList ? self.forwardBuyList.count : 0;
         }];
         [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
-            ForwardBuyCell *cell = [view dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:path];
-            cell.imageUrl = @"http://c.hiphotos.baidu.com/image/pic/item/a8014c086e061d95a0e7763979f40ad162d9ca0a.jpg";
-            cell.name = @"魂牵梦萦影响力；影响力；影响力；影响力；";
-            cell.number = 50;
-            cell.price = 123.12;
-            cell.actionCount = 10;
-            cell.commentCount = 9;
-            switch (path.row % 3) {
-                case 0: {
-                    cell.beginDate = [NSDate dateWithYear:2015 month:8 day:5];
-                    break;
-                }
-                case 1: {
-                    cell.beginDate = [NSDate dateWithYear:2015 month:7 day:30];
-                    break;
-                }
-                case 2: {
-                    cell.beginDate = [NSDate dateWithYear:2015 month:7 day:1];
-                    break;
-                }
-                default:
-                    break;
-            }
-            cell.endDate = [cell.beginDate dateByAddingDays:2];
+            _strong_check(self, nil);
+            ForwardBuyCell *cell          = [view dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:path];
+            WLForwardBuyModel *forwardBuy = self.forwardBuyList[path.row];
+            cell.imageUrl     = forwardBuy.banner;
+            cell.beginDate    = forwardBuy.startDate;
+            cell.endDate      = forwardBuy.endDate;
+            cell.name         = forwardBuy.title;
+            cell.price        = forwardBuy.price;
+            cell.actionCount  = forwardBuy.actionCount;
+            cell.commentCount = forwardBuy.commentCount;
             return cell;
         }];
     }
