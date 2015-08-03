@@ -72,9 +72,9 @@
 #define DLog(format, ...)
 #endif
 
-#define _weak(x)            __weak typeof(x) weak##x = x
-#define _strong(x)          typeof(weak##x) x = weak##x
-#define _strong_check(x)    typeof(weak##x) x = weak##x; if (!weak##x) return
+#define _weak(x)                __weak typeof(x) weak##x = x
+#define _strong(x)              typeof(weak##x) x = weak##x
+#define _strong_check(x, ...)   typeof(weak##x) x = weak##x; if (!weak##x) return __VA_ARGS__
 
 /**
  *  将属性名着字母大写。对应MJExtension setupReplacedKeyFromPropertyName121方法的block

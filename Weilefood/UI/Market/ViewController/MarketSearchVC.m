@@ -123,10 +123,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
         _searchTextField.placeholder = @"请输入关键字进行搜索";
         _weak(self);
         [_searchTextField withBlockForShouldReturn:^BOOL(UITextField *view) {
-            _strong(self);
-            if (!self) {
-                return NO;
-            }
+            _strong_check(self, NO);
             if (!view.text && view.text.length <= 0) {
                 return NO;
             }
@@ -147,17 +144,11 @@ static NSString *const kCellIdentifier = @"MYCELL";
         _tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(_loadMore)];
         _weak(self);
         [_tableView withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {
-            _strong(self);
-            if (!self) {
-                return 0;
-            }
+            _strong_check(self, 0);
             return self.productList ? self.productList.count : 0;
         }];
         [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
-            _strong(self);
-            if (!self) {
-                return nil;
-            }
+            _strong_check(self, nil);
             MarketProductCell *cell = [view dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:path];
             WLProductModel *product = self.productList[path.row];
             cell.imageUrl = product.images;

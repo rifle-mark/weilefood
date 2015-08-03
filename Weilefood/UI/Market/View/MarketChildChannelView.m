@@ -196,17 +196,11 @@
         [_tableView registerClass:[MCCVChannelCell class] forCellReuseIdentifier:[MCCVChannelCell reuseIdentifier]];
         _weak(self);
         [_tableView withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {
-            _strong(self);
-            if (!self) {
-                return 0;
-            }
+//            _strong_check(self, 0);
             return 5;
         }];
         [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
-            _strong(self);
-            if (!self) {
-                return nil;
-            }
+            _strong_check(self, nil);
             MCCVChannelCell *cell = [view dequeueReusableCellWithIdentifier:[MCCVChannelCell reuseIdentifier] forIndexPath:path];
             kChannelID channelID = [self _getChannelIDWithRow:path.row];
             switch (channelID) {

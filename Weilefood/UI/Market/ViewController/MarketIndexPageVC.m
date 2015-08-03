@@ -288,17 +288,11 @@ static NSInteger const kPageSize = 10;
             [self _loadDataWithIsLatest:NO];
         }];
         [_tableView withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {
-            _strong(self);
-            if (!self) {
-                return 0;
-            }
+            _strong_check(self, 0);
             return self.productList ? self.productList.count : 0;
         }];
         [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
-            _strong(self);
-            if (!self) {
-                return nil;
-            }
+            _strong_check(self, nil);
             MarketProductCell *cell = [view dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:path];
             WLProductModel *produect = self.productList[path.row];
             cell.imageUrl = produect.images;

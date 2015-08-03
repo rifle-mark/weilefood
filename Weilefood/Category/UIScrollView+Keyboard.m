@@ -74,7 +74,7 @@
     _weak(self);
     __block BOOL handled = NO;
     [self addObserverForNotificationName:UIKeyboardWillShowNotification usingBlock:^(NSNotification *notification) {
-        _strong(self);
+        _strong_check(self);
         UIView *activeField = [self findFirstResponder];
         if (activeField) {
             handled = YES;
@@ -102,7 +102,7 @@
         }
     }];
     [self addObserverForNotificationName:UIKeyboardWillHideNotification usingBlock:^(NSNotification *notification) {
-        _strong(self);
+        _strong_check(self);
         if (handled) {
             UIEdgeInsets contentInsets = UIEdgeInsetsZero;
             self.contentInset = contentInsets;
