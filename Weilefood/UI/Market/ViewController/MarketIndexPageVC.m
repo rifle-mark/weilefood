@@ -204,13 +204,13 @@ static NSInteger const kPageSize = 10;
 - (UIButton *)channelButton1 {
     if (!_channelButton1) {
         _channelButton1 = [self _createChannelButton];
+        _channelButton1.adjustsImageWhenHighlighted = NO;
         [_channelButton1 setTitle:@"优选" forState:UIControlStateNormal];
-        [self _setTextColorWithChannelButton:_channelButton1 isSelected:YES];
         [_channelButton1 setImage:[UIImage imageNamed:@"market_arrow_down"] forState:UIControlStateNormal];
-        [_channelButton1 setImage:[UIImage imageNamed:@"market_arrow_down"] forState:UIControlStateHighlighted];
-        [_channelButton1 sizeToFit];
-        _channelButton1.titleEdgeInsets = UIEdgeInsetsMake(0, -_channelButton1.imageView.frame.size.width + 5, 0, _channelButton1.imageView.frame.size.width - 5);
-        _channelButton1.imageEdgeInsets = UIEdgeInsetsMake(0, _channelButton1.titleLabel.frame.size.width, 0, -_channelButton1.titleLabel.frame.size.width);
+        [_channelButton1 setImageToRight];
+//        [_channelButton1 sizeToFit];
+//        _channelButton1.titleEdgeInsets = UIEdgeInsetsMake(0, -_channelButton1.imageView.frame.size.width + 5, 0, _channelButton1.imageView.frame.size.width - 5);
+//        _channelButton1.imageEdgeInsets = UIEdgeInsetsMake(0, _channelButton1.titleLabel.frame.size.width, 0, -_channelButton1.titleLabel.frame.size.width);
         
         _weak(self);
         [_channelButton1 addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {

@@ -19,8 +19,6 @@
 @property (nonatomic, strong  ) NSDate   *endDate;
 /// 名称
 @property (nonatomic, copy    ) NSString *name;
-/// 城市
-@property (nonatomic, copy    ) NSString *city;
 /// 是否已参加
 @property (nonatomic, assign  ) BOOL     participated;
 
