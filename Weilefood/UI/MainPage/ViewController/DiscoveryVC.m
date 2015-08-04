@@ -198,7 +198,7 @@ static NSInteger const kSectionIndexActivity   = 3;
             headerView.title = @"营养推荐";
             headerView.allButtonActionBlock = ^(){
                 _strong_check(self);
-                [self.navigationController pushViewController:[[VideoListVC alloc] init] animated:YES];
+                DLog(@"");
             };
             break;
         }
@@ -457,7 +457,7 @@ static NSInteger const kSectionIndexActivity   = 3;
         _weak(self);
         [_rightButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            [self.navigationController pushViewController:[[VideoListVC alloc] init] animated:YES];
+            DLog(@"");
         }];
     }
     return _rightButton;
@@ -467,6 +467,12 @@ static NSInteger const kSectionIndexActivity   = 3;
     if (!_videoImageView) {
         _videoImageView = [[UIImageView alloc] init];
         _videoImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _videoImageView.userInteractionEnabled = YES;
+        _weak(self);
+        [_videoImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithActionBlock:^(UIGestureRecognizer *gesture) {
+            _strong_check(self);
+            [self.navigationController pushViewController:[[VideoListVC alloc] init] animated:YES];
+        }]];
     }
     return _videoImageView;
 }
