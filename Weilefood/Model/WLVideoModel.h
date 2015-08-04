@@ -17,7 +17,7 @@
 @property (nonatomic, copy) NSString *title;
 /// 图片
 @property (nonatomic, copy) NSString *images;
-/// 视频地址
+/// 视频地址(无视频地址表示是文章)
 @property (nonatomic, copy) NSString *videoUrl;
 /// 赞数
 @property (nonatomic, assign) NSUInteger actionCount;
@@ -27,6 +27,8 @@
 @property (nonatomic, assign) NSUInteger commentCount;
 /// 是否已购买
 @property (nonatomic, assign) BOOL isBuy;
+/// 介绍
+@property (nonatomic, copy) NSString *desc;
 ///
 @property (nonatomic, copy) NSDate *createDate;
 

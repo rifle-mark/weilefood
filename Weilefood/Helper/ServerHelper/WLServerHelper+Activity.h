@@ -16,7 +16,7 @@
 /**
  *  获取活动详细信息
  *
- *  @param activityId 预购ID
+ *  @param activityId 活动ID
  *  @param callback
  */
 - (void)activity_getInfoWithActivityId:(NSUInteger)activityId callback:(void (^)(WLApiInfoModel *apiInfo, WLActivityModel *apiResult, NSError *error))callback;

@@ -165,9 +165,9 @@ static NSInteger const kPageSize       = 10;
             VideoCollectionCell *cell = [view dequeueReusableCellWithReuseIdentifier:kCellIdentifier forIndexPath:path];
             WLVideoModel *video = self.videoList[path.item];
             cell.imageUrl = video.images;
-            cell.title = video.title;
-            cell.points = video.points;
-            cell.isVideo = YES;
+            cell.title    = video.title;
+            cell.points   = video.points;
+            cell.isVideo  = video.videoUrl && (video.videoUrl.length > 0);
             [cell favoriteBlock:^(VideoCollectionCell *cell) {
                 _strong_check(self);
                 DLog(@"");

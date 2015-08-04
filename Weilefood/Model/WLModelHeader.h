@@ -28,5 +28,6 @@
 #import "WLDialogModel.h"
 #import "WLMessageModel.h"
 #import "WLPointsModel.h"
+#import "WLNutritionModel.h"
 
 #endif

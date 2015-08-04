@@ -40,7 +40,7 @@
 @property (nonatomic, strong) WLVideoModel *videoData;
 @property (nonatomic, strong) NSArray      *sectionDataProducts;
 @property (nonatomic, strong) NSArray      *sectionDataForwardBuys;
-@property (nonatomic, strong) NSArray      *sectionDataVideos;
+@property (nonatomic, strong) NSArray      *sectionDataNutritions;
 @property (nonatomic, strong) NSArray      *sectionDataActivitys;
 
 @end
@@ -57,7 +57,7 @@ static NSInteger const kCellMargin          = 10;
 static NSInteger const kSectionCount           = 4;
 static NSInteger const kSectionIndexProduct    = 0;
 static NSInteger const kSectionIndexForwardBuy = 1;
-static NSInteger const kSectionIndexVideo      = 2;
+static NSInteger const kSectionIndexNutrition  = 2;
 static NSInteger const kSectionIndexActivity   = 3;
 
 @implementation DiscoveryVC
@@ -127,7 +127,7 @@ static NSInteger const kSectionIndexActivity   = 3;
         UIButton *btn = array[2];
         [imgView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(btn);
-            make.centerY.equalTo(btn).offset(-10);
+            make.centerY.equalTo(btn).offset(-15);
         }];
         [label mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(imgView);
@@ -156,8 +156,8 @@ static NSInteger const kSectionIndexActivity   = 3;
         case kSectionIndexForwardBuy:
             return self.sectionDataForwardBuys.count;
             break;
-        case kSectionIndexVideo:
-            return self.sectionDataVideos.count;
+        case kSectionIndexNutrition:
+            return self.sectionDataNutritions.count;
             break;
         case kSectionIndexActivity:
             return self.sectionDataActivitys.count;
@@ -178,7 +178,7 @@ static NSInteger const kSectionIndexActivity   = 3;
     _weak(self);
     switch (indexPath.section) {
         case kSectionIndexProduct: {
-            headerView.title = @"市集";
+            headerView.title = @"集市";
             headerView.allButtonActionBlock = ^(){
                 _strong_check(self);
                 [self.navigationController pushViewController:[[MarketIndexPageVC alloc] init] animated:YES];
@@ -194,8 +194,8 @@ static NSInteger const kSectionIndexActivity   = 3;
             };
             break;
         }
-        case kSectionIndexVideo: {
-            headerView.title = @"课堂";
+        case kSectionIndexNutrition: {
+            headerView.title = @"营养推荐";
             headerView.allButtonActionBlock = ^(){
                 _strong_check(self);
                 [self.navigationController pushViewController:[[VideoListVC alloc] init] animated:YES];
@@ -236,10 +236,10 @@ static NSInteger const kSectionIndexActivity   = 3;
             money = forwardBuy.price;
             break;
         }
-        case kSectionIndexVideo: {
-            WLVideoModel *video = self.sectionDataVideos[indexPath.item];
-            imageUrl = video.images;
-            title = video.title;
+        case kSectionIndexNutrition: {
+            WLNutritionModel *nutrition = self.sectionDataNutritions[indexPath.item];
+            imageUrl = nutrition.images;
+            title = nutrition.title;
             money = 0;
             break;
         }
@@ -279,9 +279,9 @@ static NSInteger const kSectionIndexActivity   = 3;
         _strong_check(self);
         [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:kSectionIndexForwardBuy]];
     }];
-    [self startObserveObject:self forKeyPath:@"sectionDataVideos" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
+    [self startObserveObject:self forKeyPath:@"sectionDataNutritions" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
-        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:kSectionIndexVideo]];
+        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:kSectionIndexNutrition]];
     }];
     [self startObserveObject:self forKeyPath:@"sectionDataActivitys" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
@@ -327,7 +327,7 @@ static NSInteger const kSectionIndexActivity   = 3;
         }
         self.sectionDataForwardBuys = apiResult;
     }];
-    [[WLServerHelper sharedInstance] video_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
+    [[WLServerHelper sharedInstance] nutrition_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         if (error) {
             DLog(@"%@", error);
@@ -337,7 +337,7 @@ static NSInteger const kSectionIndexActivity   = 3;
             [MBProgressHUD showErrorWithMessage:apiInfo.message];
             return;
         }
-        self.sectionDataVideos = apiResult;
+        self.sectionDataNutritions = apiResult;
     }];
     [[WLServerHelper sharedInstance] activity_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
@@ -446,7 +446,7 @@ static NSInteger const kSectionIndexActivity   = 3;
 - (UILabel *)rightLabel {
     if (!_rightLabel) {
         _rightLabel = [self _createButtonLabel];
-        _rightLabel.text = @"课堂";
+        _rightLabel.text = @"营养推荐";
     }
     return _rightLabel;
 }

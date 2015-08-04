@@ -24,5 +24,6 @@
 #import "WLServerHelper+Order.h"
 #import "WLServerHelper+Message.h"
 #import "WLServerHelper+Points.h"
+#import "WLServerHelper+Nutrition.h"
 
 #endif
