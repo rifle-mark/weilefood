@@ -25,13 +25,9 @@
 @property (nonatomic, assign) NSUInteger points;
 /// 评论数
 @property (nonatomic, assign) NSUInteger commentCount;
-///
-@property (nonatomic, assign) NSInteger isDeleted;
-///
-@property (nonatomic, assign) NSInteger isRecommend;
+/// 是否已购买
+@property (nonatomic, assign) BOOL isBuy;
 ///
 @property (nonatomic, copy) NSDate *createDate;
-///
-@property (nonatomic, copy) NSString *desc;
 
 @end
