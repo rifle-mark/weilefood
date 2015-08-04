@@ -84,7 +84,6 @@ static NSInteger const kPageSize       = 10;
 
 - (void)_loadDataWithIsLatest:(BOOL)isLatest {
     _weak(self);
-    NSInteger pageIndex = [self.forwardBuyList count] / kPageSize + 1;
     NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLForwardBuyModel *)[self.forwardBuyList lastObject]).createDate;
     [[WLServerHelper sharedInstance] forwardBuy_getListWithChannelId:self.selectChanneID maxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
@@ -103,7 +102,7 @@ static NSInteger const kPageSize       = 10;
             return;
         }
         self.forwardBuyList = isLatest ? apiResult : [self.forwardBuyList arrayByAddingObjectsFromArray:apiResult];
-        self.tableView.footer.hidden = !apiResult || apiResult.count <= pageIndex;
+        self.tableView.footer.hidden = !apiResult || apiResult.count < kPageSize;
     }];
 }
 

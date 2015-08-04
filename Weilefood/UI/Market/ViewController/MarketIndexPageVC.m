@@ -116,7 +116,6 @@ static NSInteger const kPageSize = 10;
 
 - (void)_loadDataWithIsLatest:(BOOL)isLatest {
     _weak(self);
-    NSInteger pageIndex = [self.productList count] / kPageSize + 1;
     NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLProductModel *)[self.productList lastObject]).createDate;
     [[WLServerHelper sharedInstance] product_getListWithChannelId:self.selectChanneID maxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
@@ -135,7 +134,7 @@ static NSInteger const kPageSize = 10;
             return;
         }
         self.productList = isLatest ? apiResult : [self.productList arrayByAddingObjectsFromArray:apiResult];
-        self.tableView.footer.hidden = !apiResult || apiResult.count <= pageIndex;
+        self.tableView.footer.hidden = !apiResult || apiResult.count < kPageSize;
     }];
 }
 

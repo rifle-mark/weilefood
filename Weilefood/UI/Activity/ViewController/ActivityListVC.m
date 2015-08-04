@@ -74,7 +74,6 @@ static NSInteger const kPageSize       = 10;
 
 - (void)_loadDataWithIsLatest:(BOOL)isLatest {
     _weak(self);
-    NSInteger pageIndex = [self.activityList count] / kPageSize + 1;
     NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLActivityModel *)[self.activityList lastObject]).createDate;
     [[WLServerHelper sharedInstance] activity_getListWithType:WLActivityTypeOffline city:@"" maxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
@@ -93,7 +92,7 @@ static NSInteger const kPageSize       = 10;
             return;
         }
         self.activityList = isLatest ? apiResult : [self.activityList arrayByAddingObjectsFromArray:apiResult];
-        self.tableView.footer.hidden = !apiResult || apiResult.count <= pageIndex;
+        self.tableView.footer.hidden = !apiResult || apiResult.count < kPageSize;
     }];
 }
 
@@ -137,6 +136,7 @@ static NSInteger const kPageSize       = 10;
             return self.activityList ? self.activityList.count : 0;
         }];
         [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
+            _strong_check(self, nil);
             ActivityCell *cell = [view dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:path];
             WLActivityModel *activity = self.activityList[path.row];
             cell.imageUrl     = activity.banner;
