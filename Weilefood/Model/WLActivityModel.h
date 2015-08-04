@@ -13,9 +13,9 @@ typedef NS_ENUM(NSInteger, WLActivityState) {
     /// 已开始
     WLActivityStateStarted = 0,
     /// 未开始
-    WLActivityStateNotStarted = 1,
+    WLActivityStateNotStarted = 3,
     /// 已结束
-    WLActivityStateEnded = 2,
+    WLActivityStateEnded = 4,
 };
 
 /// 线上线下活动

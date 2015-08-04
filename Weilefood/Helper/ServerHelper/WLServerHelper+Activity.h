@@ -10,14 +10,6 @@
 
 @class WLActivityModel;
 
-/// 活动类型
-typedef NS_ENUM(NSUInteger, WLActivityType) {
-    /// 线上活动
-    WLActivityTypeOnline    = 1,
-    /// 线下活动
-    WLActivityTypeOffline   = 2,
-};
-
 /// 活动相关
 @interface WLServerHelper (Activity)
 
@@ -41,12 +33,11 @@ typedef NS_ENUM(NSUInteger, WLActivityType) {
 /**
  *  获取活动列表。(NSArray<WLActivityModel>)apiResult
  *
- *  @param type      活动类型
  *  @param city      活动城市(中文字符串)
  *  @param maxDate   加载最新数据传0，加载更多数据传MIN(Date)
  *  @param pageSize  返回的最大记录数
  *  @param callback
  */
-- (void)activity_getListWithType:(WLActivityType)type city:(NSString *)city maxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
+- (void)activity_getListWithCity:(NSString *)city maxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
 
 @end

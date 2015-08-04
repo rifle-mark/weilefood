@@ -75,7 +75,7 @@ static NSInteger const kPageSize       = 10;
 - (void)_loadDataWithIsLatest:(BOOL)isLatest {
     _weak(self);
     NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLActivityModel *)[self.activityList lastObject]).createDate;
-    [[WLServerHelper sharedInstance] activity_getListWithType:WLActivityTypeOffline city:@"" maxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
+    [[WLServerHelper sharedInstance] activity_getListWithCity:@"" maxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         if (self.tableView.header.isRefreshing) {
             [self.tableView.header endRefreshing];

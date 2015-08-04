@@ -21,11 +21,10 @@
     [self httpGET:apiUrl parameters:nil resultItemsClass:[WLActivityModel class] callback:callback];
 }
 
-- (void)activity_getListWithType:(WLActivityType)type city:(NSString *)city maxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
+- (void)activity_getListWithCity:(NSString *)city maxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"activity", @"list"]];
     NSDictionary *parameters = @{@"pageindex"   : @1,
                                  @"pagesize"    : @(pageSize),
-                                 @"type"        : @(type),
                                  @"city"        : city,
                                  @"maxdate"     : @([maxDate timeIntervalSince1970]),
                                  };
