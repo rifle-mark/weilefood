@@ -70,9 +70,9 @@ static NSInteger const kSectionIndexActivity   = 3;
                                             selectedImage:[UIImage imageNamed:@"discovery_baritem_icon_h"]];
     
     NSArray *array = @[self.bannerView,
-                       self.leftImageView, self.leftLabel, self.leftButton,
-                       self.middleImageView, self.middleLabel, self.middleButton,
-                       self.rightImageView, self.rightLabel, self.rightButton,
+                       self.leftImageView,      self.leftLabel,     self.leftButton,
+                       self.middleImageView,    self.middleLabel,   self.middleButton,
+                       self.rightImageView,     self.rightLabel,    self.rightButton,
                        self.videoImageView,
                        ];
     for (UIView *view in array) {
@@ -173,8 +173,8 @@ static NSInteger const kSectionIndexActivity   = 3;
         return nil;
     }
     DiscoveryCollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
-                                                                                  withReuseIdentifier:kHeaderIdentifier
-                                                                                         forIndexPath:indexPath];
+                                                                                   withReuseIdentifier:kHeaderIdentifier
+                                                                                          forIndexPath:indexPath];
     _weak(self);
     switch (indexPath.section) {
         case kSectionIndexProduct: {
@@ -483,7 +483,7 @@ static NSInteger const kSectionIndexActivity   = 3;
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.headerReferenceSize = CGSizeMake(0, [DiscoveryCollectionHeaderView viewHeight]);
         CGFloat cellWidth = ([UIApplication sharedApplication].keyWindow.bounds.size.width - kCellMargin * 3) / 2.0;
-        layout.itemSize = CGSizeMake(cellWidth, cellWidth * kDiscoveryCollectionCellImageHeightScale + 42);
+        layout.itemSize = CGSizeMake(cellWidth, [DiscoveryCollectionCell cellHeightWithCellWidth:cellWidth]);
         layout.sectionInset = UIEdgeInsetsMake(0, kCellMargin, kCellMargin, kCellMargin);
         layout.minimumLineSpacing = kCellMargin;
         

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-/// 首页CollectionCell的组头
+/// 发现界面CollectionCell的组头
 @interface DiscoveryCollectionHeaderView : UICollectionReusableView
 
 /// 标题

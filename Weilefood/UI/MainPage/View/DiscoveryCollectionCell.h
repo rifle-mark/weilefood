@@ -8,10 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-/// Cell中图片高度=图片宽度*此数据
-static CGFloat const kDiscoveryCollectionCellImageHeightScale = 0.788;
-
-/// 首页CollectionCell
+/// 发现界面CollectionCell
 @interface DiscoveryCollectionCell : UICollectionViewCell
 
 /// 图片URL
@@ -20,5 +17,14 @@ static CGFloat const kDiscoveryCollectionCellImageHeightScale = 0.788;
 @property (nonatomic, copy  ) NSString *title;
 /// 金额
 @property (nonatomic, assign) CGFloat  money;
+
+/**
+ *  Cell展示所需要的高度
+ *
+ *  @param cellWidth Cell宽度
+ *
+ *  @return 高度
+ */
++ (CGFloat)cellHeightWithCellWidth:(CGFloat)cellWidth;
 
 @end

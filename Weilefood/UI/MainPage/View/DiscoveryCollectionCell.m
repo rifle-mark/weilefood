@@ -16,7 +16,14 @@
 
 @end
 
+/// Cell中图片高度=图片宽度*此数据
+static CGFloat const kImageHeightScale = 0.788;
+
 @implementation DiscoveryCollectionCell
+
++ (CGFloat)cellHeightWithCellWidth:(CGFloat)cellWidth {
+    return cellWidth * kImageHeightScale + 68;
+}
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -51,15 +58,15 @@
 - (void)_makeConstraints {
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.contentView);
-        make.height.equalTo(self.imageView.mas_width).multipliedBy(kDiscoveryCollectionCellImageHeightScale);
+        make.height.equalTo(self.imageView.mas_width).multipliedBy(kImageHeightScale);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.imageView.mas_bottom).offset(8);
         make.left.right.equalTo(self.contentView);
     }];
     [self.moneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleLabel.mas_baseline).offset(4);
         make.left.right.equalTo(self.contentView);
+        make.bottomMargin.equalTo(@-7);
     }];
 }
 
@@ -79,6 +86,7 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = [UIFont systemFontOfSize:13];
         _titleLabel.textColor = k_COLOR_DIMGRAY;
+        _titleLabel.numberOfLines = 2;
     }
     return _titleLabel;
 }
