@@ -90,6 +90,7 @@ __MJRefresh__       2.0.1   https://github.com/CoderMJLee/MJRefresh<br>
 __GCExtension__     https://github.com/njgarychow/ObjC-GCExtension<br>
 __MagicalRecord__   2.3.0   https://github.com/magicalpanda/MagicalRecord<br>
 __DateTools__   	1.6.1   https://github.com/MatthewYork/DateTools<br>
+__SwipeView__   	1.3.2   https://github.com/nicklockwood/SwipeView<br>
 
 ### Xcode插件
 ####__Alcatraz__ 

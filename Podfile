@@ -26,6 +26,8 @@ target 'Weilefood' do
   pod 'Aspects'
   # NSDate扩展
   pod 'DateTools'
+  # 循环分页视图，占用资源少
+  pod 'SwipeView'
 
 end
 
