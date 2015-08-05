@@ -10,6 +10,7 @@
 
 #import "DiscoveryCollectionHeaderView.h"
 #import "DiscoveryCollectionCell.h"
+#import <SwipeView/SwipeView.h>
 
 #import "MarketIndexPageVC.h"
 #import "ForwardBuyListVC.h"
@@ -19,10 +20,10 @@
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
-@interface DiscoveryVC () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface DiscoveryVC () <UICollectionViewDataSource, UICollectionViewDelegate, SwipeViewDataSource>
 
 @property (nonatomic, strong) UIView      *headerView;
-@property (nonatomic, strong) UIView      *bannerView;
+@property (nonatomic, strong) SwipeView   *bannerView;
 @property (nonatomic, strong) UIImageView *leftImageView;
 @property (nonatomic, strong) UILabel     *leftLabel;
 @property (nonatomic, strong) UIButton    *leftButton;
@@ -37,6 +38,7 @@
 @property (nonatomic, strong) UIView           *fixView;
 @property (nonatomic, strong) UICollectionView *collectionView;
 
+@property (nonatomic, strong) NSArray             *bannerAdDatas;
 @property (nonatomic, strong) NSArray             *sectionDataProducts;
 @property (nonatomic, strong) NSArray             *sectionDataForwardBuys;
 @property (nonatomic, strong) NSArray             *sectionDataNutritions;
@@ -58,6 +60,8 @@ static NSInteger const kSectionIndexProduct    = 0;
 static NSInteger const kSectionIndexForwardBuy = 1;
 static NSInteger const kSectionIndexNutrition  = 2;
 static NSInteger const kSectionIndexActivity   = 3;
+
+static NSInteger const kBannerAdImageChangeDelay = 4;
 
 @implementation DiscoveryVC
 
@@ -140,6 +144,29 @@ static NSInteger const kSectionIndexActivity   = 3;
         make.bottomMargin.equalTo(@0);
     }];
 }
+
+#pragma mark - SwipeViewDataSource
+
+- (NSInteger)numberOfItemsInSwipeView:(SwipeView *)swipeView {
+    return self.bannerAdDatas ? self.bannerAdDatas.count : 0;
+}
+
+- (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view {
+    UIImageView *imageView = nil;
+    if (!view) {
+        imageView = [[UIImageView alloc] init];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.clipsToBounds = YES;
+        imageView.frame = swipeView.bounds;
+    }
+    else {
+        imageView = (UIImageView *)view;
+    }
+    WLAdModel *ad = self.bannerAdDatas[index];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:ad.images]];
+    return imageView;
+}
+
 
 #pragma mark - UICollectionViewDataSource
 
@@ -266,6 +293,12 @@ static NSInteger const kSectionIndexActivity   = 3;
 
 - (void)_addObserve {
     _weak(self);
+    
+    [self startObserveObject:self forKeyPath:@"bannerAdDatas" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
+        _strong_check(self);
+        [self.bannerView reloadData];
+        [self performSelector:@selector(_autoNextBannerAdImage) withObject:self afterDelay:kBannerAdImageChangeDelay];
+    }];
     [self startObserveObject:self forKeyPath:@"sectionDataProducts" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
         [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:kSectionIndexProduct]];
@@ -286,66 +319,47 @@ static NSInteger const kSectionIndexActivity   = 3;
 
 - (void)_loadData {
     _weak(self);
+    [[WLServerHelper sharedInstance] ad_getListWithCallback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
+        _strong_check(self);
+        ServerHelperErrorHandle;
+        self.bannerAdDatas = apiResult;
+    }];
     [[WLServerHelper sharedInstance] video_getAdImageWithCallback:^(WLApiInfoModel *apiInfo, WLVideoAdImageModel *apiResult, NSError *error) {
         _strong_check(self);
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         [self.videoImageView sd_setImageWithURL:[NSURL URLWithString:apiResult.videoIndexPic]];
     }];
     [[WLServerHelper sharedInstance] product_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         self.sectionDataProducts = apiResult;
     }];
     [[WLServerHelper sharedInstance] forwardBuy_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         self.sectionDataForwardBuys = apiResult;
     }];
     [[WLServerHelper sharedInstance] nutrition_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         self.sectionDataNutritions = apiResult;
     }];
     [[WLServerHelper sharedInstance] activity_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         self.sectionDataActivitys = apiResult;
     }];
+}
+
+- (void)_autoNextBannerAdImage {
+    if (self.bannerView.numberOfPages > 0) {
+        NSInteger newPage = self.bannerView.currentPage + 1;
+        if (newPage >= self.bannerView.numberOfPages) {
+            newPage = 0;
+        }
+        [self.bannerView scrollToPage:newPage duration:0.3];
+    }
+    [self performSelector:@selector(_autoNextBannerAdImage) withObject:self afterDelay:kBannerAdImageChangeDelay];
 }
 
 - (UILabel *)_createButtonLabel {
@@ -366,10 +380,13 @@ static NSInteger const kSectionIndexActivity   = 3;
     return _headerView;
 }
 
-- (UIView *)bannerView {
+- (SwipeView *)bannerView {
     if (!_bannerView) {
-        _bannerView = [[UIView alloc] init];
+        _bannerView = [[SwipeView alloc] init];
         _bannerView.backgroundColor = [UIColor grayColor];
+        _bannerView.pagingEnabled = YES;
+        _bannerView.wrapEnabled = YES;
+        _bannerView.dataSource = self;
     }
     return _bannerView;
 }
