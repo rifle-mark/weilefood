@@ -352,7 +352,7 @@ static NSInteger const kBannerAdImageChangeDelay = 4;
 }
 
 - (void)_autoNextBannerAdImage {
-    if (self.bannerView.numberOfPages > 0) {
+    if (self.bannerView.numberOfPages > 0 && !self.bannerView.decelerating) {
         NSInteger newPage = self.bannerView.currentPage + 1;
         if (newPage >= self.bannerView.numberOfPages) {
             newPage = 0;
