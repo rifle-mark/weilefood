@@ -53,7 +53,12 @@
         [WLServerHelper sharedInstance].userToken = user.token;
     }
     
-    // 监听用户登录消息
+    // 监听网络状态
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        NSLog(@"Network New Status:%@", [[AFNetworkReachabilityManager sharedManager] localizedNetworkReachabilityStatusString]);
+    }];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    // 监听用户登录登出消息
     [self addObserverForNotificationName:kNotificationUserLoginSucc usingBlock:^(NSNotification *notification) {
         if (!notification.object || [notification.object isKindOfClass:[WLUserModel class]]) {
             return;
