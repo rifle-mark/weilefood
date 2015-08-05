@@ -20,20 +20,21 @@
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
-@interface DiscoveryVC () <UICollectionViewDataSource, UICollectionViewDelegate, SwipeViewDataSource>
+@interface DiscoveryVC () <UICollectionViewDataSource, UICollectionViewDelegate, SwipeViewDataSource, SwipeViewDelegate>
 
-@property (nonatomic, strong) UIView      *headerView;
-@property (nonatomic, strong) SwipeView   *bannerView;
-@property (nonatomic, strong) UIImageView *leftImageView;
-@property (nonatomic, strong) UILabel     *leftLabel;
-@property (nonatomic, strong) UIButton    *leftButton;
-@property (nonatomic, strong) UIImageView *middleImageView;
-@property (nonatomic, strong) UILabel     *middleLabel;
-@property (nonatomic, strong) UIButton    *middleButton;
-@property (nonatomic, strong) UIImageView *rightImageView;
-@property (nonatomic, strong) UILabel     *rightLabel;
-@property (nonatomic, strong) UIButton    *rightButton;
-@property (nonatomic, strong) UIImageView *videoImageView;
+@property (nonatomic, strong) UIView        *headerView;
+@property (nonatomic, strong) SwipeView     *bannerView;
+@property (nonatomic, strong) UIPageControl *pageControl;
+@property (nonatomic, strong) UIImageView   *leftImageView;
+@property (nonatomic, strong) UILabel       *leftLabel;
+@property (nonatomic, strong) UIButton      *leftButton;
+@property (nonatomic, strong) UIImageView   *middleImageView;
+@property (nonatomic, strong) UILabel       *middleLabel;
+@property (nonatomic, strong) UIButton      *middleButton;
+@property (nonatomic, strong) UIImageView   *rightImageView;
+@property (nonatomic, strong) UILabel       *rightLabel;
+@property (nonatomic, strong) UIButton      *rightButton;
+@property (nonatomic, strong) UIImageView   *videoImageView;
 
 @property (nonatomic, strong) UIView           *fixView;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -72,7 +73,7 @@ static NSInteger const kBannerAdImageChangeDelay = 4;
                                                     image:[UIImage imageNamed:@"discovery_baritem_icon_n"]
                                             selectedImage:[UIImage imageNamed:@"discovery_baritem_icon_h"]];
     
-    NSArray *array = @[self.bannerView,
+    NSArray *array = @[self.bannerView,         self.pageControl,
                        self.leftImageView,      self.leftLabel,     self.leftButton,
                        self.middleImageView,    self.middleLabel,   self.middleButton,
                        self.rightImageView,     self.rightLabel,    self.rightButton,
@@ -105,6 +106,11 @@ static NSInteger const kBannerAdImageChangeDelay = 4;
     [self.bannerView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self.bannerView.superview);
         make.height.equalTo(@(kHeaderBannerHeight));
+    }];
+    [self.pageControl mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.bannerView);
+        make.bottom.equalTo(self.bannerView);
+        make.height.equalTo(@30);
     }];
     [self.middleButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bannerView.mas_bottom);
@@ -167,6 +173,23 @@ static NSInteger const kBannerAdImageChangeDelay = 4;
     return imageView;
 }
 
+#pragma mark - SwipeViewDelegate
+
+- (void)swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView {
+    self.pageControl.currentPage = swipeView.currentPage;
+}
+
+- (void)swipeViewWillBeginDragging:(SwipeView *)swipeView {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(_autoNextBannerAdImage) object:nil];
+}
+
+- (void)swipeViewDidEndDragging:(SwipeView *)swipeView willDecelerate:(BOOL)decelerate {
+    [self performSelector:@selector(_autoNextBannerAdImage) withObject:nil afterDelay:kBannerAdImageChangeDelay];
+}
+
+- (void)swipeView:(SwipeView *)swipeView didSelectItemAtIndex:(NSInteger)index {
+    // TODO: 进入广告界面
+}
 
 #pragma mark - UICollectionViewDataSource
 
@@ -297,7 +320,8 @@ static NSInteger const kBannerAdImageChangeDelay = 4;
     [self startObserveObject:self forKeyPath:@"bannerAdDatas" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
         [self.bannerView reloadData];
-        [self performSelector:@selector(_autoNextBannerAdImage) withObject:self afterDelay:kBannerAdImageChangeDelay];
+        self.pageControl.numberOfPages = self.bannerView.numberOfPages;
+        [self performSelector:@selector(_autoNextBannerAdImage) withObject:nil afterDelay:kBannerAdImageChangeDelay];
     }];
     [self startObserveObject:self forKeyPath:@"sectionDataProducts" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
@@ -359,7 +383,7 @@ static NSInteger const kBannerAdImageChangeDelay = 4;
         }
         [self.bannerView scrollToPage:newPage duration:0.3];
     }
-    [self performSelector:@selector(_autoNextBannerAdImage) withObject:self afterDelay:kBannerAdImageChangeDelay];
+    [self performSelector:@selector(_autoNextBannerAdImage) withObject:nil afterDelay:kBannerAdImageChangeDelay];
 }
 
 - (UILabel *)_createButtonLabel {
@@ -387,8 +411,16 @@ static NSInteger const kBannerAdImageChangeDelay = 4;
         _bannerView.pagingEnabled = YES;
         _bannerView.wrapEnabled = YES;
         _bannerView.dataSource = self;
+        _bannerView.delegate = self;
     }
     return _bannerView;
+}
+
+- (UIPageControl *)pageControl {
+    if (!_pageControl) {
+        _pageControl = [[UIPageControl alloc] init];
+    }
+    return _pageControl;
 }
 
 - (UIImageView *)leftImageView {
