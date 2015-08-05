@@ -19,4 +19,17 @@
     }];
 }
 
++ (NSDictionary *)objectClassInArray {
+    return @{@"pictures":[WLProductPictureModel class],
+             @"Pictures":[WLProductPictureModel class]};
+}
+
+@end
+
+@implementation WLProductPictureModel
+
++ (void)initialize {
+    [self setupReplacedKeyFromPropertyName121:CapitalizedPropertyName];
+}
+
 @end

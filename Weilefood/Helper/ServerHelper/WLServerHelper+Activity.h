@@ -40,4 +40,11 @@
  */
 - (void)activity_getListWithCity:(NSString *)city maxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
 
+/**
+ *  获取活动已开通城市列表。(NSArray<WLActivityCityModel>)apiResult
+ *
+ *  @param callback
+ */
+- (void)activity_getCityListWithCallback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
+
 @end

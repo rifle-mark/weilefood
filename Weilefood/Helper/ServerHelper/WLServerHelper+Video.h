@@ -8,9 +8,16 @@
 
 #import "WLServerHelper.h"
 
-@class WLVideoModel;
+@class WLVideoModel, WLVideoAdImageModel;
 
 @interface WLServerHelper (Video)
+
+/**
+ *  获取视频栏目在首页和列表界面的广告图
+ *
+ *  @param callback
+ */
+- (void)video_getAdImageWithCallback:(void (^)(WLApiInfoModel *apiInfo, WLVideoAdImageModel *apiResult, NSError *error))callback;
 
 /**
  *  获取主题视频详细信息

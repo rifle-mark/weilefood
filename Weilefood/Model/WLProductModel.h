@@ -31,11 +31,26 @@
 @property (nonatomic, assign) NSUInteger channelId;
 /// 所属栏目名称
 @property (nonatomic, copy) NSString *channelName;
+/// 幻灯片图组(详情接口)
+@property (nonatomic, strong) NSArray *pictures;
 ///
 @property (nonatomic, copy) NSDate *createDate;
 ///
 @property (nonatomic, assign) NSInteger isRecommend;
 ///
 @property (nonatomic, assign) NSInteger isDeleted;
+
+@end
+
+
+/// 产品图片对象
+@interface WLProductPictureModel : NSObject
+
+/// 图片URL
+@property (nonatomic, copy) NSString *picPath;
+/// ID
+@property (nonatomic, assign) long long productId;
+/// 所属产品ID
+@property (nonatomic, assign) long long productPictureId;
 
 @end

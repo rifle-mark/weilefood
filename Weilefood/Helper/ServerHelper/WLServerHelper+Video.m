@@ -11,6 +11,11 @@
 
 @implementation WLServerHelper (Video)
 
+- (void)video_getAdImageWithCallback:(void (^)(WLApiInfoModel *apiInfo, WLVideoAdImageModel *apiResult, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"pconfig", @"detail"]];
+    [self httpGET:apiUrl parameters:nil resultClass:[WLVideoAdImageModel class] callback:callback];
+}
+
 - (void)video_getInfoWithVideoId:(NSUInteger)videoId callback:(void (^)(WLApiInfoModel *apiInfo, WLVideoModel *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"video", @"detail", @(videoId)]];
     [self httpGET:apiUrl parameters:nil resultClass:[WLVideoModel class] callback:callback];
