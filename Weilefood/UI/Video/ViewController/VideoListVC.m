@@ -47,10 +47,9 @@ static NSInteger const kPageSize       = 10;
     
     [self.view addSubview:self.collectionView];
     
-    [self.bannerImageView sd_setImageWithURL:[NSURL URLWithString:@"http://c.hiphotos.baidu.com/image/pic/item/a8014c086e061d95a0e7763979f40ad162d9ca0a.jpg"]];
-    
     [self _addObserve];
     
+    [self _loadBannerImageData];
     [self.collectionView.header beginRefreshing];
 }
 
@@ -70,6 +69,22 @@ static NSInteger const kPageSize       = 10;
     [self startObserveObject:self forKeyPath:@"videoList" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
         [self.collectionView reloadData];
+    }];
+}
+
+- (void)_loadBannerImageData {
+    _weak(self);
+    [[WLServerHelper sharedInstance] video_getAdImageWithCallback:^(WLApiInfoModel *apiInfo, WLVideoAdImageModel *apiResult, NSError *error) {
+        _strong_check(self);
+        if (error) {
+            DLog(@"%@", error);
+            return;
+        }
+        if (!apiInfo.isSuc) {
+            [MBProgressHUD showErrorWithMessage:apiInfo.message];
+            return;
+        }
+        [self.bannerImageView sd_setImageWithURL:[NSURL URLWithString:apiResult.videoListPic]];
     }];
 }
 

@@ -37,11 +37,10 @@
 @property (nonatomic, strong) UIView           *fixView;
 @property (nonatomic, strong) UICollectionView *collectionView;
 
-@property (nonatomic, strong) WLVideoModel *videoData;
-@property (nonatomic, strong) NSArray      *sectionDataProducts;
-@property (nonatomic, strong) NSArray      *sectionDataForwardBuys;
-@property (nonatomic, strong) NSArray      *sectionDataNutritions;
-@property (nonatomic, strong) NSArray      *sectionDataActivitys;
+@property (nonatomic, strong) NSArray             *sectionDataProducts;
+@property (nonatomic, strong) NSArray             *sectionDataForwardBuys;
+@property (nonatomic, strong) NSArray             *sectionDataNutritions;
+@property (nonatomic, strong) NSArray             *sectionDataActivitys;
 
 @end
 
@@ -267,10 +266,6 @@ static NSInteger const kSectionIndexActivity   = 3;
 
 - (void)_addObserve {
     _weak(self);
-    [self startObserveObject:self forKeyPath:@"videoData" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
-        _strong_check(self);
-        [self.videoImageView sd_setImageWithURL:[NSURL URLWithString:self.videoData.images]];
-    }];
     [self startObserveObject:self forKeyPath:@"sectionDataProducts" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
         [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:kSectionIndexProduct]];
@@ -291,7 +286,7 @@ static NSInteger const kSectionIndexActivity   = 3;
 
 - (void)_loadData {
     _weak(self);
-    [[WLServerHelper sharedInstance] video_getListWithPageIndex:1 pageSize:1 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
+    [[WLServerHelper sharedInstance] video_getAdImageWithCallback:^(WLApiInfoModel *apiInfo, WLVideoAdImageModel *apiResult, NSError *error) {
         _strong_check(self);
         if (error) {
             DLog(@"%@", error);
@@ -301,7 +296,7 @@ static NSInteger const kSectionIndexActivity   = 3;
             [MBProgressHUD showErrorWithMessage:apiInfo.message];
             return;
         }
-        self.videoData = [apiResult firstObject];
+        [self.videoImageView sd_setImageWithURL:[NSURL URLWithString:apiResult.videoIndexPic]];
     }];
     [[WLServerHelper sharedInstance] product_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
@@ -467,6 +462,7 @@ static NSInteger const kSectionIndexActivity   = 3;
     if (!_videoImageView) {
         _videoImageView = [[UIImageView alloc] init];
         _videoImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _videoImageView.clipsToBounds = YES;
         _videoImageView.userInteractionEnabled = YES;
         _weak(self);
         [_videoImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithActionBlock:^(UIGestureRecognizer *gesture) {
