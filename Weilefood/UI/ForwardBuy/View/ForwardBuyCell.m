@@ -78,12 +78,12 @@
 
 - (void)setActionCount:(NSUInteger)actionCount {
     _actionCount = actionCount;
-    self.actionCountLabel.text = [NSString stringWithFormat:@"%ld", actionCount];
+    self.actionCountLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)actionCount];
 }
 
 - (void)setCommentCount:(NSUInteger)commentCount {
     _commentCount = commentCount;
-    self.commentCountLabel.text = [NSString stringWithFormat:@"%ld", commentCount];
+    self.commentCountLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)commentCount];
 }
 
 #pragma mark - private methods

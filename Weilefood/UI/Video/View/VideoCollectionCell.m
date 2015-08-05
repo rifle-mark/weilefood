@@ -56,7 +56,7 @@ static CGFloat const kImageHeightScale = 0.788;
 
 - (void)setPoints:(NSInteger)points {
     _points = points;
-    self.pointsLabel.text = [NSString stringWithFormat:@"观看积分 %ld", points];
+    self.pointsLabel.text = [NSString stringWithFormat:@"观看积分 %ld", (long)points];
 }
 
 - (void)favoriteBlock:(void (^)(VideoCollectionCell *))block {
