@@ -125,14 +125,7 @@ static NSInteger const kPageSize = 10;
         if (self.tableView.footer.isRefreshing) {
             [self.tableView.footer endRefreshing];
         }
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         self.productList = isLatest ? apiResult : [self.productList arrayByAddingObjectsFromArray:apiResult];
         self.tableView.footer.hidden = !apiResult || apiResult.count < kPageSize;
     }];

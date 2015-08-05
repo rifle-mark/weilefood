@@ -183,14 +183,7 @@
     [[WLServerHelper sharedInstance] user_loginWithUserName:self.phoneTextField.text password:self.passwordTextField.text callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
         _strong_check(self);
         self.loginButton.enabled = YES;
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         DLog(@"登录成功");
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserLoginSucc object:apiResult];
     }];
@@ -216,6 +209,7 @@
     else
         NSAssert(NO, @"不支持此平台登录");
     
+    _weak(self);
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:type];
     snsPlatform.loginClickHandler(self, [UMSocialControllerService defaultControllerService], YES, ^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
@@ -223,14 +217,8 @@
             NSLog(@"昵称:%@, uid:%@, token:%@, 头像链接:%@", snsAccount.userName, snsAccount.usid, snsAccount.accessToken, snsAccount.iconURL);
             
             [[WLServerHelper sharedInstance] user_socialLoginWithPlatform:platform openId:snsAccount.usid token:snsAccount.accessToken avatar:snsAccount.iconURL appId:@"" nickName:snsAccount.userName callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
-                if (error) {
-                    DLog(@"%@", error);
-                    return;
-                }
-                if (!apiInfo.isSuc) {
-                    [MBProgressHUD showErrorWithMessage:apiInfo.message];
-                    return;
-                }
+                _strong_check(self);
+                ServerHelperErrorHandle;
                 DLog(@"第三方平台登录成功");
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserLoginSucc object:apiResult];
             }];

@@ -153,15 +153,7 @@
     [[WLServerHelper sharedInstance] user_getPhoneCodeWithPhoneNum:phoneNum callback:^(WLApiInfoModel *apiInfo, NSString *phoneCode, NSError *error) {
         _strong_check(self);
         self.securityCodeButton.enabled = YES;
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
-        
+        ServerHelperErrorHandle;
         self.lastSecurityCode = phoneCode;
         DLog(@"验证码获取成功:%@", phoneCode);
         self.securityCodeButton.enabled = NO;
@@ -226,14 +218,7 @@
     [[WLServerHelper sharedInstance] user_regWithUserName:self.phoneTextField.text password:self.passwordTextField.text callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
         _strong_check(self);
         self.submitButton.enabled = YES;
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         DLog(@"注册成功");
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserLoginSucc object:apiResult];
     }];

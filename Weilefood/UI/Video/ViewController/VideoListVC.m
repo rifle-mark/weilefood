@@ -76,14 +76,7 @@ static NSInteger const kPageSize       = 10;
     _weak(self);
     [[WLServerHelper sharedInstance] video_getAdImageWithCallback:^(WLApiInfoModel *apiInfo, WLVideoAdImageModel *apiResult, NSError *error) {
         _strong_check(self);
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         [self.bannerImageView sd_setImageWithURL:[NSURL URLWithString:apiResult.videoListPic]];
     }];
 }
@@ -99,14 +92,7 @@ static NSInteger const kPageSize       = 10;
         if (self.collectionView.footer.isRefreshing) {
             [self.collectionView.footer endRefreshing];
         }
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         self.videoList = isLatest ? apiResult : [self.videoList arrayByAddingObjectsFromArray:apiResult];
         self.collectionView.footer.hidden = !apiResult || apiResult.count < kPageSize;
     }];

@@ -83,4 +83,19 @@
     return [NSString stringWithFormat:@"%@%@", [[propertyName substringToIndex:1] uppercaseString], [propertyName substringFromIndex:1]]; \
 }
 
+/**
+ *  网络API接口回调中对错误的标准处理过程
+ */
+#define ServerHelperErrorHandle \
+if (error) {\
+    DLog(@"%@", error);\
+    return;\
+}\
+if (!apiInfo.isSuc) {\
+    if (apiInfo.message && apiInfo.message.length > 0) {\
+        [MBProgressHUD showErrorWithMessage:apiInfo.message];\
+    }\
+    return;\
+}
+
 #endif

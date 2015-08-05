@@ -75,14 +75,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
     [[WLServerHelper sharedInstance] product_searchWithKeyword:self.searchTextField.text maxDate:date pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         [MBProgressHUD hideLoading];
         _strong_check(self);
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         self.productList = apiResult;
     }];
 }
@@ -99,14 +92,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
         if (self.tableView.footer.isRefreshing) {
             [self.tableView.footer endRefreshing];
         }
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         self.productList = [self.productList arrayByAddingObjectsFromArray:apiResult];
     }];
 }
