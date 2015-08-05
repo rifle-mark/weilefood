@@ -9,7 +9,9 @@
 #ifndef Weilefood_NotificationMacro_h
 #define Weilefood_NotificationMacro_h
 
-/// 用户登录成功
-#define kNotificationUserLoginSucc @"kNotificationUserLoginSucc"
+/// 用户登录成功消息
+static NSString *kNotificationUserLoginSucc = @"kNotificationUserLoginSucc";
+/// 用户登出消息
+static NSString *kNotificationUserLogout    = @"kNotificationUserLogout";
 
 #endif

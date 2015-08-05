@@ -15,16 +15,16 @@
 /**
  *  查询WLUserModel
  */
-+ (WLUserModel *)findUser;
++ (WLUserModel *)user_find;
 
 /**
  *  保存WLUserModel
  */
-+ (void)saveWithUser:(WLUserModel *)model;
++ (void)user_save:(WLUserModel *)model;
 
 /**
  *  删除WLUserModel
  */
-+ (void)deleteUser;
++ (void)user_delete;
 
 @end

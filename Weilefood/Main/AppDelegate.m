@@ -48,19 +48,23 @@
     [MagicalRecord setupCoreDataStackWithStoreNamed:kCoreDataStoreName];
     
     // 加载本地登录用户token
-    WLUserModel *user = [WLDatabaseHelper findUser];
+    WLUserModel *user = [WLDatabaseHelper user_find];
     if (user) {
         [WLServerHelper sharedInstance].userToken = user.token;
     }
     
     // 监听用户登录消息
     [self addObserverForNotificationName:kNotificationUserLoginSucc usingBlock:^(NSNotification *notification) {
-        WLUserModel *user = notification.object;
-        if (!user) {
+        if (!notification.object || [notification.object isKindOfClass:[WLUserModel class]]) {
             return;
         }
+        WLUserModel *user = notification.object;
         [WLServerHelper sharedInstance].userToken = user.token;
-        [WLDatabaseHelper saveWithUser:user];
+        [WLDatabaseHelper user_save:user];
+    }];
+    [self addObserverForNotificationName:kNotificationUserLogout usingBlock:^(NSNotification *notification) {
+        [WLServerHelper sharedInstance].userToken = nil;
+        [WLDatabaseHelper user_delete];
     }];
     
     // 自定义BackButton样式，移除按钮文字
