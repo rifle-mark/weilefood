@@ -17,6 +17,8 @@
 #import "ActivityListVC.h"
 #import "VideoListVC.h"
 
+#import "ProductInfoVC.h"
+
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
@@ -310,6 +312,20 @@ static NSInteger const kBannerAdImageChangeDelay = 4;
     cell.title = title;
     cell.money = money;
     return cell;
+}
+
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case kSectionIndexProduct: {
+            WLProductModel *product = self.sectionDataProducts[indexPath.item];
+            [self.navigationController pushViewController:[[ProductInfoVC alloc] initWithProduct:product] animated:YES];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 #pragma mark - private methons

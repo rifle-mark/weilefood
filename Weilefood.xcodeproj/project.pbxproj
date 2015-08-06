@@ -57,6 +57,8 @@
 		249A73D21B569D4100F46F3D /* WLUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73CC1B569D4100F46F3D /* WLUserModel.m */; };
 		249A9BA61B7249F3008203C8 /* WLActivityCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A9BA51B7249F3008203C8 /* WLActivityCityModel.m */; };
 		249A9BA91B724B37008203C8 /* WLVideoAdImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A9BA81B724B37008203C8 /* WLVideoAdImageModel.m */; };
+		249A9BAF1B726F75008203C8 /* ProductTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A9BAE1B726F75008203C8 /* ProductTableHeaderView.m */; };
+		249A9BB21B726FBE008203C8 /* ProductSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A9BB11B726FBE008203C8 /* ProductSectionHeaderView.m */; };
 		249B9B291B6340C3000A85B0 /* MainPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249B9B281B6340C3000A85B0 /* MainPageVC.m */; };
 		249EF30D1B64BEDA00AAEBE0 /* MarketIndexPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249EF30C1B64BEDA00AAEBE0 /* MarketIndexPageVC.m */; };
 		24A0266B1B6DDEC500C6139B /* MarketChildChannelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A0266A1B6DDEC500C6139B /* MarketChildChannelView.m */; };
@@ -266,6 +268,10 @@
 		249A9BA51B7249F3008203C8 /* WLActivityCityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLActivityCityModel.m; sourceTree = "<group>"; };
 		249A9BA71B724B37008203C8 /* WLVideoAdImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLVideoAdImageModel.h; sourceTree = "<group>"; };
 		249A9BA81B724B37008203C8 /* WLVideoAdImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLVideoAdImageModel.m; sourceTree = "<group>"; };
+		249A9BAD1B726F75008203C8 /* ProductTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductTableHeaderView.h; sourceTree = "<group>"; };
+		249A9BAE1B726F75008203C8 /* ProductTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductTableHeaderView.m; sourceTree = "<group>"; };
+		249A9BB01B726FBE008203C8 /* ProductSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductSectionHeaderView.h; sourceTree = "<group>"; };
+		249A9BB11B726FBE008203C8 /* ProductSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductSectionHeaderView.m; sourceTree = "<group>"; };
 		249B9B271B6340C3000A85B0 /* MainPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageVC.h; sourceTree = "<group>"; };
 		249B9B281B6340C3000A85B0 /* MainPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageVC.m; sourceTree = "<group>"; };
 		249EF30B1B64BEDA00AAEBE0 /* MarketIndexPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketIndexPageVC.h; sourceTree = "<group>"; };
@@ -631,6 +637,10 @@
 				24C792671B666B4E007DCB30 /* MarketProductCell.m */,
 				24A026691B6DDEC500C6139B /* MarketChildChannelView.h */,
 				24A0266A1B6DDEC500C6139B /* MarketChildChannelView.m */,
+				249A9BAD1B726F75008203C8 /* ProductTableHeaderView.h */,
+				249A9BAE1B726F75008203C8 /* ProductTableHeaderView.m */,
+				249A9BB01B726FBE008203C8 /* ProductSectionHeaderView.h */,
+				249A9BB11B726FBE008203C8 /* ProductSectionHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1424,6 +1434,7 @@
 				2482E6381B5E7CB1005815E8 /* WLOrderDetailModel.m in Sources */,
 				24B8C06C1B5242BC001C5722 /* AGIPCPreviewController.m in Sources */,
 				24CDCC031B4F792E00BDE8CB /* UIToolbar+GCDelegateBlock.m in Sources */,
+				249A9BAF1B726F75008203C8 /* ProductTableHeaderView.m in Sources */,
 				24CDCC021B4F792E00BDE8CB /* UITextView+GCDelegateBlock.m in Sources */,
 				24CDCBF51B4F792E00BDE8CB /* UICollectionView+GCDelegateAndDataSourceBlock.m in Sources */,
 				24C32EC91B613F6100D509A4 /* WLDatabaseHelper.m in Sources */,
@@ -1480,6 +1491,7 @@
 				24CDCC181B4F792E00BDE8CB /* NSObject+GCAccessor.m in Sources */,
 				24CDCBF21B4F792E00BDE8CB /* UITextViewDelegateImplementationProxy.m in Sources */,
 				24CDCBE51B4F792E00BDE8CB /* UICollectionViewDelegateAndDataSourceImplementationProxy.m in Sources */,
+				249A9BB21B726FBE008203C8 /* ProductSectionHeaderView.m in Sources */,
 				24CAC42F1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m in Sources */,
 				24CAC4451B5808B900E3C4D5 /* WLActivityModel.m in Sources */,
 				24CDCBE61B4F792E00BDE8CB /* UIGestureRecognizerDelegateImplementProxy.m in Sources */,

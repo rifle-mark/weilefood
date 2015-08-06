@@ -45,8 +45,8 @@ static NSString *const kCellIdentifier = @"MYCELL";
     }];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self.searchTextField becomeFirstResponder];
 }
 
@@ -137,12 +137,12 @@ static NSString *const kCellIdentifier = @"MYCELL";
             _strong_check(self, nil);
             MarketProductCell *cell = [view dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:path];
             WLProductModel *product = self.productList[path.row];
-            cell.imageUrl = product.images;
-            cell.tagType = product.channelId;
-            cell.name = product.productName;
-            cell.number = product.count;
-            cell.price = product.price;
-            cell.actionCount = product.actionCount;
+            cell.imageUrl     = product.images;
+            cell.tagType      = product.channelId;
+            cell.name         = product.productName;
+            cell.number       = product.count;
+            cell.price        = product.price;
+            cell.actionCount  = product.actionCount;
             cell.commentCount = product.commentCount;
             return cell;
         }];
