@@ -83,7 +83,7 @@ static NSInteger const kImageChangeDelay = 4;
 
 - (void)setNumber:(NSInteger)number {
     _number = number;
-    self.numberLabel.text = [NSString stringWithFormat:@" %ld份 ", number];
+    self.numberLabel.text = [NSString stringWithFormat:@" %ld份 ", (long)number];
 }
 
 - (void)setPrice:(CGFloat)price {
