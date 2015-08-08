@@ -28,8 +28,8 @@ PODS:
   - MagicalRecord (2.3.0)
   - Masonry (0.6.2)
   - MBProgressHUD (0.9.1)
-  - MJExtension (2.5.5)
-  - MJRefresh (2.3.2)
+  - MJExtension (2.5.6)
+  - MJRefresh (2.4.1)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
@@ -60,8 +60,8 @@ SPEC CHECKSUMS:
   MagicalRecord: 89eb7d7ead39fb37f01c3d010665ee94d17f8dba
   Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  MJExtension: fa526531d00a7c88771bf72e626bb49fb9292b9c
-  MJRefresh: 0f6f5e8387970607c26080b44058b229a23065d7
+  MJExtension: 5ea3e326162ccc07c60afe8cc36c936bba20d0d5
+  MJRefresh: 55bedd6a85e23878db77ddd3889bfde678a905f8
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SwipeView: bd67cfaf7760c036438446b3ccb28a3b84fce009
   UMengAnalytics-NO-IDFA: e41024644de702e450093ef043af20b5fbe06cbc
