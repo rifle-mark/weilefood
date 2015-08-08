@@ -31,13 +31,18 @@ typedef NS_ENUM(NSInteger, MarketProductCellTag) {
 @property (nonatomic, assign) MarketProductCellTag tagType;
 /// 名称
 @property (nonatomic, copy  ) NSString             *name;
-/// 剩余数量
-@property (nonatomic, assign) NSInteger            number;
 /// 单价
 @property (nonatomic, assign) CGFloat              price;
 /// 赞数
 @property (nonatomic, assign) NSUInteger           actionCount;
 /// 评论数
 @property (nonatomic, assign) NSUInteger           commentCount;
+
+/**
+ *  cell展示所需要的高度
+ *
+ *  @return 高度
+ */
++ (CGFloat)cellHeight;
 
 @end

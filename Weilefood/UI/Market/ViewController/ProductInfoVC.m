@@ -84,6 +84,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
         make.left.equalTo(self.addCartButton.mas_right);
         make.top.bottom.right.equalTo(self.footerView);
     }];
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 
@@ -113,15 +114,10 @@ static NSString *const kCellIdentifier = @"MYCELL";
     self.sectionHeaderView.commentCount = self.product.commentCount;
     
     [self.webView loadHTMLString:self.product.desc baseURL:nil];
-//    NSURLRequest *r = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://mail.163.com"]];
-//    [self.webView loadRequest:r];
 }
 
 - (void)_resetWebViewHeight {
     if (self.webView.superview) {
-        [self.webView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(@(self.webView.scrollView.contentSize.height ?: 10));
-        }];
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
@@ -130,8 +126,8 @@ static NSString *const kCellIdentifier = @"MYCELL";
 
 - (ProductTableHeaderView *)tableHeaderView {
     if (!_tableHeaderView) {
-        _tableHeaderView = [[ProductTableHeaderView alloc] init];
-        _tableHeaderView.frame = CGRectMake(0, 0, V_W_([UIApplication sharedApplication].keyWindow), [ProductTableHeaderView viewHeight]);
+        CGRect frame = CGRectMake(0, 0, V_W_([UIApplication sharedApplication].keyWindow), [ProductTableHeaderView viewHeight]);
+        _tableHeaderView = [[ProductTableHeaderView alloc] initWithFrame:frame];
         _tableHeaderView.backgroundColor = k_COLOR_WHITE;
     }
     return _tableHeaderView;
@@ -163,7 +159,6 @@ static NSString *const kCellIdentifier = @"MYCELL";
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.sectionHeaderHeight = [ProductSectionHeaderView viewHeight];
-        _tableView.estimatedRowHeight = 200;
         _tableView.tableHeaderView = self.tableHeaderView;
         _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
@@ -175,6 +170,10 @@ static NSString *const kCellIdentifier = @"MYCELL";
             _strong_check(self, nil);
             return self.sectionHeaderView;
         }];
+        [_tableView withBlockForRowHeight:^CGFloat(UITableView *view, NSIndexPath *path) {
+            _strong_check(self, 0);
+            return self.webView.scrollView.contentSize.height ?: 10;
+        }];
         [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
             _strong_check(self, nil);
             UITableViewCell *cell = [view dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:path];
@@ -182,7 +181,6 @@ static NSString *const kCellIdentifier = @"MYCELL";
             [cell.contentView addSubview:self.webView];
             [self.webView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.edges.equalTo(self.webView.superview);
-                make.height.equalTo(@(self.webView.scrollView.contentSize.height ?: 10));
             }];
             return cell;
         }];

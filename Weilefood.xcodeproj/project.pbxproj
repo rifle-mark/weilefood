@@ -62,6 +62,7 @@
 		249B9B291B6340C3000A85B0 /* MainPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249B9B281B6340C3000A85B0 /* MainPageVC.m */; };
 		249EF30D1B64BEDA00AAEBE0 /* MarketIndexPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249EF30C1B64BEDA00AAEBE0 /* MarketIndexPageVC.m */; };
 		24A0266B1B6DDEC500C6139B /* MarketChildChannelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A0266A1B6DDEC500C6139B /* MarketChildChannelView.m */; };
+		24B2E2AD1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B2E2AC1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m */; };
 		24B8C0641B5242BC001C5722 /* AGImagePickerController+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C04B1B5242BC001C5722 /* AGImagePickerController+Helper.m */; };
 		24B8C0651B5242BC001C5722 /* AGImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 24B8C04C1B5242BC001C5722 /* AGImagePickerController.bundle */; };
 		24B8C0661B5242BC001C5722 /* AGImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C04E1B5242BC001C5722 /* AGImagePickerController.m */; };
@@ -163,7 +164,7 @@
 		24E66DC21B6271810081324A /* MBProgressHUD+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DC11B6271810081324A /* MBProgressHUD+Message.m */; };
 		24E66DC41B6271870081324A /* MBProgressHUDImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24E66DC31B6271870081324A /* MBProgressHUDImage.xcassets */; };
 		24E66DC81B6277190081324A /* ResetPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DC71B6277190081324A /* ResetPasswordVC.m */; };
-		24E8DD391B648DF4007F137E /* DiscoveryCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E8DD381B648DF4007F137E /* DiscoveryCollectionHeaderView.m */; };
+		24E8DD391B648DF4007F137E /* DiscoveryCollectionSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E8DD381B648DF4007F137E /* DiscoveryCollectionSectionHeaderView.m */; };
 		24E8DD3C1B6491B5007F137E /* DiscoveryCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E8DD3B1B6491B5007F137E /* DiscoveryCollectionCell.m */; };
 		E02DC6C27427F1714243E3AE /* libPods-Weilefood.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B0DAFB8AFA7EC3AE1728AE /* libPods-Weilefood.a */; };
 /* End PBXBuildFile section */
@@ -278,6 +279,8 @@
 		249EF30C1B64BEDA00AAEBE0 /* MarketIndexPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketIndexPageVC.m; sourceTree = "<group>"; };
 		24A026691B6DDEC500C6139B /* MarketChildChannelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketChildChannelView.h; sourceTree = "<group>"; };
 		24A0266A1B6DDEC500C6139B /* MarketChildChannelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketChildChannelView.m; sourceTree = "<group>"; };
+		24B2E2AB1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryCollectionHeaderView.h; sourceTree = "<group>"; };
+		24B2E2AC1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryCollectionHeaderView.m; sourceTree = "<group>"; };
 		24B8C04A1B5242BC001C5722 /* AGImagePickerController+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AGImagePickerController+Helper.h"; sourceTree = "<group>"; };
 		24B8C04B1B5242BC001C5722 /* AGImagePickerController+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AGImagePickerController+Helper.m"; sourceTree = "<group>"; };
 		24B8C04C1B5242BC001C5722 /* AGImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AGImagePickerController.bundle; sourceTree = "<group>"; };
@@ -494,8 +497,8 @@
 		24E66DC51B6271900081324A /* ColorMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorMacro.h; sourceTree = "<group>"; };
 		24E66DC61B6277190081324A /* ResetPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResetPasswordVC.h; sourceTree = "<group>"; };
 		24E66DC71B6277190081324A /* ResetPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResetPasswordVC.m; sourceTree = "<group>"; };
-		24E8DD371B648DF4007F137E /* DiscoveryCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryCollectionHeaderView.h; sourceTree = "<group>"; };
-		24E8DD381B648DF4007F137E /* DiscoveryCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryCollectionHeaderView.m; sourceTree = "<group>"; };
+		24E8DD371B648DF4007F137E /* DiscoveryCollectionSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryCollectionSectionHeaderView.h; sourceTree = "<group>"; };
+		24E8DD381B648DF4007F137E /* DiscoveryCollectionSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryCollectionSectionHeaderView.m; sourceTree = "<group>"; };
 		24E8DD3A1B6491B5007F137E /* DiscoveryCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryCollectionCell.h; sourceTree = "<group>"; };
 		24E8DD3B1B6491B5007F137E /* DiscoveryCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryCollectionCell.m; sourceTree = "<group>"; };
 		27B0DAFB8AFA7EC3AE1728AE /* libPods-Weilefood.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weilefood.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -602,8 +605,10 @@
 		240D79921B5FEB42007E2E43 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				24E8DD371B648DF4007F137E /* DiscoveryCollectionHeaderView.h */,
-				24E8DD381B648DF4007F137E /* DiscoveryCollectionHeaderView.m */,
+				24B2E2AB1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.h */,
+				24B2E2AC1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m */,
+				24E8DD371B648DF4007F137E /* DiscoveryCollectionSectionHeaderView.h */,
+				24E8DD381B648DF4007F137E /* DiscoveryCollectionSectionHeaderView.m */,
 				24E8DD3A1B6491B5007F137E /* DiscoveryCollectionCell.h */,
 				24E8DD3B1B6491B5007F137E /* DiscoveryCollectionCell.m */,
 			);
@@ -1409,7 +1414,7 @@
 				247EA72F1B711B2F00E6A161 /* WLServerHelper+Nutrition.m in Sources */,
 				24CDCBFC1B4F792E00BDE8CB /* UIScrollView+GCDelegateBlock.m in Sources */,
 				24CDCC131B4F792E00BDE8CB /* UITextField+GCDelegate.m in Sources */,
-				24E8DD391B648DF4007F137E /* DiscoveryCollectionHeaderView.m in Sources */,
+				24E8DD391B648DF4007F137E /* DiscoveryCollectionSectionHeaderView.m in Sources */,
 				24C32EBE1B61229D00D509A4 /* RegisterVC.m in Sources */,
 				24CAC43C1B58050900E3C4D5 /* WLProductModel.m in Sources */,
 				245936AF1B5A3AB3008FFAB8 /* WLServerHelper+Activity.m in Sources */,
@@ -1538,6 +1543,7 @@
 				24D55DE31B67EA1100EC6373 /* UINavigationController+UserBarButtonItem.m in Sources */,
 				24CDCBF71B4F792E00BDE8CB /* UIImagePickerController+GCDelegateBlock.m in Sources */,
 				2482E63B1B5E8285005815E8 /* WLOrderProductModel.m in Sources */,
+				24B2E2AD1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m in Sources */,
 				249A73D11B569D4100F46F3D /* WLUploadImageModel.m in Sources */,
 				24CDCC111B4F792E00BDE8CB /* UITabBarController+GCDelegate.m in Sources */,
 				24D55DE61B67EB2400EC6373 /* UIBarButtonItem+Ext.m in Sources */,

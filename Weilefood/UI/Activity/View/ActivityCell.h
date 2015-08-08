@@ -22,4 +22,11 @@
 /// 是否已参加
 @property (nonatomic, assign  ) BOOL     participated;
 
+/**
+ *  cell展示所需要的高度
+ *
+ *  @return 高度
+ */
++ (CGFloat)cellHeight;
+
 @end

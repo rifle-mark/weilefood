@@ -66,10 +66,11 @@ static NSInteger const kPageSize       = 10;
         make.width.equalTo(self.channelButton2);
     }];
     [self.channelButton2 mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.width.equalTo(self.channelButton1);
+        make.top.bottom.equalTo(self.channelButton1);
         make.left.equalTo(self.channelButton1.mas_right);
         make.right.equalTo(self.channelsView);
     }];
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 #pragma mark - private methons
@@ -161,7 +162,7 @@ static NSInteger const kPageSize       = 10;
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _tableView.estimatedRowHeight = 280;
+        _tableView.rowHeight = [ForwardBuyCell cellHeight];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[ForwardBuyCell class] forCellReuseIdentifier:kCellIdentifier];
         _weak(self);

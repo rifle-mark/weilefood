@@ -7,11 +7,14 @@
 //
 
 #import "UINavigationController+UserBarButtonItem.h"
+#import "LoginVC.h"
 
 @implementation UINavigationController (UserBarButtonItem)
 
 - (void)_userAction {
-    DLog(@"");
+    LoginVC *vc = [[LoginVC alloc] init];
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nc animated:YES completion:nil];
 }
 
 - (UIBarButtonItem *)createUserBarButtonItem {

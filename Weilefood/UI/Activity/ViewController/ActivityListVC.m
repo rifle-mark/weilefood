@@ -48,9 +48,10 @@ static NSInteger const kPageSize       = 10;
     [super viewDidLayoutSubviews];
     
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(self.topLayoutGuide.length);
-        make.left.right.bottom.equalTo(self.view);
+        make.edges.equalTo(self.view);
     }];
+    
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 #pragma mark - private methons
@@ -112,7 +113,7 @@ static NSInteger const kPageSize       = 10;
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _tableView.estimatedRowHeight = 280;
+        _tableView.rowHeight = [ActivityCell cellHeight];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[ActivityCell class] forCellReuseIdentifier:kCellIdentifier];
         _weak(self);

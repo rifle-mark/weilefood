@@ -1,5 +1,5 @@
 //
-//  DiscoveryCollectionHeaderView.h
+//  DiscoveryCollectionSectionHeaderView.h
 //  Weilefood
 //
 //  Created by kelei on 15/7/26.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /// 发现界面CollectionCell的组头
-@interface DiscoveryCollectionHeaderView : UICollectionReusableView
+@interface DiscoveryCollectionSectionHeaderView : UICollectionReusableView
 
 /// 标题
 @property (nonatomic, copy) NSString *title;

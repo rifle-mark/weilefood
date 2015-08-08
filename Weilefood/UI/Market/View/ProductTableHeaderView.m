@@ -30,8 +30,8 @@ static NSInteger const kImageChangeDelay = 4;
     return V_W_([UIApplication sharedApplication].keyWindow) * 2.0 / 3.0 + 10 + kTitleFont.lineHeight * 2 + 8 + kPriceFont.lineHeight;
 }
 
-- (id)init {
-    if (self = [super init]) {
+- (id)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
         [self addSubview:self.swipeView];
         [self addSubview:self.pageControl];
         [self addSubview:self.titleLabel];
@@ -63,7 +63,7 @@ static NSInteger const kImageChangeDelay = 4;
     }];
     [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).offset(-10);
-        make.bottomMargin.equalTo(@0);
+        make.bottom.equalTo(self.priceLabel.superview);
         make.height.equalTo(@(self.priceLabel.font.lineHeight));
     }];
 }

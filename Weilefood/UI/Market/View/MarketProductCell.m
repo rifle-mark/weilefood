@@ -13,7 +13,6 @@
 @property (nonatomic, strong) UIImageView *picImageView;
 @property (nonatomic, strong) UIImageView *tagImageView;
 @property (nonatomic, strong) UILabel     *nameLabel;
-//@property (nonatomic, strong) UILabel     *numberLabel;
 @property (nonatomic, strong) UILabel     *priceLabel;
 @property (nonatomic, strong) UIImageView *actionImageView;
 @property (nonatomic, strong) UILabel     *actionCountLabel;
@@ -25,20 +24,22 @@
 
 @implementation MarketProductCell
 
++ (CGFloat)cellHeight {
+    return 10 + (V_W_([UIApplication sharedApplication].keyWindow) - 20) * 2.0 / 3.0 + 71;
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self.contentView addSubview:self.picImageView];
         [self.contentView addSubview:self.tagImageView];
         [self.contentView addSubview:self.nameLabel];
-//        [self.contentView addSubview:self.numberLabel];
         [self.contentView addSubview:self.priceLabel];
         [self.contentView addSubview:self.actionImageView];
         [self.contentView addSubview:self.actionCountLabel];
         [self.contentView addSubview:self.commentImageView];
         [self.contentView addSubview:self.commentCountLabel];
         [self.contentView addSubview:self.footerView];
-        
         [self _makeConstraints];
     }
     return self;
@@ -75,11 +76,6 @@
 - (void)setName:(NSString *)name {
     _name = [name copy];
     self.nameLabel.text = name;
-}
-
-- (void)setNumber:(NSInteger)number {
-    _number = number;
-//    self.numberLabel.text = [NSString stringWithFormat:@" 剩余：%ld份 ", number];
 }
 
 - (void)setPrice:(CGFloat)price {
@@ -139,7 +135,7 @@
     
     [self.footerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.priceLabel.mas_bottom).offset(8);
-        make.left.bottom.right.equalTo(self.contentView);
+        make.left.right.equalTo(self.contentView);
         make.height.equalTo(@8);
     }];
 }
@@ -170,17 +166,6 @@
     }
     return _nameLabel;
 }
-
-//- (UILabel *)numberLabel {
-//    if (!_numberLabel) {
-//        _numberLabel = [[UILabel alloc] init];
-//        _numberLabel.font = [UIFont systemFontOfSize:12];
-//        _numberLabel.textColor = [UIColor whiteColor];
-//        _numberLabel.backgroundColor = [UIColor blueColor];
-//        _numberLabel.layer.cornerRadius = 10;
-//    }
-//    return _numberLabel;
-//}
 
 - (UILabel *)priceLabel {
     if (!_priceLabel) {

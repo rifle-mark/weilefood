@@ -41,8 +41,9 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0));
+        make.edges.equalTo(self.view);
     }];
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -124,7 +125,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _tableView.estimatedRowHeight = 340;
+        _tableView.rowHeight = [MarketProductCell cellHeight];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[MarketProductCell class] forCellReuseIdentifier:kCellIdentifier];
         _tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(_loadMore)];
@@ -140,7 +141,6 @@ static NSString *const kCellIdentifier = @"MYCELL";
             cell.imageUrl     = product.images;
             cell.tagType      = product.channelId;
             cell.name         = product.productName;
-            cell.number       = product.count;
             cell.price        = product.price;
             cell.actionCount  = product.actionCount;
             cell.commentCount = product.commentCount;

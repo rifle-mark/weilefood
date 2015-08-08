@@ -57,9 +57,9 @@ static NSInteger const kPageSize       = 10;
     [super viewDidLayoutSubviews];
     
     [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(self.topLayoutGuide.length);
-        make.left.right.bottom.equalTo(self.view);
+        make.edges.equalTo(self.view);
     }];
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 #pragma mark - private methons

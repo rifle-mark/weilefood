@@ -91,7 +91,6 @@ static NSInteger const kPageSize = 10;
     [self.channelButton1 mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.channelsView).offset(1);
         make.left.bottom.equalTo(self.channelsView);
-        make.width.equalTo(self.channelButton2);
     }];
     [self.channelButton2 mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.width.equalTo(self.channelButton1);
@@ -102,6 +101,7 @@ static NSInteger const kPageSize = 10;
         make.left.equalTo(self.channelButton2.mas_right);
         make.right.equalTo(self.channelsView);
     }];
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 #pragma mark - private methons
@@ -264,7 +264,7 @@ static NSInteger const kPageSize = 10;
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _tableView.estimatedRowHeight = 340;
+        _tableView.rowHeight = [MarketProductCell cellHeight];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[MarketProductCell class] forCellReuseIdentifier:kCellIdentifier];
         _weak(self);
@@ -286,7 +286,6 @@ static NSInteger const kPageSize = 10;
             WLProductModel *produect = self.productList[path.row];
             cell.imageUrl     = produect.images;
             cell.name         = produect.productName;
-            cell.number       = produect.count;
             cell.price        = produect.price;
             cell.actionCount  = produect.actionCount;
             cell.commentCount = produect.commentCount;

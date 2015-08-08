@@ -26,4 +26,11 @@
 /// 预购结束时间
 @property (nonatomic, strong) NSDate     *endDate;
 
+/**
+ *  cell展示所需要的高度
+ *
+ *  @return 高度
+ */
++ (CGFloat)cellHeight;
+
 @end

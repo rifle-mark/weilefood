@@ -130,6 +130,7 @@
         make.left.right.height.equalTo(self.phoneBGView);
         make.bottom.equalTo(self.submitButton.superview).offset(-15);
     }];
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 #pragma mark - private methons

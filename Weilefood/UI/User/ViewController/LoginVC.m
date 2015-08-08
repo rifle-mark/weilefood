@@ -16,7 +16,8 @@
 
 @interface LoginVC ()
 
-@property (nonatomic, strong) UIView       *fixView;
+@property (nonatomic, strong) UIBarButtonItem *closeItem;
+
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView       *contentView;
 
@@ -46,8 +47,9 @@
     
     self.title = @"登录";
     self.view.backgroundColor = [UIColor whiteColor];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navigationItem.leftBarButtonItem = self.closeItem;
     
-    [self.view addSubview:self.fixView];
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.contentView];
     
@@ -75,8 +77,7 @@
     [super viewDidLayoutSubviews];
     
     [self.scrollView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.view);
-        make.top.equalTo(@(self.topLayoutGuide.length));
+        make.edges.equalTo(self.view);
     }];
     [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.scrollView);
@@ -154,11 +155,16 @@
         make.top.equalTo(self.weixinLoginButton.mas_bottom).offset(15);
         make.centerX.equalTo(self.weixinLoginButton);
         make.height.equalTo(@(self.weixinLabel.font.lineHeight));
-        make.bottomMargin.equalTo(@-20);
+        make.bottom.equalTo(self.weixinLabel.superview).offset(-20);
     }];
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 #pragma mark - private methons
+
+- (void)_closeAction {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (void)_resetPasswordAction {
     [self.navigationController pushViewController:[[ResetPasswordVC alloc] init] animated:YES];
@@ -228,11 +234,11 @@
 
 #pragma mark - private property methons
 
-- (UIView *)fixView{
-    if (!_fixView) {
-        _fixView = [[UIView alloc] init];
+- (UIBarButtonItem *)closeItem {
+    if (!_closeItem) {
+        _closeItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(_closeAction)];
     }
-    return _fixView;
+    return _closeItem;
 }
 
 - (UIScrollView *)scrollView {

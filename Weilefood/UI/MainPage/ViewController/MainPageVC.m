@@ -66,6 +66,7 @@
         make.right.equalTo(self.discoveryButton.superview);
         make.top.bottom.equalTo(self.discoveryButton);
     }];
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

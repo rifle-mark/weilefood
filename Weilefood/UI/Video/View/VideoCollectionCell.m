@@ -79,10 +79,10 @@ static CGFloat const kImageHeightScale = 0.788;
     }];
     [self.pointsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.contentView);
-        make.bottomMargin.equalTo(@-7);
+        make.bottom.equalTo(self.pointsLabel.superview).offset(-7);
     }];
     [self.favoriteButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.rightMargin.equalTo(@0);
+        make.right.equalTo(self.favoriteButton.superview);
         make.centerY.equalTo(self.pointsLabel);
     }];
 }
