@@ -36,7 +36,6 @@
 #import "UIBarButtonItem+Ext.h"
 #import "UIButton+ImagePosition.h"
 #import "UIScrollView+Keyboard.h"
-#import "UINavigationController+UserBarButtonItem.h"
 #import "MBProgressHUD+Message.h"
 
 #endif

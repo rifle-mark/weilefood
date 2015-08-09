@@ -16,8 +16,6 @@
 
 @interface LoginVC ()
 
-@property (nonatomic, strong) UIBarButtonItem *closeItem;
-
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView       *contentView;
 
@@ -48,7 +46,7 @@
     self.title = @"登录";
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.navigationItem.leftBarButtonItem = self.closeItem;
+    self.navigationItem.leftBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], [UIBarButtonItem createCloseBarButtonItem]];
     
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.contentView];
@@ -162,10 +160,6 @@
 
 #pragma mark - private methons
 
-- (void)_closeAction {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (void)_resetPasswordAction {
     [self.navigationController pushViewController:[[ResetPasswordVC alloc] init] animated:YES];
 }
@@ -233,13 +227,6 @@
 }
 
 #pragma mark - private property methons
-
-- (UIBarButtonItem *)closeItem {
-    if (!_closeItem) {
-        _closeItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(_closeAction)];
-    }
-    return _closeItem;
-}
 
 - (UIScrollView *)scrollView {
     if (!_scrollView) {

@@ -35,8 +35,8 @@ static NSInteger const kPageSize       = 10;
     self.view.backgroundColor = [UIColor whiteColor];
     
     UIBarButtonItem *cityItem = [[UIBarButtonItem alloc] initWithCustomView:self.cityButton];
-    UIBarButtonItem *userItem = [self.navigationController createUserBarButtonItem];
-    self.navigationItem.rightBarButtonItems = @[userItem, cityItem];
+    UIBarButtonItem *userItem = [UIBarButtonItem createUserBarButtonItem];
+    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], userItem, cityItem];
     
     [self.view addSubview:self.tableView];
     
@@ -109,12 +109,13 @@ static NSInteger const kPageSize       = 10;
         [_cityButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
             CitySelectVC *vc = [[CitySelectVC alloc] init];
-            [vc selectedCity:^(WLActivityCityModel *activityCity) {
+            [vc selectedCity:^(CitySelectVC *sender, WLActivityCityModel *activityCity) {
                 _strong_check(self);
                 self.city = activityCity;
-                [self.navigationController popViewControllerAnimated:YES];
+                [sender dismissViewControllerAnimated:YES completion:nil];
             }];
-            [self.navigationController pushViewController:vc animated:YES];
+            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+            [self.navigationController presentViewController:nc animated:YES completion:nil];
         }];
     }
     return _cityButton;

@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class WLActivityCityModel;
+@class CitySelectVC, WLActivityCityModel;
 
-typedef void (^SelectedCity)(WLActivityCityModel *activityCity);
+typedef void (^SelectedCity)(CitySelectVC *sender, WLActivityCityModel *activityCity);
 
 /// 活动城市选择界面
 @interface CitySelectVC : UIViewController

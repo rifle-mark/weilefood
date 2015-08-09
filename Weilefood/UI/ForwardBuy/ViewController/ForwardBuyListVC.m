@@ -34,7 +34,7 @@ static NSInteger const kPageSize       = 10;
     [super viewDidLoad];
     self.title = @"预购";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItem = [self.navigationController createUserBarButtonItem];
+    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], [UIBarButtonItem createUserBarButtonItem]];
     
     [self.channelsView addSubview:self.channelButton1];
     [self.channelsView addSubview:self.channelButton2];

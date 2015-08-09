@@ -71,7 +71,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationItem.rightBarButtonItem = self.userItem;
+    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], self.userItem];
 }
 
 #pragma mark - private methons
@@ -93,7 +93,7 @@
 
 - (UIBarButtonItem *)userItem {
     if (!_userItem) {
-        _userItem = [self.navigationController createUserBarButtonItem];
+        _userItem = [UIBarButtonItem createUserBarButtonItem];
     }
     return _userItem;
 }

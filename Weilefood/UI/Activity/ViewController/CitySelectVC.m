@@ -31,6 +31,7 @@
     
     self.title = @"选择城市";
     self.view.backgroundColor = k_COLOR_LAVENDER;
+    self.navigationItem.leftBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], [UIBarButtonItem createCloseBarButtonItem]];
     
     [self.gpsCityView addSubview:self.gpsCityLabel];
     [self.gpsCityView addSubview:self.gpsCityButton];
@@ -173,7 +174,7 @@
         [_collectionView withBlockForItemDidSelect:^(UICollectionView *view, NSIndexPath *path) {
             _strong_check(self);
             WLActivityCityModel *city = self.cityList[path.item];
-            GCBlockInvoke(self.selectedCity, city);
+            GCBlockInvoke(self.selectedCity, self, city);
         }];
     }
     return _collectionView;
