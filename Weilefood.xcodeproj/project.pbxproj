@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2406062F1B772F9100C6F373 /* CitySelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2406062E1B772F9100C6F373 /* CitySelectVC.m */; };
 		240D79A51B5FECFB007E2E43 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240D79A41B5FECFB007E2E43 /* LoginVC.m */; };
 		240FB7031B69025900DF5CE4 /* UIButton+ImagePosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 240FB7021B69025900DF5CE4 /* UIButton+ImagePosition.m */; };
 		240FB7061B69063900DF5CE4 /* DiscoveryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240FB7051B69063900DF5CE4 /* DiscoveryVC.m */; };
@@ -171,6 +172,8 @@
 
 /* Begin PBXFileReference section */
 		060F4AADF217CE753F362849 /* Pods-Weilefood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weilefood.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weilefood/Pods-Weilefood.release.xcconfig"; sourceTree = "<group>"; };
+		2406062D1B772F9100C6F373 /* CitySelectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitySelectVC.h; sourceTree = "<group>"; };
+		2406062E1B772F9100C6F373 /* CitySelectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitySelectVC.m; sourceTree = "<group>"; };
 		240D79A31B5FECFB007E2E43 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		240D79A41B5FECFB007E2E43 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 		240FB7001B69024F00DF5CE4 /* ViewFrameMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewFrameMacro.h; sourceTree = "<group>"; };
@@ -555,6 +558,8 @@
 			children = (
 				24134EB41B6A711900E5BE07 /* ActivityListVC.h */,
 				24134EB51B6A711900E5BE07 /* ActivityListVC.m */,
+				2406062D1B772F9100C6F373 /* CitySelectVC.h */,
+				2406062E1B772F9100C6F373 /* CitySelectVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1468,6 +1473,7 @@
 				24E66DBF1B62717A0081324A /* UIScrollView+Keyboard.m in Sources */,
 				24CDCC171B4F792E00BDE8CB /* GCAOPProxy.m in Sources */,
 				24CDCBE01B4F792E00BDE8CB /* NSObject+GCProxyRegister.m in Sources */,
+				2406062F1B772F9100C6F373 /* CitySelectVC.m in Sources */,
 				24B8C0691B5242BC001C5722 /* AGIPCAssetsController.m in Sources */,
 				24CDCBDC1B4F792E00BDE8CB /* main.m in Sources */,
 				24134EB91B6A712F00E5BE07 /* ActivityCell.m in Sources */,
