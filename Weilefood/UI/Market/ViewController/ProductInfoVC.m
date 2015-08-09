@@ -65,24 +65,26 @@ static NSString *const kCellIdentifier = @"MYCELL";
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.top.equalTo(self.view).offset(self.topLayoutGuide.length);
-        make.bottom.equalTo(self.footerView.mas_top);
+        make.bottom.equalTo(self.footerView.mas_top).offset(1);
     }];
     [self.footerView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
-        make.height.equalTo(@40);
+        make.height.equalTo(@50);
     }];
     [self.favoriteButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.bottom.equalTo(self.footerView);
-        make.width.equalTo(@60);
+        make.left.bottom.equalTo(self.footerView);
+        make.top.equalTo(@1);
+        make.width.equalTo(@64);
     }];
     [self.addCartButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.favoriteButton.mas_right);
-        make.top.bottom.equalTo(self.footerView);
+        make.top.bottom.equalTo(self.favoriteButton);
         make.width.equalTo(self.buyButton);
     }];
     [self.buyButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.addCartButton.mas_right);
-        make.top.bottom.right.equalTo(self.footerView);
+        make.right.equalTo(self.footerView);
+        make.top.bottom.equalTo(self.favoriteButton);
     }];
     FixesViewDidLayoutSubviewsiOS7Error;
 }
@@ -113,7 +115,9 @@ static NSString *const kCellIdentifier = @"MYCELL";
     self.sectionHeaderView.actionCount = self.product.actionCount;
     self.sectionHeaderView.commentCount = self.product.commentCount;
     
-    [self.webView loadHTMLString:self.product.desc baseURL:nil];
+    if (self.webView.superview) {
+        [self.webView loadHTMLString:self.product.desc baseURL:nil];
+    }
 }
 
 - (void)_resetWebViewHeight {
@@ -158,9 +162,9 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.sectionHeaderHeight = [ProductSectionHeaderView viewHeight];
         _tableView.tableHeaderView = self.tableHeaderView;
-        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 1)];
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
         _weak(self);
         [_tableView withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {
@@ -172,7 +176,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
         }];
         [_tableView withBlockForRowHeight:^CGFloat(UITableView *view, NSIndexPath *path) {
             _strong_check(self, 0);
-            return self.webView.scrollView.contentSize.height ?: 10;
+            return self.webView.scrollView.contentSize.height ?: 300;
         }];
         [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
             _strong_check(self, nil);
@@ -182,6 +186,9 @@ static NSString *const kCellIdentifier = @"MYCELL";
             [self.webView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.edges.equalTo(self.webView.superview);
             }];
+            if (!self.webView.request && self.product.desc && self.product.desc.length > 0) {
+                [self.webView loadHTMLString:self.product.desc baseURL:nil];
+            }
             return cell;
         }];
     }
@@ -191,6 +198,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (UIView *)footerView {
     if (!_footerView) {
         _footerView = [[UIView alloc] init];
+        _footerView.backgroundColor = [k_COLOR_MAROOM colorWithAlphaComponent:0.4];
     }
     return _footerView;
 }
@@ -200,8 +208,12 @@ static NSString *const kCellIdentifier = @"MYCELL";
         _favoriteButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _favoriteButton.backgroundColor = k_COLOR_WHITESMOKE;
         _favoriteButton.titleLabel.font = [UIFont systemFontOfSize:12];
-        [_favoriteButton setTitleColor:k_COLOR_BLACK forState:UIControlStateNormal];
         [_favoriteButton setTitle:@"收藏" forState:UIControlStateNormal];
+        [_favoriteButton setTitleColor:k_COLOR_MAROOM forState:UIControlStateNormal];
+        [_favoriteButton setTitleColor:k_COLOR_ORANGE forState:UIControlStateHighlighted];
+        [_favoriteButton setImage:[UIImage imageNamed:@"productinfo_icon_favorite_n"] forState:UIControlStateNormal];
+        [_favoriteButton setImage:[UIImage imageNamed:@"productinfo_icon_favorite_h"] forState:UIControlStateHighlighted];
+        [_favoriteButton setImageToTop];
     }
     return _favoriteButton;
 }
@@ -209,9 +221,9 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (UIButton *)addCartButton {
     if (!_addCartButton) {
         _addCartButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _addCartButton.backgroundColor = k_COLOR_THEME_NAVIGATIONBAR;
+        _addCartButton.backgroundColor = k_COLOR_TURQUOISE;
         _addCartButton.titleLabel.font = [UIFont systemFontOfSize:16];
-        [_addCartButton setTitleColor:k_COLOR_THEME_NAVIGATIONBAR_TEXT forState:UIControlStateNormal];
+        [_addCartButton setTitleColor:k_COLOR_WHITE forState:UIControlStateNormal];
         [_addCartButton setTitle:@"加入购物车" forState:UIControlStateNormal];
     }
     return _addCartButton;

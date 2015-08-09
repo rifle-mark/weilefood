@@ -20,14 +20,12 @@
 @end
 
 static NSInteger const kImageChangeDelay = 4;
-#define kTitleFont  [UIFont systemFontOfSize:15]
-#define kNumberFont [UIFont systemFontOfSize:12]
-#define kPriceFont  [UIFont systemFontOfSize:15]
+#define kTitleFont  [UIFont systemFontOfSize:18]
 
 @implementation ProductTableHeaderView
 
 + (CGFloat)viewHeight {
-    return V_W_([UIApplication sharedApplication].keyWindow) * 2.0 / 3.0 + 10 + kTitleFont.lineHeight * 2 + 8 + kPriceFont.lineHeight;
+    return V_W_([UIApplication sharedApplication].keyWindow) + 15 + kTitleFont.lineHeight * 2 + 50;
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -37,34 +35,33 @@ static NSInteger const kImageChangeDelay = 4;
         [self addSubview:self.titleLabel];
         [self addSubview:self.numberLabel];
         [self addSubview:self.priceLabel];
-        
-        [self _makeConstraints];
     }
     return self;
 }
 
-- (void)_makeConstraints {
-    [self.swipeView mas_makeConstraints:^(MASConstraintMaker *make) {
+- (void)updateConstraints {
+    [super updateConstraints];
+    
+    [self.swipeView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self);
-        make.height.equalTo(self.swipeView.mas_width).multipliedBy(2.0 / 3.0);
+        make.height.equalTo(self.swipeView.mas_width);
     }];
-    [self.pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.pageControl mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.swipeView);
         make.height.equalTo(@25);
     }];
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self).insets(UIEdgeInsetsMake(0, 10, 0, 10));
-        make.top.equalTo(self.swipeView.mas_bottom).offset(10);
+        make.top.equalTo(self.swipeView.mas_bottom).offset(15);
     }];
-    [self.numberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.numberLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel);
-        make.centerY.equalTo(self.priceLabel);
-        make.height.equalTo(@(self.numberLabel.font.lineHeight + 4));
+        make.bottom.equalTo(self);
+        make.height.equalTo(@20);
     }];
-    [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.priceLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).offset(-10);
-        make.bottom.equalTo(self.priceLabel.superview);
-        make.height.equalTo(@(self.priceLabel.font.lineHeight));
+        make.bottom.height.equalTo(self.numberLabel);
     }];
 }
 
@@ -74,6 +71,7 @@ static NSInteger const kImageChangeDelay = 4;
     _images = images;
     [self.swipeView reloadData];
     self.pageControl.numberOfPages = self.swipeView.numberOfPages;
+    [self performSelector:@selector(_autoNextImage) withObject:nil afterDelay:kImageChangeDelay];
 }
 
 - (void)setTitle:(NSString *)title {
@@ -83,7 +81,7 @@ static NSInteger const kImageChangeDelay = 4;
 
 - (void)setNumber:(NSInteger)number {
     _number = number;
-    self.numberLabel.text = [NSString stringWithFormat:@" %ld份 ", (long)number];
+    self.numberLabel.text = [NSString stringWithFormat:@" 剩余：%ld份 ", (long)number];
 }
 
 - (void)setPrice:(CGFloat)price {
@@ -161,6 +159,7 @@ static NSInteger const kImageChangeDelay = 4;
 - (UIPageControl *)pageControl {
     if (!_pageControl) {
         _pageControl = [[UIPageControl alloc] init];
+        _pageControl.userInteractionEnabled = NO;
     }
     return _pageControl;
 }
@@ -169,7 +168,7 @@ static NSInteger const kImageChangeDelay = 4;
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = kTitleFont;
-        _titleLabel.textColor = k_COLOR_THEME_NAVIGATIONBAR;
+        _titleLabel.textColor = k_COLOR_MAROOM;
         _titleLabel.numberOfLines = 2;
     }
     return _titleLabel;
@@ -178,10 +177,10 @@ static NSInteger const kImageChangeDelay = 4;
 - (UILabel *)numberLabel {
     if (!_numberLabel) {
         _numberLabel = [[UILabel alloc] init];
-        _numberLabel.font = kNumberFont;
-        _numberLabel.textColor = k_COLOR_THEME_NAVIGATIONBAR_TEXT;
-        _numberLabel.backgroundColor = k_COLOR_THEME_NAVIGATIONBAR;
-        _numberLabel.layer.cornerRadius = 3;
+        _numberLabel.font = [UIFont systemFontOfSize:11];
+        _numberLabel.textColor = k_COLOR_STAR_DUST;
+        _numberLabel.backgroundColor = k_COLOR_WHITESMOKE;
+        _numberLabel.layer.cornerRadius = 4;
     }
     return _numberLabel;
 }
@@ -189,8 +188,8 @@ static NSInteger const kImageChangeDelay = 4;
 - (UILabel *)priceLabel {
     if (!_priceLabel) {
         _priceLabel = [[UILabel alloc] init];
-        _priceLabel.font = kPriceFont;
-        _priceLabel.textColor = k_COLOR_ORANGE;
+        _priceLabel.font = [UIFont systemFontOfSize:20];;
+        _priceLabel.textColor = k_COLOR_GOLDENROD;
     }
     return _priceLabel;
 }

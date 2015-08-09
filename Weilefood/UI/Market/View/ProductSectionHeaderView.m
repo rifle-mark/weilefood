@@ -22,13 +22,12 @@
 @end
 
 static NSInteger const kButtonMargin = 10;
-static NSInteger const kButtonHeight = 30;
-static NSInteger const kLineHeight = 4;
+static NSInteger const kLineHeight = 7;
 
 @implementation ProductSectionHeaderView
 
 + (CGFloat)viewHeight {
-    return kButtonMargin * 2 + kButtonHeight + kLineHeight;
+    return kButtonMargin * 2 + [UIImage imageNamed:@"productinfo_btn_action_n"].size.height + kLineHeight;
 }
 
 - (id)init {
@@ -46,7 +45,7 @@ static NSInteger const kLineHeight = 4;
 - (void)_makeConstraints {
     [self.actionButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.equalTo(self).offset(kButtonMargin);
-        make.height.equalTo(@(kButtonHeight));
+        make.size.mas_equalTo([self.actionButton backgroundImageForState:UIControlStateNormal].size);
     }];
     [self.commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.height.equalTo(self.actionButton);
@@ -92,9 +91,10 @@ static NSInteger const kLineHeight = 4;
     if (!_actionButton) {
         _actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _actionButton.titleLabel.font = [UIFont systemFontOfSize:12];
-        _actionButton.layer.borderColor = k_COLOR_GOLDENROD.CGColor;
-        _actionButton.layer.borderWidth = 1;
-        [_actionButton setTitleColor:k_COLOR_GOLDENROD forState:UIControlStateNormal];
+        [_actionButton setTitleColor:k_COLOR_DARKGRAY forState:UIControlStateNormal];
+        [_actionButton setBackgroundImage:[UIImage imageNamed:@"productinfo_btn_action_n"] forState:UIControlStateNormal];
+        [_actionButton setBackgroundImage:[UIImage imageNamed:@"productinfo_btn_action_h"] forState:UIControlStateHighlighted];
+        [_actionButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 0)];
         _weak(self);
         [_actionButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
@@ -108,9 +108,10 @@ static NSInteger const kLineHeight = 4;
     if (!_commentButton) {
         _commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _commentButton.titleLabel.font = [UIFont systemFontOfSize:12];
-        _commentButton.layer.borderColor = k_COLOR_GOLDENROD.CGColor;
-        _commentButton.layer.borderWidth = 1;
-        [_commentButton setTitleColor:k_COLOR_GOLDENROD forState:UIControlStateNormal];
+        [_commentButton setTitleColor:k_COLOR_DARKGRAY forState:UIControlStateNormal];
+        [_commentButton setBackgroundImage:[UIImage imageNamed:@"productinfo_btn_comment_n"] forState:UIControlStateNormal];
+        [_commentButton setBackgroundImage:[UIImage imageNamed:@"productinfo_btn_comment_h"] forState:UIControlStateHighlighted];
+        [_commentButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 0)];
         _weak(self);
         [_commentButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
@@ -123,10 +124,8 @@ static NSInteger const kLineHeight = 4;
 - (UIButton *)shareButton {
     if (!_shareButton) {
         _shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _shareButton.titleLabel.font = [UIFont systemFontOfSize:12];
-        _shareButton.backgroundColor = k_COLOR_GOLDENROD;
-        [_shareButton setTitleColor:k_COLOR_GOLDENROD forState:UIControlStateNormal];
-        [_shareButton setTitle:@"分享" forState:UIControlStateNormal];
+        [_shareButton setBackgroundImage:[UIImage imageNamed:@"productinfo_btn_share_n"] forState:UIControlStateNormal];
+        [_shareButton setBackgroundImage:[UIImage imageNamed:@"productinfo_btn_share_h"] forState:UIControlStateHighlighted];
         _weak(self);
         [_shareButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
@@ -134,6 +133,14 @@ static NSInteger const kLineHeight = 4;
         }];
     }
     return _shareButton;
+}
+
+- (UIView *)lineView {
+    if (!_lineView) {
+        _lineView = [[UIView alloc] init];
+        _lineView.backgroundColor = k_COLOR_WHITESMOKE;
+    }
+    return _lineView;
 }
 
 @end

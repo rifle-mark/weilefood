@@ -118,7 +118,7 @@ static NSInteger const kSectionIndexActivity   = 4;
         headerView.videoImageUrl = self.videoAdImage;
         [headerView bannerImageClickBlock:^(NSInteger index) {
             _strong_check(self);
-            DLog(@"%d", index);
+            DLog(@"%ld", (long)index);
         }];
         [headerView marketClickBlock:^{
             _strong_check(self);

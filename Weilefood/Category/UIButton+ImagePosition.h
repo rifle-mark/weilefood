@@ -20,4 +20,9 @@
  */
 - (void)setImageToRight;
 
+/**
+ *  设置图片在文字的上方
+ */
+- (void)setImageToTop;
+
 @end
