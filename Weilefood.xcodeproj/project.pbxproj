@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2406062F1B772F9100C6F373 /* CitySelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2406062E1B772F9100C6F373 /* CitySelectVC.m */; };
+		240606341B774ECE00C6F373 /* CommentListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240606331B774ECE00C6F373 /* CommentListVC.m */; };
+		240606371B775F6F00C6F373 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 240606361B775F6F00C6F373 /* CommentCell.m */; };
 		240D79A51B5FECFB007E2E43 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240D79A41B5FECFB007E2E43 /* LoginVC.m */; };
 		240FB7031B69025900DF5CE4 /* UIButton+ImagePosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 240FB7021B69025900DF5CE4 /* UIButton+ImagePosition.m */; };
 		240FB7061B69063900DF5CE4 /* DiscoveryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240FB7051B69063900DF5CE4 /* DiscoveryVC.m */; };
@@ -173,6 +175,10 @@
 		060F4AADF217CE753F362849 /* Pods-Weilefood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weilefood.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weilefood/Pods-Weilefood.release.xcconfig"; sourceTree = "<group>"; };
 		2406062D1B772F9100C6F373 /* CitySelectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitySelectVC.h; sourceTree = "<group>"; };
 		2406062E1B772F9100C6F373 /* CitySelectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitySelectVC.m; sourceTree = "<group>"; };
+		240606321B774ECE00C6F373 /* CommentListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentListVC.h; sourceTree = "<group>"; };
+		240606331B774ECE00C6F373 /* CommentListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentListVC.m; sourceTree = "<group>"; };
+		240606351B775F6F00C6F373 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
+		240606361B775F6F00C6F373 /* CommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
 		240D79A31B5FECFB007E2E43 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		240D79A41B5FECFB007E2E43 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 		240FB7001B69024F00DF5CE4 /* ViewFrameMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewFrameMacro.h; sourceTree = "<group>"; };
@@ -532,6 +538,24 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		240606301B774E6C00C6F373 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				240606351B775F6F00C6F373 /* CommentCell.h */,
+				240606361B775F6F00C6F373 /* CommentCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		240606311B774E6C00C6F373 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				240606321B774ECE00C6F373 /* CommentListVC.h */,
+				240606331B774ECE00C6F373 /* CommentListVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		240D798A1B5FEB42007E2E43 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
@@ -564,6 +588,8 @@
 		240D798D1B5FEB42007E2E43 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				240606301B774E6C00C6F373 /* View */,
+				240606311B774E6C00C6F373 /* ViewController */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1422,6 +1448,7 @@
 				245936B51B5A4015008FFAB8 /* WLAdModel.m in Sources */,
 				2482E6441B5E949D005815E8 /* WLMessageModel.m in Sources */,
 				24A0266B1B6DDEC500C6139B /* MarketChildChannelView.m in Sources */,
+				240606371B775F6F00C6F373 /* CommentCell.m in Sources */,
 				24CDCC1E1B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m in Sources */,
 				24B8C0671B5242BC001C5722 /* AGImagePreviewController.m in Sources */,
 				245936B21B5A3CAF008FFAB8 /* WLServerHelper+Comment.m in Sources */,
@@ -1465,6 +1492,7 @@
 				249745F61B6A5E190019ADDA /* ProductInfoVC.m in Sources */,
 				2482E64A1B5E9B6E005815E8 /* WLPointsModel.m in Sources */,
 				249EF30D1B64BEDA00AAEBE0 /* MarketIndexPageVC.m in Sources */,
+				240606341B774ECE00C6F373 /* CommentListVC.m in Sources */,
 				24E66DBF1B62717A0081324A /* UIScrollView+Keyboard.m in Sources */,
 				24CDCC171B4F792E00BDE8CB /* GCAOPProxy.m in Sources */,
 				24CDCBE01B4F792E00BDE8CB /* NSObject+GCProxyRegister.m in Sources */,

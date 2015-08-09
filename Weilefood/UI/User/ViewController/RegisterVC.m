@@ -299,6 +299,13 @@
     if (!_securityCodeTextField) {
         _securityCodeTextField = [[UITextField alloc] init];
         _securityCodeTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+        _securityCodeTextField.returnKeyType = UIReturnKeyNext;
+        _weak(self);
+        [_securityCodeTextField withBlockForShouldReturn:^BOOL(UITextField *view) {
+            _strong_check(self, NO);
+            [self.passwordTextField becomeFirstResponder];
+            return NO;
+        }];
     }
     return _securityCodeTextField;
 }
@@ -326,6 +333,13 @@
     if (!_passwordTextField) {
         _passwordTextField = [[UITextField alloc] init];
         _passwordTextField.secureTextEntry = YES;
+        _passwordTextField.returnKeyType = UIReturnKeyNext;
+        _weak(self);
+        [_passwordTextField withBlockForShouldReturn:^BOOL(UITextField *view) {
+            _strong_check(self, NO);
+            [self.passwordConfirmTextField becomeFirstResponder];
+            return NO;
+        }];
     }
     return _passwordTextField;
 }
@@ -353,6 +367,13 @@
     if (!_passwordConfirmTextField) {
         _passwordConfirmTextField = [[UITextField alloc] init];
         _passwordConfirmTextField.secureTextEntry = YES;
+        _passwordConfirmTextField.returnKeyType = UIReturnKeyDone;
+        _weak(self);
+        [_passwordConfirmTextField withBlockForShouldReturn:^BOOL(UITextField *view) {
+            _strong_check(self, NO);
+            [self _registerAction];
+            return NO;
+        }];
     }
     return _passwordConfirmTextField;
 }

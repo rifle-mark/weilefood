@@ -10,6 +10,8 @@
 #import "ProductTableHeaderView.h"
 #import "ProductSectionHeaderView.h"
 
+#import "CommentListVC.h"
+
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
@@ -89,6 +91,15 @@ static NSString *const kCellIdentifier = @"MYCELL";
     FixesViewDidLayoutSubviewsiOS7Error;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
 
 #pragma mark - private methods
 
@@ -141,6 +152,26 @@ static NSString *const kCellIdentifier = @"MYCELL";
     if (!_sectionHeaderView) {
         _sectionHeaderView = [[ProductSectionHeaderView alloc] init];
         _sectionHeaderView.backgroundColor = k_COLOR_WHITE;
+        _weak(self);
+        [_sectionHeaderView actionBlock:^{
+            _strong_check(self);
+            [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeProduct actType:WLActionActTypeApproval objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                _strong_check(self);
+                ServerHelperErrorHandle;
+                self.product.actionCount++;
+                self.sectionHeaderView.actionCount = self.product.actionCount;
+            }];
+        }];
+        [_sectionHeaderView commentBlock:^{
+            _strong_check(self);
+            CommentListVC *vc = [[CommentListVC alloc] initWithType:WLCommentTypeProduct refId:self.product.productId];
+            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+            [self.navigationController presentViewController:nc animated:YES completion:nil];
+        }];
+        [_sectionHeaderView shareBlock:^{
+            _strong_check(self);
+            DLog(@"");
+        }];
     }
     return _sectionHeaderView;
 }
@@ -214,6 +245,15 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_favoriteButton setImage:[UIImage imageNamed:@"productinfo_icon_favorite_n"] forState:UIControlStateNormal];
         [_favoriteButton setImage:[UIImage imageNamed:@"productinfo_icon_favorite_h"] forState:UIControlStateHighlighted];
         [_favoriteButton setImageToTop];
+        _weak(self);
+        [_favoriteButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            _strong_check(self);
+            [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeProduct actType:WLActionActTypeFavorite objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                _strong_check(self);
+                ServerHelperErrorHandle;
+                [self.favoriteButton setHighlighted:YES];
+            }];
+        }];
     }
     return _favoriteButton;
 }

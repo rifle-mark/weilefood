@@ -60,7 +60,7 @@
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     // 监听用户登录登出消息
     [self addObserverForNotificationName:kNotificationUserLoginSucc usingBlock:^(NSNotification *notification) {
-        if (!notification.object || [notification.object isKindOfClass:[WLUserModel class]]) {
+        if (!notification.object || ![notification.object isKindOfClass:[WLUserModel class]]) {
             return;
         }
         WLUserModel *user = notification.object;

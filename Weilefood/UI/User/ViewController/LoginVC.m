@@ -294,6 +294,14 @@
     if (!_passwordTextField) {
         _passwordTextField = [[UITextField alloc] init];
         _passwordTextField.secureTextEntry = YES;
+        _passwordTextField.returnKeyType = UIReturnKeyDone;
+        _weak(self);
+        [_passwordTextField withBlockForShouldReturn:^BOOL(UITextField *view) {
+            _strong_check(self, NO);
+            [view resignFirstResponder];
+            [self _loginAction];
+            return NO;
+        }];
     }
     return _passwordTextField;
 }

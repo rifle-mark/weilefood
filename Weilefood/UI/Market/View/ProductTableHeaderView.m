@@ -181,6 +181,7 @@ static NSInteger const kImageChangeDelay = 4;
         _numberLabel.textColor = k_COLOR_STAR_DUST;
         _numberLabel.backgroundColor = k_COLOR_WHITESMOKE;
         _numberLabel.layer.cornerRadius = 4;
+        _numberLabel.clipsToBounds = YES;
     }
     return _numberLabel;
 }

@@ -94,7 +94,7 @@ static NSInteger const kLineHeight = 7;
         [_actionButton setTitleColor:k_COLOR_DARKGRAY forState:UIControlStateNormal];
         [_actionButton setBackgroundImage:[UIImage imageNamed:@"productinfo_btn_action_n"] forState:UIControlStateNormal];
         [_actionButton setBackgroundImage:[UIImage imageNamed:@"productinfo_btn_action_h"] forState:UIControlStateHighlighted];
-        [_actionButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 0)];
+        [_actionButton setTitleEdgeInsets:UIEdgeInsetsMake(5, 20, 0, 0)];
         _weak(self);
         [_actionButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
@@ -111,7 +111,7 @@ static NSInteger const kLineHeight = 7;
         [_commentButton setTitleColor:k_COLOR_DARKGRAY forState:UIControlStateNormal];
         [_commentButton setBackgroundImage:[UIImage imageNamed:@"productinfo_btn_comment_n"] forState:UIControlStateNormal];
         [_commentButton setBackgroundImage:[UIImage imageNamed:@"productinfo_btn_comment_h"] forState:UIControlStateHighlighted];
-        [_commentButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 0)];
+        [_commentButton setTitleEdgeInsets:UIEdgeInsetsMake(5, 20, 0, 0)];
         _weak(self);
         [_commentButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
