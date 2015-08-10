@@ -17,6 +17,8 @@
 
 @interface ProductInfoVC ()
 
+@property (nonatomic, strong) UIView *statusBarView;
+
 @property (nonatomic, strong) ProductTableHeaderView   *tableHeaderView;
 @property (nonatomic, strong) ProductSectionHeaderView *sectionHeaderView;
 @property (nonatomic, strong) UIWebView                *webView;
@@ -27,6 +29,8 @@
 @property (nonatomic, strong) UIButton                 *buyButton;
 
 @property (nonatomic, strong) WLProductModel *product;
+@property (nonatomic, assign) CGFloat        navBarColorAlpha;
+@property (nonatomic, assign) CGFloat        headerHeight;
 
 @end
 
@@ -43,6 +47,8 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (instancetype)initWithProduct:(WLProductModel *)product {
     NSParameterAssert(product);
     if (self = [super init]) {
+        _navBarColorAlpha = -1;
+        _headerHeight = [ProductTableHeaderView viewHeight];
         self.product = product;
     }
     return self;
@@ -51,6 +57,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = k_COLOR_WHITE;
+//    self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.footerView];
@@ -65,8 +72,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.top.equalTo(self.view).offset(self.topLayoutGuide.length);
+        make.top.left.right.equalTo(self.view);
         make.bottom.equalTo(self.footerView.mas_top).offset(1);
     }];
     [self.footerView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -93,12 +99,42 @@ static NSString *const kCellIdentifier = @"MYCELL";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.backgroundColor = k_COLOR_THEME_NAVIGATIONBAR;
+    
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    [self.navigationController.navigationBar addSubview:self.statusBarView];
+    
+    if (self.navBarColorAlpha == -1) {
+        self.navBarColorAlpha = 0;
+    }
+    else {
+        /*
+         这段解决：
+         iOS8中进入此界面后，从屏幕左边缘往右滑一点，再松开，navigationBar显示了背景色的问题
+         */
+        self.navBarColorAlpha += 0.01;
+        self.navBarColorAlpha -= 0.01;
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    self.headerHeight = V_H_(self.tableHeaderView);
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-//    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    self.navigationController.navigationBar.translucent = NO;
+    [self.statusBarView removeFromSuperview];
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+    self.navigationController.navigationBar.backgroundColor = nil;
+    self.navigationController.navigationBar.titleTextAttributes = nil;
 }
 
 #pragma mark - private methods
@@ -139,9 +175,16 @@ static NSString *const kCellIdentifier = @"MYCELL";
 
 #pragma mark - private property methods
 
+- (UIView *)statusBarView {
+    if (!_statusBarView) {
+        _statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, SCREEN_WIDTH, 20)];
+    }
+    return _statusBarView;
+}
+
 - (ProductTableHeaderView *)tableHeaderView {
     if (!_tableHeaderView) {
-        CGRect frame = CGRectMake(0, 0, V_W_([UIApplication sharedApplication].keyWindow), [ProductTableHeaderView viewHeight]);
+        CGRect frame = CGRectMake(0, 0, SCREEN_WIDTH, [ProductTableHeaderView viewHeight] - 64);
         _tableHeaderView = [[ProductTableHeaderView alloc] initWithFrame:frame];
         _tableHeaderView.backgroundColor = k_COLOR_WHITE;
     }
@@ -222,6 +265,22 @@ static NSString *const kCellIdentifier = @"MYCELL";
             }
             return cell;
         }];
+        [_tableView withBlockForDidScroll:^(UIScrollView *view) {
+            _strong_check(self);
+            CGPoint offset = view.contentOffset;
+            static CGFloat const navBarHeight = 64;
+            CGFloat alpha = 1;
+            if (offset.y < (self.headerHeight - navBarHeight * 2)) {
+                alpha = 0;
+            }
+            else if (offset.y >= self.headerHeight - navBarHeight) {
+                alpha = 1;
+            }
+            else  {
+                alpha = (offset.y - (self.headerHeight - navBarHeight * 2)) / navBarHeight;
+            }
+            self.navBarColorAlpha = alpha;
+        }];
     }
     return _tableView;
 }
@@ -278,6 +337,16 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_buyButton setTitle:@"立即购买" forState:UIControlStateNormal];
     }
     return _buyButton;
+}
+
+- (void)setNavBarColorAlpha:(CGFloat)navBarColorAlpha {
+    if (_navBarColorAlpha == navBarColorAlpha) {
+        return;
+    }
+    _navBarColorAlpha = navBarColorAlpha;
+    self.statusBarView.backgroundColor = [k_COLOR_THEME_NAVIGATIONBAR colorWithAlphaComponent:_navBarColorAlpha];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [k_COLOR_WHITE colorWithAlphaComponent:_navBarColorAlpha]};
+    self.navigationController.navigationBar.backgroundColor = self.statusBarView.backgroundColor;
 }
 
 @end

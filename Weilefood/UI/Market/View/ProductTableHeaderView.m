@@ -19,13 +19,18 @@
 
 @end
 
-static NSInteger const kImageChangeDelay = 4;
+static NSInteger const kImageChangeDelay    = 4;
+static NSInteger const kTitleTopMargin      = 15;
+static NSInteger const kNumberTopMargin     = 10;
+static NSInteger const kNumberHeightpMargin = 20;
 #define kTitleFont  [UIFont systemFontOfSize:18]
 
 @implementation ProductTableHeaderView
 
 + (CGFloat)viewHeight {
-    return V_W_([UIApplication sharedApplication].keyWindow) + 15 + kTitleFont.lineHeight * 2 + 50;
+    return SCREEN_WIDTH
+        + kTitleTopMargin + kTitleFont.lineHeight * 2
+        + kNumberTopMargin + kNumberHeightpMargin;
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -43,8 +48,9 @@ static NSInteger const kImageChangeDelay = 4;
     [super updateConstraints];
     
     [self.swipeView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self);
+        make.left.right.equalTo(self);
         make.height.equalTo(self.swipeView.mas_width);
+        make.bottom.equalTo(self.titleLabel.mas_top).offset(-kTitleTopMargin);
     }];
     [self.pageControl mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.swipeView);
@@ -52,12 +58,14 @@ static NSInteger const kImageChangeDelay = 4;
     }];
     [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self).insets(UIEdgeInsetsMake(0, 10, 0, 10));
-        make.top.equalTo(self.swipeView.mas_bottom).offset(15);
+        make.bottom.equalTo(self.numberLabel.mas_top).offset(-kNumberTopMargin);
+        make.height.equalTo(@(kTitleFont.lineHeight * 2));
+//        make.top.equalTo(self.swipeView.mas_bottom).offset(kTitleTopMargin);
     }];
     [self.numberLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel);
         make.bottom.equalTo(self);
-        make.height.equalTo(@20);
+        make.height.equalTo(@(kNumberHeightpMargin));
     }];
     [self.priceLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).offset(-10);
@@ -71,7 +79,9 @@ static NSInteger const kImageChangeDelay = 4;
     _images = images;
     [self.swipeView reloadData];
     self.pageControl.numberOfPages = self.swipeView.numberOfPages;
-    [self performSelector:@selector(_autoNextImage) withObject:nil afterDelay:kImageChangeDelay];
+    if (self.pageControl.numberOfPages > 0) {
+        [self performSelector:@selector(_autoNextImage) withObject:nil afterDelay:kImageChangeDelay];
+    }
 }
 
 - (void)setTitle:(NSString *)title {
