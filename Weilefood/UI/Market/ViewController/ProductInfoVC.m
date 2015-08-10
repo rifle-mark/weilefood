@@ -57,7 +57,6 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = k_COLOR_WHITE;
-//    self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.footerView];
