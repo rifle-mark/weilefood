@@ -25,4 +25,9 @@
  */
 + (UIBarButtonItem *)createCloseBarButtonItem;
 
+/**
+ *  返回应用级别的“购物车”BarButtonItem按钮
+ */
++ (UIBarButtonItem *)createCartBarButtonItem;
+
 @end

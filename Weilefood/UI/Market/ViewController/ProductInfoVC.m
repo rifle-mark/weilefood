@@ -17,7 +17,9 @@
 
 @interface ProductInfoVC ()
 
-@property (nonatomic, strong) UIView *statusBarView;
+@property (nonatomic, strong) UIView   *navView;
+@property (nonatomic, strong) UIButton *backButton;
+@property (nonatomic, strong) UIButton *cartButton;
 
 @property (nonatomic, strong) ProductTableHeaderView   *tableHeaderView;
 @property (nonatomic, strong) ProductSectionHeaderView *sectionHeaderView;
@@ -29,7 +31,6 @@
 @property (nonatomic, strong) UIButton                 *buyButton;
 
 @property (nonatomic, strong) WLProductModel *product;
-@property (nonatomic, assign) CGFloat        navBarColorAlpha;
 @property (nonatomic, assign) CGFloat        headerHeight;
 
 @end
@@ -47,7 +48,6 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (instancetype)initWithProduct:(WLProductModel *)product {
     NSParameterAssert(product);
     if (self = [super init]) {
-        _navBarColorAlpha = -1;
         _headerHeight = [ProductTableHeaderView viewHeight];
         self.product = product;
     }
@@ -57,8 +57,13 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = k_COLOR_WHITE;
+    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], [UIBarButtonItem createCartBarButtonItem]];
     
     [self.view addSubview:self.tableView];
+    [self.view addSubview:self.navView];
+    [self.navView addSubview:self.backButton];
+    [self.navView addSubview:self.cartButton];
+    
     [self.view addSubview:self.footerView];
     [self.footerView addSubview:self.favoriteButton];
     [self.footerView addSubview:self.addCartButton];
@@ -70,6 +75,20 @@ static NSString *const kCellIdentifier = @"MYCELL";
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
+    
+    [self.navView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
+        make.top.equalTo(self.view).offset(20);
+    }];
+    [self.backButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.navView).offset(6);
+        make.left.equalTo(self.navView).offset(10);
+    }];
+    [self.cartButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.navView).offset(6);
+        make.right.equalTo(self.navView).offset(-10);
+    }];
+    
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
         make.bottom.equalTo(self.footerView.mas_top).offset(1);
@@ -96,44 +115,10 @@ static NSString *const kCellIdentifier = @"MYCELL";
     FixesViewDidLayoutSubviewsiOS7Error;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.navigationBar.backgroundColor = k_COLOR_THEME_NAVIGATIONBAR;
-    
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-    [self.navigationController.navigationBar addSubview:self.statusBarView];
-    
-    if (self.navBarColorAlpha == -1) {
-        self.navBarColorAlpha = 0;
-    }
-    else {
-        /*
-         这段解决：
-         iOS8中进入此界面后，从屏幕左边缘往右滑一点，再松开，navigationBar显示了背景色的问题
-         */
-        self.navBarColorAlpha += 0.01;
-        self.navBarColorAlpha -= 0.01;
-    }
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     self.headerHeight = V_H_(self.tableHeaderView);
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    self.navigationController.navigationBar.translucent = NO;
-    [self.statusBarView removeFromSuperview];
-    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:nil];
-    self.navigationController.navigationBar.backgroundColor = nil;
-    self.navigationController.navigationBar.titleTextAttributes = nil;
 }
 
 #pragma mark - private methods
@@ -149,6 +134,8 @@ static NSString *const kCellIdentifier = @"MYCELL";
 }
 
 - (void)_showData {
+    self.title = self.product.productName;
+    
     NSMutableArray *images = [NSMutableArray array];
     for (WLProductPictureModel *pic in self.product.pictures) {
         [images addObject:pic.picPath];
@@ -174,11 +161,29 @@ static NSString *const kCellIdentifier = @"MYCELL";
 
 #pragma mark - private property methods
 
-- (UIView *)statusBarView {
-    if (!_statusBarView) {
-        _statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, SCREEN_WIDTH, 20)];
+- (UIView *)navView {
+    if (!_navView) {
+        _navView = [[UIView alloc] init];
     }
-    return _statusBarView;
+    return _navView;
+}
+
+- (UIButton *)backButton {
+    if (!_backButton) {
+        _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_backButton setImage:[UIImage imageNamed:@"btn_back_n"] forState:UIControlStateNormal];
+        [_backButton setImage:[UIImage imageNamed:@"btn_back_h"] forState:UIControlStateHighlighted];
+    }
+    return _backButton;
+}
+
+- (UIButton *)cartButton {
+    if (!_cartButton) {
+        _cartButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_cartButton setImage:[UIImage imageNamed:@"btn_cart_n"] forState:UIControlStateNormal];
+        [_cartButton setImage:[UIImage imageNamed:@"btn_cart_h"] forState:UIControlStateHighlighted];
+    }
+    return _cartButton;
 }
 
 - (ProductTableHeaderView *)tableHeaderView {
@@ -278,7 +283,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
             else  {
                 alpha = (offset.y - (self.headerHeight - navBarHeight * 2)) / navBarHeight;
             }
-            self.navBarColorAlpha = alpha;
+            self.navigationBarAlpha = alpha;
         }];
     }
     return _tableView;
@@ -338,14 +343,9 @@ static NSString *const kCellIdentifier = @"MYCELL";
     return _buyButton;
 }
 
-- (void)setNavBarColorAlpha:(CGFloat)navBarColorAlpha {
-    if (_navBarColorAlpha == navBarColorAlpha) {
-        return;
-    }
-    _navBarColorAlpha = navBarColorAlpha;
-    self.statusBarView.backgroundColor = [k_COLOR_THEME_NAVIGATIONBAR colorWithAlphaComponent:_navBarColorAlpha];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [k_COLOR_WHITE colorWithAlphaComponent:_navBarColorAlpha]};
-    self.navigationController.navigationBar.backgroundColor = self.statusBarView.backgroundColor;
+- (void)setNavigationBarAlpha:(CGFloat)navigationBarAlpha {
+    [super setNavigationBarAlpha:navigationBarAlpha];
+    self.navView.alpha = 1 - navigationBarAlpha;
 }
 
 @end
