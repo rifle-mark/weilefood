@@ -168,6 +168,7 @@
 		24E66DC81B6277190081324A /* ResetPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DC71B6277190081324A /* ResetPasswordVC.m */; };
 		24E8DD391B648DF4007F137E /* DiscoveryCollectionSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E8DD381B648DF4007F137E /* DiscoveryCollectionSectionHeaderView.m */; };
 		24E8DD3C1B6491B5007F137E /* DiscoveryCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E8DD3B1B6491B5007F137E /* DiscoveryCollectionCell.m */; };
+		24ECD7B41B78FCEE00AED422 /* TransparentNavigationBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ECD7B31B78FCEE00AED422 /* TransparentNavigationBarVC.m */; };
 		E02DC6C27427F1714243E3AE /* libPods-Weilefood.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B0DAFB8AFA7EC3AE1728AE /* libPods-Weilefood.a */; };
 /* End PBXBuildFile section */
 
@@ -507,6 +508,8 @@
 		24E8DD381B648DF4007F137E /* DiscoveryCollectionSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryCollectionSectionHeaderView.m; sourceTree = "<group>"; };
 		24E8DD3A1B6491B5007F137E /* DiscoveryCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryCollectionCell.h; sourceTree = "<group>"; };
 		24E8DD3B1B6491B5007F137E /* DiscoveryCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryCollectionCell.m; sourceTree = "<group>"; };
+		24ECD7B21B78FCEE00AED422 /* TransparentNavigationBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentNavigationBarVC.h; sourceTree = "<group>"; };
+		24ECD7B31B78FCEE00AED422 /* TransparentNavigationBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransparentNavigationBarVC.m; sourceTree = "<group>"; };
 		27B0DAFB8AFA7EC3AE1728AE /* libPods-Weilefood.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weilefood.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBCCE652BC72BE081355B32A /* Pods-Weilefood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weilefood.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weilefood/Pods-Weilefood.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -552,6 +555,8 @@
 			children = (
 				240606321B774ECE00C6F373 /* CommentListVC.h */,
 				240606331B774ECE00C6F373 /* CommentListVC.m */,
+				24ECD7B21B78FCEE00AED422 /* TransparentNavigationBarVC.h */,
+				24ECD7B31B78FCEE00AED422 /* TransparentNavigationBarVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1438,6 +1443,7 @@
 				24CDCBEF1B4F792E00BDE8CB /* UITabbarDelegateImplementationProxy.m in Sources */,
 				240FB7061B69063900DF5CE4 /* DiscoveryVC.m in Sources */,
 				247EA72F1B711B2F00E6A161 /* WLServerHelper+Nutrition.m in Sources */,
+				24ECD7B41B78FCEE00AED422 /* TransparentNavigationBarVC.m in Sources */,
 				24CDCBFC1B4F792E00BDE8CB /* UIScrollView+GCDelegateBlock.m in Sources */,
 				24CDCC131B4F792E00BDE8CB /* UITextField+GCDelegate.m in Sources */,
 				24E8DD391B648DF4007F137E /* DiscoveryCollectionSectionHeaderView.m in Sources */,

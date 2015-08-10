@@ -47,21 +47,6 @@ static NSInteger const kNumberHeightpMargin = 20;
 - (void)updateConstraints {
     [super updateConstraints];
     
-    [self.swipeView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self);
-        make.height.equalTo(self.swipeView.mas_width);
-        make.bottom.equalTo(self.titleLabel.mas_top).offset(-kTitleTopMargin);
-    }];
-    [self.pageControl mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.swipeView);
-        make.height.equalTo(@25);
-    }];
-    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self).insets(UIEdgeInsetsMake(0, 10, 0, 10));
-        make.bottom.equalTo(self.numberLabel.mas_top).offset(-kNumberTopMargin);
-        make.height.equalTo(@(kTitleFont.lineHeight * 2));
-//        make.top.equalTo(self.swipeView.mas_bottom).offset(kTitleTopMargin);
-    }];
     [self.numberLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel);
         make.bottom.equalTo(self);
@@ -70,6 +55,19 @@ static NSInteger const kNumberHeightpMargin = 20;
     [self.priceLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).offset(-10);
         make.bottom.height.equalTo(self.numberLabel);
+    }];
+    [self.swipeView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self);
+        make.height.equalTo(self.swipeView.mas_width);
+        make.bottom.equalTo(self.numberLabel.mas_top).offset(-kNumberTopMargin -kTitleFont.lineHeight * 2 -kTitleTopMargin);
+    }];
+    [self.pageControl mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.swipeView);
+        make.height.equalTo(@25);
+    }];
+    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self).insets(UIEdgeInsetsMake(0, 10, 0, 10));
+        make.top.equalTo(self.swipeView.mas_bottom).offset(kTitleTopMargin);
     }];
 }
 
