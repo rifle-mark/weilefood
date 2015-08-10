@@ -130,6 +130,7 @@
         make.left.right.height.equalTo(self.phoneBGView);
         make.bottom.equalTo(self.submitButton.superview).offset(-15);
     }];
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 #pragma mark - private methons
@@ -146,15 +147,7 @@
     [[WLServerHelper sharedInstance] user_getPhoneCodeWithPhoneNum:phoneNum callback:^(WLApiInfoModel *apiInfo, NSString *phoneCode, NSError *error) {
         _strong_check(self);
         self.securityCodeButton.enabled = YES;
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
-        
+        ServerHelperErrorHandle;
         self.lastSecurityCode = phoneCode;
         DLog(@"验证码获取成功:%@", phoneCode);
         self.securityCodeButton.enabled = NO;
@@ -214,14 +207,7 @@
     [[WLServerHelper sharedInstance] user_resetPasswordWithPhoneNum:self.phoneTextField.text password:self.passwordTextField.text callback:^(WLApiInfoModel *apiInfo, NSError *error) {
         _strong_check(self);
         self.submitButton.enabled = YES;
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         [MBProgressHUD showSuccessWithMessage:@"新密码设置成功！"];
     }];
 }
@@ -300,6 +286,13 @@
     if (!_securityCodeTextField) {
         _securityCodeTextField = [[UITextField alloc] init];
         _securityCodeTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+        _securityCodeTextField.returnKeyType = UIReturnKeyNext;
+        _weak(self);
+        [_securityCodeTextField withBlockForShouldReturn:^BOOL(UITextField *view) {
+            _strong_check(self, NO);
+            [self.passwordTextField becomeFirstResponder];
+            return NO;
+        }];
     }
     return _securityCodeTextField;
 }
@@ -327,6 +320,13 @@
     if (!_passwordTextField) {
         _passwordTextField = [[UITextField alloc] init];
         _passwordTextField.secureTextEntry = YES;
+        _passwordTextField.returnKeyType = UIReturnKeyNext;
+        _weak(self);
+        [_passwordTextField withBlockForShouldReturn:^BOOL(UITextField *view) {
+            _strong_check(self, NO);
+            [self.passwordConfirmTextField becomeFirstResponder];
+            return NO;
+        }];
     }
     return _passwordTextField;
 }
@@ -354,6 +354,13 @@
     if (!_passwordConfirmTextField) {
         _passwordConfirmTextField = [[UITextField alloc] init];
         _passwordConfirmTextField.secureTextEntry = YES;
+        _passwordConfirmTextField.returnKeyType = UIReturnKeyDone;
+        _weak(self);
+        [_passwordConfirmTextField withBlockForShouldReturn:^BOOL(UITextField *view) {
+            _strong_check(self, NO);
+            [self _registerAction];
+            return NO;
+        }];
     }
     return _passwordConfirmTextField;
 }

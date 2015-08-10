@@ -18,10 +18,12 @@ typedef NS_ENUM(NSUInteger, WLActionType) {
     WLActionTypeActivity = 3,
     /// 预购
     WLActionTypeForwardBuy = 4,
-    /// 课堂
-    WLActionTypeClass = 5,
+    /// 营养推荐
+    WLActionTypeNutrition = 5,
     /// 主题视频
     WLActionTypeVideo = 6,
+    /// 营养师
+    WLActionTypeDietitians = 7,
 };
 
 /// 点赞/收藏

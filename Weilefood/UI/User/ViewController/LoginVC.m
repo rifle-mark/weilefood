@@ -16,7 +16,6 @@
 
 @interface LoginVC ()
 
-@property (nonatomic, strong) UIView       *fixView;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView       *contentView;
 
@@ -46,8 +45,9 @@
     
     self.title = @"登录";
     self.view.backgroundColor = [UIColor whiteColor];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navigationItem.leftBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], [UIBarButtonItem createCloseBarButtonItem]];
     
-    [self.view addSubview:self.fixView];
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.contentView];
     
@@ -75,8 +75,7 @@
     [super viewDidLayoutSubviews];
     
     [self.scrollView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.view);
-        make.top.equalTo(@(self.topLayoutGuide.length));
+        make.edges.equalTo(self.view);
     }];
     [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.scrollView);
@@ -154,8 +153,9 @@
         make.top.equalTo(self.weixinLoginButton.mas_bottom).offset(15);
         make.centerX.equalTo(self.weixinLoginButton);
         make.height.equalTo(@(self.weixinLabel.font.lineHeight));
-        make.bottomMargin.equalTo(@-20);
+        make.bottom.equalTo(self.weixinLabel.superview).offset(-20);
     }];
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 #pragma mark - private methons
@@ -183,14 +183,7 @@
     [[WLServerHelper sharedInstance] user_loginWithUserName:self.phoneTextField.text password:self.passwordTextField.text callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
         _strong_check(self);
         self.loginButton.enabled = YES;
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         DLog(@"登录成功");
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserLoginSucc object:apiResult];
     }];
@@ -216,6 +209,7 @@
     else
         NSAssert(NO, @"不支持此平台登录");
     
+    _weak(self);
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:type];
     snsPlatform.loginClickHandler(self, [UMSocialControllerService defaultControllerService], YES, ^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
@@ -223,14 +217,8 @@
             NSLog(@"昵称:%@, uid:%@, token:%@, 头像链接:%@", snsAccount.userName, snsAccount.usid, snsAccount.accessToken, snsAccount.iconURL);
             
             [[WLServerHelper sharedInstance] user_socialLoginWithPlatform:platform openId:snsAccount.usid token:snsAccount.accessToken avatar:snsAccount.iconURL appId:@"" nickName:snsAccount.userName callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
-                if (error) {
-                    DLog(@"%@", error);
-                    return;
-                }
-                if (!apiInfo.isSuc) {
-                    [MBProgressHUD showErrorWithMessage:apiInfo.message];
-                    return;
-                }
+                _strong_check(self);
+                ServerHelperErrorHandle;
                 DLog(@"第三方平台登录成功");
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationUserLoginSucc object:apiResult];
             }];
@@ -239,13 +227,6 @@
 }
 
 #pragma mark - private property methons
-
-- (UIView *)fixView{
-    if (!_fixView) {
-        _fixView = [[UIView alloc] init];
-    }
-    return _fixView;
-}
 
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
@@ -313,6 +294,14 @@
     if (!_passwordTextField) {
         _passwordTextField = [[UITextField alloc] init];
         _passwordTextField.secureTextEntry = YES;
+        _passwordTextField.returnKeyType = UIReturnKeyDone;
+        _weak(self);
+        [_passwordTextField withBlockForShouldReturn:^BOOL(UITextField *view) {
+            _strong_check(self, NO);
+            [view resignFirstResponder];
+            [self _loginAction];
+            return NO;
+        }];
     }
     return _passwordTextField;
 }

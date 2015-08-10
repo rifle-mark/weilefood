@@ -11,7 +11,7 @@
 
 @implementation WLDatabaseHelper (User)
 
-+ (WLUserModel *)findUser {
++ (WLUserModel *)user_find {
     WLUserModel *model = nil;
     WLMOUser *managedObject = [WLMOUser MR_findFirst];
     if (managedObject) {
@@ -21,7 +21,7 @@
     return model;
 }
 
-+ (void)saveWithUser:(WLUserModel *)model {
++ (void)user_save:(WLUserModel *)model {
     NSParameterAssert(model);
     
     WLMOUser *managedObject = [WLMOUser MR_findFirst];
@@ -31,7 +31,7 @@
     [self copyPropertyValuesFromObject:model toManagedObject:managedObject];
 }
 
-+ (void)deleteUser {
++ (void)user_delete {
     [WLMOUser MR_truncateAll];
 }
 

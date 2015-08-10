@@ -66,7 +66,7 @@ static CGFloat const kImageHeightScale = 0.788;
     }];
     [self.moneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.contentView);
-        make.bottomMargin.equalTo(@-7);
+        make.bottom.equalTo(self.moneyLabel.superview).offset(-7);
     }];
 }
 

@@ -47,7 +47,9 @@ NSString * const API_RESULT_ITEMS_KEYNAME = @"Items";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager.requestSerializer setValue:self.userToken forHTTPHeaderField:@"token"];
+    if (self.userToken && self.userToken.length > 0) {
+        [manager.requestSerializer setValue:self.userToken forHTTPHeaderField:@"token"];
+    }
     return manager;
 }
 

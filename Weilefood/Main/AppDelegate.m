@@ -48,19 +48,28 @@
     [MagicalRecord setupCoreDataStackWithStoreNamed:kCoreDataStoreName];
     
     // 加载本地登录用户token
-    WLUserModel *user = [WLDatabaseHelper findUser];
+    WLUserModel *user = [WLDatabaseHelper user_find];
     if (user) {
         [WLServerHelper sharedInstance].userToken = user.token;
     }
     
-    // 监听用户登录消息
+    // 监听网络状态
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        NSLog(@"Network New Status:%@", [[AFNetworkReachabilityManager sharedManager] localizedNetworkReachabilityStatusString]);
+    }];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    // 监听用户登录登出消息
     [self addObserverForNotificationName:kNotificationUserLoginSucc usingBlock:^(NSNotification *notification) {
-        WLUserModel *user = notification.object;
-        if (!user) {
+        if (!notification.object || ![notification.object isKindOfClass:[WLUserModel class]]) {
             return;
         }
+        WLUserModel *user = notification.object;
         [WLServerHelper sharedInstance].userToken = user.token;
-        [WLDatabaseHelper saveWithUser:user];
+        [WLDatabaseHelper user_save:user];
+    }];
+    [self addObserverForNotificationName:kNotificationUserLogout usingBlock:^(NSNotification *notification) {
+        [WLServerHelper sharedInstance].userToken = nil;
+        [WLDatabaseHelper user_delete];
     }];
     
     // 自定义BackButton样式，移除按钮文字
@@ -69,7 +78,9 @@
     [UINavigationBar appearance].barStyle = UIBarStyleBlack;
     [UINavigationBar appearance].barTintColor = k_COLOR_THEME_NAVIGATIONBAR;
     [UINavigationBar appearance].tintColor = k_COLOR_THEME_NAVIGATIONBAR_TEXT;
-    [UINavigationBar appearance].translucent = NO;
+    [UINavigationController aspect_hookSelector:NSSelectorFromString(@"initWithRootViewController:") withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo) {
+        ((UINavigationController *)aspectInfo.instance).navigationBar.translucent = NO;
+    } error:NULL];
     
     // UI入口
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

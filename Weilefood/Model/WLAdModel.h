@@ -18,14 +18,16 @@ typedef NS_ENUM(NSUInteger, WLAdType) {
     WLAdTypeActivity = 3,
     /// 预购
     WLAdTypeForwardBuy = 4,
-    /// 课堂
-    WLAdTypeClass = 5,
+    /// 营养推荐
+    WLAdTypeNutrition = 5,
     /// 主题视频
     WLAdTypeVideo = 6,
     /// 链接广告
     WLAdTypeUrl = 7,
     /// 无链接广告
     WLAdTypeNoUrl = 8,
+    /// 营养师
+    WLAdTypeDietitians = 9,
 };
 
 /// 广告

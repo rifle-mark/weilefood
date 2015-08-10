@@ -51,7 +51,7 @@ static NSInteger const kPageSize = 10;
     [super viewDidLoad];
     self.title = @"集市";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItems = @[[self.navigationController createUserBarButtonItem], self.searchButtonItem];
+    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], [UIBarButtonItem createUserBarButtonItem], self.searchButtonItem];
     
     [self.channelsView addSubview:self.channelButton1];
     [self.channelsView addSubview:self.channelButton2];
@@ -91,7 +91,6 @@ static NSInteger const kPageSize = 10;
     [self.channelButton1 mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.channelsView).offset(1);
         make.left.bottom.equalTo(self.channelsView);
-        make.width.equalTo(self.channelButton2);
     }];
     [self.channelButton2 mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.width.equalTo(self.channelButton1);
@@ -102,6 +101,7 @@ static NSInteger const kPageSize = 10;
         make.left.equalTo(self.channelButton2.mas_right);
         make.right.equalTo(self.channelsView);
     }];
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 #pragma mark - private methons
@@ -125,14 +125,7 @@ static NSInteger const kPageSize = 10;
         if (self.tableView.footer.isRefreshing) {
             [self.tableView.footer endRefreshing];
         }
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         self.productList = isLatest ? apiResult : [self.productList arrayByAddingObjectsFromArray:apiResult];
         self.tableView.footer.hidden = !apiResult || apiResult.count < kPageSize;
     }];
@@ -207,9 +200,6 @@ static NSInteger const kPageSize = 10;
         [_channelButton1 setTitle:@"优选" forState:UIControlStateNormal];
         [_channelButton1 setImage:[UIImage imageNamed:@"market_arrow_down"] forState:UIControlStateNormal];
         [_channelButton1 setImageToRight];
-//        [_channelButton1 sizeToFit];
-//        _channelButton1.titleEdgeInsets = UIEdgeInsetsMake(0, -_channelButton1.imageView.frame.size.width + 5, 0, _channelButton1.imageView.frame.size.width - 5);
-//        _channelButton1.imageEdgeInsets = UIEdgeInsetsMake(0, _channelButton1.titleLabel.frame.size.width, 0, -_channelButton1.titleLabel.frame.size.width);
         
         _weak(self);
         [_channelButton1 addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
@@ -274,7 +264,7 @@ static NSInteger const kPageSize = 10;
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _tableView.estimatedRowHeight = 340;
+        _tableView.rowHeight = [MarketProductCell cellHeight];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[MarketProductCell class] forCellReuseIdentifier:kCellIdentifier];
         _weak(self);
@@ -296,7 +286,6 @@ static NSInteger const kPageSize = 10;
             WLProductModel *produect = self.productList[path.row];
             cell.imageUrl     = produect.images;
             cell.name         = produect.productName;
-            cell.number       = produect.count;
             cell.price        = produect.price;
             cell.actionCount  = produect.actionCount;
             cell.commentCount = produect.commentCount;

@@ -18,10 +18,12 @@ typedef NS_ENUM(NSUInteger, WLCommentType) {
     WLCommentTypeActivity = 3,
     /// 预购
     WLCommentTypeForwardBuy = 4,
-    /// 课堂
-    WLCommentTypeClass = 5,
+    /// 营养推荐
+    WLCommentTypeNutrition = 5,
     /// 主题视频
     WLCommentTypeVideo = 6,
+    /// 营养师
+    WLCommentTypeDietitians = 7,
 };
 
 /// 评论

@@ -12,9 +12,17 @@
 
 /**
  *  返回NavigationBar上的FixedSpace，用于缩短按钮间距
- *
- *  @return 
  */
 + (instancetype)createNavigationFixedItem;
+
+/**
+ *  返回应用级别的“用户”BarButtonItem按钮
+ */
++ (UIBarButtonItem *)createUserBarButtonItem;
+
+/**
+ *  返回应用级别的“关闭”BarButtonItem按钮
+ */
++ (UIBarButtonItem *)createCloseBarButtonItem;
 
 @end

@@ -43,14 +43,13 @@ static NSInteger const kPageSize       = 10;
     [super viewDidLoad];
     self.title = @"视频";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItem = [self.navigationController createUserBarButtonItem];
+    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], [UIBarButtonItem createUserBarButtonItem]];
     
     [self.view addSubview:self.collectionView];
     
-    [self.bannerImageView sd_setImageWithURL:[NSURL URLWithString:@"http://c.hiphotos.baidu.com/image/pic/item/a8014c086e061d95a0e7763979f40ad162d9ca0a.jpg"]];
-    
     [self _addObserve];
     
+    [self _loadBannerImageData];
     [self.collectionView.header beginRefreshing];
 }
 
@@ -58,9 +57,9 @@ static NSInteger const kPageSize       = 10;
     [super viewDidLayoutSubviews];
     
     [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(self.topLayoutGuide.length);
-        make.left.right.bottom.equalTo(self.view);
+        make.edges.equalTo(self.view);
     }];
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 #pragma mark - private methons
@@ -70,6 +69,15 @@ static NSInteger const kPageSize       = 10;
     [self startObserveObject:self forKeyPath:@"videoList" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
         [self.collectionView reloadData];
+    }];
+}
+
+- (void)_loadBannerImageData {
+    _weak(self);
+    [[WLServerHelper sharedInstance] video_getAdImageWithCallback:^(WLApiInfoModel *apiInfo, WLVideoAdImageModel *apiResult, NSError *error) {
+        _strong_check(self);
+        ServerHelperErrorHandle;
+        [self.bannerImageView sd_setImageWithURL:[NSURL URLWithString:apiResult.videoListPic]];
     }];
 }
 
@@ -84,14 +92,7 @@ static NSInteger const kPageSize       = 10;
         if (self.collectionView.footer.isRefreshing) {
             [self.collectionView.footer endRefreshing];
         }
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         self.videoList = isLatest ? apiResult : [self.videoList arrayByAddingObjectsFromArray:apiResult];
         self.collectionView.footer.hidden = !apiResult || apiResult.count < kPageSize;
     }];

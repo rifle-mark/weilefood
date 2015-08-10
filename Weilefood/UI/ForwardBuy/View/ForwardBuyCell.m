@@ -27,6 +27,10 @@
 
 @implementation ForwardBuyCell
 
++ (CGFloat)cellHeight {
+    return 10 + (V_W_([UIApplication sharedApplication].keyWindow) - 20) * 2.0 / 3.0 + 95.7;
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -78,12 +82,12 @@
 
 - (void)setActionCount:(NSUInteger)actionCount {
     _actionCount = actionCount;
-    self.actionCountLabel.text = [NSString stringWithFormat:@"%ld", actionCount];
+    self.actionCountLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)actionCount];
 }
 
 - (void)setCommentCount:(NSUInteger)commentCount {
     _commentCount = commentCount;
-    self.commentCountLabel.text = [NSString stringWithFormat:@"%ld", commentCount];
+    self.commentCountLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)commentCount];
 }
 
 #pragma mark - private methods
@@ -140,7 +144,7 @@
     
     [self.footerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.priceLabel.mas_bottom).offset(8);
-        make.left.bottom.right.equalTo(self.contentView);
+        make.left.right.equalTo(self.contentView);
         make.height.equalTo(@8);
     }];
 }

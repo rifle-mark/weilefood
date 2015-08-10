@@ -31,4 +31,9 @@
     [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLActivityModel class] callback:callback];
 }
 
+- (void)activity_getCityListWithCallback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"activity", @"citylist"]];
+    [self httpGET:apiUrl parameters:nil resultArrayClass:[WLActivityCityModel class] callback:callback];
+}
+
 @end

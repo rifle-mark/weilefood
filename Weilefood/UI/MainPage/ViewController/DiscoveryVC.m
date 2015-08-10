@@ -9,79 +9,56 @@
 #import "DiscoveryVC.h"
 
 #import "DiscoveryCollectionHeaderView.h"
+#import "DiscoveryCollectionSectionHeaderView.h"
 #import "DiscoveryCollectionCell.h"
+#import <SwipeView/SwipeView.h>
 
 #import "MarketIndexPageVC.h"
 #import "ForwardBuyListVC.h"
 #import "ActivityListVC.h"
 #import "VideoListVC.h"
 
+#import "ProductInfoVC.h"
+
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
-@interface DiscoveryVC () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface DiscoveryVC () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, strong) UIView      *headerView;
-@property (nonatomic, strong) UIView      *bannerView;
-@property (nonatomic, strong) UIImageView *leftImageView;
-@property (nonatomic, strong) UILabel     *leftLabel;
-@property (nonatomic, strong) UIButton    *leftButton;
-@property (nonatomic, strong) UIImageView *middleImageView;
-@property (nonatomic, strong) UILabel     *middleLabel;
-@property (nonatomic, strong) UIButton    *middleButton;
-@property (nonatomic, strong) UIImageView *rightImageView;
-@property (nonatomic, strong) UILabel     *rightLabel;
-@property (nonatomic, strong) UIButton    *rightButton;
-@property (nonatomic, strong) UIImageView *videoImageView;
-
-@property (nonatomic, strong) UIView           *fixView;
 @property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, weak) DiscoveryCollectionHeaderView *headerView;
 
-@property (nonatomic, strong) WLVideoModel *videoData;
-@property (nonatomic, strong) NSArray      *sectionDataProducts;
-@property (nonatomic, strong) NSArray      *sectionDataForwardBuys;
-@property (nonatomic, strong) NSArray      *sectionDataNutritions;
-@property (nonatomic, strong) NSArray      *sectionDataActivitys;
+@property (nonatomic, strong) NSArray *bannerAdDatas;
+@property (nonatomic, strong) NSString *videoAdImage;
+@property (nonatomic, strong) NSArray *sectionDataProducts;
+@property (nonatomic, strong) NSArray *sectionDataForwardBuys;
+@property (nonatomic, strong) NSArray *sectionDataNutritions;
+@property (nonatomic, strong) NSArray *sectionDataActivitys;
 
 @end
 
-static NSInteger const kHeaderBannerHeight  = 160;
-static NSInteger const kHeaderButtonWidth   = 80;
-static NSInteger const kHeaderButtonHeight  = 126;
-static NSInteger const kHeaderAdHeight      = 88;
+static NSString *const kCellIdentifier          = @"MYCELL";
+static NSString *const kHeaderIdentifier        = @"HEADER";
+static NSString *const kSectionHeaderIdentifier = @"SECTIONHEADER";
+static NSInteger const kCellMargin              = 10;
 
-static NSString *const kCellIdentifier      = @"MYCELL";
-static NSString *const kHeaderIdentifier    = @"HEADER";
-static NSInteger const kCellMargin          = 10;
-
-static NSInteger const kSectionCount           = 4;
-static NSInteger const kSectionIndexProduct    = 0;
-static NSInteger const kSectionIndexForwardBuy = 1;
-static NSInteger const kSectionIndexNutrition  = 2;
-static NSInteger const kSectionIndexActivity   = 3;
+static NSInteger const kSectionCount           = 5;
+static NSInteger const kSectionIndexHeader     = 0;
+static NSInteger const kSectionIndexProduct    = 1;
+static NSInteger const kSectionIndexForwardBuy = 2;
+static NSInteger const kSectionIndexNutrition  = 3;
+static NSInteger const kSectionIndexActivity   = 4;
 
 @implementation DiscoveryVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"发现"
                                                     image:[UIImage imageNamed:@"discovery_baritem_icon_n"]
                                             selectedImage:[UIImage imageNamed:@"discovery_baritem_icon_h"]];
     
-    NSArray *array = @[self.bannerView,
-                       self.leftImageView,      self.leftLabel,     self.leftButton,
-                       self.middleImageView,    self.middleLabel,   self.middleButton,
-                       self.rightImageView,     self.rightLabel,    self.rightButton,
-                       self.videoImageView,
-                       ];
-    for (UIView *view in array) {
-        [self.headerView addSubview:view];
-    }
-    
-    [self.collectionView addSubview:self.headerView];
-    
-    [self.view addSubview:self.fixView];
     [self.view addSubview:self.collectionView];
     
     [self _addObserve];
@@ -92,54 +69,10 @@ static NSInteger const kSectionIndexActivity   = 3;
     [super viewDidLayoutSubviews];
     
     [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(self.topLayoutGuide.length, 0, self.bottomLayoutGuide.length, 0));
+        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(0, 0, self.bottomLayoutGuide.length, 0));
     }];
-    [self.headerView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.height.equalTo(@(kHeaderBannerHeight + kHeaderButtonHeight + kHeaderAdHeight));
-        make.bottom.equalTo(@0);
-    }];
-    [self.bannerView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.equalTo(self.bannerView.superview);
-        make.height.equalTo(@(kHeaderBannerHeight));
-    }];
-    [self.middleButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.bannerView.mas_bottom);
-        make.centerX.equalTo(@0);
-        make.size.mas_equalTo(CGSizeMake(kHeaderButtonWidth, kHeaderButtonHeight));
-    }];
-    CGFloat buttonMargin = ([UIApplication sharedApplication].keyWindow.bounds.size.width - kHeaderButtonWidth * 3) / 4.0;
-    [self.leftButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.width.height.equalTo(self.middleButton);
-        make.left.equalTo(@(buttonMargin));
-    }];
-    [self.rightButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.width.height.equalTo(self.middleButton);
-        make.right.equalTo(@(-buttonMargin));
-    }];
-    NSArray *views = @[@[self.leftImageView, self.leftLabel, self.leftButton],
-                       @[self.middleImageView, self.middleLabel, self.middleButton],
-                       @[self.rightImageView, self.rightLabel, self.rightButton],
-                       ];
-    for (NSArray *array in views) {
-        UIImageView *imgView = array[0];
-        UILabel *label = array[1];
-        UIButton *btn = array[2];
-        [imgView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(btn);
-            make.centerY.equalTo(btn).offset(-15);
-        }];
-        [label mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(imgView);
-            make.top.equalTo(imgView.mas_bottom).offset(10);
-        }];
-    }
     
-    [self.videoImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.middleButton.mas_bottom);
-        make.left.right.equalTo(self.videoImageView.superview);
-        make.bottomMargin.equalTo(@0);
-    }];
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -172,10 +105,44 @@ static NSInteger const kSectionIndexActivity   = 3;
     if (![kind isEqualToString:UICollectionElementKindSectionHeader]) {
         return nil;
     }
-    DiscoveryCollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
-                                                                                   withReuseIdentifier:kHeaderIdentifier
-                                                                                          forIndexPath:indexPath];
+    
     _weak(self);
+    if (indexPath.section == kSectionIndexHeader) {
+        DiscoveryCollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                                                       withReuseIdentifier:kHeaderIdentifier
+                                                                                              forIndexPath:indexPath];
+        if (self.headerView == headerView) {
+            return headerView;
+        }
+        headerView.bannerImageUrls = [self _getBannerImages];
+        headerView.videoImageUrl = self.videoAdImage;
+        [headerView bannerImageClickBlock:^(NSInteger index) {
+            _strong_check(self);
+            DLog(@"%ld", (long)index);
+        }];
+        [headerView marketClickBlock:^{
+            _strong_check(self);
+            [self.navigationController pushViewController:[[MarketIndexPageVC alloc] init] animated:YES];
+        }];
+        [headerView forwardbuyClickBlock:^{
+            _strong_check(self);
+            [self.navigationController pushViewController:[[ForwardBuyListVC alloc] init] animated:YES];
+        }];
+        [headerView nutritionClickBlock:^{
+            _strong_check(self);
+            DLog(@"");
+        }];
+        [headerView videoImageClickBlock:^{
+            _strong_check(self);
+            [self.navigationController pushViewController:[[VideoListVC alloc] init] animated:YES];
+        }];
+        self.headerView = headerView;
+        return headerView;
+    }
+
+    DiscoveryCollectionSectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                                                          withReuseIdentifier:kSectionHeaderIdentifier
+                                                                                                 forIndexPath:indexPath];
     switch (indexPath.section) {
         case kSectionIndexProduct: {
             headerView.title = @"集市";
@@ -198,7 +165,7 @@ static NSInteger const kSectionIndexActivity   = 3;
             headerView.title = @"营养推荐";
             headerView.allButtonActionBlock = ^(){
                 _strong_check(self);
-                DLog(@"");
+                [self.navigationController pushViewController:[[VideoListVC alloc] init] animated:YES];
             };
             break;
         }
@@ -263,13 +230,43 @@ static NSInteger const kSectionIndexActivity   = 3;
     return cell;
 }
 
+#pragma mark - UICollectionViewDelegateFlowLayout
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    CGFloat width = V_W_(self.view);
+    return CGSizeMake(width, section == 0 ? [DiscoveryCollectionHeaderView viewHeight] : [DiscoveryCollectionSectionHeaderView viewHeight]);
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0, kCellMargin, section == kSectionIndexHeader ? 0 : kCellMargin, kCellMargin);
+}
+
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case kSectionIndexProduct: {
+            WLProductModel *product = self.sectionDataProducts[indexPath.item];
+            [self.navigationController pushViewController:[[ProductInfoVC alloc] initWithProduct:product] animated:YES];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
 #pragma mark - private methons
 
 - (void)_addObserve {
     _weak(self);
-    [self startObserveObject:self forKeyPath:@"videoData" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
+    
+    [self startObserveObject:self forKeyPath:@"bannerAdDatas" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
-        [self.videoImageView sd_setImageWithURL:[NSURL URLWithString:self.videoData.images]];
+        self.headerView.bannerImageUrls = [self _getBannerImages];
+    }];
+    [self startObserveObject:self forKeyPath:@"videoAdImage" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
+        _strong_check(self);
+        self.headerView.videoImageUrl = self.videoAdImage;
     }];
     [self startObserveObject:self forKeyPath:@"sectionDataProducts" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
@@ -291,215 +288,62 @@ static NSInteger const kSectionIndexActivity   = 3;
 
 - (void)_loadData {
     _weak(self);
-    [[WLServerHelper sharedInstance] video_getListWithPageIndex:1 pageSize:1 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
+    [[WLServerHelper sharedInstance] ad_getListWithCallback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
-        self.videoData = [apiResult firstObject];
+        ServerHelperErrorHandle;
+        self.bannerAdDatas = apiResult;
+    }];
+    [[WLServerHelper sharedInstance] video_getAdImageWithCallback:^(WLApiInfoModel *apiInfo, WLVideoAdImageModel *apiResult, NSError *error) {
+        _strong_check(self);
+        ServerHelperErrorHandle;
+        self.videoAdImage = apiResult.videoIndexPic;
     }];
     [[WLServerHelper sharedInstance] product_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         self.sectionDataProducts = apiResult;
     }];
     [[WLServerHelper sharedInstance] forwardBuy_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         self.sectionDataForwardBuys = apiResult;
     }];
     [[WLServerHelper sharedInstance] nutrition_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         self.sectionDataNutritions = apiResult;
     }];
     [[WLServerHelper sharedInstance] activity_getListWithPageIndex:1 pageSize:4 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         self.sectionDataActivitys = apiResult;
     }];
 }
 
-- (UILabel *)_createButtonLabel {
-    return ({
-        UILabel *v = [[UILabel alloc] init];
-        v.font = [UIFont systemFontOfSize:15];
-        v.textColor = k_COLOR_MAROOM;
-        v;
-    });
+- (NSArray *)_getBannerImages {
+    NSMutableArray *ret = [NSMutableArray array];
+    for (WLAdModel *ad in self.bannerAdDatas) {
+        [ret addObject:ad.images];
+    }
+    return ret;
 }
 
 #pragma mark - private property methons
 
-- (UIView *)headerView {
-    if (!_headerView) {
-        _headerView = [[UIView alloc] init];
-    }
-    return _headerView;
-}
-
-- (UIView *)bannerView {
-    if (!_bannerView) {
-        _bannerView = [[UIView alloc] init];
-        _bannerView.backgroundColor = [UIColor grayColor];
-    }
-    return _bannerView;
-}
-
-- (UIImageView *)leftImageView {
-    if (!_leftImageView) {
-        _leftImageView = [[UIImageView alloc] init];
-        _leftImageView.image = [UIImage imageNamed:@"discovery_market_icon"];
-    }
-    return _leftImageView;
-}
-
-- (UILabel *)leftLabel {
-    if (!_leftLabel) {
-        _leftLabel = [self _createButtonLabel];
-        _leftLabel.text = @"集市";
-    }
-    return _leftLabel;
-}
-
-- (UIButton *)leftButton {
-    if (!_leftButton) {
-        _leftButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        _weak(self);
-        [_leftButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
-            _strong_check(self);
-            [self.navigationController pushViewController:[[MarketIndexPageVC alloc] init] animated:YES];
-        }];
-    }
-    return _leftButton;
-}
-
-- (UIImageView *)middleImageView {
-    if (!_middleImageView) {
-        _middleImageView = [[UIImageView alloc] init];
-        _middleImageView.image = [UIImage imageNamed:@"discovery_forwardbuy_icon"];
-    }
-    return _middleImageView;
-}
-
-- (UILabel *)middleLabel {
-    if (!_middleLabel) {
-        _middleLabel = [self _createButtonLabel];
-        _middleLabel.text = @"预购";
-    }
-    return _middleLabel;
-}
-
-- (UIButton *)middleButton {
-    if (!_middleButton) {
-        _middleButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        _weak(self);
-        [_middleButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
-            _strong_check(self);
-            [self.navigationController pushViewController:[[ForwardBuyListVC alloc] init] animated:YES];
-        }];
-    }
-    return _middleButton;
-}
-
-- (UIImageView *)rightImageView {
-    if (!_rightImageView) {
-        _rightImageView = [[UIImageView alloc] init];
-        _rightImageView.image = [UIImage imageNamed:@"discovery_right_icon"];
-    }
-    return _rightImageView;
-}
-
-- (UILabel *)rightLabel {
-    if (!_rightLabel) {
-        _rightLabel = [self _createButtonLabel];
-        _rightLabel.text = @"营养推荐";
-    }
-    return _rightLabel;
-}
-
-- (UIButton *)rightButton {
-    if (!_rightButton) {
-        _rightButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        _weak(self);
-        [_rightButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
-            _strong_check(self);
-            DLog(@"");
-        }];
-    }
-    return _rightButton;
-}
-
-- (UIImageView *)videoImageView {
-    if (!_videoImageView) {
-        _videoImageView = [[UIImageView alloc] init];
-        _videoImageView.contentMode = UIViewContentModeScaleAspectFill;
-        _videoImageView.userInteractionEnabled = YES;
-        _weak(self);
-        [_videoImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithActionBlock:^(UIGestureRecognizer *gesture) {
-            _strong_check(self);
-            [self.navigationController pushViewController:[[VideoListVC alloc] init] animated:YES];
-        }]];
-    }
-    return _videoImageView;
-}
-
-- (UIView *)fixView {
-    if (!_fixView) {
-        _fixView = [[UIView alloc] init];
-    }
-    return _fixView;
-}
-
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.headerReferenceSize = CGSizeMake(0, [DiscoveryCollectionHeaderView viewHeight]);
-        CGFloat cellWidth = ([UIApplication sharedApplication].keyWindow.bounds.size.width - kCellMargin * 3) / 2.0;
+        CGFloat cellWidth = (V_W_([UIApplication sharedApplication].keyWindow) - kCellMargin * 3) / 2.0;
         layout.itemSize = CGSizeMake(cellWidth, [DiscoveryCollectionCell cellHeightWithCellWidth:cellWidth]);
-        layout.sectionInset = UIEdgeInsetsMake(0, kCellMargin, kCellMargin, kCellMargin);
         layout.minimumLineSpacing = kCellMargin;
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
-        _collectionView.contentInset = UIEdgeInsetsMake(kHeaderBannerHeight + kHeaderButtonHeight + kHeaderAdHeight, 0, 0, 0);
         [_collectionView registerClass:[DiscoveryCollectionCell class] forCellWithReuseIdentifier:kCellIdentifier];
         [_collectionView registerClass:[DiscoveryCollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kHeaderIdentifier];
+        [_collectionView registerClass:[DiscoveryCollectionSectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kSectionHeaderIdentifier];
     }
     return _collectionView;
 }

@@ -41,12 +41,13 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0));
+        make.edges.equalTo(self.view);
     }];
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self.searchTextField becomeFirstResponder];
 }
 
@@ -75,14 +76,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
     [[WLServerHelper sharedInstance] product_searchWithKeyword:self.searchTextField.text maxDate:date pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         [MBProgressHUD hideLoading];
         _strong_check(self);
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         self.productList = apiResult;
     }];
 }
@@ -99,14 +93,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
         if (self.tableView.footer.isRefreshing) {
             [self.tableView.footer endRefreshing];
         }
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         self.productList = [self.productList arrayByAddingObjectsFromArray:apiResult];
     }];
 }
@@ -138,7 +125,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _tableView.estimatedRowHeight = 340;
+        _tableView.rowHeight = [MarketProductCell cellHeight];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[MarketProductCell class] forCellReuseIdentifier:kCellIdentifier];
         _tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(_loadMore)];
@@ -151,12 +138,11 @@ static NSString *const kCellIdentifier = @"MYCELL";
             _strong_check(self, nil);
             MarketProductCell *cell = [view dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:path];
             WLProductModel *product = self.productList[path.row];
-            cell.imageUrl = product.images;
-            cell.tagType = product.channelId;
-            cell.name = product.productName;
-            cell.number = product.count;
-            cell.price = product.price;
-            cell.actionCount = product.actionCount;
+            cell.imageUrl     = product.images;
+            cell.tagType      = product.channelId;
+            cell.name         = product.productName;
+            cell.price        = product.price;
+            cell.actionCount  = product.actionCount;
             cell.commentCount = product.commentCount;
             return cell;
         }];

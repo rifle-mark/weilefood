@@ -17,6 +17,7 @@
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     dispatch_once(&onceToken, ^{
         instance = [[self alloc] initWithWindow:window];
+        instance.removeFromSuperViewOnHide = YES;
     });
     if (!instance.superview) {
         [window addSubview:instance];
@@ -25,8 +26,11 @@
 }
 
 + (void)showSuccessWithMessage:(NSString *)message {
-    MBProgressHUD *hud = [self _sharedHUD];
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    MBProgressHUD *hud = [[self alloc] initWithWindow:window];
+    [window addSubview:hud];
     hud.userInteractionEnabled = NO;
+    hud.removeFromSuperViewOnHide = YES;
     hud.mode = MBProgressHUDModeCustomView;
     hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
     hud.labelText = message;
@@ -36,8 +40,11 @@
 
 + (void)showErrorWithMessage:(NSString *)message {
     NSParameterAssert(message);
-    MBProgressHUD *hud = [self _sharedHUD];
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    MBProgressHUD *hud = [[self alloc] initWithWindow:window];
+    [window addSubview:hud];
     hud.userInteractionEnabled = NO;
+    hud.removeFromSuperViewOnHide = YES;
     hud.mode = MBProgressHUDModeText;
     hud.labelText = message;
     [hud show:YES];

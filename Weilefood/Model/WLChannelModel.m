@@ -17,4 +17,9 @@
     [self setupReplacedKeyFromPropertyName121:CapitalizedPropertyName];
 }
 
++ (NSDictionary *)objectClassInArray {
+    return @{@"childChannel":[WLChannelModel class],
+             @"ChildChannel":[WLChannelModel class]};
+}
+
 @end

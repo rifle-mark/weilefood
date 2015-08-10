@@ -9,6 +9,8 @@
 #import "ActivityListVC.h"
 #import "ActivityCell.h"
 
+#import "CitySelectVC.h"
+
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
@@ -17,8 +19,8 @@
 @property (nonatomic, strong) UIButton    *cityButton;
 @property (nonatomic, strong) UITableView *tableView;
 
-@property (nonatomic, strong) NSString    *cityName;
-@property (nonatomic, strong) NSArray     *activityList;
+@property (nonatomic, strong) WLActivityCityModel *city;
+@property (nonatomic, strong) NSArray             *activityList;
 
 @end
 
@@ -33,38 +35,40 @@ static NSInteger const kPageSize       = 10;
     self.view.backgroundColor = [UIColor whiteColor];
     
     UIBarButtonItem *cityItem = [[UIBarButtonItem alloc] initWithCustomView:self.cityButton];
-    UIBarButtonItem *userItem = [self.navigationController createUserBarButtonItem];
-    self.navigationItem.rightBarButtonItems = @[userItem, cityItem];
+    UIBarButtonItem *userItem = [UIBarButtonItem createUserBarButtonItem];
+    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], userItem, cityItem];
     
     [self.view addSubview:self.tableView];
     
     [self _addObserve];
     
-    self.cityName = @"所有城市";
-    [self.tableView.header beginRefreshing];
+    self.city = nil;
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(self.topLayoutGuide.length);
-        make.left.right.bottom.equalTo(self.view);
+        make.edges.equalTo(self.view);
     }];
+    
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 #pragma mark - private methons
 
 - (void)_addObserve {
     _weak(self);
-    [self startObserveObject:self forKeyPath:@"cityName" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
+    [self startObserveObject:self forKeyPath:@"city" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
-        [self.cityButton setTitle:self.cityName forState:UIControlStateNormal];
+        NSString *cityName = self.city ? self.city.city : @"所有城市";
+        [self.cityButton setTitle:cityName forState:UIControlStateNormal];
         [self.cityButton setImageToRight];
         CGRect frame = self.cityButton.frame;
         frame.size.height = 24;
         frame.size.width += 10;
         self.cityButton.frame = frame;
+        [self.tableView.header beginRefreshing];
     }];
     [self startObserveObject:self forKeyPath:@"activityList" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
@@ -74,8 +78,9 @@ static NSInteger const kPageSize       = 10;
 
 - (void)_loadDataWithIsLatest:(BOOL)isLatest {
     _weak(self);
+    NSString *cityName = self.city ? self.city.city : @"";
     NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLActivityModel *)[self.activityList lastObject]).createDate;
-    [[WLServerHelper sharedInstance] activity_getListWithCity:@"" maxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
+    [[WLServerHelper sharedInstance] activity_getListWithCity:cityName maxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         if (self.tableView.header.isRefreshing) {
             [self.tableView.header endRefreshing];
@@ -83,14 +88,7 @@ static NSInteger const kPageSize       = 10;
         if (self.tableView.footer.isRefreshing) {
             [self.tableView.footer endRefreshing];
         }
-        if (error) {
-            DLog(@"%@", error);
-            return;
-        }
-        if (!apiInfo.isSuc) {
-            [MBProgressHUD showErrorWithMessage:apiInfo.message];
-            return;
-        }
+        ServerHelperErrorHandle;
         self.activityList = isLatest ? apiResult : [self.activityList arrayByAddingObjectsFromArray:apiResult];
         self.tableView.footer.hidden = !apiResult || apiResult.count < kPageSize;
     }];
@@ -110,7 +108,14 @@ static NSInteger const kPageSize       = 10;
         _weak(self);
         [_cityButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            self.cityName = @"成都";
+            CitySelectVC *vc = [[CitySelectVC alloc] init];
+            [vc selectedCity:^(CitySelectVC *sender, WLActivityCityModel *activityCity) {
+                _strong_check(self);
+                self.city = activityCity;
+                [sender dismissViewControllerAnimated:YES completion:nil];
+            }];
+            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+            [self.navigationController presentViewController:nc animated:YES completion:nil];
         }];
     }
     return _cityButton;
@@ -119,7 +124,7 @@ static NSInteger const kPageSize       = 10;
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _tableView.estimatedRowHeight = 280;
+        _tableView.rowHeight = [ActivityCell cellHeight];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[ActivityCell class] forCellReuseIdentifier:kCellIdentifier];
         _weak(self);

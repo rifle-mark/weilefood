@@ -37,13 +37,13 @@
 }
 - (void)_makeConstraints {
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leftMargin.equalTo(@15);
-        make.topMargin.equalTo(@5);
+        make.left.equalTo(self.iconImageView.superview).offset(15);
+        make.top.equalTo(self.iconImageView.superview).offset(5);
         make.size.mas_equalTo(CGSizeMake(33, 33));
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.iconImageView.mas_right).offset(12);
-        make.rightMargin.equalTo(@-15);
+        make.right.equalTo(self.nameLabel.superview).offset(-15);
         make.top.bottom.equalTo(self.iconImageView);
     }];
     [self.checkedImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -196,7 +196,6 @@
         [_tableView registerClass:[MCCVChannelCell class] forCellReuseIdentifier:[MCCVChannelCell reuseIdentifier]];
         _weak(self);
         [_tableView withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {
-//            _strong_check(self, 0);
             return 5;
         }];
         [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
