@@ -7,9 +7,9 @@
 //
 
 #import "ProductTableHeaderView.h"
-#import <SwipeView/SwipeView.h>
+#import "SwipeView+AutomaticCycleScrollingImage.h"
 
-@interface ProductTableHeaderView () <SwipeViewDataSource, SwipeViewDelegate>
+@interface ProductTableHeaderView ()
 
 @property (nonatomic, strong) SwipeView     *swipeView;
 @property (nonatomic, strong) UIPageControl *pageControl;
@@ -19,7 +19,6 @@
 
 @end
 
-static NSInteger const kImageChangeDelay    = 4;
 static NSInteger const kTitleTopMargin      = 15;
 static NSInteger const kNumberTopMargin     = 10;
 static NSInteger const kNumberHeightpMargin = 20;
@@ -75,11 +74,9 @@ static NSInteger const kNumberHeightpMargin = 20;
 
 - (void)setImages:(NSArray *)images {
     _images = images;
+    self.swipeView.acsi_imageUrls = images;
     [self.swipeView reloadData];
     self.pageControl.numberOfPages = self.swipeView.numberOfPages;
-    if (self.pageControl.numberOfPages > 0) {
-        [self performSelector:@selector(_autoNextImage) withObject:nil afterDelay:kImageChangeDelay];
-    }
 }
 
 - (void)setTitle:(NSString *)title {
@@ -97,69 +94,21 @@ static NSInteger const kNumberHeightpMargin = 20;
     self.priceLabel.text = [NSString stringWithFormat:@"￥%.2f", price];
 }
 
-#pragma mark - SwipeViewDataSource
-
-- (NSInteger)numberOfItemsInSwipeView:(SwipeView *)swipeView {
-    return self.images ? self.images.count : 0;
-}
-
-- (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view {
-    UIImageView *imageView = nil;
-    if (!view) {
-        imageView = [[UIImageView alloc] init];
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
-        imageView.clipsToBounds = YES;
-        imageView.frame = swipeView.bounds;
-    }
-    else {
-        imageView = (UIImageView *)view;
-    }
-    NSString *url = self.images[index];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:url]];
-    return imageView;
-}
-
-#pragma mark - SwipeViewDelegate
-
-- (void)swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView {
-    self.pageControl.currentPage = swipeView.currentPage;
-}
-
-- (void)swipeViewWillBeginDragging:(SwipeView *)swipeView {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(_autoNextImage) object:nil];
-}
-
-- (void)swipeViewDidEndDragging:(SwipeView *)swipeView willDecelerate:(BOOL)decelerate {
-    [self performSelector:@selector(_autoNextImage) withObject:nil afterDelay:kImageChangeDelay];
-}
-
-- (void)swipeView:(SwipeView *)swipeView didSelectItemAtIndex:(NSInteger)index {
-    // TODO: 进入广告界面
-}
-
-#pragma mark - private methods
-
-- (void)_autoNextImage {
-    if (self.swipeView.numberOfPages > 0 && !self.swipeView.decelerating) {
-        NSInteger newPage = self.swipeView.currentPage + 1;
-        if (newPage >= self.swipeView.numberOfPages) {
-            newPage = 0;
-        }
-        [self.swipeView scrollToPage:newPage duration:0.3];
-    }
-    [self performSelector:@selector(_autoNextImage) withObject:nil afterDelay:kImageChangeDelay];
-}
-
 #pragma mark - private property methods
 
 - (SwipeView *)swipeView {
     if (!_swipeView) {
-        _swipeView = [[SwipeView alloc] init];
+        _swipeView = [SwipeView acsi_create];
         _swipeView.backgroundColor = k_COLOR_WHITE;
-        _swipeView.pagingEnabled = YES;
-        _swipeView.wrapEnabled = YES;
-        _swipeView.dataSource = self;
-        _swipeView.delegate = self;
+        _weak(self);
+        [_swipeView acsi_currentItemIndexDidChangeBlock:^(SwipeView *swipeView) {
+            _strong_check(self);
+            self.pageControl.currentPage = swipeView.currentPage;
+        }];
+        [_swipeView acsi_didSelectItemAtIndexBlock:^(SwipeView *swipeView, NSInteger index) {
+            _strong_check(self);
+            DLog(@"");
+        }];
     }
     return _swipeView;
 }
