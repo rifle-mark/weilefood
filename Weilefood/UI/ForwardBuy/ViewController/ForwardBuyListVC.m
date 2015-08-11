@@ -9,6 +9,8 @@
 #import "ForwardBuyListVC.h"
 #import "ForwardBuyCell.h"
 
+#import "ForwardBuyInfoVC.h"
+
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
@@ -190,6 +192,11 @@ static NSInteger const kPageSize       = 10;
             cell.actionCount  = forwardBuy.actionCount;
             cell.commentCount = forwardBuy.commentCount;
             return cell;
+        }];
+        [_tableView withBlockForRowDidSelect:^(UITableView *view, NSIndexPath *path) {
+            _strong_check(self);
+            WLForwardBuyModel *forwardBuy = self.forwardBuyList[path.row];
+            [self.navigationController pushViewController:[[ForwardBuyInfoVC alloc] initWithForwardBuy:forwardBuy] animated:YES];
         }];
     }
     return _tableView;

@@ -7,9 +7,9 @@
 //
 
 #import "DiscoveryCollectionHeaderView.h"
-#import <SwipeView/SwipeView.h>
+#import "SwipeView+AutomaticCycleScrollingImage.h"
 
-@interface DiscoveryCollectionHeaderView () <SwipeViewDataSource, SwipeViewDelegate>
+@interface DiscoveryCollectionHeaderView ()
 
 @property (nonatomic, strong) SwipeView     *bannerView;
 @property (nonatomic, strong) UIPageControl *pageControl;
@@ -36,8 +36,6 @@ static NSInteger const kHeaderBannerHeight  = 160;
 static NSInteger const kHeaderButtonWidth   = 80;
 static NSInteger const kHeaderButtonHeight  = 126;
 static NSInteger const kHeaderAdHeight      = 88;
-
-static NSInteger const kBannerImageChangeDelay = 4;
 
 @implementation DiscoveryCollectionHeaderView
 
@@ -109,52 +107,13 @@ static NSInteger const kBannerImageChangeDelay = 4;
     }];
 }
 
-#pragma mark - SwipeViewDataSource
-
-- (NSInteger)numberOfItemsInSwipeView:(SwipeView *)swipeView {
-    return self.bannerImageUrls ? self.bannerImageUrls.count : 0;
-}
-
-- (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view {
-    UIImageView *imageView = nil;
-    if (!view) {
-        imageView = [[UIImageView alloc] init];
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
-        imageView.clipsToBounds = YES;
-        imageView.frame = swipeView.bounds;
-    }
-    else {
-        imageView = (UIImageView *)view;
-    }
-    [imageView sd_setImageWithURL:[NSURL URLWithString:self.bannerImageUrls[index]]];
-    return imageView;
-}
-
-#pragma mark - SwipeViewDelegate
-
-- (void)swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView {
-    self.pageControl.currentPage = swipeView.currentPage;
-}
-
-- (void)swipeViewWillBeginDragging:(SwipeView *)swipeView {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(_autoNextBannerAdImage) object:nil];
-}
-
-- (void)swipeViewDidEndDragging:(SwipeView *)swipeView willDecelerate:(BOOL)decelerate {
-    [self performSelector:@selector(_autoNextBannerAdImage) withObject:nil afterDelay:kBannerImageChangeDelay];
-}
-
-- (void)swipeView:(SwipeView *)swipeView didSelectItemAtIndex:(NSInteger)index {
-    GCBlockInvoke(self.bannerImageClickBlock, index);
-}
-
 #pragma mark - public methods
 
 - (void)setBannerImageUrls:(NSArray *)bannerImageUrls {
     _bannerImageUrls = bannerImageUrls;
+    self.bannerView.acsi_imageUrls = bannerImageUrls;
     [self.bannerView reloadData];
     self.pageControl.numberOfPages = self.bannerView.numberOfPages;
-    [self performSelector:@selector(_autoNextBannerAdImage) withObject:nil afterDelay:kBannerImageChangeDelay];
 }
 
 - (void)setVideoImageUrl:(NSString *)videoImageUrl {
@@ -184,17 +143,6 @@ static NSInteger const kBannerImageChangeDelay = 4;
 
 #pragma mark - private methods
 
-- (void)_autoNextBannerAdImage {
-    if (self.bannerView.numberOfPages > 0 && !self.bannerView.decelerating) {
-        NSInteger newPage = self.bannerView.currentPage + 1;
-        if (newPage >= self.bannerView.numberOfPages) {
-            newPage = 0;
-        }
-        [self.bannerView scrollToPage:newPage duration:0.3];
-    }
-    [self performSelector:@selector(_autoNextBannerAdImage) withObject:nil afterDelay:kBannerImageChangeDelay];
-}
-
 - (UILabel *)_createButtonLabel {
     return ({
         UILabel *v = [[UILabel alloc] init];
@@ -208,12 +156,17 @@ static NSInteger const kBannerImageChangeDelay = 4;
 
 - (SwipeView *)bannerView {
     if (!_bannerView) {
-        _bannerView = [[SwipeView alloc] init];
+        _bannerView = [SwipeView acsi_create];
         _bannerView.backgroundColor = [UIColor grayColor];
-        _bannerView.pagingEnabled = YES;
-        _bannerView.wrapEnabled = YES;
-        _bannerView.dataSource = self;
-        _bannerView.delegate = self;
+        _weak(self);
+        [_bannerView acsi_currentItemIndexDidChangeBlock:^(SwipeView *swipeView) {
+            _strong_check(self);
+            self.pageControl.currentPage = swipeView.currentPage;
+        }];
+        [_bannerView acsi_didSelectItemAtIndexBlock:^(SwipeView *swipeView, NSInteger index) {
+            _strong_check(self);
+            GCBlockInvoke(self.bannerImageClickBlock, index);
+        }];
     }
     return _bannerView;
 }

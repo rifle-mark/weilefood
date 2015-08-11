@@ -1,18 +1,21 @@
 //
-//  ProductTableHeaderView.m
+//  ForwardBuyInfoHeaderView.m
 //  Weilefood
 //
-//  Created by kelei on 15/8/6.
+//  Created by kelei on 15/8/11.
 //  Copyright (c) 2015年 kelei. All rights reserved.
 //
 
-#import "ProductTableHeaderView.h"
+#import "ForwardBuyInfoHeaderView.h"
 #import "SwipeView+AutomaticCycleScrollingImage.h"
 
-@interface ProductTableHeaderView ()
+@interface ForwardBuyInfoHeaderView ()
 
 @property (nonatomic, strong) SwipeView     *swipeView;
 @property (nonatomic, strong) UIPageControl *pageControl;
+@property (nonatomic, strong) UIView        *timeView;
+@property (nonatomic, strong) UIImageView   *timeIconImageView;
+@property (nonatomic, strong) UILabel       *beginEndDateLabel;
 @property (nonatomic, strong) UILabel       *titleLabel;
 @property (nonatomic, strong) UILabel       *numberLabel;
 @property (nonatomic, strong) UILabel       *priceLabel;
@@ -20,25 +23,31 @@
 @end
 
 static NSInteger const kTitleTopMargin      = 15;
+static NSInteger const kTimeHeight          = 33;
 static NSInteger const kNumberTopMargin     = 10;
 static NSInteger const kNumberHeightpMargin = 20;
 #define kTitleFont  [UIFont systemFontOfSize:18]
 
-@implementation ProductTableHeaderView
+@implementation ForwardBuyInfoHeaderView
 
 + (CGFloat)viewHeight {
     return SCREEN_WIDTH
-        + kTitleTopMargin + kTitleFont.lineHeight * 2
-        + kNumberTopMargin + kNumberHeightpMargin;
+    + kTimeHeight
+    + kTitleTopMargin + kTitleFont.lineHeight * 2
+    + kNumberTopMargin + kNumberHeightpMargin;
 }
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self addSubview:self.swipeView];
         [self addSubview:self.pageControl];
+        [self addSubview:self.timeView];
         [self addSubview:self.titleLabel];
         [self addSubview:self.numberLabel];
         [self addSubview:self.priceLabel];
+        
+        [self.timeView addSubview:self.timeIconImageView];
+        [self.timeView addSubview:self.beginEndDateLabel];
     }
     return self;
 }
@@ -55,18 +64,32 @@ static NSInteger const kNumberHeightpMargin = 20;
         make.right.equalTo(self).offset(-10);
         make.bottom.height.equalTo(self.numberLabel);
     }];
+    [self.timeView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self);
+        make.height.equalTo(@(kTimeHeight));
+        make.bottom.equalTo(self.numberLabel.mas_top).offset(-kNumberTopMargin -kTitleFont.lineHeight * 2 -kTitleTopMargin);
+    }];
+    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self).insets(UIEdgeInsetsMake(0, 10, 0, 10));
+        make.top.equalTo(self.timeView.mas_bottom).offset(kTitleTopMargin);
+    }];
     [self.swipeView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self);
         make.height.equalTo(self.swipeView.mas_width);
-        make.bottom.equalTo(self.numberLabel.mas_top).offset(-kNumberTopMargin -kTitleFont.lineHeight * 2 -kTitleTopMargin);
+        make.bottom.equalTo(self.timeView.mas_top);
     }];
     [self.pageControl mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.swipeView);
         make.height.equalTo(@25);
     }];
-    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self).insets(UIEdgeInsetsMake(0, 10, 0, 10));
-        make.top.equalTo(self.swipeView.mas_bottom).offset(kTitleTopMargin);
+    
+    [self.timeIconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.beginEndDateLabel.mas_left);
+        make.centerY.equalTo(self.timeView);
+    }];
+    [self.beginEndDateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.timeView).offset(self.timeIconImageView.image.size.width / 2);
+        make.centerY.equalTo(self.timeView);
     }];
 }
 
@@ -94,6 +117,32 @@ static NSInteger const kNumberHeightpMargin = 20;
     self.priceLabel.text = [NSString stringWithFormat:@"￥%.2f", price];
 }
 
+- (void)setBeginDate:(NSDate *)beginDate {
+    _beginDate = beginDate;
+    [self _refeashDateAndStatusLabel];
+}
+
+- (void)setEndDate:(NSDate *)endDate {
+    _endDate = endDate;
+    [self _refeashDateAndStatusLabel];
+}
+
+#pragma mark - private methods
+
+- (void)_refeashDateAndStatusLabel {
+    self.beginEndDateLabel.text = [NSString stringWithFormat:@"购买时间：%@ — %@", [self.beginDate formattedDateWithFormat:@"MM.dd"], [self.endDate formattedDateWithFormat:@"MM.dd"]];
+    NSDate *now = [NSDate date];
+    if ([now isEarlierThan:self.beginDate]) {
+        self.timeView.backgroundColor = k_COLOR_MEDIUM_AQUAMARINE;
+    }
+    else if ([now isLaterThan:self.endDate]) {
+        self.timeView.backgroundColor = k_COLOR_DARKGRAY;
+    }
+    else {
+        self.timeView.backgroundColor = k_COLOR_ANZAC;
+    }
+}
+
 #pragma mark - private property methods
 
 - (SwipeView *)swipeView {
@@ -119,6 +168,30 @@ static NSInteger const kNumberHeightpMargin = 20;
         _pageControl.userInteractionEnabled = NO;
     }
     return _pageControl;
+}
+
+- (UIView *)timeView {
+    if (!_timeView) {
+        _timeView = [[UIView alloc] init];
+    }
+    return _timeView;
+}
+
+- (UIImageView *)timeIconImageView {
+    if (!_timeIconImageView) {
+        _timeIconImageView = [[UIImageView alloc] init];
+        _timeIconImageView.image = [UIImage imageNamed:@"fy_icon_time"];
+    }
+    return _timeIconImageView;
+}
+
+- (UILabel *)beginEndDateLabel {
+    if (!_beginEndDateLabel) {
+        _beginEndDateLabel = [[UILabel alloc] init];
+        _beginEndDateLabel.font = [UIFont systemFontOfSize:13];
+        _beginEndDateLabel.textColor = k_COLOR_WHITE;
+    }
+    return _beginEndDateLabel;
 }
 
 - (UILabel *)titleLabel {

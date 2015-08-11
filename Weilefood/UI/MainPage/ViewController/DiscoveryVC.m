@@ -11,7 +11,6 @@
 #import "DiscoveryCollectionHeaderView.h"
 #import "DiscoveryCollectionSectionHeaderView.h"
 #import "DiscoveryCollectionCell.h"
-#import <SwipeView/SwipeView.h>
 
 #import "MarketIndexPageVC.h"
 #import "ForwardBuyListVC.h"
@@ -19,6 +18,7 @@
 #import "VideoListVC.h"
 
 #import "ProductInfoVC.h"
+#import "ForwardBuyInfoVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -157,7 +157,6 @@ static NSInteger const kSectionIndexActivity   = 4;
             headerView.allButtonActionBlock = ^(){
                 _strong_check(self);
                 [self.navigationController pushViewController:[[ForwardBuyListVC alloc] init] animated:YES];
-                
             };
             break;
         }
@@ -248,6 +247,11 @@ static NSInteger const kSectionIndexActivity   = 4;
         case kSectionIndexProduct: {
             WLProductModel *product = self.sectionDataProducts[indexPath.item];
             [self.navigationController pushViewController:[[ProductInfoVC alloc] initWithProduct:product] animated:YES];
+            break;
+        }
+        case kSectionIndexForwardBuy: {
+            WLForwardBuyModel *forwardBuy = self.sectionDataForwardBuys[indexPath.item];
+            [self.navigationController pushViewController:[[ForwardBuyInfoVC alloc] initWithForwardBuy:forwardBuy] animated:YES];
             break;
         }
         default:

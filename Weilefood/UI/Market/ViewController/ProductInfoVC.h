@@ -6,7 +6,6 @@
 //  Copyright (c) 2015年 kelei. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "TransparentNavigationBarVC.h"
 
 @class WLProductModel;

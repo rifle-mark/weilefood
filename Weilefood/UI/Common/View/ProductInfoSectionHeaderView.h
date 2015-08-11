@@ -1,5 +1,5 @@
 //
-//  ProductSectionHeaderView.h
+//  ProductInfoSectionHeaderView.h
 //  Weilefood
 //
 //  Created by kelei on 15/8/6.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /// 商品详情界面 - 固定头部分
-@interface ProductSectionHeaderView : UIView
+@interface ProductInfoSectionHeaderView : UIView
 
 /// 赞数量
 @property (nonatomic, assign) NSInteger actionCount;

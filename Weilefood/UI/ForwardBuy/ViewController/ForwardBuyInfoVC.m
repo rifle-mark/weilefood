@@ -1,13 +1,13 @@
 //
-//  ProductInfoVC.m
+//  ForwardBuyInfoVC.m
 //  Weilefood
 //
-//  Created by kelei on 15/7/30.
+//  Created by kelei on 15/8/11.
 //  Copyright (c) 2015年 kelei. All rights reserved.
 //
 
-#import "ProductInfoVC.h"
-#import "ProductInfoHeaderView.h"
+#import "ForwardBuyInfoVC.h"
+#import "ForwardBuyInfoHeaderView.h"
 #import "ProductInfoSectionHeaderView.h"
 
 #import "CommentListVC.h"
@@ -15,13 +15,13 @@
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
-@interface ProductInfoVC ()
+@interface ForwardBuyInfoVC ()
 
 @property (nonatomic, strong) UIView   *navView;
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UIButton *cartButton;
 
-@property (nonatomic, strong) ProductInfoHeaderView        *tableHeaderView;
+@property (nonatomic, strong) ForwardBuyInfoHeaderView     *tableHeaderView;
 @property (nonatomic, strong) ProductInfoSectionHeaderView *sectionHeaderView;
 @property (nonatomic, strong) UIWebView                    *webView;
 @property (nonatomic, strong) UITableView                  *tableView;
@@ -30,26 +30,26 @@
 @property (nonatomic, strong) UIButton                     *addCartButton;
 @property (nonatomic, strong) UIButton                     *buyButton;
 
-@property (nonatomic, strong) WLProductModel *product;
-@property (nonatomic, assign) CGFloat        headerHeight;
+@property (nonatomic, strong) WLForwardBuyModel *forwardBuy;
+@property (nonatomic, assign) CGFloat           headerHeight;
 
 @end
 
 static NSString *const kCellIdentifier = @"MYCELL";
 
-@implementation ProductInfoVC
+@implementation ForwardBuyInfoVC
 
 - (id)init {
-    NSAssert(NO, @"请使用initWithProduct:来实例化");
+    NSAssert(NO, @"请使用initWithForwardBuy:来实例化");
     self = [super init];
     return self;
 }
 
-- (instancetype)initWithProduct:(WLProductModel *)product {
-    NSParameterAssert(product);
+- (instancetype)initWithForwardBuy:(WLForwardBuyModel *)forwardBuy {
+    NSParameterAssert(forwardBuy);
     if (self = [super init]) {
-        _headerHeight = [ProductInfoHeaderView viewHeight];
-        self.product = product;
+        _headerHeight = [ForwardBuyInfoHeaderView viewHeight];
+        self.forwardBuy = forwardBuy;
     }
     return self;
 }
@@ -125,31 +125,29 @@ static NSString *const kCellIdentifier = @"MYCELL";
 
 - (void)_loadData {
     _weak(self);
-    [[WLServerHelper sharedInstance] product_getInfoWithProductId:self.product.productId callback:^(WLApiInfoModel *apiInfo, WLProductModel *apiResult, NSError *error) {
+    [[WLServerHelper sharedInstance] forwardBuy_getInfoWithForwardBuylId:self.forwardBuy.forwardBuyId callback:^(WLApiInfoModel *apiInfo, WLForwardBuyModel *apiResult, NSError *error) {
         _strong_check(self);
         ServerHelperErrorHandle;
-        self.product = apiResult;
+        self.forwardBuy = apiResult;
         [self _showData];
     }];
 }
 
 - (void)_showData {
-    self.title = self.product.productName;
+    self.title = self.forwardBuy.title;
     
-    NSMutableArray *images = [NSMutableArray array];
-    for (WLProductPictureModel *pic in self.product.pictures) {
-        [images addObject:pic.picPath];
-    }
-    self.tableHeaderView.images = images;
-    self.tableHeaderView.title  = self.product.productName;
-    self.tableHeaderView.number = self.product.count;
-    self.tableHeaderView.price  = self.product.price;
+    self.tableHeaderView.images    = @[self.forwardBuy.banner];
+    self.tableHeaderView.title     = self.forwardBuy.title;
+    self.tableHeaderView.number    = self.forwardBuy.count;
+    self.tableHeaderView.price     = self.forwardBuy.price;
+    self.tableHeaderView.beginDate = self.forwardBuy.startDate;
+    self.tableHeaderView.endDate   = self.forwardBuy.endDate;
     
-    self.sectionHeaderView.actionCount = self.product.actionCount;
-    self.sectionHeaderView.commentCount = self.product.commentCount;
+    self.sectionHeaderView.actionCount = self.forwardBuy.actionCount;
+    self.sectionHeaderView.commentCount = self.forwardBuy.commentCount;
     
     if (self.webView.superview) {
-        [self.webView loadHTMLString:self.product.desc baseURL:nil];
+        [self.webView loadHTMLString:self.forwardBuy.desc baseURL:nil];
     }
 }
 
@@ -186,10 +184,10 @@ static NSString *const kCellIdentifier = @"MYCELL";
     return _cartButton;
 }
 
-- (ProductInfoHeaderView *)tableHeaderView {
+- (ForwardBuyInfoHeaderView *)tableHeaderView {
     if (!_tableHeaderView) {
-        CGRect frame = CGRectMake(0, 0, SCREEN_WIDTH, [ProductInfoHeaderView viewHeight] - 64);
-        _tableHeaderView = [[ProductInfoHeaderView alloc] initWithFrame:frame];
+        CGRect frame = CGRectMake(0, 0, SCREEN_WIDTH, [ForwardBuyInfoHeaderView viewHeight] - 64);
+        _tableHeaderView = [[ForwardBuyInfoHeaderView alloc] initWithFrame:frame];
         _tableHeaderView.backgroundColor = k_COLOR_WHITE;
     }
     return _tableHeaderView;
@@ -202,15 +200,15 @@ static NSString *const kCellIdentifier = @"MYCELL";
         _weak(self);
         [_sectionHeaderView actionBlock:^{
             _strong_check(self);
-            [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeProduct actType:WLActionActTypeApproval objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+            [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeForwardBuy actType:WLActionActTypeApproval objectId:self.forwardBuy.forwardBuyId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
                 _strong_check(self);
                 ServerHelperErrorHandle;
-                self.sectionHeaderView.actionCount = ++self.product.actionCount;
+                self.sectionHeaderView.actionCount = ++self.forwardBuy.actionCount;
             }];
         }];
         [_sectionHeaderView commentBlock:^{
             _strong_check(self);
-            CommentListVC *vc = [[CommentListVC alloc] initWithType:WLCommentTypeProduct refId:self.product.productId];
+            CommentListVC *vc = [[CommentListVC alloc] initWithType:WLCommentTypeForwardBuy refId:self.forwardBuy.forwardBuyId];
             UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
             [self.navigationController presentViewController:nc animated:YES completion:nil];
         }];
@@ -263,8 +261,8 @@ static NSString *const kCellIdentifier = @"MYCELL";
             [self.webView mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.edges.equalTo(self.webView.superview);
             }];
-            if (!self.webView.request && self.product.desc && self.product.desc.length > 0) {
-                [self.webView loadHTMLString:self.product.desc baseURL:nil];
+            if (!self.webView.request && self.forwardBuy.desc && self.forwardBuy.desc.length > 0) {
+                [self.webView loadHTMLString:self.forwardBuy.desc baseURL:nil];
             }
             return cell;
         }];
@@ -310,7 +308,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
         _weak(self);
         [_favoriteButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeProduct actType:WLActionActTypeFavorite objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+            [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeForwardBuy actType:WLActionActTypeFavorite objectId:self.forwardBuy.forwardBuyId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
                 _strong_check(self);
                 ServerHelperErrorHandle;
                 [self.favoriteButton setHighlighted:YES];

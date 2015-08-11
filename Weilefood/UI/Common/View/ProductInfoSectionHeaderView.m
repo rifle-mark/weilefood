@@ -1,14 +1,14 @@
 //
-//  ProductSectionHeaderView.m
+//  ProductInfoSectionHeaderView.m
 //  Weilefood
 //
 //  Created by kelei on 15/8/6.
 //  Copyright (c) 2015年 kelei. All rights reserved.
 //
 
-#import "ProductSectionHeaderView.h"
+#import "ProductInfoSectionHeaderView.h"
 
-@interface ProductSectionHeaderView ()
+@interface ProductInfoSectionHeaderView ()
 
 @property (nonatomic, strong) UIButton *actionButton;
 @property (nonatomic, strong) UIButton *commentButton;
@@ -24,7 +24,7 @@
 static NSInteger const kButtonMargin = 10;
 static NSInteger const kLineHeight = 7;
 
-@implementation ProductSectionHeaderView
+@implementation ProductInfoSectionHeaderView
 
 + (CGFloat)viewHeight {
     return kButtonMargin * 2 + [UIImage imageNamed:@"productinfo_btn_action_n"].size.height + kLineHeight;
