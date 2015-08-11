@@ -10,6 +10,7 @@
 #import "ActivityCell.h"
 
 #import "CitySelectVC.h"
+#import "ActivityInfoVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -150,6 +151,11 @@ static NSInteger const kPageSize       = 10;
             cell.endDate      = activity.endDate;
             cell.participated = activity.isJoin;
             return cell;
+        }];
+        [_tableView withBlockForRowDidSelect:^(UITableView *view, NSIndexPath *path) {
+            _strong_check(self);
+            WLActivityModel *activity = self.activityList[path.row];
+            [self.navigationController pushViewController:[[ActivityInfoVC alloc] initWithActivity:activity] animated:YES];
         }];
     }
     return _tableView;

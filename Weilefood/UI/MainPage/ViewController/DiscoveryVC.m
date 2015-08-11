@@ -19,6 +19,7 @@
 
 #import "ProductInfoVC.h"
 #import "ForwardBuyInfoVC.h"
+#import "ActivityInfoVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -252,6 +253,11 @@ static NSInteger const kSectionIndexActivity   = 4;
         case kSectionIndexForwardBuy: {
             WLForwardBuyModel *forwardBuy = self.sectionDataForwardBuys[indexPath.item];
             [self.navigationController pushViewController:[[ForwardBuyInfoVC alloc] initWithForwardBuy:forwardBuy] animated:YES];
+            break;
+        }
+        case kSectionIndexActivity: {
+            WLActivityModel *activity = self.sectionDataActivitys[indexPath.item];
+            [self.navigationController pushViewController:[[ActivityInfoVC alloc] initWithActivity:activity] animated:YES];
             break;
         }
         default:

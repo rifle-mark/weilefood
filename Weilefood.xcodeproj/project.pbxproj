@@ -86,6 +86,8 @@
 		24C40B4E1B7A356100E8AFA9 /* ProductInfoSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C40B4D1B7A356100E8AFA9 /* ProductInfoSectionHeaderView.m */; };
 		24C40B511B7A35B200E8AFA9 /* ForwardBuyInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C40B501B7A35B200E8AFA9 /* ForwardBuyInfoVC.m */; };
 		24C40B541B7A36D400E8AFA9 /* ForwardBuyInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C40B531B7A36D400E8AFA9 /* ForwardBuyInfoHeaderView.m */; };
+		24C40B571B7A438500E8AFA9 /* ActivityInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C40B561B7A438500E8AFA9 /* ActivityInfoVC.m */; };
+		24C40B5A1B7A442500E8AFA9 /* ActivityInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C40B591B7A442500E8AFA9 /* ActivityInfoHeaderView.m */; };
 		24C792681B666B4E007DCB30 /* MarketProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C792671B666B4E007DCB30 /* MarketProductCell.m */; };
 		24CAC42F1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC42E1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m */; };
 		24CAC4331B57E9D800E3C4D5 /* WLServerHelper+Share.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC4321B57E9D700E3C4D5 /* WLServerHelper+Share.m */; };
@@ -338,6 +340,10 @@
 		24C40B501B7A35B200E8AFA9 /* ForwardBuyInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForwardBuyInfoVC.m; sourceTree = "<group>"; };
 		24C40B521B7A36D400E8AFA9 /* ForwardBuyInfoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForwardBuyInfoHeaderView.h; sourceTree = "<group>"; };
 		24C40B531B7A36D400E8AFA9 /* ForwardBuyInfoHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForwardBuyInfoHeaderView.m; sourceTree = "<group>"; };
+		24C40B551B7A438500E8AFA9 /* ActivityInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityInfoVC.h; sourceTree = "<group>"; };
+		24C40B561B7A438500E8AFA9 /* ActivityInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityInfoVC.m; sourceTree = "<group>"; };
+		24C40B581B7A442500E8AFA9 /* ActivityInfoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityInfoHeaderView.h; sourceTree = "<group>"; };
+		24C40B591B7A442500E8AFA9 /* ActivityInfoHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityInfoHeaderView.m; sourceTree = "<group>"; };
 		24C792661B666B4E007DCB30 /* MarketProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketProductCell.h; sourceTree = "<group>"; };
 		24C792671B666B4E007DCB30 /* MarketProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketProductCell.m; sourceTree = "<group>"; };
 		24CAC42D1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+UploadImage.h"; sourceTree = "<group>"; };
@@ -586,6 +592,8 @@
 			children = (
 				24134EB71B6A712F00E5BE07 /* ActivityCell.h */,
 				24134EB81B6A712F00E5BE07 /* ActivityCell.m */,
+				24C40B581B7A442500E8AFA9 /* ActivityInfoHeaderView.h */,
+				24C40B591B7A442500E8AFA9 /* ActivityInfoHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -595,6 +603,8 @@
 			children = (
 				24134EB41B6A711900E5BE07 /* ActivityListVC.h */,
 				24134EB51B6A711900E5BE07 /* ActivityListVC.m */,
+				24C40B551B7A438500E8AFA9 /* ActivityInfoVC.h */,
+				24C40B561B7A438500E8AFA9 /* ActivityInfoVC.m */,
 				2406062D1B772F9100C6F373 /* CitySelectVC.h */,
 				2406062E1B772F9100C6F373 /* CitySelectVC.m */,
 			);
@@ -1480,6 +1490,7 @@
 				245936A31B5A2C62008FFAB8 /* WLServerHelper+Channel.m in Sources */,
 				24CDCBE71B4F792E00BDE8CB /* UIImagePickerControllerDelegateImplementationProxy.m in Sources */,
 				24CDCC1A1B4F792E00BDE8CB /* NSObject+GCKVO.m in Sources */,
+				24C40B571B7A438500E8AFA9 /* ActivityInfoVC.m in Sources */,
 				24CDCC0F1B4F792E00BDE8CB /* UISearchBar+GCDelegate.m in Sources */,
 				24CAC4331B57E9D800E3C4D5 /* WLServerHelper+Share.m in Sources */,
 				240FB7031B69025900DF5CE4 /* UIButton+ImagePosition.m in Sources */,
@@ -1527,6 +1538,7 @@
 				24CDCC1D1B4F792E00BDE8CB /* UIControl+GCEvent.m in Sources */,
 				249A9BA91B724B37008203C8 /* WLVideoAdImageModel.m in Sources */,
 				245936AC1B5A3943008FFAB8 /* WLServerHelper+Video.m in Sources */,
+				24C40B5A1B7A442500E8AFA9 /* ActivityInfoHeaderView.m in Sources */,
 				24CDCC121B4F792E00BDE8CB /* UITableView+GCDelegateAndDataSource.m in Sources */,
 				24CDCC081B4F792E00BDE8CB /* UIGestureRecognizer+GCDelegate.m in Sources */,
 				24B8C06E1B5242BC001C5722 /* AGPreviewScrollView.m in Sources */,

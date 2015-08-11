@@ -25,7 +25,7 @@
 static NSInteger const kTitleTopMargin      = 15;
 static NSInteger const kTimeHeight          = 33;
 static NSInteger const kNumberTopMargin     = 10;
-static NSInteger const kNumberHeightpMargin = 20;
+static NSInteger const kNumberHeight        = 20;
 #define kTitleFont  [UIFont systemFontOfSize:18]
 
 @implementation ForwardBuyInfoHeaderView
@@ -34,7 +34,7 @@ static NSInteger const kNumberHeightpMargin = 20;
     return SCREEN_WIDTH
     + kTimeHeight
     + kTitleTopMargin + kTitleFont.lineHeight * 2
-    + kNumberTopMargin + kNumberHeightpMargin;
+    + kNumberTopMargin + kNumberHeight;
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -58,7 +58,7 @@ static NSInteger const kNumberHeightpMargin = 20;
     [self.numberLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel);
         make.bottom.equalTo(self);
-        make.height.equalTo(@(kNumberHeightpMargin));
+        make.height.equalTo(@(kNumberHeight));
     }];
     [self.priceLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).offset(-10);
