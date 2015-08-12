@@ -39,11 +39,20 @@ typedef NS_ENUM(NSUInteger, WLActionActType) {
 /**
  *  点赞、收藏
  *
- *  @param type     目标对象的类型
- *  @param actType  点赞 或 收藏
- *  @param objectId 目标对象ID
+ *  @param objectType 目标对象的类型
+ *  @param actType    点赞 或 收藏
+ *  @param objectId   目标对象ID
  *  @param callback
  */
-- (void)action_addWithType:(WLActionType)type actType:(WLActionActType)actType objectId:(NSUInteger)objectId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback;
+- (void)action_addWithActType:(WLActionActType)actType objectType:(WLActionType)objectType objectId:(NSUInteger)objectId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback;
+
+/**
+ *  取消收藏
+ *
+ *  @param objectType 目标对象的类型
+ *  @param objectId   目标对象ID
+ *  @param callback
+ */
+- (void)action_deleteFavoriteWithObjectType:(WLActionType)objectType objectId:(NSUInteger)objectId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback;
 
 @end

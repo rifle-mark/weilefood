@@ -27,7 +27,8 @@
 
 @end
 
-static NSInteger kPageSize = 10;
+static NSString *const kHintText = @"在这里说点什么吧...";
+static NSInteger const kPageSize = 10;
 
 @implementation CommentListVC
 
@@ -197,11 +198,11 @@ static NSInteger kPageSize = 10;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         [_tableView registerClass:[CommentCell class] forCellReuseIdentifier:kCellIdentifier];
         _weak(self);
-        _tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [_tableView headerWithRefreshingBlock:^{
             _strong_check(self);
             [self _loadDataWithIsLatest:YES];
         }];
-        _tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [_tableView footerWithRefreshingBlock:^{
             _strong_check(self);
             [self _loadDataWithIsLatest:NO];
         }];
@@ -250,11 +251,21 @@ static NSInteger kPageSize = 10;
         _textField = [[UITextView alloc] init];
         _textField.backgroundColor = k_COLOR_WHITE;
         _textField.font = [UIFont systemFontOfSize:13];
-//        _textField.placeholder = @"在这里说点什么吧...";
         _textField.textColor = k_COLOR_DARKGRAY;
         _textField.layer.borderColor = k_COLOR_DARKGRAY.CGColor;
         _textField.layer.borderWidth = k1pxWidth;
         _textField.layer.cornerRadius = 4;
+        _textField.text = kHintText;
+        [_textField withBlockForDidBeginEditing:^(UITextView *view) {
+            if ([view.text isEqualToString:kHintText]) {
+                view.text = @"";
+            }
+        }];
+        [_textField withBlockForDidEndEditing:^(UITextView *view) {
+            if (!view.text || view.text.length <= 0) {
+                view.text = kHintText;
+            }
+        }];
     }
     return _textField;
 }

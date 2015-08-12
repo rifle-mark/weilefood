@@ -10,6 +10,7 @@
 #import "VideoCollectionCell.h"
 
 #import "VideoInfoVC.h"
+#import "LoginVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -133,11 +134,11 @@ static NSInteger const kPageSize       = 10;
         [_collectionView registerClass:[VideoCollectionCell class] forCellWithReuseIdentifier:kCellIdentifier];
         [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kHeaderIdentifier];
         _weak(self);
-        _collectionView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [_collectionView headerWithRefreshingBlock:^{
             _strong_check(self);
             [self _loadDataWithIsLatest:YES];
         }];
-        _collectionView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [_collectionView footerWithRefreshingBlock:^{
             _strong_check(self);
             [self _loadDataWithIsLatest:NO];
         }];
@@ -170,10 +171,30 @@ static NSInteger const kPageSize       = 10;
             cell.imageUrl = video.images;
             cell.title    = video.title;
             cell.points   = video.points;
+            cell.isFavorite = video.isFav;
             cell.isVideo  = video.videoUrl && (video.videoUrl.length > 0);
             [cell favoriteBlock:^(VideoCollectionCell *cell) {
                 _strong_check(self);
-                DLog(@"");
+                NSIndexPath *path = [self.collectionView indexPathForCell:cell];
+                WLVideoModel *video = self.videoList[path.item];
+                [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+                    if (video.isFav) {
+                        [[WLServerHelper sharedInstance] action_deleteFavoriteWithObjectType:WLActionTypeVideo objectId:video.videoId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                            _strong_check(self);
+                            ServerHelperErrorHandle;
+                            video.isFav = NO;
+                            [self.collectionView reloadItemsAtIndexPaths:@[path]];
+                        }];
+                    }
+                    else {
+                        [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeFavorite objectType:WLActionTypeVideo objectId:video.videoId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                            _strong_check(self);
+                            ServerHelperErrorHandle;
+                            video.isFav = YES;
+                            [self.collectionView reloadItemsAtIndexPaths:@[path]];
+                        }];
+                    }
+                }];
             }];
             return cell;
         }];

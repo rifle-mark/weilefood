@@ -13,6 +13,7 @@
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface VideoInfoVC ()
 
@@ -25,7 +26,7 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView       *contentView;
 @property (nonatomic, strong) UIImageView  *videoImageView;
-@property (nonatomic, strong) UIImageView  *playImageView;
+@property (nonatomic, strong) UIButton     *playButton;
 @property (nonatomic, strong) UILabel      *titleLabel;
 @property (nonatomic, strong) UILabel      *pointsLabel;
 @property (nonatomic, strong) UIView       *lineView;
@@ -68,7 +69,7 @@
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.contentView];
     [self.contentView addSubview:self.videoImageView];
-    [self.contentView addSubview:self.playImageView];
+    [self.contentView addSubview:self.playButton];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.pointsLabel];
     [self.contentView addSubview:self.lineView];
@@ -96,7 +97,7 @@
             make.height.equalTo(self.videoImageView.mas_width).offset(3.0 / 4.0);
         }
     }];
-    [self.playImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.playButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.videoImageView);
     }];
     [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -150,10 +151,11 @@
 #pragma mark - private methods
 
 - (void)_showData {
+    self.favoriteButton.highlighted = self.video.isFav;
     [self.actionButton setTitle:[NSString stringWithFormat:@"%u", self.video.actionCount] forState:UIControlStateNormal];
     [self.commentButton setTitle:[NSString stringWithFormat:@"%u", self.video.commentCount] forState:UIControlStateNormal];
     self.videoImageView.hidden = !self.video.videoUrl || self.video.videoUrl.length <= 0;
-    self.playImageView.hidden = self.videoImageView.hidden;
+    self.playButton.hidden = self.videoImageView.hidden;
     if (!self.videoImageView.hidden) {
         [self.videoImageView sd_setImageWithURL:[NSURL URLWithString:self.video.images]];
     }
@@ -192,11 +194,22 @@
         [_favoriteButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeVideo actType:WLActionActTypeFavorite objectId:self.video.videoId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
-                    _strong_check(self);
-                    ServerHelperErrorHandle;
-                    [self _showData];
-                }];
+                if (self.video.isFav) {
+                    [[WLServerHelper sharedInstance] action_deleteFavoriteWithObjectType:WLActionTypeVideo objectId:self.video.videoId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                        _strong_check(self);
+                        ServerHelperErrorHandle;
+                        self.video.isFav = NO;
+                        [self _showData];
+                    }];
+                }
+                else {
+                    [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeFavorite objectType:WLActionTypeVideo objectId:self.video.videoId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                        _strong_check(self);
+                        ServerHelperErrorHandle;
+                        self.video.isFav = YES;
+                        [self _showData];
+                    }];
+                }
             }];
         }];
     }
@@ -216,9 +229,10 @@
         [_actionButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeVideo actType:WLActionActTypeApproval objectId:self.video.videoId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeApproval objectType:WLActionTypeVideo objectId:self.video.videoId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
                     _strong_check(self);
                     ServerHelperErrorHandle;
+                    self.actionButton.highlighted = YES;
                     self.video.actionCount++;
                     [self _showData];
                 }];
@@ -284,12 +298,20 @@
     return _videoImageView;
 }
 
-- (UIImageView  *)playImageView {
-    if (!_playImageView) {
-        _playImageView = [[UIImageView alloc] init];
-        _playImageView.image = [UIImage imageNamed:@"video_play"];
+- (UIButton  *)playButton {
+    if (!_playButton) {
+        _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_playButton setImage:[UIImage imageNamed:@"video_play"] forState:UIControlStateNormal];
+        _weak(self);
+        [_playButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            _strong_check(self);
+            NSURL *url = [NSURL URLWithString:self.video.videoUrl];
+            MPMoviePlayerViewController *pvc = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
+            pvc.moviePlayer.movieSourceType = MPMovieSourceTypeStreaming;
+            [self presentViewController:pvc animated:YES completion:nil];
+        }];
     }
-    return _playImageView;
+    return _playButton;
 }
 
 - (UILabel *)titleLabel {

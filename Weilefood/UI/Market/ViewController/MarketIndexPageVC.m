@@ -268,11 +268,11 @@ static NSInteger const kPageSize = 10;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[MarketProductCell class] forCellReuseIdentifier:kCellIdentifier];
         _weak(self);
-        _tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [_tableView headerWithRefreshingBlock:^{
             _strong_check(self);
             [self _loadDataWithIsLatest:YES];
         }];
-        _tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [_tableView footerWithRefreshingBlock:^{
             _strong_check(self);
             [self _loadDataWithIsLatest:NO];
         }];

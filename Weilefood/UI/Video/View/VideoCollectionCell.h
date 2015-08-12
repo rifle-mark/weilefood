@@ -19,6 +19,8 @@
 @property (nonatomic, assign) NSInteger points;
 /// YES:视频 NO:文章
 @property (nonatomic, assign) BOOL      isVideo;
+/// 已收藏
+@property (nonatomic, assign) BOOL      isFavorite;
 
 /**
  *  Cell展示所需要的高度

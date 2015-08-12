@@ -154,6 +154,8 @@ static NSString *const kCellIdentifier = @"MYCELL";
     if (self.webView.superview) {
         [self.webView loadHTMLString:self.forwardBuy.desc baseURL:nil];
     }
+    
+    self.favoriteButton.highlighted = self.forwardBuy.isFav;
 }
 
 - (void)_resetWebViewHeight {
@@ -206,7 +208,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_sectionHeaderView actionBlock:^{
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeForwardBuy actType:WLActionActTypeApproval objectId:self.forwardBuy.forwardBuyId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeApproval objectType:WLActionTypeForwardBuy objectId:self.forwardBuy.forwardBuyId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
                     _strong_check(self);
                     ServerHelperErrorHandle;
                     self.sectionHeaderView.actionCount = ++self.forwardBuy.actionCount;
@@ -314,11 +316,22 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_favoriteButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeForwardBuy actType:WLActionActTypeFavorite objectId:self.forwardBuy.forwardBuyId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
-                    _strong_check(self);
-                    ServerHelperErrorHandle;
-                    [self.favoriteButton setHighlighted:YES];
-                }];
+                if (self.forwardBuy.isFav) {
+                    [[WLServerHelper sharedInstance] action_deleteFavoriteWithObjectType:WLActionTypeForwardBuy objectId:self.forwardBuy.forwardBuyId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                        _strong_check(self);
+                        ServerHelperErrorHandle;
+                        self.forwardBuy.isFav = NO;
+                        [self _showData];
+                    }];
+                }
+                else {
+                    [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeFavorite objectType:WLActionTypeForwardBuy objectId:self.forwardBuy.forwardBuyId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                        _strong_check(self);
+                        ServerHelperErrorHandle;
+                        self.forwardBuy.isFav = YES;
+                        [self _showData];
+                    }];
+                }
             }];
         }];
     }

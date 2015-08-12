@@ -152,6 +152,8 @@ static NSString *const kCellIdentifier = @"MYCELL";
     if (self.webView.superview) {
         [self.webView loadHTMLString:self.product.desc baseURL:nil];
     }
+    
+    self.favoriteButton.highlighted = self.product.isFav;
 }
 
 - (void)_resetWebViewHeight {
@@ -204,7 +206,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_sectionHeaderView actionBlock:^{
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeProduct actType:WLActionActTypeApproval objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeApproval objectType:WLActionTypeProduct objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
                     _strong_check(self);
                     ServerHelperErrorHandle;
                     self.sectionHeaderView.actionCount = ++self.product.actionCount;
@@ -312,11 +314,22 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_favoriteButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeProduct actType:WLActionActTypeFavorite objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
-                    _strong_check(self);
-                    ServerHelperErrorHandle;
-                    [self.favoriteButton setHighlighted:YES];
-                }];
+                if (self.product.isFav) {
+                    [[WLServerHelper sharedInstance] action_deleteFavoriteWithObjectType:WLActionTypeProduct objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                        _strong_check(self);
+                        ServerHelperErrorHandle;
+                        self.product.isFav = NO;
+                        [self _showData];
+                    }];
+                }
+                else {
+                    [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeFavorite objectType:WLActionTypeProduct objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                        _strong_check(self);
+                        ServerHelperErrorHandle;
+                        self.product.isFav = YES;
+                        [self _showData];
+                    }];
+                }
             }];
         }];
     }

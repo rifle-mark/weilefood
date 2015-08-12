@@ -135,6 +135,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [self.webView loadHTMLString:self.activity.content baseURL:nil];
     }
     
+    self.favoriteButton.highlighted = self.activity.isFav;
     self.buyButton.enabled = NO;
     if (self.activity.isJoin) {
         [self.buyButton setTitle:@"已参加" forState:UIControlStateNormal];
@@ -197,7 +198,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_sectionHeaderView actionBlock:^{
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeActivity actType:WLActionActTypeApproval objectId:self.activity.activityId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeApproval objectType:WLActionTypeActivity objectId:self.activity.activityId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
                     _strong_check(self);
                     ServerHelperErrorHandle;
                     self.sectionHeaderView.actionCount = ++self.activity.actionCount;
@@ -305,11 +306,22 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_favoriteButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeActivity actType:WLActionActTypeFavorite objectId:self.activity.activityId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
-                    _strong_check(self);
-                    ServerHelperErrorHandle;
-                    [self.favoriteButton setHighlighted:YES];
-                }];
+                if (self.activity.isFav) {
+                    [[WLServerHelper sharedInstance] action_deleteFavoriteWithObjectType:WLActionTypeActivity objectId:self.activity.activityId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                        _strong_check(self);
+                        ServerHelperErrorHandle;
+                        self.activity.isFav = NO;
+                        [self _showData];
+                    }];
+                }
+                else {
+                    [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeFavorite objectType:WLActionTypeActivity objectId:self.activity.activityId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                        _strong_check(self);
+                        ServerHelperErrorHandle;
+                        self.activity.isFav = YES;
+                        [self _showData];
+                    }];
+                }
             }];
         }];
     }

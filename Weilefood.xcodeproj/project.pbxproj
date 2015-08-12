@@ -168,6 +168,9 @@
 		24CDCC1D1B4F792E00BDE8CB /* UIControl+GCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCBD31B4F792E00BDE8CB /* UIControl+GCEvent.m */; };
 		24CDCC1E1B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCBD61B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m */; };
 		24CDCC2C1B4FA34B00BDE8CB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24CDCC2B1B4FA34B00BDE8CB /* CoreData.framework */; };
+		24D3F9BA1B7B9C13005F63DB /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24D3F9B91B7B9C13005F63DB /* MediaPlayer.framework */; };
+		24D3F9BD1B7BA825005F63DB /* NSDate+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D3F9BC1B7BA825005F63DB /* NSDate+Ext.m */; };
+		24D3F9C61B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D3F9C51B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m */; };
 		24D55DE61B67EB2400EC6373 /* UIBarButtonItem+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */; };
 		24E66DBF1B62717A0081324A /* UIScrollView+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DBE1B62717A0081324A /* UIScrollView+Keyboard.m */; };
 		24E66DC21B6271810081324A /* MBProgressHUD+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DC11B6271810081324A /* MBProgressHUD+Message.m */; };
@@ -515,6 +518,11 @@
 		24CDCBD61B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+GCAction.m"; sourceTree = "<group>"; };
 		24CDCC1F1B4F7B7000BDE8CB /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		24CDCC2B1B4FA34B00BDE8CB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		24D3F9B91B7B9C13005F63DB /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		24D3F9BB1B7BA825005F63DB /* NSDate+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Ext.h"; sourceTree = "<group>"; };
+		24D3F9BC1B7BA825005F63DB /* NSDate+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Ext.m"; sourceTree = "<group>"; };
+		24D3F9C41B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MJRefreshDefault.h"; sourceTree = "<group>"; };
+		24D3F9C51B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefreshDefault.m"; sourceTree = "<group>"; };
 		24D55DE41B67EB2400EC6373 /* UIBarButtonItem+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Ext.h"; sourceTree = "<group>"; };
 		24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Ext.m"; sourceTree = "<group>"; };
 		24E66DBD1B62717A0081324A /* UIScrollView+Keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Keyboard.h"; sourceTree = "<group>"; };
@@ -540,6 +548,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24D3F9BA1B7B9C13005F63DB /* MediaPlayer.framework in Frameworks */,
 				2467B7241B50D146001202A4 /* SystemConfiguration.framework in Frameworks */,
 				2467B7221B50D140001202A4 /* libz.dylib in Frameworks */,
 				2467B7201B50D13B001202A4 /* CoreTelephony.framework in Frameworks */,
@@ -1018,6 +1027,8 @@
 			children = (
 				246F07801B56A6210086CD28 /* NSString+Ext.h */,
 				246F07811B56A6210086CD28 /* NSString+Ext.m */,
+				24D3F9BB1B7BA825005F63DB /* NSDate+Ext.h */,
+				24D3F9BC1B7BA825005F63DB /* NSDate+Ext.m */,
 				24E66DC01B6271810081324A /* MBProgressHUD+Message.h */,
 				24E66DC11B6271810081324A /* MBProgressHUD+Message.m */,
 				240FB7011B69025900DF5CE4 /* UIButton+ImagePosition.h */,
@@ -1028,6 +1039,8 @@
 				24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */,
 				24C40B491B7A2B1A00E8AFA9 /* SwipeView+AutomaticCycleScrollingImage.h */,
 				24C40B4A1B7A2B1A00E8AFA9 /* SwipeView+AutomaticCycleScrollingImage.m */,
+				24D3F9C41B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.h */,
+				24D3F9C51B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1346,6 +1359,7 @@
 		610C5F99515E558BBD5D2B02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				24D3F9B91B7B9C13005F63DB /* MediaPlayer.framework */,
 				24B8C0771B5247A2001C5722 /* AssetsLibrary.framework */,
 				24B8C0751B524795001C5722 /* CoreLocation.framework */,
 				24B8C0731B52478C001C5722 /* QuartzCore.framework */,
@@ -1574,6 +1588,7 @@
 				24CDCBF21B4F792E00BDE8CB /* UITextViewDelegateImplementationProxy.m in Sources */,
 				24CDCBE51B4F792E00BDE8CB /* UICollectionViewDelegateAndDataSourceImplementationProxy.m in Sources */,
 				24CAC42F1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m in Sources */,
+				24D3F9C61B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m in Sources */,
 				24CAC4451B5808B900E3C4D5 /* WLActivityModel.m in Sources */,
 				24CDCBE61B4F792E00BDE8CB /* UIGestureRecognizerDelegateImplementProxy.m in Sources */,
 				245936A61B5A2ECF008FFAB8 /* WLServerHelper+Product.m in Sources */,
@@ -1601,6 +1616,7 @@
 				24CDCC0C1B4F792E00BDE8CB /* UIPickerView+GCDelegateAndDataSource.m in Sources */,
 				240D79A51B5FECFB007E2E43 /* LoginVC.m in Sources */,
 				24CDCBEB1B4F792E00BDE8CB /* UIPopoverControllerImplementationProxy.m in Sources */,
+				24D3F9BD1B7BA825005F63DB /* NSDate+Ext.m in Sources */,
 				24CDCC161B4F792E00BDE8CB /* UIWebView+GCDelegate.m in Sources */,
 				24CDCBF01B4F792E00BDE8CB /* UITableViewDelegateAndDataSourceImplementationProxy.m in Sources */,
 				24CDCBE31B4F792E00BDE8CB /* AVAudioPlayerDelegateImplementationProxy.m in Sources */,
