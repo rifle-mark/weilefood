@@ -31,6 +31,12 @@ static NSInteger kPageSize = 10;
 
 @implementation CommentListVC
 
++ (void)showWithType:(WLCommentType)type refId:(NSUInteger)refId {
+    CommentListVC *vc = [[CommentListVC alloc] initWithType:type refId:refId];
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nc animated:YES completion:nil];
+}
+
 - (id)init {
     NSAssert(NO, @"请使用initWithType:refId:方法来实例化本界面");
     return nil;
@@ -72,7 +78,7 @@ static NSInteger kPageSize = 10;
     [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.footerView.mas_top);
-        make.height.equalTo(@0.4);
+        make.height.equalTo(@k1pxWidth);
     }];
     [self.footerView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
@@ -247,7 +253,7 @@ static NSInteger kPageSize = 10;
 //        _textField.placeholder = @"在这里说点什么吧...";
         _textField.textColor = k_COLOR_DARKGRAY;
         _textField.layer.borderColor = k_COLOR_DARKGRAY.CGColor;
-        _textField.layer.borderWidth = 0.4;
+        _textField.layer.borderWidth = k1pxWidth;
         _textField.layer.cornerRadius = 4;
     }
     return _textField;

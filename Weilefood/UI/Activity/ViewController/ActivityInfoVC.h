@@ -14,7 +14,7 @@
 @interface ActivityInfoVC : TransparentNavigationBarVC
 
 /**
- *  通过WLActivityModel实例化商品详情界面
+ *  通过WLActivityModel实例化活动详情界面
  *
  *  @param activity
  *

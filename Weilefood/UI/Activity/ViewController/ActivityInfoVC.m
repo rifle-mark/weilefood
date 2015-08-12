@@ -11,6 +11,7 @@
 #import "ProductInfoSectionHeaderView.h"
 
 #import "CommentListVC.h"
+#import "LoginVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -194,18 +195,18 @@ static NSString *const kCellIdentifier = @"MYCELL";
         _sectionHeaderView.backgroundColor = k_COLOR_WHITE;
         _weak(self);
         [_sectionHeaderView actionBlock:^{
-            _strong_check(self);
-            [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeActivity actType:WLActionActTypeApproval objectId:self.activity.activityId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+            [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                ServerHelperErrorHandle;
-                self.sectionHeaderView.actionCount = ++self.activity.actionCount;
+                [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeActivity actType:WLActionActTypeApproval objectId:self.activity.activityId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                    _strong_check(self);
+                    ServerHelperErrorHandle;
+                    self.sectionHeaderView.actionCount = ++self.activity.actionCount;
+                }];
             }];
         }];
         [_sectionHeaderView commentBlock:^{
             _strong_check(self);
-            CommentListVC *vc = [[CommentListVC alloc] initWithType:WLCommentTypeActivity refId:self.activity.activityId];
-            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
-            [self.navigationController presentViewController:nc animated:YES completion:nil];
+            [CommentListVC showWithType:WLCommentTypeActivity refId:self.activity.activityId];
         }];
         [_sectionHeaderView shareBlock:^{
             _strong_check(self);
@@ -302,11 +303,13 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_favoriteButton setImageToTop];
         _weak(self);
         [_favoriteButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
-            _strong_check(self);
-            [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeActivity actType:WLActionActTypeFavorite objectId:self.activity.activityId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+            [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                ServerHelperErrorHandle;
-                [self.favoriteButton setHighlighted:YES];
+                [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeActivity actType:WLActionActTypeFavorite objectId:self.activity.activityId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                    _strong_check(self);
+                    ServerHelperErrorHandle;
+                    [self.favoriteButton setHighlighted:YES];
+                }];
             }];
         }];
     }

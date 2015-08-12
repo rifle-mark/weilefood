@@ -9,6 +9,8 @@
 #import "VideoListVC.h"
 #import "VideoCollectionCell.h"
 
+#import "VideoInfoVC.h"
+
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
@@ -174,6 +176,11 @@ static NSInteger const kPageSize       = 10;
                 DLog(@"");
             }];
             return cell;
+        }];
+        [_collectionView withBlockForItemDidSelect:^(UICollectionView *view, NSIndexPath *path) {
+            _strong_check(self);
+            WLVideoModel *video = self.videoList[path.item];
+            [self.navigationController pushViewController:[[VideoInfoVC alloc] initWithVideo:video] animated:YES];
         }];
     }
     return _collectionView;

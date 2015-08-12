@@ -36,9 +36,30 @@
 @property (nonatomic, strong) UIButton     *weixinLoginButton;
 @property (nonatomic, strong) UILabel      *weixinLabel;
 
+@property (nonatomic, copy) LoggedBlock loggedBlock;
+
 @end
 
 @implementation LoginVC
+
++ (void)show {
+    LoginVC *vc = [[LoginVC alloc] init];
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nc animated:YES completion:nil];
+}
+
++ (void)needsLoginWithLoggedBlock:(LoggedBlock)block {
+    WLUserModel *user = [WLDatabaseHelper user_find];
+    if (user) {
+        GCBlockInvoke(block, user);
+    }
+    else {
+        LoginVC *vc = [[LoginVC alloc] init];
+        vc.loggedBlock = block;
+        UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nc animated:YES completion:nil];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -69,6 +90,7 @@
     [self.contentView addSubview:self.weixinLabel];
     
     [self.scrollView handleKeyboard];
+    [self _addObserver];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -159,6 +181,20 @@
 }
 
 #pragma mark - private methons
+
+- (void)_addObserver {
+    _weak(self);
+    [self addObserverForNotificationName:kNotificationUserLoginSucc usingBlock:^(NSNotification *notification) {
+        _strong_check(self);
+        if (!notification.object || ![notification.object isKindOfClass:[WLUserModel class]]) {
+            return;
+        }
+        [self dismissViewControllerAnimated:YES completion:^{
+            _strong_check(self);
+            GCBlockInvoke(self.loggedBlock, notification.object);
+        }];
+    }];
+}
 
 - (void)_resetPasswordAction {
     [self.navigationController pushViewController:[[ResetPasswordVC alloc] init] animated:YES];

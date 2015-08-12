@@ -11,6 +11,7 @@
 #import "ProductInfoSectionHeaderView.h"
 
 #import "CommentListVC.h"
+#import "LoginVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -199,18 +200,18 @@ static NSString *const kCellIdentifier = @"MYCELL";
         _sectionHeaderView.backgroundColor = k_COLOR_WHITE;
         _weak(self);
         [_sectionHeaderView actionBlock:^{
-            _strong_check(self);
-            [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeForwardBuy actType:WLActionActTypeApproval objectId:self.forwardBuy.forwardBuyId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+            [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                ServerHelperErrorHandle;
-                self.sectionHeaderView.actionCount = ++self.forwardBuy.actionCount;
+                [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeForwardBuy actType:WLActionActTypeApproval objectId:self.forwardBuy.forwardBuyId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                    _strong_check(self);
+                    ServerHelperErrorHandle;
+                    self.sectionHeaderView.actionCount = ++self.forwardBuy.actionCount;
+                }];
             }];
         }];
         [_sectionHeaderView commentBlock:^{
             _strong_check(self);
-            CommentListVC *vc = [[CommentListVC alloc] initWithType:WLCommentTypeForwardBuy refId:self.forwardBuy.forwardBuyId];
-            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
-            [self.navigationController presentViewController:nc animated:YES completion:nil];
+            [CommentListVC showWithType:WLCommentTypeForwardBuy refId:self.forwardBuy.forwardBuyId];
         }];
         [_sectionHeaderView shareBlock:^{
             _strong_check(self);
@@ -307,11 +308,13 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_favoriteButton setImageToTop];
         _weak(self);
         [_favoriteButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
-            _strong_check(self);
-            [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeForwardBuy actType:WLActionActTypeFavorite objectId:self.forwardBuy.forwardBuyId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+            [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                ServerHelperErrorHandle;
-                [self.favoriteButton setHighlighted:YES];
+                [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeForwardBuy actType:WLActionActTypeFavorite objectId:self.forwardBuy.forwardBuyId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                    _strong_check(self);
+                    ServerHelperErrorHandle;
+                    [self.favoriteButton setHighlighted:YES];
+                }];
             }];
         }];
     }

@@ -20,9 +20,7 @@
 }
 
 - (void)_userAction {
-    LoginVC *vc = [[LoginVC alloc] init];
-    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nc animated:YES completion:nil];
+    [LoginVC show];
 }
 
 + (UIBarButtonItem *)createUserBarButtonItem {
