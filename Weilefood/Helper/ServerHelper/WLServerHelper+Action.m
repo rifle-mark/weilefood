@@ -11,9 +11,17 @@
 
 @implementation WLServerHelper (Action)
 
-- (void)action_addWithType:(WLActionType)type actType:(WLActionActType)actType objectId:(NSUInteger)objectId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback {
-    NSString *apiUrl = [self getApiUrlWithPaths:@[@"action", @"add", @(type), @(actType), @(objectId)]];
+- (void)action_addWithActType:(WLActionActType)actType objectType:(WLActionType)objectType objectId:(NSUInteger)objectId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"action", @"add", @(objectType), @(actType), @(objectId)]];
     [self httpGET:apiUrl parameters:nil callback:callback];
+}
+
+- (void)action_deleteFavoriteWithObjectType:(WLActionType)objectType objectId:(NSUInteger)objectId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"action", @"deletefav"]];
+    NSDictionary *parameters = @{@"type"  : @(objectType),
+                                 @"refid" : @(objectId),
+                                 };
+    [self httpPOST:apiUrl parameters:parameters callback:callback];
 }
 
 @end

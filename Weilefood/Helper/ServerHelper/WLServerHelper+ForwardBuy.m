@@ -22,7 +22,7 @@
 }
 
 - (void)forwardBuy_getListWithChannelId:(NSUInteger)channelId maxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
-    NSString *apiUrl = [self getApiUrlWithPaths:@[@"forwardbuy", @"list", @(1), @(pageSize), @(channelId), @([maxDate timeIntervalSince1970])]];
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"forwardbuy", @"list", @(1), @(pageSize), @(channelId), @([maxDate millisecondIntervalSince1970])]];
     [self httpGET:apiUrl parameters:nil resultItemsClass:[WLForwardBuyModel class] callback:callback];
 }
 

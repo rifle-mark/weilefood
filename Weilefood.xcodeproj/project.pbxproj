@@ -60,8 +60,7 @@
 		249A73D21B569D4100F46F3D /* WLUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A73CC1B569D4100F46F3D /* WLUserModel.m */; };
 		249A9BA61B7249F3008203C8 /* WLActivityCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A9BA51B7249F3008203C8 /* WLActivityCityModel.m */; };
 		249A9BA91B724B37008203C8 /* WLVideoAdImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A9BA81B724B37008203C8 /* WLVideoAdImageModel.m */; };
-		249A9BAF1B726F75008203C8 /* ProductTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A9BAE1B726F75008203C8 /* ProductTableHeaderView.m */; };
-		249A9BB21B726FBE008203C8 /* ProductSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A9BB11B726FBE008203C8 /* ProductSectionHeaderView.m */; };
+		249A9BAF1B726F75008203C8 /* ProductInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 249A9BAE1B726F75008203C8 /* ProductInfoHeaderView.m */; };
 		249B9B291B6340C3000A85B0 /* MainPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249B9B281B6340C3000A85B0 /* MainPageVC.m */; };
 		249EF30D1B64BEDA00AAEBE0 /* MarketIndexPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249EF30C1B64BEDA00AAEBE0 /* MarketIndexPageVC.m */; };
 		24A0266B1B6DDEC500C6139B /* MarketChildChannelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A0266A1B6DDEC500C6139B /* MarketChildChannelView.m */; };
@@ -83,6 +82,14 @@
 		24C32EC21B613BDC00D509A4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 24C32EC01B613BDC00D509A4 /* Model.xcdatamodeld */; };
 		24C32EC91B613F6100D509A4 /* WLDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C32EC81B613F6100D509A4 /* WLDatabaseHelper.m */; };
 		24C32ECD1B613FD400D509A4 /* WLDatabaseHelper+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C32ECC1B613FD400D509A4 /* WLDatabaseHelper+User.m */; };
+		24C40B4B1B7A2B1A00E8AFA9 /* SwipeView+AutomaticCycleScrollingImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C40B4A1B7A2B1A00E8AFA9 /* SwipeView+AutomaticCycleScrollingImage.m */; };
+		24C40B4E1B7A356100E8AFA9 /* ProductInfoSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C40B4D1B7A356100E8AFA9 /* ProductInfoSectionHeaderView.m */; };
+		24C40B511B7A35B200E8AFA9 /* ForwardBuyInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C40B501B7A35B200E8AFA9 /* ForwardBuyInfoVC.m */; };
+		24C40B541B7A36D400E8AFA9 /* ForwardBuyInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C40B531B7A36D400E8AFA9 /* ForwardBuyInfoHeaderView.m */; };
+		24C40B571B7A438500E8AFA9 /* ActivityInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C40B561B7A438500E8AFA9 /* ActivityInfoVC.m */; };
+		24C40B5A1B7A442500E8AFA9 /* ActivityInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C40B591B7A442500E8AFA9 /* ActivityInfoHeaderView.m */; };
+		24C40B5D1B7A579A00E8AFA9 /* VideoInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C40B5C1B7A579A00E8AFA9 /* VideoInfoVC.m */; };
+		24C755CF1B7B8C4F00463BFC /* WLPictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C755CE1B7B8C4F00463BFC /* WLPictureModel.m */; };
 		24C792681B666B4E007DCB30 /* MarketProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C792671B666B4E007DCB30 /* MarketProductCell.m */; };
 		24CAC42F1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC42E1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m */; };
 		24CAC4331B57E9D800E3C4D5 /* WLServerHelper+Share.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC4321B57E9D700E3C4D5 /* WLServerHelper+Share.m */; };
@@ -161,6 +168,9 @@
 		24CDCC1D1B4F792E00BDE8CB /* UIControl+GCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCBD31B4F792E00BDE8CB /* UIControl+GCEvent.m */; };
 		24CDCC1E1B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCBD61B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m */; };
 		24CDCC2C1B4FA34B00BDE8CB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24CDCC2B1B4FA34B00BDE8CB /* CoreData.framework */; };
+		24D3F9BA1B7B9C13005F63DB /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24D3F9B91B7B9C13005F63DB /* MediaPlayer.framework */; };
+		24D3F9BD1B7BA825005F63DB /* NSDate+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D3F9BC1B7BA825005F63DB /* NSDate+Ext.m */; };
+		24D3F9C61B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D3F9C51B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m */; };
 		24D55DE61B67EB2400EC6373 /* UIBarButtonItem+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */; };
 		24E66DBF1B62717A0081324A /* UIScrollView+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DBE1B62717A0081324A /* UIScrollView+Keyboard.m */; };
 		24E66DC21B6271810081324A /* MBProgressHUD+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DC11B6271810081324A /* MBProgressHUD+Message.m */; };
@@ -278,10 +288,8 @@
 		249A9BA51B7249F3008203C8 /* WLActivityCityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLActivityCityModel.m; sourceTree = "<group>"; };
 		249A9BA71B724B37008203C8 /* WLVideoAdImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLVideoAdImageModel.h; sourceTree = "<group>"; };
 		249A9BA81B724B37008203C8 /* WLVideoAdImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLVideoAdImageModel.m; sourceTree = "<group>"; };
-		249A9BAD1B726F75008203C8 /* ProductTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductTableHeaderView.h; sourceTree = "<group>"; };
-		249A9BAE1B726F75008203C8 /* ProductTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductTableHeaderView.m; sourceTree = "<group>"; };
-		249A9BB01B726FBE008203C8 /* ProductSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductSectionHeaderView.h; sourceTree = "<group>"; };
-		249A9BB11B726FBE008203C8 /* ProductSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductSectionHeaderView.m; sourceTree = "<group>"; };
+		249A9BAD1B726F75008203C8 /* ProductInfoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductInfoHeaderView.h; sourceTree = "<group>"; };
+		249A9BAE1B726F75008203C8 /* ProductInfoHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductInfoHeaderView.m; sourceTree = "<group>"; };
 		249B9B271B6340C3000A85B0 /* MainPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageVC.h; sourceTree = "<group>"; };
 		249B9B281B6340C3000A85B0 /* MainPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageVC.m; sourceTree = "<group>"; };
 		249EF30B1B64BEDA00AAEBE0 /* MarketIndexPageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketIndexPageVC.h; sourceTree = "<group>"; };
@@ -329,6 +337,22 @@
 		24C32ECB1B613FD400D509A4 /* WLDatabaseHelper+User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLDatabaseHelper+User.h"; sourceTree = "<group>"; };
 		24C32ECC1B613FD400D509A4 /* WLDatabaseHelper+User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLDatabaseHelper+User.m"; sourceTree = "<group>"; };
 		24C32ECE1B6141D200D509A4 /* NotificationMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationMacro.h; sourceTree = "<group>"; };
+		24C40B491B7A2B1A00E8AFA9 /* SwipeView+AutomaticCycleScrollingImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SwipeView+AutomaticCycleScrollingImage.h"; sourceTree = "<group>"; };
+		24C40B4A1B7A2B1A00E8AFA9 /* SwipeView+AutomaticCycleScrollingImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SwipeView+AutomaticCycleScrollingImage.m"; sourceTree = "<group>"; };
+		24C40B4C1B7A356100E8AFA9 /* ProductInfoSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductInfoSectionHeaderView.h; sourceTree = "<group>"; };
+		24C40B4D1B7A356100E8AFA9 /* ProductInfoSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductInfoSectionHeaderView.m; sourceTree = "<group>"; };
+		24C40B4F1B7A35B200E8AFA9 /* ForwardBuyInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForwardBuyInfoVC.h; sourceTree = "<group>"; };
+		24C40B501B7A35B200E8AFA9 /* ForwardBuyInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForwardBuyInfoVC.m; sourceTree = "<group>"; };
+		24C40B521B7A36D400E8AFA9 /* ForwardBuyInfoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForwardBuyInfoHeaderView.h; sourceTree = "<group>"; };
+		24C40B531B7A36D400E8AFA9 /* ForwardBuyInfoHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForwardBuyInfoHeaderView.m; sourceTree = "<group>"; };
+		24C40B551B7A438500E8AFA9 /* ActivityInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityInfoVC.h; sourceTree = "<group>"; };
+		24C40B561B7A438500E8AFA9 /* ActivityInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityInfoVC.m; sourceTree = "<group>"; };
+		24C40B581B7A442500E8AFA9 /* ActivityInfoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityInfoHeaderView.h; sourceTree = "<group>"; };
+		24C40B591B7A442500E8AFA9 /* ActivityInfoHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityInfoHeaderView.m; sourceTree = "<group>"; };
+		24C40B5B1B7A579A00E8AFA9 /* VideoInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoInfoVC.h; sourceTree = "<group>"; };
+		24C40B5C1B7A579A00E8AFA9 /* VideoInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoInfoVC.m; sourceTree = "<group>"; };
+		24C755CD1B7B8C4F00463BFC /* WLPictureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLPictureModel.h; sourceTree = "<group>"; };
+		24C755CE1B7B8C4F00463BFC /* WLPictureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLPictureModel.m; sourceTree = "<group>"; };
 		24C792661B666B4E007DCB30 /* MarketProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketProductCell.h; sourceTree = "<group>"; };
 		24C792671B666B4E007DCB30 /* MarketProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketProductCell.m; sourceTree = "<group>"; };
 		24CAC42D1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+UploadImage.h"; sourceTree = "<group>"; };
@@ -494,6 +518,11 @@
 		24CDCBD61B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+GCAction.m"; sourceTree = "<group>"; };
 		24CDCC1F1B4F7B7000BDE8CB /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		24CDCC2B1B4FA34B00BDE8CB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		24D3F9B91B7B9C13005F63DB /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		24D3F9BB1B7BA825005F63DB /* NSDate+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Ext.h"; sourceTree = "<group>"; };
+		24D3F9BC1B7BA825005F63DB /* NSDate+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Ext.m"; sourceTree = "<group>"; };
+		24D3F9C41B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MJRefreshDefault.h"; sourceTree = "<group>"; };
+		24D3F9C51B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefreshDefault.m"; sourceTree = "<group>"; };
 		24D55DE41B67EB2400EC6373 /* UIBarButtonItem+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Ext.h"; sourceTree = "<group>"; };
 		24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Ext.m"; sourceTree = "<group>"; };
 		24E66DBD1B62717A0081324A /* UIScrollView+Keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Keyboard.h"; sourceTree = "<group>"; };
@@ -519,6 +548,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24D3F9BA1B7B9C13005F63DB /* MediaPlayer.framework in Frameworks */,
 				2467B7241B50D146001202A4 /* SystemConfiguration.framework in Frameworks */,
 				2467B7221B50D140001202A4 /* libz.dylib in Frameworks */,
 				2467B7201B50D13B001202A4 /* CoreTelephony.framework in Frameworks */,
@@ -546,6 +576,8 @@
 			children = (
 				240606351B775F6F00C6F373 /* CommentCell.h */,
 				240606361B775F6F00C6F373 /* CommentCell.m */,
+				24C40B4C1B7A356100E8AFA9 /* ProductInfoSectionHeaderView.h */,
+				24C40B4D1B7A356100E8AFA9 /* ProductInfoSectionHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -575,6 +607,8 @@
 			children = (
 				24134EB71B6A712F00E5BE07 /* ActivityCell.h */,
 				24134EB81B6A712F00E5BE07 /* ActivityCell.m */,
+				24C40B581B7A442500E8AFA9 /* ActivityInfoHeaderView.h */,
+				24C40B591B7A442500E8AFA9 /* ActivityInfoHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -584,6 +618,8 @@
 			children = (
 				24134EB41B6A711900E5BE07 /* ActivityListVC.h */,
 				24134EB51B6A711900E5BE07 /* ActivityListVC.m */,
+				24C40B551B7A438500E8AFA9 /* ActivityInfoVC.h */,
+				24C40B561B7A438500E8AFA9 /* ActivityInfoVC.m */,
 				2406062D1B772F9100C6F373 /* CitySelectVC.h */,
 				2406062E1B772F9100C6F373 /* CitySelectVC.m */,
 			);
@@ -613,6 +649,8 @@
 			children = (
 				249745FA1B6A656F0019ADDA /* ForwardBuyCell.h */,
 				249745FB1B6A656F0019ADDA /* ForwardBuyCell.m */,
+				24C40B521B7A36D400E8AFA9 /* ForwardBuyInfoHeaderView.h */,
+				24C40B531B7A36D400E8AFA9 /* ForwardBuyInfoHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -622,6 +660,8 @@
 			children = (
 				249745F71B6A63360019ADDA /* ForwardBuyListVC.h */,
 				249745F81B6A63360019ADDA /* ForwardBuyListVC.m */,
+				24C40B4F1B7A35B200E8AFA9 /* ForwardBuyInfoVC.h */,
+				24C40B501B7A35B200E8AFA9 /* ForwardBuyInfoVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -675,10 +715,8 @@
 				24C792671B666B4E007DCB30 /* MarketProductCell.m */,
 				24A026691B6DDEC500C6139B /* MarketChildChannelView.h */,
 				24A0266A1B6DDEC500C6139B /* MarketChildChannelView.m */,
-				249A9BAD1B726F75008203C8 /* ProductTableHeaderView.h */,
-				249A9BAE1B726F75008203C8 /* ProductTableHeaderView.m */,
-				249A9BB01B726FBE008203C8 /* ProductSectionHeaderView.h */,
-				249A9BB11B726FBE008203C8 /* ProductSectionHeaderView.m */,
+				249A9BAD1B726F75008203C8 /* ProductInfoHeaderView.h */,
+				249A9BAE1B726F75008203C8 /* ProductInfoHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -796,6 +834,8 @@
 			children = (
 				24134EBD1B6A718500E5BE07 /* VideoListVC.h */,
 				24134EBE1B6A718500E5BE07 /* VideoListVC.m */,
+				24C40B5B1B7A579A00E8AFA9 /* VideoInfoVC.h */,
+				24C40B5C1B7A579A00E8AFA9 /* VideoInfoVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -864,6 +904,8 @@
 				24CAC4351B57EA5F00E3C4D5 /* WLShareModel.m */,
 				24CAC4371B58044C00E3C4D5 /* WLChannelModel.h */,
 				24CAC4381B58044C00E3C4D5 /* WLChannelModel.m */,
+				24C755CD1B7B8C4F00463BFC /* WLPictureModel.h */,
+				24C755CE1B7B8C4F00463BFC /* WLPictureModel.m */,
 				24CAC43A1B58050900E3C4D5 /* WLProductModel.h */,
 				24CAC43B1B58050900E3C4D5 /* WLProductModel.m */,
 				24CAC43D1B5806BF00E3C4D5 /* WLForwardBuyModel.h */,
@@ -985,6 +1027,8 @@
 			children = (
 				246F07801B56A6210086CD28 /* NSString+Ext.h */,
 				246F07811B56A6210086CD28 /* NSString+Ext.m */,
+				24D3F9BB1B7BA825005F63DB /* NSDate+Ext.h */,
+				24D3F9BC1B7BA825005F63DB /* NSDate+Ext.m */,
 				24E66DC01B6271810081324A /* MBProgressHUD+Message.h */,
 				24E66DC11B6271810081324A /* MBProgressHUD+Message.m */,
 				240FB7011B69025900DF5CE4 /* UIButton+ImagePosition.h */,
@@ -993,6 +1037,10 @@
 				24E66DBE1B62717A0081324A /* UIScrollView+Keyboard.m */,
 				24D55DE41B67EB2400EC6373 /* UIBarButtonItem+Ext.h */,
 				24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */,
+				24C40B491B7A2B1A00E8AFA9 /* SwipeView+AutomaticCycleScrollingImage.h */,
+				24C40B4A1B7A2B1A00E8AFA9 /* SwipeView+AutomaticCycleScrollingImage.m */,
+				24D3F9C41B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.h */,
+				24D3F9C51B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1311,6 +1359,7 @@
 		610C5F99515E558BBD5D2B02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				24D3F9B91B7B9C13005F63DB /* MediaPlayer.framework */,
 				24B8C0771B5247A2001C5722 /* AssetsLibrary.framework */,
 				24B8C0751B524795001C5722 /* CoreLocation.framework */,
 				24B8C0731B52478C001C5722 /* QuartzCore.framework */,
@@ -1441,12 +1490,14 @@
 				24CDCBE41B4F792E00BDE8CB /* AVAudioRecordDelegateImplementationProxy.m in Sources */,
 				2482E6351B5E7CA2005815E8 /* WLOrderAddressModel.m in Sources */,
 				24CDCBEF1B4F792E00BDE8CB /* UITabbarDelegateImplementationProxy.m in Sources */,
+				24C40B511B7A35B200E8AFA9 /* ForwardBuyInfoVC.m in Sources */,
 				240FB7061B69063900DF5CE4 /* DiscoveryVC.m in Sources */,
 				247EA72F1B711B2F00E6A161 /* WLServerHelper+Nutrition.m in Sources */,
 				24ECD7B41B78FCEE00AED422 /* TransparentNavigationBarVC.m in Sources */,
 				24CDCBFC1B4F792E00BDE8CB /* UIScrollView+GCDelegateBlock.m in Sources */,
 				24CDCC131B4F792E00BDE8CB /* UITextField+GCDelegate.m in Sources */,
 				24E8DD391B648DF4007F137E /* DiscoveryCollectionSectionHeaderView.m in Sources */,
+				24C40B5D1B7A579A00E8AFA9 /* VideoInfoVC.m in Sources */,
 				24C32EBE1B61229D00D509A4 /* RegisterVC.m in Sources */,
 				24CAC43C1B58050900E3C4D5 /* WLProductModel.m in Sources */,
 				245936AF1B5A3AB3008FFAB8 /* WLServerHelper+Activity.m in Sources */,
@@ -1462,8 +1513,10 @@
 				249745FC1B6A656F0019ADDA /* ForwardBuyCell.m in Sources */,
 				24CDCBDA1B4F792E00BDE8CB /* AppDelegate.m in Sources */,
 				245936A31B5A2C62008FFAB8 /* WLServerHelper+Channel.m in Sources */,
+				24C755CF1B7B8C4F00463BFC /* WLPictureModel.m in Sources */,
 				24CDCBE71B4F792E00BDE8CB /* UIImagePickerControllerDelegateImplementationProxy.m in Sources */,
 				24CDCC1A1B4F792E00BDE8CB /* NSObject+GCKVO.m in Sources */,
+				24C40B571B7A438500E8AFA9 /* ActivityInfoVC.m in Sources */,
 				24CDCC0F1B4F792E00BDE8CB /* UISearchBar+GCDelegate.m in Sources */,
 				24CAC4331B57E9D800E3C4D5 /* WLServerHelper+Share.m in Sources */,
 				240FB7031B69025900DF5CE4 /* UIButton+ImagePosition.m in Sources */,
@@ -1472,7 +1525,7 @@
 				2482E6381B5E7CB1005815E8 /* WLOrderDetailModel.m in Sources */,
 				24B8C06C1B5242BC001C5722 /* AGIPCPreviewController.m in Sources */,
 				24CDCC031B4F792E00BDE8CB /* UIToolbar+GCDelegateBlock.m in Sources */,
-				249A9BAF1B726F75008203C8 /* ProductTableHeaderView.m in Sources */,
+				249A9BAF1B726F75008203C8 /* ProductInfoHeaderView.m in Sources */,
 				24CDCC021B4F792E00BDE8CB /* UITextView+GCDelegateBlock.m in Sources */,
 				24CDCBF51B4F792E00BDE8CB /* UICollectionView+GCDelegateAndDataSourceBlock.m in Sources */,
 				24C32EC91B613F6100D509A4 /* WLDatabaseHelper.m in Sources */,
@@ -1491,6 +1544,7 @@
 				24CDCBF61B4F792E00BDE8CB /* UIGestureRecognizer+GCDelegateBlock.m in Sources */,
 				24CDCC1B1B4F792E00BDE8CB /* NSObject+GCNotificationObserver.m in Sources */,
 				24CDCBE81B4F792E00BDE8CB /* UINavigationBarDelegateImpletationProxy.m in Sources */,
+				24C40B4B1B7A2B1A00E8AFA9 /* SwipeView+AutomaticCycleScrollingImage.m in Sources */,
 				2482E63E1B5E844B005815E8 /* WLServerHelper+Order.m in Sources */,
 				24B8C06D1B5242BC001C5722 /* AGIPCToolbarItem.m in Sources */,
 				24CDCBE21B4F792E00BDE8CB /* AVAudioRecorder+GCDelegateBlock.m in Sources */,
@@ -1510,6 +1564,7 @@
 				24CDCC1D1B4F792E00BDE8CB /* UIControl+GCEvent.m in Sources */,
 				249A9BA91B724B37008203C8 /* WLVideoAdImageModel.m in Sources */,
 				245936AC1B5A3943008FFAB8 /* WLServerHelper+Video.m in Sources */,
+				24C40B5A1B7A442500E8AFA9 /* ActivityInfoHeaderView.m in Sources */,
 				24CDCC121B4F792E00BDE8CB /* UITableView+GCDelegateAndDataSource.m in Sources */,
 				24CDCC081B4F792E00BDE8CB /* UIGestureRecognizer+GCDelegate.m in Sources */,
 				24B8C06E1B5242BC001C5722 /* AGPreviewScrollView.m in Sources */,
@@ -1523,6 +1578,7 @@
 				24CDCC0D1B4F792E00BDE8CB /* UIPopoverController+GCDelegate.m in Sources */,
 				2482E62F1B5E7C72005815E8 /* WLOrderModel.m in Sources */,
 				24CDCBE91B4F792E00BDE8CB /* UINavigationControllerDelegateImplementionProxy.m in Sources */,
+				24C40B4E1B7A356100E8AFA9 /* ProductInfoSectionHeaderView.m in Sources */,
 				24CAC4421B5807ED00E3C4D5 /* WLVideoModel.m in Sources */,
 				24E8DD3C1B6491B5007F137E /* DiscoveryCollectionCell.m in Sources */,
 				245936B81B5A42F4008FFAB8 /* WLServerHelper+Ad.m in Sources */,
@@ -1531,8 +1587,8 @@
 				24CDCC181B4F792E00BDE8CB /* NSObject+GCAccessor.m in Sources */,
 				24CDCBF21B4F792E00BDE8CB /* UITextViewDelegateImplementationProxy.m in Sources */,
 				24CDCBE51B4F792E00BDE8CB /* UICollectionViewDelegateAndDataSourceImplementationProxy.m in Sources */,
-				249A9BB21B726FBE008203C8 /* ProductSectionHeaderView.m in Sources */,
 				24CAC42F1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m in Sources */,
+				24D3F9C61B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m in Sources */,
 				24CAC4451B5808B900E3C4D5 /* WLActivityModel.m in Sources */,
 				24CDCBE61B4F792E00BDE8CB /* UIGestureRecognizerDelegateImplementProxy.m in Sources */,
 				245936A61B5A2ECF008FFAB8 /* WLServerHelper+Product.m in Sources */,
@@ -1544,6 +1600,7 @@
 				24B8C0641B5242BC001C5722 /* AGImagePickerController+Helper.m in Sources */,
 				24CDCC011B4F792E00BDE8CB /* UITextField+GCDelegateBlock.m in Sources */,
 				249A73BE1B569D2300F46F3D /* WLDictionaryHelper.m in Sources */,
+				24C40B541B7A36D400E8AFA9 /* ForwardBuyInfoHeaderView.m in Sources */,
 				24E66DC21B6271810081324A /* MBProgressHUD+Message.m in Sources */,
 				24C32ECD1B613FD400D509A4 /* WLDatabaseHelper+User.m in Sources */,
 				24CDCC141B4F792E00BDE8CB /* UITextView+GCDelegate.m in Sources */,
@@ -1559,6 +1616,7 @@
 				24CDCC0C1B4F792E00BDE8CB /* UIPickerView+GCDelegateAndDataSource.m in Sources */,
 				240D79A51B5FECFB007E2E43 /* LoginVC.m in Sources */,
 				24CDCBEB1B4F792E00BDE8CB /* UIPopoverControllerImplementationProxy.m in Sources */,
+				24D3F9BD1B7BA825005F63DB /* NSDate+Ext.m in Sources */,
 				24CDCC161B4F792E00BDE8CB /* UIWebView+GCDelegate.m in Sources */,
 				24CDCBF01B4F792E00BDE8CB /* UITableViewDelegateAndDataSourceImplementationProxy.m in Sources */,
 				24CDCBE31B4F792E00BDE8CB /* AVAudioPlayerDelegateImplementationProxy.m in Sources */,

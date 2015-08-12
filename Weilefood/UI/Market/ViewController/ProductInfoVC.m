@@ -7,10 +7,11 @@
 //
 
 #import "ProductInfoVC.h"
-#import "ProductTableHeaderView.h"
-#import "ProductSectionHeaderView.h"
+#import "ProductInfoHeaderView.h"
+#import "ProductInfoSectionHeaderView.h"
 
 #import "CommentListVC.h"
+#import "LoginVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -21,14 +22,14 @@
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UIButton *cartButton;
 
-@property (nonatomic, strong) ProductTableHeaderView   *tableHeaderView;
-@property (nonatomic, strong) ProductSectionHeaderView *sectionHeaderView;
-@property (nonatomic, strong) UIWebView                *webView;
-@property (nonatomic, strong) UITableView              *tableView;
-@property (nonatomic, strong) UIView                   *footerView;
-@property (nonatomic, strong) UIButton                 *favoriteButton;
-@property (nonatomic, strong) UIButton                 *addCartButton;
-@property (nonatomic, strong) UIButton                 *buyButton;
+@property (nonatomic, strong) ProductInfoHeaderView        *tableHeaderView;
+@property (nonatomic, strong) ProductInfoSectionHeaderView *sectionHeaderView;
+@property (nonatomic, strong) UIWebView                    *webView;
+@property (nonatomic, strong) UITableView                  *tableView;
+@property (nonatomic, strong) UIView                       *footerView;
+@property (nonatomic, strong) UIButton                     *favoriteButton;
+@property (nonatomic, strong) UIButton                     *addCartButton;
+@property (nonatomic, strong) UIButton                     *buyButton;
 
 @property (nonatomic, strong) WLProductModel *product;
 @property (nonatomic, assign) CGFloat        headerHeight;
@@ -40,7 +41,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
 @implementation ProductInfoVC
 
 - (id)init {
-    NSAssert(_product, @"请使用initWithProduct:来实例化");
+    NSAssert(NO, @"请使用initWithProduct:来实例化");
     self = [super init];
     return self;
 }
@@ -48,7 +49,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (instancetype)initWithProduct:(WLProductModel *)product {
     NSParameterAssert(product);
     if (self = [super init]) {
-        _headerHeight = [ProductTableHeaderView viewHeight];
+        _headerHeight = [ProductInfoHeaderView viewHeight];
         self.product = product;
     }
     return self;
@@ -137,7 +138,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
     self.title = self.product.productName;
     
     NSMutableArray *images = [NSMutableArray array];
-    for (WLProductPictureModel *pic in self.product.pictures) {
+    for (WLPictureModel *pic in self.product.pictures) {
         [images addObject:pic.picPath];
     }
     self.tableHeaderView.images = images;
@@ -151,6 +152,8 @@ static NSString *const kCellIdentifier = @"MYCELL";
     if (self.webView.superview) {
         [self.webView loadHTMLString:self.product.desc baseURL:nil];
     }
+    
+    self.favoriteButton.highlighted = self.product.isFav;
 }
 
 - (void)_resetWebViewHeight {
@@ -186,34 +189,33 @@ static NSString *const kCellIdentifier = @"MYCELL";
     return _cartButton;
 }
 
-- (ProductTableHeaderView *)tableHeaderView {
+- (ProductInfoHeaderView *)tableHeaderView {
     if (!_tableHeaderView) {
-        CGRect frame = CGRectMake(0, 0, SCREEN_WIDTH, [ProductTableHeaderView viewHeight] - 64);
-        _tableHeaderView = [[ProductTableHeaderView alloc] initWithFrame:frame];
+        CGRect frame = CGRectMake(0, 0, SCREEN_WIDTH, [ProductInfoHeaderView viewHeight] - 64);
+        _tableHeaderView = [[ProductInfoHeaderView alloc] initWithFrame:frame];
         _tableHeaderView.backgroundColor = k_COLOR_WHITE;
     }
     return _tableHeaderView;
 }
 
-- (ProductSectionHeaderView *)sectionHeaderView {
+- (ProductInfoSectionHeaderView *)sectionHeaderView {
     if (!_sectionHeaderView) {
-        _sectionHeaderView = [[ProductSectionHeaderView alloc] init];
+        _sectionHeaderView = [[ProductInfoSectionHeaderView alloc] init];
         _sectionHeaderView.backgroundColor = k_COLOR_WHITE;
         _weak(self);
         [_sectionHeaderView actionBlock:^{
-            _strong_check(self);
-            [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeProduct actType:WLActionActTypeApproval objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+            [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                ServerHelperErrorHandle;
-                self.product.actionCount++;
-                self.sectionHeaderView.actionCount = self.product.actionCount;
+                [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeApproval objectType:WLActionTypeProduct objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                    _strong_check(self);
+                    ServerHelperErrorHandle;
+                    self.sectionHeaderView.actionCount = ++self.product.actionCount;
+                }];
             }];
         }];
         [_sectionHeaderView commentBlock:^{
             _strong_check(self);
-            CommentListVC *vc = [[CommentListVC alloc] initWithType:WLCommentTypeProduct refId:self.product.productId];
-            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
-            [self.navigationController presentViewController:nc animated:YES completion:nil];
+            [CommentListVC showWithType:WLCommentTypeProduct refId:self.product.productId];
         }];
         [_sectionHeaderView shareBlock:^{
             _strong_check(self);
@@ -241,7 +243,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.sectionHeaderHeight = [ProductSectionHeaderView viewHeight];
+        _tableView.sectionHeaderHeight = [ProductInfoSectionHeaderView viewHeight];
         _tableView.tableHeaderView = self.tableHeaderView;
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
         _weak(self);
@@ -310,11 +312,24 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_favoriteButton setImageToTop];
         _weak(self);
         [_favoriteButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
-            _strong_check(self);
-            [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeProduct actType:WLActionActTypeFavorite objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+            [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                ServerHelperErrorHandle;
-                [self.favoriteButton setHighlighted:YES];
+                if (self.product.isFav) {
+                    [[WLServerHelper sharedInstance] action_deleteFavoriteWithObjectType:WLActionTypeProduct objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                        _strong_check(self);
+                        ServerHelperErrorHandle;
+                        self.product.isFav = NO;
+                        [self _showData];
+                    }];
+                }
+                else {
+                    [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeFavorite objectType:WLActionTypeProduct objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                        _strong_check(self);
+                        ServerHelperErrorHandle;
+                        self.product.isFav = YES;
+                        [self _showData];
+                    }];
+                }
             }];
         }];
     }

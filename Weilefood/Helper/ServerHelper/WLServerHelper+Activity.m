@@ -26,7 +26,7 @@
     NSDictionary *parameters = @{@"pageindex"   : @1,
                                  @"pagesize"    : @(pageSize),
                                  @"city"        : city,
-                                 @"maxdate"     : @([maxDate timeIntervalSince1970]),
+                                 @"maxdate"     : @([maxDate millisecondIntervalSince1970]),
                                  };
     [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLActivityModel class] callback:callback];
 }

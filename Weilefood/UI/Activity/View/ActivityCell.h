@@ -13,9 +13,9 @@
 
 /// 图片URL
 @property (nonatomic, copy    ) NSString *imageUrl;
-/// 预购开始时间
+/// 开始时间
 @property (nonatomic, strong  ) NSDate   *beginDate;
-/// 预购结束时间
+/// 结束时间
 @property (nonatomic, strong  ) NSDate   *endDate;
 /// 名称
 @property (nonatomic, copy    ) NSString *name;

@@ -1,15 +1,15 @@
 //
-//  ProductTableHeaderView.h
+//  ForwardBuyInfoHeaderView.h
 //  Weilefood
 //
-//  Created by kelei on 15/8/6.
+//  Created by kelei on 15/8/11.
 //  Copyright (c) 2015年 kelei. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-/// 商品详情界面 - 头部分
-@interface ProductTableHeaderView : UIView
+/// 预购详情界面 - 头部分
+@interface ForwardBuyInfoHeaderView : UIView
 
 /// 商品图集URL<NSString>
 @property (nonatomic, strong) NSArray   *images;
@@ -19,6 +19,10 @@
 @property (nonatomic, assign) NSInteger number;
 /// 价格
 @property (nonatomic, assign) CGFloat   price;
+/// 预购开始时间
+@property (nonatomic, strong) NSDate    *beginDate;
+/// 预购结束时间
+@property (nonatomic, strong) NSDate    *endDate;
 
 /**
  *  展示所需要的高度

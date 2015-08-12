@@ -7,9 +7,9 @@
 //
 
 #import "DiscoveryCollectionHeaderView.h"
-#import <SwipeView/SwipeView.h>
+#import "SwipeView+AutomaticCycleScrollingImage.h"
 
-@interface DiscoveryCollectionHeaderView () <SwipeViewDataSource, SwipeViewDelegate>
+@interface DiscoveryCollectionHeaderView ()
 
 @property (nonatomic, strong) SwipeView     *bannerView;
 @property (nonatomic, strong) UIPageControl *pageControl;
@@ -37,8 +37,6 @@ static NSInteger const kHeaderButtonWidth   = 80;
 static NSInteger const kHeaderButtonHeight  = 126;
 static NSInteger const kHeaderAdHeight      = 88;
 
-static NSInteger const kBannerImageChangeDelay = 4;
-
 @implementation DiscoveryCollectionHeaderView
 
 + (CGFloat)viewHeight {
@@ -56,20 +54,23 @@ static NSInteger const kBannerImageChangeDelay = 4;
         for (UIView *view in array) {
             [self addSubview:view];
         }
-        [self _makeConstraints];
+        [self _remakeConstraints];
     }
     return self;
 }
 
-- (void)_makeConstraints {
+- (void)_remakeConstraints {
     [self.bannerView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self.bannerView.superview);
         make.height.equalTo(@(kHeaderBannerHeight));
     }];
+    CGSize size = [self.pageControl sizeForNumberOfPages:self.pageControl.numberOfPages];
+    size.width += 8;
+    size.height = 15;
     [self.pageControl mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.bannerView);
-        make.bottom.equalTo(self.bannerView);
-        make.height.equalTo(@30);
+        make.centerX.equalTo(self.bannerView);
+        make.bottom.equalTo(self.bannerView).offset(-10);
+        make.size.mas_equalTo(size);
     }];
     [self.middleButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bannerView.mas_bottom);
@@ -109,52 +110,14 @@ static NSInteger const kBannerImageChangeDelay = 4;
     }];
 }
 
-#pragma mark - SwipeViewDataSource
-
-- (NSInteger)numberOfItemsInSwipeView:(SwipeView *)swipeView {
-    return self.bannerImageUrls ? self.bannerImageUrls.count : 0;
-}
-
-- (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view {
-    UIImageView *imageView = nil;
-    if (!view) {
-        imageView = [[UIImageView alloc] init];
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
-        imageView.clipsToBounds = YES;
-        imageView.frame = swipeView.bounds;
-    }
-    else {
-        imageView = (UIImageView *)view;
-    }
-    [imageView sd_setImageWithURL:[NSURL URLWithString:self.bannerImageUrls[index]]];
-    return imageView;
-}
-
-#pragma mark - SwipeViewDelegate
-
-- (void)swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView {
-    self.pageControl.currentPage = swipeView.currentPage;
-}
-
-- (void)swipeViewWillBeginDragging:(SwipeView *)swipeView {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(_autoNextBannerAdImage) object:nil];
-}
-
-- (void)swipeViewDidEndDragging:(SwipeView *)swipeView willDecelerate:(BOOL)decelerate {
-    [self performSelector:@selector(_autoNextBannerAdImage) withObject:nil afterDelay:kBannerImageChangeDelay];
-}
-
-- (void)swipeView:(SwipeView *)swipeView didSelectItemAtIndex:(NSInteger)index {
-    GCBlockInvoke(self.bannerImageClickBlock, index);
-}
-
 #pragma mark - public methods
 
 - (void)setBannerImageUrls:(NSArray *)bannerImageUrls {
     _bannerImageUrls = bannerImageUrls;
+    self.bannerView.acsi_imageUrls = bannerImageUrls;
     [self.bannerView reloadData];
     self.pageControl.numberOfPages = self.bannerView.numberOfPages;
-    [self performSelector:@selector(_autoNextBannerAdImage) withObject:nil afterDelay:kBannerImageChangeDelay];
+    [self _remakeConstraints];
 }
 
 - (void)setVideoImageUrl:(NSString *)videoImageUrl {
@@ -184,17 +147,6 @@ static NSInteger const kBannerImageChangeDelay = 4;
 
 #pragma mark - private methods
 
-- (void)_autoNextBannerAdImage {
-    if (self.bannerView.numberOfPages > 0 && !self.bannerView.decelerating) {
-        NSInteger newPage = self.bannerView.currentPage + 1;
-        if (newPage >= self.bannerView.numberOfPages) {
-            newPage = 0;
-        }
-        [self.bannerView scrollToPage:newPage duration:0.3];
-    }
-    [self performSelector:@selector(_autoNextBannerAdImage) withObject:nil afterDelay:kBannerImageChangeDelay];
-}
-
 - (UILabel *)_createButtonLabel {
     return ({
         UILabel *v = [[UILabel alloc] init];
@@ -208,12 +160,17 @@ static NSInteger const kBannerImageChangeDelay = 4;
 
 - (SwipeView *)bannerView {
     if (!_bannerView) {
-        _bannerView = [[SwipeView alloc] init];
+        _bannerView = [SwipeView acsi_create];
         _bannerView.backgroundColor = [UIColor grayColor];
-        _bannerView.pagingEnabled = YES;
-        _bannerView.wrapEnabled = YES;
-        _bannerView.dataSource = self;
-        _bannerView.delegate = self;
+        _weak(self);
+        [_bannerView acsi_currentItemIndexDidChangeBlock:^(SwipeView *swipeView) {
+            _strong_check(self);
+            self.pageControl.currentPage = swipeView.currentPage;
+        }];
+        [_bannerView acsi_didSelectItemAtIndexBlock:^(SwipeView *swipeView, NSInteger index) {
+            _strong_check(self);
+            GCBlockInvoke(self.bannerImageClickBlock, index);
+        }];
     }
     return _bannerView;
 }
@@ -221,6 +178,9 @@ static NSInteger const kBannerImageChangeDelay = 4;
 - (UIPageControl *)pageControl {
     if (!_pageControl) {
         _pageControl = [[UIPageControl alloc] init];
+        _pageControl.userInteractionEnabled = NO;
+        _pageControl.backgroundColor = [k_COLOR_BLACK colorWithAlphaComponent:0.7];
+        _pageControl.layer.cornerRadius = 7;
     }
     return _pageControl;
 }

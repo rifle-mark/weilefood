@@ -27,7 +27,7 @@
 }
 
 - (void)video_getListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
-    NSString *apiUrl = [self getApiUrlWithPaths:@[@"video", @"list", @(1), @(pageSize), @([maxDate timeIntervalSince1970])]];
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"video", @"list", @(1), @(pageSize), @([maxDate millisecondIntervalSince1970])]];
     [self httpGET:apiUrl parameters:nil resultItemsClass:[WLVideoModel class] callback:callback];
 }
 

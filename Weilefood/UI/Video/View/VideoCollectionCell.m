@@ -59,6 +59,11 @@ static CGFloat const kImageHeightScale = 0.788;
     self.pointsLabel.text = [NSString stringWithFormat:@"观看积分 %ld", (long)points];
 }
 
+- (void)setIsFavorite:(BOOL)isFavorite {
+    _isFavorite = isFavorite;
+    self.favoriteButton.highlighted = isFavorite;
+}
+
 - (void)favoriteBlock:(void (^)(VideoCollectionCell *))block {
     self.favoriteBlock = block;
 }

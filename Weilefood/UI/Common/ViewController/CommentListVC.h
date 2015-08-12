@@ -14,13 +14,13 @@ typedef NS_ENUM(NSUInteger, WLCommentType);
 @interface CommentListVC : UIViewController
 
 /**
- *  实例化评论列表界面对象
+ *  弹出评论列表界面
  *
  *  @param type  评论类型
  *  @param refId 评论对象ID
  *
  *  @return 界面实例
  */
-- (id)initWithType:(WLCommentType)type refId:(NSUInteger)refId;
++ (void)showWithType:(WLCommentType)type refId:(NSUInteger)refId;
 
 @end

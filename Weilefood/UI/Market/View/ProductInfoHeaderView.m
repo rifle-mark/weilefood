@@ -1,15 +1,15 @@
 //
-//  ProductTableHeaderView.m
+//  ProductInfoHeaderView.m
 //  Weilefood
 //
 //  Created by kelei on 15/8/6.
 //  Copyright (c) 2015年 kelei. All rights reserved.
 //
 
-#import "ProductTableHeaderView.h"
-#import <SwipeView/SwipeView.h>
+#import "ProductInfoHeaderView.h"
+#import "SwipeView+AutomaticCycleScrollingImage.h"
 
-@interface ProductTableHeaderView () <SwipeViewDataSource, SwipeViewDelegate>
+@interface ProductInfoHeaderView ()
 
 @property (nonatomic, strong) SwipeView     *swipeView;
 @property (nonatomic, strong) UIPageControl *pageControl;
@@ -19,18 +19,17 @@
 
 @end
 
-static NSInteger const kImageChangeDelay    = 4;
-static NSInteger const kTitleTopMargin      = 15;
-static NSInteger const kNumberTopMargin     = 10;
-static NSInteger const kNumberHeightpMargin = 20;
+static NSInteger const kTitleTopMargin  = 15;
+static NSInteger const kNumberTopMargin = 10;
+static NSInteger const kNumberHeight    = 20;
 #define kTitleFont  [UIFont systemFontOfSize:18]
 
-@implementation ProductTableHeaderView
+@implementation ProductInfoHeaderView
 
 + (CGFloat)viewHeight {
     return SCREEN_WIDTH
         + kTitleTopMargin + kTitleFont.lineHeight * 2
-        + kNumberTopMargin + kNumberHeightpMargin;
+        + kNumberTopMargin + kNumberHeight;
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -50,7 +49,7 @@ static NSInteger const kNumberHeightpMargin = 20;
     [self.numberLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel);
         make.bottom.equalTo(self);
-        make.height.equalTo(@(kNumberHeightpMargin));
+        make.height.equalTo(@(kNumberHeight));
     }];
     [self.priceLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).offset(-10);
@@ -61,9 +60,13 @@ static NSInteger const kNumberHeightpMargin = 20;
         make.height.equalTo(self.swipeView.mas_width);
         make.bottom.equalTo(self.numberLabel.mas_top).offset(-kNumberTopMargin -kTitleFont.lineHeight * 2 -kTitleTopMargin);
     }];
+    CGSize size = [self.pageControl sizeForNumberOfPages:self.pageControl.numberOfPages];
+    size.width += 8;
+    size.height = 15;
     [self.pageControl mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.swipeView);
-        make.height.equalTo(@25);
+        make.centerX.equalTo(self.swipeView);
+        make.bottom.equalTo(self.swipeView).offset(-10);
+        make.size.mas_equalTo(size);
     }];
     [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self).insets(UIEdgeInsetsMake(0, 10, 0, 10));
@@ -75,11 +78,12 @@ static NSInteger const kNumberHeightpMargin = 20;
 
 - (void)setImages:(NSArray *)images {
     _images = images;
+    self.swipeView.acsi_imageUrls = images;
     [self.swipeView reloadData];
     self.pageControl.numberOfPages = self.swipeView.numberOfPages;
-    if (self.pageControl.numberOfPages > 0) {
-        [self performSelector:@selector(_autoNextImage) withObject:nil afterDelay:kImageChangeDelay];
-    }
+    // 这里直接调用[self setNeedsUpdateConstraints];在iOS7下会报错，原因是设置约束的时机问题。
+    // 所以使用以下方法延迟执行
+    [self performSelector:@selector(setNeedsUpdateConstraints) withObject:nil afterDelay:0.1];
 }
 
 - (void)setTitle:(NSString *)title {
@@ -97,69 +101,21 @@ static NSInteger const kNumberHeightpMargin = 20;
     self.priceLabel.text = [NSString stringWithFormat:@"￥%.2f", price];
 }
 
-#pragma mark - SwipeViewDataSource
-
-- (NSInteger)numberOfItemsInSwipeView:(SwipeView *)swipeView {
-    return self.images ? self.images.count : 0;
-}
-
-- (UIView *)swipeView:(SwipeView *)swipeView viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view {
-    UIImageView *imageView = nil;
-    if (!view) {
-        imageView = [[UIImageView alloc] init];
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
-        imageView.clipsToBounds = YES;
-        imageView.frame = swipeView.bounds;
-    }
-    else {
-        imageView = (UIImageView *)view;
-    }
-    NSString *url = self.images[index];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:url]];
-    return imageView;
-}
-
-#pragma mark - SwipeViewDelegate
-
-- (void)swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView {
-    self.pageControl.currentPage = swipeView.currentPage;
-}
-
-- (void)swipeViewWillBeginDragging:(SwipeView *)swipeView {
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(_autoNextImage) object:nil];
-}
-
-- (void)swipeViewDidEndDragging:(SwipeView *)swipeView willDecelerate:(BOOL)decelerate {
-    [self performSelector:@selector(_autoNextImage) withObject:nil afterDelay:kImageChangeDelay];
-}
-
-- (void)swipeView:(SwipeView *)swipeView didSelectItemAtIndex:(NSInteger)index {
-    // TODO: 进入广告界面
-}
-
-#pragma mark - private methods
-
-- (void)_autoNextImage {
-    if (self.swipeView.numberOfPages > 0 && !self.swipeView.decelerating) {
-        NSInteger newPage = self.swipeView.currentPage + 1;
-        if (newPage >= self.swipeView.numberOfPages) {
-            newPage = 0;
-        }
-        [self.swipeView scrollToPage:newPage duration:0.3];
-    }
-    [self performSelector:@selector(_autoNextImage) withObject:nil afterDelay:kImageChangeDelay];
-}
-
 #pragma mark - private property methods
 
 - (SwipeView *)swipeView {
     if (!_swipeView) {
-        _swipeView = [[SwipeView alloc] init];
+        _swipeView = [SwipeView acsi_create];
         _swipeView.backgroundColor = k_COLOR_WHITE;
-        _swipeView.pagingEnabled = YES;
-        _swipeView.wrapEnabled = YES;
-        _swipeView.dataSource = self;
-        _swipeView.delegate = self;
+        _weak(self);
+        [_swipeView acsi_currentItemIndexDidChangeBlock:^(SwipeView *swipeView) {
+            _strong_check(self);
+            self.pageControl.currentPage = swipeView.currentPage;
+        }];
+        [_swipeView acsi_didSelectItemAtIndexBlock:^(SwipeView *swipeView, NSInteger index) {
+            _strong_check(self);
+            DLog(@"");
+        }];
     }
     return _swipeView;
 }
@@ -168,6 +124,8 @@ static NSInteger const kNumberHeightpMargin = 20;
     if (!_pageControl) {
         _pageControl = [[UIPageControl alloc] init];
         _pageControl.userInteractionEnabled = NO;
+        _pageControl.backgroundColor = [k_COLOR_BLACK colorWithAlphaComponent:0.7];
+        _pageControl.layer.cornerRadius = 7;
     }
     return _pageControl;
 }

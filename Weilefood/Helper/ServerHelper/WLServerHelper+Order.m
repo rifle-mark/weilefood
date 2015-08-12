@@ -43,7 +43,7 @@
 }
 
 - (void)order_getListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
-    NSString *apiUrl = [self getApiUrlWithPaths:@[@"orderform", @"myorder", @(pageSize), @([maxDate timeIntervalSince1970])]];
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"orderform", @"myorder", @(pageSize), @([maxDate millisecondIntervalSince1970])]];
     [self httpGET:apiUrl parameters:nil resultItemsClass:[WLOrderDetailModel class] callback:callback];
 }
 

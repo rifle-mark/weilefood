@@ -10,6 +10,7 @@
 #define LawyerCenter_ViewFrameMacro_h
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define k1pxWidth   0.5
 
 #define V_X0(v) CGRectGetMinX(v.frame)
 #define V_Y0(v) CGRectGetMinY(v.frame)
