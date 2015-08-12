@@ -137,7 +137,11 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (void)_showData {
     self.title = self.forwardBuy.title;
     
-    self.tableHeaderView.images    = @[self.forwardBuy.banner];
+    NSMutableArray *images = [NSMutableArray array];
+    for (WLPictureModel *pic in self.forwardBuy.pictures) {
+        [images addObject:pic.picPath];
+    }
+    self.tableHeaderView.images    = images;
     self.tableHeaderView.title     = self.forwardBuy.title;
     self.tableHeaderView.number    = self.forwardBuy.count;
     self.tableHeaderView.price     = self.forwardBuy.price;

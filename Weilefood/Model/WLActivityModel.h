@@ -47,6 +47,8 @@ typedef NS_ENUM(NSInteger, WLActivityState) {
 @property (nonatomic, assign) BOOL isJoin;
 /// 活动状态
 @property (nonatomic, assign) WLActivityState state;
+/// 是否已收藏
+@property (nonatomic, assign) BOOL isFav;
 ///
 @property (nonatomic, copy) NSDate *createDate;
 ///

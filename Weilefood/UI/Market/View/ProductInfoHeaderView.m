@@ -60,9 +60,13 @@ static NSInteger const kNumberHeight    = 20;
         make.height.equalTo(self.swipeView.mas_width);
         make.bottom.equalTo(self.numberLabel.mas_top).offset(-kNumberTopMargin -kTitleFont.lineHeight * 2 -kTitleTopMargin);
     }];
+    CGSize size = [self.pageControl sizeForNumberOfPages:self.pageControl.numberOfPages];
+    size.width += 8;
+    size.height = 15;
     [self.pageControl mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.swipeView);
-        make.height.equalTo(@25);
+        make.centerX.equalTo(self.swipeView);
+        make.bottom.equalTo(self.swipeView).offset(-10);
+        make.size.mas_equalTo(size);
     }];
     [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self).insets(UIEdgeInsetsMake(0, 10, 0, 10));
@@ -77,6 +81,9 @@ static NSInteger const kNumberHeight    = 20;
     self.swipeView.acsi_imageUrls = images;
     [self.swipeView reloadData];
     self.pageControl.numberOfPages = self.swipeView.numberOfPages;
+    // 这里直接调用[self setNeedsUpdateConstraints];在iOS7下会报错，原因是设置约束的时机问题。
+    // 所以使用以下方法延迟执行
+    [self performSelector:@selector(setNeedsUpdateConstraints) withObject:nil afterDelay:0.1];
 }
 
 - (void)setTitle:(NSString *)title {
@@ -117,6 +124,8 @@ static NSInteger const kNumberHeight    = 20;
     if (!_pageControl) {
         _pageControl = [[UIPageControl alloc] init];
         _pageControl.userInteractionEnabled = NO;
+        _pageControl.backgroundColor = [k_COLOR_BLACK colorWithAlphaComponent:0.7];
+        _pageControl.layer.cornerRadius = 7;
     }
     return _pageControl;
 }

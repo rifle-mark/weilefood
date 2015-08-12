@@ -89,6 +89,7 @@
 		24C40B571B7A438500E8AFA9 /* ActivityInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C40B561B7A438500E8AFA9 /* ActivityInfoVC.m */; };
 		24C40B5A1B7A442500E8AFA9 /* ActivityInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C40B591B7A442500E8AFA9 /* ActivityInfoHeaderView.m */; };
 		24C40B5D1B7A579A00E8AFA9 /* VideoInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C40B5C1B7A579A00E8AFA9 /* VideoInfoVC.m */; };
+		24C755CF1B7B8C4F00463BFC /* WLPictureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C755CE1B7B8C4F00463BFC /* WLPictureModel.m */; };
 		24C792681B666B4E007DCB30 /* MarketProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C792671B666B4E007DCB30 /* MarketProductCell.m */; };
 		24CAC42F1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC42E1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m */; };
 		24CAC4331B57E9D800E3C4D5 /* WLServerHelper+Share.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC4321B57E9D700E3C4D5 /* WLServerHelper+Share.m */; };
@@ -347,6 +348,8 @@
 		24C40B591B7A442500E8AFA9 /* ActivityInfoHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityInfoHeaderView.m; sourceTree = "<group>"; };
 		24C40B5B1B7A579A00E8AFA9 /* VideoInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoInfoVC.h; sourceTree = "<group>"; };
 		24C40B5C1B7A579A00E8AFA9 /* VideoInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoInfoVC.m; sourceTree = "<group>"; };
+		24C755CD1B7B8C4F00463BFC /* WLPictureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLPictureModel.h; sourceTree = "<group>"; };
+		24C755CE1B7B8C4F00463BFC /* WLPictureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLPictureModel.m; sourceTree = "<group>"; };
 		24C792661B666B4E007DCB30 /* MarketProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketProductCell.h; sourceTree = "<group>"; };
 		24C792671B666B4E007DCB30 /* MarketProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketProductCell.m; sourceTree = "<group>"; };
 		24CAC42D1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+UploadImage.h"; sourceTree = "<group>"; };
@@ -892,6 +895,8 @@
 				24CAC4351B57EA5F00E3C4D5 /* WLShareModel.m */,
 				24CAC4371B58044C00E3C4D5 /* WLChannelModel.h */,
 				24CAC4381B58044C00E3C4D5 /* WLChannelModel.m */,
+				24C755CD1B7B8C4F00463BFC /* WLPictureModel.h */,
+				24C755CE1B7B8C4F00463BFC /* WLPictureModel.m */,
 				24CAC43A1B58050900E3C4D5 /* WLProductModel.h */,
 				24CAC43B1B58050900E3C4D5 /* WLProductModel.m */,
 				24CAC43D1B5806BF00E3C4D5 /* WLForwardBuyModel.h */,
@@ -1494,6 +1499,7 @@
 				249745FC1B6A656F0019ADDA /* ForwardBuyCell.m in Sources */,
 				24CDCBDA1B4F792E00BDE8CB /* AppDelegate.m in Sources */,
 				245936A31B5A2C62008FFAB8 /* WLServerHelper+Channel.m in Sources */,
+				24C755CF1B7B8C4F00463BFC /* WLPictureModel.m in Sources */,
 				24CDCBE71B4F792E00BDE8CB /* UIImagePickerControllerDelegateImplementationProxy.m in Sources */,
 				24CDCC1A1B4F792E00BDE8CB /* NSObject+GCKVO.m in Sources */,
 				24C40B571B7A438500E8AFA9 /* ActivityInfoVC.m in Sources */,

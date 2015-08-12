@@ -31,10 +31,16 @@
 @property (nonatomic, assign) NSUInteger commentCount;
 /// 描述
 @property (nonatomic, copy) NSString *desc;
+/// 是否已收藏
+@property (nonatomic, assign) BOOL isFav;
+/// 所属栏目ID
+@property (nonatomic, assign) NSUInteger channelId;
+/// 所属栏目名称
+@property (nonatomic, copy) NSString *channelName;
+/// 幻灯片图组(详情接口)<WLPictureModel>
+@property (nonatomic, strong) NSArray *pictures;
 ///
 @property (nonatomic, copy) NSDate *createDate;
-///
-@property (nonatomic, assign) NSUInteger channelId;
 ///
 @property (nonatomic, assign) NSInteger isDeleted;
 

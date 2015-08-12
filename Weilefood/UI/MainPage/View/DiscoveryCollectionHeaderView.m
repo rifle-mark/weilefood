@@ -54,20 +54,23 @@ static NSInteger const kHeaderAdHeight      = 88;
         for (UIView *view in array) {
             [self addSubview:view];
         }
-        [self _makeConstraints];
+        [self _remakeConstraints];
     }
     return self;
 }
 
-- (void)_makeConstraints {
+- (void)_remakeConstraints {
     [self.bannerView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self.bannerView.superview);
         make.height.equalTo(@(kHeaderBannerHeight));
     }];
+    CGSize size = [self.pageControl sizeForNumberOfPages:self.pageControl.numberOfPages];
+    size.width += 8;
+    size.height = 15;
     [self.pageControl mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.bannerView);
-        make.bottom.equalTo(self.bannerView);
-        make.height.equalTo(@30);
+        make.centerX.equalTo(self.bannerView);
+        make.bottom.equalTo(self.bannerView).offset(-10);
+        make.size.mas_equalTo(size);
     }];
     [self.middleButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bannerView.mas_bottom);
@@ -114,6 +117,7 @@ static NSInteger const kHeaderAdHeight      = 88;
     self.bannerView.acsi_imageUrls = bannerImageUrls;
     [self.bannerView reloadData];
     self.pageControl.numberOfPages = self.bannerView.numberOfPages;
+    [self _remakeConstraints];
 }
 
 - (void)setVideoImageUrl:(NSString *)videoImageUrl {
@@ -174,6 +178,9 @@ static NSInteger const kHeaderAdHeight      = 88;
 - (UIPageControl *)pageControl {
     if (!_pageControl) {
         _pageControl = [[UIPageControl alloc] init];
+        _pageControl.userInteractionEnabled = NO;
+        _pageControl.backgroundColor = [k_COLOR_BLACK colorWithAlphaComponent:0.7];
+        _pageControl.layer.cornerRadius = 7;
     }
     return _pageControl;
 }

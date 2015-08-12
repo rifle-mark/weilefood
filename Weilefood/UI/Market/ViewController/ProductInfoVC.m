@@ -138,7 +138,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
     self.title = self.product.productName;
     
     NSMutableArray *images = [NSMutableArray array];
-    for (WLProductPictureModel *pic in self.product.pictures) {
+    for (WLPictureModel *pic in self.product.pictures) {
         [images addObject:pic.picPath];
     }
     self.tableHeaderView.images = images;
