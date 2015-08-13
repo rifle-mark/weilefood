@@ -12,6 +12,7 @@
 
 #import "CommentListVC.h"
 #import "LoginVC.h"
+#import "ShareOnPlatformVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -219,7 +220,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
         }];
         [_sectionHeaderView shareBlock:^{
             _strong_check(self);
-            DLog(@"");
+            [ShareOnPlatformVC shareWithImageUrl:self.product.images title:self.product.productName url:nil];
         }];
     }
     return _sectionHeaderView;
