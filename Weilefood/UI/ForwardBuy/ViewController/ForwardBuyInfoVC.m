@@ -147,6 +147,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
     self.tableHeaderView.price     = self.forwardBuy.price;
     self.tableHeaderView.beginDate = self.forwardBuy.startDate;
     self.tableHeaderView.endDate   = self.forwardBuy.endDate;
+    self.tableHeaderView.state     = self.forwardBuy.state;
     
     self.sectionHeaderView.actionCount = self.forwardBuy.actionCount;
     self.sectionHeaderView.commentCount = self.forwardBuy.commentCount;

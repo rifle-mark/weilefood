@@ -187,6 +187,7 @@ static NSInteger const kPageSize       = 10;
             cell.imageUrl     = forwardBuy.banner;
             cell.beginDate    = forwardBuy.startDate;
             cell.endDate      = forwardBuy.endDate;
+            cell.state        = forwardBuy.state;
             cell.name         = forwardBuy.title;
             cell.price        = forwardBuy.price;
             cell.actionCount  = forwardBuy.actionCount;

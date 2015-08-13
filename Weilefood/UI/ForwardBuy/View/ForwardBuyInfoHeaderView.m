@@ -8,6 +8,7 @@
 
 #import "ForwardBuyInfoHeaderView.h"
 #import "SwipeView+AutomaticCycleScrollingImage.h"
+#import "WLModelHeader.h"
 
 @interface ForwardBuyInfoHeaderView ()
 
@@ -134,20 +135,25 @@ static NSInteger const kNumberHeight        = 20;
     [self _refeashDateAndStatusLabel];
 }
 
+- (void)setState:(WLForwardBuyState)state {
+    _state = state;
+    switch (state) {
+        case WLForwardBuyStateNotStarted:
+            self.timeView.backgroundColor = k_COLOR_MEDIUM_AQUAMARINE;
+            break;
+        case WLForwardBuyStateEnded:
+            self.timeView.backgroundColor = k_COLOR_DARKGRAY;
+            break;
+        default:
+            self.timeView.backgroundColor = k_COLOR_ANZAC;
+            break;
+    }
+}
+
 #pragma mark - private methods
 
 - (void)_refeashDateAndStatusLabel {
     self.beginEndDateLabel.text = [NSString stringWithFormat:@"购买时间：%@ — %@", [self.beginDate formattedDateWithFormat:@"MM.dd"], [self.endDate formattedDateWithFormat:@"MM.dd"]];
-    NSDate *now = [NSDate date];
-    if ([now isEarlierThan:self.beginDate]) {
-        self.timeView.backgroundColor = k_COLOR_MEDIUM_AQUAMARINE;
-    }
-    else if ([now isLaterThan:self.endDate]) {
-        self.timeView.backgroundColor = k_COLOR_DARKGRAY;
-    }
-    else {
-        self.timeView.backgroundColor = k_COLOR_ANZAC;
-    }
 }
 
 #pragma mark - private property methods

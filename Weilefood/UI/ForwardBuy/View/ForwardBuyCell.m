@@ -7,6 +7,7 @@
 //
 
 #import "ForwardBuyCell.h"
+#import "WLModelHeader.h"
 
 @interface ForwardBuyCell ()
 
@@ -90,6 +91,27 @@
     self.commentCountLabel.text = [NSString stringWithFormat:@"%ld", (unsigned long)commentCount];
 }
 
+- (void)setState:(WLForwardBuyState)state {
+    _state = state;
+    switch (state) {
+        case WLForwardBuyStateNotStarted: {
+            self.timeView.backgroundColor = k_COLOR_MEDIUM_AQUAMARINE;
+            self.statusImageView.image = [UIImage imageNamed:@"item_state_notStarted"];
+            break;
+        }
+        case WLForwardBuyStateEnded: {
+            self.timeView.backgroundColor = k_COLOR_DARKGRAY;
+            self.statusImageView.image = [UIImage imageNamed:@"item_state_ended"];
+            break;
+        }
+        default: {
+            self.timeView.backgroundColor = k_COLOR_ANZAC;
+            self.statusImageView.image = [UIImage imageNamed:@"item_state_started"];
+            break;
+        }
+    }
+}
+
 #pragma mark - private methods
 
 - (void)_makeConstraints {
@@ -151,19 +173,6 @@
 
 - (void)_refeashDateAndStatusLabel {
     self.beginEndDateLabel.text = [NSString stringWithFormat:@"购买时间：%@ — %@", [self.beginDate formattedDateWithFormat:@"MM.dd"], [self.endDate formattedDateWithFormat:@"MM.dd"]];
-    NSDate *now = [NSDate date];
-    if ([now isEarlierThan:self.beginDate]) {
-        self.statusImageView.image = [UIImage imageNamed:@"item_state_notStarted"];
-        self.timeView.backgroundColor = k_COLOR_MEDIUM_AQUAMARINE;
-    }
-    else if ([now isLaterThan:self.endDate]) {
-        self.statusImageView.image = [UIImage imageNamed:@"item_state_ended"];
-        self.timeView.backgroundColor = k_COLOR_DARKGRAY;
-    }
-    else {
-        self.statusImageView.image = [UIImage imageNamed:@"item_state_started"];
-        self.timeView.backgroundColor = k_COLOR_ANZAC;
-    }
 }
 
 #pragma mark - private property methods
