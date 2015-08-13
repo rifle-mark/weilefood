@@ -8,21 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
+/// 预购状态
+typedef NS_ENUM(NSInteger, WLForwardBuyState);
+
 /// 预购详情界面 - 头部分
 @interface ForwardBuyInfoHeaderView : UIView
 
 /// 商品图集URL<NSString>
-@property (nonatomic, strong) NSArray   *images;
+@property (nonatomic, strong) NSArray           *images;
 /// 商品名称
-@property (nonatomic, copy  ) NSString  *title;
+@property (nonatomic, copy  ) NSString          *title;
 /// 剩余数量
-@property (nonatomic, assign) NSInteger number;
+@property (nonatomic, assign) NSInteger         number;
 /// 价格
-@property (nonatomic, assign) CGFloat   price;
+@property (nonatomic, assign) CGFloat           price;
 /// 预购开始时间
-@property (nonatomic, strong) NSDate    *beginDate;
+@property (nonatomic, strong) NSDate            *beginDate;
 /// 预购结束时间
-@property (nonatomic, strong) NSDate    *endDate;
+@property (nonatomic, strong) NSDate            *endDate;
+/// 状态
+@property (nonatomic, assign) WLForwardBuyState state;
 
 /**
  *  展示所需要的高度

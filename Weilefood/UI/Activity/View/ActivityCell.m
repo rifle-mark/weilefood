@@ -7,6 +7,7 @@
 //
 
 #import "ActivityCell.h"
+#import "WLModelHeader.h"
 
 @interface ActivityCell ()
 
@@ -70,6 +71,21 @@
     self.participatedLabel.hidden = !participated;
 }
 
+- (void)setState:(WLActivityState)state {
+    _state = state;
+    switch (state) {
+        case WLActivityStateNotStarted:
+            self.statusImageView.image = [UIImage imageNamed:@"item_state_notStarted"];
+            break;
+        case WLActivityStateEnded:
+            self.statusImageView.image = [UIImage imageNamed:@"item_state_ended"];
+            break;
+        default:
+            self.statusImageView.image = [UIImage imageNamed:@"item_state_started"];
+            break;
+    }
+}
+
 #pragma mark - private methods
 
 - (void)_makeConstraints {
@@ -108,16 +124,6 @@
 
 - (void)_refeashDateAndStatusLabel {
     self.beginEndDateLabel.text = [NSString stringWithFormat:@"活动时间：%@ — %@", [self.beginDate formattedDateWithFormat:@"MM.dd"], [self.endDate formattedDateWithFormat:@"MM.dd"]];
-    NSDate *now = [NSDate date];
-    if ([now isEarlierThan:self.beginDate]) {
-        self.statusImageView.image = [UIImage imageNamed:@"item_state_notStarted"];
-    }
-    else if ([now isLaterThan:self.endDate]) {
-        self.statusImageView.image = [UIImage imageNamed:@"item_state_ended"];
-    }
-    else {
-        self.statusImageView.image = [UIImage imageNamed:@"item_state_started"];
-    }
 }
 
 #pragma mark - private property methods

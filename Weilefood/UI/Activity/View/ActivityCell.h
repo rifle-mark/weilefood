@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+/// 活动状态
+typedef NS_ENUM(NSInteger, WLActivityState);
+
 /// 活动列表 - 活动Cell
 @interface ActivityCell : UITableViewCell
 
@@ -21,6 +24,8 @@
 @property (nonatomic, copy    ) NSString *name;
 /// 是否已参加
 @property (nonatomic, assign  ) BOOL     participated;
+/// 状态
+@property (nonatomic, assign) WLActivityState state;
 
 /**
  *  cell展示所需要的高度

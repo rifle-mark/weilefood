@@ -150,6 +150,7 @@ static NSInteger const kPageSize       = 10;
             cell.beginDate    = activity.startDate;
             cell.endDate      = activity.endDate;
             cell.participated = activity.isJoin;
+            cell.state        = activity.state;
             return cell;
         }];
         [_tableView withBlockForRowDidSelect:^(UITableView *view, NSIndexPath *path) {

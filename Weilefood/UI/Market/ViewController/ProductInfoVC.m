@@ -12,6 +12,8 @@
 
 #import "CommentListVC.h"
 #import "LoginVC.h"
+#import "ShareOnPlatformVC.h"
+#import "InputQuantityVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -219,7 +221,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
         }];
         [_sectionHeaderView shareBlock:^{
             _strong_check(self);
-            DLog(@"");
+            [ShareOnPlatformVC shareWithImageUrl:self.product.images title:self.product.productName url:nil];
         }];
     }
     return _sectionHeaderView;
@@ -343,6 +345,13 @@ static NSString *const kCellIdentifier = @"MYCELL";
         _addCartButton.titleLabel.font = [UIFont systemFontOfSize:16];
         [_addCartButton setTitleColor:k_COLOR_WHITE forState:UIControlStateNormal];
         [_addCartButton setTitle:@"加入购物车" forState:UIControlStateNormal];
+        _weak(self);
+        [_addCartButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            [InputQuantityVC inputQuantityWithSuccessBlock:^(NSInteger quantity) {
+                _strong_check(self);
+                DLog(@"%d", quantity);
+            }];
+        }];
     }
     return _addCartButton;
 }

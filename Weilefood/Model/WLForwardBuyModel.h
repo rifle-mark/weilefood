@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+/// 预购状态
+typedef NS_ENUM(NSInteger, WLForwardBuyState) {
+    /// 已开始进行中
+    WLForwardBuyStateStarted    = 0,
+    /// 未开始
+    WLForwardBuyStateNotStarted = 3,
+    /// 已结束
+    WLForwardBuyStateEnded      = 4,
+};
+
 /// 预购
 @interface WLForwardBuyModel : NSObject
 
@@ -29,6 +39,8 @@
 @property (nonatomic, assign) NSUInteger actionCount;
 /// 评论数
 @property (nonatomic, assign) NSUInteger commentCount;
+/// 状态
+@property (nonatomic, assign) WLForwardBuyState state;
 /// 描述
 @property (nonatomic, copy) NSString *desc;
 /// 是否已收藏

@@ -398,7 +398,7 @@
 - (UIButton *)weiboLoginButton {
     if (!_weiboLoginButton) {
         _weiboLoginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_weiboLoginButton setImage:[UIImage imageNamed:@"user_login_weibo"] forState:UIControlStateNormal];
+        [_weiboLoginButton setImage:[UIImage imageNamed:@"share_icon_weibo"] forState:UIControlStateNormal];
         [_weiboLoginButton addTarget:self action:@selector(_weiboLoginAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _weiboLoginButton;
@@ -417,7 +417,7 @@
 - (UIButton *)weixinLoginButton {
     if (!_weixinLoginButton) {
         _weixinLoginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_weixinLoginButton setImage:[UIImage imageNamed:@"user_login_wx"] forState:UIControlStateNormal];
+        [_weixinLoginButton setImage:[UIImage imageNamed:@"share_icon_wx"] forState:UIControlStateNormal];
         [_weixinLoginButton addTarget:self action:@selector(_weixinLoginAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _weixinLoginButton;
