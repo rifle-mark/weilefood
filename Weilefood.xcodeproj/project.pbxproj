@@ -103,7 +103,6 @@
 		24CAC4421B5807ED00E3C4D5 /* WLVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC4411B5807ED00E3C4D5 /* WLVideoModel.m */; };
 		24CAC4451B5808B900E3C4D5 /* WLActivityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC4441B5808B900E3C4D5 /* WLActivityModel.m */; };
 		24CAC4481B580A5800E3C4D5 /* WLCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CAC4471B580A5800E3C4D5 /* WLCommentModel.m */; };
-		24CDCBD71B4F792E00BDE8CB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24CDCB2C1B4F792D00BDE8CB /* LaunchScreen.xib */; };
 		24CDCBDA1B4F792E00BDE8CB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB3A1B4F792D00BDE8CB /* AppDelegate.m */; };
 		24CDCBDC1B4F792E00BDE8CB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB3C1B4F792D00BDE8CB /* main.m */; };
 		24CDCBDF1B4F792E00BDE8CB /* GCImplementationProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCB4A1B4F792D00BDE8CB /* GCImplementationProxy.m */; };
@@ -386,7 +385,6 @@
 		24CAC4461B580A5800E3C4D5 /* WLCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLCommentModel.h; sourceTree = "<group>"; };
 		24CAC4471B580A5800E3C4D5 /* WLCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLCommentModel.m; sourceTree = "<group>"; };
 		24CDCAFF1B4F773900BDE8CB /* Weilefood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weilefood.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		24CDCB2D1B4F792D00BDE8CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		24CDCB361B4F792D00BDE8CB /* UtilsMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilsMacro.h; sourceTree = "<group>"; };
 		24CDCB371B4F792D00BDE8CB /* VendorMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VendorMacro.h; sourceTree = "<group>"; };
 		24CDCB391B4F792D00BDE8CB /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1129,7 +1127,6 @@
 				240D79971B5FEB42007E2E43 /* Order */,
 				240D799A1B5FEB42007E2E43 /* Share */,
 				240D799D1B5FEB42007E2E43 /* User */,
-				24CDCB2C1B4F792D00BDE8CB /* LaunchScreen.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1463,7 +1460,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24CDCBD71B4F792E00BDE8CB /* LaunchScreen.xib in Resources */,
 				247EA7291B7103B400E6A161 /* Images.xcassets in Resources */,
 				24B8C0651B5242BC001C5722 /* AGImagePickerController.bundle in Resources */,
 				24E66DC41B6271870081324A /* MBProgressHUDImage.xcassets in Resources */,
@@ -1681,18 +1677,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		24CDCB2C1B4F792D00BDE8CB /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				24CDCB2D1B4F792D00BDE8CB /* Base */,
-			);
-			name = LaunchScreen.xib;
-			path = ../Base.lproj;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		24CDCB231B4F773900BDE8CB /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1784,6 +1768,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yulin Chen (A43C3D2MLQ)";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = Weilefood/Main/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1792,6 +1777,7 @@
 					"$(PROJECT_DIR)/Weilefood/Vendor/BPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b4e21f12-d710-4fed-9bc4-0876203266f9";
 			};
 			name = Debug;
 		};
@@ -1801,6 +1787,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yulin Chen (A43C3D2MLQ)";
 				INFOPLIST_FILE = Weilefood/Main/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1808,6 +1795,7 @@
 					"$(PROJECT_DIR)/Weilefood/Vendor/BPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b4e21f12-d710-4fed-9bc4-0876203266f9";
 			};
 			name = Release;
 		};
