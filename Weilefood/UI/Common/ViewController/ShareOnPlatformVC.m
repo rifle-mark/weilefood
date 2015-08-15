@@ -7,6 +7,7 @@
 //
 
 #import "ShareOnPlatformVC.h"
+#import <UMengSocial/WXApi.h>
 
 @interface ShareOnPlatformVC ()
 
@@ -70,12 +71,13 @@ static NSInteger const kLabelTopMargin = 10;
     
     [self.view addSubview:self.closeButton];
     [self.view addSubview:self.weiboLabel];
-    [self.view addSubview:self.wxLabel];
-    [self.view addSubview:self.wxqLabel];
     [self.view addSubview:self.weiboButton];
-    [self.view addSubview:self.wxButton];
-    [self.view addSubview:self.wxqButton];
-    
+    if ([WXApi isWXAppInstalled]) {
+        [self.view addSubview:self.wxLabel];
+        [self.view addSubview:self.wxqLabel];
+        [self.view addSubview:self.wxButton];
+        [self.view addSubview:self.wxqButton];
+    }
     [self _setButtonAlpha:0];
 }
 
@@ -85,30 +87,42 @@ static NSInteger const kLabelTopMargin = 10;
     [self.closeButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    [self.weiboButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.centerY.equalTo(self.view);
-    }];
-    [self.wxButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.weiboButton.mas_right);
-        make.centerY.width.equalTo(self.weiboButton);
-    }];
-    [self.wxqButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.wxButton.mas_right);
-        make.centerY.width.equalTo(self.wxButton);
-        make.right.equalTo(self.view);
-    }];
-    [self.weiboLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.weiboButton);
-        make.top.equalTo(self.weiboButton.mas_bottom).offset(kLabelTopMargin);
-    }];
-    [self.wxLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.wxButton);
-        make.top.equalTo(self.wxButton.mas_bottom).offset(kLabelTopMargin);
-    }];
-    [self.wxqLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.wxqButton);
-        make.top.equalTo(self.wxqButton.mas_bottom).offset(kLabelTopMargin);
-    }];
+    
+    if ([WXApi isWXAppInstalled]) {
+        [self.weiboButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.centerY.equalTo(self.view);
+        }];
+        [self.wxButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.weiboButton.mas_right);
+            make.centerY.width.equalTo(self.weiboButton);
+        }];
+        [self.wxqButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.wxButton.mas_right);
+            make.centerY.width.equalTo(self.wxButton);
+            make.right.equalTo(self.view);
+        }];
+        [self.weiboLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.weiboButton);
+            make.top.equalTo(self.weiboButton.mas_bottom).offset(kLabelTopMargin);
+        }];
+        [self.wxLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.wxButton);
+            make.top.equalTo(self.wxButton.mas_bottom).offset(kLabelTopMargin);
+        }];
+        [self.wxqLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.wxqButton);
+            make.top.equalTo(self.wxqButton.mas_bottom).offset(kLabelTopMargin);
+        }];
+    }
+    else {
+        [self.weiboButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self.view);
+        }];
+        [self.weiboLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.weiboButton);
+            make.top.equalTo(self.weiboButton.mas_bottom).offset(kLabelTopMargin);
+        }];
+    }
     
     FixesViewDidLayoutSubviewsiOS7Error;
 }

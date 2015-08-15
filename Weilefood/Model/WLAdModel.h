@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, WLAdType) {
     /// 无链接广告
     WLAdTypeNoUrl = 8,
     /// 营养师
-    WLAdTypeDietitians = 9,
+    WLAdTypeDoctor = 9,
 };
 
 /// 广告
@@ -45,7 +45,7 @@ typedef NS_ENUM(NSUInteger, WLAdType) {
 @property (nonatomic, copy) NSString *name;
 /// 图片
 @property (nonatomic, copy) NSString *images;
-/// 如果Type为7，连接广告，则使用此字段
+/// 如果Type为7WLAdTypeUrl时，点击广告打开此链接网页
 @property (nonatomic, copy) NSString *url;
 ///
 @property (nonatomic, copy) NSDate *createDate;

@@ -39,7 +39,7 @@
     [MobClick startWithAppkey:UMengAppKey reportPolicy:BATCH channelId:UMengAnalyticsChannelId];
     // 友盟分享
     [UMSocialData setAppKey:UMengAppKey];
-    // 微信登录
+    // 为友盟配置微信
     [UMSocialWechatHandler setWXAppId:WXAppId appSecret:WXAppSecret url:WXAppUrl];
     // 百度推送
     [BPushHelper registerAppDelegate:self launchOptions:launchOptions apiKey:BPushApiKey pushMode:BPushModeDevelopment withFirstAction:nil withSecondAction:nil withCategory:nil isDebug:YES isClearBadgeNumber:YES];
