@@ -354,7 +354,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
             [InputQuantityVC inputQuantityWithEnterBlock:^(InputQuantityVC *inputQuantityVC, NSInteger quantity) {
                 _strong_check(self);
                 // TODO 加入购物车
-                DLog(@"%ld", quantity);
+                DLog(@"%ld", (long)quantity);
                 [inputQuantityVC dismissSelf];
             }];
         }];
