@@ -122,7 +122,7 @@ static NSInteger const kHeaderAdHeight      = 88;
 
 - (void)setVideoImageUrl:(NSString *)videoImageUrl {
     _videoImageUrl = [videoImageUrl copy];
-    [self.videoImageView sd_setImageWithURL:[NSURL URLWithString:videoImageUrl]];
+    [self.videoImageView my_setImageWithURL:[NSURL URLWithString:videoImageUrl]];
 }
 
 - (void)bannerImageClickBlock:(BannerImageClickBlock)block {

@@ -61,7 +61,7 @@ static NSInteger const kTimeHeight     = 14;
 
 - (void)setImageUrl:(NSString *)imageUrl {
     _imageUrl = [imageUrl copy];
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]];
+    [self.imageView my_setImageWithURL:[NSURL URLWithString:imageUrl]];
 }
 
 - (void)setTitle:(NSString *)title {
