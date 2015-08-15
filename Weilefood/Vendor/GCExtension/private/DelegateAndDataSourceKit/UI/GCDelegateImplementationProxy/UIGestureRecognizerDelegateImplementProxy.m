@@ -56,7 +56,7 @@
                             @"gestureRecognizer:shouldReceiveTouch:" : @"blockForShouldReceiveTouch",
                             @"gestureRecognizer:shouldRecognizeSimultaneouslyWithGestureRecognizer:" : @"blockForShouldSimultaneous",
                             @"gestureRecognizer:shouldRequireFailureOfGestureRecognizer:" : @"blockForShouldRequireFailureOf",
-                            @"gestureRecognizer:shouldBeRequiredToFailByGestureRecognizer:" : @"blockForShouldBeRequireToFailureBy,"
+                            @"gestureRecognizer:shouldBeRequiredToFailByGestureRecognizer:" : @"blockForShouldBeRequireToFailureBy"
                             }[selectorString];
     return blockName ?: [super blockNamesForSelectorString:selectorString];
 }

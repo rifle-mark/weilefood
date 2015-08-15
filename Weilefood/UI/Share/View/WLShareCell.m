@@ -112,23 +112,6 @@ static CGFloat controlHeight = 47;
         make.width.height.equalTo(@42);
     }];
     
-//    UIButton *actionBtn = [[UIButton alloc] init];
-//    [actionBtn setBackgroundImage:[UIImage imageNamed:@"cl_weicomment_action_btn"] forState:UIControlStateNormal];
-//    [actionBtn setBackgroundImage:[UIImage imageNamed:@"cl_weicomment_action_btn"] forState:UIControlStateHighlighted];
-//    [actionBtn addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
-//        _strong(self);
-//        GCBlockInvoke(self.actionBlock, self);
-//    }];
-    
-//    [self.userView addSubview:actionBtn];
-//    [actionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        _strong(self);
-//        make.top.equalTo(self.userView).with.offset(14);
-//        make.right.equalTo(self.userView);
-//        make.width.equalTo(@34);
-//        make.height.equalTo(@19);
-//    }];
-    
     self.nameL = [[UILabel alloc] init];
     self.nameL.backgroundColor = k_COLOR_CLEAR;
     self.nameL.font = [UIFont boldSystemFontOfSize:15];
@@ -153,17 +136,6 @@ static CGFloat controlHeight = 47;
         make.left.right.equalTo(self.nameL);
         make.height.equalTo(@12);
     }];
-    
-//    UIView *nameSplitV = [[UIView alloc] init];
-//    nameSplitV.backgroundColor = k_COLOR_GALLERY;
-//    [self.userView addSubview:nameSplitV];
-//    [nameSplitV mas_makeConstraints:^(MASConstraintMaker *make) {
-//        _strong(self);
-//        make.left.equalTo(self.userView).with.offset(66);
-//        make.bottom.equalTo(self.userView);
-//        make.right.equalTo(self.userView);
-//        make.height.equalTo(@1);
-//    }];
     
     self.controlV = [[UIView alloc] init];
     self.controlV.backgroundColor = k_COLOR_CLEAR;
@@ -195,8 +167,8 @@ static CGFloat controlHeight = 47;
     
     _weak(btnSplitV);
     self.upBtn = [[UIButton alloc] init];
-    [self.upBtn setImage:[UIImage imageNamed:@"cl_weicomment_up_btn"] forState:UIControlStateNormal];
-    [self.upBtn setImage:[UIImage imageNamed:@"cl_weicomment_up_btn_h"] forState:UIControlStateDisabled];
+    [self.upBtn setImage:[UIImage imageNamed:@"wl_share_up_btn"] forState:UIControlStateNormal];
+    [self.upBtn setImage:[UIImage imageNamed:@"wl_share_up_btn_h"] forState:UIControlStateDisabled];
     self.upBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -14, 0, 0);
     self.upBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 14, 0, 0);
     self.upBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
@@ -216,7 +188,7 @@ static CGFloat controlHeight = 47;
     }];
     
     self.commentBtn = [[UIButton alloc] init];
-    [self.commentBtn setImage:[UIImage imageNamed:@"cl_weicomment_sub_btn"] forState:UIControlStateNormal];
+    [self.commentBtn setImage:[UIImage imageNamed:@"wl_share_sub_btn"] forState:UIControlStateNormal];
     self.commentBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -14, 0, 0);
     self.commentBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 14, 0, 0);
     self.commentBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
@@ -324,13 +296,14 @@ static CGFloat controlHeight = 47;
             make.height.equalTo(@((picRowNumber==0?0:picRowNumber*(5+picHeight)+15)));
         }];
         
-        [self.upBtn setTitle:[NSString stringWithFormat:@"(%lul)", (unsigned long)self.share.actionCount] forState:UIControlStateNormal];
-        [self.commentBtn setTitle:[NSString stringWithFormat:@"(%lul)", self.share.commentCount] forState:UIControlStateNormal];
+        [self.upBtn setTitle:[NSString stringWithFormat:@"(%lu)", (unsigned long)self.share.actionCount] forState:UIControlStateNormal];
+        [self.commentBtn setTitle:[NSString stringWithFormat:@"(%lu)", (unsigned long)self.share.commentCount] forState:UIControlStateNormal];
+        [self.upBtn setEnabled:!self.share.isLike];
     }];
     
-    [self startObserveObject:self forKeyPath:@"isUped" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
+    [self startObserveObject:self forKeyPath:@"isLike" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong(self);
-        [self.upBtn setEnabled:!self.isUped];
+        [self.upBtn setEnabled:!self.isLike];
     }];
 }
 

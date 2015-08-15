@@ -7,15 +7,19 @@
 //
 
 #import "SharedAllListVC.h"
+#import "ShareDetailVC.h"
 
 #import "WLShareCell.h"
+
+#import "WLServerHelperHeader.h"
+#import "WLModelHeader.h"
+#import "LoginVC.h"
 
 @interface SharedAllListVC ()
 
 @property(nonatomic,strong)UITableView  *shareListTableV;
 
 @property(nonatomic,strong)NSArray      *shareList;
-@property(nonatomic,strong)NSNumber     *currentPage;
 
 
 @end
@@ -31,11 +35,12 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    self.shareList = @[];
+    
     [self.view addSubview:self.shareListTableV];
     
     [self _setupObserver];
     
-    self.currentPage = @0;
     [self.shareListTableV.header beginRefreshing];
 }
 
@@ -60,11 +65,11 @@
             v.showsHorizontalScrollIndicator = NO;
             
             _weak(self);
-            v.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [v headerWithRefreshingBlock:^{
                 _strong_check(self);
                 [self _refreshCommentList];
             }];
-            v.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            [v footerWithRefreshingBlock:^{
                 _strong_check(self);
                 [self _loadMoreComment];
             }];
@@ -86,24 +91,16 @@
                     cell = [[WLShareCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[WLShareCell reuseIdentify]];
                 }
                 cell.share = self.shareList[path.row];
-//                cell.isUped = [[CommunityLifeModel sharedModel] isWeiCommentUpWithCommentId:(cell.comment.commentId)];
-                cell.isUped = YES;
                 _weak(cell);
                 cell.likeActionBlock = ^(WLShareModel *share){
-//                    if (![[UserModel sharedModel] isNormalLogined]) {
-//                        [SVProgressHUD showErrorWithStatus:@"请先登录"];
-//                        return;
-//                    }
-//                    [[CommunityLifeModel sharedModel] asyncWeiUpWithCommentId:comment.commentId remoteBlock:^(BOOL isSuccess, NSString *msg, NSError *error) {
-//                        _strong(cell);
-//                        if (isSuccess) {
-//                            [UserPointHandler addUserPointWithType:ActionUp showInfo:NO];
-//                            cell.isUped = YES;
-//                            [cell addUpCount];
-//                            return;
-//                        }
-//                        [SVProgressHUD showErrorWithStatus:@"操作失败"];
-//                    }];
+                    [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+                        [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeApproval objectType:WLActionTypeShare objectId:share.shareId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                            _strong_check(cell);
+                            ServerHelperErrorHandle;
+                            cell.isLike = YES;
+                            [cell addUpCount];
+                        }];
+                    }];
                 };
                 cell.commentActionBlock = ^(WLShareModel *share) {
                     // TODO: open share detail VC
@@ -122,8 +119,9 @@
                     return;
                 }
                 
-                // TODO: open share detail VC
-//                [self performSegueWithIdentifier:@"Segue_WeiComment_Detail" sender:[view cellForRowAtIndexPath:path]];
+                ShareDetailVC *detailVC = [[ShareDetailVC alloc] init];
+                detailVC.share = self.shareList[path.row];
+                [self.navigationController pushViewController:detailVC animated:YES];
             }];
             v;
         });
@@ -131,22 +129,6 @@
     
     return _shareListTableV;
 }
-//
-//- (void)_setupTapGestureRecognizer {
-//    _weak(self);
-//    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] init];
-//    [tap withBlockForShouldReceiveTouch:^BOOL(UIGestureRecognizer *gesture, UITouch *touch) {
-//        _strong(self);
-//        if (!CGRectContainsPoint(self.actionV.frame, [touch locationInView:self.contentV])) {
-//            [self.actionV setHidden:YES];
-//        }
-//        if (!CGRectContainsPoint(self.deleteActionV.frame, [touch locationInView:self.deleteActionV])) {
-//            [self.deleteActionV setHidden:YES];
-//        }
-//        return NO;
-//    }];
-//    [self.contentV addGestureRecognizer:tap];
-//}
 
 #pragma mark - Data
 - (void)_setupObserver {
@@ -154,92 +136,35 @@
     [self startObserveObject:self forKeyPath:@"shareList" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong(self);
         [self.shareListTableV reloadData];
-        
-//        if ([UserModel sharedModel].isNormalLogined) {
-//            UserInfo *cUser = [UserModel sharedModel].currentNormalUser;
-//            for (WeiCommentInfo *info in self.commentList) {
-//                WeiCommentAction *action = [[[MKWModelHandler defaultHandler] queryObjectsForEntity:k_ENTITY_WEICOMMENTACTION predicate:[NSPredicate predicateWithFormat:@"commentId=%@ AND userId=%@", info.commentId, cUser.userId]] firstObject];
-//                if (!action) {
-//                    action = [[MKWModelHandler defaultHandler] insertNewObjectForEntityForName:k_ENTITY_WEICOMMENTACTION];
-//                    action.commentId = info.commentId;
-//                    action.userId = cUser.userId;
-//                }
-//                action.isRead = @(YES);
-//            }
-//        }
     }];
 }
 
-- (void)_loadShareAtPage:(NSNumber *)page pageSize:(NSNumber *)pageSize {
+- (void)_loadShareAtDate:(NSDate *)date pageSize:(NSNumber *)pageSize {
     _weak(self);
-//    if (self.isMine) {
-//        [[CommunityLifeModel sharedModel] asyncMyWeiListWithCommunityId:[[CommonModel sharedModel] currentCommunityId] parentId:@0 page:page pageSize:pageSize cacheBlock:nil remoteBlock:^(NSArray *commentList, NSNumber *cPage, NSError *error) {
-//            _strong(self);
-//            if (self.commentTableV.header.isRefreshing) {
-//                [self.commentTableV.header endRefreshing];
-//            }
-//            if (self.commentTableV.footer.isRefreshing) {
-//                [self.commentTableV.footer endRefreshing];
-//            }
-//            if (!error) {
-//                if ([cPage integerValue] == 1) {
-//                    self.currentPage = cPage;
-//                    self.commentList = commentList;
-//                }
-//                else if ([commentList count]>0) {
-//                    self.currentPage = cPage;
-//                    NSMutableArray *tmp = [self.commentList mutableCopy];
-//                    [tmp addObjectsFromArray:commentList];
-//                    self.commentList = tmp;
-//                }
-//            }
-//        }];
-//    }
-//    else {
-    
-    // TODO: get share list
-//        [[CommunityLifeModel sharedModel] asyncWeiListWithCommunityId:[[CommonModel sharedModel] currentCommunityId] parentId:@0 page:page pageSize:pageSize cacheBlock:nil remoteBlock:^(NSArray *commentList, NSNumber *cPage, NSError *error) {
-//            _strong(self);
-//            if (self.commentTableV.header.isRefreshing) {
-//                [self.commentTableV.header endRefreshing];
-//            }
-//            if (self.commentTableV.footer.isRefreshing) {
-//                [self.commentTableV.footer endRefreshing];
-//            }
-//            if (!error) {
-//                if ([cPage integerValue] == 1) {
-//                    self.currentPage = cPage;
-//                    self.commentList = commentList;
-//                }
-//                else if ([commentList count]>0) {
-//                    self.currentPage = cPage;
-//                    NSMutableArray *tmp = [self.commentList mutableCopy];
-//                    [tmp addObjectsFromArray:commentList];
-//                    self.commentList = tmp;
-//                }
-//                
-//                if ([commentList count] > 0 && [UserModel sharedModel].isNormalLogined) {
-//                    for (WeiCommentInfo *info in commentList) {
-//                        WeiCommentAction *action = [[[MKWModelHandler defaultHandler] queryObjectsForEntity:k_ENTITY_WEICOMMENTACTION predicate:[NSPredicate predicateWithFormat:@"commentId=%@", info.commentId]] firstObject];
-//                        if (!action) {
-//                            action = [[MKWModelHandler defaultHandler] insertNewObjectForEntityForName:k_ENTITY_WEICOMMENTACTION];
-//                            action.commentId = info.commentId;
-//                            action.userId = [UserModel sharedModel].currentNormalUser.userId;
-//                        }
-//                        action.isRead = @(YES);
-//                    }
-//                }
-//            }
-//        }];
-//    }
+    [[WLServerHelper sharedInstance] share_getListWithMaxDate:date pageSize:20 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
+        _strong_check(self);
+        
+        [self.shareListTableV.header endRefreshing];
+        [self.shareListTableV.footer endRefreshing];
+        
+        ServerHelperErrorHandle;
+        if ([date timeIntervalSince1970] == 0) {
+            self.shareList = apiResult;
+        }
+        else {
+            NSMutableArray *tmpShareList = [self.shareList mutableCopy];
+            [tmpShareList addObjectsFromArray:apiResult];
+            self.shareList = tmpShareList;
+        }
+    }];
 }
 
 - (void)_refreshCommentList {
-    [self _loadShareAtPage:@1 pageSize:@20];
+    [self _loadShareAtDate:[NSDate dateWithTimeIntervalSince1970:0] pageSize:@20];
 }
 
 - (void)_loadMoreComment {
-    [self _loadShareAtPage:@([self.currentPage integerValue] + 1) pageSize:@20];
+    [self _loadShareAtDate:[[self.shareList lastObject] createDate] pageSize:@20];
 }
 
 @end

@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class WLShareModel;
+@class WLCommentModel;
 @interface WLShareSubCommentCell : UITableViewCell
 
-@property(nonatomic,strong)WLShareModel     *share;
-@property(nonatomic,copy)void(^longTapBlock)(WLShareModel *share);
+@property(nonatomic,strong)WLCommentModel     *comment;
+@property(nonatomic,copy)void(^longTapBlock)(WLCommentModel *comment);
 + (NSString *)reuseIdentify;
 
-+ (CGFloat)heightWithComment:(WLShareModel *)share screenWidth:(CGFloat)width;
++ (CGFloat)heightWithComment:(WLCommentModel *)comment screenWidth:(CGFloat)width;
 @end

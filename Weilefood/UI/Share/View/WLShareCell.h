@@ -20,7 +20,7 @@
 @interface WLShareCell : UITableViewCell
 
 @property(nonatomic,strong)WLShareModel     *share;
-@property(nonatomic,assign)BOOL             isUped;
+@property(nonatomic,assign)BOOL             isLike;
 
 @property(nonatomic,copy)void(^likeActionBlock)(WLShareModel *comment);
 @property(nonatomic,copy)void(^commentActionBlock)(WLShareModel *comment);

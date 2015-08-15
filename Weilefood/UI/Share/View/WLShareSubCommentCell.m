@@ -9,6 +9,7 @@
 #import "WLShareSubCommentCell.h"
 
 #import "WLShareModel.h"
+#import "WLCommentModel.h"
 
 @interface WLShareSubCommentCell ()
 
@@ -25,12 +26,12 @@
     return @"WeiSubCommentCellIdentify";
 }
 
-+ (CGFloat)heightWithComment:(WLShareModel *)share screenWidth:(CGFloat)width {
-    CGRect strRect = [[WLShareSubCommentCell _contentAttributeStringWithComment:share] boundingRectWithSize:ccs(width - 86, 1000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
++ (CGFloat)heightWithComment:(WLCommentModel *)comment screenWidth:(CGFloat)width {
+    CGRect strRect = [[WLShareSubCommentCell _contentAttributeStringWithComment:comment] boundingRectWithSize:ccs(width - 86, 1000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     return strRect.size.height + 15+12+10+15;
 }
 
-+ (NSAttributedString *)_contentAttributeStringWithComment:(WLShareModel *)share {
++ (NSAttributedString *)_contentAttributeStringWithComment:(WLCommentModel *)comment {
     NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
     ps.alignment = NSTextAlignmentLeft;
     ps.lineBreakMode = NSLineBreakByWordWrapping;
@@ -40,7 +41,7 @@
                           NSBackgroundColorAttributeName:k_COLOR_CLEAR,
                           NSParagraphStyleAttributeName:ps};
     
-    NSAttributedString *str = [[NSAttributedString alloc] initWithString:share.content attributes:att];
+    NSAttributedString *str = [[NSAttributedString alloc] initWithString:comment.content attributes:att];
     return str;
 }
 
@@ -111,7 +112,7 @@
         UILongPressGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc] initWithActionBlock:^(UIGestureRecognizer *gesture) {
             _strong(self);
             if (gesture.state == UIGestureRecognizerStateBegan) {
-                GCBlockInvoke(self.longTapBlock, self.share);
+                GCBlockInvoke(self.longTapBlock, self.comment);
             }
         }];
         [self.contentView addGestureRecognizer:longTap];
@@ -123,11 +124,11 @@
 
 - (void)_setupObserver {
     _weak(self);
-    [self startObserveObject:self forKeyPath:@"share" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
+    [self startObserveObject:self forKeyPath:@"comment" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong(self);
-        [self.avatarV sd_setImageWithURL:[WLAPIAddressGenerator urlOfPictureWith:42 height:42 urlString:self.share.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-        self.nickNameL.text = self.share.nickName;
-        self.contentL.attributedText = [[self class] _contentAttributeStringWithComment:self.share];
+        [self.avatarV sd_setImageWithURL:[WLAPIAddressGenerator urlOfPictureWith:42 height:42 urlString:self.comment.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+        self.nickNameL.text = self.comment.nickName;
+        self.contentL.attributedText = [[self class] _contentAttributeStringWithComment:self.comment];
     }];
 }
 
