@@ -46,7 +46,7 @@ static CGFloat const kImageHeightScale = 0.788;
 
 - (void)setImageUrl:(NSString *)imageUrl {
     _imageUrl = [imageUrl copy];
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]];
+    [self.imageView my_setImageWithURL:[NSURL URLWithString:imageUrl]];
 }
 
 - (void)setTitle:(NSString *)title {

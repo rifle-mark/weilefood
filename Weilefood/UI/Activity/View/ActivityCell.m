@@ -47,7 +47,7 @@
 
 - (void)setImageUrl:(NSString *)imageUrl {
     _imageUrl = [imageUrl copy];
-    [self.picImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]];
+    [self.picImageView my_setImageWithURL:[NSURL URLWithString:imageUrl]];
 }
 
 - (void)setBeginDate:(NSDate *)beginDate {

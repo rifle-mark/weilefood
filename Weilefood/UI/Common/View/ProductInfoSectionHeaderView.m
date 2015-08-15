@@ -63,6 +63,11 @@ static NSInteger const kLineHeight = 7;
 
 #pragma mark - public methods
 
+- (void)setHasAction:(BOOL)hasAction {
+    _hasAction = hasAction;
+    self.actionButton.enabled = !hasAction;
+}
+
 - (void)setActionCount:(NSInteger)actionCount {
     _actionCount = actionCount;
     [self.actionButton setTitle:[NSString stringWithFormat:@"%ld", (long)actionCount] forState:UIControlStateNormal];
@@ -94,6 +99,7 @@ static NSInteger const kLineHeight = 7;
         [_actionButton setTitleColor:k_COLOR_DARKGRAY forState:UIControlStateNormal];
         [_actionButton setBackgroundImage:[UIImage imageNamed:@"productinfo_btn_action_n"] forState:UIControlStateNormal];
         [_actionButton setBackgroundImage:[UIImage imageNamed:@"productinfo_btn_action_h"] forState:UIControlStateHighlighted];
+        [_actionButton setBackgroundImage:[UIImage imageNamed:@"productinfo_btn_action_h"] forState:UIControlStateDisabled];
         [_actionButton setTitleEdgeInsets:UIEdgeInsetsMake(5, 20, 0, 0)];
         _weak(self);
         [_actionButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {

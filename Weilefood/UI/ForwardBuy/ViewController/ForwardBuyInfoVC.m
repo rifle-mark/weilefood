@@ -151,6 +151,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
     self.tableHeaderView.endDate   = self.forwardBuy.endDate;
     self.tableHeaderView.state     = self.forwardBuy.state;
     
+    self.sectionHeaderView.hasAction = self.forwardBuy.isLike;
     self.sectionHeaderView.actionCount = self.forwardBuy.actionCount;
     self.sectionHeaderView.commentCount = self.forwardBuy.commentCount;
     
@@ -214,7 +215,9 @@ static NSString *const kCellIdentifier = @"MYCELL";
                 [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeApproval objectType:WLActionTypeForwardBuy objectId:self.forwardBuy.forwardBuyId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
                     _strong_check(self);
                     ServerHelperErrorHandle;
-                    self.sectionHeaderView.actionCount = ++self.forwardBuy.actionCount;
+                    self.forwardBuy.actionCount++;
+                    self.forwardBuy.isLike = YES;
+                    [self _showData];
                 }];
             }];
         }];
@@ -354,7 +357,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
             [InputQuantityVC inputQuantityWithEnterBlock:^(InputQuantityVC *inputQuantityVC, NSInteger quantity) {
                 _strong_check(self);
                 // TODO 加入购物车
-                DLog(@"%ld", quantity);
+                DLog(@"%ld", (long)quantity);
                 [inputQuantityVC dismissSelf];
             }];
         }];

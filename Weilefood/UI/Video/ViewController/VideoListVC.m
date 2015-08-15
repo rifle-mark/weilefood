@@ -80,7 +80,7 @@ static NSInteger const kPageSize       = 10;
     [[WLServerHelper sharedInstance] video_getAdImageWithCallback:^(WLApiInfoModel *apiInfo, WLVideoAdImageModel *apiResult, NSError *error) {
         _strong_check(self);
         ServerHelperErrorHandle;
-        [self.bannerImageView sd_setImageWithURL:[NSURL URLWithString:apiResult.videoListPic]];
+        [self.bannerImageView my_setImageWithURL:[NSURL URLWithString:apiResult.videoListPic]];
     }];
 }
 

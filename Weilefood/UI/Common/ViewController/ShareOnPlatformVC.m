@@ -150,10 +150,9 @@ static NSInteger const kLabelTopMargin = 10;
 }
 
 - (void)_shareWithType:(NSString *)type {
-    
-    //[UMSocialData defaultData].extConfig.wechatSessionData.title = @"微信好友title";
+    // 微信分享给朋友可以有“标题”和“说明”，这里只需要“说明”及可，所以把标题置空。
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = @"";
     [UMSocialData defaultData].extConfig.wechatSessionData.url = self.shareUrl;
-    //[UMSocialData defaultData].extConfig.wechatTimelineData.title = @"微信朋友圈title";
     [UMSocialData defaultData].extConfig.wechatTimelineData.url = self.shareUrl;
     
     _weak(self);

@@ -38,6 +38,7 @@
 #import "UIButton+ImagePosition.h"
 #import "UIScrollView+Keyboard.h"
 #import "UIScrollView+MJRefreshDefault.h"
+#import "UIImageView+SDWebImage.h"
 #import "MBProgressHUD+Message.h"
 
 #endif

@@ -81,7 +81,7 @@ static NSInteger const kImageChangeDelay = 4;
         imageView = (UIImageView *)view;
     }
     NSString *url = self.acsi_imageUrls[index];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:url]];
+    [imageView my_setImageWithURL:[NSURL URLWithString:url]];
     return imageView;
 }
 
