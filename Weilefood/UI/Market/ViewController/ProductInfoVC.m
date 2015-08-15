@@ -148,6 +148,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
     self.tableHeaderView.number = self.product.count;
     self.tableHeaderView.price  = self.product.price;
     
+    self.sectionHeaderView.hasAction = self.product.isLike;
     self.sectionHeaderView.actionCount = self.product.actionCount;
     self.sectionHeaderView.commentCount = self.product.commentCount;
     
@@ -211,7 +212,9 @@ static NSString *const kCellIdentifier = @"MYCELL";
                 [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeApproval objectType:WLActionTypeProduct objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
                     _strong_check(self);
                     ServerHelperErrorHandle;
-                    self.sectionHeaderView.actionCount = ++self.product.actionCount;
+                    self.product.actionCount++;
+                    self.product.isLike = YES;
+                    [self _showData];
                 }];
             }];
         }];

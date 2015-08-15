@@ -11,6 +11,8 @@
 /// 商品详情界面 - 固定头部分
 @interface ProductInfoSectionHeaderView : UIView
 
+/// 是否已赞
+@property (nonatomic, assign) BOOL      hasAction;
 /// 赞数量
 @property (nonatomic, assign) NSInteger actionCount;
 /// 评论数量

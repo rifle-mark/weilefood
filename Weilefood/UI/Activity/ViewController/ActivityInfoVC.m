@@ -129,6 +129,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
     self.tableHeaderView.beginDate = self.activity.startDate;
     self.tableHeaderView.endDate   = self.activity.endDate;
     
+    self.sectionHeaderView.hasAction = self.activity.isLike;
     self.sectionHeaderView.actionCount = self.activity.actionCount;
     self.sectionHeaderView.commentCount = self.activity.commentCount;
     
@@ -202,7 +203,9 @@ static NSString *const kCellIdentifier = @"MYCELL";
                 [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeApproval objectType:WLActionTypeActivity objectId:self.activity.activityId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
                     _strong_check(self);
                     ServerHelperErrorHandle;
-                    self.sectionHeaderView.actionCount = ++self.activity.actionCount;
+                    self.activity.actionCount++;
+                    self.activity.isLike = YES;
+                    [self _showData];
                 }];
             }];
         }];

@@ -152,6 +152,7 @@
 
 - (void)_showData {
     self.favoriteButton.highlighted = self.video.isFav;
+    self.actionButton.enabled = !self.video.isLike;
     [self.actionButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.video.actionCount] forState:UIControlStateNormal];
     [self.commentButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.video.commentCount] forState:UIControlStateNormal];
     self.videoImageView.hidden = !self.video.videoUrl || self.video.videoUrl.length <= 0;
@@ -225,6 +226,7 @@
         [_actionButton setTitleColor:k_COLOR_DARKGRAY forState:UIControlStateNormal];
         [_actionButton setImage:[UIImage imageNamed:@"videoinfo_icon_action_n"] forState:UIControlStateNormal];
         [_actionButton setImage:[UIImage imageNamed:@"videoinfo_icon_action_h"] forState:UIControlStateHighlighted];
+        [_actionButton setImage:[UIImage imageNamed:@"videoinfo_icon_action_h"] forState:UIControlStateDisabled];
         _weak(self);
         [_actionButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
@@ -232,8 +234,8 @@
                 [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeApproval objectType:WLActionTypeVideo objectId:self.video.videoId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
                     _strong_check(self);
                     ServerHelperErrorHandle;
-                    self.actionButton.highlighted = YES;
                     self.video.actionCount++;
+                    self.video.isLike = YES;
                     [self _showData];
                 }];
             }];
