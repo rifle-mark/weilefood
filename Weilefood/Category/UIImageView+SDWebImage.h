@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *  简单对SDWebImage扩展
+ *  内部加载本应用的占位图
+ *  不用注意contentMode属性的设置时机问题
+ */
 @interface UIImageView (SDWebImage)
 
 - (void)my_setImageWithURL:(NSURL *)url;
