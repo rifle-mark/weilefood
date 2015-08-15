@@ -152,15 +152,15 @@
 
 - (void)_showData {
     self.favoriteButton.highlighted = self.video.isFav;
-    [self.actionButton setTitle:[NSString stringWithFormat:@"%u", self.video.actionCount] forState:UIControlStateNormal];
-    [self.commentButton setTitle:[NSString stringWithFormat:@"%u", self.video.commentCount] forState:UIControlStateNormal];
+    [self.actionButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.video.actionCount] forState:UIControlStateNormal];
+    [self.commentButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.video.commentCount] forState:UIControlStateNormal];
     self.videoImageView.hidden = !self.video.videoUrl || self.video.videoUrl.length <= 0;
     self.playButton.hidden = self.videoImageView.hidden;
     if (!self.videoImageView.hidden) {
         [self.videoImageView sd_setImageWithURL:[NSURL URLWithString:self.video.images]];
     }
     self.titleLabel.text = self.video.title;
-    self.pointsLabel.text = [NSString stringWithFormat:@"观看积分 %u", self.video.points];
+    self.pointsLabel.text = [NSString stringWithFormat:@"观看积分 %lu", (unsigned long)self.video.points];
     [self.webView loadHTMLString:self.video.desc baseURL:nil];
 }
 
