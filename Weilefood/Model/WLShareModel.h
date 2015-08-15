@@ -29,7 +29,8 @@
 @property (nonatomic, assign) NSUInteger commentCount;
 /// 是否已收藏
 @property (nonatomic, assign) BOOL isFav;
+@property (nonatomic, assign) BOOL isLike;
 ///
-@property (nonatomic, copy) NSData *createDate;
+@property (nonatomic, copy) NSDate *createDate;
 
 @end
