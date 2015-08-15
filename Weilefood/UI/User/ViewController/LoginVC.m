@@ -145,7 +145,7 @@
         make.width.equalTo(self.loginButton);
     }];
     [self.loginButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.passwordTextField);
+        make.right.equalTo(self.passwordBGView);
         make.top.width.height.equalTo(self.registerButton);
         make.left.equalTo(self.registerButton.mas_right).offset(15);
     }];
