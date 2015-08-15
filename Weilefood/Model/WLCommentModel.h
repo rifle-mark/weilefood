@@ -23,7 +23,7 @@ typedef NS_ENUM(NSUInteger, WLCommentType) {
     /// 主题视频
     WLCommentTypeVideo = 6,
     /// 营养师
-    WLCommentTypeDietitians = 7,
+    WLCommentTypeDoctor = 7,
 };
 
 /// 评论

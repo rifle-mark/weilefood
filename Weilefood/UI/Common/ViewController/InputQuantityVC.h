@@ -8,16 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^InputQuantitySuccessBlock)(NSInteger quantity);
+@class InputQuantityVC;
+
+typedef void (^EnterQuantityBlock)(InputQuantityVC *inputQuantityVC, NSInteger quantity);
 
 /// 购买商品时的输入数量界面
 @interface InputQuantityVC : UIViewController
 
 /**
- *  显示界面并指定确定输入后的回调
+ *  显示界面
  *
- *  @param successBlock 回调
+ *  @param enterBlock 回调：用户点击了确定
  */
-+ (void)inputQuantityWithSuccessBlock:(InputQuantitySuccessBlock)successBlock;
++ (void)inputQuantityWithEnterBlock:(EnterQuantityBlock)enterBlock;
+
+/**
+ *  关闭自己
+ */
+- (void)dismissSelf;
 
 @end

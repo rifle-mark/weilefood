@@ -7,6 +7,7 @@
 //
 
 #import "ShareOnPlatformVC.h"
+#import <UMengSocial/WXApi.h>
 
 @interface ShareOnPlatformVC ()
 
@@ -20,7 +21,9 @@
 
 @property (nonatomic, strong) UIImage  *image;
 @property (nonatomic, copy  ) NSString *desc;
-@property (nonatomic, copy  ) NSString *url;
+@property (nonatomic, copy  ) NSString *shareUrl;
+
+@property (nonatomic, assign) UIModalPresentationStyle pvcOldModalPresentationStyle;
 
 @end
 
@@ -28,25 +31,33 @@ static NSInteger const kLabelTopMargin = 10;
 
 @implementation ShareOnPlatformVC
 
-+ (void)shareWithImageUrl:(NSString *)imageUrl title:(NSString *)title url:(NSString *)url {
-    [MBProgressHUD showLoadingWithMessage:nil];
-    [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:imageUrl] options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
++ (void)shareWithImageUrl:(NSString *)imageUrl title:(NSString *)title shareUrl:(NSString *)shareUrl {
+    
+    NSURL *url = [NSURL URLWithString:imageUrl];
+    BOOL isShowLoading = ![[SDWebImageManager sharedManager] cachedImageExistsForURL:url];
+    if (isShowLoading) {
+        [MBProgressHUD showLoadingWithMessage:nil];
+    }
+    [[SDWebImageManager sharedManager] downloadImageWithURL:url options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
         
-        [MBProgressHUD hideLoading];
+        if (isShowLoading) {
+            [MBProgressHUD hideLoading];
+        }
         if (error) {
             DLog("%@", error);
             return;
         }
         ShareOnPlatformVC *vc = [[ShareOnPlatformVC alloc] init];
-        vc.image = image;
-        vc.desc  = title;
-        vc.url   = url;
+        vc.image    = image;
+        vc.desc     = title;
+        vc.shareUrl = shareUrl;
         UIViewController *pvc = [UIApplication sharedApplication].keyWindow.rootViewController;
-        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8")) {
-            vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        if (SYSTEM_VERSION_LESS_THAN(@"8")) {
+            vc.pvcOldModalPresentationStyle = pvc.modalPresentationStyle;
+            pvc.modalPresentationStyle = UIModalPresentationCurrentContext;
         }
         else {
-            pvc.modalPresentationStyle = UIModalPresentationCurrentContext;
+            vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         }
         [pvc presentViewController:vc animated:NO completion:nil];
         
@@ -60,12 +71,13 @@ static NSInteger const kLabelTopMargin = 10;
     
     [self.view addSubview:self.closeButton];
     [self.view addSubview:self.weiboLabel];
-    [self.view addSubview:self.wxLabel];
-    [self.view addSubview:self.wxqLabel];
     [self.view addSubview:self.weiboButton];
-    [self.view addSubview:self.wxButton];
-    [self.view addSubview:self.wxqButton];
-    
+    if ([WXApi isWXAppInstalled]) {
+        [self.view addSubview:self.wxLabel];
+        [self.view addSubview:self.wxqLabel];
+        [self.view addSubview:self.wxButton];
+        [self.view addSubview:self.wxqButton];
+    }
     [self _setButtonAlpha:0];
 }
 
@@ -75,30 +87,42 @@ static NSInteger const kLabelTopMargin = 10;
     [self.closeButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    [self.weiboButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.centerY.equalTo(self.view);
-    }];
-    [self.wxButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.weiboButton.mas_right);
-        make.centerY.width.equalTo(self.weiboButton);
-    }];
-    [self.wxqButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.wxButton.mas_right);
-        make.centerY.width.equalTo(self.wxButton);
-        make.right.equalTo(self.view);
-    }];
-    [self.weiboLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.weiboButton);
-        make.top.equalTo(self.weiboButton.mas_bottom).offset(kLabelTopMargin);
-    }];
-    [self.wxLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.wxButton);
-        make.top.equalTo(self.wxButton.mas_bottom).offset(kLabelTopMargin);
-    }];
-    [self.wxqLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.wxqButton);
-        make.top.equalTo(self.wxqButton.mas_bottom).offset(kLabelTopMargin);
-    }];
+    
+    if ([WXApi isWXAppInstalled]) {
+        [self.weiboButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.centerY.equalTo(self.view);
+        }];
+        [self.wxButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.weiboButton.mas_right);
+            make.centerY.width.equalTo(self.weiboButton);
+        }];
+        [self.wxqButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.wxButton.mas_right);
+            make.centerY.width.equalTo(self.wxButton);
+            make.right.equalTo(self.view);
+        }];
+        [self.weiboLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.weiboButton);
+            make.top.equalTo(self.weiboButton.mas_bottom).offset(kLabelTopMargin);
+        }];
+        [self.wxLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.wxButton);
+            make.top.equalTo(self.wxButton.mas_bottom).offset(kLabelTopMargin);
+        }];
+        [self.wxqLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.wxqButton);
+            make.top.equalTo(self.wxqButton.mas_bottom).offset(kLabelTopMargin);
+        }];
+    }
+    else {
+        [self.weiboButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self.view);
+        }];
+        [self.weiboLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.weiboButton);
+            make.top.equalTo(self.weiboButton.mas_bottom).offset(kLabelTopMargin);
+        }];
+    }
     
     FixesViewDidLayoutSubviewsiOS7Error;
 }
@@ -118,11 +142,20 @@ static NSInteger const kLabelTopMargin = 10;
         self.view.layer.backgroundColor = k_COLOR_CLEAR.CGColor;
         [self _setButtonAlpha:0];
     } completion:^(BOOL finished) {
+        if (self.presentingViewController && SYSTEM_VERSION_LESS_THAN(@"8")) {
+            self.presentingViewController.modalPresentationStyle = self.pvcOldModalPresentationStyle;
+        }
         [self dismissViewControllerAnimated:NO completion:nil];
     }];
 }
 
 - (void)_shareWithType:(NSString *)type {
+    
+    //[UMSocialData defaultData].extConfig.wechatSessionData.title = @"微信好友title";
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = self.shareUrl;
+    //[UMSocialData defaultData].extConfig.wechatTimelineData.title = @"微信朋友圈title";
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = self.shareUrl;
+    
     _weak(self);
     [[UMSocialDataService defaultDataService] postSNSWithTypes:@[type]
                                                        content:self.desc

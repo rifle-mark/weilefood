@@ -221,7 +221,8 @@ static NSString *const kCellIdentifier = @"MYCELL";
         }];
         [_sectionHeaderView shareBlock:^{
             _strong_check(self);
-            [ShareOnPlatformVC shareWithImageUrl:self.product.images title:self.product.productName url:nil];
+            NSString *url = [[WLServerHelper sharedInstance] getShareUrlWithType:WLServerHelperShareTypeProduct objectId:self.product.productId];
+            [ShareOnPlatformVC shareWithImageUrl:self.product.images title:self.product.productName shareUrl:url];
         }];
     }
     return _sectionHeaderView;
@@ -347,9 +348,11 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_addCartButton setTitle:@"加入购物车" forState:UIControlStateNormal];
         _weak(self);
         [_addCartButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
-            [InputQuantityVC inputQuantityWithSuccessBlock:^(NSInteger quantity) {
+            [InputQuantityVC inputQuantityWithEnterBlock:^(InputQuantityVC *inputQuantityVC, NSInteger quantity) {
                 _strong_check(self);
-                DLog(@"%d", quantity);
+                // TODO 加入购物车
+                DLog(@"%ld", quantity);
+                [inputQuantityVC dismissSelf];
             }];
         }];
     }
@@ -363,6 +366,17 @@ static NSString *const kCellIdentifier = @"MYCELL";
         _buyButton.titleLabel.font = [UIFont systemFontOfSize:16];
         [_buyButton setTitleColor:k_COLOR_WHITE forState:UIControlStateNormal];
         [_buyButton setTitle:@"立即购买" forState:UIControlStateNormal];
+        _weak(self);
+        [_buyButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+                [InputQuantityVC inputQuantityWithEnterBlock:^(InputQuantityVC *inputQuantityVC, NSInteger quantity) {
+                    _strong_check(self);
+                    // TODO 立即购买
+                    DLog(@"%ld", quantity);
+                    [inputQuantityVC dismissSelf];
+                }];
+            }];
+        }];
     }
     return _buyButton;
 }

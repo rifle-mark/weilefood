@@ -45,6 +45,8 @@ typedef NS_ENUM(NSInteger, WLForwardBuyState) {
 @property (nonatomic, copy) NSString *desc;
 /// 是否已收藏
 @property (nonatomic, assign) BOOL isFav;
+/// 是否已赞
+@property (nonatomic, assign) BOOL isLike;
 /// 所属栏目ID
 @property (nonatomic, assign) NSUInteger channelId;
 /// 所属栏目名称

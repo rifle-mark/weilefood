@@ -10,6 +10,7 @@
 
 #import "CommentListVC.h"
 #import "LoginVC.h"
+#import "ShareOnPlatformVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -52,7 +53,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = k_COLOR_WHITE;
     
     NSArray *barItems = @[self.shareButton,
@@ -83,7 +83,7 @@
     [super viewDidLayoutSubviews];
     
     [self.scrollView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0));
+        make.edges.equalTo(self.view);
     }];
     [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.width.equalTo(self.scrollView);
@@ -152,15 +152,15 @@
 
 - (void)_showData {
     self.favoriteButton.highlighted = self.video.isFav;
-    [self.actionButton setTitle:[NSString stringWithFormat:@"%u", self.video.actionCount] forState:UIControlStateNormal];
-    [self.commentButton setTitle:[NSString stringWithFormat:@"%u", self.video.commentCount] forState:UIControlStateNormal];
+    [self.actionButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.video.actionCount] forState:UIControlStateNormal];
+    [self.commentButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.video.commentCount] forState:UIControlStateNormal];
     self.videoImageView.hidden = !self.video.videoUrl || self.video.videoUrl.length <= 0;
     self.playButton.hidden = self.videoImageView.hidden;
     if (!self.videoImageView.hidden) {
         [self.videoImageView sd_setImageWithURL:[NSURL URLWithString:self.video.images]];
     }
     self.titleLabel.text = self.video.title;
-    self.pointsLabel.text = [NSString stringWithFormat:@"观看积分 %u", self.video.points];
+    self.pointsLabel.text = [NSString stringWithFormat:@"观看积分 %lu", (unsigned long)self.video.points];
     [self.webView loadHTMLString:self.video.desc baseURL:nil];
 }
 
@@ -267,7 +267,8 @@
         _weak(self);
         [_shareButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            DLog(@"");
+            NSString *url = [[WLServerHelper sharedInstance] getShareUrlWithType:WLServerHelperShareTypeVideo objectId:self.video.videoId];
+            [ShareOnPlatformVC shareWithImageUrl:self.video.images title:self.video.title shareUrl:url];
         }];
     }
     return _shareButton;

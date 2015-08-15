@@ -20,7 +20,9 @@
 
 @property (nonatomic, assign) BOOL isShowContent;
 @property (nonatomic, assign) NSInteger quantity;
-@property (nonatomic, copy) InputQuantitySuccessBlock inputQuantitySuccessBlock;
+@property (nonatomic, copy) EnterQuantityBlock enterQuantityBlock;
+
+@property (nonatomic, assign) UIModalPresentationStyle pvcOldModalPresentationStyle;
 
 @end
 
@@ -29,15 +31,16 @@ static NSInteger const kButtonHeight = 49;
 
 @implementation InputQuantityVC
 
-+ (void)inputQuantityWithSuccessBlock:(InputQuantitySuccessBlock)successBlock {
++ (void)inputQuantityWithEnterBlock:(EnterQuantityBlock)enterBlock {
     InputQuantityVC *vc = [[InputQuantityVC alloc] init];
-    vc.inputQuantitySuccessBlock = successBlock;
+    vc.enterQuantityBlock = enterBlock;
     UIViewController *pvc = [UIApplication sharedApplication].keyWindow.rootViewController;
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8")) {
-        vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    if (SYSTEM_VERSION_LESS_THAN(@"8")) {
+        vc.pvcOldModalPresentationStyle = pvc.modalPresentationStyle;
+        pvc.modalPresentationStyle = UIModalPresentationCurrentContext;
     }
     else {
-        pvc.modalPresentationStyle = UIModalPresentationCurrentContext;
+        vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     }
     [pvc presentViewController:vc animated:NO completion:nil];
 }
@@ -118,22 +121,21 @@ static NSInteger const kButtonHeight = 49;
 
 #pragma mark - public methods
 
-- (void)inputQuantitySuccessBlock:(InputQuantitySuccessBlock)block {
-    self.inputQuantitySuccessBlock = block;
-}
-
-#pragma mark - private methods
-
-- (void)_closeSelf {
+- (void)dismissSelf {
     [UIView animateWithDuration:0.3 animations:^{
         self.view.layer.backgroundColor = k_COLOR_CLEAR.CGColor;
         self.isShowContent = NO;
         [self.view setNeedsLayout];
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
+        if (self.presentingViewController && SYSTEM_VERSION_LESS_THAN(@"8")) {
+            self.presentingViewController.modalPresentationStyle = self.pvcOldModalPresentationStyle;
+        }
         [self dismissViewControllerAnimated:NO completion:nil];
     }];
 }
+
+#pragma mark - private methods
 
 #pragma mark - private property methods
 
@@ -152,7 +154,7 @@ static NSInteger const kButtonHeight = 49;
         _weak(self);
         [_closeButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            [self _closeSelf];
+            [self dismissSelf];
         }];
     }
     return _closeButton;
@@ -229,8 +231,7 @@ static NSInteger const kButtonHeight = 49;
         _weak(self);
         [_enterButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            GCBlockInvoke(self.inputQuantitySuccessBlock, self.quantity);
-            [self _closeSelf];
+            GCBlockInvoke(self.enterQuantityBlock, self, self.quantity);
         }];
     }
     return _enterButton;
