@@ -10,6 +10,7 @@
 
 #import "CommentListVC.h"
 #import "LoginVC.h"
+#import "ShareOnPlatformVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -52,7 +53,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = k_COLOR_WHITE;
     
     NSArray *barItems = @[self.shareButton,
@@ -83,7 +83,7 @@
     [super viewDidLayoutSubviews];
     
     [self.scrollView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(self.topLayoutGuide.length, 0, 0, 0));
+        make.edges.equalTo(self.view);
     }];
     [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.width.equalTo(self.scrollView);
@@ -267,7 +267,8 @@
         _weak(self);
         [_shareButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            DLog(@"");
+            NSString *url = [[WLServerHelper sharedInstance] getShareUrlWithType:WLServerHelperShareTypeVideo objectId:self.video.videoId];
+            [ShareOnPlatformVC shareWithImageUrl:self.video.images title:self.video.title shareUrl:url];
         }];
     }
     return _shareButton;

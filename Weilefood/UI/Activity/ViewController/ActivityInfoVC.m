@@ -12,6 +12,7 @@
 
 #import "CommentListVC.h"
 #import "LoginVC.h"
+#import "ShareOnPlatformVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -211,7 +212,8 @@ static NSString *const kCellIdentifier = @"MYCELL";
         }];
         [_sectionHeaderView shareBlock:^{
             _strong_check(self);
-            DLog(@"");
+            NSString *url = [[WLServerHelper sharedInstance] getShareUrlWithType:WLServerHelperShareTypeActivity objectId:self.activity.activityId];
+            [ShareOnPlatformVC shareWithImageUrl:self.activity.banner title:self.activity.title shareUrl:url];
         }];
     }
     return _sectionHeaderView;
@@ -335,8 +337,11 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_buyButton setTitleColor:k_COLOR_WHITE forState:UIControlStateNormal];
         _weak(self);
         [_buyButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
-            _strong_check(self);
-            DLog(@"");
+            [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+                _strong_check(self);
+                DLog(@"");
+                // TODO 立即参与
+            }];
         }];
     }
     return _buyButton;

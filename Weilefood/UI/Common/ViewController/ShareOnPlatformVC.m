@@ -22,6 +22,8 @@
 @property (nonatomic, copy  ) NSString *desc;
 @property (nonatomic, copy  ) NSString *shareUrl;
 
+@property (nonatomic, assign) UIModalPresentationStyle pvcOldModalPresentationStyle;
+
 @end
 
 static NSInteger const kLabelTopMargin = 10;
@@ -49,11 +51,12 @@ static NSInteger const kLabelTopMargin = 10;
         vc.desc     = title;
         vc.shareUrl = shareUrl;
         UIViewController *pvc = [UIApplication sharedApplication].keyWindow.rootViewController;
-        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8")) {
-            vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        if (SYSTEM_VERSION_LESS_THAN(@"8")) {
+            vc.pvcOldModalPresentationStyle = pvc.modalPresentationStyle;
+            pvc.modalPresentationStyle = UIModalPresentationCurrentContext;
         }
         else {
-            pvc.modalPresentationStyle = UIModalPresentationCurrentContext;
+            vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         }
         [pvc presentViewController:vc animated:NO completion:nil];
         
@@ -125,6 +128,9 @@ static NSInteger const kLabelTopMargin = 10;
         self.view.layer.backgroundColor = k_COLOR_CLEAR.CGColor;
         [self _setButtonAlpha:0];
     } completion:^(BOOL finished) {
+        if (self.presentingViewController && SYSTEM_VERSION_LESS_THAN(@"8")) {
+            self.presentingViewController.modalPresentationStyle = self.pvcOldModalPresentationStyle;
+        }
         [self dismissViewControllerAnimated:NO completion:nil];
     }];
 }

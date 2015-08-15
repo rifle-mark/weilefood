@@ -348,9 +348,11 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_addCartButton setTitle:@"加入购物车" forState:UIControlStateNormal];
         _weak(self);
         [_addCartButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
-            [InputQuantityVC inputQuantityWithSuccessBlock:^(NSInteger quantity) {
+            [InputQuantityVC inputQuantityWithEnterBlock:^(InputQuantityVC *inputQuantityVC, NSInteger quantity) {
                 _strong_check(self);
+                // TODO 加入购物车
                 DLog(@"%d", quantity);
+                [inputQuantityVC dismissSelf];
             }];
         }];
     }
@@ -366,9 +368,13 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_buyButton setTitle:@"立即购买" forState:UIControlStateNormal];
         _weak(self);
         [_buyButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
-            [InputQuantityVC inputQuantityWithSuccessBlock:^(NSInteger quantity) {
-                _strong_check(self);
-                DLog(@"%d", quantity);
+            [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+                [InputQuantityVC inputQuantityWithEnterBlock:^(InputQuantityVC *inputQuantityVC, NSInteger quantity) {
+                    _strong_check(self);
+                    // TODO 立即购买
+                    DLog(@"%d", quantity);
+                    [inputQuantityVC dismissSelf];
+                }];
             }];
         }];
     }

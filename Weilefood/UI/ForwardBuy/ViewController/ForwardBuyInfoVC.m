@@ -12,6 +12,8 @@
 
 #import "CommentListVC.h"
 #import "LoginVC.h"
+#import "ShareOnPlatformVC.h"
+#import "InputQuantityVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -222,7 +224,8 @@ static NSString *const kCellIdentifier = @"MYCELL";
         }];
         [_sectionHeaderView shareBlock:^{
             _strong_check(self);
-            DLog(@"");
+            NSString *url = [[WLServerHelper sharedInstance] getShareUrlWithType:WLServerHelperShareTypeForwardBuy objectId:self.forwardBuy.forwardBuyId];
+            [ShareOnPlatformVC shareWithImageUrl:self.forwardBuy.banner title:self.forwardBuy.title shareUrl:url];
         }];
     }
     return _sectionHeaderView;
@@ -346,6 +349,15 @@ static NSString *const kCellIdentifier = @"MYCELL";
         _addCartButton.titleLabel.font = [UIFont systemFontOfSize:16];
         [_addCartButton setTitleColor:k_COLOR_WHITE forState:UIControlStateNormal];
         [_addCartButton setTitle:@"加入购物车" forState:UIControlStateNormal];
+        _weak(self);
+        [_addCartButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            [InputQuantityVC inputQuantityWithEnterBlock:^(InputQuantityVC *inputQuantityVC, NSInteger quantity) {
+                _strong_check(self);
+                // TODO 加入购物车
+                DLog(@"%d", quantity);
+                [inputQuantityVC dismissSelf];
+            }];
+        }];
     }
     return _addCartButton;
 }
@@ -357,6 +369,17 @@ static NSString *const kCellIdentifier = @"MYCELL";
         _buyButton.titleLabel.font = [UIFont systemFontOfSize:16];
         [_buyButton setTitleColor:k_COLOR_WHITE forState:UIControlStateNormal];
         [_buyButton setTitle:@"立即购买" forState:UIControlStateNormal];
+        _weak(self);
+        [_buyButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+                [InputQuantityVC inputQuantityWithEnterBlock:^(InputQuantityVC *inputQuantityVC, NSInteger quantity) {
+                    _strong_check(self);
+                    // TODO 立即购买
+                    DLog(@"%d", quantity);
+                    [inputQuantityVC dismissSelf];
+                }];
+            }];
+        }];
     }
     return _buyButton;
 }
