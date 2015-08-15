@@ -26,6 +26,14 @@
 /// 内容
 @property (nonatomic, copy) NSString *content;
 ///
-@property (nonatomic, copy) NSData *createDate;
+@property (nonatomic, copy) NSDate *createDate;
+/**
+ *  评论数
+ */
+@property (nonatomic, assign) NSUInteger commentCount;
+/**
+ *  是否收藏
+ */
+@property (nonatomic, assign) BOOL  isFav;
 
 @end
