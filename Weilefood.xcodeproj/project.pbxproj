@@ -18,6 +18,9 @@
 		24134EB61B6A711900E5BE07 /* ActivityListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24134EB51B6A711900E5BE07 /* ActivityListVC.m */; };
 		24134EB91B6A712F00E5BE07 /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24134EB81B6A712F00E5BE07 /* ActivityCell.m */; };
 		24134EBF1B6A718500E5BE07 /* VideoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24134EBE1B6A718500E5BE07 /* VideoListVC.m */; };
+		2438A7621B7ECC77003404BF /* WLDoctorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2438A7611B7ECC77003404BF /* WLDoctorModel.m */; };
+		2438A7651B7ECF09003404BF /* WLServerHelper+Doctor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2438A7641B7ECF09003404BF /* WLServerHelper+Doctor.m */; };
+		2438A7681B7ED1AD003404BF /* WLServerHelper+ShareUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2438A7671B7ED1AD003404BF /* WLServerHelper+ShareUrl.m */; };
 		245936A31B5A2C62008FFAB8 /* WLServerHelper+Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A21B5A2C62008FFAB8 /* WLServerHelper+Channel.m */; };
 		245936A61B5A2ECF008FFAB8 /* WLServerHelper+Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A51B5A2ECF008FFAB8 /* WLServerHelper+Product.m */; };
 		245936A91B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A81B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m */; };
@@ -209,6 +212,12 @@
 		24134EB81B6A712F00E5BE07 /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
 		24134EBD1B6A718500E5BE07 /* VideoListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoListVC.h; sourceTree = "<group>"; };
 		24134EBE1B6A718500E5BE07 /* VideoListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoListVC.m; sourceTree = "<group>"; };
+		2438A7601B7ECC77003404BF /* WLDoctorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLDoctorModel.h; sourceTree = "<group>"; };
+		2438A7611B7ECC77003404BF /* WLDoctorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLDoctorModel.m; sourceTree = "<group>"; };
+		2438A7631B7ECF09003404BF /* WLServerHelper+Doctor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Doctor.h"; sourceTree = "<group>"; };
+		2438A7641B7ECF09003404BF /* WLServerHelper+Doctor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Doctor.m"; sourceTree = "<group>"; };
+		2438A7661B7ED1AD003404BF /* WLServerHelper+ShareUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+ShareUrl.h"; sourceTree = "<group>"; };
+		2438A7671B7ED1AD003404BF /* WLServerHelper+ShareUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+ShareUrl.m"; sourceTree = "<group>"; };
 		245936A11B5A2C62008FFAB8 /* WLServerHelper+Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Channel.h"; sourceTree = "<group>"; };
 		245936A21B5A2C62008FFAB8 /* WLServerHelper+Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Channel.m"; sourceTree = "<group>"; };
 		245936A41B5A2ECF008FFAB8 /* WLServerHelper+Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Product.h"; sourceTree = "<group>"; };
@@ -865,6 +874,8 @@
 				249A73B71B569D2300F46F3D /* WLServerHelperHeader.h */,
 				249A73B51B569D2300F46F3D /* WLServerHelper.h */,
 				249A73B61B569D2300F46F3D /* WLServerHelper.m */,
+				2438A7661B7ED1AD003404BF /* WLServerHelper+ShareUrl.h */,
+				2438A7671B7ED1AD003404BF /* WLServerHelper+ShareUrl.m */,
 				24CAC42D1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.h */,
 				24CAC42E1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m */,
 				249A73B31B569D2300F46F3D /* WLServerHelper+User.h */,
@@ -877,10 +888,14 @@
 				245936A51B5A2ECF008FFAB8 /* WLServerHelper+Product.m */,
 				245936A71B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.h */,
 				245936A81B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m */,
-				245936AA1B5A3943008FFAB8 /* WLServerHelper+Video.h */,
-				245936AB1B5A3943008FFAB8 /* WLServerHelper+Video.m */,
+				247EA72D1B711B2F00E6A161 /* WLServerHelper+Nutrition.h */,
+				247EA72E1B711B2F00E6A161 /* WLServerHelper+Nutrition.m */,
 				245936AD1B5A3AB3008FFAB8 /* WLServerHelper+Activity.h */,
 				245936AE1B5A3AB3008FFAB8 /* WLServerHelper+Activity.m */,
+				245936AA1B5A3943008FFAB8 /* WLServerHelper+Video.h */,
+				245936AB1B5A3943008FFAB8 /* WLServerHelper+Video.m */,
+				2438A7631B7ECF09003404BF /* WLServerHelper+Doctor.h */,
+				2438A7641B7ECF09003404BF /* WLServerHelper+Doctor.m */,
 				245936B01B5A3CAF008FFAB8 /* WLServerHelper+Comment.h */,
 				245936B11B5A3CAF008FFAB8 /* WLServerHelper+Comment.m */,
 				245936B61B5A42F4008FFAB8 /* WLServerHelper+Ad.h */,
@@ -893,8 +908,6 @@
 				2482E6461B5E96FE005815E8 /* WLServerHelper+Message.m */,
 				2482E64B1B5E9CBB005815E8 /* WLServerHelper+Points.h */,
 				2482E64C1B5E9CBB005815E8 /* WLServerHelper+Points.m */,
-				247EA72D1B711B2F00E6A161 /* WLServerHelper+Nutrition.h */,
-				247EA72E1B711B2F00E6A161 /* WLServerHelper+Nutrition.m */,
 			);
 			path = ServerHelper;
 			sourceTree = "<group>";
@@ -920,14 +933,18 @@
 				24CAC43B1B58050900E3C4D5 /* WLProductModel.m */,
 				24CAC43D1B5806BF00E3C4D5 /* WLForwardBuyModel.h */,
 				24CAC43E1B5806BF00E3C4D5 /* WLForwardBuyModel.m */,
-				24CAC4401B5807ED00E3C4D5 /* WLVideoModel.h */,
-				24CAC4411B5807ED00E3C4D5 /* WLVideoModel.m */,
-				249A9BA71B724B37008203C8 /* WLVideoAdImageModel.h */,
-				249A9BA81B724B37008203C8 /* WLVideoAdImageModel.m */,
+				247EA72A1B7119B300E6A161 /* WLNutritionModel.h */,
+				247EA72B1B7119B300E6A161 /* WLNutritionModel.m */,
 				24CAC4431B5808B900E3C4D5 /* WLActivityModel.h */,
 				24CAC4441B5808B900E3C4D5 /* WLActivityModel.m */,
 				249A9BA41B7249F3008203C8 /* WLActivityCityModel.h */,
 				249A9BA51B7249F3008203C8 /* WLActivityCityModel.m */,
+				24CAC4401B5807ED00E3C4D5 /* WLVideoModel.h */,
+				24CAC4411B5807ED00E3C4D5 /* WLVideoModel.m */,
+				249A9BA71B724B37008203C8 /* WLVideoAdImageModel.h */,
+				249A9BA81B724B37008203C8 /* WLVideoAdImageModel.m */,
+				2438A7601B7ECC77003404BF /* WLDoctorModel.h */,
+				2438A7611B7ECC77003404BF /* WLDoctorModel.m */,
 				24CAC4461B580A5800E3C4D5 /* WLCommentModel.h */,
 				24CAC4471B580A5800E3C4D5 /* WLCommentModel.m */,
 				245936B31B5A4015008FFAB8 /* WLAdModel.h */,
@@ -948,8 +965,6 @@
 				2482E6431B5E949D005815E8 /* WLMessageModel.m */,
 				2482E6481B5E9B6E005815E8 /* WLPointsModel.h */,
 				2482E6491B5E9B6E005815E8 /* WLPointsModel.m */,
-				247EA72A1B7119B300E6A161 /* WLNutritionModel.h */,
-				247EA72B1B7119B300E6A161 /* WLNutritionModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1542,6 +1557,7 @@
 				24C32EC91B613F6100D509A4 /* WLDatabaseHelper.m in Sources */,
 				2482E64D1B5E9CBB005815E8 /* WLServerHelper+Points.m in Sources */,
 				24CDCBF11B4F792E00BDE8CB /* UITextFieldDelegateImplementationProxy.m in Sources */,
+				2438A7651B7ECF09003404BF /* WLServerHelper+Doctor.m in Sources */,
 				24B8C0681B5242BC001C5722 /* AGIPCAlbumsController.m in Sources */,
 				24CDCC051B4F792E00BDE8CB /* AVAudioPlayer+GCDelegate.m in Sources */,
 				246F07821B56A6210086CD28 /* NSString+Ext.m in Sources */,
@@ -1600,6 +1616,7 @@
 				24CDCBF21B4F792E00BDE8CB /* UITextViewDelegateImplementationProxy.m in Sources */,
 				24CDCBE51B4F792E00BDE8CB /* UICollectionViewDelegateAndDataSourceImplementationProxy.m in Sources */,
 				24CAC42F1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m in Sources */,
+				2438A7621B7ECC77003404BF /* WLDoctorModel.m in Sources */,
 				24D3F9C61B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m in Sources */,
 				24CAC4451B5808B900E3C4D5 /* WLActivityModel.m in Sources */,
 				24CDCBE61B4F792E00BDE8CB /* UIGestureRecognizerDelegateImplementProxy.m in Sources */,
@@ -1618,6 +1635,7 @@
 				24CDCC141B4F792E00BDE8CB /* UITextView+GCDelegate.m in Sources */,
 				249A9BA61B7249F3008203C8 /* WLActivityCityModel.m in Sources */,
 				24CDCC071B4F792E00BDE8CB /* UICollectionView+GCDelegateAndDataSource.m in Sources */,
+				2438A7681B7ED1AD003404BF /* WLServerHelper+ShareUrl.m in Sources */,
 				24CDCBEA1B4F792E00BDE8CB /* UIPickerViewDelegateImplementationProxy.m in Sources */,
 				24CDCC151B4F792E00BDE8CB /* UIToolbar+GCDelegate.m in Sources */,
 				24CDCBFF1B4F792E00BDE8CB /* UITabBarController+GCDelegateBlock.m in Sources */,
