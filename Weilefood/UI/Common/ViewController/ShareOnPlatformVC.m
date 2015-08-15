@@ -20,7 +20,7 @@
 
 @property (nonatomic, strong) UIImage  *image;
 @property (nonatomic, copy  ) NSString *desc;
-@property (nonatomic, copy  ) NSString *url;
+@property (nonatomic, copy  ) NSString *shareUrl;
 
 @end
 
@@ -28,19 +28,26 @@ static NSInteger const kLabelTopMargin = 10;
 
 @implementation ShareOnPlatformVC
 
-+ (void)shareWithImageUrl:(NSString *)imageUrl title:(NSString *)title url:(NSString *)url {
-    [MBProgressHUD showLoadingWithMessage:nil];
-    [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:imageUrl] options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
++ (void)shareWithImageUrl:(NSString *)imageUrl title:(NSString *)title shareUrl:(NSString *)shareUrl {
+    
+    NSURL *url = [NSURL URLWithString:imageUrl];
+    BOOL isShowLoading = ![[SDWebImageManager sharedManager] cachedImageExistsForURL:url];
+    if (isShowLoading) {
+        [MBProgressHUD showLoadingWithMessage:nil];
+    }
+    [[SDWebImageManager sharedManager] downloadImageWithURL:url options:SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
         
-        [MBProgressHUD hideLoading];
+        if (isShowLoading) {
+            [MBProgressHUD hideLoading];
+        }
         if (error) {
             DLog("%@", error);
             return;
         }
         ShareOnPlatformVC *vc = [[ShareOnPlatformVC alloc] init];
-        vc.image = image;
-        vc.desc  = title;
-        vc.url   = url;
+        vc.image    = image;
+        vc.desc     = title;
+        vc.shareUrl = shareUrl;
         UIViewController *pvc = [UIApplication sharedApplication].keyWindow.rootViewController;
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8")) {
             vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
@@ -123,6 +130,12 @@ static NSInteger const kLabelTopMargin = 10;
 }
 
 - (void)_shareWithType:(NSString *)type {
+    
+    //[UMSocialData defaultData].extConfig.wechatSessionData.title = @"微信好友title";
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = self.shareUrl;
+    //[UMSocialData defaultData].extConfig.wechatTimelineData.title = @"微信朋友圈title";
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = self.shareUrl;
+    
     _weak(self);
     [[UMSocialDataService defaultDataService] postSNSWithTypes:@[type]
                                                        content:self.desc
