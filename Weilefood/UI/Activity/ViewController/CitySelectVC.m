@@ -13,10 +13,10 @@
 
 @interface CitySelectVC ()
 
-@property (nonatomic, strong) UIView           *gpsCityView;
-@property (nonatomic, strong) UILabel          *gpsCityLabel;
-@property (nonatomic, strong) UIButton         *gpsCityButton;
-@property (nonatomic, strong) UILabel          *otherCityLabel;
+//@property (nonatomic, strong) UIView           *gpsCityView;
+//@property (nonatomic, strong) UILabel          *gpsCityLabel;
+//@property (nonatomic, strong) UIButton         *gpsCityButton;
+//@property (nonatomic, strong) UILabel          *otherCityLabel;
 @property (nonatomic, strong) UICollectionView *collectionView;
 
 @property (nonatomic, copy) SelectedCity selectedCity;
@@ -33,10 +33,10 @@
     self.view.backgroundColor = k_COLOR_LAVENDER;
     self.navigationItem.leftBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], [UIBarButtonItem createCloseBarButtonItem]];
     
-    [self.gpsCityView addSubview:self.gpsCityLabel];
-    [self.gpsCityView addSubview:self.gpsCityButton];
-    [self.view addSubview:self.gpsCityView];
-    [self.view addSubview:self.otherCityLabel];
+//    [self.gpsCityView addSubview:self.gpsCityLabel];
+//    [self.gpsCityView addSubview:self.gpsCityButton];
+//    [self.view addSubview:self.gpsCityView];
+//    [self.view addSubview:self.otherCityLabel];
     [self.view addSubview:self.collectionView];
     
     [self _addObserve];
@@ -46,25 +46,23 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
-    [self.gpsCityView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.top.equalTo(self.view).offset(10);
-        make.height.equalTo(@44);
-    }];
-    [self.gpsCityLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.gpsCityLabel.superview).insets(UIEdgeInsetsMake(0, 22, 0, 0));
-    }];
-    [self.gpsCityButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.gpsCityButton.superview);
-    }];
-    [self.otherCityLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(22);
-        make.top.equalTo(self.gpsCityView.mas_bottom).offset(25);
-    }];
+//    [self.gpsCityView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.equalTo(self.view);
+//        make.top.equalTo(self.view).offset(10);
+//        make.height.equalTo(@44);
+//    }];
+//    [self.gpsCityLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(self.gpsCityLabel.superview).insets(UIEdgeInsetsMake(0, 22, 0, 0));
+//    }];
+//    [self.gpsCityButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(self.gpsCityButton.superview);
+//    }];
+//    [self.otherCityLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.view).offset(22);
+//        make.top.equalTo(self.gpsCityView.mas_bottom).offset(25);
+//    }];
     [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view).insets(UIEdgeInsetsMake(0, 22, 0, 22));
-        make.top.equalTo(self.otherCityLabel.mas_bottom).offset(20);
-        make.bottom.equalTo(self.view);
+        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(22, 22, 0, 22));
     }];
     
     FixesViewDidLayoutSubviewsiOS7Error;
@@ -97,38 +95,38 @@
 
 #pragma mark - private property methods
 
-- (UIView *)gpsCityView {
-    if (!_gpsCityView) {
-        _gpsCityView = [[UIView alloc] init];
-        _gpsCityView.backgroundColor = k_COLOR_WHITE;
-    }
-    return _gpsCityView;
-}
+//- (UIView *)gpsCityView {
+//    if (!_gpsCityView) {
+//        _gpsCityView = [[UIView alloc] init];
+//        _gpsCityView.backgroundColor = k_COLOR_WHITE;
+//    }
+//    return _gpsCityView;
+//}
 
-- (UILabel *)gpsCityLabel {
-    if (!_gpsCityLabel) {
-        _gpsCityLabel = [[UILabel alloc] init];
-        _gpsCityLabel.font = [UIFont systemFontOfSize:15];
-    }
-    return _gpsCityLabel;
-}
+//- (UILabel *)gpsCityLabel {
+//    if (!_gpsCityLabel) {
+//        _gpsCityLabel = [[UILabel alloc] init];
+//        _gpsCityLabel.font = [UIFont systemFontOfSize:15];
+//    }
+//    return _gpsCityLabel;
+//}
 
-- (UIButton *)gpsCityButton {
-    if (!_gpsCityButton) {
-        _gpsCityButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    }
-    return _gpsCityButton;
-}
+//- (UIButton *)gpsCityButton {
+//    if (!_gpsCityButton) {
+//        _gpsCityButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    }
+//    return _gpsCityButton;
+//}
 
-- (UILabel *)otherCityLabel {
-    if (!_otherCityLabel) {
-        _otherCityLabel = [[UILabel alloc] init];
-        _otherCityLabel.font = [UIFont systemFontOfSize:15];
-        _otherCityLabel.textColor = k_COLOR_STAR_DUST;
-        _otherCityLabel.text = @"访问其它城市";
-    }
-    return _otherCityLabel;
-}
+//- (UILabel *)otherCityLabel {
+//    if (!_otherCityLabel) {
+//        _otherCityLabel = [[UILabel alloc] init];
+//        _otherCityLabel.font = [UIFont systemFontOfSize:15];
+//        _otherCityLabel.textColor = k_COLOR_STAR_DUST;
+//        _otherCityLabel.text = @"访问其它城市";
+//    }
+//    return _otherCityLabel;
+//}
 
 - (UICollectionView *)collectionView {
     if (!_collectionView) {

@@ -10,6 +10,7 @@
 #import "ActivityCell.h"
 
 #import "CitySelectVC.h"
+#import "ActivityInfoVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -128,11 +129,11 @@ static NSInteger const kPageSize       = 10;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[ActivityCell class] forCellReuseIdentifier:kCellIdentifier];
         _weak(self);
-        _tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [_tableView headerWithRefreshingBlock:^{
             _strong_check(self);
             [self _loadDataWithIsLatest:YES];
         }];
-        _tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [_tableView footerWithRefreshingBlock:^{
             _strong_check(self);
             [self _loadDataWithIsLatest:NO];
         }];
@@ -149,7 +150,13 @@ static NSInteger const kPageSize       = 10;
             cell.beginDate    = activity.startDate;
             cell.endDate      = activity.endDate;
             cell.participated = activity.isJoin;
+            cell.state        = activity.state;
             return cell;
+        }];
+        [_tableView withBlockForRowDidSelect:^(UITableView *view, NSIndexPath *path) {
+            _strong_check(self);
+            WLActivityModel *activity = self.activityList[path.row];
+            [self.navigationController pushViewController:[[ActivityInfoVC alloc] initWithActivity:activity] animated:YES];
         }];
     }
     return _tableView;

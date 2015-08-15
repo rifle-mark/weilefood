@@ -27,9 +27,16 @@
 
 @end
 
-static NSInteger kPageSize = 10;
+static NSString *const kHintText = @"在这里说点什么吧...";
+static NSInteger const kPageSize = 10;
 
 @implementation CommentListVC
+
++ (void)showWithType:(WLCommentType)type refId:(NSUInteger)refId {
+    CommentListVC *vc = [[CommentListVC alloc] initWithType:type refId:refId];
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nc animated:YES completion:nil];
+}
 
 - (id)init {
     NSAssert(NO, @"请使用initWithType:refId:方法来实例化本界面");
@@ -72,7 +79,7 @@ static NSInteger kPageSize = 10;
     [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.footerView.mas_top);
-        make.height.equalTo(@0.4);
+        make.height.equalTo(@k1pxWidth);
     }];
     [self.footerView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
@@ -147,31 +154,6 @@ static NSInteger kPageSize = 10;
             [self.tableView.footer endRefreshing];
         }
         ServerHelperErrorHandle;
-        
-//        NSMutableArray *array = [NSMutableArray array];
-//        WLCommentModel *comment = nil;
-//        for (int i = 0; i < 3; i++) {
-//            comment = [[WLCommentModel alloc] init];
-//            comment.avatar = @"http://v1.qzone.cc/avatar/201408/22/21/13/53f741f95904e103.jpg%21200x200.jpg";
-//            comment.nickName = @"魂牵梦萦";
-//            comment.content = @"魂牵梦萦";
-//            comment.createDate = [NSDate date];
-//            [array addObject:comment];
-//            comment = [[WLCommentModel alloc] init];
-//            comment.avatar = @"http://cdnq.duitang.com/uploads/item/201507/10/20150710173942_iSH5w.jpeg";
-//            comment.nickName = @"魂牵";
-//            comment.content = @"魂牵梦萦fdsafdsafdsafdsa范德萨范德萨范德萨范德萨";
-//            comment.createDate = [NSDate date];
-//            [array addObject:comment];
-//            comment = [[WLCommentModel alloc] init];
-//            comment.avatar = @"http://img5q.duitang.com/uploads/item/201409/22/20140922224948_nEmk8.jpeg";
-//            comment.nickName = @"魂牵范德萨惹我棋逢对手";
-//            comment.content = @"魂牵梦萦fdsafdsafdsafdsa范德萨范德萨范德萨范德萨范德萨范德萨范德萨热接口完全符合简单快乐撒横峰街道沙发；合口味清分机哦对接撒分开了大花洒尽快发货多数据奥克兰如而我i呕气风华绝代凯萨琳回复等级考试啦热u我i去防护等级萨克雷热u我i请回复等级考试腊肉特u我i切换发动机萨克雷废物i欺负返回倒计时卡了u任务迁移v合成进行中绿牡丹撒了谎热u我i群殴防护等级斯卡拉回复";
-//            comment.createDate = [NSDate date];
-//            [array addObject:comment];
-//        }
-//        apiResult = array;
-        
         self.commentList = isLatest ? apiResult : [self.commentList arrayByAddingObjectsFromArray:apiResult];
         self.tableView.footer.hidden = !apiResult || apiResult.count < kPageSize;
     }];
@@ -191,11 +173,11 @@ static NSInteger kPageSize = 10;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         [_tableView registerClass:[CommentCell class] forCellReuseIdentifier:kCellIdentifier];
         _weak(self);
-        _tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [_tableView headerWithRefreshingBlock:^{
             _strong_check(self);
             [self _loadDataWithIsLatest:YES];
         }];
-        _tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [_tableView footerWithRefreshingBlock:^{
             _strong_check(self);
             [self _loadDataWithIsLatest:NO];
         }];
@@ -244,11 +226,21 @@ static NSInteger kPageSize = 10;
         _textField = [[UITextView alloc] init];
         _textField.backgroundColor = k_COLOR_WHITE;
         _textField.font = [UIFont systemFontOfSize:13];
-//        _textField.placeholder = @"在这里说点什么吧...";
         _textField.textColor = k_COLOR_DARKGRAY;
         _textField.layer.borderColor = k_COLOR_DARKGRAY.CGColor;
-        _textField.layer.borderWidth = 0.4;
+        _textField.layer.borderWidth = k1pxWidth;
         _textField.layer.cornerRadius = 4;
+        _textField.text = kHintText;
+        [_textField withBlockForDidBeginEditing:^(UITextView *view) {
+            if ([view.text isEqualToString:kHintText]) {
+                view.text = @"";
+            }
+        }];
+        [_textField withBlockForDidEndEditing:^(UITextView *view) {
+            if (!view.text || view.text.length <= 0) {
+                view.text = kHintText;
+            }
+        }];
     }
     return _textField;
 }
@@ -261,8 +253,14 @@ static NSInteger kPageSize = 10;
         _weak(self);
         [_sendButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
+            if ([self.textField.text isEqualToString:kHintText]) {
+                [MBProgressHUD showErrorWithMessage:@"请填写评论内容"];
+                [self.textField becomeFirstResponder];
+                return;
+            }
             if (!self.textField.text || self.textField.text.length <= 5) {
                 [MBProgressHUD showErrorWithMessage:@"评论内容太少，多写一点吧"];
+                [self.textField becomeFirstResponder];
                 return;
             }
             [self.textField resignFirstResponder];

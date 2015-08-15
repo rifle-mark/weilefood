@@ -14,6 +14,7 @@
 #import "WLUserModel.h"
 #import "WLShareModel.h"
 #import "WLChannelModel.h"
+#import "WLPictureModel.h"
 #import "WLProductModel.h"
 #import "WLForwardBuyModel.h"
 #import "WLVideoModel.h"
@@ -31,5 +32,6 @@
 #import "WLMessageModel.h"
 #import "WLPointsModel.h"
 #import "WLNutritionModel.h"
+#import "WLDoctorModel.h"
 
 #endif

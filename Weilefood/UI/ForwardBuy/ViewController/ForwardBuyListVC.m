@@ -9,6 +9,8 @@
 #import "ForwardBuyListVC.h"
 #import "ForwardBuyCell.h"
 
+#import "ForwardBuyInfoVC.h"
+
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
@@ -166,11 +168,11 @@ static NSInteger const kPageSize       = 10;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[ForwardBuyCell class] forCellReuseIdentifier:kCellIdentifier];
         _weak(self);
-        _tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [_tableView headerWithRefreshingBlock:^{
             _strong_check(self);
             [self _loadDataWithIsLatest:YES];
         }];
-        _tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [_tableView footerWithRefreshingBlock:^{
             _strong_check(self);
             [self _loadDataWithIsLatest:NO];
         }];
@@ -185,11 +187,17 @@ static NSInteger const kPageSize       = 10;
             cell.imageUrl     = forwardBuy.banner;
             cell.beginDate    = forwardBuy.startDate;
             cell.endDate      = forwardBuy.endDate;
+            cell.state        = forwardBuy.state;
             cell.name         = forwardBuy.title;
             cell.price        = forwardBuy.price;
             cell.actionCount  = forwardBuy.actionCount;
             cell.commentCount = forwardBuy.commentCount;
             return cell;
+        }];
+        [_tableView withBlockForRowDidSelect:^(UITableView *view, NSIndexPath *path) {
+            _strong_check(self);
+            WLForwardBuyModel *forwardBuy = self.forwardBuyList[path.row];
+            [self.navigationController pushViewController:[[ForwardBuyInfoVC alloc] initWithForwardBuy:forwardBuy] animated:YES];
         }];
     }
     return _tableView;

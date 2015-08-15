@@ -11,7 +11,6 @@
 #import "DiscoveryCollectionHeaderView.h"
 #import "DiscoveryCollectionSectionHeaderView.h"
 #import "DiscoveryCollectionCell.h"
-#import <SwipeView/SwipeView.h>
 
 #import "MarketIndexPageVC.h"
 #import "ForwardBuyListVC.h"
@@ -19,6 +18,8 @@
 #import "VideoListVC.h"
 
 #import "ProductInfoVC.h"
+#import "ForwardBuyInfoVC.h"
+#import "ActivityInfoVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -118,7 +119,48 @@ static NSInteger const kSectionIndexActivity   = 4;
         headerView.videoImageUrl = self.videoAdImage;
         [headerView bannerImageClickBlock:^(NSInteger index) {
             _strong_check(self);
-            DLog(@"%ld", (long)index);
+            WLAdModel *ad = self.bannerAdDatas[index];
+            switch (ad.type) {
+                case WLAdTypeShare: {
+                    break;
+                }
+                case WLAdTypeProduct: {
+                    WLProductModel *product = [[WLProductModel alloc] init];
+                    product.productId = ad.refId;
+                    [self.navigationController pushViewController:[[ProductInfoVC alloc] initWithProduct:product] animated:YES];
+                    break;
+                }
+                case WLAdTypeActivity: {
+                    WLActivityModel *activity = [[WLActivityModel alloc] init];
+                    activity.activityId = ad.refId;
+                    [self.navigationController pushViewController:[[ActivityInfoVC alloc] initWithActivity:activity] animated:YES];
+                    break;
+                }
+                case WLAdTypeForwardBuy: {
+                    WLForwardBuyModel *forwardBuy = [[WLForwardBuyModel alloc] init];
+                    forwardBuy.forwardBuyId = ad.refId;
+                    [self.navigationController pushViewController:[[ForwardBuyInfoVC alloc] initWithForwardBuy:forwardBuy] animated:YES];
+                    break;
+                }
+                case WLAdTypeNutrition: {
+                    break;
+                }
+                case WLAdTypeVideo: {
+                    break;
+                }
+                case WLAdTypeUrl: {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ad.url]];
+                    break;
+                }
+                case WLAdTypeNoUrl: {
+                    break;
+                }
+                case WLAdTypeDoctor: {
+                    break;
+                }
+                default:
+                    break;
+            }
         }];
         [headerView marketClickBlock:^{
             _strong_check(self);
@@ -157,7 +199,6 @@ static NSInteger const kSectionIndexActivity   = 4;
             headerView.allButtonActionBlock = ^(){
                 _strong_check(self);
                 [self.navigationController pushViewController:[[ForwardBuyListVC alloc] init] animated:YES];
-                
             };
             break;
         }
@@ -248,6 +289,16 @@ static NSInteger const kSectionIndexActivity   = 4;
         case kSectionIndexProduct: {
             WLProductModel *product = self.sectionDataProducts[indexPath.item];
             [self.navigationController pushViewController:[[ProductInfoVC alloc] initWithProduct:product] animated:YES];
+            break;
+        }
+        case kSectionIndexForwardBuy: {
+            WLForwardBuyModel *forwardBuy = self.sectionDataForwardBuys[indexPath.item];
+            [self.navigationController pushViewController:[[ForwardBuyInfoVC alloc] initWithForwardBuy:forwardBuy] animated:YES];
+            break;
+        }
+        case kSectionIndexActivity: {
+            WLActivityModel *activity = self.sectionDataActivitys[indexPath.item];
+            [self.navigationController pushViewController:[[ActivityInfoVC alloc] initWithActivity:activity] animated:YES];
             break;
         }
         default:

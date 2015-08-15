@@ -23,6 +23,10 @@
 @property (nonatomic, assign) long long actionCount;
 /// 评论数
 @property (nonatomic, assign) long long commentCount;
+/// 是否已收藏
+@property (nonatomic, assign) BOOL isFav;
+/// 是否已赞
+@property (nonatomic, assign) BOOL isLike;
 ///
 @property (nonatomic, assign) NSInteger type;
 ///

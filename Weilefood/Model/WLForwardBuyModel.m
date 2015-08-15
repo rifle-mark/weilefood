@@ -7,6 +7,7 @@
 //
 
 #import "WLForwardBuyModel.h"
+#import "WLPictureModel.h"
 
 @implementation WLForwardBuyModel
 
@@ -17,6 +18,11 @@
         }
         return [NSString stringWithFormat:@"%@%@", [[propertyName substringToIndex:1] uppercaseString], [propertyName substringFromIndex:1]];
     }];
+}
+
++ (NSDictionary *)objectClassInArray {
+    return @{@"pictures":[WLPictureModel class],
+             @"Pictures":[WLPictureModel class]};
 }
 
 @end

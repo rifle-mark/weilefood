@@ -7,29 +7,33 @@
 //
 
 #import "ProductInfoVC.h"
-#import "ProductTableHeaderView.h"
-#import "ProductSectionHeaderView.h"
+#import "ProductInfoHeaderView.h"
+#import "ProductInfoSectionHeaderView.h"
 
 #import "CommentListVC.h"
+#import "LoginVC.h"
+#import "ShareOnPlatformVC.h"
+#import "InputQuantityVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
 @interface ProductInfoVC ()
 
-@property (nonatomic, strong) UIView *statusBarView;
+@property (nonatomic, strong) UIView   *navView;
+@property (nonatomic, strong) UIButton *backButton;
+@property (nonatomic, strong) UIButton *cartButton;
 
-@property (nonatomic, strong) ProductTableHeaderView   *tableHeaderView;
-@property (nonatomic, strong) ProductSectionHeaderView *sectionHeaderView;
-@property (nonatomic, strong) UIWebView                *webView;
-@property (nonatomic, strong) UITableView              *tableView;
-@property (nonatomic, strong) UIView                   *footerView;
-@property (nonatomic, strong) UIButton                 *favoriteButton;
-@property (nonatomic, strong) UIButton                 *addCartButton;
-@property (nonatomic, strong) UIButton                 *buyButton;
+@property (nonatomic, strong) ProductInfoHeaderView        *tableHeaderView;
+@property (nonatomic, strong) ProductInfoSectionHeaderView *sectionHeaderView;
+@property (nonatomic, strong) UIWebView                    *webView;
+@property (nonatomic, strong) UITableView                  *tableView;
+@property (nonatomic, strong) UIView                       *footerView;
+@property (nonatomic, strong) UIButton                     *favoriteButton;
+@property (nonatomic, strong) UIButton                     *addCartButton;
+@property (nonatomic, strong) UIButton                     *buyButton;
 
 @property (nonatomic, strong) WLProductModel *product;
-@property (nonatomic, assign) CGFloat        navBarColorAlpha;
 @property (nonatomic, assign) CGFloat        headerHeight;
 
 @end
@@ -39,7 +43,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
 @implementation ProductInfoVC
 
 - (id)init {
-    NSAssert(_product, @"请使用initWithProduct:来实例化");
+    NSAssert(NO, @"请使用initWithProduct:来实例化");
     self = [super init];
     return self;
 }
@@ -47,8 +51,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (instancetype)initWithProduct:(WLProductModel *)product {
     NSParameterAssert(product);
     if (self = [super init]) {
-        _navBarColorAlpha = -1;
-        _headerHeight = [ProductTableHeaderView viewHeight];
+        _headerHeight = [ProductInfoHeaderView viewHeight];
         self.product = product;
     }
     return self;
@@ -57,9 +60,13 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = k_COLOR_WHITE;
-//    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], [UIBarButtonItem createCartBarButtonItem]];
     
     [self.view addSubview:self.tableView];
+    [self.view addSubview:self.navView];
+    [self.navView addSubview:self.backButton];
+    [self.navView addSubview:self.cartButton];
+    
     [self.view addSubview:self.footerView];
     [self.footerView addSubview:self.favoriteButton];
     [self.footerView addSubview:self.addCartButton];
@@ -71,6 +78,20 @@ static NSString *const kCellIdentifier = @"MYCELL";
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
+    
+    [self.navView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
+        make.top.equalTo(self.view).offset(20);
+    }];
+    [self.backButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.navView).offset(6);
+        make.left.equalTo(self.navView).offset(10);
+    }];
+    [self.cartButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.navView).offset(6);
+        make.right.equalTo(self.navView).offset(-10);
+    }];
+    
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
         make.bottom.equalTo(self.footerView.mas_top).offset(1);
@@ -97,44 +118,10 @@ static NSString *const kCellIdentifier = @"MYCELL";
     FixesViewDidLayoutSubviewsiOS7Error;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.navigationBar.backgroundColor = k_COLOR_THEME_NAVIGATIONBAR;
-    
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-    [self.navigationController.navigationBar addSubview:self.statusBarView];
-    
-    if (self.navBarColorAlpha == -1) {
-        self.navBarColorAlpha = 0;
-    }
-    else {
-        /*
-         这段解决：
-         iOS8中进入此界面后，从屏幕左边缘往右滑一点，再松开，navigationBar显示了背景色的问题
-         */
-        self.navBarColorAlpha += 0.01;
-        self.navBarColorAlpha -= 0.01;
-    }
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     self.headerHeight = V_H_(self.tableHeaderView);
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    self.navigationController.navigationBar.translucent = NO;
-    [self.statusBarView removeFromSuperview];
-    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:nil];
-    self.navigationController.navigationBar.backgroundColor = nil;
-    self.navigationController.navigationBar.titleTextAttributes = nil;
 }
 
 #pragma mark - private methods
@@ -150,8 +137,10 @@ static NSString *const kCellIdentifier = @"MYCELL";
 }
 
 - (void)_showData {
+    self.title = self.product.productName;
+    
     NSMutableArray *images = [NSMutableArray array];
-    for (WLProductPictureModel *pic in self.product.pictures) {
+    for (WLPictureModel *pic in self.product.pictures) {
         [images addObject:pic.picPath];
     }
     self.tableHeaderView.images = images;
@@ -159,12 +148,15 @@ static NSString *const kCellIdentifier = @"MYCELL";
     self.tableHeaderView.number = self.product.count;
     self.tableHeaderView.price  = self.product.price;
     
+    self.sectionHeaderView.hasAction = self.product.isLike;
     self.sectionHeaderView.actionCount = self.product.actionCount;
     self.sectionHeaderView.commentCount = self.product.commentCount;
     
     if (self.webView.superview) {
         [self.webView loadHTMLString:self.product.desc baseURL:nil];
     }
+    
+    self.favoriteButton.highlighted = self.product.isFav;
 }
 
 - (void)_resetWebViewHeight {
@@ -175,45 +167,65 @@ static NSString *const kCellIdentifier = @"MYCELL";
 
 #pragma mark - private property methods
 
-- (UIView *)statusBarView {
-    if (!_statusBarView) {
-        _statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, SCREEN_WIDTH, 20)];
+- (UIView *)navView {
+    if (!_navView) {
+        _navView = [[UIView alloc] init];
     }
-    return _statusBarView;
+    return _navView;
 }
 
-- (ProductTableHeaderView *)tableHeaderView {
+- (UIButton *)backButton {
+    if (!_backButton) {
+        _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_backButton setImage:[UIImage imageNamed:@"btn_back_n"] forState:UIControlStateNormal];
+        [_backButton setImage:[UIImage imageNamed:@"btn_back_h"] forState:UIControlStateHighlighted];
+    }
+    return _backButton;
+}
+
+- (UIButton *)cartButton {
+    if (!_cartButton) {
+        _cartButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_cartButton setImage:[UIImage imageNamed:@"btn_cart_n"] forState:UIControlStateNormal];
+        [_cartButton setImage:[UIImage imageNamed:@"btn_cart_h"] forState:UIControlStateHighlighted];
+    }
+    return _cartButton;
+}
+
+- (ProductInfoHeaderView *)tableHeaderView {
     if (!_tableHeaderView) {
-        CGRect frame = CGRectMake(0, 0, SCREEN_WIDTH, [ProductTableHeaderView viewHeight] - 64);
-        _tableHeaderView = [[ProductTableHeaderView alloc] initWithFrame:frame];
+        CGRect frame = CGRectMake(0, 0, SCREEN_WIDTH, [ProductInfoHeaderView viewHeight] - 64);
+        _tableHeaderView = [[ProductInfoHeaderView alloc] initWithFrame:frame];
         _tableHeaderView.backgroundColor = k_COLOR_WHITE;
     }
     return _tableHeaderView;
 }
 
-- (ProductSectionHeaderView *)sectionHeaderView {
+- (ProductInfoSectionHeaderView *)sectionHeaderView {
     if (!_sectionHeaderView) {
-        _sectionHeaderView = [[ProductSectionHeaderView alloc] init];
+        _sectionHeaderView = [[ProductInfoSectionHeaderView alloc] init];
         _sectionHeaderView.backgroundColor = k_COLOR_WHITE;
         _weak(self);
         [_sectionHeaderView actionBlock:^{
-            _strong_check(self);
-            [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeProduct actType:WLActionActTypeApproval objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+            [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                ServerHelperErrorHandle;
-                self.product.actionCount++;
-                self.sectionHeaderView.actionCount = self.product.actionCount;
+                [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeApproval objectType:WLActionTypeProduct objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                    _strong_check(self);
+                    ServerHelperErrorHandle;
+                    self.product.actionCount++;
+                    self.product.isLike = YES;
+                    [self _showData];
+                }];
             }];
         }];
         [_sectionHeaderView commentBlock:^{
             _strong_check(self);
-            CommentListVC *vc = [[CommentListVC alloc] initWithType:WLCommentTypeProduct refId:self.product.productId];
-            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
-            [self.navigationController presentViewController:nc animated:YES completion:nil];
+            [CommentListVC showWithType:WLCommentTypeProduct refId:self.product.productId];
         }];
         [_sectionHeaderView shareBlock:^{
             _strong_check(self);
-            DLog(@"");
+            NSString *url = [[WLServerHelper sharedInstance] getShareUrlWithType:WLServerHelperShareTypeProduct objectId:self.product.productId];
+            [ShareOnPlatformVC shareWithImageUrl:self.product.images title:self.product.productName shareUrl:url];
         }];
     }
     return _sectionHeaderView;
@@ -237,7 +249,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.sectionHeaderHeight = [ProductSectionHeaderView viewHeight];
+        _tableView.sectionHeaderHeight = [ProductInfoSectionHeaderView viewHeight];
         _tableView.tableHeaderView = self.tableHeaderView;
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
         _weak(self);
@@ -279,7 +291,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
             else  {
                 alpha = (offset.y - (self.headerHeight - navBarHeight * 2)) / navBarHeight;
             }
-            self.navBarColorAlpha = alpha;
+            self.navigationBarAlpha = alpha;
         }];
     }
     return _tableView;
@@ -306,11 +318,24 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_favoriteButton setImageToTop];
         _weak(self);
         [_favoriteButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
-            _strong_check(self);
-            [[WLServerHelper sharedInstance] action_addWithType:WLActionTypeProduct actType:WLActionActTypeFavorite objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+            [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                ServerHelperErrorHandle;
-                [self.favoriteButton setHighlighted:YES];
+                if (self.product.isFav) {
+                    [[WLServerHelper sharedInstance] action_deleteFavoriteWithObjectType:WLActionTypeProduct objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                        _strong_check(self);
+                        ServerHelperErrorHandle;
+                        self.product.isFav = NO;
+                        [self _showData];
+                    }];
+                }
+                else {
+                    [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeFavorite objectType:WLActionTypeProduct objectId:self.product.productId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                        _strong_check(self);
+                        ServerHelperErrorHandle;
+                        self.product.isFav = YES;
+                        [self _showData];
+                    }];
+                }
             }];
         }];
     }
@@ -324,6 +349,15 @@ static NSString *const kCellIdentifier = @"MYCELL";
         _addCartButton.titleLabel.font = [UIFont systemFontOfSize:16];
         [_addCartButton setTitleColor:k_COLOR_WHITE forState:UIControlStateNormal];
         [_addCartButton setTitle:@"加入购物车" forState:UIControlStateNormal];
+        _weak(self);
+        [_addCartButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            [InputQuantityVC inputQuantityWithEnterBlock:^(InputQuantityVC *inputQuantityVC, NSInteger quantity) {
+                _strong_check(self);
+                // TODO 加入购物车
+                DLog(@"%ld", (long)quantity);
+                [inputQuantityVC dismissSelf];
+            }];
+        }];
     }
     return _addCartButton;
 }
@@ -335,18 +369,24 @@ static NSString *const kCellIdentifier = @"MYCELL";
         _buyButton.titleLabel.font = [UIFont systemFontOfSize:16];
         [_buyButton setTitleColor:k_COLOR_WHITE forState:UIControlStateNormal];
         [_buyButton setTitle:@"立即购买" forState:UIControlStateNormal];
+        _weak(self);
+        [_buyButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+                [InputQuantityVC inputQuantityWithEnterBlock:^(InputQuantityVC *inputQuantityVC, NSInteger quantity) {
+                    _strong_check(self);
+                    // TODO 立即购买
+                    DLog(@"%ld", (long)quantity);
+                    [inputQuantityVC dismissSelf];
+                }];
+            }];
+        }];
     }
     return _buyButton;
 }
 
-- (void)setNavBarColorAlpha:(CGFloat)navBarColorAlpha {
-    if (_navBarColorAlpha == navBarColorAlpha) {
-        return;
-    }
-    _navBarColorAlpha = navBarColorAlpha;
-    self.statusBarView.backgroundColor = [k_COLOR_THEME_NAVIGATIONBAR colorWithAlphaComponent:_navBarColorAlpha];
-    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [k_COLOR_WHITE colorWithAlphaComponent:_navBarColorAlpha]};
-    self.navigationController.navigationBar.backgroundColor = self.statusBarView.backgroundColor;
+- (void)setNavigationBarAlpha:(CGFloat)navigationBarAlpha {
+    [super setNavigationBarAlpha:navigationBarAlpha];
+    self.navView.alpha = 1 - navigationBarAlpha;
 }
 
 @end

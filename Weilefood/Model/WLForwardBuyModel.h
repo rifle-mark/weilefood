@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+/// 预购状态
+typedef NS_ENUM(NSInteger, WLForwardBuyState) {
+    /// 已开始进行中
+    WLForwardBuyStateStarted    = 0,
+    /// 未开始
+    WLForwardBuyStateNotStarted = 3,
+    /// 已结束
+    WLForwardBuyStateEnded      = 4,
+};
+
 /// 预购
 @interface WLForwardBuyModel : NSObject
 
@@ -29,12 +39,22 @@
 @property (nonatomic, assign) NSUInteger actionCount;
 /// 评论数
 @property (nonatomic, assign) NSUInteger commentCount;
+/// 状态
+@property (nonatomic, assign) WLForwardBuyState state;
 /// 描述
 @property (nonatomic, copy) NSString *desc;
+/// 是否已收藏
+@property (nonatomic, assign) BOOL isFav;
+/// 是否已赞
+@property (nonatomic, assign) BOOL isLike;
+/// 所属栏目ID
+@property (nonatomic, assign) NSUInteger channelId;
+/// 所属栏目名称
+@property (nonatomic, copy) NSString *channelName;
+/// 幻灯片图组(详情接口)<WLPictureModel>
+@property (nonatomic, strong) NSArray *pictures;
 ///
 @property (nonatomic, copy) NSDate *createDate;
-///
-@property (nonatomic, assign) NSUInteger channelId;
 ///
 @property (nonatomic, assign) NSInteger isDeleted;
 

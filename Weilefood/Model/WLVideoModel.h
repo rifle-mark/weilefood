@@ -29,6 +29,10 @@
 @property (nonatomic, assign) BOOL isBuy;
 /// 介绍
 @property (nonatomic, copy) NSString *desc;
+/// 是否已收藏
+@property (nonatomic, assign) BOOL isFav;
+/// 是否已赞
+@property (nonatomic, assign) BOOL isLike;
 ///
 @property (nonatomic, copy) NSDate *createDate;
 

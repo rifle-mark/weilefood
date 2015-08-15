@@ -128,8 +128,11 @@ static NSString *const kCellIdentifier = @"MYCELL";
         _tableView.rowHeight = [MarketProductCell cellHeight];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerClass:[MarketProductCell class] forCellReuseIdentifier:kCellIdentifier];
-        _tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(_loadMore)];
         _weak(self);
+        [_tableView footerWithRefreshingBlock:^{
+            _strong_check(self);
+            [self _loadMore];
+        }];
         [_tableView withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {
             _strong_check(self, 0);
             return self.productList ? self.productList.count : 0;

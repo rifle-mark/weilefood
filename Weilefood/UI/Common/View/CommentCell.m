@@ -81,7 +81,7 @@ static NSInteger const kContentRigthMargin = 20;
 
 - (void)setAvatarUrl:(NSString *)avatarUrl {
     _avatarUrl = [avatarUrl copy];
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:avatarUrl]];
+    [self.avatarImageView my_setImageWithURL:[NSURL URLWithString:avatarUrl]];
 }
 
 - (void)setName:(NSString *)name {

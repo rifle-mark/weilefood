@@ -8,19 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+/// 活动状态
+typedef NS_ENUM(NSInteger, WLActivityState);
+
 /// 活动列表 - 活动Cell
 @interface ActivityCell : UITableViewCell
 
 /// 图片URL
 @property (nonatomic, copy    ) NSString *imageUrl;
-/// 预购开始时间
+/// 开始时间
 @property (nonatomic, strong  ) NSDate   *beginDate;
-/// 预购结束时间
+/// 结束时间
 @property (nonatomic, strong  ) NSDate   *endDate;
 /// 名称
 @property (nonatomic, copy    ) NSString *name;
 /// 是否已参加
 @property (nonatomic, assign  ) BOOL     participated;
+/// 状态
+@property (nonatomic, assign) WLActivityState state;
 
 /**
  *  cell展示所需要的高度

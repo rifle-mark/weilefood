@@ -13,6 +13,7 @@
 #import "WLServerHelperHeader.h"
 #import "WLDatabaseHelperHeader.h"
 #import "WLModelHeader.h"
+#import <UMengSocial/WXApi.h>
 
 @interface LoginVC ()
 
@@ -36,9 +37,30 @@
 @property (nonatomic, strong) UIButton     *weixinLoginButton;
 @property (nonatomic, strong) UILabel      *weixinLabel;
 
+@property (nonatomic, copy) LoggedBlock loggedBlock;
+
 @end
 
 @implementation LoginVC
+
++ (void)show {
+    LoginVC *vc = [[LoginVC alloc] init];
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nc animated:YES completion:nil];
+}
+
++ (void)needsLoginWithLoggedBlock:(LoggedBlock)block {
+    WLUserModel *user = [WLDatabaseHelper user_find];
+    if (user) {
+        GCBlockInvoke(block, user);
+    }
+    else {
+        LoginVC *vc = [[LoginVC alloc] init];
+        vc.loggedBlock = block;
+        UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nc animated:YES completion:nil];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -65,10 +87,12 @@
     [self.contentView addSubview:self.separateView];
     [self.contentView addSubview:self.weiboLoginButton];
     [self.contentView addSubview:self.weiboLabel];
-    [self.contentView addSubview:self.weixinLoginButton];
-    [self.contentView addSubview:self.weixinLabel];
-    
+    if ([WXApi isWXAppInstalled]) {
+        [self.contentView addSubview:self.weixinLoginButton];
+        [self.contentView addSubview:self.weixinLabel];
+    }
     [self.scrollView handleKeyboard];
+    [self _addObserver];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -121,7 +145,7 @@
         make.width.equalTo(self.loginButton);
     }];
     [self.loginButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.passwordTextField);
+        make.right.equalTo(self.passwordBGView);
         make.top.width.height.equalTo(self.registerButton);
         make.left.equalTo(self.registerButton.mas_right).offset(15);
     }];
@@ -134,31 +158,59 @@
         make.left.right.equalTo(self.passwordBGView);
         make.height.equalTo(@1);
     }];
-    [self.weiboLoginButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.separateView.mas_bottom).offset(40);
-        make.left.equalTo(self.separateView);
-        make.width.equalTo(self.weixinLoginButton);
-    }];
-    [self.weiboLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.weiboLoginButton.mas_bottom).offset(15);
-        make.centerX.equalTo(self.weiboLoginButton);
-        make.height.equalTo(@(self.weiboLabel.font.lineHeight));
-    }];
-    [self.weixinLoginButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.width.equalTo(self.weiboLoginButton);
-        make.right.equalTo(self.separateView);
-        make.left.equalTo(self.weiboLoginButton.mas_right).offset(15);
-    }];
-    [self.weixinLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.weixinLoginButton.mas_bottom).offset(15);
-        make.centerX.equalTo(self.weixinLoginButton);
-        make.height.equalTo(@(self.weixinLabel.font.lineHeight));
-        make.bottom.equalTo(self.weixinLabel.superview).offset(-20);
-    }];
+    
+    if ([WXApi isWXAppInstalled]) {
+        [self.weiboLoginButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.separateView.mas_bottom).offset(40);
+            make.left.equalTo(self.separateView);
+            make.width.equalTo(self.weixinLoginButton);
+        }];
+        [self.weiboLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.weiboLoginButton.mas_bottom).offset(15);
+            make.centerX.equalTo(self.weiboLoginButton);
+            make.height.equalTo(@(self.weiboLabel.font.lineHeight));
+        }];
+        [self.weixinLoginButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.width.equalTo(self.weiboLoginButton);
+            make.right.equalTo(self.separateView);
+            make.left.equalTo(self.weiboLoginButton.mas_right).offset(15);
+        }];
+        [self.weixinLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.weixinLoginButton.mas_bottom).offset(15);
+            make.centerX.equalTo(self.weixinLoginButton);
+            make.height.equalTo(@(self.weixinLabel.font.lineHeight));
+            make.bottom.equalTo(self.weixinLabel.superview).offset(-20);
+        }];
+    }
+    else {
+        [self.weiboLoginButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.separateView.mas_bottom).offset(40);
+            make.left.right.equalTo(self.separateView);
+        }];
+        [self.weiboLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.weiboLoginButton.mas_bottom).offset(15);
+            make.centerX.equalTo(self.weiboLoginButton);
+            make.height.equalTo(@(self.weiboLabel.font.lineHeight));
+        }];
+    }
     FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 #pragma mark - private methons
+
+- (void)_addObserver {
+    _weak(self);
+    [self addObserverForNotificationName:kNotificationUserLoginSucc usingBlock:^(NSNotification *notification) {
+        _strong_check(self);
+        if (!notification.object || ![notification.object isKindOfClass:[WLUserModel class]]) {
+            return;
+        }
+        [self dismissViewControllerAnimated:YES completion:^{
+            _strong_check(self);
+            GCBlockInvoke(self.loggedBlock, notification.object);
+        }];
+    }];
+}
 
 - (void)_resetPasswordAction {
     [self.navigationController pushViewController:[[ResetPasswordVC alloc] init] animated:YES];
@@ -362,7 +414,7 @@
 - (UIButton *)weiboLoginButton {
     if (!_weiboLoginButton) {
         _weiboLoginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_weiboLoginButton setImage:[UIImage imageNamed:@"user_login_weibo"] forState:UIControlStateNormal];
+        [_weiboLoginButton setImage:[UIImage imageNamed:@"share_icon_weibo"] forState:UIControlStateNormal];
         [_weiboLoginButton addTarget:self action:@selector(_weiboLoginAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _weiboLoginButton;
@@ -381,7 +433,7 @@
 - (UIButton *)weixinLoginButton {
     if (!_weixinLoginButton) {
         _weixinLoginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_weixinLoginButton setImage:[UIImage imageNamed:@"user_login_wx"] forState:UIControlStateNormal];
+        [_weixinLoginButton setImage:[UIImage imageNamed:@"share_icon_wx"] forState:UIControlStateNormal];
         [_weixinLoginButton addTarget:self action:@selector(_weixinLoginAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _weixinLoginButton;

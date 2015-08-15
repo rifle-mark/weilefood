@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, WLOrderProductType) {
     /// 预购
     WLOrderProductTypeForwardBuy = 4,
     /// 营养师
-    WLOrderProductTypeDietitians = 5,
+    WLOrderProductTypeDoctor = 5,
 };
 
 /// 订单商品
