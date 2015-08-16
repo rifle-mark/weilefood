@@ -115,8 +115,8 @@
         [_discoveryButton setTitleColor:k_COLOR_MAROOM forState:UIControlStateNormal];
         [_discoveryButton setTitleColor:k_COLOR_ORANGE forState:UIControlStateDisabled];
         [_discoveryButton setTitle:@"发现" forState:UIControlStateNormal];
-        [_discoveryButton setImage:[UIImage imageNamed:@"mainpage_baritem_icon_n"] forState:UIControlStateNormal];
-        [_discoveryButton setImage:[UIImage imageNamed:@"mainpage_baritem_icon_h"] forState:UIControlStateDisabled];
+        [_discoveryButton setImage:[UIImage imageNamed:@"mainpage_baritem_icon_discovery_n"] forState:UIControlStateNormal];
+        [_discoveryButton setImage:[UIImage imageNamed:@"mainpage_baritem_icon_discovery_h"] forState:UIControlStateDisabled];
         _discoveryButton.titleEdgeInsets = UIEdgeInsetsMake(14, -12, -14, 12);
         _discoveryButton.imageEdgeInsets = UIEdgeInsetsMake(-7, 16.5, 7, -16.5);
         _weak(self);
@@ -153,8 +153,8 @@
         [_sharedListButton setTitleColor:k_COLOR_MAROOM forState:UIControlStateNormal];
         [_sharedListButton setTitleColor:k_COLOR_ORANGE forState:UIControlStateDisabled];
         [_sharedListButton setTitle:@"美食圈" forState:UIControlStateNormal];
-        [_sharedListButton setImage:[UIImage imageNamed:@"mainpage_baritem_icon_n"] forState:UIControlStateNormal];
-        [_sharedListButton setImage:[UIImage imageNamed:@"mainpage_baritem_icon_h"] forState:UIControlStateDisabled];
+        [_sharedListButton setImage:[UIImage imageNamed:@"mainpage_baritem_icon_share_n"] forState:UIControlStateNormal];
+        [_sharedListButton setImage:[UIImage imageNamed:@"mainpage_baritem_icon_share_h"] forState:UIControlStateDisabled];
         _sharedListButton.titleEdgeInsets = UIEdgeInsetsMake(14, -18, -14, 18);
         _sharedListButton.imageEdgeInsets = UIEdgeInsetsMake(-7, 16.5, 7, -16.5);
         _weak(self);

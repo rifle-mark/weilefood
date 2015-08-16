@@ -52,6 +52,8 @@
         make.top.equalTo(self.view).with.offset(self.topLayoutGuide.length);
         make.bottom.equalTo(self.view).with.offset(self.bottomLayoutGuide.length);
     }];
+    
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 - (UITableView *)shareListTableV {
