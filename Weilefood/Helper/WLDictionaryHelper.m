@@ -17,6 +17,7 @@
         if ([value isKindOfClass:[NSString class]] && [value hasPrefix:@"/Date("]) {
             NSRange range = NSMakeRange(6, 10);
             unsigned long int timeValue = [[value substringWithRange:range] integerValue];
+            timeValue -= 8 * 60 * 60;// 服务端返回的+8北京时间，所以这里减8小时。
             NSDate* date = [NSDate dateWithTimeIntervalSince1970:timeValue];
             [validDictionary setObject:date forKey:key];
         }
