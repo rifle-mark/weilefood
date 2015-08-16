@@ -105,11 +105,14 @@
                     }];
                 };
                 cell.commentActionBlock = ^(WLShareModel *share) {
-                    // TODO: open share detail VC
+                    _strong_check(self);
+                    ShareDetailVC *detailVC = [[ShareDetailVC alloc] init];
+                    detailVC.share = self.shareList[path.row];
+                    [self.navigationController pushViewController:detailVC animated:YES];
+                    [detailVC showCommentViewWithComment:share];
                 };
                 cell.picShowBlock = ^(NSArray *picUrlArray, NSInteger index) {
-                    _strong(self);
-//                    [self performSegueWithIdentifier:@"Segue_WeiCommentList_PictureShow" sender:@{@"dataArray":picUrlArray, @"Index":@(index)}];
+                    _strong_check(self);
                     // TODO: open picture show VC
                 };
                 return cell;
@@ -150,6 +153,8 @@
         [self.shareListTableV.footer endRefreshing];
         
         ServerHelperErrorHandle;
+        self.shareListTableV.footer.hidden = !apiResult || apiResult.count < pageSize;
+        
         if ([date timeIntervalSince1970] == 0) {
             self.shareList = apiResult;
         }
@@ -158,7 +163,7 @@
             [tmpShareList addObjectsFromArray:apiResult];
             self.shareList = tmpShareList;
         }
-        self.shareListTableV.footer.hidden = !apiResult || apiResult.count < pageSize;
+        
     }];
 }
 
