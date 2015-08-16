@@ -31,4 +31,6 @@
  */
 - (NSString *)md5string;
 
++ (BOOL)isNilEmptyOrBlankString:(NSString *)str;
+
 @end

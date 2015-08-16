@@ -34,4 +34,21 @@
             ];
 }
 
++ (BOOL)isNilEmptyOrBlankString:(NSString *)str {
+    if (!str) {
+        return YES;
+    }
+    if ([str isEqual:[NSNull null]]) {
+        return YES;
+    }
+    
+    NSString *tmpStr = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (0 == [tmpStr length]) {
+        return YES;
+    }
+    
+    return NO;
+    
+}
+
 @end

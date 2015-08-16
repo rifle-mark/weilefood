@@ -31,6 +31,7 @@
 #import "VendorMacro.h"
 #import "ViewFrameMacro.h"
 #import "NotificationMacro.h"
+#import "WLAPIAddressGenerator.h"
 
 #import "NSString+Ext.h"
 #import "NSDate+Ext.h"
@@ -40,5 +41,6 @@
 #import "UIScrollView+MJRefreshDefault.h"
 #import "UIImageView+SDWebImage.h"
 #import "MBProgressHUD+Message.h"
+#import "NSDate+MKWDate.h"
 
 #endif

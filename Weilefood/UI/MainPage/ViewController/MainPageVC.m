@@ -10,6 +10,8 @@
 
 #import "DiscoveryVC.h"
 #import "SharedAllListVC.h"
+#import "ShareEditVC.h"
+#import "LoginVC.h"
 
 @interface MainPageVC ()
 
@@ -133,8 +135,12 @@
         [_addShareButton setImage:[UIImage imageNamed:@"mainpage_add_icon_h"] forState:UIControlStateHighlighted];
         _weak(self);
         [_addShareButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
-            _strong_check(self);
-            DLog(@"");
+            [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+                _strong_check(self);
+                ShareEditVC *shareEditVC = [[ShareEditVC alloc] init];
+                [self.navigationController pushViewController:shareEditVC animated:YES];
+            }];
+            
         }];
     }
     return _addShareButton;
