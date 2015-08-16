@@ -141,9 +141,9 @@
     }];
 }
 
-- (void)_loadShareAtDate:(NSDate *)date pageSize:(NSNumber *)pageSize {
+- (void)_loadShareAtDate:(NSDate *)date pageSize:(NSUInteger)pageSize {
     _weak(self);
-    [[WLServerHelper sharedInstance] share_getListWithMaxDate:date pageSize:20 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
+    [[WLServerHelper sharedInstance] share_getListWithMaxDate:date pageSize:pageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         
         [self.shareListTableV.header endRefreshing];
@@ -158,15 +158,16 @@
             [tmpShareList addObjectsFromArray:apiResult];
             self.shareList = tmpShareList;
         }
+        self.shareListTableV.footer.hidden = !apiResult || apiResult.count < pageSize;
     }];
 }
 
 - (void)_refreshCommentList {
-    [self _loadShareAtDate:[NSDate dateWithTimeIntervalSince1970:0] pageSize:@20];
+    [self _loadShareAtDate:[NSDate dateWithTimeIntervalSince1970:0] pageSize:20];
 }
 
 - (void)_loadMoreComment {
-    [self _loadShareAtDate:[[self.shareList lastObject] createDate] pageSize:@20];
+    [self _loadShareAtDate:[[self.shareList lastObject] createDate] pageSize:20];
 }
 
 @end
