@@ -15,3 +15,16 @@
 }
 
 @end
+
+
+@implementation WLMOOrderProduct
+@dynamic orderDetailId;
+@dynamic type;
+@dynamic refId;
+@dynamic count;
+@dynamic price;
+@dynamic title;
+@dynamic image;
+@dynamic orderId;
+@dynamic createDate;
+@end

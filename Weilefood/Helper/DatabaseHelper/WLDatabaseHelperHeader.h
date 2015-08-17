@@ -11,5 +11,6 @@
 
 #import "WLDatabaseHelper.h"
 #import "WLDatabaseHelper+User.h"
+#import "WLDatabaseHelper+ShoppingCartItem.h"
 
 #endif
