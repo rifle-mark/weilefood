@@ -25,11 +25,19 @@
 @property(nonatomic,strong)UITableView      *commentDetailTableV;
 @property(nonatomic,strong)WLShareSubCommentView *commentV;
 @property(nonatomic,strong)UIImageView      *deleteActionV;
+@property(nonatomic,strong)UIView           *footerView;
+@property(nonatomic,strong)UITextView       *textField;
+@property(nonatomic,strong)UIButton         *sendButton;
+@property(nonatomic,strong)UIView           *lineView;
+
+@property(nonatomic, assign)CGFloat         keyboardHeight;
 
 @property(nonatomic,strong)NSArray          *commentList;
 @property(nonatomic,strong)NSNumber         *currentPage;
 
 @end
+
+static NSString *const kHintText = @"在这里说点什么吧...";
 
 @implementation ShareDetailVC
 
@@ -37,9 +45,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.navigationItem.title = @"分享详情";
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"举报" style:UIBarButtonItemStyleDone target:self action:@selector(_policeShare:)];
+    rightItem.tintColor = k_COLOR_WHITE;
+    self.navigationItem.rightBarButtonItem = rightItem;
+    
     [self.view addSubview:self.commentDetailTableV];
     [self.view addSubview:self.commentV];
     [self.view addSubview:self.deleteActionV];
+    [self.view addSubview:self.footerView];
+    [self.view addSubview:self.lineView];
+    [self.footerView addSubview:self.textField];
+    [self.footerView addSubview:self.sendButton];
     
     [self _setupObserver];
     [self _refreshCommentList];
@@ -59,6 +76,27 @@
     [self.commentDetailTableV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.commentDetailTableV.superview);
         make.top.equalTo(self.commentDetailTableV.superview).with.offset(self.topLayoutGuide.length);
+    }];
+    
+    [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.footerView.mas_top);
+        make.height.equalTo(@k1pxWidth);
+    }];
+    [self.footerView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-self.keyboardHeight);
+    }];
+    [self.textField mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.equalTo(self.footerView).offset(8);
+        make.right.equalTo(self.sendButton.mas_left).offset(-8);
+        make.bottom.equalTo(@-8);
+        make.height.equalTo(@(MAX([self.sendButton backgroundImageForState:UIControlStateNormal].size.height, self.textField.contentSize.height)));
+    }];
+    [self.sendButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.footerView).offset(-8);
+        make.bottom.equalTo(self.textField);
+        make.size.mas_equalTo([self.sendButton backgroundImageForState:UIControlStateNormal].size);
     }];
     
     [self.commentV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -93,6 +131,7 @@
             v.showsVerticalScrollIndicator = NO;
             v.separatorStyle = UITableViewCellSeparatorStyleNone;
             v.allowsSelection = NO;
+            v.backgroundColor = k_COLOR_WHITESMOKE;
             _weak(self);
             [v withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {
                 _strong(self);
@@ -131,7 +170,7 @@
                     cell.commentActionBlock = ^(WLShareModel *share) {
                         [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                             _strong_check(self);
-                            [self _showCommentViewWithComment:share];
+                            [self showCommentViewWithComment:share];
                         }];
                         
                     };
@@ -174,12 +213,12 @@
                     return cell;
                 }
             }];
-            v.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-                _strong(self);
+            [v headerWithRefreshingBlock:^{
+                _strong_check(self);
                 [self _refreshCommentList];
             }];
-            v.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-                _strong(self);
+            [v footerWithRefreshingBlock:^{
+                _strong_check(self);
                 [self _loadMoreComment];
             }];
             v;
@@ -249,6 +288,93 @@
     return _deleteActionV;
 }
 
+- (UIView *)lineView {
+    if (!_lineView) {
+        _lineView = [[UIView alloc] init];
+        _lineView.backgroundColor = k_COLOR_DARKGRAY;
+    }
+    return _lineView;
+}
+
+- (UIView *)footerView {
+    if (!_footerView) {
+        _footerView = [[UIView alloc] init];
+        _footerView.backgroundColor = k_COLOR_WHITESMOKE;
+    }
+    return _footerView;
+}
+
+- (UITextView *)textField {
+    if (!_textField) {
+        _textField = [[UITextView alloc] init];
+        _textField.backgroundColor = k_COLOR_WHITE;
+        _textField.font = [UIFont systemFontOfSize:13];
+        _textField.textColor = k_COLOR_DARKGRAY;
+        _textField.layer.borderColor = k_COLOR_DARKGRAY.CGColor;
+        _textField.layer.borderWidth = k1pxWidth;
+        _textField.layer.cornerRadius = 4;
+        _textField.text = kHintText;
+        [_textField withBlockForShouldBeginEditing:^BOOL(UITextView *view) {
+            if (![WLDatabaseHelper user_find])
+            {
+                [LoginVC needsLoginWithLoggedBlock:nil];
+                return NO;
+            }
+            else {
+                return YES;
+            }
+        }];
+        [_textField withBlockForDidBeginEditing:^(UITextView *view) {
+            if ([view.text isEqualToString:kHintText]) {
+                view.text = @"";
+            }
+        }];
+        [_textField withBlockForDidEndEditing:^(UITextView *view) {
+            if (!view.text || view.text.length <= 0) {
+                view.text = kHintText;
+            }
+        }];
+    }
+    return _textField;
+}
+
+- (UIButton *)sendButton {
+    if (!_sendButton) {
+        _sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_sendButton setBackgroundImage:[UIImage imageNamed:@"btn_comment_send_n"] forState:UIControlStateNormal];
+        [_sendButton setBackgroundImage:[UIImage imageNamed:@"btn_comment_send_h"] forState:UIControlStateHighlighted];
+        _weak(self);
+        [_sendButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            _strong_check(self);
+            if (![WLDatabaseHelper user_find]) {
+                [LoginVC needsLoginWithLoggedBlock:nil];
+                return;
+            }
+            if ([self.textField.text isEqualToString:kHintText]) {
+                [MBProgressHUD showErrorWithMessage:@"请填写评论内容"];
+                [self.textField becomeFirstResponder];
+                return;
+            }
+            if (!self.textField.text || self.textField.text.length <= 5) {
+                [MBProgressHUD showErrorWithMessage:@"评论内容太少，多写一点吧"];
+                [self.textField becomeFirstResponder];
+                return;
+            }
+            [self.textField resignFirstResponder];
+            
+            [MBProgressHUD showLoadingWithMessage:@"正在提交..."];
+            [[WLServerHelper sharedInstance] comment_addWithType:WLCommentTypeShare refId:self.share.shareId content:self.textField.text parentId:0 callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                [MBProgressHUD hideLoading];
+                _strong_check(self);
+                ServerHelperErrorHandle;
+                self.textField.text = @"";
+                [MBProgressHUD showSuccessWithMessage:@"已发布"];
+            }];
+        }];
+    }
+    return _sendButton;
+}
+
 -(BOOL)canBecomeFirstResponder {
     return YES;
 }
@@ -273,63 +399,60 @@
 
 - (void)_setupObserver {
     _weak(self);
+    __block BOOL handled = NO;
+    [self addObserverForNotificationName:UIKeyboardWillShowNotification usingBlock:^(NSNotification *notification) {
+        _strong_check(self);
+        if (self.textField.isFirstResponder) {
+            handled = YES;
+            
+            NSDictionary* info = [notification userInfo];
+            CGFloat duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+            self.keyboardHeight = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+            [UIView animateWithDuration:duration animations:^{
+                [self.view setNeedsLayout];
+                [self.view layoutIfNeeded];
+            }];
+        }
+    }];
+    [self addObserverForNotificationName:UIKeyboardWillHideNotification usingBlock:^(NSNotification *notification) {
+        _strong_check(self);
+        if (handled) {
+            handled = NO;
+            NSDictionary* info = [notification userInfo];
+            CGFloat duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+            self.keyboardHeight = 0;
+            [UIView animateWithDuration:duration animations:^{
+                [self.view setNeedsLayout];
+                [self.view layoutIfNeeded];
+            }];
+        }
+    }];
+    
     [self startObserveObject:self forKeyPath:@"commentList" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong(self);
         [self.commentDetailTableV reloadData];
     }];
     
-    [self addObserverForNotificationName:UIKeyboardWillShowNotification usingBlock:^(NSNotification *noti) {
-        _strong(self);
-        NSNumber *duration = [noti.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-        NSNumber *curve = [noti.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
-        [UIView animateWithDuration:[duration doubleValue] delay:0.0f options:[curve integerValue]<<16 animations:^(){
-            [self.commentV mas_remakeConstraints:^(MASConstraintMaker *make) {
-                _strong(self);
-                CGRect keyboardBounds = [[noti.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-                CGFloat keyboardHeight = keyboardBounds.size.height;
-                make.left.right.equalTo(self.view);
-                make.height.equalTo(@50);
-                make.bottom.equalTo(self.view).with.offset(keyboardHeight<=self.bottomLayoutGuide.length?(-self.bottomLayoutGuide.length):(-keyboardHeight));
-            }];
-            [self.view layoutIfNeeded];
-        } completion:nil];
-    }];
-    
-    [self addObserverForNotificationName:UIKeyboardWillHideNotification usingBlock:^(NSNotification *noti) {
-        _strong(self);
-        NSNumber *duration = [noti.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-        NSNumber *curve = [noti.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
-        self.commentV.comment = nil;
-        
-        [UIView animateWithDuration:[duration doubleValue] delay:0.0f options:[curve integerValue]<<16 animations:^(){
-            [self.commentV mas_remakeConstraints:^(MASConstraintMaker *make) {
-                _strong(self);
-                make.left.right.equalTo(self.view);
-                make.height.equalTo(@50);
-                make.bottom.equalTo(self.view);
-            }];
-            [self.view layoutIfNeeded];
-        } completion:^(BOOL finished){
-            _strong(self);
-            [self.commentV setHidden:YES];
-        }];
+    [self startObserveObject:self.textField forKeyPath:@"contentSize" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
+        _strong_check(self);
+        [self.view setNeedsLayout];
     }];
 }
 
-- (void)_showCommentViewWithComment:(WLShareModel*)comment {
-    if (![self.commentV isHidden]) {
-        return;
-    }
-    self.commentV.comment = comment;
-    _weak(self);
-    [self.commentV mas_remakeConstraints:^(MASConstraintMaker *make) {
-        _strong(self);
-        make.left.right.equalTo(self.view);
-        make.height.equalTo(@50);
-        make.bottom.equalTo(self.view);
-    }];
-    self.commentV.hidden = NO;
-    [self.commentV becomeFirstResponder];
+- (void)showCommentViewWithComment:(WLShareModel*)comment {
+//    if (![self.commentV isHidden]) {
+//        return;
+//    }
+//    self.commentV.comment = comment;
+//    _weak(self);
+//    [self.commentV mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        _strong(self);
+//        make.left.right.equalTo(self.view);
+//        make.height.equalTo(@50);
+//        make.bottom.equalTo(self.view);
+//    }];
+//    self.commentV.hidden = NO;
+//    [self.commentV becomeFirstResponder];
 }
 
 - (void)_setupTapGestureRecognizer {
@@ -364,6 +487,8 @@
         
         ServerHelperErrorHandle;
         self.commentList = apiResult;
+        
+        self.commentDetailTableV.footer.hidden = !apiResult || apiResult.count < 20;
     }];
 }
 
@@ -381,6 +506,20 @@
         NSMutableArray *tmpCommentList = [self.commentList mutableCopy];
         [tmpCommentList addObjectsFromArray:apiResult];
         self.commentList = tmpCommentList;
+        
+        self.commentDetailTableV.footer.hidden = !apiResult || apiResult.count < 20;
+    }];
+}
+
+- (void)_policeShare:(id)sender {
+    _weak(self);
+    [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+        _strong_check(self);
+        [[WLServerHelper sharedInstance] share_policeWithShareId:self.share.shareId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+            ServerHelperErrorHandle;
+            
+            [MBProgressHUD showSuccessWithMessage:@"举报成功"];
+        }];
     }];
 }
 

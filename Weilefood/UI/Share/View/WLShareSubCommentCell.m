@@ -58,7 +58,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.backgroundColor = RGB(228, 228, 228);
+        self.backgroundColor = k_COLOR_WHITESMOKE;
         _weak(self);
         self.avatarV = [[UIImageView alloc] init];
         self.avatarV.clipsToBounds = YES;
@@ -68,7 +68,7 @@
             _strong(self);
             make.top.equalTo(self.contentView).with.offset(12);
             make.left.equalTo(self.contentView).with.offset(15);
-            make.width.height.equalTo(@44);
+            make.width.height.equalTo(@42);
         }];
         
         self.timeL = [[UILabel alloc] init];
@@ -107,6 +107,16 @@
             make.left.equalTo(self.nickNameL);
             make.right.equalTo(self.contentView).with.offset(-17);
             make.bottom.equalTo(self.contentView).with.offset(-15);
+        }];
+        
+        UIView *splitV = [[UIView alloc] init];
+        splitV.backgroundColor = k_COLOR_DARKGRAY;
+        [self.contentView addSubview:splitV];
+        [splitV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.contentView).with.offset(10);
+            make.right.equalTo(self.contentView).with.offset(-10);
+            make.bottom.equalTo(self.contentView);
+            make.height.equalTo(@0.4);
         }];
         
         UILongPressGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc] initWithActionBlock:^(UIGestureRecognizer *gesture) {
