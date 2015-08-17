@@ -1828,7 +1828,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yulin Chen (A43C3D2MLQ)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu Mobile Connection Incorporated Technology Co., Ltd.";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = Weilefood/Main/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1837,7 +1837,7 @@
 					"$(PROJECT_DIR)/Weilefood/Vendor/BPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b4e21f12-d710-4fed-9bc4-0876203266f9";
+				PROVISIONING_PROFILE = "abf20ead-d8ce-4936-93a6-adcdac3e1d00";
 			};
 			name = Debug;
 		};
@@ -1847,7 +1847,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yulin Chen (A43C3D2MLQ)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu Mobile Connection Incorporated Technology Co., Ltd.";
 				INFOPLIST_FILE = Weilefood/Main/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1855,7 +1855,7 @@
 					"$(PROJECT_DIR)/Weilefood/Vendor/BPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b4e21f12-d710-4fed-9bc4-0876203266f9";
+				PROVISIONING_PROFILE = "abf20ead-d8ce-4936-93a6-adcdac3e1d00";
 			};
 			name = Release;
 		};
