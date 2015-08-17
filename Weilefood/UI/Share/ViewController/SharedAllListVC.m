@@ -163,6 +163,7 @@
             [tmpShareList addObjectsFromArray:apiResult];
             self.shareList = tmpShareList;
         }
+        
     }];
 }
 
