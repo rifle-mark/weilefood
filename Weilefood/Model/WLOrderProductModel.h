@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 /// 订单商品类型
-typedef NS_ENUM(NSUInteger, WLOrderProductType) {
+typedef NS_ENUM(NSInteger, WLOrderProductType) {
     /// 市集产品
     WLOrderProductTypeProduct = 2,
     /// 活动
@@ -42,4 +42,18 @@ typedef NS_ENUM(NSUInteger, WLOrderProductType) {
 ///
 @property (nonatomic, copy) NSDate *createDate;
 
+@end
+
+
+/// CoreData使用
+@interface WLMOOrderProduct : NSManagedObject
+@property (nonatomic, strong) NSNumber *orderDetailId;
+@property (nonatomic, strong) NSNumber *type;
+@property (nonatomic, strong) NSNumber *refId;
+@property (nonatomic, strong) NSNumber *count;
+@property (nonatomic, strong) NSNumber *price;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *image;
+@property (nonatomic, strong) NSNumber *orderId;
+@property (nonatomic, strong) NSDate *createDate;
 @end

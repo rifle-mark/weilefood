@@ -15,6 +15,7 @@
 #import "ShareOnPlatformVC.h"
 #import "InputQuantityVC.h"
 
+#import "WLDatabaseHelperHeader.h"
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
@@ -353,8 +354,19 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_addCartButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             [InputQuantityVC inputQuantityWithEnterBlock:^(InputQuantityVC *inputQuantityVC, NSInteger quantity) {
                 _strong_check(self);
-                // TODO 加入购物车
-                DLog(@"%ld", (long)quantity);
+                WLShoppingCartItemModel *item = [WLDatabaseHelper shoppingCart_findItemWithType:WLOrderProductTypeProduct refId:self.product.productId];
+                if (!item) {
+                    item = [[WLShoppingCartItemModel alloc] init];
+                    item.count = 0;
+                }
+                item.type  = WLOrderProductTypeProduct;
+                item.refId = self.product.productId;
+                item.title = self.product.productName;
+                item.image = self.product.images;
+                item.price = self.product.price;
+                item.count += quantity;
+                item.selected = YES;
+                [WLDatabaseHelper shoppingCart_saveItem:item];
                 [inputQuantityVC dismissSelf];
             }];
         }];
