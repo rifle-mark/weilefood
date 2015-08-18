@@ -14,6 +14,12 @@
     NSParameterAssert(class);
     NSParameterAssert(fromObject);
     NSParameterAssert(toObject);
+    
+    // 复制父类的属性值
+    if (![NSStringFromClass([class superclass]) isEqualToString:@"NSObject"]) {
+        [self copyPropertyValuesWithClass:[class superclass] FromObject:fromObject toObject:toObject];
+    }
+    
     unsigned int count;
     objc_property_t *propertyList = class_copyPropertyList(class, &count);
     for (int i = 0; i < count; i++) {
