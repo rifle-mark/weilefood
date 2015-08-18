@@ -165,11 +165,6 @@
             make.left.equalTo(self.separateView);
             make.width.equalTo(self.weixinLoginButton);
         }];
-        [self.weiboLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.weiboLoginButton.mas_bottom).offset(15);
-            make.centerX.equalTo(self.weiboLoginButton);
-            make.height.equalTo(@(self.weiboLabel.font.lineHeight));
-        }];
         [self.weixinLoginButton mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.width.equalTo(self.weiboLoginButton);
             make.right.equalTo(self.separateView);
@@ -179,7 +174,6 @@
             make.top.equalTo(self.weixinLoginButton.mas_bottom).offset(15);
             make.centerX.equalTo(self.weixinLoginButton);
             make.height.equalTo(@(self.weixinLabel.font.lineHeight));
-            make.bottom.equalTo(self.weixinLabel.superview).offset(-20);
         }];
     }
     else {
@@ -187,12 +181,13 @@
             make.top.equalTo(self.separateView.mas_bottom).offset(40);
             make.left.right.equalTo(self.separateView);
         }];
-        [self.weiboLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.weiboLoginButton.mas_bottom).offset(15);
-            make.centerX.equalTo(self.weiboLoginButton);
-            make.height.equalTo(@(self.weiboLabel.font.lineHeight));
-        }];
     }
+    [self.weiboLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.weiboLoginButton.mas_bottom).offset(15);
+        make.centerX.equalTo(self.weiboLoginButton);
+        make.height.equalTo(@(self.weiboLabel.font.lineHeight));
+        make.bottom.equalTo(self.weiboLabel.superview).offset(-20);
+    }];
     FixesViewDidLayoutSubviewsiOS7Error;
 }
 
