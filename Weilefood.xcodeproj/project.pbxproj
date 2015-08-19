@@ -185,6 +185,7 @@
 		24E922231B7F35FD007F763C /* UIImageView+SDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E922221B7F35FD007F763C /* UIImageView+SDWebImage.m */; };
 		24E93CEF1B82179700E41615 /* WLShoppingCartItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E93CEE1B82179700E41615 /* WLShoppingCartItemModel.m */; };
 		24E93CF21B821AC900E41615 /* WLDatabaseHelper+ShoppingCartItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E93CF11B821AC900E41615 /* WLDatabaseHelper+ShoppingCartItem.m */; };
+		24EC87DA1B84B807007B289A /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EC87D91B84B807007B289A /* UITextView+Placeholder.m */; };
 		24ECD7B41B78FCEE00AED422 /* TransparentNavigationBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ECD7B31B78FCEE00AED422 /* TransparentNavigationBarVC.m */; };
 		4D8B1A6A1B7CD96C008F0925 /* NSDate+MKWDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B1A691B7CD96C008F0925 /* NSDate+MKWDate.m */; };
 		4D8B1A6D1B7CDBF6008F0925 /* WLAPIAddressGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B1A6C1B7CDBF6008F0925 /* WLAPIAddressGenerator.m */; };
@@ -568,6 +569,8 @@
 		24E93CEE1B82179700E41615 /* WLShoppingCartItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLShoppingCartItemModel.m; sourceTree = "<group>"; };
 		24E93CF01B821AC900E41615 /* WLDatabaseHelper+ShoppingCartItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLDatabaseHelper+ShoppingCartItem.h"; sourceTree = "<group>"; };
 		24E93CF11B821AC900E41615 /* WLDatabaseHelper+ShoppingCartItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLDatabaseHelper+ShoppingCartItem.m"; sourceTree = "<group>"; };
+		24EC87D81B84B807007B289A /* UITextView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Placeholder.h"; sourceTree = "<group>"; };
+		24EC87D91B84B807007B289A /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
 		24ECD7B21B78FCEE00AED422 /* TransparentNavigationBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentNavigationBarVC.h; sourceTree = "<group>"; };
 		24ECD7B31B78FCEE00AED422 /* TransparentNavigationBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransparentNavigationBarVC.m; sourceTree = "<group>"; };
 		27B0DAFB8AFA7EC3AE1728AE /* libPods-Weilefood.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weilefood.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1102,6 +1105,8 @@
 				4DAA2BB01B7FD751004E5601 /* UIMenuController+UserInfo.m */,
 				4DAA2BAC1B7FACFC004E5601 /* UIImage+AdjustmentSize.h */,
 				4DAA2BAD1B7FACFC004E5601 /* UIImage+AdjustmentSize.m */,
+				24EC87D81B84B807007B289A /* UITextView+Placeholder.h */,
+				24EC87D91B84B807007B289A /* UITextView+Placeholder.m */,
 				4D8B1A681B7CD96C008F0925 /* NSDate+MKWDate.h */,
 				4D8B1A691B7CD96C008F0925 /* NSDate+MKWDate.m */,
 				246F07801B56A6210086CD28 /* NSString+Ext.h */,
@@ -1625,6 +1630,7 @@
 				24B8C06F1B5242BC001C5722 /* ALAsset+AGIPC.m in Sources */,
 				240FB7091B690D5B00DF5CE4 /* SharedAllListVC.m in Sources */,
 				24B8C0661B5242BC001C5722 /* AGImagePickerController.m in Sources */,
+				24EC87DA1B84B807007B289A /* UITextView+Placeholder.m in Sources */,
 				24CDCBFD1B4F792E00BDE8CB /* UISearchBar+GCDelegateBlock.m in Sources */,
 				240FB70C1B6921F800DF5CE4 /* MarketSearchVC.m in Sources */,
 				24CDCBF61B4F792E00BDE8CB /* UIGestureRecognizer+GCDelegateBlock.m in Sources */,
