@@ -33,9 +33,10 @@ static NSInteger const kContentRigthMargin = 20;
 
 @implementation CommentCell
 
-+ (CGFloat)cellHeightWithContent:(NSString *)content {
++ (CGFloat)cellHeightWithToName:(NSString *)toName content:(NSString *)content {
+    NSString *text = toName && toName.length > 0 ? [NSString stringWithFormat:@"回复%@：%@", toName, content] : content;
     CGFloat contentWidth = V_W_([UIApplication sharedApplication].keyWindow) - kAvatarLeftMargin - kAvatarWidth - kContentLeftMargin - kContentRigthMargin;
-    CGRect contentFrame = [content boundingRectWithSize:CGSizeMake(contentWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kContentFont} context:nil];
+    CGRect contentFrame = [text boundingRectWithSize:CGSizeMake(contentWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kContentFont} context:nil];
     
     return kNameTopMargin + kNameFont.lineHeight
         + kContentTopMargin + contentFrame.size.height
@@ -89,14 +90,33 @@ static NSInteger const kContentRigthMargin = 20;
     self.nameLabel.text = name;
 }
 
+- (void)setToName:(NSString *)toName {
+    _toName = [toName copy];
+    [self _resetContentText];
+}
+
 - (void)setContent:(NSString *)content {
     _content = [content copy];
-    self.contentLabel.text = content;
+    [self _resetContentText];
 }
 
 - (void)setTime:(NSDate *)time {
     _time = [time copy];
     self.timeLabel.text = [time formattedDateWithFormat:@"yyyy-MM-dd"];;
+}
+
+#pragma mark - private methods
+
+- (void)_resetContentText {
+    if (self.toName && self.toName.length > 0) {
+        NSString *text = [NSString stringWithFormat:@"回复%@：%@", self.toName, self.content];
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:text];
+        [attr addAttributes:@{NSForegroundColorAttributeName: k_COLOR_GOLDENROD} range:[text rangeOfString:self.toName]];
+        self.contentLabel.attributedText = attr;
+    }
+    else {
+        self.contentLabel.text = self.content;
+    }
 }
 
 #pragma mark - private property methods

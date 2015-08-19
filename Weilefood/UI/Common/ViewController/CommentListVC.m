@@ -9,6 +9,8 @@
 #import "CommentListVC.h"
 #import "CommentCell.h"
 
+#import "UITextView+Placeholder.h"
+
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
@@ -17,13 +19,15 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIView      *lineView;
 @property (nonatomic, strong) UIView      *footerView;
-@property (nonatomic, strong) UITextView *textField;
+@property (nonatomic, strong) UITextView  *textView;
 @property (nonatomic, strong) UIButton    *sendButton;
 
 @property (nonatomic, assign) CGFloat       keyboardHeight;
 @property (nonatomic, assign) WLCommentType type;
 @property (nonatomic, assign) NSUInteger    refId;
 @property (nonatomic, strong) NSArray       *commentList;
+
+@property (nonatomic, strong) WLCommentModel *replyComment;
 
 @end
 
@@ -61,7 +65,7 @@ static NSInteger const kPageSize = 10;
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.lineView];
     [self.view addSubview:self.footerView];
-    [self.footerView addSubview:self.textField];
+    [self.footerView addSubview:self.textView];
     [self.footerView addSubview:self.sendButton];
     
     [self _addObserve];
@@ -85,15 +89,15 @@ static NSInteger const kPageSize = 10;
         make.left.right.equalTo(self.view);
         make.bottom.equalTo(self.view).offset(-self.keyboardHeight);
     }];
-    [self.textField mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.textView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.top.equalTo(self.footerView).offset(8);
         make.right.equalTo(self.sendButton.mas_left).offset(-8);
         make.bottom.equalTo(@-8);
-        make.height.equalTo(@(MAX([self.sendButton backgroundImageForState:UIControlStateNormal].size.height, self.textField.contentSize.height)));
+        make.height.equalTo(@(MAX([self.sendButton backgroundImageForState:UIControlStateNormal].size.height, self.textView.contentSize.height)));
     }];
     [self.sendButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.footerView).offset(-8);
-        make.bottom.equalTo(self.textField);
+        make.bottom.equalTo(self.textView);
         make.size.mas_equalTo([self.sendButton backgroundImageForState:UIControlStateNormal].size);
     }];
     
@@ -107,7 +111,7 @@ static NSInteger const kPageSize = 10;
     __block BOOL handled = NO;
     [self addObserverForNotificationName:UIKeyboardWillShowNotification usingBlock:^(NSNotification *notification) {
         _strong_check(self);
-        if (self.textField.isFirstResponder) {
+        if (self.textView.isFirstResponder) {
             handled = YES;
             
             NSDictionary* info = [notification userInfo];
@@ -136,9 +140,18 @@ static NSInteger const kPageSize = 10;
         _strong_check(self);
         [self.tableView reloadData];
     }];
-    [self startObserveObject:self.textField forKeyPath:@"contentSize" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
+    [self startObserveObject:self.textView forKeyPath:@"contentSize" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
         [self.view setNeedsLayout];
+    }];
+    [self startObserveObject:self forKeyPath:@"replyComment" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
+        _strong_check(self);
+        if (self.replyComment) {
+            self.textView.placeholder = [NSString stringWithFormat:@"回复%@：", self.replyComment.nickName];
+        }
+        else {
+            self.textView.placeholder = kHintText;
+        }
     }];
 }
 
@@ -188,7 +201,7 @@ static NSInteger const kPageSize = 10;
         [_tableView withBlockForRowHeight:^CGFloat(UITableView *view, NSIndexPath *path) {
             _strong_check(self, 0);
             WLCommentModel *comment = self.commentList[path.row];
-            CGFloat height = [CommentCell cellHeightWithContent:comment.content];
+            CGFloat height = [CommentCell cellHeightWithToName:comment.toNickName content:comment.content];
             return height;
         }];
         [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
@@ -197,9 +210,15 @@ static NSInteger const kPageSize = 10;
             WLCommentModel *comment = self.commentList[path.row];
             cell.avatarUrl = comment.avatar;
             cell.name      = comment.nickName;
+            cell.toName    = comment.toNickName;
             cell.content   = comment.content;
             cell.time      = comment.createDate;
             return cell;
+        }];
+        [_tableView withBlockForRowDidSelect:^(UITableView *view, NSIndexPath *path) {
+            _strong_check(self);
+            self.replyComment = self.commentList[path.row];
+            [self.textView becomeFirstResponder];
         }];
     }
     return _tableView;
@@ -221,28 +240,23 @@ static NSInteger const kPageSize = 10;
     return _footerView;
 }
 
-- (UITextView *)textField {
-    if (!_textField) {
-        _textField = [[UITextView alloc] init];
-        _textField.backgroundColor = k_COLOR_WHITE;
-        _textField.font = [UIFont systemFontOfSize:13];
-        _textField.textColor = k_COLOR_DARKGRAY;
-        _textField.layer.borderColor = k_COLOR_DARKGRAY.CGColor;
-        _textField.layer.borderWidth = k1pxWidth;
-        _textField.layer.cornerRadius = 4;
-        _textField.text = kHintText;
-        [_textField withBlockForDidBeginEditing:^(UITextView *view) {
-            if ([view.text isEqualToString:kHintText]) {
-                view.text = @"";
-            }
-        }];
-        [_textField withBlockForDidEndEditing:^(UITextView *view) {
-            if (!view.text || view.text.length <= 0) {
-                view.text = kHintText;
-            }
+- (UITextView *)textView {
+    if (!_textView) {
+        _textView = [[UITextView alloc] init];
+        _textView.backgroundColor = k_COLOR_WHITE;
+        _textView.font = [UIFont systemFontOfSize:13];
+        _textView.layer.borderColor = k_COLOR_DARKGRAY.CGColor;
+        _textView.layer.borderWidth = k1pxWidth;
+        _textView.layer.cornerRadius = 4;
+        _textView.placeholder = kHintText;
+        _weak(self);
+        [_textView withBlockForDidEndEditing:^(UITextView *view) {
+            _strong_check(self);
+            view.text = @"";
+            self.replyComment = nil;
         }];
     }
-    return _textField;
+    return _textView;
 }
 
 - (UIButton *)sendButton {
@@ -253,24 +267,23 @@ static NSInteger const kPageSize = 10;
         _weak(self);
         [_sendButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            if ([self.textField.text isEqualToString:kHintText]) {
+            if ([self.textView.text isEqualToString:kHintText]) {
                 [MBProgressHUD showErrorWithMessage:@"请填写评论内容"];
-                [self.textField becomeFirstResponder];
+                [self.textView becomeFirstResponder];
                 return;
             }
-            if (!self.textField.text || self.textField.text.length <= 5) {
+            if (!self.textView.text || self.textView.text.length <= 5) {
                 [MBProgressHUD showErrorWithMessage:@"评论内容太少，多写一点吧"];
-                [self.textField becomeFirstResponder];
+                [self.textView becomeFirstResponder];
                 return;
             }
-            [self.textField resignFirstResponder];
-            
             [MBProgressHUD showLoadingWithMessage:@"正在提交..."];
-            [[WLServerHelper sharedInstance] comment_addWithType:self.type refId:self.refId content:self.textField.text parentId:0 callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+            [[WLServerHelper sharedInstance] comment_addWithType:self.type refId:self.refId content:self.textView.text parentId:(self.replyComment ? self.replyComment.commentId : 0) callback:^(WLApiInfoModel *apiInfo, NSError *error) {
                 [MBProgressHUD hideLoading];
                 _strong_check(self);
                 ServerHelperErrorHandle;
-                self.textField.text = @"";
+                [self.textView resignFirstResponder];
+                [self.tableView.header beginRefreshing];
                 [MBProgressHUD showSuccessWithMessage:@"已发布"];
             }];
         }];

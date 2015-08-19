@@ -13,8 +13,10 @@
 
 /// 头像URL
 @property (nonatomic, copy) NSString *avatarUrl;
-/// 名称
+/// 昵称
 @property (nonatomic, copy) NSString *name;
+/// 回复用户昵称
+@property (nonatomic, copy) NSString *toName;
 /// 内容
 @property (nonatomic, copy) NSString *content;
 /// 时间
@@ -23,10 +25,11 @@
 /**
  *  Cell展示所需要的高度
  *
+ *  @param toName  回复用户昵称
  *  @param content Cell内容字符串
  *
  *  @return 高度
  */
-+ (CGFloat)cellHeightWithContent:(NSString *)content;
++ (CGFloat)cellHeightWithToName:(NSString *)toName content:(NSString *)content;
 
 @end
