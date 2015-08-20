@@ -25,7 +25,10 @@
     for (int i = 0; i < count; i++) {
         objc_property_t property = propertyList[i];
         NSString *propertyName = [NSString stringWithCString:property_getName(property) encoding:NSUTF8StringEncoding];
-        [toObject setValue:[fromObject valueForKey:propertyName] forKey:propertyName];
+        if ([toObject respondsToSelector:NSSelectorFromString(propertyName)]
+            && [fromObject respondsToSelector:NSSelectorFromString(propertyName)]) {
+            [toObject setValue:[fromObject valueForKey:propertyName] forKey:propertyName];
+        }
     }
 }
 

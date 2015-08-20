@@ -310,7 +310,6 @@
             _strong_check(self);
             NSURL *url = [NSURL URLWithString:self.video.videoUrl];
             MPMoviePlayerViewController *pvc = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
-            pvc.moviePlayer.movieSourceType = MPMovieSourceTypeStreaming;
             [self presentViewController:pvc animated:YES completion:nil];
         }];
     }

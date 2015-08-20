@@ -170,7 +170,6 @@
 		24CDCC1D1B4F792E00BDE8CB /* UIControl+GCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCBD31B4F792E00BDE8CB /* UIControl+GCEvent.m */; };
 		24CDCC1E1B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CDCBD61B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m */; };
 		24CDCC2C1B4FA34B00BDE8CB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24CDCC2B1B4FA34B00BDE8CB /* CoreData.framework */; };
-		24D3F9BA1B7B9C13005F63DB /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24D3F9B91B7B9C13005F63DB /* MediaPlayer.framework */; };
 		24D3F9BD1B7BA825005F63DB /* NSDate+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D3F9BC1B7BA825005F63DB /* NSDate+Ext.m */; };
 		24D3F9C61B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D3F9C51B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m */; };
 		24D55DE61B67EB2400EC6373 /* UIBarButtonItem+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */; };
@@ -347,10 +346,6 @@
 		24B8C0611B5242BC001C5722 /* ALAsset+AGIPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+AGIPC.m"; sourceTree = "<group>"; };
 		24B8C0621B5242BC001C5722 /* UIButton+AGIPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AGIPC.h"; sourceTree = "<group>"; };
 		24B8C0631B5242BC001C5722 /* UIButton+AGIPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AGIPC.m"; sourceTree = "<group>"; };
-		24B8C0711B52477C001C5722 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		24B8C0731B52478C001C5722 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		24B8C0751B524795001C5722 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		24B8C0771B5247A2001C5722 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		24C32EBC1B61229D00D509A4 /* RegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterVC.h; sourceTree = "<group>"; };
 		24C32EBD1B61229D00D509A4 /* RegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterVC.m; sourceTree = "<group>"; };
 		24C32EC11B613BDC00D509A4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -540,7 +535,6 @@
 		24CDCBD61B4F792E00BDE8CB /* UIGestureRecognizer+GCAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+GCAction.m"; sourceTree = "<group>"; };
 		24CDCC1F1B4F7B7000BDE8CB /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		24CDCC2B1B4FA34B00BDE8CB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		24D3F9B91B7B9C13005F63DB /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		24D3F9BB1B7BA825005F63DB /* NSDate+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Ext.h"; sourceTree = "<group>"; };
 		24D3F9BC1B7BA825005F63DB /* NSDate+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Ext.m"; sourceTree = "<group>"; };
 		24D3F9C41B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MJRefreshDefault.h"; sourceTree = "<group>"; };
@@ -600,7 +594,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24D3F9BA1B7B9C13005F63DB /* MediaPlayer.framework in Frameworks */,
 				2467B7241B50D146001202A4 /* SystemConfiguration.framework in Frameworks */,
 				2467B7221B50D140001202A4 /* libz.dylib in Frameworks */,
 				2467B7201B50D13B001202A4 /* CoreTelephony.framework in Frameworks */,
@@ -1446,11 +1439,6 @@
 		610C5F99515E558BBD5D2B02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				24D3F9B91B7B9C13005F63DB /* MediaPlayer.framework */,
-				24B8C0771B5247A2001C5722 /* AssetsLibrary.framework */,
-				24B8C0751B524795001C5722 /* CoreLocation.framework */,
-				24B8C0731B52478C001C5722 /* QuartzCore.framework */,
-				24B8C0711B52477C001C5722 /* CoreGraphics.framework */,
 				2467B7231B50D146001202A4 /* SystemConfiguration.framework */,
 				2467B7211B50D140001202A4 /* libz.dylib */,
 				2467B71F1B50D13B001202A4 /* CoreTelephony.framework */,
