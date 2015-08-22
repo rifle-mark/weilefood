@@ -132,12 +132,12 @@ static NSInteger const kPageSize = 10;
 }
 
 - (void)_setTextColorWithChannelButton:(UIButton *)button isSelected:(BOOL)isSelected {
-    [button setTitleColor:isSelected ? k_COLOR_THEME_NAVIGATIONBAR_TEXT : k_COLOR_TEAL forState:UIControlStateNormal];
+    button.tintColor = isSelected ? k_COLOR_THEME_NAVIGATIONBAR_TEXT : k_COLOR_TEAL;
 }
 
 - (UIButton *)_createChannelButton {
     return ({
-        UIButton *v = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIButton *v = [UIButton buttonWithType:UIButtonTypeSystem];
         v.backgroundColor = k_COLOR_THEME_NAVIGATIONBAR;
         v.titleLabel.font = [UIFont boldSystemFontOfSize:15];
         v;
