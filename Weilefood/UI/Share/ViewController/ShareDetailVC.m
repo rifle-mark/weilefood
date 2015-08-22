@@ -368,6 +368,8 @@ static NSString *const kHintText = @"在这里说点什么吧...";
                 _strong_check(self);
                 ServerHelperErrorHandle;
                 self.textField.text = @"";
+                WLShareCell *cell = (WLShareCell*)[self.commentDetailTableV cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+                [cell addCommentCount];
                 [MBProgressHUD showSuccessWithMessage:@"已发布"];
             }];
         }];
