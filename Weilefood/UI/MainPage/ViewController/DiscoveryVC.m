@@ -16,6 +16,7 @@
 #import "ForwardBuyListVC.h"
 #import "ActivityListVC.h"
 #import "VideoListVC.h"
+#import "HousekeeperIndexVC.h"
 
 #import "ProductInfoVC.h"
 #import "ForwardBuyInfoVC.h"
@@ -172,7 +173,7 @@ static NSInteger const kSectionIndexActivity   = 4;
         }];
         [headerView nutritionClickBlock:^{
             _strong_check(self);
-            DLog(@"");
+            [self.navigationController pushViewController:[[HousekeeperIndexVC alloc] init] animated:YES];
         }];
         [headerView videoImageClickBlock:^{
             _strong_check(self);
@@ -206,7 +207,7 @@ static NSInteger const kSectionIndexActivity   = 4;
             headerView.title = @"营养推荐";
             headerView.allButtonActionBlock = ^(){
                 _strong_check(self);
-                [self.navigationController pushViewController:[[VideoListVC alloc] init] animated:YES];
+                [self.navigationController pushViewController:[[HousekeeperIndexVC alloc] init] animated:YES];
             };
             break;
         }
@@ -299,6 +300,10 @@ static NSInteger const kSectionIndexActivity   = 4;
         case kSectionIndexActivity: {
             WLActivityModel *activity = self.sectionDataActivitys[indexPath.item];
             [self.navigationController pushViewController:[[ActivityInfoVC alloc] initWithActivity:activity] animated:YES];
+            break;
+        }
+        case kSectionIndexNutrition: {
+            DLog(@"TODO");
             break;
         }
         default:

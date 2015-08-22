@@ -30,6 +30,6 @@
 ///
 @property (nonatomic, assign) NSInteger type;
 ///
-@property (nonatomic, copy) NSString *createDate;
+@property (nonatomic, strong) NSDate *createDate;
 
 @end

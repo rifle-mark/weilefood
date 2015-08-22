@@ -173,6 +173,8 @@
 		24D3F9BD1B7BA825005F63DB /* NSDate+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D3F9BC1B7BA825005F63DB /* NSDate+Ext.m */; };
 		24D3F9C61B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D3F9C51B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m */; };
 		24D55DE61B67EB2400EC6373 /* UIBarButtonItem+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */; };
+		24DAE7F91B8852700050582D /* HousekeeperIndexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DAE7F81B8852700050582D /* HousekeeperIndexVC.m */; };
+		24DAE7FC1B8853920050582D /* DoctorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DAE7FB1B8853920050582D /* DoctorCell.m */; };
 		24E627871B7CDF7700743B51 /* ShareOnPlatformVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E627861B7CDF7700743B51 /* ShareOnPlatformVC.m */; };
 		24E6278A1B7D043600743B51 /* InputQuantityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E627891B7D043600743B51 /* InputQuantityVC.m */; };
 		24E66DBF1B62717A0081324A /* UIScrollView+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DBE1B62717A0081324A /* UIScrollView+Keyboard.m */; };
@@ -541,6 +543,10 @@
 		24D3F9C51B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefreshDefault.m"; sourceTree = "<group>"; };
 		24D55DE41B67EB2400EC6373 /* UIBarButtonItem+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Ext.h"; sourceTree = "<group>"; };
 		24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Ext.m"; sourceTree = "<group>"; };
+		24DAE7F71B8852700050582D /* HousekeeperIndexVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HousekeeperIndexVC.h; sourceTree = "<group>"; };
+		24DAE7F81B8852700050582D /* HousekeeperIndexVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HousekeeperIndexVC.m; sourceTree = "<group>"; };
+		24DAE7FA1B8853920050582D /* DoctorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorCell.h; sourceTree = "<group>"; };
+		24DAE7FB1B8853920050582D /* DoctorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorCell.m; sourceTree = "<group>"; };
 		24E627851B7CDF7700743B51 /* ShareOnPlatformVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareOnPlatformVC.h; sourceTree = "<group>"; };
 		24E627861B7CDF7700743B51 /* ShareOnPlatformVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareOnPlatformVC.m; sourceTree = "<group>"; };
 		24E627881B7D043600743B51 /* InputQuantityVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputQuantityVC.h; sourceTree = "<group>"; };
@@ -975,6 +981,8 @@
 				24CAC43E1B5806BF00E3C4D5 /* WLForwardBuyModel.m */,
 				247EA72A1B7119B300E6A161 /* WLNutritionModel.h */,
 				247EA72B1B7119B300E6A161 /* WLNutritionModel.m */,
+				2438A7601B7ECC77003404BF /* WLDoctorModel.h */,
+				2438A7611B7ECC77003404BF /* WLDoctorModel.m */,
 				24CAC4431B5808B900E3C4D5 /* WLActivityModel.h */,
 				24CAC4441B5808B900E3C4D5 /* WLActivityModel.m */,
 				249A9BA41B7249F3008203C8 /* WLActivityCityModel.h */,
@@ -983,8 +991,6 @@
 				24CAC4411B5807ED00E3C4D5 /* WLVideoModel.m */,
 				249A9BA71B724B37008203C8 /* WLVideoAdImageModel.h */,
 				249A9BA81B724B37008203C8 /* WLVideoAdImageModel.m */,
-				2438A7601B7ECC77003404BF /* WLDoctorModel.h */,
-				2438A7611B7ECC77003404BF /* WLDoctorModel.m */,
 				24CAC4461B580A5800E3C4D5 /* WLCommentModel.h */,
 				24CAC4471B580A5800E3C4D5 /* WLCommentModel.m */,
 				245936B31B5A4015008FFAB8 /* WLAdModel.h */,
@@ -1180,6 +1186,7 @@
 				240D79911B5FEB42007E2E43 /* MainPage */,
 				240D79941B5FEB42007E2E43 /* Market */,
 				240D798E1B5FEB42007E2E43 /* ForwardBuy */,
+				24DAE7F41B8852350050582D /* Housekeeper */,
 				240D798A1B5FEB42007E2E43 /* Activity */,
 				240D79A01B5FEB42007E2E43 /* Video */,
 				240D79971B5FEB42007E2E43 /* Order */,
@@ -1436,6 +1443,34 @@
 			path = UIKit;
 			sourceTree = "<group>";
 		};
+		24DAE7F41B8852350050582D /* Housekeeper */ = {
+			isa = PBXGroup;
+			children = (
+				24DAE7F51B8852350050582D /* View */,
+				24DAE7F61B8852350050582D /* ViewController */,
+			);
+			name = Housekeeper;
+			path = Video/Housekeeper;
+			sourceTree = "<group>";
+		};
+		24DAE7F51B8852350050582D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				24DAE7FA1B8853920050582D /* DoctorCell.h */,
+				24DAE7FB1B8853920050582D /* DoctorCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		24DAE7F61B8852350050582D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				24DAE7F71B8852700050582D /* HousekeeperIndexVC.h */,
+				24DAE7F81B8852700050582D /* HousekeeperIndexVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		610C5F99515E558BBD5D2B02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1635,6 +1670,7 @@
 				240606341B774ECE00C6F373 /* CommentListVC.m in Sources */,
 				24E66DBF1B62717A0081324A /* UIScrollView+Keyboard.m in Sources */,
 				24CDCC171B4F792E00BDE8CB /* GCAOPProxy.m in Sources */,
+				24DAE7F91B8852700050582D /* HousekeeperIndexVC.m in Sources */,
 				24CDCBE01B4F792E00BDE8CB /* NSObject+GCProxyRegister.m in Sources */,
 				2406062F1B772F9100C6F373 /* CitySelectVC.m in Sources */,
 				24B8C0691B5242BC001C5722 /* AGIPCAssetsController.m in Sources */,
@@ -1692,6 +1728,7 @@
 				24CDCC071B4F792E00BDE8CB /* UICollectionView+GCDelegateAndDataSource.m in Sources */,
 				2438A7681B7ED1AD003404BF /* WLServerHelper+ShareUrl.m in Sources */,
 				24CDCBEA1B4F792E00BDE8CB /* UIPickerViewDelegateImplementationProxy.m in Sources */,
+				24DAE7FC1B8853920050582D /* DoctorCell.m in Sources */,
 				24E922231B7F35FD007F763C /* UIImageView+SDWebImage.m in Sources */,
 				24CDCC151B4F792E00BDE8CB /* UIToolbar+GCDelegate.m in Sources */,
 				24CDCBFF1B4F792E00BDE8CB /* UITabBarController+GCDelegateBlock.m in Sources */,
