@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <UMengSocial/UMSocialWechatHandler.h>
+#import <UMengSocial/UMSocialSinaHandler.h>
 #import "BPushHelper.h"
 #import "WLServerHelperHeader.h"
 #import "WLDatabaseHelperHeader.h"
@@ -39,6 +40,7 @@
     [MobClick startWithAppkey:UMengAppKey reportPolicy:BATCH channelId:UMengAnalyticsChannelId];
     // 友盟分享
     [UMSocialData setAppKey:UMengAppKey];
+    [UMSocialSinaHandler openSSOWithRedirectURL:WBRedirectURL];
     // 为友盟配置微信
     [UMSocialWechatHandler setWXAppId:WXAppId appSecret:WXAppSecret url:WXAppUrl];
     // 百度推送

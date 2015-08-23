@@ -7,6 +7,7 @@
 //
 
 #import "DoctorCell.h"
+#import "ScoreView.h"
 
 @interface DoctorCell ()
 
@@ -16,18 +17,10 @@
 @property (nonatomic, strong) UILabel     *commentCountLabel;
 @property (nonatomic, strong) UIImageView *picImageView;
 @property (nonatomic, strong) UILabel     *nameLabel;
-
-@property (nonatomic, strong) UIImageView *scoreBGView;
-@property (nonatomic, strong) UILabel     *scoreTitleLabel;
-@property (nonatomic, strong) UIImageView *scoreImageView1;
-@property (nonatomic, strong) UIImageView *scoreImageView2;
-@property (nonatomic, strong) UIImageView *scoreImageView3;
-@property (nonatomic, strong) UIImageView *scoreImageView4;
-@property (nonatomic, strong) UIImageView *scoreImageView5;
-
-@property (nonatomic, strong) UIView  *descView;
-@property (nonatomic, strong) UILabel *descLabel;
-@property (nonatomic, strong) UIView  *footerView;
+@property (nonatomic, strong) ScoreView   *scoreView;
+@property (nonatomic, strong) UIView      *descView;
+@property (nonatomic, strong) UILabel     *descLabel;
+@property (nonatomic, strong) UIView      *footerView;
 
 @end
 
@@ -35,7 +28,6 @@ static NSInteger const kImageTopMargin      = 50;
 static NSInteger const kImageHeight         = 170;
 static NSInteger const kNameTopMargin       = 32;
 static NSInteger const kScoreTopMargin      = 8;
-static NSInteger const kScoreHeight         = 23;
 static NSInteger const kScoreBottomMargin   = 9;
 static NSInteger const kDescLeftRightMargin = 27;
 static NSInteger const kDescTopBottomMargin = 15;
@@ -51,7 +43,7 @@ static NSInteger const kFooterHeight        = 10;
     CGFloat descHeight = [desc boundingRectWithSize:CGSizeMake(descWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kDescFont} context:nil].size.height;
     return kImageTopMargin + kImageHeight
     + kNameTopMargin + kNameFont.lineHeight
-    + kScoreTopMargin + kScoreHeight + kScoreBottomMargin
+    + kScoreTopMargin + [ScoreView viewHeight] + kScoreBottomMargin
     + kDescTopBottomMargin + descHeight + kDescTopBottomMargin
     + kFooterHeight;
 }
@@ -65,9 +57,7 @@ static NSInteger const kFooterHeight        = 10;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
         NSArray *views = @[self.actionImageView, self.actionCountLabel, self.commentImageView, self.commentCountLabel,
-                           self.picImageView, self.nameLabel,
-                           self.scoreBGView, self.scoreTitleLabel,
-                           self.scoreImageView1, self.scoreImageView2, self.scoreImageView3, self.scoreImageView4, self.scoreImageView5,
+                           self.picImageView, self.nameLabel, self.scoreView,
                            self.descView, self.descLabel, self.footerView,
                            ];
         for (UIView *view in views) {
@@ -106,29 +96,14 @@ static NSInteger const kFooterHeight        = 10;
         make.centerX.equalTo(@0);
     }];
     
-    [self.scoreBGView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.scoreView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.nameLabel.mas_baseline).offset(kScoreTopMargin);
         make.centerX.equalTo(@0);
-        make.height.equalTo(@(kScoreHeight));
-        make.left.equalTo(self.scoreTitleLabel).offset(-10);
-        make.right.equalTo(self.scoreImageView5).offset(10);
     }];
-    [self.scoreTitleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.scoreBGView);
-    }];
-    NSArray *views = @[self.scoreImageView1, self.scoreImageView2, self.scoreImageView3, self.scoreImageView4, self.scoreImageView5];
-    UIView *prevView = self.scoreTitleLabel;
-    for (UIView *view in views) {
-        [view mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(prevView.mas_right);
-            make.centerY.equalTo(prevView);
-        }];
-        prevView = view;
-    }
     
     [self.descView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.descView.superview);
-        make.top.equalTo(self.scoreBGView.mas_bottom).offset(kScoreBottomMargin);
+        make.top.equalTo(self.scoreView.mas_bottom).offset(kScoreBottomMargin);
     }];
     [self.descLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.descView).insets(UIEdgeInsetsMake(kDescTopBottomMargin, kDescLeftRightMargin, kDescTopBottomMargin, kDescLeftRightMargin));
@@ -164,14 +139,7 @@ static NSInteger const kFooterHeight        = 10;
 
 - (void)setScore:(NSInteger)score {
     _score = score;
-    
-    UIImage *imageN = [UIImage imageNamed:@"housekeeper_score_icon_n"];
-    UIImage *imageH = [UIImage imageNamed:@"housekeeper_score_icon_h"];
-    self.scoreImageView1.image = score >= 1 ? imageH : imageN;
-    self.scoreImageView2.image = score >= 2 ? imageH : imageN;
-    self.scoreImageView3.image = score >= 3 ? imageH : imageN;
-    self.scoreImageView4.image = score >= 4 ? imageH : imageN;
-    self.scoreImageView5.image = score >= 5 ? imageH : imageN;
+    self.scoreView.score = score;
 }
 
 - (void)setDesc:(NSString *)desc {
@@ -234,57 +202,11 @@ static NSInteger const kFooterHeight        = 10;
     return _nameLabel;
 }
 
-- (UIImageView *)scoreBGView {
-    if (!_scoreBGView) {
-        _scoreBGView = [[UIImageView alloc] init];
-        _scoreBGView.image = [UIImage imageNamed:@"housekeeper_score_bg"];
+- (ScoreView *)scoreView {
+    if (!_scoreView) {
+        _scoreView = [[ScoreView alloc] init];
     }
-    return _scoreBGView;
-}
-
-- (UILabel *)scoreTitleLabel {
-    if (!_scoreTitleLabel) {
-        _scoreTitleLabel = [[UILabel alloc] init];
-        _scoreTitleLabel.font = [UIFont systemFontOfSize:12];
-        _scoreTitleLabel.textColor = k_COLOR_WHITE;
-        _scoreTitleLabel.text = @"星级：";
-    }
-    return _scoreTitleLabel;
-}
-
-- (UIImageView *)scoreImageView1 {
-    if (!_scoreImageView1) {
-        _scoreImageView1 = [[UIImageView alloc] init];
-    }
-    return _scoreImageView1;
-}
-
-- (UIImageView *)scoreImageView2 {
-    if (!_scoreImageView2) {
-        _scoreImageView2 = [[UIImageView alloc] init];
-    }
-    return _scoreImageView2;
-}
-
-- (UIImageView *)scoreImageView3 {
-    if (!_scoreImageView3) {
-        _scoreImageView3 = [[UIImageView alloc] init];
-    }
-    return _scoreImageView3;
-}
-
-- (UIImageView *)scoreImageView4 {
-    if (!_scoreImageView4) {
-        _scoreImageView4 = [[UIImageView alloc] init];
-    }
-    return _scoreImageView4;
-}
-
-- (UIImageView *)scoreImageView5 {
-    if (!_scoreImageView5) {
-        _scoreImageView5 = [[UIImageView alloc] init];
-    }
-    return _scoreImageView5;
+    return _scoreView;
 }
 
 - (UIView *)descView {
