@@ -43,7 +43,11 @@ static NSUInteger kPageSize = 20;
     [self.view addSubview:self.shareListTableV];
     
     [self _setupObserver];
+    [self refreshList];
     
+}
+
+- (void)refreshList {
     [self.shareListTableV.header beginRefreshing];
 }
 
@@ -77,10 +81,6 @@ static NSUInteger kPageSize = 20;
             [v footerWithRefreshingBlock:^{
                 _strong_check(self);
                 [self _loadMoreComment];
-            }];
-            [v withBlockForRowEstimatedHeight:^CGFloat(UITableView *view, NSIndexPath *path) {
-                _strong_check(self, 0);
-                return 120;
             }];
             
             [v withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {

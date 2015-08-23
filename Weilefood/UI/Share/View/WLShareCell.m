@@ -99,10 +99,11 @@ static CGFloat controlHeight = 47;
 
 - (void)_setupSubViews {
     _weak(self);
-    
-    [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.equalTo(self.contentView.superview);
-    }];
+    if (!SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+        [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.bottom.equalTo(self.contentView.superview);
+        }];
+    }
     [self.splitV mas_makeConstraints:^(MASConstraintMaker *make) {
         _strong(self);
         make.top.left.right.equalTo(self.contentView);
@@ -198,11 +199,13 @@ static CGFloat controlHeight = 47;
             make.height.equalTo(@((picRowNumber==0?0:picRowNumber*(5+picHeight)+15)));
         }];
         
-        [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.right.bottom.equalTo(self.contentView.superview);
-            make.width.equalTo(@([UIScreen mainScreen].bounds.size.width));
-            make.height.equalTo(@([WLShareCell heightWithComment:self.share screenWidth:[UIScreen mainScreen].bounds.size.width]));
-        }];
+        if (!SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+            [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.top.right.bottom.equalTo(self.contentView.superview);
+                make.width.equalTo(@([UIScreen mainScreen].bounds.size.width));
+                make.height.equalTo(@([WLShareCell heightWithComment:self.share screenWidth:[UIScreen mainScreen].bounds.size.width]));
+            }];
+        }
         
         [self.upBtn setTitle:[NSString stringWithFormat:@"(%lu)", (unsigned long)self.share.actionCount] forState:UIControlStateNormal];
         [self.commentBtn setTitle:[NSString stringWithFormat:@"(%lu)", (unsigned long)self.share.commentCount] forState:UIControlStateNormal];

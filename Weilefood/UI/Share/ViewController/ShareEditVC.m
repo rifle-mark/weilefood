@@ -397,6 +397,7 @@
             ServerHelperErrorHandle;
             
             [self.navigationController popViewControllerAnimated:YES];
+            GCBlockInvoke(self.addSuccessBlock);
         }];
     };
     
