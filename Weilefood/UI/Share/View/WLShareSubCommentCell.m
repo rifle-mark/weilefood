@@ -59,6 +59,10 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = k_COLOR_WHITESMOKE;
+        
+        [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.right.bottom.equalTo(self.contentView.superview);
+        }];
         _weak(self);
         self.avatarV = [[UIImageView alloc] init];
         self.avatarV.clipsToBounds = YES;
@@ -139,6 +143,10 @@
         [self.avatarV sd_setImageWithURL:[WLAPIAddressGenerator urlOfPictureWith:42 height:42 urlString:self.comment.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
         self.nickNameL.text = self.comment.nickName;
         self.contentL.attributedText = [[self class] _contentAttributeStringWithComment:self.comment];
+        [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.right.bottom.equalTo(self.contentView.superview);
+            make.width.equalTo(@([UIScreen mainScreen].bounds.size.width));
+        }];
     }];
 }
 
