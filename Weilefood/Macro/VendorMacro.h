@@ -21,6 +21,11 @@
 #define BPushApiKey                     @"DF0eNG6TNUqEvrVyQhIRU0Ea"
 
 /**
+ *  微博
+ */
+#define WBRedirectURL                   @"http://sns.whalecloud.com/sina2/callback"
+
+/**
  *  微信
  */
 #define WXAppId                         @"wx8ae2e5317dc91790"

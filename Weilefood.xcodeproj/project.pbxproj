@@ -188,6 +188,7 @@
 		24E93CF21B821AC900E41615 /* WLDatabaseHelper+ShoppingCartItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E93CF11B821AC900E41615 /* WLDatabaseHelper+ShoppingCartItem.m */; };
 		24EC87DA1B84B807007B289A /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EC87D91B84B807007B289A /* UITextView+Placeholder.m */; };
 		24ECD7B41B78FCEE00AED422 /* TransparentNavigationBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ECD7B31B78FCEE00AED422 /* TransparentNavigationBarVC.m */; };
+		24F551F01B895B7E00B76092 /* ScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F551EF1B895B7E00B76092 /* ScoreView.m */; };
 		4D8B1A6A1B7CD96C008F0925 /* NSDate+MKWDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B1A691B7CD96C008F0925 /* NSDate+MKWDate.m */; };
 		4D8B1A6D1B7CDBF6008F0925 /* WLAPIAddressGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B1A6C1B7CDBF6008F0925 /* WLAPIAddressGenerator.m */; };
 		4DAA2BA71B7F73B9004E5601 /* ShareDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BA41B7F73B9004E5601 /* ShareDetailVC.m */; };
@@ -573,6 +574,8 @@
 		24EC87D91B84B807007B289A /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
 		24ECD7B21B78FCEE00AED422 /* TransparentNavigationBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentNavigationBarVC.h; sourceTree = "<group>"; };
 		24ECD7B31B78FCEE00AED422 /* TransparentNavigationBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransparentNavigationBarVC.m; sourceTree = "<group>"; };
+		24F551EE1B895B7E00B76092 /* ScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreView.h; sourceTree = "<group>"; };
+		24F551EF1B895B7E00B76092 /* ScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreView.m; sourceTree = "<group>"; };
 		27B0DAFB8AFA7EC3AE1728AE /* libPods-Weilefood.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weilefood.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D8B1A681B7CD96C008F0925 /* NSDate+MKWDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MKWDate.h"; sourceTree = "<group>"; };
 		4D8B1A691B7CD96C008F0925 /* NSDate+MKWDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MKWDate.m"; sourceTree = "<group>"; };
@@ -629,6 +632,8 @@
 				240606361B775F6F00C6F373 /* CommentCell.m */,
 				24C40B4C1B7A356100E8AFA9 /* ProductInfoSectionHeaderView.h */,
 				24C40B4D1B7A356100E8AFA9 /* ProductInfoSectionHeaderView.m */,
+				24F551EE1B895B7E00B76092 /* ScoreView.h */,
+				24F551EF1B895B7E00B76092 /* ScoreView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1715,6 +1720,7 @@
 				24CDCC091B4F792E00BDE8CB /* UIImagePickerController+GCDelegate.m in Sources */,
 				24CAC43F1B5806BF00E3C4D5 /* WLForwardBuyModel.m in Sources */,
 				2482E6471B5E96FE005815E8 /* WLServerHelper+Message.m in Sources */,
+				24F551F01B895B7E00B76092 /* ScoreView.m in Sources */,
 				24CDCBDF1B4F792E00BDE8CB /* GCImplementationProxy.m in Sources */,
 				247EA7271B70FB9600E6A161 /* VideoCollectionCell.m in Sources */,
 				24B8C0641B5242BC001C5722 /* AGImagePickerController+Helper.m in Sources */,
