@@ -18,7 +18,7 @@
 #import "WLDatabaseHelperHeader.h"
 
 #import "UIMenuController+UserInfo.h"
-//#import "PictureShowVC.h"
+#import "PictureShowVC.h"
 
 @interface ShareDetailVC ()
 
@@ -74,8 +74,9 @@ static NSString *const kHintText = @"在这里说点什么吧...";
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     [self.commentDetailTableV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.commentDetailTableV.superview);
+        make.left.right.equalTo(self.commentDetailTableV.superview);
         make.top.equalTo(self.commentDetailTableV.superview).with.offset(self.topLayoutGuide.length);
+        make.bottom.equalTo(self.lineView.mas_top);
     }];
     
     [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -107,7 +108,7 @@ static NSString *const kHintText = @"在这里说点什么吧...";
     
     [self _setupTapGestureRecognizer];
     
-    FixesViewDidLayoutSubviewsiOS7Error
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 /*
@@ -176,8 +177,10 @@ static NSString *const kHintText = @"在这里说点什么吧...";
                     };
                     cell.picShowBlock = ^(NSArray *picUrlArray, NSInteger index) {
                         _strong_check(self);
-                        // TODO:
-                        // show pic VC
+                        PictureShowVC *picVC = [[PictureShowVC alloc] init];
+                        picVC.picUrlArray = picUrlArray;
+                        picVC.currentIndex = index;
+                        [self.navigationController pushViewController:picVC animated:YES];
                     };
                     return cell;
                 }
@@ -368,6 +371,8 @@ static NSString *const kHintText = @"在这里说点什么吧...";
                 _strong_check(self);
                 ServerHelperErrorHandle;
                 self.textField.text = @"";
+                WLShareCell *cell = (WLShareCell*)[self.commentDetailTableV cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+                [cell addCommentCount];
                 [MBProgressHUD showSuccessWithMessage:@"已发布"];
             }];
         }];

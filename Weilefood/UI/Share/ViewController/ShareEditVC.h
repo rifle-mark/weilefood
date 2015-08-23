@@ -11,4 +11,5 @@
 @interface ShareEditVC : UIViewController
 
 @property(nonatomic,strong)NSString         *locationName;
+@property(nonatomic,copy)void(^addSuccessBlock)();
 @end

@@ -138,6 +138,11 @@
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
                 ShareEditVC *shareEditVC = [[ShareEditVC alloc] init];
+                shareEditVC.addSuccessBlock = ^(){
+                    _strong_check(self);
+                    [self _isSelectedDiscoveryTabBar:NO];
+                    [((SharedAllListVC*)self.viewControllers[1]) refreshList];
+                };
                 [self.navigationController pushViewController:shareEditVC animated:YES];
             }];
             

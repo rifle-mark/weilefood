@@ -11,4 +11,9 @@
 /// 全站用户分享列表界面
 @interface SharedAllListVC : UIViewController
 
+/**
+ *  刷新列表
+ */
+- (void)refreshList;
+
 @end

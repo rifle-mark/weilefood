@@ -14,6 +14,7 @@
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 #import "LoginVC.h"
+#import "PictureShowVC.h"
 
 @interface SharedAllListVC ()
 
@@ -23,6 +24,8 @@
 
 
 @end
+
+static NSUInteger kPageSize = 20;
 
 @implementation SharedAllListVC
 
@@ -40,7 +43,11 @@
     [self.view addSubview:self.shareListTableV];
     
     [self _setupObserver];
+    [self refreshList];
     
+}
+
+- (void)refreshList {
     [self.shareListTableV.header beginRefreshing];
 }
 
@@ -113,7 +120,10 @@
                 };
                 cell.picShowBlock = ^(NSArray *picUrlArray, NSInteger index) {
                     _strong_check(self);
-                    // TODO: open picture show VC
+                    PictureShowVC *picVC = [[PictureShowVC alloc] init];
+                    picVC.picUrlArray = picUrlArray;
+                    picVC.currentIndex = index;
+                    [self.navigationController pushViewController:picVC animated:YES];
                 };
                 return cell;
             }];
@@ -148,31 +158,24 @@
     _weak(self);
     [[WLServerHelper sharedInstance] share_getListWithMaxDate:date pageSize:pageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
-        
-        [self.shareListTableV.header endRefreshing];
-        [self.shareListTableV.footer endRefreshing];
-        
+        if ([self.shareListTableV.header isRefreshing]) {
+            [self.shareListTableV.header endRefreshing];
+        }
+        if ([self.shareListTableV.footer isRefreshing]) {
+            [self.shareListTableV.footer endRefreshing];
+        }
         ServerHelperErrorHandle;
+        self.shareList = [date timeIntervalSince1970]==0?apiResult:[self.shareList arrayByAddingObjectsFromArray:apiResult];
         self.shareListTableV.footer.hidden = !apiResult || apiResult.count < pageSize;
-        
-        if ([date timeIntervalSince1970] == 0) {
-            self.shareList = apiResult;
-        }
-        else {
-            NSMutableArray *tmpShareList = [self.shareList mutableCopy];
-            [tmpShareList addObjectsFromArray:apiResult];
-            self.shareList = tmpShareList;
-        }
-        
     }];
 }
 
 - (void)_refreshCommentList {
-    [self _loadShareAtDate:[NSDate dateWithTimeIntervalSince1970:0] pageSize:20];
+    [self _loadShareAtDate:[NSDate dateWithTimeIntervalSince1970:0] pageSize:kPageSize];
 }
 
 - (void)_loadMoreComment {
-    [self _loadShareAtDate:[[self.shareList lastObject] createDate] pageSize:20];
+    [self _loadShareAtDate:[[self.shareList lastObject] createDate] pageSize:kPageSize];
 }
 
 @end
