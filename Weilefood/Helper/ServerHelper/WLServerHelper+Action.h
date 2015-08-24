@@ -44,7 +44,7 @@ typedef NS_ENUM(NSUInteger, WLActionActType) {
  *  @param objectId   目标对象ID
  *  @param callback
  */
-- (void)action_addWithActType:(WLActionActType)actType objectType:(WLActionType)objectType objectId:(NSUInteger)objectId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback;
+- (void)action_addWithActType:(WLActionActType)actType objectType:(WLActionType)objectType objectId:(long long)objectId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback;
 
 /**
  *  取消收藏
@@ -53,6 +53,6 @@ typedef NS_ENUM(NSUInteger, WLActionActType) {
  *  @param objectId   目标对象ID
  *  @param callback
  */
-- (void)action_deleteFavoriteWithObjectType:(WLActionType)objectType objectId:(NSUInteger)objectId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback;
+- (void)action_deleteFavoriteWithObjectType:(WLActionType)objectType objectId:(long long)objectId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback;
 
 @end

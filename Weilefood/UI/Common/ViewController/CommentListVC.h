@@ -21,6 +21,6 @@ typedef NS_ENUM(NSUInteger, WLCommentType);
  *
  *  @return 界面实例
  */
-+ (void)showWithType:(WLCommentType)type refId:(NSUInteger)refId;
++ (void)showWithType:(WLCommentType)type refId:(long long)refId;
 
 @end

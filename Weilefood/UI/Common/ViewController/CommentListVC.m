@@ -24,7 +24,7 @@
 
 @property (nonatomic, assign) CGFloat       keyboardHeight;
 @property (nonatomic, assign) WLCommentType type;
-@property (nonatomic, assign) NSUInteger    refId;
+@property (nonatomic, assign) long long     refId;
 @property (nonatomic, strong) NSArray       *commentList;
 
 @property (nonatomic, strong) WLCommentModel *replyComment;
@@ -36,7 +36,7 @@ static NSInteger const kPageSize = 10;
 
 @implementation CommentListVC
 
-+ (void)showWithType:(WLCommentType)type refId:(NSUInteger)refId {
++ (void)showWithType:(WLCommentType)type refId:(long long)refId {
     CommentListVC *vc = [[CommentListVC alloc] initWithType:type refId:refId];
     UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nc animated:YES completion:nil];
@@ -47,7 +47,7 @@ static NSInteger const kPageSize = 10;
     return nil;
 }
 
-- (id)initWithType:(WLCommentType)type refId:(NSUInteger)refId {
+- (id)initWithType:(WLCommentType)type refId:(long long)refId {
     if (self = [super init]) {
         self.type = type;
         self.refId = refId;
