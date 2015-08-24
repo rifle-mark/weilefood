@@ -35,6 +35,7 @@
 		2467B7221B50D140001202A4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2467B7211B50D140001202A4 /* libz.dylib */; };
 		2467B7241B50D146001202A4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2467B7231B50D146001202A4 /* SystemConfiguration.framework */; };
 		2467B7271B50E30E001202A4 /* BPushHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2467B7261B50E30E001202A4 /* BPushHelper.m */; };
+		2468842F1B8A16510080B9D0 /* DoctorServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2468842E1B8A16510080B9D0 /* DoctorServiceCell.m */; };
 		246F07821B56A6210086CD28 /* NSString+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 246F07811B56A6210086CD28 /* NSString+Ext.m */; };
 		247EA7271B70FB9600E6A161 /* VideoCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 247EA7261B70FB9600E6A161 /* VideoCollectionCell.m */; };
 		247EA7291B7103B400E6A161 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 247EA7281B7103B400E6A161 /* Images.xcassets */; };
@@ -175,6 +176,9 @@
 		24D55DE61B67EB2400EC6373 /* UIBarButtonItem+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */; };
 		24DAE7F91B8852700050582D /* HousekeeperIndexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DAE7F81B8852700050582D /* HousekeeperIndexVC.m */; };
 		24DAE7FC1B8853920050582D /* DoctorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DAE7FB1B8853920050582D /* DoctorCell.m */; };
+		24E5E6141B8B5E7800604577 /* DoctorInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E5E6131B8B5E7800604577 /* DoctorInfoVC.m */; };
+		24E5E6171B8B601800604577 /* DoctorInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E5E6161B8B601800604577 /* DoctorInfoHeaderView.m */; };
+		24E5E61A1B8B68F600604577 /* DoctorDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E5E6191B8B68F600604577 /* DoctorDescriptionCell.m */; };
 		24E627871B7CDF7700743B51 /* ShareOnPlatformVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E627861B7CDF7700743B51 /* ShareOnPlatformVC.m */; };
 		24E6278A1B7D043600743B51 /* InputQuantityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E627891B7D043600743B51 /* InputQuantityVC.m */; };
 		24E66DBF1B62717A0081324A /* UIScrollView+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DBE1B62717A0081324A /* UIScrollView+Keyboard.m */; };
@@ -281,6 +285,8 @@
 		2467B7231B50D146001202A4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2467B7251B50E30E001202A4 /* BPushHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPushHelper.h; sourceTree = "<group>"; };
 		2467B7261B50E30E001202A4 /* BPushHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPushHelper.m; sourceTree = "<group>"; };
+		2468842D1B8A16510080B9D0 /* DoctorServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorServiceCell.h; sourceTree = "<group>"; };
+		2468842E1B8A16510080B9D0 /* DoctorServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorServiceCell.m; sourceTree = "<group>"; };
 		246F07801B56A6210086CD28 /* NSString+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Ext.h"; sourceTree = "<group>"; };
 		246F07811B56A6210086CD28 /* NSString+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Ext.m"; sourceTree = "<group>"; };
 		247EA7251B70FB9600E6A161 /* VideoCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCollectionCell.h; sourceTree = "<group>"; };
@@ -573,6 +579,12 @@
 		24DAE7F81B8852700050582D /* HousekeeperIndexVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HousekeeperIndexVC.m; sourceTree = "<group>"; };
 		24DAE7FA1B8853920050582D /* DoctorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorCell.h; sourceTree = "<group>"; };
 		24DAE7FB1B8853920050582D /* DoctorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorCell.m; sourceTree = "<group>"; };
+		24E5E6121B8B5E7800604577 /* DoctorInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorInfoVC.h; sourceTree = "<group>"; };
+		24E5E6131B8B5E7800604577 /* DoctorInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorInfoVC.m; sourceTree = "<group>"; };
+		24E5E6151B8B601800604577 /* DoctorInfoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorInfoHeaderView.h; sourceTree = "<group>"; };
+		24E5E6161B8B601800604577 /* DoctorInfoHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorInfoHeaderView.m; sourceTree = "<group>"; };
+		24E5E6181B8B68F600604577 /* DoctorDescriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorDescriptionCell.h; sourceTree = "<group>"; };
+		24E5E6191B8B68F600604577 /* DoctorDescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorDescriptionCell.m; sourceTree = "<group>"; };
 		24E627851B7CDF7700743B51 /* ShareOnPlatformVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareOnPlatformVC.h; sourceTree = "<group>"; };
 		24E627861B7CDF7700743B51 /* ShareOnPlatformVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareOnPlatformVC.m; sourceTree = "<group>"; };
 		24E627881B7D043600743B51 /* InputQuantityVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputQuantityVC.h; sourceTree = "<group>"; };
@@ -1617,6 +1629,12 @@
 			children = (
 				24DAE7FA1B8853920050582D /* DoctorCell.h */,
 				24DAE7FB1B8853920050582D /* DoctorCell.m */,
+				24E5E6151B8B601800604577 /* DoctorInfoHeaderView.h */,
+				24E5E6161B8B601800604577 /* DoctorInfoHeaderView.m */,
+				24E5E6181B8B68F600604577 /* DoctorDescriptionCell.h */,
+				24E5E6191B8B68F600604577 /* DoctorDescriptionCell.m */,
+				2468842D1B8A16510080B9D0 /* DoctorServiceCell.h */,
+				2468842E1B8A16510080B9D0 /* DoctorServiceCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1626,10 +1644,12 @@
 			children = (
 				24DAE7F71B8852700050582D /* HousekeeperIndexVC.h */,
 				24DAE7F81B8852700050582D /* HousekeeperIndexVC.m */,
+				24E5E6121B8B5E7800604577 /* DoctorInfoVC.h */,
+				24E5E6131B8B5E7800604577 /* DoctorInfoVC.m */,
 			);
 			path = ViewController;
-            sourceTree = "<group>";
-        };
+			sourceTree = "<group>";
+		};
 		4DE8B9BC1B885D1E00E8608E /* AliPay */ = {
 			isa = PBXGroup;
 			children = (
@@ -1953,6 +1973,7 @@
 				24CDCC131B4F792E00BDE8CB /* UITextField+GCDelegate.m in Sources */,
 				24E8DD391B648DF4007F137E /* DiscoveryCollectionSectionHeaderView.m in Sources */,
 				24C40B5D1B7A579A00E8AFA9 /* VideoInfoVC.m in Sources */,
+				24E5E6171B8B601800604577 /* DoctorInfoHeaderView.m in Sources */,
 				24C32EBE1B61229D00D509A4 /* RegisterVC.m in Sources */,
 				4DE8BA541B885D1F00E8608E /* GCPageViewController.m in Sources */,
 				4DE1B19D1B798691006F9F0E /* WLShareCell.m in Sources */,
@@ -1998,6 +2019,7 @@
 				24CDCC051B4F792E00BDE8CB /* AVAudioPlayer+GCDelegate.m in Sources */,
 				246F07821B56A6210086CD28 /* NSString+Ext.m in Sources */,
 				24134EBF1B6A718500E5BE07 /* VideoListVC.m in Sources */,
+				24E5E61A1B8B68F600604577 /* DoctorDescriptionCell.m in Sources */,
 				24CDCBF31B4F792E00BDE8CB /* UIToolbarDelegateImplementationProxy.m in Sources */,
 				24B8C06F1B5242BC001C5722 /* ALAsset+AGIPC.m in Sources */,
 				240FB7091B690D5B00DF5CE4 /* SharedAllListVC.m in Sources */,
@@ -2057,6 +2079,7 @@
 				4DE8BA511B885D1F00E8608E /* UIView+GCOperation.m in Sources */,
 				245936B81B5A42F4008FFAB8 /* WLServerHelper+Ad.m in Sources */,
 				2482E6411B5E9482005815E8 /* WLDialogModel.m in Sources */,
+				2468842F1B8A16510080B9D0 /* DoctorServiceCell.m in Sources */,
 				249A73CE1B569D4100F46F3D /* WLApiInfoModel.m in Sources */,
 				24CDCC181B4F792E00BDE8CB /* NSObject+GCAccessor.m in Sources */,
 				24E93CF21B821AC900E41615 /* WLDatabaseHelper+ShoppingCartItem.m in Sources */,
@@ -2125,6 +2148,7 @@
 				24CDCBF71B4F792E00BDE8CB /* UIImagePickerController+GCDelegateBlock.m in Sources */,
 				2482E63B1B5E8285005815E8 /* WLOrderProductModel.m in Sources */,
 				24B2E2AD1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m in Sources */,
+				24E5E6141B8B5E7800604577 /* DoctorInfoVC.m in Sources */,
 				4DAA2BB11B7FD751004E5601 /* UIMenuController+UserInfo.m in Sources */,
 				249A73D11B569D4100F46F3D /* WLUploadImageModel.m in Sources */,
 				24CDCC111B4F792E00BDE8CB /* UITabBarController+GCDelegate.m in Sources */,

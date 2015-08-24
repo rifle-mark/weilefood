@@ -22,9 +22,13 @@
 /// 介绍(html格式)
 @property (nonatomic, copy) NSString *desc;
 /// 赞数
-@property (nonatomic, assign) long long actionCount;
+@property (nonatomic, assign) NSInteger actionCount;
 /// 评论数
-@property (nonatomic, assign) long long commentCount;
+@property (nonatomic, assign) NSInteger commentCount;
+/// 是否已收藏
+@property (nonatomic, assign) BOOL isFav;
+/// 是否已赞
+@property (nonatomic, assign) BOOL isLike;
 /// 提供的服务<WLDoctorServiceModel>
 @property (nonatomic, strong) NSArray *service;
 ///
@@ -52,10 +56,6 @@
 @property (nonatomic, copy) NSString *title;
 /// 价格
 @property (nonatomic, assign) CGFloat price;
-/// 是否已收藏
-@property (nonatomic, assign) BOOL isFav;
-/// 是否已赞
-@property (nonatomic, assign) BOOL isLike;
 /// 所属营养师ID
 @property (nonatomic, assign) long long doctorId;
 ///

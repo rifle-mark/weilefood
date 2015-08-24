@@ -15,6 +15,9 @@
         if ([propertyName isEqualToString:@"desc"]) {
             return @"Description";
         }
+        if ([propertyName isEqualToString:@"service"]) {
+            return propertyName;
+        }
         return [NSString stringWithFormat:@"%@%@", [[propertyName substringToIndex:1] uppercaseString], [propertyName substringFromIndex:1]];
     }];
 }

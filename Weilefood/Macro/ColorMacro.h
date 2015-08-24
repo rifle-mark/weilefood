@@ -28,6 +28,7 @@
 #define k_COLOR_MEDIUM_AQUAMARINE   RGB(120, 204, 171)
 #define k_COLOR_STAR_DUST           RGB(156, 156, 156)
 #define k_COLOR_DESERT_STORM        RGB(248, 248, 248)
+#define k_COLOR_SILVER_TREE         RGB(100, 188, 154)
 #define k_COLOR_CLEAR               [UIColor clearColor]
 #define k_COLOR_WHITE               [UIColor whiteColor]
 #define k_COLOR_BLACK               [UIColor blackColor]

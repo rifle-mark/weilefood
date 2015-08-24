@@ -78,4 +78,5 @@
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [k_COLOR_WHITE colorWithAlphaComponent:_navigationBarAlpha]};
     self.navigationController.navigationBar.backgroundColor = self.statusBarView.backgroundColor;
 }
+
 @end

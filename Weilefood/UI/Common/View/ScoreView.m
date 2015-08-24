@@ -30,6 +30,7 @@ static NSInteger const kBGHeight = 23;
 
 - (id)init {
     if (self = [super init]) {
+        self.translatesAutoresizingMaskIntoConstraints = NO;
         NSArray *views = @[self.scoreBGView, self.scoreTitleLabel,
                            self.scoreImageView1, self.scoreImageView2, self.scoreImageView3, self.scoreImageView4, self.scoreImageView5,
                            ];
@@ -45,9 +46,6 @@ static NSInteger const kBGHeight = 23;
     [self.scoreBGView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self);
         make.height.equalTo(@(kBGHeight));
-//        make.top.equalTo(self.nameLabel.mas_baseline).offset(kScoreTopMargin);
-//        make.centerX.equalTo(@0);
-//        make.height.equalTo(@(kScoreHeight));
         make.left.equalTo(self.scoreTitleLabel).offset(-10);
         make.right.equalTo(self.scoreImageView5).offset(10);
     }];

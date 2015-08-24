@@ -9,6 +9,8 @@
 #import "HousekeeperIndexVC.h"
 #import "DoctorCell.h"
 
+#import "DoctorInfoVC.h"
+
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
@@ -213,9 +215,11 @@ static NSInteger const kPageSize       = 10;
             return nil;
         }];
         [_tableView withBlockForRowDidSelect:^(UITableView *view, NSIndexPath *path) {
-//            _strong_check(self);
-//            WLForwardBuyModel *forwardBuy = self.forwardBuyList[path.row];
-//            [self.navigationController pushViewController:[[ForwardBuyInfoVC alloc] initWithForwardBuy:forwardBuy] animated:YES];
+            _strong_check(self);
+            if (self.selectedDoctor) {
+                WLDoctorModel *doctor = self.dataList[path.row];
+                [self.navigationController pushViewController:[[DoctorInfoVC alloc] initWithDoctor:doctor] animated:YES];
+            }
         }];
     }
     return _tableView;
