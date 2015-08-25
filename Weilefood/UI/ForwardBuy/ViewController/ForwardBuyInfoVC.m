@@ -23,7 +23,6 @@
 
 @property (nonatomic, strong) UIView   *navView;
 @property (nonatomic, strong) UIButton *backButton;
-@property (nonatomic, strong) UIButton *cartButton;
 
 @property (nonatomic, strong) ForwardBuyInfoHeaderView     *tableHeaderView;
 @property (nonatomic, strong) ProductInfoSectionHeaderView *sectionHeaderView;
@@ -31,7 +30,6 @@
 @property (nonatomic, strong) UITableView                  *tableView;
 @property (nonatomic, strong) UIView                       *footerView;
 @property (nonatomic, strong) UIButton                     *favoriteButton;
-@property (nonatomic, strong) UIButton                     *addCartButton;
 @property (nonatomic, strong) UIButton                     *buyButton;
 
 @property (nonatomic, strong) WLForwardBuyModel *forwardBuy;
@@ -61,16 +59,13 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = k_COLOR_WHITE;
-    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], [UIBarButtonItem createCartBarButtonItem]];
     
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.navView];
     [self.navView addSubview:self.backButton];
-    [self.navView addSubview:self.cartButton];
     
     [self.view addSubview:self.footerView];
     [self.footerView addSubview:self.favoriteButton];
-    [self.footerView addSubview:self.addCartButton];
     [self.footerView addSubview:self.buyButton];
     
     [self _showData];
@@ -88,10 +83,6 @@ static NSString *const kCellIdentifier = @"MYCELL";
         make.top.equalTo(self.navView).offset(6);
         make.left.equalTo(self.navView).offset(10);
     }];
-    [self.cartButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.navView).offset(6);
-        make.right.equalTo(self.navView).offset(-10);
-    }];
     
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(self.view);
@@ -106,13 +97,8 @@ static NSString *const kCellIdentifier = @"MYCELL";
         make.top.equalTo(@1);
         make.width.equalTo(@64);
     }];
-    [self.addCartButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.favoriteButton.mas_right);
-        make.top.bottom.equalTo(self.favoriteButton);
-        make.width.equalTo(self.buyButton);
-    }];
     [self.buyButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.addCartButton.mas_right);
+        make.left.equalTo(self.favoriteButton.mas_right);
         make.right.equalTo(self.footerView);
         make.top.bottom.equalTo(self.favoriteButton);
     }];
@@ -185,15 +171,6 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_backButton setImage:[UIImage imageNamed:@"btn_back_h"] forState:UIControlStateHighlighted];
     }
     return _backButton;
-}
-
-- (UIButton *)cartButton {
-    if (!_cartButton) {
-        _cartButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_cartButton setImage:[UIImage imageNamed:@"btn_cart_n"] forState:UIControlStateNormal];
-        [_cartButton setImage:[UIImage imageNamed:@"btn_cart_h"] forState:UIControlStateHighlighted];
-    }
-    return _cartButton;
 }
 
 - (ForwardBuyInfoHeaderView *)tableHeaderView {
@@ -344,37 +321,6 @@ static NSString *const kCellIdentifier = @"MYCELL";
         }];
     }
     return _favoriteButton;
-}
-
-- (UIButton *)addCartButton {
-    if (!_addCartButton) {
-        _addCartButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _addCartButton.backgroundColor = k_COLOR_TURQUOISE;
-        _addCartButton.titleLabel.font = [UIFont systemFontOfSize:16];
-        [_addCartButton setTitleColor:k_COLOR_WHITE forState:UIControlStateNormal];
-        [_addCartButton setTitle:@"加入购物车" forState:UIControlStateNormal];
-        _weak(self);
-        [_addCartButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
-            [InputQuantityVC inputQuantityWithEnterBlock:^(InputQuantityVC *inputQuantityVC, NSInteger quantity) {
-                _strong_check(self);
-                WLShoppingCartItemModel *item = [WLDatabaseHelper shoppingCart_findItemWithType:WLOrderProductTypeForwardBuy refId:self.forwardBuy.forwardBuyId];
-                if (!item) {
-                    item = [[WLShoppingCartItemModel alloc] init];
-                    item.count = 0;
-                }
-                item.type  = WLOrderProductTypeForwardBuy;
-                item.refId = self.forwardBuy.forwardBuyId;
-                item.title = self.forwardBuy.title;
-                item.image = self.forwardBuy.banner;
-                item.price = self.forwardBuy.price;
-                item.count += quantity;
-                item.selected = YES;
-                [WLDatabaseHelper shoppingCart_saveItem:item];
-                [inputQuantityVC dismissSelf];
-            }];
-        }];
-    }
-    return _addCartButton;
 }
 
 - (UIButton *)buyButton {
