@@ -8,6 +8,7 @@
 
 #import "UIBarButtonItem+Ext.h"
 #import "LoginVC.h"
+#import "ShoppingCartVC.h"
 
 @implementation UIBarButtonItem (Ext)
 
@@ -48,7 +49,13 @@
 }
 
 - (void)_cartAction {
-    DLog(@"");
+    UIViewController *vc = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if ([vc isKindOfClass:[UINavigationController class]]) {
+        [((UINavigationController *)vc) pushViewController:[[ShoppingCartVC alloc] init] animated:YES];
+    }
+    else {
+        [vc.navigationController pushViewController:[[ShoppingCartVC alloc] init] animated:YES];
+    }
 }
 
 + (UIBarButtonItem *)createCartBarButtonItem {
