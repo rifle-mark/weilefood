@@ -26,13 +26,6 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>wx8ae2e5317dc91790</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
 				<string>sina.55a08c6367e58ef24a007a9f</string>
 			</array>
 		</dict>

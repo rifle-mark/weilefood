@@ -53,6 +53,8 @@
 		2482E6471B5E96FE005815E8 /* WLServerHelper+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6461B5E96FE005815E8 /* WLServerHelper+Message.m */; };
 		2482E64A1B5E9B6E005815E8 /* WLPointsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6491B5E9B6E005815E8 /* WLPointsModel.m */; };
 		2482E64D1B5E9CBB005815E8 /* WLServerHelper+Points.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E64C1B5E9CBB005815E8 /* WLServerHelper+Points.m */; };
+		24970F171B8CA53900342AAE /* ShoppingCartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24970F161B8CA53900342AAE /* ShoppingCartVC.m */; };
+		24970F1A1B8CA60700342AAE /* ShoppingCartProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24970F191B8CA60700342AAE /* ShoppingCartProductCell.m */; };
 		249745F61B6A5E190019ADDA /* ProductInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249745F51B6A5E190019ADDA /* ProductInfoVC.m */; };
 		249745F91B6A63360019ADDA /* ForwardBuyListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249745F81B6A63360019ADDA /* ForwardBuyListVC.m */; };
 		249745FC1B6A656F0019ADDA /* ForwardBuyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 249745FB1B6A656F0019ADDA /* ForwardBuyCell.m */; };
@@ -320,6 +322,10 @@
 		2482E6491B5E9B6E005815E8 /* WLPointsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLPointsModel.m; sourceTree = "<group>"; };
 		2482E64B1B5E9CBB005815E8 /* WLServerHelper+Points.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Points.h"; sourceTree = "<group>"; };
 		2482E64C1B5E9CBB005815E8 /* WLServerHelper+Points.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Points.m"; sourceTree = "<group>"; };
+		24970F151B8CA53900342AAE /* ShoppingCartVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShoppingCartVC.h; path = Weilefood/UI/Video/Housekeeper/View/ShoppingCartVC.h; sourceTree = SOURCE_ROOT; };
+		24970F161B8CA53900342AAE /* ShoppingCartVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShoppingCartVC.m; path = Weilefood/UI/Video/Housekeeper/View/ShoppingCartVC.m; sourceTree = SOURCE_ROOT; };
+		24970F181B8CA60700342AAE /* ShoppingCartProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShoppingCartProductCell.h; path = Weilefood/UI/Video/Housekeeper/View/ShoppingCartProductCell.h; sourceTree = SOURCE_ROOT; };
+		24970F191B8CA60700342AAE /* ShoppingCartProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShoppingCartProductCell.m; path = Weilefood/UI/Video/Housekeeper/View/ShoppingCartProductCell.m; sourceTree = SOURCE_ROOT; };
 		249745F41B6A5E190019ADDA /* ProductInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductInfoVC.h; sourceTree = "<group>"; };
 		249745F51B6A5E190019ADDA /* ProductInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductInfoVC.m; sourceTree = "<group>"; };
 		249745F71B6A63360019ADDA /* ForwardBuyListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForwardBuyListVC.h; sourceTree = "<group>"; };
@@ -971,6 +977,8 @@
 		240D79981B5FEB42007E2E43 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				24970F181B8CA60700342AAE /* ShoppingCartProductCell.h */,
+				24970F191B8CA60700342AAE /* ShoppingCartProductCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -978,6 +986,8 @@
 		240D79991B5FEB42007E2E43 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				24970F151B8CA53900342AAE /* ShoppingCartVC.h */,
+				24970F161B8CA53900342AAE /* ShoppingCartVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2104,6 +2114,7 @@
 				24B8C0641B5242BC001C5722 /* AGImagePickerController+Helper.m in Sources */,
 				24CDCC011B4F792E00BDE8CB /* UITextField+GCDelegateBlock.m in Sources */,
 				249A73BE1B569D2300F46F3D /* WLDictionaryHelper.m in Sources */,
+				24970F1A1B8CA60700342AAE /* ShoppingCartProductCell.m in Sources */,
 				24C40B541B7A36D400E8AFA9 /* ForwardBuyInfoHeaderView.m in Sources */,
 				24E66DC21B6271810081324A /* MBProgressHUD+Message.m in Sources */,
 				24C32ECD1B613FD400D509A4 /* WLDatabaseHelper+User.m in Sources */,
@@ -2125,6 +2136,7 @@
 				24CDCBED1B4F792E00BDE8CB /* UISearchBarDelegateImplementationProxy.m in Sources */,
 				24CDCC0C1B4F792E00BDE8CB /* UIPickerView+GCDelegateAndDataSource.m in Sources */,
 				240D79A51B5FECFB007E2E43 /* LoginVC.m in Sources */,
+				24970F171B8CA53900342AAE /* ShoppingCartVC.m in Sources */,
 				24CDCBEB1B4F792E00BDE8CB /* UIPopoverControllerImplementationProxy.m in Sources */,
 				24D3F9BD1B7BA825005F63DB /* NSDate+Ext.m in Sources */,
 				24CDCC161B4F792E00BDE8CB /* UIWebView+GCDelegate.m in Sources */,
