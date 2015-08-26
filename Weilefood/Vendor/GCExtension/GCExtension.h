@@ -9,5 +9,6 @@
 #import "UIExtensionKit.h"
 #import "ObjectExtensionKit.h"
 #import "DelegateAndDataSourceKit.h"
+#import "GCAlertView.h"
 
 #import "GCMacro.h"

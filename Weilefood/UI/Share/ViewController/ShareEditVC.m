@@ -34,6 +34,8 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.imgV = [[UIImageView alloc] init];
+        self.imgV.contentMode = UIViewContentModeScaleAspectFill;
+        self.imgV.clipsToBounds = YES;
         [self.contentView addSubview:self.imgV];
         _weak(self);
         [self.imgV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -109,7 +111,7 @@
 
 @end
 
-@interface ShareEditVC ()
+@interface ShareEditVC () <UIActionSheetDelegate>
 
 @property(nonatomic,strong)UIScrollView     *scrollV;
 @property(nonatomic,strong)UIView           *contentV;
@@ -120,6 +122,9 @@
 @property(nonatomic,strong)NSMutableArray   *images;
 
 @end
+
+static NSString* pickerAlbum = @"相册";
+static NSString* pickerCamera = @"拍照";
 
 @implementation ShareEditVC
 
@@ -280,42 +285,30 @@
                 [self _refreshPicView];
             };
             cell.imagePickBlock = ^(ShareEditPicCell *cell) {
-                AGImagePickerController *ipc = [[AGImagePickerController alloc] init];
-                ipc.maximumNumberOfPhotosToBeSelected = 9-[self.images count];
-                ipc.toolbarItemsForManagingTheSelection = @[];
-                ipc.didFailBlock = ^(NSError *error) {
-                    _strong_check(self);
-                    if (error == nil) {
-                        DLog(@"User has cancelled.");
-                        [self dismissViewControllerAnimated:YES completion:nil];
-                    }
-                    else {
-                        DLog(@"Fail. Error: %@", error);
-                        // We need to wait for the view controller to appear first.
-                        double delayInSeconds = 0.5;
-                        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-                        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                            _strong_check(self);
-                            [self dismissViewControllerAnimated:YES completion:nil];
-                        });
-                    }
-                };
-                ipc.didFinishBlock = ^(NSArray *info) {
-                    _strong_check(self);
-                    DLog(@"Info: %@", info);
-                    NSMutableArray *newImages = [NSMutableArray array];
-                    for (ALAsset *asset in info) {
-                        UIImage *image = [UIImage imageWithCGImage:asset.thumbnail];
-                        image = [image adjustedToStandardSize];
-                        [newImages addObject:image];
-                    }
-                    if (newImages.count > 0) {
-                        [self.images addObjectsFromArray:newImages];
-                        [self _refreshPicView];
-                    }
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                };
-                [self.navigationController presentViewController:ipc animated:YES completion:nil];
+                UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:nil];
+                
+                BOOL canShow = NO;
+                NSArray* cameraTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+                if ([cameraTypes containsObject:(__bridge NSString *)kUTTypeImage]) {
+                    [action addButtonWithTitle:pickerCamera];
+                    canShow = YES;
+                }
+                
+                NSArray* AlbumTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+                if ([AlbumTypes containsObject:(__bridge NSString *)kUTTypeImage]) {
+                    [action addButtonWithTitle:pickerAlbum];
+                    canShow = YES;
+                }
+                
+                if (canShow) {
+                    [action showInView:self.view];
+                }
+                else {
+                    GCAlertView *alert = [[GCAlertView alloc] initWithTitle:nil andMessage:@"无可用图片"];
+                    [alert show];
+                }
+                
+                return;
             };
             return cell;
         }];
@@ -425,4 +418,69 @@
     [self.editV resignFirstResponder];
 }
 
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"clicked index %ld", buttonIndex);
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:pickerAlbum]) {
+        // 打开相册
+        _weak(self);
+        AGImagePickerController *ipc = [[AGImagePickerController alloc] init];
+        ipc.maximumNumberOfPhotosToBeSelected = 9-[self.images count];
+        ipc.toolbarItemsForManagingTheSelection = @[];
+        ipc.didFailBlock = ^(NSError *error) {
+            _strong_check(self);
+            if (error == nil) {
+                DLog(@"User has cancelled.");
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+            else {
+                DLog(@"Fail. Error: %@", error);
+                // We need to wait for the view controller to appear first.
+                double delayInSeconds = 0.5;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    _strong_check(self);
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                });
+            }
+        };
+        ipc.didFinishBlock = ^(NSArray *info) {
+            _strong_check(self);
+            NSMutableArray *newImages = [NSMutableArray array];
+            for (ALAsset *asset in info) {
+                UIImage *image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
+                image = [image adjustedToStandardSize];
+                [newImages addObject:image];
+            }
+            if (newImages.count > 0) {
+                [self.images addObjectsFromArray:newImages];
+                [self _refreshPicView];
+            }
+            [self dismissViewControllerAnimated:YES completion:nil];
+        };
+        [self.navigationController presentViewController:ipc animated:YES completion:nil];
+    }
+    
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:pickerCamera]) {
+        // 拍照
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        picker.mediaTypes = @[(__bridge NSString*)kUTTypeImage];
+        [picker withBlockForDidFinishPickingMedia:^(UIImagePickerController *picker, NSDictionary *info) {
+            UIImage *img = nil;
+            if (picker.allowsEditing) {
+                img = info[UIImagePickerControllerEditedImage];
+            }
+            else {
+                img = info[UIImagePickerControllerOriginalImage];
+            }
+            img = [img adjustedToStandardSize];
+            [self.images addObjectsFromArray:@[img]];
+            [self _refreshPicView];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+}
 @end

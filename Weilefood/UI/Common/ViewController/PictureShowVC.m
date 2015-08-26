@@ -73,10 +73,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [super viewWillDisappear:animated];
+}
+
 - (void)loadView {
     [super loadView];
     self.view.backgroundColor = k_COLOR_BLACK;
     [self _loadCodingViews];
+    
+    _weak(self);
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(UIGestureRecognizer *gesture) {
+        _strong_check(self);
+        [self.navigationController setNavigationBarHidden:!self.navigationController.navigationBarHidden animated:YES];
+    }];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)viewDidLayoutSubviews {

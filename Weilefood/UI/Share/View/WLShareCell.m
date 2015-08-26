@@ -17,6 +17,7 @@ static CGFloat controlHeight = 47;
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.imgV = [[UIImageView alloc] init];
+        self.imgV.clipsToBounds = YES;
         [self.contentView addSubview:self.imgV];
         _weak(self);
         self.clipsToBounds = YES;
@@ -430,7 +431,8 @@ static CGFloat controlHeight = 47;
             [cell.imgV sd_setImageWithURL:[NSURL URLWithString:self.picUrlVArray[path.row]] placeholderImage:[UIImage imageNamed:@"default_placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 if (!error) {
                     _strong_check(cell);
-                    cell.imgV.contentMode = UIViewContentModeScaleToFill;
+                    cell.imgV.contentMode = UIViewContentModeScaleAspectFill;
+                    cell.imgV.clipsToBounds = YES;
                     cell.imgV.image = image;
                 }
             }];

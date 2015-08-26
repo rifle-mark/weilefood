@@ -195,6 +195,7 @@
 		24EC87DA1B84B807007B289A /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EC87D91B84B807007B289A /* UITextView+Placeholder.m */; };
 		24ECD7B41B78FCEE00AED422 /* TransparentNavigationBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ECD7B31B78FCEE00AED422 /* TransparentNavigationBarVC.m */; };
 		24F551F01B895B7E00B76092 /* ScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F551EF1B895B7E00B76092 /* ScoreView.m */; };
+		4D3A89CE1B8D5C6600B609CD /* GCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3A89CD1B8D5C6600B609CD /* GCAlertView.m */; };
 		4D8B1A6D1B7CDBF6008F0925 /* WLAPIAddressGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B1A6C1B7CDBF6008F0925 /* WLAPIAddressGenerator.m */; };
 		4DAA2BA71B7F73B9004E5601 /* ShareDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BA41B7F73B9004E5601 /* ShareDetailVC.m */; };
 		4DAA2BA81B7F73B9004E5601 /* ShareEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BA61B7F73B9004E5601 /* ShareEditVC.m */; };
@@ -620,6 +621,8 @@
 		24F551EE1B895B7E00B76092 /* ScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreView.h; sourceTree = "<group>"; };
 		24F551EF1B895B7E00B76092 /* ScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreView.m; sourceTree = "<group>"; };
 		27B0DAFB8AFA7EC3AE1728AE /* libPods-Weilefood.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weilefood.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D3A89CC1B8D5C6600B609CD /* GCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCAlertView.h; sourceTree = "<group>"; };
+		4D3A89CD1B8D5C6600B609CD /* GCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCAlertView.m; sourceTree = "<group>"; };
 		4D8B1A6B1B7CDBF6008F0925 /* WLAPIAddressGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLAPIAddressGenerator.h; sourceTree = "<group>"; };
 		4D8B1A6C1B7CDBF6008F0925 /* WLAPIAddressGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLAPIAddressGenerator.m; sourceTree = "<group>"; };
 		4DAA2BA31B7F73B9004E5601 /* ShareDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareDetailVC.h; sourceTree = "<group>"; };
@@ -1390,6 +1393,8 @@
 		24CDCB441B4F792D00BDE8CB /* GCExtension */ = {
 			isa = PBXGroup;
 			children = (
+				4D3A89CC1B8D5C6600B609CD /* GCAlertView.h */,
+				4D3A89CD1B8D5C6600B609CD /* GCAlertView.m */,
 				24CDCB451B4F792D00BDE8CB /* GCExtension.h */,
 				24CDCB461B4F792D00BDE8CB /* GCMacro.h */,
 				24CDCB471B4F792D00BDE8CB /* private */,
@@ -2016,6 +2021,7 @@
 				24B8C06C1B5242BC001C5722 /* AGIPCPreviewController.m in Sources */,
 				24CDCC031B4F792E00BDE8CB /* UIToolbar+GCDelegateBlock.m in Sources */,
 				249A9BAF1B726F75008203C8 /* ProductInfoHeaderView.m in Sources */,
+				4D3A89CE1B8D5C6600B609CD /* GCAlertView.m in Sources */,
 				24CDCC021B4F792E00BDE8CB /* UITextView+GCDelegateBlock.m in Sources */,
 				24CDCBF51B4F792E00BDE8CB /* UICollectionView+GCDelegateAndDataSourceBlock.m in Sources */,
 				24C32EC91B613F6100D509A4 /* WLDatabaseHelper.m in Sources */,
