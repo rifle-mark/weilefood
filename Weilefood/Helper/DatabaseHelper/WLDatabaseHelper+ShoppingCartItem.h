@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, WLOrderProductType);
 
 /// 删除购物车中某个商品
 + (void)shoppingCart_delete:(WLShoppingCartItemModel *)model;
++ (void)shoppingCart_deleteWithType:(WLOrderProductType)type refId:(NSUInteger)refId;
 
 /// 删除购物车中所有商品
 + (void)shoppingCart_deleteAll;

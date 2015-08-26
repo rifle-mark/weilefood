@@ -47,7 +47,11 @@
 }
 
 + (void)shoppingCart_delete:(WLShoppingCartItemModel *)model {
-    WLMOShoppingCartItem *managedObject = [self _findWithType:model.type refId:model.refId];
+    [self shoppingCart_deleteWithType:model.type refId:model.refId];
+}
+
++ (void)shoppingCart_deleteWithType:(WLOrderProductType)type refId:(NSUInteger)refId {
+    WLMOShoppingCartItem *managedObject = [self _findWithType:type refId:refId];
     if (managedObject) {
         [managedObject MR_deleteEntity];
     }

@@ -71,6 +71,9 @@
 		249EF30D1B64BEDA00AAEBE0 /* MarketIndexPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249EF30C1B64BEDA00AAEBE0 /* MarketIndexPageVC.m */; };
 		24A0266B1B6DDEC500C6139B /* MarketChildChannelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A0266A1B6DDEC500C6139B /* MarketChildChannelView.m */; };
 		24B2E2AD1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B2E2AC1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m */; };
+		24B31F101B8DF178006E42D7 /* OrderConfirmVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B31F0F1B8DF178006E42D7 /* OrderConfirmVC.m */; };
+		24B31F131B8DF1D4006E42D7 /* InputAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B31F121B8DF1D4006E42D7 /* InputAddressView.m */; };
+		24B31F161B8DF4CB006E42D7 /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B31F151B8DF4CB006E42D7 /* InputView.m */; };
 		24B8C0641B5242BC001C5722 /* AGImagePickerController+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C04B1B5242BC001C5722 /* AGImagePickerController+Helper.m */; };
 		24B8C0651B5242BC001C5722 /* AGImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 24B8C04C1B5242BC001C5722 /* AGImagePickerController.bundle */; };
 		24B8C0661B5242BC001C5722 /* AGImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B8C04E1B5242BC001C5722 /* AGImagePickerController.m */; };
@@ -361,6 +364,12 @@
 		24A0266A1B6DDEC500C6139B /* MarketChildChannelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketChildChannelView.m; sourceTree = "<group>"; };
 		24B2E2AB1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryCollectionHeaderView.h; sourceTree = "<group>"; };
 		24B2E2AC1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryCollectionHeaderView.m; sourceTree = "<group>"; };
+		24B31F0E1B8DF178006E42D7 /* OrderConfirmVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderConfirmVC.h; path = Weilefood/UI/Video/Housekeeper/View/OrderConfirmVC.h; sourceTree = SOURCE_ROOT; };
+		24B31F0F1B8DF178006E42D7 /* OrderConfirmVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderConfirmVC.m; path = Weilefood/UI/Video/Housekeeper/View/OrderConfirmVC.m; sourceTree = SOURCE_ROOT; };
+		24B31F111B8DF1D4006E42D7 /* InputAddressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputAddressView.h; sourceTree = "<group>"; };
+		24B31F121B8DF1D4006E42D7 /* InputAddressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputAddressView.m; sourceTree = "<group>"; };
+		24B31F141B8DF4CB006E42D7 /* InputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputView.h; sourceTree = "<group>"; };
+		24B31F151B8DF4CB006E42D7 /* InputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputView.m; sourceTree = "<group>"; };
 		24B8C04A1B5242BC001C5722 /* AGImagePickerController+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AGImagePickerController+Helper.h"; sourceTree = "<group>"; };
 		24B8C04B1B5242BC001C5722 /* AGImagePickerController+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AGImagePickerController+Helper.m"; sourceTree = "<group>"; };
 		24B8C04C1B5242BC001C5722 /* AGImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AGImagePickerController.bundle; sourceTree = "<group>"; };
@@ -806,6 +815,10 @@
 				24C40B4D1B7A356100E8AFA9 /* ProductInfoSectionHeaderView.m */,
 				24F551EE1B895B7E00B76092 /* ScoreView.h */,
 				24F551EF1B895B7E00B76092 /* ScoreView.m */,
+				24B31F141B8DF4CB006E42D7 /* InputView.h */,
+				24B31F151B8DF4CB006E42D7 /* InputView.m */,
+				24B31F111B8DF1D4006E42D7 /* InputAddressView.h */,
+				24B31F121B8DF1D4006E42D7 /* InputAddressView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -991,6 +1004,8 @@
 			children = (
 				24970F151B8CA53900342AAE /* ShoppingCartVC.h */,
 				24970F161B8CA53900342AAE /* ShoppingCartVC.m */,
+				24B31F0E1B8DF178006E42D7 /* OrderConfirmVC.h */,
+				24B31F0F1B8DF178006E42D7 /* OrderConfirmVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2108,6 +2123,7 @@
 				24D3F9C61B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m in Sources */,
 				24CAC4451B5808B900E3C4D5 /* WLActivityModel.m in Sources */,
 				4DE8BA4C1B885D1F00E8608E /* GCDefaultPageView.m in Sources */,
+				24B31F131B8DF1D4006E42D7 /* InputAddressView.m in Sources */,
 				24CDCBE61B4F792E00BDE8CB /* UIGestureRecognizerDelegateImplementProxy.m in Sources */,
 				4DE8BA4E1B885D1F00E8608E /* GCPageScrollView.m in Sources */,
 				245936A61B5A2ECF008FFAB8 /* WLServerHelper+Product.m in Sources */,
@@ -2123,6 +2139,7 @@
 				24970F1A1B8CA60700342AAE /* ShoppingCartProductCell.m in Sources */,
 				24C40B541B7A36D400E8AFA9 /* ForwardBuyInfoHeaderView.m in Sources */,
 				24E66DC21B6271810081324A /* MBProgressHUD+Message.m in Sources */,
+				24B31F161B8DF4CB006E42D7 /* InputView.m in Sources */,
 				24C32ECD1B613FD400D509A4 /* WLDatabaseHelper+User.m in Sources */,
 				24CDCC141B4F792E00BDE8CB /* UITextView+GCDelegate.m in Sources */,
 				249A9BA61B7249F3008203C8 /* WLActivityCityModel.m in Sources */,
@@ -2145,6 +2162,7 @@
 				24970F171B8CA53900342AAE /* ShoppingCartVC.m in Sources */,
 				24CDCBEB1B4F792E00BDE8CB /* UIPopoverControllerImplementationProxy.m in Sources */,
 				24D3F9BD1B7BA825005F63DB /* NSDate+Ext.m in Sources */,
+				24B31F101B8DF178006E42D7 /* OrderConfirmVC.m in Sources */,
 				24CDCC161B4F792E00BDE8CB /* UIWebView+GCDelegate.m in Sources */,
 				24CDCBF01B4F792E00BDE8CB /* UITableViewDelegateAndDataSourceImplementationProxy.m in Sources */,
 				24CDCBE31B4F792E00BDE8CB /* AVAudioPlayerDelegateImplementationProxy.m in Sources */,
