@@ -19,14 +19,14 @@ typedef NS_ENUM(NSInteger, WLOrderProductType);
 + (NSArray *)shoppingCart_findItems;
 
 /// 查询指定商品在购物中的信息
-+ (WLShoppingCartItemModel *)shoppingCart_findItemWithType:(WLOrderProductType)type refId:(NSUInteger)refId;
++ (WLShoppingCartItemModel *)shoppingCart_findItemWithType:(WLOrderProductType)type refId:(long long)refId;
 
 /// 增加或修改购物车中的商品
 + (void)shoppingCart_saveItem:(WLShoppingCartItemModel *)model;
 
 /// 删除购物车中某个商品
 + (void)shoppingCart_delete:(WLShoppingCartItemModel *)model;
-+ (void)shoppingCart_deleteWithType:(WLOrderProductType)type refId:(NSUInteger)refId;
++ (void)shoppingCart_deleteWithType:(WLOrderProductType)type refId:(long long)refId;
 
 /// 删除购物车中所有商品
 + (void)shoppingCart_deleteAll;

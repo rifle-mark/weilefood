@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, WLOrderProductType) {
 /// 商品类型(生成订单时必填)
 @property (nonatomic, assign) WLOrderProductType type;
 /// 商品对象ID(生成订单时必填)
-@property (nonatomic, assign) NSUInteger refId;
+@property (nonatomic, assign) long long refId;
 /// 数量(生成订单时必填)
 @property (nonatomic, assign) NSUInteger count;
 /// 单价

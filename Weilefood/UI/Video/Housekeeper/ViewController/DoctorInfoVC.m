@@ -15,6 +15,7 @@
 #import "CommentListVC.h"
 #import "LoginVC.h"
 #import "ShareOnPlatformVC.h"
+#import "OrderConfirmVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -269,6 +270,15 @@
                 NSIndexPath *path = [self.tableView indexPathForCell:cell];
                 WLDoctorServiceModel *service = self.doctor.service[path.row - 1];
                 DLog(@"%@", service);
+                
+                WLOrderProductModel *product = [[WLOrderProductModel alloc] init];
+                product.type  = WLOrderProductTypeDoctor;
+                product.refId = service.doctorServiceId;
+                product.count = 1;
+                product.price = service.price;
+                product.title = [NSString stringWithFormat:@"%@ %@", self.doctor.trueName, service.title];
+                product.image = self.doctor.images;
+                [self.navigationController pushViewController:[[OrderConfirmVC alloc] initWithProductList:@[product]] animated:YES];
             }];
             return cell;
         }];

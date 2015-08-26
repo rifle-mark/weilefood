@@ -11,7 +11,7 @@
 
 @implementation WLDatabaseHelper (ShoppingCartItem)
 
-+ (WLMOShoppingCartItem *)_findWithType:(WLOrderProductType)type refId:(NSUInteger)refId {
++ (WLMOShoppingCartItem *)_findWithType:(WLOrderProductType)type refId:(long long)refId {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type = %ld AND refId = %ld", type, refId];
     return [WLMOShoppingCartItem MR_findFirstWithPredicate:predicate];
 }
@@ -27,7 +27,7 @@
     return ret;
 }
 
-+ (WLShoppingCartItemModel *)shoppingCart_findItemWithType:(WLOrderProductType)type refId:(NSUInteger)refId {
++ (WLShoppingCartItemModel *)shoppingCart_findItemWithType:(WLOrderProductType)type refId:(long long)refId {
     WLShoppingCartItemModel *model = nil;
     WLMOShoppingCartItem *managedObject = [self _findWithType:type refId:refId];
     if (managedObject) {
@@ -50,7 +50,7 @@
     [self shoppingCart_deleteWithType:model.type refId:model.refId];
 }
 
-+ (void)shoppingCart_deleteWithType:(WLOrderProductType)type refId:(NSUInteger)refId {
++ (void)shoppingCart_deleteWithType:(WLOrderProductType)type refId:(long long)refId {
     WLMOShoppingCartItem *managedObject = [self _findWithType:type refId:refId];
     if (managedObject) {
         [managedObject MR_deleteEntity];
