@@ -9,6 +9,8 @@
 #import "ShoppingCartVC.h"
 #import "ShoppingCartProductCell.h"
 
+#import "OrderConfirmVC.h"
+
 #import "WLDatabaseHelperHeader.h"
 #import "WLModelHeader.h"
 
@@ -237,6 +239,21 @@
         _buyButton.titleLabel.font = [UIFont systemFontOfSize:16];
         [_buyButton setTitleColor:k_COLOR_WHITE forState:UIControlStateNormal];
         [_buyButton setTitle:@"立即购买" forState:UIControlStateNormal];
+        _weak(self);
+        [_buyButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            _strong_check(self);
+            NSMutableArray *productList = [NSMutableArray array];
+            for (WLShoppingCartItemModel *item in self.productList) {
+                if (item.selected) {
+                    [productList addObject:item];
+                }
+            }
+            if (productList.count <= 0) {
+                [MBProgressHUD showErrorWithMessage:@"请选择要购买的商品"];
+                return;
+            }
+            [self.navigationController pushViewController:[[OrderConfirmVC alloc] initWithProductList:productList] animated:YES];
+        }];
     }
     return _buyButton;
 }

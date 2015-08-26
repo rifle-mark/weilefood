@@ -14,6 +14,7 @@
 #import "LoginVC.h"
 #import "ShareOnPlatformVC.h"
 #import "InputQuantityVC.h"
+#import "OrderConfirmVC.h"
 
 #import "WLDatabaseHelperHeader.h"
 #import "WLServerHelperHeader.h"
@@ -386,9 +387,16 @@ static NSString *const kCellIdentifier = @"MYCELL";
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 [InputQuantityVC inputQuantityWithEnterBlock:^(InputQuantityVC *inputQuantityVC, NSInteger quantity) {
                     _strong_check(self);
-                    // TODO 立即购买
-                    DLog(@"%ld", (long)quantity);
                     [inputQuantityVC dismissSelf];
+                    
+                    WLOrderProductModel *product = [[WLOrderProductModel alloc] init];
+                    product.type  = WLOrderProductTypeProduct;
+                    product.refId = self.product.productId;
+                    product.count = quantity;
+                    product.price = self.product.price;
+                    product.title = self.product.productName;
+                    product.image = self.product.images;
+                    [self.navigationController pushViewController:[[OrderConfirmVC alloc] initWithProductList:@[product]] animated:YES];
                 }];
             }];
         }];
