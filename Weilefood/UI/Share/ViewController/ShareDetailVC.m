@@ -11,7 +11,6 @@
 
 #import "WLShareCell.h"
 #import "WLShareSubCommentCell.h"
-#import "WLShareSubCommentView.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -23,7 +22,6 @@
 @interface ShareDetailVC ()
 
 @property(nonatomic,strong)UITableView      *commentDetailTableV;
-@property(nonatomic,strong)WLShareSubCommentView *commentV;
 @property(nonatomic,strong)UIImageView      *deleteActionV;
 @property(nonatomic,strong)UIView           *footerView;
 @property(nonatomic,strong)UITextView       *textField;
@@ -34,6 +32,8 @@
 
 @property(nonatomic,strong)NSArray          *commentList;
 @property(nonatomic,strong)NSNumber         *currentPage;
+
+@property(nonatomic,weak)WLCommentModel     *aimComment;
 
 @end
 
@@ -51,7 +51,6 @@ static NSString *const kHintText = @"在这里说点什么吧...";
     self.navigationItem.rightBarButtonItem = rightItem;
     
     [self.view addSubview:self.commentDetailTableV];
-    [self.view addSubview:self.commentV];
     [self.view addSubview:self.deleteActionV];
     [self.view addSubview:self.footerView];
     [self.view addSubview:self.lineView];
@@ -100,10 +99,6 @@ static NSString *const kHintText = @"在这里说点什么吧...";
         make.size.mas_equalTo([self.sendButton backgroundImageForState:UIControlStateNormal].size);
     }];
     
-    [self.commentV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.commentV.superview);
-        make.height.equalTo(@50);
-    }];
     [self.deleteActionV setHidden:YES];
     
     [self _setupTapGestureRecognizer];
@@ -131,7 +126,7 @@ static NSString *const kHintText = @"在这里说点什么吧...";
             v.showsHorizontalScrollIndicator = NO;
             v.showsVerticalScrollIndicator = NO;
             v.separatorStyle = UITableViewCellSeparatorStyleNone;
-            v.allowsSelection = NO;
+            v.allowsSelection = YES;
             v.backgroundColor = k_COLOR_WHITESMOKE;
             _weak(self);
             [v withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {
@@ -171,7 +166,7 @@ static NSString *const kHintText = @"在这里说点什么吧...";
                     cell.commentActionBlock = ^(WLShareModel *share) {
                         [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                             _strong_check(self);
-                            [self showCommentViewWithComment:share];
+                            [self showCommentViewWithShare:share];
                         }];
                         
                     };
@@ -216,6 +211,21 @@ static NSString *const kHintText = @"在这里说点什么吧...";
                     return cell;
                 }
             }];
+            [v withBlockForRowDidSelect:^(UITableView *view, NSIndexPath *path) {
+                if (path.row == 0) {
+                    return;
+                }
+                [view deselectRowAtIndexPath:path animated:YES];
+                
+                [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+                    _strong_check(self);
+                    WLShareSubCommentCell *cell = (WLShareSubCommentCell*)[view cellForRowAtIndexPath:path];
+                    self.aimComment = cell.comment;
+                    [self.textField becomeFirstResponder];
+                    self.textField.text = [NSString stringWithFormat:@"回复:%@", self.aimComment.nickName];
+                }];
+                
+            }];
             [v headerWithRefreshingBlock:^{
                 _strong_check(self);
                 [self _refreshCommentList];
@@ -229,30 +239,6 @@ static NSString *const kHintText = @"在这里说点什么吧...";
     }
     
     return _commentDetailTableV;
-}
-
-- (WLShareSubCommentView *)commentV {
-    if (!_commentV) {
-        _commentV = ({
-            _weak(self);
-            WLShareSubCommentView* view = [[WLShareSubCommentView alloc] init];
-            [view withSubmitAction:^(NSString *commentContent, NSNumber *rootCommentID) {
-                _strong_check(self);
-                [self.commentV resignFirstResponder];
-                [self.commentV clearContent];
-                [[WLServerHelper sharedInstance] comment_addWithType:WLCommentTypeShare refId:self.share.shareId content:commentContent parentId:0 callback:^(WLApiInfoModel *apiInfo, NSError *error) {
-                    _strong_check(self);
-                    ServerHelperErrorHandle;
-                    [self _refreshCommentList];
-                    [MBProgressHUD showSuccessWithMessage:@"评论成功"];
-                    return;
-                }];
-            }];
-            view;
-        });
-        _commentV.hidden = YES;
-    }
-    return _commentV;
 }
 
 - (UIImageView *)deleteActionV {
@@ -327,10 +313,11 @@ static NSString *const kHintText = @"在这里说点什么吧...";
                 return YES;
             }
         }];
-        [_textField withBlockForDidBeginEditing:^(UITextView *view) {
-            if ([view.text isEqualToString:kHintText]) {
+        [_textField withBlockForShouldChangeText:^BOOL(UITextView *view, NSRange range, NSString *text) {
+            if ([view.text isEqualToString:[NSString stringWithFormat:@"回复:%@",self.aimComment.nickName]] || [view.text isEqualToString:kHintText] ) {
                 view.text = @"";
             }
+            return YES;
         }];
         [_textField withBlockForDidEndEditing:^(UITextView *view) {
             if (!view.text || view.text.length <= 0) {
@@ -349,24 +336,25 @@ static NSString *const kHintText = @"在这里说点什么吧...";
         _weak(self);
         [_sendButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
+            
             if (![WLDatabaseHelper user_find]) {
                 [LoginVC needsLoginWithLoggedBlock:nil];
                 return;
             }
-            if ([self.textField.text isEqualToString:kHintText]) {
+            if ([self.textField.text isEqualToString:kHintText] || [self.textField.text isEqualToString:[NSString stringWithFormat:@"回复:%@", self.aimComment.nickName]]) {
                 [MBProgressHUD showErrorWithMessage:@"请填写评论内容"];
-                [self.textField becomeFirstResponder];
                 return;
             }
             if (!self.textField.text || self.textField.text.length <= 5) {
+                
                 [MBProgressHUD showErrorWithMessage:@"评论内容太少，多写一点吧"];
-                [self.textField becomeFirstResponder];
                 return;
             }
+            NSString *content = self.textField.text;
+            NSUInteger parentID = self.aimComment?self.aimComment.commentId:0;
             [self.textField resignFirstResponder];
-            
             [MBProgressHUD showLoadingWithMessage:@"正在提交..."];
-            [[WLServerHelper sharedInstance] comment_addWithType:WLCommentTypeShare refId:self.share.shareId content:self.textField.text parentId:0 callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+            [[WLServerHelper sharedInstance] comment_addWithType:WLCommentTypeShare refId:self.share.shareId content:content parentId:parentID callback:^(WLApiInfoModel *apiInfo, NSError *error) {
                 [MBProgressHUD hideLoading];
                 _strong_check(self);
                 ServerHelperErrorHandle;
@@ -426,6 +414,8 @@ static NSString *const kHintText = @"在这里说点什么吧...";
             NSDictionary* info = [notification userInfo];
             CGFloat duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
             self.keyboardHeight = 0;
+            self.aimComment = nil;
+            self.textField.text = kHintText;
             [UIView animateWithDuration:duration animations:^{
                 [self.view setNeedsLayout];
                 [self.view layoutIfNeeded];
@@ -444,20 +434,11 @@ static NSString *const kHintText = @"在这里说点什么吧...";
     }];
 }
 
-- (void)showCommentViewWithComment:(WLShareModel*)comment {
-//    if (![self.commentV isHidden]) {
-//        return;
-//    }
-//    self.commentV.comment = comment;
-//    _weak(self);
-//    [self.commentV mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        _strong(self);
-//        make.left.right.equalTo(self.view);
-//        make.height.equalTo(@50);
-//        make.bottom.equalTo(self.view);
-//    }];
-//    self.commentV.hidden = NO;
-//    [self.commentV becomeFirstResponder];
+- (void)showCommentViewWithShare:(WLShareModel*)share {
+    if ([self.textField isFirstResponder]) {
+        return;
+    }
+    [self.textField becomeFirstResponder];
 }
 
 - (void)_setupTapGestureRecognizer {
@@ -469,12 +450,17 @@ static NSString *const kHintText = @"在这里说点什么吧...";
             [self.deleteActionV setHidden:YES];
         }
         
-        if (!CGRectContainsPoint(self.commentV.frame, [touch locationInView:self.view])) {
-            [self.commentV resignFirstResponder];
+        if ([self.textField isFirstResponder] && !CGRectContainsPoint(self.footerView.frame, [touch locationInView:self.view])) {
+            [self.textField resignFirstResponder];
         }
         return NO;
     }];
     [self.view addGestureRecognizer:tap];
+}
+
+- (void)textFieldResignFirstResponder {
+    [self.textField resignFirstResponder];
+    
 }
 #pragma mark - Data
 

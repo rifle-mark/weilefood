@@ -41,7 +41,9 @@
                           NSBackgroundColorAttributeName:k_COLOR_CLEAR,
                           NSParagraphStyleAttributeName:ps};
     
-    NSAttributedString *str = [[NSAttributedString alloc] initWithString:comment.content attributes:att];
+    NSString *content = [NSString stringWithFormat:@"%@%@%@", [NSString isNilEmptyOrBlankString:comment.toNickName]?@"":@"回复 ", [NSString isNilEmptyOrBlankString:comment.toNickName]?@"":comment.toNickName, [NSString stringWithFormat:@": %@", comment.content]];
+
+    NSAttributedString *str = [[NSAttributedString alloc] initWithString:content attributes:att];
     return str;
 }
 
@@ -57,7 +59,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.selectionStyle = UITableViewCellSelectionStyleGray;
         self.backgroundColor = k_COLOR_WHITESMOKE;
         
         if (!SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
@@ -80,7 +82,7 @@
         self.timeL = [[UILabel alloc] init];
         self.timeL.backgroundColor = k_COLOR_CLEAR;
         self.timeL.font = [UIFont boldSystemFontOfSize:12];
-        self.timeL.textColor = k_COLOR_LAVENDER;
+        self.timeL.textColor = k_COLOR_DIMGRAY;
         self.timeL.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:self.timeL];
         [self.timeL mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -126,7 +128,7 @@
         }];
         
         UILongPressGestureRecognizer *longTap = [[UILongPressGestureRecognizer alloc] initWithActionBlock:^(UIGestureRecognizer *gesture) {
-            _strong(self);
+            _strong_check(self);
             if (gesture.state == UIGestureRecognizerStateBegan) {
                 GCBlockInvoke(self.longTapBlock, self.comment);
             }
@@ -144,6 +146,7 @@
         _strong(self);
         [self.avatarV sd_setImageWithURL:[WLAPIAddressGenerator urlOfPictureWith:42 height:42 urlString:self.comment.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
         self.nickNameL.text = self.comment.nickName;
+        self.timeL.text = [self.comment.createDate timeAgoSinceDate:[NSDate date]];
         self.contentL.attributedText = [[self class] _contentAttributeStringWithComment:self.comment];
         if (!SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
             [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {

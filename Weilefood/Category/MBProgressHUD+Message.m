@@ -39,6 +39,10 @@
 }
 
 + (void)showErrorWithMessage:(NSString *)message {
+    [self showErrorWithMessage:message completeBlock:nil];
+}
+
++ (void)showErrorWithMessage:(NSString *)message completeBlock:(MBProgressHUDCompletionBlock)block {
     NSParameterAssert(message);
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     MBProgressHUD *hud = [[self alloc] initWithWindow:window];
@@ -47,6 +51,7 @@
     hud.removeFromSuperViewOnHide = YES;
     hud.mode = MBProgressHUDModeText;
     hud.labelText = message;
+    hud.completionBlock = block;
     [hud show:YES];
     [hud hide:YES afterDelay:3];
 }

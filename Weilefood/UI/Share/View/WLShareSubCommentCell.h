@@ -13,6 +13,7 @@
 
 @property(nonatomic,strong)WLCommentModel     *comment;
 @property(nonatomic,copy)void(^longTapBlock)(WLCommentModel *comment);
+@property(nonatomic,copy)void(^shortTapBlock)(WLCommentModel *comment);
 + (NSString *)reuseIdentify;
 
 + (CGFloat)heightWithComment:(WLCommentModel *)comment screenWidth:(CGFloat)width;

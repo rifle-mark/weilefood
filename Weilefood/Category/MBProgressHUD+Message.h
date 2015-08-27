@@ -25,6 +25,14 @@
 + (void)showErrorWithMessage:(NSString *)message;
 
 /**
+ *  显示错误消息，消失后执行block
+ *
+ *  @param message 消息内容。不能为nil
+ *  @param block   执行block
+ */
++ (void)showErrorWithMessage:(NSString *)message completeBlock:(MBProgressHUDCompletionBlock)block;
+
+/**
  *  显示正在加载消息
  *
  *  @param message 消息内容。可以为nil
