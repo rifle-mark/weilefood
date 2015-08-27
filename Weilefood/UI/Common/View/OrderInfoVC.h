@@ -8,11 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@class WLOrderDetailModel;
+@class WLOrderModel;
 
 /// 订单详情界面
 @interface OrderInfoVC : UIViewController
 
-//- (instancetype)initWithOrder:()
+/**
+ *  初始化本界面
+ *
+ *  @param order 列表上的订单信息对象
+ *
+ *  @return
+ */
+- (instancetype)initWithOrder:(WLOrderModel *)order;
 
 @end

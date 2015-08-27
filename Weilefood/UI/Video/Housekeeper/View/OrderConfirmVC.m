@@ -10,6 +10,8 @@
 #import "InputAddressView.h"
 #import "ShoppingCartProductCell.h"
 
+#import "OrderInfoVC.h"
+
 #import "WLDatabaseHelperHeader.h"
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -24,6 +26,7 @@
 @property (nonatomic, strong) UIButton         *submitButton;
 
 @property (nonatomic, strong) NSArray *productList;
+@property (nonatomic, assign) BOOL isDidAppear;
 
 @end
 
@@ -226,9 +229,7 @@ static NSString *const kOrderAddressKeyZipCode = @"OrderAddressKeyZipCode";
                 for (WLOrderProductModel *item in self.productList) {
                     [WLDatabaseHelper shoppingCart_deleteWithType:item.type refId:item.refId];
                 }
-                
-                [self.navigationController popViewControllerAnimated:YES];
-//                self.navigationController pushViewController:<#(UIViewController *)#> animated:<#(BOOL)#>
+                [self.navigationController pushViewController:[[OrderInfoVC alloc] initWithOrder:apiResult] animated:NO];
             }];
         }];
     }

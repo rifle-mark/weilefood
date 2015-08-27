@@ -38,7 +38,7 @@ typedef NS_ENUM(NSInteger, WLOrderProductType) {
 /// 图片URL
 @property (nonatomic, copy) NSString *image;
 /// 订单ID
-@property (nonatomic, assign) NSUInteger orderId;
+@property (nonatomic, assign) long long orderId;
 ///
 @property (nonatomic, copy) NSDate *createDate;
 

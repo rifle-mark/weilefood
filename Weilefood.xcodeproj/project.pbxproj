@@ -179,6 +179,8 @@
 		24DAE7F91B8852700050582D /* HousekeeperIndexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DAE7F81B8852700050582D /* HousekeeperIndexVC.m */; };
 		24DAE7FC1B8853920050582D /* DoctorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DAE7FB1B8853920050582D /* DoctorCell.m */; };
 		24E503FC1B8F42200015D214 /* OrderInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E503FB1B8F42200015D214 /* OrderInfoVC.m */; };
+		24E503FF1B8F548A0015D214 /* OrderInfoHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E503FE1B8F548A0015D214 /* OrderInfoHeaderCell.m */; };
+		24E504021B8F627A0015D214 /* OrderNumberAndDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E504011B8F627A0015D214 /* OrderNumberAndDateView.m */; };
 		24E5E6141B8B5E7800604577 /* DoctorInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E5E6131B8B5E7800604577 /* DoctorInfoVC.m */; };
 		24E5E6171B8B601800604577 /* DoctorInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E5E6161B8B601800604577 /* DoctorInfoHeaderView.m */; };
 		24E5E61A1B8B68F600604577 /* DoctorDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E5E6191B8B68F600604577 /* DoctorDescriptionCell.m */; };
@@ -588,6 +590,10 @@
 		24DAE7FB1B8853920050582D /* DoctorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorCell.m; sourceTree = "<group>"; };
 		24E503FA1B8F42200015D214 /* OrderInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderInfoVC.h; path = Weilefood/UI/Common/View/OrderInfoVC.h; sourceTree = SOURCE_ROOT; };
 		24E503FB1B8F42200015D214 /* OrderInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderInfoVC.m; path = Weilefood/UI/Common/View/OrderInfoVC.m; sourceTree = SOURCE_ROOT; };
+		24E503FD1B8F548A0015D214 /* OrderInfoHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderInfoHeaderCell.h; path = Weilefood/UI/Common/View/OrderInfoHeaderCell.h; sourceTree = SOURCE_ROOT; };
+		24E503FE1B8F548A0015D214 /* OrderInfoHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderInfoHeaderCell.m; path = Weilefood/UI/Common/View/OrderInfoHeaderCell.m; sourceTree = SOURCE_ROOT; };
+		24E504001B8F627A0015D214 /* OrderNumberAndDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderNumberAndDateView.h; path = Weilefood/UI/Common/View/OrderNumberAndDateView.h; sourceTree = SOURCE_ROOT; };
+		24E504011B8F627A0015D214 /* OrderNumberAndDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderNumberAndDateView.m; path = Weilefood/UI/Common/View/OrderNumberAndDateView.m; sourceTree = SOURCE_ROOT; };
 		24E5E6121B8B5E7800604577 /* DoctorInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorInfoVC.h; sourceTree = "<group>"; };
 		24E5E6131B8B5E7800604577 /* DoctorInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorInfoVC.m; sourceTree = "<group>"; };
 		24E5E6151B8B601800604577 /* DoctorInfoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorInfoHeaderView.h; sourceTree = "<group>"; };
@@ -986,6 +992,10 @@
 			children = (
 				24970F181B8CA60700342AAE /* ShoppingCartProductCell.h */,
 				24970F191B8CA60700342AAE /* ShoppingCartProductCell.m */,
+				24E504001B8F627A0015D214 /* OrderNumberAndDateView.h */,
+				24E504011B8F627A0015D214 /* OrderNumberAndDateView.m */,
+				24E503FD1B8F548A0015D214 /* OrderInfoHeaderCell.h */,
+				24E503FE1B8F548A0015D214 /* OrderInfoHeaderCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2138,6 +2148,7 @@
 				24CDCBFF1B4F792E00BDE8CB /* UITabBarController+GCDelegateBlock.m in Sources */,
 				24CAC4361B57EA5F00E3C4D5 /* WLShareModel.m in Sources */,
 				4DE1B19E1B798691006F9F0E /* WLShareSubCommentCell.m in Sources */,
+				24E504021B8F627A0015D214 /* OrderNumberAndDateView.m in Sources */,
 				24B8C0701B5242BC001C5722 /* UIButton+AGIPC.m in Sources */,
 				24CDCBFA1B4F792E00BDE8CB /* UIPickerView+GCDelegateAndDataSourceBlock.m in Sources */,
 				24CDCBED1B4F792E00BDE8CB /* UISearchBarDelegateImplementationProxy.m in Sources */,
@@ -2156,6 +2167,7 @@
 				24CDCBFE1B4F792E00BDE8CB /* UITabBar+GCDelegateBlock.m in Sources */,
 				24E66DC81B6277190081324A /* ResetPasswordVC.m in Sources */,
 				24CDCC061B4F792E00BDE8CB /* AVAudioRecorder+GCDelegate.m in Sources */,
+				24E503FF1B8F548A0015D214 /* OrderInfoHeaderCell.m in Sources */,
 				24CAC4481B580A5800E3C4D5 /* WLCommentModel.m in Sources */,
 				2467B7271B50E30E001202A4 /* BPushHelper.m in Sources */,
 				24134EB61B6A711900E5BE07 /* ActivityListVC.m in Sources */,
