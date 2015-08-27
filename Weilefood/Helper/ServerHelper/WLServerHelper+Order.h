@@ -27,7 +27,7 @@
  *  @param orderId  订单ID
  *  @param callback
  */
-- (void)order_confirmWithOrderId:(NSUInteger)orderId callback:(void (^)(WLApiInfoModel *apiInfo, WLOrderModel *apiResult, NSError *error))callback;
+- (void)order_confirmWithOrderId:(long long)orderId callback:(void (^)(WLApiInfoModel *apiInfo, WLOrderModel *apiResult, NSError *error))callback;
 
 /**
  *  获取订单详细信息
@@ -35,7 +35,7 @@
  *  @param orderId  订单ID
  *  @param callback
  */
-- (void)order_getDetailWithOrderId:(NSUInteger)orderId callback:(void (^)(WLApiInfoModel *apiInfo, WLOrderModel *apiResult, NSError *error))callback;
+- (void)order_getDetailWithOrderId:(long long)orderId callback:(void (^)(WLApiInfoModel *apiInfo, WLOrderModel *apiResult, NSError *error))callback;
 
 /**
  *  获取 我的营养师订单列表。(NSArray<WLOrderModel>)apiResult

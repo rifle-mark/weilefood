@@ -31,13 +31,13 @@
     [self httpPOST:apiUrl parameters:parameters resultClass:[WLOrderModel class] callback:callback];
 }
 
-- (void)order_confirmWithOrderId:(NSUInteger)orderId callback:(void (^)(WLApiInfoModel *apiInfo, WLOrderModel *apiResult, NSError *error))callback {
+- (void)order_confirmWithOrderId:(long long)orderId callback:(void (^)(WLApiInfoModel *apiInfo, WLOrderModel *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"orderform", @"confirmorder"]];
     NSDictionary *parameters = @{@"orderid":@(orderId)};
     [self httpPOST:apiUrl parameters:parameters resultClass:[WLOrderModel class] callback:callback];
 }
 
-- (void)order_getDetailWithOrderId:(NSUInteger)orderId callback:(void (^)(WLApiInfoModel *apiInfo, WLOrderModel *apiResult, NSError *error))callback {
+- (void)order_getDetailWithOrderId:(long long)orderId callback:(void (^)(WLApiInfoModel *apiInfo, WLOrderModel *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"orderform", @"detail", @(orderId)]];
     [self httpGET:apiUrl parameters:nil resultClass:[WLOrderModel class] callback:callback];
 }
