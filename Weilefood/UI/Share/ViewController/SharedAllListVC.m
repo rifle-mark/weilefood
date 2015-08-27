@@ -116,7 +116,7 @@ static NSUInteger kPageSize = 20;
                     ShareDetailVC *detailVC = [[ShareDetailVC alloc] init];
                     detailVC.share = self.shareList[path.row];
                     [self.navigationController pushViewController:detailVC animated:YES];
-                    [detailVC showCommentViewWithComment:share];
+                    [detailVC showCommentViewWithShare:share];
                 };
                 cell.picShowBlock = ^(NSArray *picUrlArray, NSInteger index) {
                     _strong_check(self);

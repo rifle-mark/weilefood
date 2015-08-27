@@ -13,6 +13,6 @@
 
 @property(nonatomic,strong)WLShareModel       *share;
 
-- (void)showCommentViewWithComment:(WLShareModel*)comment;
+- (void)showCommentViewWithShare:(WLShareModel*)share;
 
 @end

@@ -64,6 +64,68 @@ static CGFloat controlHeight = 47;
 
 @implementation WLShareCell
 
+#pragma mark - class method
++ (NSString *)reuseIdentify {
+    return @"WeiCommentCellIdentify";
+}
+
++ (CGFloat)heightWithComment:(WLShareModel *)share screenWidth:(CGFloat)width {
+    
+    NSInteger picRowNumber = [WLShareCell _picRowNumberWithComment:share];
+    CGFloat picHeight = [WLShareCell _picHeightWithScreenWidth:width];
+    return splitHeight+userVHeight+(picRowNumber==0?0:picRowNumber*(5+picHeight)+15)+controlHeight+30+[WLShareCell _contentHeightWithComment:share screenWidth:width];
+}
+
++ (CGFloat)_contentHeightWithComment:(WLShareModel *)share screenWidth:(CGFloat)width {
+    NSAttributedString *contentStr = [WLShareCell _contentAttributeStringWithComment:share];
+    CGRect contentRect = [contentStr boundingRectWithSize:ccs(width-100, 1000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    return contentRect.size.height;
+}
+
++ (NSInteger)_picRowNumberWithComment:(WLShareModel *)share {
+    if ([NSString isNilEmptyOrBlankString:share.images]) {
+        return 0;
+    }
+    NSArray *images = [WLShareCell _picUrlArrayWithComment:share];
+    if ([images count] <= 0) {
+        return 0;
+    }
+    
+    NSInteger columCount = 3;
+    NSUInteger imageCount = [images count];
+    NSInteger rowCount = 1;
+    while (imageCount > columCount) {
+        rowCount += 1;
+        imageCount -= 3;
+    }
+    return rowCount;
+}
+
++ (NSArray*)_picUrlArrayWithComment:(WLShareModel *)share {
+    return [[share.images stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsSeparatedByString:@","];
+}
+
++ (CGFloat)_picHeightWithScreenWidth:(CGFloat)width {
+    CGFloat totalwidth = width - 110;
+    return totalwidth / 3;
+}
+
++ (NSAttributedString *)_contentAttributeStringWithComment:(WLShareModel *)share {
+    NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
+    ps.alignment = NSTextAlignmentLeft;
+    ps.lineBreakMode = NSLineBreakByWordWrapping;
+    ps.lineHeightMultiple = 1;
+    NSDictionary *att = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:15],
+                          NSForegroundColorAttributeName:k_COLOR_DIMGRAY,
+                          NSBackgroundColorAttributeName:k_COLOR_CLEAR,
+                          NSParagraphStyleAttributeName:ps};
+    
+    NSAttributedString *str = [[NSAttributedString alloc] initWithString:share.content attributes:att];
+    return str;
+}
+
+#pragma mark - instance method
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -82,7 +144,7 @@ static CGFloat controlHeight = 47;
         [self.contentV addSubview:self.contentL];
         [self.contentV addSubview:self.picsV];
         
-        [self _setupSubViews];
+        [self _layoutViews];
         [self _setupObserver];
     }
     return self;
@@ -98,7 +160,7 @@ static CGFloat controlHeight = 47;
     // Configure the view for the selected state
 }
 
-- (void)_setupSubViews {
+- (void)_layoutViews {
     _weak(self);
     if (!SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
         [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -223,66 +285,7 @@ static CGFloat controlHeight = 47;
     [self.upBtn setTitle:[NSString stringWithFormat:@"(%@)", @(self.share.actionCount +1)] forState:UIControlStateNormal];
 }
 - (void)addCommentCount {
-    
-}
-
-+ (NSString *)reuseIdentify {
-    return @"WeiCommentCellIdentify";
-}
-
-+ (CGFloat)heightWithComment:(WLShareModel *)share screenWidth:(CGFloat)width {
-
-    NSInteger picRowNumber = [WLShareCell _picRowNumberWithComment:share];
-    CGFloat picHeight = [WLShareCell _picHeightWithScreenWidth:width];
-    return splitHeight+userVHeight+(picRowNumber==0?0:picRowNumber*(5+picHeight)+15)+controlHeight+30+[WLShareCell _contentHeightWithComment:share screenWidth:width];
-}
-
-+ (CGFloat)_contentHeightWithComment:(WLShareModel *)share screenWidth:(CGFloat)width {
-    NSAttributedString *contentStr = [WLShareCell _contentAttributeStringWithComment:share];
-    CGRect contentRect = [contentStr boundingRectWithSize:ccs(width-100, 1000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-    return contentRect.size.height;
-}
-
-+ (NSInteger)_picRowNumberWithComment:(WLShareModel *)share {
-    if ([NSString isNilEmptyOrBlankString:share.images]) {
-        return 0;
-    }
-    NSArray *images = [WLShareCell _picUrlArrayWithComment:share];
-    if ([images count] <= 0) {
-        return 0;
-    }
-    
-    NSInteger columCount = 3;
-    NSUInteger imageCount = [images count];
-    NSInteger rowCount = 1;
-    while (imageCount > columCount) {
-        rowCount += 1;
-        imageCount -= 3;
-    }
-    return rowCount;
-}
-
-+ (NSArray*)_picUrlArrayWithComment:(WLShareModel *)share {
-    return [[share.images stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsSeparatedByString:@","];
-}
-
-+ (CGFloat)_picHeightWithScreenWidth:(CGFloat)width {
-    CGFloat totalwidth = width - 110;
-    return totalwidth / 3;
-}
-
-+ (NSAttributedString *)_contentAttributeStringWithComment:(WLShareModel *)share {
-    NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
-    ps.alignment = NSTextAlignmentLeft;
-    ps.lineBreakMode = NSLineBreakByWordWrapping;
-    ps.lineHeightMultiple = 1;
-    NSDictionary *att = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:15],
-                          NSForegroundColorAttributeName:k_COLOR_DIMGRAY,
-                          NSBackgroundColorAttributeName:k_COLOR_CLEAR,
-                          NSParagraphStyleAttributeName:ps};
-    
-    NSAttributedString *str = [[NSAttributedString alloc] initWithString:share.content attributes:att];
-    return str;
+    [self.commentBtn setTitle:[NSString stringWithFormat:@"(%lu)", (unsigned long)self.share.commentCount+1] forState:UIControlStateNormal];
 }
 
 #pragma mark - propertys

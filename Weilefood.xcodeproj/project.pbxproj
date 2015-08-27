@@ -202,7 +202,6 @@
 		4D8B1A6D1B7CDBF6008F0925 /* WLAPIAddressGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B1A6C1B7CDBF6008F0925 /* WLAPIAddressGenerator.m */; };
 		4DAA2BA71B7F73B9004E5601 /* ShareDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BA41B7F73B9004E5601 /* ShareDetailVC.m */; };
 		4DAA2BA81B7F73B9004E5601 /* ShareEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BA61B7F73B9004E5601 /* ShareEditVC.m */; };
-		4DAA2BAB1B7F7874004E5601 /* WLShareSubCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BAA1B7F7874004E5601 /* WLShareSubCommentView.m */; };
 		4DAA2BAE1B7FACFC004E5601 /* UIImage+AdjustmentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BAD1B7FACFC004E5601 /* UIImage+AdjustmentSize.m */; };
 		4DAA2BB11B7FD751004E5601 /* UIMenuController+UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BB01B7FD751004E5601 /* UIMenuController+UserInfo.m */; };
 		4DE1B19D1B798691006F9F0E /* WLShareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1B19A1B798691006F9F0E /* WLShareCell.m */; };
@@ -638,8 +637,6 @@
 		4DAA2BA41B7F73B9004E5601 /* ShareDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareDetailVC.m; sourceTree = "<group>"; };
 		4DAA2BA51B7F73B9004E5601 /* ShareEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareEditVC.h; sourceTree = "<group>"; };
 		4DAA2BA61B7F73B9004E5601 /* ShareEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareEditVC.m; sourceTree = "<group>"; };
-		4DAA2BA91B7F7874004E5601 /* WLShareSubCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLShareSubCommentView.h; sourceTree = "<group>"; };
-		4DAA2BAA1B7F7874004E5601 /* WLShareSubCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLShareSubCommentView.m; sourceTree = "<group>"; };
 		4DAA2BAC1B7FACFC004E5601 /* UIImage+AdjustmentSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+AdjustmentSize.h"; sourceTree = "<group>"; };
 		4DAA2BAD1B7FACFC004E5601 /* UIImage+AdjustmentSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AdjustmentSize.m"; sourceTree = "<group>"; };
 		4DAA2BAF1B7FD751004E5601 /* UIMenuController+UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIMenuController+UserInfo.h"; sourceTree = "<group>"; };
@@ -1022,8 +1019,6 @@
 		240D799B1B5FEB42007E2E43 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4DAA2BA91B7F7874004E5601 /* WLShareSubCommentView.h */,
-				4DAA2BAA1B7F7874004E5601 /* WLShareSubCommentView.m */,
 				4DE1B1991B798691006F9F0E /* WLShareCell.h */,
 				4DE1B19A1B798691006F9F0E /* WLShareCell.m */,
 				4DE1B19B1B798691006F9F0E /* WLShareSubCommentCell.h */,
@@ -2189,7 +2184,6 @@
 				249A73D11B569D4100F46F3D /* WLUploadImageModel.m in Sources */,
 				24CDCC111B4F792E00BDE8CB /* UITabBarController+GCDelegate.m in Sources */,
 				24D55DE61B67EB2400EC6373 /* UIBarButtonItem+Ext.m in Sources */,
-				4DAA2BAB1B7F7874004E5601 /* WLShareSubCommentView.m in Sources */,
 				24B8C06B1B5242BC001C5722 /* AGIPCGridItem.m in Sources */,
 				4D8B1A6D1B7CDBF6008F0925 /* WLAPIAddressGenerator.m in Sources */,
 				24CDCC1C1B4F792E00BDE8CB /* NSTimer+GCBlock.m in Sources */,
