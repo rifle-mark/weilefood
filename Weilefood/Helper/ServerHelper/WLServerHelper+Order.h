@@ -8,7 +8,7 @@
 
 #import "WLServerHelper.h"
 
-@class WLOrderAddressModel, WLOrderModel, WLOrderDetailModel;
+@class WLOrderAddressModel, WLOrderModel;
 
 @interface WLServerHelper (Order)
 
@@ -35,17 +35,42 @@
  *  @param orderId  订单ID
  *  @param callback
  */
-- (void)order_getDetailWithOrderId:(NSUInteger)orderId callback:(void (^)(WLApiInfoModel *apiInfo, WLOrderDetailModel *apiResult, NSError *error))callback;
+- (void)order_getDetailWithOrderId:(NSUInteger)orderId callback:(void (^)(WLApiInfoModel *apiInfo, WLOrderModel *apiResult, NSError *error))callback;
 
 /**
- *  获取我的订单列表。(NSArray<WLOrderModel>)apiResult
+ *  获取 我的营养师订单列表。(NSArray<WLOrderModel>)apiResult
  *
  *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
  *  @param pageSize 返回的最大记录数
  *  @param callback
  */
-- (void)order_getListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
+- (void)order_getDoctorListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
 
+/**
+ *  获取 我的预购订单列表。(NSArray<WLOrderModel>)apiResult
+ *
+ *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param pageSize 返回的最大记录数
+ *  @param callback
+ */
+- (void)order_getForwardbuyListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
 
+/**
+ *  获取 我的活动订单列表。(NSArray<WLOrderModel>)apiResult
+ *
+ *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param pageSize 返回的最大记录数
+ *  @param callback
+ */
+- (void)order_getActivityListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
+
+/**
+ *  获取 我的集市商品订单列表。(NSArray<WLOrderModel>)apiResult
+ *
+ *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param pageSize 返回的最大记录数
+ *  @param callback
+ */
+- (void)order_getProductListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
 
 @end

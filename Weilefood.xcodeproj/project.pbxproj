@@ -43,9 +43,6 @@
 		247EA72F1B711B2F00E6A161 /* WLServerHelper+Nutrition.m in Sources */ = {isa = PBXBuildFile; fileRef = 247EA72E1B711B2F00E6A161 /* WLServerHelper+Nutrition.m */; };
 		2482E62C1B5E7864005815E8 /* WLServerHelper+Action.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E62B1B5E7864005815E8 /* WLServerHelper+Action.m */; };
 		2482E62F1B5E7C72005815E8 /* WLOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E62E1B5E7C72005815E8 /* WLOrderModel.m */; };
-		2482E6321B5E7C92005815E8 /* WLOrderDeliverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6311B5E7C92005815E8 /* WLOrderDeliverModel.m */; };
-		2482E6351B5E7CA2005815E8 /* WLOrderAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6341B5E7CA2005815E8 /* WLOrderAddressModel.m */; };
-		2482E6381B5E7CB1005815E8 /* WLOrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6371B5E7CB1005815E8 /* WLOrderDetailModel.m */; };
 		2482E63B1B5E8285005815E8 /* WLOrderProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E63A1B5E8285005815E8 /* WLOrderProductModel.m */; };
 		2482E63E1B5E844B005815E8 /* WLServerHelper+Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E63D1B5E844B005815E8 /* WLServerHelper+Order.m */; };
 		2482E6411B5E9482005815E8 /* WLDialogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6401B5E9482005815E8 /* WLDialogModel.m */; };
@@ -181,6 +178,7 @@
 		24D55DE61B67EB2400EC6373 /* UIBarButtonItem+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */; };
 		24DAE7F91B8852700050582D /* HousekeeperIndexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DAE7F81B8852700050582D /* HousekeeperIndexVC.m */; };
 		24DAE7FC1B8853920050582D /* DoctorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DAE7FB1B8853920050582D /* DoctorCell.m */; };
+		24E503FC1B8F42200015D214 /* OrderInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E503FB1B8F42200015D214 /* OrderInfoVC.m */; };
 		24E5E6141B8B5E7800604577 /* DoctorInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E5E6131B8B5E7800604577 /* DoctorInfoVC.m */; };
 		24E5E6171B8B601800604577 /* DoctorInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E5E6161B8B601800604577 /* DoctorInfoHeaderView.m */; };
 		24E5E61A1B8B68F600604577 /* DoctorDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E5E6191B8B68F600604577 /* DoctorDescriptionCell.m */; };
@@ -305,12 +303,6 @@
 		2482E62B1B5E7864005815E8 /* WLServerHelper+Action.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Action.m"; sourceTree = "<group>"; };
 		2482E62D1B5E7C72005815E8 /* WLOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLOrderModel.h; sourceTree = "<group>"; };
 		2482E62E1B5E7C72005815E8 /* WLOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLOrderModel.m; sourceTree = "<group>"; };
-		2482E6301B5E7C92005815E8 /* WLOrderDeliverModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLOrderDeliverModel.h; sourceTree = "<group>"; };
-		2482E6311B5E7C92005815E8 /* WLOrderDeliverModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLOrderDeliverModel.m; sourceTree = "<group>"; };
-		2482E6331B5E7CA2005815E8 /* WLOrderAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLOrderAddressModel.h; sourceTree = "<group>"; };
-		2482E6341B5E7CA2005815E8 /* WLOrderAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLOrderAddressModel.m; sourceTree = "<group>"; };
-		2482E6361B5E7CB1005815E8 /* WLOrderDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLOrderDetailModel.h; sourceTree = "<group>"; };
-		2482E6371B5E7CB1005815E8 /* WLOrderDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLOrderDetailModel.m; sourceTree = "<group>"; };
 		2482E6391B5E8285005815E8 /* WLOrderProductModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLOrderProductModel.h; sourceTree = "<group>"; };
 		2482E63A1B5E8285005815E8 /* WLOrderProductModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLOrderProductModel.m; sourceTree = "<group>"; };
 		2482E63C1B5E844B005815E8 /* WLServerHelper+Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Order.h"; sourceTree = "<group>"; };
@@ -594,6 +586,8 @@
 		24DAE7F81B8852700050582D /* HousekeeperIndexVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HousekeeperIndexVC.m; sourceTree = "<group>"; };
 		24DAE7FA1B8853920050582D /* DoctorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorCell.h; sourceTree = "<group>"; };
 		24DAE7FB1B8853920050582D /* DoctorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorCell.m; sourceTree = "<group>"; };
+		24E503FA1B8F42200015D214 /* OrderInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderInfoVC.h; path = Weilefood/UI/Common/View/OrderInfoVC.h; sourceTree = SOURCE_ROOT; };
+		24E503FB1B8F42200015D214 /* OrderInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderInfoVC.m; path = Weilefood/UI/Common/View/OrderInfoVC.m; sourceTree = SOURCE_ROOT; };
 		24E5E6121B8B5E7800604577 /* DoctorInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorInfoVC.h; sourceTree = "<group>"; };
 		24E5E6131B8B5E7800604577 /* DoctorInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorInfoVC.m; sourceTree = "<group>"; };
 		24E5E6151B8B601800604577 /* DoctorInfoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorInfoHeaderView.h; sourceTree = "<group>"; };
@@ -1003,6 +997,8 @@
 				24970F161B8CA53900342AAE /* ShoppingCartVC.m */,
 				24B31F0E1B8DF178006E42D7 /* OrderConfirmVC.h */,
 				24B31F0F1B8DF178006E42D7 /* OrderConfirmVC.m */,
+				24E503FA1B8F42200015D214 /* OrderInfoVC.h */,
+				24E503FB1B8F42200015D214 /* OrderInfoVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1190,12 +1186,6 @@
 				245936B41B5A4015008FFAB8 /* WLAdModel.m */,
 				2482E62D1B5E7C72005815E8 /* WLOrderModel.h */,
 				2482E62E1B5E7C72005815E8 /* WLOrderModel.m */,
-				2482E6361B5E7CB1005815E8 /* WLOrderDetailModel.h */,
-				2482E6371B5E7CB1005815E8 /* WLOrderDetailModel.m */,
-				2482E6301B5E7C92005815E8 /* WLOrderDeliverModel.h */,
-				2482E6311B5E7C92005815E8 /* WLOrderDeliverModel.m */,
-				2482E6331B5E7CA2005815E8 /* WLOrderAddressModel.h */,
-				2482E6341B5E7CA2005815E8 /* WLOrderAddressModel.m */,
 				2482E6391B5E8285005815E8 /* WLOrderProductModel.h */,
 				2482E63A1B5E8285005815E8 /* WLOrderProductModel.m */,
 				24E93CED1B82179700E41615 /* WLShoppingCartItemModel.h */,
@@ -1988,7 +1978,6 @@
 				24E6278A1B7D043600743B51 /* InputQuantityVC.m in Sources */,
 				24C32EC21B613BDC00D509A4 /* Model.xcdatamodeld in Sources */,
 				24CDCBE41B4F792E00BDE8CB /* AVAudioRecordDelegateImplementationProxy.m in Sources */,
-				2482E6351B5E7CA2005815E8 /* WLOrderAddressModel.m in Sources */,
 				24CDCBEF1B4F792E00BDE8CB /* UITabbarDelegateImplementationProxy.m in Sources */,
 				24C40B511B7A35B200E8AFA9 /* ForwardBuyInfoVC.m in Sources */,
 				240FB7061B69063900DF5CE4 /* DiscoveryVC.m in Sources */,
@@ -2027,7 +2016,6 @@
 				240FB7031B69025900DF5CE4 /* UIButton+ImagePosition.m in Sources */,
 				24CDCBE11B4F792E00BDE8CB /* AVAudioPlayer+GCDelegateBlock.m in Sources */,
 				24CDCC0E1B4F792E00BDE8CB /* UIScrollView+GCDelegate.m in Sources */,
-				2482E6381B5E7CB1005815E8 /* WLOrderDetailModel.m in Sources */,
 				24B8C06C1B5242BC001C5722 /* AGIPCPreviewController.m in Sources */,
 				24CDCC031B4F792E00BDE8CB /* UIToolbar+GCDelegateBlock.m in Sources */,
 				249A9BAF1B726F75008203C8 /* ProductInfoHeaderView.m in Sources */,
@@ -2049,6 +2037,7 @@
 				24CDCBF31B4F792E00BDE8CB /* UIToolbarDelegateImplementationProxy.m in Sources */,
 				24B8C06F1B5242BC001C5722 /* ALAsset+AGIPC.m in Sources */,
 				240FB7091B690D5B00DF5CE4 /* SharedAllListVC.m in Sources */,
+				24E503FC1B8F42200015D214 /* OrderInfoVC.m in Sources */,
 				24B8C0661B5242BC001C5722 /* AGImagePickerController.m in Sources */,
 				24EC87DA1B84B807007B289A /* UITextView+Placeholder.m in Sources */,
 				24CDCBFD1B4F792E00BDE8CB /* UISearchBar+GCDelegateBlock.m in Sources */,
@@ -2187,7 +2176,6 @@
 				24B8C06B1B5242BC001C5722 /* AGIPCGridItem.m in Sources */,
 				4D8B1A6D1B7CDBF6008F0925 /* WLAPIAddressGenerator.m in Sources */,
 				24CDCC1C1B4F792E00BDE8CB /* NSTimer+GCBlock.m in Sources */,
-				2482E6321B5E7C92005815E8 /* WLOrderDeliverModel.m in Sources */,
 				4DE8BA521B885D1F00E8608E /* GCPageView.m in Sources */,
 				24CDCBEE1B4F792E00BDE8CB /* UITabbarControllerDelegateImplementationProxy.m in Sources */,
 				24CDCBF91B4F792E00BDE8CB /* UINavigationController+GCDelegateBlock.m in Sources */,
