@@ -421,7 +421,7 @@ static NSString* pickerCamera = @"拍照";
 
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSLog(@"clicked index %ld", buttonIndex);
+    DLog(@"clicked index %ld", (long)buttonIndex);
     if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:pickerAlbum]) {
         // 打开相册
         _weak(self);

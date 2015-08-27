@@ -7,8 +7,31 @@
 //
 
 #import "WLOrderModel.h"
+#import "WLOrderProductModel.h"
 
 @implementation WLOrderModel
+
++ (void)initialize {
+    [self setupReplacedKeyFromPropertyName121:CapitalizedPropertyName];
+}
+
++ (NSDictionary *)objectClassInArray{
+    return @{@"orderDetail" : [WLOrderProductModel class],
+             @"OrderDetail" : [WLOrderProductModel class],
+             };
+}
+
+@end
+
+@implementation WLOrderDeliverModel
+
++ (void)initialize {
+    [self setupReplacedKeyFromPropertyName121:CapitalizedPropertyName];
+}
+
+@end
+
+@implementation WLOrderAddressModel
 
 + (void)initialize {
     [self setupReplacedKeyFromPropertyName121:CapitalizedPropertyName];
