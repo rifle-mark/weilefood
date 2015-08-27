@@ -351,7 +351,7 @@ static NSString *const kHintText = @"在这里说点什么吧...";
                 return;
             }
             NSString *content = self.textField.text;
-            NSUInteger parentID = self.aimComment?self.aimComment.commentId:0;
+            long long parentID = self.aimComment ? self.aimComment.commentId : 0;
             [self.textField resignFirstResponder];
             [MBProgressHUD showLoadingWithMessage:@"正在提交..."];
             [[WLServerHelper sharedInstance] comment_addWithType:WLCommentTypeShare refId:self.share.shareId content:content parentId:parentID callback:^(WLApiInfoModel *apiInfo, NSError *error) {
