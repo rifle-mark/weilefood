@@ -13,6 +13,7 @@
 #import "CommentListVC.h"
 #import "LoginVC.h"
 #import "ShareOnPlatformVC.h"
+#import "OrderConfirmVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -342,8 +343,14 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_buyButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                DLog(@"");
-                // TODO 立即参与
+                WLOrderProductModel *product = [[WLOrderProductModel alloc] init];
+                product.type  = WLOrderProductTypeActivity;
+                product.refId = self.activity.activityId;
+                product.count = 1;
+                product.price = self.activity.price;
+                product.title = self.activity.title;
+                product.image = self.activity.banner;
+                [self.navigationController pushViewController:[[OrderConfirmVC alloc] initWithProductList:@[product]] animated:YES];
             }];
         }];
     }

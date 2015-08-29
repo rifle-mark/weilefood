@@ -12,7 +12,9 @@
 #import "ShoppingCartProductCell.h"
 
 #import "OrderConfirmVC.h"
+#import "SelectPayPlatformVC.h"
 
+#import "WLPayHelper.h"
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
@@ -228,7 +230,20 @@
         _weak(self);
         [_payButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            DLog(@"");
+            [SelectPayPlatformVC selectPayPlatformWithMoney:self.orderBaseInfo.totalMoney selectBlock:^(SelectPayPlatformVC *vc, SelectPayPlatform selectPayPlatform) {
+                _strong_check(self);
+                [WLPayHelper payWithPlatform:(WLPayPlatform)selectPayPlatform orderNum:self.orderBaseInfo.orderNum money:self.orderBaseInfo.totalMoney callback:^(BOOL isSuccess, NSString *errorMessage) {
+                    _strong_check(self);
+                    if (isSuccess) {
+                        [vc dismissSelf];
+                        self.orderBaseInfo.state = WLOrderStatePaid;
+                        [self _showData];
+                    }
+                    else if (errorMessage && errorMessage.length > 0) {
+                        [MBProgressHUD showErrorWithMessage:errorMessage];
+                    }
+                }];
+            }];
         }];
     }
     return _payButton;

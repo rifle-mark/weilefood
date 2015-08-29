@@ -15,7 +15,7 @@
 #import "WLDatabaseHelperHeader.h"
 
 #import "LoginVC.h"
-#import "MyOrderVC.h"
+#import "UserOrderListVC.h"
 #import "MyShareVC.h"
 #import "MyMessageVC.h"
 #import "MyShopCarVC.h"
@@ -199,7 +199,7 @@ static NSInteger const kSectionList   = 2;
                 _strong_check(self);
                 switch (cell.itemType) {
                     case MyOrder: {
-                        MyOrderVC *vc = [[MyOrderVC alloc] init];
+                        UserOrderListVC *vc = [[UserOrderListVC alloc] init];
                         [self.navigationController pushViewController:vc animated:YES];
                     }
                         break;

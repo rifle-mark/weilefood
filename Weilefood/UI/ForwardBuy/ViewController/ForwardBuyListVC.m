@@ -78,11 +78,11 @@ static NSInteger const kPageSize       = 10;
 #pragma mark - private methons
 
 - (void)_addObserve {
-        _weak(self);
-        [self startObserveObject:self forKeyPath:@"forwardBuyList" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
-            _strong_check(self);
-            [self.tableView reloadData];
-        }];
+    _weak(self);
+    [self startObserveObject:self forKeyPath:@"forwardBuyList" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
+        _strong_check(self);
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)_loadDataWithIsLatest:(BOOL)isLatest {

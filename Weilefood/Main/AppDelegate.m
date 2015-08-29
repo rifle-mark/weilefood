@@ -13,6 +13,7 @@
 #import "WLServerHelperHeader.h"
 #import "WLDatabaseHelperHeader.h"
 #import "WLModelHeader.h"
+#import "AlipayHeader.h"
 
 #import "MainPageVC.h"
 
@@ -146,7 +147,20 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    return  [UMSocialSnsService handleOpenURL:url];
+    DLog(@"%@", url);
+    //如果极简 SDK 不可用,会跳转支付宝钱包进行支付,需要将支付宝钱包的支付结果回传给 SD
+    if ([url.host isEqualToString:@"safepay"]) {
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+        }];
+    }
+    //支付宝钱包快登授权返回 authCode
+    if ([url.host isEqualToString:@"platformapi"]) {
+        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+        }];
+    }
+    return [UMSocialSnsService handleOpenURL:url];
 }
 
 @end
