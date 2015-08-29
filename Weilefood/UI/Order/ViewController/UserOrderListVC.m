@@ -483,8 +483,8 @@ static NSString *const kTextCompleted      = @"已完成";
             ShoppingCartProductCell *cell = [view dequeueReusableCellWithIdentifier:[ShoppingCartProductCell reuseIdentifier] forIndexPath:path];
             cell.imageUrl               = order.image;
             cell.name                   = order.title;
-//            cell.price                  = order.price;
-//            cell.quantity               = order.count;
+            cell.price                  = order.price;
+            cell.quantity               = order.count;
             cell.displaySelectControl   = NO;
             cell.displayQuantityControl = NO;
             return cell;
@@ -581,7 +581,7 @@ static NSString *const kTextCompleted      = @"已完成";
                 }
                 return cell;
             }
-            if (path.row == kRowHeader) {
+            if (path.row == kRowFooter) {
                 UITableViewCell *cell = [view dequeueReusableCellWithIdentifier:kFooterCellReuseIdentifier forIndexPath:path];
                 cell.backgroundColor = k_COLOR_LAVENDER;
                 return cell;

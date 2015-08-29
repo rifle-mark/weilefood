@@ -56,6 +56,11 @@ typedef NS_ENUM(NSInteger, WLOrderState) {
 @property (nonatomic, copy  ) NSString     *trueName;
 /// 预购名称|活动名称|
 @property (nonatomic, copy  ) NSString     *title;
+/// 预购单价
+@property (nonatomic, assign) CGFloat      price;
+/// 预购数量
+@property (nonatomic, assign) NSInteger    count;
+
 
 /// 发货快递信息
 @property (nonatomic, strong) WLOrderDeliverModel *deliver;
