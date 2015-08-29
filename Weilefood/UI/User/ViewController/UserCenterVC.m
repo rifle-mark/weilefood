@@ -13,6 +13,7 @@
 #import "UserCenterListCell.h"
 
 #import "WLDatabaseHelperHeader.h"
+#import "WLModelHeader.h"
 
 #import "LoginVC.h"
 #import "MyOrderVC.h"
@@ -139,6 +140,7 @@ static NSInteger const kSectionList   = 2;
                         [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                             _strong_check(self);
                             UserPointVC *vc = [[UserPointVC alloc] init];
+                            vc.myPoint = [[WLDatabaseHelper user_find] points];
                             [self.navigationController pushViewController:vc animated:YES];
                         }];
                     }];

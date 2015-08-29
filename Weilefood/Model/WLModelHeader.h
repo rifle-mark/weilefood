@@ -29,6 +29,7 @@
 #import "WLDialogModel.h"
 #import "WLMessageModel.h"
 #import "WLPointsModel.h"
+#import "WLPointRulerModel.h"
 #import "WLNutritionModel.h"
 #import "WLDoctorModel.h"
 

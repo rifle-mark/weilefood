@@ -11,6 +11,11 @@
 
 @implementation WLServerHelper (Points)
 
+- (void)points_getRulerListCallback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"pointsinfo", @"list"]];
+    [self httpGET:apiUrl parameters:nil resultArrayClass:[WLPointRulerModel class] callback:callback];
+}
+
 - (void)points_addWithType:(WLPointsType)type callback:(void (^)(WLApiInfoModel *apiInfo, WLPointsModel *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"points", @"add"]];
     NSDictionary *parameters = @{@"type" : @(type)};

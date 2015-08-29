@@ -9,11 +9,14 @@
 #import "WLServerHelper.h"
 
 @class WLPointsModel;
+@class WLPointRulerModel;
 
 /// 积分类型
 typedef NS_ENUM(NSUInteger, WLPointsType);
 
 @interface WLServerHelper (Points)
+
+- (void)points_getRulerListCallback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
 
 /**
  *  增加积分
