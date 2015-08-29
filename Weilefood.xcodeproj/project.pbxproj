@@ -67,6 +67,7 @@
 		249B9B291B6340C3000A85B0 /* MainPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249B9B281B6340C3000A85B0 /* MainPageVC.m */; };
 		249EF30D1B64BEDA00AAEBE0 /* MarketIndexPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249EF30C1B64BEDA00AAEBE0 /* MarketIndexPageVC.m */; };
 		24A0266B1B6DDEC500C6139B /* MarketChildChannelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A0266A1B6DDEC500C6139B /* MarketChildChannelView.m */; };
+		24AE12171B91425100654AEC /* AlipayRequestConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AE12161B91425100654AEC /* AlipayRequestConfig.m */; };
 		24B2E2AD1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B2E2AC1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m */; };
 		24B31F101B8DF178006E42D7 /* OrderConfirmVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B31F0F1B8DF178006E42D7 /* OrderConfirmVC.m */; };
 		24B31F131B8DF1D4006E42D7 /* InputAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B31F121B8DF1D4006E42D7 /* InputAddressView.m */; };
@@ -355,6 +356,9 @@
 		249EF30C1B64BEDA00AAEBE0 /* MarketIndexPageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketIndexPageVC.m; sourceTree = "<group>"; };
 		24A026691B6DDEC500C6139B /* MarketChildChannelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketChildChannelView.h; sourceTree = "<group>"; };
 		24A0266A1B6DDEC500C6139B /* MarketChildChannelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketChildChannelView.m; sourceTree = "<group>"; };
+		24AE12141B91425100654AEC /* AlipayHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlipayHeader.h; sourceTree = "<group>"; };
+		24AE12151B91425100654AEC /* AlipayRequestConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlipayRequestConfig.h; sourceTree = "<group>"; };
+		24AE12161B91425100654AEC /* AlipayRequestConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlipayRequestConfig.m; sourceTree = "<group>"; };
 		24B2E2AB1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryCollectionHeaderView.h; sourceTree = "<group>"; };
 		24B2E2AC1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryCollectionHeaderView.m; sourceTree = "<group>"; };
 		24B31F0E1B8DF178006E42D7 /* OrderConfirmVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderConfirmVC.h; path = Weilefood/UI/Video/Housekeeper/View/OrderConfirmVC.h; sourceTree = SOURCE_ROOT; };
@@ -1680,9 +1684,12 @@
 			children = (
 				4DE8B9BD1B885D1E00E8608E /* lib */,
 				4DE8B9C21B885D1E00E8608E /* openssl */,
+				4DE8BA101B885D1F00E8608E /* Util */,
+				24AE12141B91425100654AEC /* AlipayHeader.h */,
+				24AE12151B91425100654AEC /* AlipayRequestConfig.h */,
+				24AE12161B91425100654AEC /* AlipayRequestConfig.m */,
 				4DE8BA0E1B885D1F00E8608E /* Order.h */,
 				4DE8BA0F1B885D1F00E8608E /* Order.m */,
-				4DE8BA101B885D1F00E8608E /* Util */,
 			);
 			path = AliPay;
 			sourceTree = "<group>";
@@ -2038,6 +2045,7 @@
 				4DE8BA4A1B885D1F00E8608E /* RSADataSigner.m in Sources */,
 				24CDCBF11B4F792E00BDE8CB /* UITextFieldDelegateImplementationProxy.m in Sources */,
 				2438A7651B7ECF09003404BF /* WLServerHelper+Doctor.m in Sources */,
+				24AE12171B91425100654AEC /* AlipayRequestConfig.m in Sources */,
 				24B8C0681B5242BC001C5722 /* AGIPCAlbumsController.m in Sources */,
 				4DAA2BAE1B7FACFC004E5601 /* UIImage+AdjustmentSize.m in Sources */,
 				24CDCC051B4F792E00BDE8CB /* AVAudioPlayer+GCDelegate.m in Sources */,
