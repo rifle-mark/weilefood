@@ -67,7 +67,7 @@
     }];
     
     [self.iconV mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.iconV.superview).with.offset(10);
+        make.left.equalTo(self.iconV.superview).with.offset(12);
         make.centerY.equalTo(self.iconV.superview);
         make.size.mas_equalTo(ccs(27, 27));
     }];
@@ -80,14 +80,14 @@
     
     [self.arrawV mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.arrawV.superview);
-        make.right.equalTo(self.arrawV.superview.mas_right).offset(-10);
+        make.right.equalTo(self.arrawV.superview.mas_right).offset(-12);
         make.width.equalTo(@(self.arrawV.image.size.width));
         make.height.equalTo(@(self.arrawV.image.size.height));
     }];
     
     [self.lineV mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.lineV.superview).with.offset(10);
-        make.right.equalTo(self.lineV.superview).with.offset(-10);
+        make.left.equalTo(self.lineV.superview).with.offset(12);
+        make.right.equalTo(self.lineV.superview).with.offset(-12);
         make.height.equalTo(@0.4);
     }];
 }

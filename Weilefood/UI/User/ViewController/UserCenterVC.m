@@ -12,6 +12,8 @@
 #import "UserCenterMiddleCell.h"
 #import "UserCenterListCell.h"
 
+#import "WLDatabaseHelperHeader.h"
+
 #import "LoginVC.h"
 #import "MyOrderVC.h"
 #import "MyShareVC.h"
@@ -21,6 +23,8 @@
 #import "MyFavoriteVC.h"
 #import "MyCommentVC.h"
 #import "FeedBackVC.h"
+#import "SettingVC.h"
+#import "UserPointVC.h"
 
 @interface UserCenterVC ()
 
@@ -36,6 +40,10 @@ static NSInteger const kSectionList   = 2;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationItem.title = @"我的帐户";
+    UIBarButtonItem *settingItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(_openSetting:)];
+    settingItem.tintColor = k_COLOR_WHITE;
+    self.navigationItem.rightBarButtonItem = settingItem;
     
     [self.view addSubview:self.tableView];
 }
@@ -51,6 +59,18 @@ static NSInteger const kSectionList   = 2;
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tableView.superview).with.offset(self.topLayoutGuide.length);
         make.left.right.bottom.equalTo(self.tableView.superview);
+    }];
+    
+    FixesViewDidLayoutSubviewsiOS7Error;
+}
+
+#pragma mark - private method
+- (void)_openSetting:(id)sender {
+    _weak(self);
+    [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+        _strong_check(self);
+        SettingVC *vc = [[SettingVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }];
 }
 
@@ -110,8 +130,18 @@ static NSInteger const kSectionList   = 2;
             switch (path.section) {
                 case kSectionInfo: {
                     UserCenterUserInfoCell *cell = [view dequeueReusableCellWithIdentifier:[UserCenterUserInfoCell reuseIdentify]];
-                    [cell onImageClickBlock:^(){}];
-                    [cell onPointClickBlock:^(){}];
+                    cell.user = [WLDatabaseHelper user_find];
+                    [cell onImageClickBlock:^(){
+                        _strong_check(self);
+                        [self _openSetting:nil];
+                    }];
+                    [cell onPointClickBlock:^(){
+                        [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+                            _strong_check(self);
+                            UserPointVC *vc = [[UserPointVC alloc] init];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }];
+                    }];
                     return cell;
                 }
                     break;
@@ -159,6 +189,12 @@ static NSInteger const kSectionList   = 2;
             }
             [view deselectRowAtIndexPath:path animated:YES];
             
+            if (cell.itemType == FeedBack) {
+                FeedBackVC *vc = [[FeedBackVC alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+                return;
+            }
+            
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
                 switch (cell.itemType) {
@@ -179,11 +215,6 @@ static NSInteger const kSectionList   = 2;
                         break;
                     case MyComment: {
                         MyCommentVC *vc = [[MyCommentVC alloc] init];
-                        [self.navigationController pushViewController:vc animated:YES];
-                    }
-                        break;
-                    case FeedBack: {
-                        FeedBackVC *vc = [[FeedBackVC alloc] init];
                         [self.navigationController pushViewController:vc animated:YES];
                     }
                         break;

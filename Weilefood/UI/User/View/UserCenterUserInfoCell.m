@@ -17,8 +17,6 @@
 @property(nonatomic,strong)UILabel              *nickNameL;
 @property(nonatomic,strong)UIButton             *pointBtn;
 
-@property(nonatomic,strong)WLUserModel          *user;
-
 @property(nonatomic,copy)OnUserInfoImageClickBlock imageClickBlock;
 @property(nonatomic,copy)OnUserInfoPointClickBlock pointClickBlock;
 
@@ -46,7 +44,6 @@
         [self _layoutSubView];
         
         [self _setupObserver];
-        self.user = [WLDatabaseHelper user_find];
     }
     return self;
 }
@@ -108,8 +105,8 @@
         _avatarV.contentMode = UIViewContentModeCenter;
         _avatarV.layer.cornerRadius = 40;
         _avatarV.userInteractionEnabled = YES;
-        _avatarV.layer.borderWidth = 0.4;
-        _avatarV.layer.borderColor = [k_COLOR_WHITESMOKE CGColor];
+        _avatarV.layer.borderWidth = 2;
+        _avatarV.layer.borderColor = [[k_COLOR_BLACK colorWithAlphaComponent:0.1] CGColor];
         _weak(self);
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(UIGestureRecognizer *gesture) {
             _strong_check(self);

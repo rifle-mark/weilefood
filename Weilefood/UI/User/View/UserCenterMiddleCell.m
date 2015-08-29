@@ -68,19 +68,19 @@
         make.centerX.equalTo(self.msgBtn.superview);
         make.top.equalTo(self.shareBtn.superview).with.offset(15);
         make.bottom.equalTo(self.shareBtn.superview).with.offset(-4);
-        make.width.equalTo(@90);
+        make.width.equalTo(@100);
     }];
     
     [self.shareBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.width.equalTo(self.msgBtn);
         CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-        make.centerX.equalTo(self.msgBtn.mas_left).with.offset(-(screenWidth-90)/4);
+        make.centerX.equalTo(self.msgBtn.mas_left).with.offset(-(screenWidth-100)/4);
     }];
     
     [self.shopCarBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.width.equalTo(self.msgBtn);
         CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-        make.centerX.equalTo(self.msgBtn.mas_right).with.offset((screenWidth-90)/4);
+        make.centerX.equalTo(self.msgBtn.mas_right).with.offset((screenWidth-100)/4);
     }];
 }
 
@@ -90,6 +90,10 @@
         _shareBtn = [[UIButton alloc] init];
         _shareBtn.backgroundColor = k_COLOR_CLEAR;
         [_shareBtn setImage:[UIImage imageNamed:@"share_btn_n"] forState:UIControlStateNormal];
+        [_shareBtn setTitle:@"我的发帖" forState:UIControlStateNormal];
+        _shareBtn.titleLabel.font = [UIFont boldSystemFontOfSize:13];
+        [_shareBtn setTitleColor:k_COLOR_STAR_DUST forState:UIControlStateNormal];
+        [_shareBtn setImageToTop];
         _weak(self);
         [_shareBtn addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
@@ -105,6 +109,10 @@
         _msgBtn = [[UIButton alloc] init];
         _msgBtn.backgroundColor = k_COLOR_CLEAR;
         [_msgBtn setImage:[UIImage imageNamed:@"msg_btn_n"] forState:UIControlStateNormal];
+        [_msgBtn setTitle:@"我的私信" forState:UIControlStateNormal];
+        _msgBtn.titleLabel.font = [UIFont boldSystemFontOfSize:13];
+        [_msgBtn setTitleColor:k_COLOR_STAR_DUST forState:UIControlStateNormal];
+        [_msgBtn setImageToTop];
         _weak(self);
         [_msgBtn addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
@@ -119,6 +127,10 @@
         _shopCarBtn = [[UIButton alloc] init];
         _shopCarBtn.backgroundColor = k_COLOR_CLEAR;
         [_shopCarBtn setImage:[UIImage imageNamed:@"shopcar_btn_n"] forState:UIControlStateNormal];
+        [_shopCarBtn setTitle:@"购物车" forState:UIControlStateNormal];
+        _shopCarBtn.titleLabel.font = [UIFont boldSystemFontOfSize:13];
+        [_shopCarBtn setTitleColor:k_COLOR_STAR_DUST forState:UIControlStateNormal];
+        [_shopCarBtn setImageToTop];
         _weak(self);
         [_shopCarBtn addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);

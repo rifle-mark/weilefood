@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class WLUserModel;
+
 typedef void(^OnUserInfoImageClickBlock)();
 typedef void(^OnUserInfoPointClickBlock)();
 
 @interface UserCenterUserInfoCell : UITableViewCell
+
+@property(nonatomic,strong)WLUserModel  *user;
 
 + (NSString*)reuseIdentify;
 

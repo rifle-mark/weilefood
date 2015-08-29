@@ -211,6 +211,8 @@
 		4D4252911B9196B900F481E3 /* MyMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252901B9196B900F481E3 /* MyMessageVC.m */; };
 		4D4252941B9196C700F481E3 /* MyShopCarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252931B9196C700F481E3 /* MyShopCarVC.m */; };
 		4D4252971B9196DA00F481E3 /* FeedBackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252961B9196DA00F481E3 /* FeedBackVC.m */; };
+		4D42529A1B91994E00F481E3 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252991B91994E00F481E3 /* SettingVC.m */; };
+		4D42529D1B91999500F481E3 /* UserPointVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D42529C1B91999500F481E3 /* UserPointVC.m */; };
 		4D8B1A6D1B7CDBF6008F0925 /* WLAPIAddressGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B1A6C1B7CDBF6008F0925 /* WLAPIAddressGenerator.m */; };
 		4DAA2BA71B7F73B9004E5601 /* ShareDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BA41B7F73B9004E5601 /* ShareDetailVC.m */; };
 		4DAA2BA81B7F73B9004E5601 /* ShareEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BA61B7F73B9004E5601 /* ShareEditVC.m */; };
@@ -667,6 +669,10 @@
 		4D4252931B9196C700F481E3 /* MyShopCarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShopCarVC.m; sourceTree = "<group>"; };
 		4D4252951B9196DA00F481E3 /* FeedBackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackVC.h; sourceTree = "<group>"; };
 		4D4252961B9196DA00F481E3 /* FeedBackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackVC.m; sourceTree = "<group>"; };
+		4D4252981B91994E00F481E3 /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
+		4D4252991B91994E00F481E3 /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
+		4D42529B1B91999500F481E3 /* UserPointVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPointVC.h; sourceTree = "<group>"; };
+		4D42529C1B91999500F481E3 /* UserPointVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPointVC.m; sourceTree = "<group>"; };
 		4D8B1A6B1B7CDBF6008F0925 /* WLAPIAddressGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLAPIAddressGenerator.h; sourceTree = "<group>"; };
 		4D8B1A6C1B7CDBF6008F0925 /* WLAPIAddressGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLAPIAddressGenerator.m; sourceTree = "<group>"; };
 		4DAA2BA31B7F73B9004E5601 /* ShareDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareDetailVC.h; sourceTree = "<group>"; };
@@ -1131,6 +1137,10 @@
 				4D4252931B9196C700F481E3 /* MyShopCarVC.m */,
 				4D4252951B9196DA00F481E3 /* FeedBackVC.h */,
 				4D4252961B9196DA00F481E3 /* FeedBackVC.m */,
+				4D4252981B91994E00F481E3 /* SettingVC.h */,
+				4D4252991B91994E00F481E3 /* SettingVC.m */,
+				4D42529B1B91999500F481E3 /* UserPointVC.h */,
+				4D42529C1B91999500F481E3 /* UserPointVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2204,6 +2214,7 @@
 				24E66DC21B6271810081324A /* MBProgressHUD+Message.m in Sources */,
 				24B31F161B8DF4CB006E42D7 /* InputView.m in Sources */,
 				24C32ECD1B613FD400D509A4 /* WLDatabaseHelper+User.m in Sources */,
+				4D42529A1B91994E00F481E3 /* SettingVC.m in Sources */,
 				24CDCC141B4F792E00BDE8CB /* UITextView+GCDelegate.m in Sources */,
 				249A9BA61B7249F3008203C8 /* WLActivityCityModel.m in Sources */,
 				24CDCC071B4F792E00BDE8CB /* UICollectionView+GCDelegateAndDataSource.m in Sources */,
@@ -2251,6 +2262,7 @@
 				24CDCBF71B4F792E00BDE8CB /* UIImagePickerController+GCDelegateBlock.m in Sources */,
 				2482E63B1B5E8285005815E8 /* WLOrderProductModel.m in Sources */,
 				24B2E2AD1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m in Sources */,
+				4D42529D1B91999500F481E3 /* UserPointVC.m in Sources */,
 				24E5E6141B8B5E7800604577 /* DoctorInfoVC.m in Sources */,
 				4DAA2BB11B7FD751004E5601 /* UIMenuController+UserInfo.m in Sources */,
 				249A73D11B569D4100F46F3D /* WLUploadImageModel.m in Sources */,
