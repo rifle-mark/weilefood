@@ -1,12 +1,12 @@
 //
-//  MyOrderListVC.m
+//  UserOrderListVC.m
 //  Weilefood
 //
 //  Created by kelei on 15/8/29.
 //  Copyright (c) 2015年 kelei. All rights reserved.
 //
 
-#import "MyOrderListVC.h"
+#import "UserOrderListVC.h"
 #import "OrderItemHeaderCell.h"
 #import "OrderItemFooterCell.h"
 #import "OrderItemDoctorCell.h"
@@ -19,7 +19,7 @@
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
-@interface MyOrderListVC ()
+@interface UserOrderListVC ()
 
 @property (nonatomic, strong) UIView   *typeView;
 @property (nonatomic, strong) UIButton *prouctButton;
@@ -48,7 +48,7 @@ static NSString *const kTextShip           = @"待发货";
 static NSString *const kTextConfirmReceipt = @"确认收货";
 static NSString *const kTextCompleted      = @"已完成";
 
-@implementation MyOrderListVC
+@implementation UserOrderListVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

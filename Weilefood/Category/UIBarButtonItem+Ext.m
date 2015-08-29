@@ -8,6 +8,7 @@
 
 #import "UIBarButtonItem+Ext.h"
 #import "LoginVC.h"
+#import "UserCenterVC.h"
 #import "ShoppingCartVC.h"
 
 @implementation UIBarButtonItem (Ext)
@@ -21,7 +22,14 @@
 }
 
 - (void)_userAction {
-    [LoginVC show];
+//    [LoginVC show];
+    UIViewController *nc = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if ([nc isKindOfClass:[UINavigationController class]]) {
+        [((UINavigationController *)nc) pushViewController:[[UserCenterVC alloc] init] animated:YES];
+    }
+    else {
+        [nc.navigationController pushViewController:[[UserCenterVC alloc] init] animated:YES];
+    }
 }
 
 + (UIBarButtonItem *)createUserBarButtonItem {

@@ -1,5 +1,5 @@
 //
-//  MyOrderListVC.h
+//  UserOrderListVC.h
 //  Weilefood
 //
 //  Created by kelei on 15/8/29.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 /// 我的订单列表
-@interface MyOrderListVC : UIViewController
+@interface UserOrderListVC : UIViewController
 
 @end
