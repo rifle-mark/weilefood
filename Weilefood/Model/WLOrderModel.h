@@ -46,7 +46,9 @@ typedef NS_ENUM(NSInteger, WLOrderState) {
 ///
 @property (nonatomic, assign) long long    userId;
 
-/// 图片|营养师头像
+/// 商品图片
+@property (nonatomic, copy  ) NSString     *image;
+/// 营养师头像
 @property (nonatomic, copy  ) NSString     *images;
 /// 营养师ID
 @property (nonatomic, assign) long long    doctorId;

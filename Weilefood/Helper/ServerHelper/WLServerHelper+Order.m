@@ -46,28 +46,28 @@
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"orderform", @"mydoctororder"]];
     NSDictionary *parameters = @{@"pagesize"  : @(pageSize),
                                  @"orderDate" : @([maxDate millisecondIntervalSince1970])};
-    [self httpGET:apiUrl parameters:parameters resultItemsClass:[WLOrderModel class] callback:callback];
+    [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLOrderModel class] callback:callback];
 }
 
 - (void)order_getForwardbuyListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"orderform", @"myforwardbuyorder"]];
     NSDictionary *parameters = @{@"pagesize"  : @(pageSize),
                                  @"orderDate" : @([maxDate millisecondIntervalSince1970])};
-    [self httpGET:apiUrl parameters:parameters resultItemsClass:[WLOrderModel class] callback:callback];
+    [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLOrderModel class] callback:callback];
 }
 
 - (void)order_getActivityListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"orderform", @"myactivityorder"]];
     NSDictionary *parameters = @{@"pagesize"  : @(pageSize),
                                  @"orderDate" : @([maxDate millisecondIntervalSince1970])};
-    [self httpGET:apiUrl parameters:parameters resultItemsClass:[WLOrderModel class] callback:callback];
+    [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLOrderModel class] callback:callback];
 }
 
 - (void)order_getProductListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"orderform", @"myproductorder"]];
     NSDictionary *parameters = @{@"pagesize"  : @(pageSize),
                                  @"orderDate" : @([maxDate millisecondIntervalSince1970])};
-    [self httpGET:apiUrl parameters:parameters resultItemsClass:[WLOrderModel class] callback:callback];
+    [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLOrderModel class] callback:callback];
 }
 
 @end

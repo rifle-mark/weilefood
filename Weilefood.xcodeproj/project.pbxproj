@@ -80,6 +80,10 @@
 		24AE12531B9186E900654AEC /* DoctorInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AE124C1B9186E900654AEC /* DoctorInfoVC.m */; };
 		24AE12541B9186E900654AEC /* HousekeeperIndexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AE124E1B9186E900654AEC /* HousekeeperIndexVC.m */; };
 		24AE12571B91877F00654AEC /* ScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AE12561B91877F00654AEC /* ScoreView.m */; };
+		24AE125A1B91885D00654AEC /* MyOrderListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AE12591B91885D00654AEC /* MyOrderListVC.m */; };
+		24AE12601B918D7100654AEC /* OrderItemFooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AE125F1B918D7100654AEC /* OrderItemFooterCell.m */; };
+		24AE12631B918DCC00654AEC /* OrderItemDoctorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AE12621B918DCC00654AEC /* OrderItemDoctorCell.m */; };
+		24AE12661B918E9C00654AEC /* OrderItemHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AE12651B918E9C00654AEC /* OrderItemHeaderCell.m */; };
 		24B2E2AD1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B2E2AC1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m */; };
 		24B31F131B8DF1D4006E42D7 /* InputAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B31F121B8DF1D4006E42D7 /* InputAddressView.m */; };
 		24B31F161B8DF4CB006E42D7 /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B31F151B8DF4CB006E42D7 /* InputView.m */; };
@@ -385,6 +389,14 @@
 		24AE124E1B9186E900654AEC /* HousekeeperIndexVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HousekeeperIndexVC.m; sourceTree = "<group>"; };
 		24AE12551B91877F00654AEC /* ScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreView.h; sourceTree = "<group>"; };
 		24AE12561B91877F00654AEC /* ScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreView.m; sourceTree = "<group>"; };
+		24AE12581B91885D00654AEC /* MyOrderListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderListVC.h; sourceTree = "<group>"; };
+		24AE12591B91885D00654AEC /* MyOrderListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderListVC.m; sourceTree = "<group>"; };
+		24AE125E1B918D7100654AEC /* OrderItemFooterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderItemFooterCell.h; sourceTree = "<group>"; };
+		24AE125F1B918D7100654AEC /* OrderItemFooterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderItemFooterCell.m; sourceTree = "<group>"; };
+		24AE12611B918DCC00654AEC /* OrderItemDoctorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderItemDoctorCell.h; sourceTree = "<group>"; };
+		24AE12621B918DCC00654AEC /* OrderItemDoctorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderItemDoctorCell.m; sourceTree = "<group>"; };
+		24AE12641B918E9C00654AEC /* OrderItemHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderItemHeaderCell.h; sourceTree = "<group>"; };
+		24AE12651B918E9C00654AEC /* OrderItemHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderItemHeaderCell.m; sourceTree = "<group>"; };
 		24B2E2AB1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryCollectionHeaderView.h; sourceTree = "<group>"; };
 		24B2E2AC1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryCollectionHeaderView.m; sourceTree = "<group>"; };
 		24B31F111B8DF1D4006E42D7 /* InputAddressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputAddressView.h; sourceTree = "<group>"; };
@@ -1201,6 +1213,12 @@
 				24AE12241B9186AE00654AEC /* OrderNumberAndDateView.m */,
 				24AE122B1B9186AE00654AEC /* ShoppingCartProductCell.h */,
 				24AE122C1B9186AE00654AEC /* ShoppingCartProductCell.m */,
+				24AE12641B918E9C00654AEC /* OrderItemHeaderCell.h */,
+				24AE12651B918E9C00654AEC /* OrderItemHeaderCell.m */,
+				24AE125E1B918D7100654AEC /* OrderItemFooterCell.h */,
+				24AE125F1B918D7100654AEC /* OrderItemFooterCell.m */,
+				24AE12611B918DCC00654AEC /* OrderItemDoctorCell.h */,
+				24AE12621B918DCC00654AEC /* OrderItemDoctorCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1216,6 +1234,8 @@
 				24AE12331B9186AE00654AEC /* SelectPayPlatformVC.m */,
 				24AE12341B9186AE00654AEC /* ShoppingCartVC.h */,
 				24AE12351B9186AE00654AEC /* ShoppingCartVC.m */,
+				24AE12581B91885D00654AEC /* MyOrderListVC.h */,
+				24AE12591B91885D00654AEC /* MyOrderListVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2013,6 +2033,7 @@
 				247EA72F1B711B2F00E6A161 /* WLServerHelper+Nutrition.m in Sources */,
 				24ECD7B41B78FCEE00AED422 /* TransparentNavigationBarVC.m in Sources */,
 				24CDCBFC1B4F792E00BDE8CB /* UIScrollView+GCDelegateBlock.m in Sources */,
+				24AE12631B918DCC00654AEC /* OrderItemDoctorCell.m in Sources */,
 				24CDCC131B4F792E00BDE8CB /* UITextField+GCDelegate.m in Sources */,
 				24E8DD391B648DF4007F137E /* DiscoveryCollectionSectionHeaderView.m in Sources */,
 				24C40B5D1B7A579A00E8AFA9 /* VideoInfoVC.m in Sources */,
@@ -2036,6 +2057,7 @@
 				24CDCBF81B4F792E00BDE8CB /* UINavigationBar+GCDelegateBlock.m in Sources */,
 				249745FC1B6A656F0019ADDA /* ForwardBuyCell.m in Sources */,
 				24CDCBDA1B4F792E00BDE8CB /* AppDelegate.m in Sources */,
+				24AE12661B918E9C00654AEC /* OrderItemHeaderCell.m in Sources */,
 				245936A31B5A2C62008FFAB8 /* WLServerHelper+Channel.m in Sources */,
 				24C755CF1B7B8C4F00463BFC /* WLPictureModel.m in Sources */,
 				24CDCBE71B4F792E00BDE8CB /* UIImagePickerControllerDelegateImplementationProxy.m in Sources */,
@@ -2156,6 +2178,7 @@
 				24CDCC011B4F792E00BDE8CB /* UITextField+GCDelegateBlock.m in Sources */,
 				249A73BE1B569D2300F46F3D /* WLDictionaryHelper.m in Sources */,
 				24C40B541B7A36D400E8AFA9 /* ForwardBuyInfoHeaderView.m in Sources */,
+				24AE12601B918D7100654AEC /* OrderItemFooterCell.m in Sources */,
 				24E66DC21B6271810081324A /* MBProgressHUD+Message.m in Sources */,
 				24B31F161B8DF4CB006E42D7 /* InputView.m in Sources */,
 				24C32ECD1B613FD400D509A4 /* WLDatabaseHelper+User.m in Sources */,
@@ -2196,6 +2219,7 @@
 				24B8C06A1B5242BC001C5722 /* AGIPCGridCell.m in Sources */,
 				4DE8B9BB1B885CD400E8608E /* PictureShowVC.m in Sources */,
 				24AE124F1B9186E900654AEC /* DoctorCell.m in Sources */,
+				24AE125A1B91885D00654AEC /* MyOrderListVC.m in Sources */,
 				24C792681B666B4E007DCB30 /* MarketProductCell.m in Sources */,
 				24CDCBEC1B4F792E00BDE8CB /* UIScrollViewDelegateImplementationProxy.m in Sources */,
 				24CDCBF71B4F792E00BDE8CB /* UIImagePickerController+GCDelegateBlock.m in Sources */,
