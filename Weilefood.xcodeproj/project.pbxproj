@@ -68,6 +68,8 @@
 		249EF30D1B64BEDA00AAEBE0 /* MarketIndexPageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249EF30C1B64BEDA00AAEBE0 /* MarketIndexPageVC.m */; };
 		24A0266B1B6DDEC500C6139B /* MarketChildChannelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A0266A1B6DDEC500C6139B /* MarketChildChannelView.m */; };
 		24AE12171B91425100654AEC /* AlipayRequestConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AE12161B91425100654AEC /* AlipayRequestConfig.m */; };
+		24AE121A1B91624400654AEC /* SelectPayPlatformVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AE12191B91624400654AEC /* SelectPayPlatformVC.m */; };
+		24AE121D1B916B0E00654AEC /* WLPayHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AE121C1B916B0E00654AEC /* WLPayHelper.m */; };
 		24B2E2AD1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B2E2AC1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m */; };
 		24B31F101B8DF178006E42D7 /* OrderConfirmVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B31F0F1B8DF178006E42D7 /* OrderConfirmVC.m */; };
 		24B31F131B8DF1D4006E42D7 /* InputAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B31F121B8DF1D4006E42D7 /* InputAddressView.m */; };
@@ -359,6 +361,10 @@
 		24AE12141B91425100654AEC /* AlipayHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlipayHeader.h; sourceTree = "<group>"; };
 		24AE12151B91425100654AEC /* AlipayRequestConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlipayRequestConfig.h; sourceTree = "<group>"; };
 		24AE12161B91425100654AEC /* AlipayRequestConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlipayRequestConfig.m; sourceTree = "<group>"; };
+		24AE12181B91624400654AEC /* SelectPayPlatformVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectPayPlatformVC.h; path = Weilefood/UI/Common/View/SelectPayPlatformVC.h; sourceTree = SOURCE_ROOT; };
+		24AE12191B91624400654AEC /* SelectPayPlatformVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectPayPlatformVC.m; path = Weilefood/UI/Common/View/SelectPayPlatformVC.m; sourceTree = SOURCE_ROOT; };
+		24AE121B1B916B0E00654AEC /* WLPayHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLPayHelper.h; sourceTree = "<group>"; };
+		24AE121C1B916B0E00654AEC /* WLPayHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLPayHelper.m; sourceTree = "<group>"; };
 		24B2E2AB1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryCollectionHeaderView.h; sourceTree = "<group>"; };
 		24B2E2AC1B764ACC008EC8BB /* DiscoveryCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryCollectionHeaderView.m; sourceTree = "<group>"; };
 		24B31F0E1B8DF178006E42D7 /* OrderConfirmVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderConfirmVC.h; path = Weilefood/UI/Video/Housekeeper/View/OrderConfirmVC.h; sourceTree = SOURCE_ROOT; };
@@ -1013,6 +1019,8 @@
 				24B31F0F1B8DF178006E42D7 /* OrderConfirmVC.m */,
 				24E503FA1B8F42200015D214 /* OrderInfoVC.h */,
 				24E503FB1B8F42200015D214 /* OrderInfoVC.m */,
+				24AE12181B91624400654AEC /* SelectPayPlatformVC.h */,
+				24AE12191B91624400654AEC /* SelectPayPlatformVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1336,6 +1344,8 @@
 				249A73B91B569D2300F46F3D /* WLDictionaryHelper.m */,
 				2467B7251B50E30E001202A4 /* BPushHelper.h */,
 				2467B7261B50E30E001202A4 /* BPushHelper.m */,
+				24AE121B1B916B0E00654AEC /* WLPayHelper.h */,
+				24AE121C1B916B0E00654AEC /* WLPayHelper.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -2156,6 +2166,7 @@
 				24CDCBFF1B4F792E00BDE8CB /* UITabBarController+GCDelegateBlock.m in Sources */,
 				24CAC4361B57EA5F00E3C4D5 /* WLShareModel.m in Sources */,
 				4DE1B19E1B798691006F9F0E /* WLShareSubCommentCell.m in Sources */,
+				24AE121A1B91624400654AEC /* SelectPayPlatformVC.m in Sources */,
 				24E504021B8F627A0015D214 /* OrderNumberAndDateView.m in Sources */,
 				24B8C0701B5242BC001C5722 /* UIButton+AGIPC.m in Sources */,
 				24CDCBFA1B4F792E00BDE8CB /* UIPickerView+GCDelegateAndDataSourceBlock.m in Sources */,
@@ -2192,6 +2203,7 @@
 				4DAA2BB11B7FD751004E5601 /* UIMenuController+UserInfo.m in Sources */,
 				249A73D11B569D4100F46F3D /* WLUploadImageModel.m in Sources */,
 				24CDCC111B4F792E00BDE8CB /* UITabBarController+GCDelegate.m in Sources */,
+				24AE121D1B916B0E00654AEC /* WLPayHelper.m in Sources */,
 				24D55DE61B67EB2400EC6373 /* UIBarButtonItem+Ext.m in Sources */,
 				24B8C06B1B5242BC001C5722 /* AGIPCGridItem.m in Sources */,
 				4D8B1A6D1B7CDBF6008F0925 /* WLAPIAddressGenerator.m in Sources */,
