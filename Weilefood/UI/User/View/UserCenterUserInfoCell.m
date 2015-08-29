@@ -93,7 +93,7 @@
         [self.avatarV my_setImageWithURL:[WLAPIAddressGenerator urlOfPictureWith:80 height:80 urlString:self.user.avatar]];
         self.nickNameL.text = self.user.nickName;
         self.pointBtn.hidden = NO;
-        [self.pointBtn setTitle:[NSString stringWithFormat:@"  积分%ld >  ", self.user.points] forState:UIControlStateNormal];
+        [self.pointBtn setTitle:[NSString stringWithFormat:@"  积分%ld >  ", (long)self.user.points] forState:UIControlStateNormal];
     }];
 }
 
@@ -102,7 +102,7 @@
     if (!_avatarV) {
         _avatarV = [[UIImageView alloc] init];
         _avatarV.clipsToBounds = YES;
-        _avatarV.contentMode = UIViewContentModeCenter;
+        _avatarV.contentMode = UIViewContentModeScaleAspectFill;
         _avatarV.layer.cornerRadius = 40;
         _avatarV.userInteractionEnabled = YES;
         _avatarV.layer.borderWidth = 2;

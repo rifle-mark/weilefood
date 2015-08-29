@@ -210,7 +210,6 @@
 		4D4252791B90428800F481E3 /* UserCenterUserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252781B90428800F481E3 /* UserCenterUserInfoCell.m */; };
 		4D42527C1B9042BC00F481E3 /* UserCenterMiddleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D42527B1B9042BC00F481E3 /* UserCenterMiddleCell.m */; };
 		4D42527F1B9042FD00F481E3 /* UserCenterListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D42527E1B9042FD00F481E3 /* UserCenterListCell.m */; };
-		4D4252821B91960500F481E3 /* MyOrderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252811B91960500F481E3 /* MyOrderVC.m */; };
 		4D4252851B91961400F481E3 /* MyVedioVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252841B91961400F481E3 /* MyVedioVC.m */; };
 		4D4252881B91962100F481E3 /* MyShareVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252871B91962100F481E3 /* MyShareVC.m */; };
 		4D42528B1B91962F00F481E3 /* MyCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D42528A1B91962F00F481E3 /* MyCommentVC.m */; };
@@ -675,8 +674,6 @@
 		4D42527B1B9042BC00F481E3 /* UserCenterMiddleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterMiddleCell.m; sourceTree = "<group>"; };
 		4D42527D1B9042FD00F481E3 /* UserCenterListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterListCell.h; sourceTree = "<group>"; };
 		4D42527E1B9042FD00F481E3 /* UserCenterListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterListCell.m; sourceTree = "<group>"; };
-		4D4252801B91960500F481E3 /* MyOrderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderVC.h; sourceTree = "<group>"; };
-		4D4252811B91960500F481E3 /* MyOrderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderVC.m; sourceTree = "<group>"; };
 		4D4252831B91961400F481E3 /* MyVedioVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyVedioVC.h; sourceTree = "<group>"; };
 		4D4252841B91961400F481E3 /* MyVedioVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyVedioVC.m; sourceTree = "<group>"; };
 		4D4252861B91962100F481E3 /* MyShareVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyShareVC.h; sourceTree = "<group>"; };
@@ -1115,8 +1112,6 @@
 				24E66DC71B6277190081324A /* ResetPasswordVC.m */,
 				4D4252741B903EF100F481E3 /* UserCenterVC.h */,
 				4D4252751B903EF100F481E3 /* UserCenterVC.m */,
-				4D4252801B91960500F481E3 /* MyOrderVC.h */,
-				4D4252811B91960500F481E3 /* MyOrderVC.m */,
 				4D4252831B91961400F481E3 /* MyVedioVC.h */,
 				4D4252841B91961400F481E3 /* MyVedioVC.m */,
 				4D4252861B91962100F481E3 /* MyShareVC.h */,
@@ -2165,7 +2160,6 @@
 				24CDCBF31B4F792E00BDE8CB /* UIToolbarDelegateImplementationProxy.m in Sources */,
 				24B8C06F1B5242BC001C5722 /* ALAsset+AGIPC.m in Sources */,
 				240FB7091B690D5B00DF5CE4 /* SharedAllListVC.m in Sources */,
-				4D4252821B91960500F481E3 /* MyOrderVC.m in Sources */,
 				24B8C0661B5242BC001C5722 /* AGImagePickerController.m in Sources */,
 				24EC87DA1B84B807007B289A /* UITextView+Placeholder.m in Sources */,
 				24CDCBFD1B4F792E00BDE8CB /* UISearchBar+GCDelegateBlock.m in Sources */,
