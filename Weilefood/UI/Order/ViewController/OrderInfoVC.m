@@ -14,6 +14,7 @@
 #import "OrderConfirmVC.h"
 #import "SelectPayPlatformVC.h"
 
+#import "UIViewController+BackButtonHandler.h"
 #import "WLPayHelper.h"
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
@@ -95,18 +96,20 @@
     FixesViewDidLayoutSubviewsiOS7Error;
 }
 
-- (void)willMoveToParentViewController:(UIViewController *)parent
-{
-    if (![parent isEqual:self.parentViewController]) {
-        // 用户执行的后退操作
-        // 如果上个界面是“确认订单”，那就回到再上一个界面，不能回到“确认订单”
-        NSMutableArray *viewControllers = [self.navigationController.viewControllers mutableCopy];
+#pragma mark - BackButtonHandlerProtocol
+
+-(BOOL)navigationShouldPopOnBackButton {
+    // 用户执行的后退操作
+    // 如果上个界面是“确认订单”，那就回到再上一个界面，不能回到“确认订单”
+    NSMutableArray *viewControllers = [self.navigationController.viewControllers mutableCopy];
+    [viewControllers removeLastObject];
+    if ([viewControllers.lastObject isKindOfClass:[OrderConfirmVC class]]
+        && viewControllers.count >= 2) {
         [viewControllers removeLastObject];
-        if ([viewControllers.lastObject isKindOfClass:[OrderConfirmVC class]]
-            && viewControllers.count >= 2) {
-            [self.navigationController popViewControllerAnimated:NO];
-        }
+        [self.navigationController popToViewController:viewControllers.lastObject animated:YES];
+        return NO;
     }
+    return YES;
 }
 
 #pragma mark - private methods
