@@ -19,14 +19,18 @@ typedef NS_ENUM(NSInteger, InputViewStyle){
 /// 表单输入项(统一样式)
 @interface InputView : UIView
 
+/// 风格
+@property (nonatomic, readonly) InputViewStyle style;
 /// 标题对象
-@property (nonatomic, strong, readonly) UILabel *titleLabel;
+@property (nonatomic, readonly) UILabel *titleLabel;
 /// 输入框对象(InputViewStyleOneLine才有)
-@property (nonatomic, strong, readonly) UITextField *textField;
+@property (nonatomic, readonly) UITextField *textField;
 /// 输入框对象(InputViewStyleMultiLine才有)
-@property (nonatomic, strong, readonly) UITextView *textView;
+@property (nonatomic, readonly) UITextView *textView;
 /// 标题所占宽度。默认0自动宽度(InputViewStyleOneLine才有)
 @property (nonatomic, assign) NSInteger titleWidth;
+/// 内容
+@property (nonatomic, copy) NSString *text;
 
 /**
  *  展示StyleOneLine风格所需要的高度

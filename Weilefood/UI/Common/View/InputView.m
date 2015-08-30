@@ -14,7 +14,6 @@
     UITextView *_textView;
     InputViewStyle _style;
 }
-
 @end
 
 static NSInteger const kViewHeight = 40;
@@ -56,6 +55,7 @@ static NSInteger const kContentMargin = 15;
 
 - (void)updateConstraints {
     if (_style == InputViewStyleOneLine) {
+        [self.titleLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
         [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self).offset(kContentMargin);
             make.top.bottom.equalTo(self);
@@ -90,6 +90,10 @@ static NSInteger const kContentMargin = 15;
 
 #pragma mark - public methods
 
+- (InputViewStyle)style {
+    return _style;
+}
+
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
@@ -103,6 +107,7 @@ static NSInteger const kContentMargin = 15;
     if (!_textField && _style == InputViewStyleOneLine) {
         _textField = [[UITextField alloc] init];
         _textField.font = kFont;
+        _textField.textColor = k_COLOR_BLACK;
     }
     return _textField;
 }
@@ -111,6 +116,7 @@ static NSInteger const kContentMargin = 15;
     if (!_textView && _style == InputViewStyleMultiLine) {
         _textView = [[UITextView alloc] init];
         _textView.font = kFont;
+        _textView.textColor = k_COLOR_BLACK;
         _textView.backgroundColor = self.backgroundColor;
         _textView.textContainerInset = UIEdgeInsetsZero;
         _textView.textContainer.lineFragmentPadding = 0;
@@ -122,6 +128,19 @@ static NSInteger const kContentMargin = 15;
     _titleWidth = titleWidth;
     if (_style == InputViewStyleOneLine) {
         [self setNeedsUpdateConstraints];
+    }
+}
+
+- (NSString *)text {
+    return _style == InputViewStyleOneLine ? self.textField.text : self.textView.text;
+}
+
+- (void)setText:(NSString *)text {
+    if (_style == InputViewStyleOneLine) {
+        self.textField.text = text;
+    }
+    else {
+        self.textView.text = text;
     }
 }
 
