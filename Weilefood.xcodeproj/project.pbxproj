@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24054E7F1B92B39E008018F2 /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 24054E7E1B92B39E008018F2 /* UIViewController+BackButtonHandler.m */; };
+		24054E821B92C236008018F2 /* SubmitUserHealthInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24054E811B92C236008018F2 /* SubmitUserHealthInfoVC.m */; };
 		2406062F1B772F9100C6F373 /* CitySelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2406062E1B772F9100C6F373 /* CitySelectVC.m */; };
 		240606341B774ECE00C6F373 /* CommentListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240606331B774ECE00C6F373 /* CommentListVC.m */; };
 		240606371B775F6F00C6F373 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 240606361B775F6F00C6F373 /* CommentCell.m */; };
@@ -259,6 +261,10 @@
 
 /* Begin PBXFileReference section */
 		060F4AADF217CE753F362849 /* Pods-Weilefood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weilefood.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weilefood/Pods-Weilefood.release.xcconfig"; sourceTree = "<group>"; };
+		24054E7D1B92B39E008018F2 /* UIViewController+BackButtonHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BackButtonHandler.h"; sourceTree = "<group>"; };
+		24054E7E1B92B39E008018F2 /* UIViewController+BackButtonHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BackButtonHandler.m"; sourceTree = "<group>"; };
+		24054E801B92C236008018F2 /* SubmitUserHealthInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitUserHealthInfoVC.h; sourceTree = "<group>"; };
+		24054E811B92C236008018F2 /* SubmitUserHealthInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitUserHealthInfoVC.m; sourceTree = "<group>"; };
 		2406062D1B772F9100C6F373 /* CitySelectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitySelectVC.h; sourceTree = "<group>"; };
 		2406062E1B772F9100C6F373 /* CitySelectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitySelectVC.m; sourceTree = "<group>"; };
 		240606321B774ECE00C6F373 /* CommentListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentListVC.h; sourceTree = "<group>"; };
@@ -1311,6 +1317,8 @@
 				24AE12351B9186AE00654AEC /* ShoppingCartVC.m */,
 				24AE12581B91885D00654AEC /* UserOrderListVC.h */,
 				24AE12591B91885D00654AEC /* UserOrderListVC.m */,
+				24054E801B92C236008018F2 /* SubmitUserHealthInfoVC.h */,
+				24054E811B92C236008018F2 /* SubmitUserHealthInfoVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1452,6 +1460,8 @@
 				24D3F9C51B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m */,
 				24E922211B7F35FD007F763C /* UIImageView+SDWebImage.h */,
 				24E922221B7F35FD007F763C /* UIImageView+SDWebImage.m */,
+				24054E7D1B92B39E008018F2 /* UIViewController+BackButtonHandler.h */,
+				24054E7E1B92B39E008018F2 /* UIViewController+BackButtonHandler.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2178,6 +2188,7 @@
 				240FB70C1B6921F800DF5CE4 /* MarketSearchVC.m in Sources */,
 				24CDCBF61B4F792E00BDE8CB /* UIGestureRecognizer+GCDelegateBlock.m in Sources */,
 				24CDCC1B1B4F792E00BDE8CB /* NSObject+GCNotificationObserver.m in Sources */,
+				24054E7F1B92B39E008018F2 /* UIViewController+BackButtonHandler.m in Sources */,
 				24AE123C1B9186AE00654AEC /* ShoppingCartProductCell.m in Sources */,
 				24CDCBE81B4F792E00BDE8CB /* UINavigationBarDelegateImpletationProxy.m in Sources */,
 				24C40B4B1B7A2B1A00E8AFA9 /* SwipeView+AutomaticCycleScrollingImage.m in Sources */,
@@ -2278,6 +2289,7 @@
 				24CDCC151B4F792E00BDE8CB /* UIToolbar+GCDelegate.m in Sources */,
 				4DE8BA441B885D1F00E8608E /* base64.m in Sources */,
 				24CDCBFF1B4F792E00BDE8CB /* UITabBarController+GCDelegateBlock.m in Sources */,
+				24054E821B92C236008018F2 /* SubmitUserHealthInfoVC.m in Sources */,
 				24CAC4361B57EA5F00E3C4D5 /* WLShareModel.m in Sources */,
 				4DE1B19E1B798691006F9F0E /* WLShareSubCommentCell.m in Sources */,
 				24B8C0701B5242BC001C5722 /* UIButton+AGIPC.m in Sources */,

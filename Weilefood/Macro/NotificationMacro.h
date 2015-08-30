@@ -10,8 +10,11 @@
 #define Weilefood_NotificationMacro_h
 
 /// 用户登录成功消息
-static NSString *kNotificationUserLoginSucc = @"kNotificationUserLoginSucc";
+static NSString *kNotificationUserLoginSucc    = @"kNotificationUserLoginSucc";
 /// 用户登出消息
-static NSString *kNotificationUserLogout    = @"kNotificationUserLogout";
+static NSString *kNotificationUserLogout       = @"kNotificationUserLogout";
+
+/// 订单信息改变了
+static NSString *kNotificationOrderInfoChanged = @"kNotificationOrderInfoChanged";
 
 #endif

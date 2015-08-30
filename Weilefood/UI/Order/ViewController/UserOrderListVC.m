@@ -14,6 +14,7 @@
 
 #import "SelectPayPlatformVC.h"
 #import "OrderInfoVC.h"
+#import "SubmitUserHealthInfoVC.h"
 
 #import "WLPayHelper.h"
 #import "WLServerHelperHeader.h"
@@ -66,6 +67,8 @@ static NSString *const kTextCompleted      = @"已完成";
     [self.view addSubview:self.doctorTableView];
     
     [self _activateTypeWithButton:self.prouctButton];
+    
+    [self _addObserver];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -110,6 +113,29 @@ static NSString *const kTextCompleted      = @"已完成";
 }
 
 #pragma mark - private mtehods
+
+- (void)_addObserver {
+    _weak(self);
+    [self addObserverForNotificationName:kNotificationOrderInfoChanged usingBlock:^(NSNotification *notification) {
+        _strong_check(self);
+        if ([notification.object isKindOfClass:[NSNumber class]]) {
+            long long orderId = [notification.object longLongValue];
+            BOOL (^refreshTableView)(UITableView *, NSArray *) = ^(UITableView *tableView, NSArray *orderList){
+                for (WLOrderModel *order in orderList) {
+                    if (order.orderId == orderId) {
+                        [tableView.header beginRefreshing];
+                        return YES;
+                    }
+                }
+                return NO;
+            };
+            refreshTableView(self.prouctTableView, self.prouctList)
+            || refreshTableView(self.forwardBuyTableView, self.forwardBuyList)
+            || refreshTableView(self.activityTableView, self.activityList)
+            || refreshTableView(self.doctorTableView, self.doctorList);
+        }
+    }];
+}
 
 - (void)_loadProuctListWithIsLatest:(BOOL)isLatest {
     _weak(self);
@@ -660,7 +686,9 @@ static NSString *const kTextCompleted      = @"已完成";
                     case WLOrderStatePaid: {
                         [cell setRightButtonWithTitle:@"提交咨询" actionBlock:^(OrderItemHeaderCell *cell) {
                             _strong_check(self);
-                            DLog(@"");
+                            NSIndexPath *path = [self.doctorTableView indexPathForCell:cell];
+                            WLOrderModel *order = self.doctorList[path.section];
+                            [self.navigationController pushViewController:[[SubmitUserHealthInfoVC alloc] initWithOrderId:order.orderId] animated:YES];
                         }];
                         break;
                     }
