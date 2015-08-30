@@ -65,7 +65,7 @@
     _weak(self);
     [self startObserveObject:self forKeyPath:@"myPoint" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
-        self.myPointL.text = [NSString stringWithFormat:@"我的积分: %ld", self.myPoint];
+        self.myPointL.text = [NSString stringWithFormat:@"我的积分: %ld", (long)self.myPoint];
     }];
     [self startObserveObject:self forKeyPath:@"rulerList" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
@@ -99,7 +99,7 @@
         _myPointL = [[UILabel alloc] init];
         _myPointL.font = [UIFont boldSystemFontOfSize:17];
         _myPointL.textColor = k_COLOR_MEDIUMTURQUOISE;
-        _myPointL.text = [NSString stringWithFormat:@"我的积分: %ld", self.myPoint];
+        _myPointL.text = [NSString stringWithFormat:@"我的积分: %ld", (long)self.myPoint];
     }
     return _myPointL;
 }
