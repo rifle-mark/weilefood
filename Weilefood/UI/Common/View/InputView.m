@@ -11,51 +11,80 @@
 @interface InputView () {
     UILabel *_titleLabel;
     UITextField *_textField;
+    UITextView *_textView;
+    InputViewStyle _style;
 }
 
 @end
 
 static NSInteger const kViewHeight = 40;
+static NSInteger const kContentMargin = 15;
+#define kFont [UIFont systemFontOfSize:14]
 
 @implementation InputView
 
-+ (CGFloat)viewHeight {
++ (CGFloat)viewHeightOfStyleOneLine {
     return kViewHeight;
 }
 
 - (id)init {
     if (self = [super init]) {
-        self.translatesAutoresizingMaskIntoConstraints = NO;
-        self.backgroundColor = k_COLOR_WHITESMOKE;
-        self.layer.cornerRadius = 4;
-        _titleWidth = 0;
-        
-        [self addSubview:self.titleLabel];
-        [self addSubview:self.textField];
+        _style = InputViewStyleOneLine;
+        [self _init];
     }
     return self;
 }
 
+- (id)initWithStyle:(InputViewStyle)style {
+    if (self = [super init]) {
+        _style = style;
+        [self _init];
+    }
+    return self;
+}
+
+- (void)_init {
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    self.backgroundColor = k_COLOR_WHITESMOKE;
+    self.layer.cornerRadius = 4;
+    _titleWidth = 0;
+    
+    [self addSubview:self.titleLabel];
+    [self addSubview:self.textField];
+    [self addSubview:self.textView];
+}
+
 - (void)updateConstraints {
-    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        if (self.titleLabel.hidden) {
-            return;
-        }
-        make.left.equalTo(self).offset(15);
-        make.top.bottom.equalTo(self);
-        make.height.equalTo(@(kViewHeight));
-        if (self.titleWidth != 0) {
-            make.width.equalTo(@(self.titleWidth));
-        }
-    }];
-    [self.textField mas_remakeConstraints:^(MASConstraintMaker *make) {
-        if (self.textField.hidden) {
-            return;
-        }
-        make.left.equalTo(self.titleLabel.mas_right).offset(10);
-        make.right.equalTo(self).offset(-15);
-        make.top.bottom.equalTo(self);
-    }];
+    if (_style == InputViewStyleOneLine) {
+        [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self).offset(kContentMargin);
+            make.top.bottom.equalTo(self);
+            make.height.equalTo(@(kViewHeight));
+            if (self.titleWidth != 0) {
+                make.width.equalTo(@(self.titleWidth));
+            }
+        }];
+        [self.textField mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.titleLabel.mas_right).offset(10);
+            make.right.equalTo(self).offset(-kContentMargin);
+            make.top.bottom.equalTo(self);
+        }];
+    }
+    else {
+        [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.equalTo(self).insets(UIEdgeInsetsMake(kContentMargin, kContentMargin, 0, kContentMargin));
+        }];
+        [self.textView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self.titleLabel);
+            make.bottom.equalTo(self).offset(-kContentMargin);
+            if (self.titleLabel.hidden) {
+                make.top.equalTo(self.titleLabel);
+            }
+            else {
+                make.top.equalTo(self.titleLabel.mas_baseline).offset(12);
+            }
+        }];
+    }
     [super updateConstraints];
 }
 
@@ -65,22 +94,35 @@ static NSInteger const kViewHeight = 40;
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textColor = k_COLOR_DIMGRAY;
-        _titleLabel.font = [UIFont systemFontOfSize:14];
+        _titleLabel.font = kFont;
     }
     return _titleLabel;
 }
 
 - (UITextField *)textField {
-    if (!_textField) {
+    if (!_textField && _style == InputViewStyleOneLine) {
         _textField = [[UITextField alloc] init];
-        _textField.font = [UIFont systemFontOfSize:14];
+        _textField.font = kFont;
     }
     return _textField;
 }
 
+- (UITextView *)textView {
+    if (!_textView && _style == InputViewStyleMultiLine) {
+        _textView = [[UITextView alloc] init];
+        _textView.font = kFont;
+        _textView.backgroundColor = self.backgroundColor;
+        _textView.textContainerInset = UIEdgeInsetsZero;
+        _textView.textContainer.lineFragmentPadding = 0;
+    }
+    return _textView;
+}
+
 - (void)setTitleWidth:(NSInteger)titleWidth {
     _titleWidth = titleWidth;
-    [self setNeedsUpdateConstraints];
+    if (_style == InputViewStyleOneLine) {
+        [self setNeedsUpdateConstraints];
+    }
 }
 
 @end
