@@ -10,4 +10,5 @@
 
 @interface UserPointVC : UIViewController
 
+@property(nonatomic,assign)NSInteger    myPoint;
 @end

@@ -219,6 +219,8 @@
 		4D4252971B9196DA00F481E3 /* FeedBackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252961B9196DA00F481E3 /* FeedBackVC.m */; };
 		4D42529A1B91994E00F481E3 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252991B91994E00F481E3 /* SettingVC.m */; };
 		4D42529D1B91999500F481E3 /* UserPointVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D42529C1B91999500F481E3 /* UserPointVC.m */; };
+		4D4252A01B91CAEF00F481E3 /* WLPointRulerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D42529F1B91CAEF00F481E3 /* WLPointRulerModel.m */; };
+		4D4252A31B91CF2000F481E3 /* PointRulerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252A21B91CF2000F481E3 /* PointRulerCell.m */; };
 		4D8B1A6D1B7CDBF6008F0925 /* WLAPIAddressGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B1A6C1B7CDBF6008F0925 /* WLAPIAddressGenerator.m */; };
 		4DAA2BA71B7F73B9004E5601 /* ShareDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BA41B7F73B9004E5601 /* ShareDetailVC.m */; };
 		4DAA2BA81B7F73B9004E5601 /* ShareEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BA61B7F73B9004E5601 /* ShareEditVC.m */; };
@@ -692,6 +694,10 @@
 		4D4252991B91994E00F481E3 /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
 		4D42529B1B91999500F481E3 /* UserPointVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPointVC.h; sourceTree = "<group>"; };
 		4D42529C1B91999500F481E3 /* UserPointVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPointVC.m; sourceTree = "<group>"; };
+		4D42529E1B91CAEF00F481E3 /* WLPointRulerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLPointRulerModel.h; sourceTree = "<group>"; };
+		4D42529F1B91CAEF00F481E3 /* WLPointRulerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLPointRulerModel.m; sourceTree = "<group>"; };
+		4D4252A11B91CF2000F481E3 /* PointRulerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointRulerCell.h; sourceTree = "<group>"; };
+		4D4252A21B91CF2000F481E3 /* PointRulerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointRulerCell.m; sourceTree = "<group>"; };
 		4D8B1A6B1B7CDBF6008F0925 /* WLAPIAddressGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLAPIAddressGenerator.h; sourceTree = "<group>"; };
 		4D8B1A6C1B7CDBF6008F0925 /* WLAPIAddressGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLAPIAddressGenerator.m; sourceTree = "<group>"; };
 		4DAA2BA31B7F73B9004E5601 /* ShareDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareDetailVC.h; sourceTree = "<group>"; };
@@ -1097,6 +1103,8 @@
 				4D42527B1B9042BC00F481E3 /* UserCenterMiddleCell.m */,
 				4D42527D1B9042FD00F481E3 /* UserCenterListCell.h */,
 				4D42527E1B9042FD00F481E3 /* UserCenterListCell.m */,
+				4D4252A11B91CF2000F481E3 /* PointRulerCell.h */,
+				4D4252A21B91CF2000F481E3 /* PointRulerCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1265,6 +1273,8 @@
 				2482E6431B5E949D005815E8 /* WLMessageModel.m */,
 				2482E6481B5E9B6E005815E8 /* WLPointsModel.h */,
 				2482E6491B5E9B6E005815E8 /* WLPointsModel.m */,
+				4D42529E1B91CAEF00F481E3 /* WLPointRulerModel.h */,
+				4D42529F1B91CAEF00F481E3 /* WLPointRulerModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2105,6 +2115,7 @@
 				24C40B5D1B7A579A00E8AFA9 /* VideoInfoVC.m in Sources */,
 				24AE123D1B9186AE00654AEC /* OrderConfirmVC.m in Sources */,
 				24C32EBE1B61229D00D509A4 /* RegisterVC.m in Sources */,
+				4D4252A01B91CAEF00F481E3 /* WLPointRulerModel.m in Sources */,
 				4DE8BA541B885D1F00E8608E /* GCPageViewController.m in Sources */,
 				4DE1B19D1B798691006F9F0E /* WLShareCell.m in Sources */,
 				24CAC43C1B58050900E3C4D5 /* WLProductModel.m in Sources */,
@@ -2289,6 +2300,7 @@
 				24CDCC061B4F792E00BDE8CB /* AVAudioRecorder+GCDelegate.m in Sources */,
 				24CAC4481B580A5800E3C4D5 /* WLCommentModel.m in Sources */,
 				2467B7271B50E30E001202A4 /* BPushHelper.m in Sources */,
+				4D4252A31B91CF2000F481E3 /* PointRulerCell.m in Sources */,
 				24134EB61B6A711900E5BE07 /* ActivityListVC.m in Sources */,
 				24CDCC0A1B4F792E00BDE8CB /* UINavigationBar+GCDelegate.m in Sources */,
 				249A73D21B569D4100F46F3D /* WLUserModel.m in Sources */,
