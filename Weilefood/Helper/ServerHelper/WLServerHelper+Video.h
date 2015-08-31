@@ -13,6 +13,14 @@
 @interface WLServerHelper (Video)
 
 /**
+ *  购买视频
+ *
+ *  @param videoId  视频ID
+ *  @param callback
+ */
+- (void)video_buyWithVideoId:(NSUInteger)videoId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback;
+
+/**
  *  获取视频栏目在首页和列表界面的广告图
  *
  *  @param callback

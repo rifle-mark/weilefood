@@ -155,12 +155,12 @@ static NSInteger const kSectionIndexActivity   = 4;
                     [self.navigationController pushViewController:[[NutritionInfoVC alloc] initWithNutrition:nutrition] animated:YES];
                     break;
                 }
-                case WLAdTypeVideo: {
-                    WLVideoModel *video = [[WLVideoModel alloc] init];
-                    video.videoId = ad.refId;
-                    [self.navigationController pushViewController:[[VideoInfoVC alloc] initWithVideo:video] animated:YES];
-                    break;
-                }
+//                case WLAdTypeVideo: {
+//                    WLVideoModel *video = [[WLVideoModel alloc] init];
+//                    video.videoId = ad.refId;
+//                    [self.navigationController pushViewController:[[VideoInfoVC alloc] initWithVideo:video] animated:YES];
+//                    break;
+//                }
                 case WLAdTypeUrl: {
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ad.url]];
                     break;
