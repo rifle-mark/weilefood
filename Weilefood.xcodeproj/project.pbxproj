@@ -221,6 +221,11 @@
 		4D42529D1B91999500F481E3 /* UserPointVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D42529C1B91999500F481E3 /* UserPointVC.m */; };
 		4D4252A01B91CAEF00F481E3 /* WLPointRulerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D42529F1B91CAEF00F481E3 /* WLPointRulerModel.m */; };
 		4D4252A31B91CF2000F481E3 /* PointRulerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252A21B91CF2000F481E3 /* PointRulerCell.m */; };
+		4D4252A61B91D9C600F481E3 /* SettingAvatarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252A51B91D9C600F481E3 /* SettingAvatarCell.m */; };
+		4D4252A91B91D9D700F481E3 /* SettingNicknameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252A81B91D9D700F481E3 /* SettingNicknameCell.m */; };
+		4D4252AC1B91D9E400F481E3 /* SettingClearCacheCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252AB1B91D9E400F481E3 /* SettingClearCacheCell.m */; };
+		4D4252AF1B91D9F700F481E3 /* SettingLogOutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252AE1B91D9F700F481E3 /* SettingLogOutCell.m */; };
+		4D4252B21B91DE6600F481E3 /* NickNameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252B11B91DE6600F481E3 /* NickNameVC.m */; };
 		4D8B1A6D1B7CDBF6008F0925 /* WLAPIAddressGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B1A6C1B7CDBF6008F0925 /* WLAPIAddressGenerator.m */; };
 		4DAA2BA71B7F73B9004E5601 /* ShareDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BA41B7F73B9004E5601 /* ShareDetailVC.m */; };
 		4DAA2BA81B7F73B9004E5601 /* ShareEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BA61B7F73B9004E5601 /* ShareEditVC.m */; };
@@ -698,6 +703,16 @@
 		4D42529F1B91CAEF00F481E3 /* WLPointRulerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLPointRulerModel.m; sourceTree = "<group>"; };
 		4D4252A11B91CF2000F481E3 /* PointRulerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointRulerCell.h; sourceTree = "<group>"; };
 		4D4252A21B91CF2000F481E3 /* PointRulerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointRulerCell.m; sourceTree = "<group>"; };
+		4D4252A41B91D9C600F481E3 /* SettingAvatarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingAvatarCell.h; sourceTree = "<group>"; };
+		4D4252A51B91D9C600F481E3 /* SettingAvatarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingAvatarCell.m; sourceTree = "<group>"; };
+		4D4252A71B91D9D700F481E3 /* SettingNicknameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingNicknameCell.h; sourceTree = "<group>"; };
+		4D4252A81B91D9D700F481E3 /* SettingNicknameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingNicknameCell.m; sourceTree = "<group>"; };
+		4D4252AA1B91D9E400F481E3 /* SettingClearCacheCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingClearCacheCell.h; sourceTree = "<group>"; };
+		4D4252AB1B91D9E400F481E3 /* SettingClearCacheCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingClearCacheCell.m; sourceTree = "<group>"; };
+		4D4252AD1B91D9F700F481E3 /* SettingLogOutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingLogOutCell.h; sourceTree = "<group>"; };
+		4D4252AE1B91D9F700F481E3 /* SettingLogOutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingLogOutCell.m; sourceTree = "<group>"; };
+		4D4252B01B91DE6600F481E3 /* NickNameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NickNameVC.h; sourceTree = "<group>"; };
+		4D4252B11B91DE6600F481E3 /* NickNameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NickNameVC.m; sourceTree = "<group>"; };
 		4D8B1A6B1B7CDBF6008F0925 /* WLAPIAddressGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLAPIAddressGenerator.h; sourceTree = "<group>"; };
 		4D8B1A6C1B7CDBF6008F0925 /* WLAPIAddressGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLAPIAddressGenerator.m; sourceTree = "<group>"; };
 		4DAA2BA31B7F73B9004E5601 /* ShareDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareDetailVC.h; sourceTree = "<group>"; };
@@ -1105,6 +1120,14 @@
 				4D42527E1B9042FD00F481E3 /* UserCenterListCell.m */,
 				4D4252A11B91CF2000F481E3 /* PointRulerCell.h */,
 				4D4252A21B91CF2000F481E3 /* PointRulerCell.m */,
+				4D4252A41B91D9C600F481E3 /* SettingAvatarCell.h */,
+				4D4252A51B91D9C600F481E3 /* SettingAvatarCell.m */,
+				4D4252A71B91D9D700F481E3 /* SettingNicknameCell.h */,
+				4D4252A81B91D9D700F481E3 /* SettingNicknameCell.m */,
+				4D4252AA1B91D9E400F481E3 /* SettingClearCacheCell.h */,
+				4D4252AB1B91D9E400F481E3 /* SettingClearCacheCell.m */,
+				4D4252AD1B91D9F700F481E3 /* SettingLogOutCell.h */,
+				4D4252AE1B91D9F700F481E3 /* SettingLogOutCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1138,6 +1161,8 @@
 				4D4252991B91994E00F481E3 /* SettingVC.m */,
 				4D42529B1B91999500F481E3 /* UserPointVC.h */,
 				4D42529C1B91999500F481E3 /* UserPointVC.m */,
+				4D4252B01B91DE6600F481E3 /* NickNameVC.h */,
+				4D4252B11B91DE6600F481E3 /* NickNameVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2112,10 +2137,12 @@
 				24AE12631B918DCC00654AEC /* OrderItemDoctorCell.m in Sources */,
 				24CDCC131B4F792E00BDE8CB /* UITextField+GCDelegate.m in Sources */,
 				24E8DD391B648DF4007F137E /* DiscoveryCollectionSectionHeaderView.m in Sources */,
+				4D4252A61B91D9C600F481E3 /* SettingAvatarCell.m in Sources */,
 				24C40B5D1B7A579A00E8AFA9 /* VideoInfoVC.m in Sources */,
 				24AE123D1B9186AE00654AEC /* OrderConfirmVC.m in Sources */,
 				24C32EBE1B61229D00D509A4 /* RegisterVC.m in Sources */,
 				4D4252A01B91CAEF00F481E3 /* WLPointRulerModel.m in Sources */,
+				4D4252B21B91DE6600F481E3 /* NickNameVC.m in Sources */,
 				4DE8BA541B885D1F00E8608E /* GCPageViewController.m in Sources */,
 				4DE1B19D1B798691006F9F0E /* WLShareCell.m in Sources */,
 				24CAC43C1B58050900E3C4D5 /* WLProductModel.m in Sources */,
@@ -2177,6 +2204,8 @@
 				4D4252851B91961400F481E3 /* MyVedioVC.m in Sources */,
 				240FB70C1B6921F800DF5CE4 /* MarketSearchVC.m in Sources */,
 				24CDCBF61B4F792E00BDE8CB /* UIGestureRecognizer+GCDelegateBlock.m in Sources */,
+				4D4252A91B91D9D700F481E3 /* SettingNicknameCell.m in Sources */,
+				4D4252AC1B91D9E400F481E3 /* SettingClearCacheCell.m in Sources */,
 				24CDCC1B1B4F792E00BDE8CB /* NSObject+GCNotificationObserver.m in Sources */,
 				24AE123C1B9186AE00654AEC /* ShoppingCartProductCell.m in Sources */,
 				24CDCBE81B4F792E00BDE8CB /* UINavigationBarDelegateImpletationProxy.m in Sources */,
@@ -2201,6 +2230,7 @@
 				24E627871B7CDF7700743B51 /* ShareOnPlatformVC.m in Sources */,
 				24134EB91B6A712F00E5BE07 /* ActivityCell.m in Sources */,
 				24CDCC101B4F792E00BDE8CB /* UITabBar+GCDelegate.m in Sources */,
+				4D4252AF1B91D9F700F481E3 /* SettingLogOutCell.m in Sources */,
 				24CDCC1D1B4F792E00BDE8CB /* UIControl+GCEvent.m in Sources */,
 				4DE8BA561B885D1F00E8608E /* payRequsestHandler.mm in Sources */,
 				4DE8BA451B885D1F00E8608E /* DataSigner.m in Sources */,

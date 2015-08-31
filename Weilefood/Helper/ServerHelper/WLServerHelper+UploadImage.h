@@ -19,4 +19,5 @@
  */
 - (void)uploadImageWithImageData:(NSData *)imageData callback:(void (^)(WLUploadImageModel *apiInfo, NSError *error))callback;
 
+- (void)uploadAvatarWithImageData:(NSData *)imageData callback:(void(^)(WLUploadImageModel *apiInfo, NSError *error))callback;
 @end

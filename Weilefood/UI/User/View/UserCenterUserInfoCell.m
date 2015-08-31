@@ -95,6 +95,19 @@
         self.pointBtn.hidden = NO;
         [self.pointBtn setTitle:[NSString stringWithFormat:@"  积分%ld >  ", (long)self.user.points] forState:UIControlStateNormal];
     }];
+    
+    [self addObserverForNotificationName:kNotificationUserInfoUpdate usingBlock:^(NSNotification *notification) {
+        _strong_check(self);
+        WLUserModel *user = [WLDatabaseHelper user_find];
+        if (self.user.userId == user.userId) {
+            self.user = user;
+        }
+    }];
+    
+    [self addObserverForNotificationName:kNotificationUserLoginSucc usingBlock:^(NSNotification *notification) {
+        _strong_check(self);
+        self.user = [WLDatabaseHelper user_find];
+    }];
 }
 
 #pragma mark - propertys

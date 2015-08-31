@@ -15,6 +15,8 @@
 #define kServerImageUrl         @"http://img.ifeicai.com"
 /// 服务端上传图片接口地址
 #define kServerUploadImageUrl   @"http://img.ifeicai.com/uploadimage.ashx"
+/// 服务端上传头像并保存接口地址
+#define kServerUploadAvatarUrl  @"http://img.ifeicai.com/uploadavatar.ashx"
 
 /// CoreData数据库文件名
 #define kCoreDataStoreName      @"Weilefood.sqlite"

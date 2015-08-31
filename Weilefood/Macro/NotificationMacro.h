@@ -13,5 +13,7 @@
 static NSString *kNotificationUserLoginSucc = @"kNotificationUserLoginSucc";
 /// 用户登出消息
 static NSString *kNotificationUserLogout    = @"kNotificationUserLogout";
+/// 用户信息修改成功
+static NSString *kNotificationUserInfoUpdate = @"kNotificationUserInfoUpdate";
 
 #endif
