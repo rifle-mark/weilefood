@@ -70,4 +70,51 @@
     [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLOrderModel class] callback:callback];
 }
 
+- (void)order_submitUserHealthInfoWithOrderId:(long long)orderId
+                                     trueName:(NSString *)trueName
+                                          sex:(NSString *)sex
+                                          age:(NSString *)age
+                                          tel:(NSString *)tel
+                                       height:(NSString *)height
+                                       weight:(NSString *)weight
+                                        waist:(NSString *)waist
+                                      address:(NSString *)address
+                                   secondName:(NSString *)secondName
+                                    secondTel:(NSString *)secondTel
+                                    isChronic:(NSString *)isChronic
+                                  chronicName:(NSString *)chronicName
+                                     sickDesc:(NSString *)sickDesc
+                                       demand:(NSString *)demand
+                                forbiddenFood:(NSString *)forbiddenFood
+                                    breakfast:(NSString *)breakfast
+                                        lunch:(NSString *)lunch
+                                       dinner:(NSString *)dinner
+                                    otherDesc:(NSString *)otherDesc
+                                       remark:(NSString *)remark
+                                     callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"customerneed", @"add"]];
+    NSDictionary *parameters = @{@"customerNeed" : @{@"OrderId" : @(orderId),
+                                                     @"TrueName" : trueName,
+                                                     @"Sex" : sex,
+                                                     @"Age" : age,
+                                                     @"Tel" : tel,
+                                                     @"Height" : height,
+                                                     @"Weight" : weight,
+                                                     @"Waist" : waist,
+                                                     @"Address" : address,
+                                                     @"SecondName" : secondName,
+                                                     @"SecondTel" : secondTel,
+                                                     @"IsChronic" : isChronic,
+                                                     @"ChronicName" : chronicName,
+                                                     @"SickDesc" : sickDesc,
+                                                     @"Demand" : demand,
+                                                     @"ForbiddenFood" : forbiddenFood,
+                                                     @"Breakfast" : breakfast,
+                                                     @"Lunch" : lunch,
+                                                     @"Dinner" : dinner,
+                                                     @"OtherDesc" : otherDesc,
+                                                     @"Remark" : remark,
+                                                     }};
+    [self httpPOST:apiUrl parameters:parameters callback:callback];
+}
 @end

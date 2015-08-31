@@ -16,7 +16,7 @@
 @property (nonatomic, strong) InputView *phoneInputView;
 @property (nonatomic, strong) InputView *cityInputView;
 @property (nonatomic, strong) InputView *addressInputView;
-@property (nonatomic, strong) UITextView *addressTextView;
+//@property (nonatomic, strong) UITextView *addressTextView;
 @property (nonatomic, strong) InputView *zipCodeInputView;
 
 @end
@@ -31,7 +31,7 @@ static NSInteger const kTitleWidth = 80;
 
 + (CGFloat)viewHeight {
     return kContentMargin
-    + [InputView viewHeight] * 4 + kAddressHeight + kInputSpacing * 4
+    + [InputView viewHeightOfStyleOneLine] * 4 + kAddressHeight + kInputSpacing * 4
     + kContentMargin;
 }
 
@@ -55,7 +55,7 @@ static NSInteger const kTitleWidth = 80;
     [self addSubview:self.cityInputView];
     [self addSubview:self.addressInputView];
     [self addSubview:self.zipCodeInputView];
-    [self.addressInputView addSubview:self.addressTextView];
+//    [self.addressInputView addSubview:self.addressTextView];
 }
 
 - (void)updateConstraints {
@@ -75,9 +75,9 @@ static NSInteger const kTitleWidth = 80;
         make.top.equalTo(self.cityInputView.mas_bottom).offset(kInputSpacing);
         make.height.equalTo(@(kAddressHeight));
     }];
-    [self.addressTextView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.addressInputView).insets(UIEdgeInsetsMake(15, 15, 15, 15));
-    }];
+//    [self.addressTextView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(self.addressInputView).insets(UIEdgeInsetsMake(15, 15, 15, 15));
+//    }];
     [self.zipCodeInputView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.addressInputView);
         make.top.equalTo(self.addressInputView.mas_bottom).offset(kInputSpacing);
@@ -113,11 +113,11 @@ static NSInteger const kTitleWidth = 80;
 }
 
 - (NSString *)address {
-    return self.addressTextView.text;
+    return self.addressInputView.textView.text;
 }
 
 - (void)setAddress:(NSString *)address {
-    self.addressTextView.text = address;
+    self.addressInputView.textView.text = address;
 }
 
 - (NSString *)zipCode {
@@ -168,13 +168,13 @@ static NSInteger const kTitleWidth = 80;
     if (!self.address || self.address.length <= 0) {
         NSString *msg = [NSString stringWithFormat:@"请输入 %@", self.addressInputView.titleLabel.text];
         [MBProgressHUD showErrorWithMessage:msg];
-        [self.addressTextView becomeFirstResponder];
+        [self.addressInputView.textView becomeFirstResponder];
         return NO;
     }
     if (self.address.length < 4) {
         NSString *msg = [NSString stringWithFormat:@"%@ 内容太少，请补充", self.addressInputView.titleLabel.text];
         [MBProgressHUD showErrorWithMessage:msg];
-        [self.addressTextView becomeFirstResponder];
+        [self.addressInputView.textView becomeFirstResponder];
         return NO;
     }
     if (!self.zipCode || self.zipCode.length <= 0) {
@@ -237,7 +237,7 @@ static NSInteger const kTitleWidth = 80;
         _weak(self);
         [_cityInputView.textField withBlockForShouldReturn:^BOOL(UITextField *view) {
             _strong_check(self, NO);
-            [self.addressInputView.textField becomeFirstResponder];
+            [self.addressInputView.textView becomeFirstResponder];
             return NO;
         }];
     }
@@ -246,25 +246,15 @@ static NSInteger const kTitleWidth = 80;
 
 - (InputView *)addressInputView {
     if (!_addressInputView) {
-        _addressInputView = [[InputView alloc] init];
+        _addressInputView = [[InputView alloc] initWithStyle:InputViewStyleMultiLine];
         _addressInputView.titleLabel.text = @"详细地址";
         _addressInputView.titleLabel.hidden = YES;
         _addressInputView.textField.hidden = YES;
-    }
-    return _addressInputView;
-}
-
-- (UITextView *)addressTextView {
-    if (!_addressTextView) {
-        _addressTextView = [[UITextView alloc] init];
-        _addressTextView.placeholder = @"输入详细地址";
-        _addressTextView.font = self.addressInputView.textField.font;
-        _addressTextView.backgroundColor = self.addressInputView.backgroundColor;
-        _addressTextView.returnKeyType = UIReturnKeyNext;
-        _addressTextView.textContainerInset = UIEdgeInsetsZero;
-        _addressTextView.textContainer.lineFragmentPadding = 0;
+        
+        _addressInputView.textView.placeholder = @"输入详细地址";
+        _addressInputView.textView.returnKeyType = UIReturnKeyNext;
         _weak(self);
-        [_addressTextView withBlockForShouldChangeText:^BOOL(UITextView *view, NSRange range, NSString *text) {
+        [_addressInputView.textView withBlockForShouldChangeText:^BOOL(UITextView *view, NSRange range, NSString *text) {
             _strong_check(self, NO);
             if ([text isEqualToString:@"\n"]) {
                 [self.zipCodeInputView.textField becomeFirstResponder];
@@ -273,8 +263,30 @@ static NSInteger const kTitleWidth = 80;
             return YES;
         }];
     }
-    return _addressTextView;
+    return _addressInputView;
 }
+
+//- (UITextView *)addressTextView {
+//    if (!_addressTextView) {
+//        _addressTextView = [[UITextView alloc] init];
+//        _addressTextView.placeholder = @"输入详细地址";
+//        _addressTextView.font = self.addressInputView.textField.font;
+//        _addressTextView.backgroundColor = self.addressInputView.backgroundColor;
+//        _addressTextView.returnKeyType = UIReturnKeyNext;
+//        _addressTextView.textContainerInset = UIEdgeInsetsZero;
+//        _addressTextView.textContainer.lineFragmentPadding = 0;
+//        _weak(self);
+//        [_addressTextView withBlockForShouldChangeText:^BOOL(UITextView *view, NSRange range, NSString *text) {
+//            _strong_check(self, NO);
+//            if ([text isEqualToString:@"\n"]) {
+//                [self.zipCodeInputView.textField becomeFirstResponder];
+//                return NO;
+//            }
+//            return YES;
+//        }];
+//    }
+//    return _addressTextView;
+//}
 
 - (InputView *)zipCodeInputView {
     if (!_zipCodeInputView) {

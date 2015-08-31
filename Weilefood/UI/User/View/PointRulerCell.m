@@ -73,7 +73,7 @@
     [self startObserveObject:self forKeyPath:@"ruler" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
         self.pointTitleL.text = self.ruler.title;
-        self.pointL.text = [NSString stringWithFormat:@"+%ld积分", self.ruler.points];
+        self.pointL.text = [NSString stringWithFormat:@"+%ld积分", (long)self.ruler.points];
     }];
 }
 
