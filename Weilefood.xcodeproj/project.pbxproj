@@ -51,6 +51,8 @@
 		2482E6471B5E96FE005815E8 /* WLServerHelper+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6461B5E96FE005815E8 /* WLServerHelper+Message.m */; };
 		2482E64A1B5E9B6E005815E8 /* WLPointsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E6491B5E9B6E005815E8 /* WLPointsModel.m */; };
 		2482E64D1B5E9CBB005815E8 /* WLServerHelper+Points.m in Sources */ = {isa = PBXBuildFile; fileRef = 2482E64C1B5E9CBB005815E8 /* WLServerHelper+Points.m */; };
+		248EFB151B948F4800936C0F /* NutritionInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 248EFB141B948F4800936C0F /* NutritionInfoVC.m */; };
+		248EFB181B94906B00936C0F /* NutritionInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 248EFB171B94906B00936C0F /* NutritionInfoHeaderView.m */; };
 		249745F61B6A5E190019ADDA /* ProductInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249745F51B6A5E190019ADDA /* ProductInfoVC.m */; };
 		249745F91B6A63360019ADDA /* ForwardBuyListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 249745F81B6A63360019ADDA /* ForwardBuyListVC.m */; };
 		249745FC1B6A656F0019ADDA /* ForwardBuyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 249745FB1B6A656F0019ADDA /* ForwardBuyCell.m */; };
@@ -194,6 +196,7 @@
 		24D3F9BD1B7BA825005F63DB /* NSDate+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D3F9BC1B7BA825005F63DB /* NSDate+Ext.m */; };
 		24D3F9C61B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D3F9C51B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m */; };
 		24D55DE61B67EB2400EC6373 /* UIBarButtonItem+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */; };
+		24DED3201B94888500F8FB31 /* NutritionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DED31F1B94888500F8FB31 /* NutritionCell.m */; };
 		24E627871B7CDF7700743B51 /* ShareOnPlatformVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E627861B7CDF7700743B51 /* ShareOnPlatformVC.m */; };
 		24E6278A1B7D043600743B51 /* InputQuantityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E627891B7D043600743B51 /* InputQuantityVC.m */; };
 		24E66DBF1B62717A0081324A /* UIScrollView+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DBE1B62717A0081324A /* UIScrollView+Keyboard.m */; };
@@ -350,6 +353,10 @@
 		2482E6491B5E9B6E005815E8 /* WLPointsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLPointsModel.m; sourceTree = "<group>"; };
 		2482E64B1B5E9CBB005815E8 /* WLServerHelper+Points.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Points.h"; sourceTree = "<group>"; };
 		2482E64C1B5E9CBB005815E8 /* WLServerHelper+Points.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Points.m"; sourceTree = "<group>"; };
+		248EFB131B948F4800936C0F /* NutritionInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NutritionInfoVC.h; sourceTree = "<group>"; };
+		248EFB141B948F4800936C0F /* NutritionInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NutritionInfoVC.m; sourceTree = "<group>"; };
+		248EFB161B94906B00936C0F /* NutritionInfoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NutritionInfoHeaderView.h; sourceTree = "<group>"; };
+		248EFB171B94906B00936C0F /* NutritionInfoHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NutritionInfoHeaderView.m; sourceTree = "<group>"; };
 		249745F41B6A5E190019ADDA /* ProductInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductInfoVC.h; sourceTree = "<group>"; };
 		249745F51B6A5E190019ADDA /* ProductInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductInfoVC.m; sourceTree = "<group>"; };
 		249745F71B6A63360019ADDA /* ForwardBuyListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForwardBuyListVC.h; sourceTree = "<group>"; };
@@ -650,6 +657,8 @@
 		24D3F9C51B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefreshDefault.m"; sourceTree = "<group>"; };
 		24D55DE41B67EB2400EC6373 /* UIBarButtonItem+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Ext.h"; sourceTree = "<group>"; };
 		24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Ext.m"; sourceTree = "<group>"; };
+		24DED31E1B94888500F8FB31 /* NutritionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NutritionCell.h; sourceTree = "<group>"; };
+		24DED31F1B94888500F8FB31 /* NutritionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NutritionCell.m; sourceTree = "<group>"; };
 		24E627851B7CDF7700743B51 /* ShareOnPlatformVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareOnPlatformVC.h; sourceTree = "<group>"; };
 		24E627861B7CDF7700743B51 /* ShareOnPlatformVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareOnPlatformVC.m; sourceTree = "<group>"; };
 		24E627881B7D043600743B51 /* InputQuantityVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputQuantityVC.h; sourceTree = "<group>"; };
@@ -1351,6 +1360,10 @@
 		24AE12411B9186E800654AEC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				24DED31E1B94888500F8FB31 /* NutritionCell.h */,
+				24DED31F1B94888500F8FB31 /* NutritionCell.m */,
+				248EFB161B94906B00936C0F /* NutritionInfoHeaderView.h */,
+				248EFB171B94906B00936C0F /* NutritionInfoHeaderView.m */,
 				24AE12421B9186E800654AEC /* DoctorCell.h */,
 				24AE12431B9186E800654AEC /* DoctorCell.m */,
 				24AE12441B9186E800654AEC /* DoctorDescriptionCell.h */,
@@ -1369,10 +1382,12 @@
 		24AE124A1B9186E900654AEC /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				24AE124B1B9186E900654AEC /* DoctorInfoVC.h */,
-				24AE124C1B9186E900654AEC /* DoctorInfoVC.m */,
 				24AE124D1B9186E900654AEC /* HousekeeperIndexVC.h */,
 				24AE124E1B9186E900654AEC /* HousekeeperIndexVC.m */,
+				248EFB131B948F4800936C0F /* NutritionInfoVC.h */,
+				248EFB141B948F4800936C0F /* NutritionInfoVC.m */,
+				24AE124B1B9186E900654AEC /* DoctorInfoVC.h */,
+				24AE124C1B9186E900654AEC /* DoctorInfoVC.m */,
 			);
 			name = ViewController;
 			path = Weilefood/UI/Housekeeper/ViewController;
@@ -2171,6 +2186,7 @@
 				245936B21B5A3CAF008FFAB8 /* WLServerHelper+Comment.m in Sources */,
 				24CDCBF81B4F792E00BDE8CB /* UINavigationBar+GCDelegateBlock.m in Sources */,
 				249745FC1B6A656F0019ADDA /* ForwardBuyCell.m in Sources */,
+				24DED3201B94888500F8FB31 /* NutritionCell.m in Sources */,
 				24CDCBDA1B4F792E00BDE8CB /* AppDelegate.m in Sources */,
 				24AE12661B918E9C00654AEC /* OrderItemHeaderCell.m in Sources */,
 				245936A31B5A2C62008FFAB8 /* WLServerHelper+Channel.m in Sources */,
@@ -2187,6 +2203,7 @@
 				24CDCC0E1B4F792E00BDE8CB /* UIScrollView+GCDelegate.m in Sources */,
 				24B8C06C1B5242BC001C5722 /* AGIPCPreviewController.m in Sources */,
 				24AE12511B9186E900654AEC /* DoctorInfoHeaderView.m in Sources */,
+				248EFB151B948F4800936C0F /* NutritionInfoVC.m in Sources */,
 				24CDCC031B4F792E00BDE8CB /* UIToolbar+GCDelegateBlock.m in Sources */,
 				249A9BAF1B726F75008203C8 /* ProductInfoHeaderView.m in Sources */,
 				4D3A89CE1B8D5C6600B609CD /* GCAlertView.m in Sources */,
@@ -2323,6 +2340,7 @@
 				24CAC4361B57EA5F00E3C4D5 /* WLShareModel.m in Sources */,
 				4DE1B19E1B798691006F9F0E /* WLShareSubCommentCell.m in Sources */,
 				24B8C0701B5242BC001C5722 /* UIButton+AGIPC.m in Sources */,
+				248EFB181B94906B00936C0F /* NutritionInfoHeaderView.m in Sources */,
 				24CDCBFA1B4F792E00BDE8CB /* UIPickerView+GCDelegateAndDataSourceBlock.m in Sources */,
 				24CDCBED1B4F792E00BDE8CB /* UISearchBarDelegateImplementationProxy.m in Sources */,
 				24CDCC0C1B4F792E00BDE8CB /* UIPickerView+GCDelegateAndDataSource.m in Sources */,

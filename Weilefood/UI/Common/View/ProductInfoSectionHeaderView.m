@@ -68,12 +68,12 @@ static NSInteger const kLineHeight = 7;
     self.actionButton.enabled = !hasAction;
 }
 
-- (void)setActionCount:(NSInteger)actionCount {
+- (void)setActionCount:(long long)actionCount {
     _actionCount = actionCount;
     [self.actionButton setTitle:[NSString stringWithFormat:@"%ld", (long)actionCount] forState:UIControlStateNormal];
 }
 
-- (void)setCommentCount:(NSInteger)commentCount {
+- (void)setCommentCount:(long long)commentCount {
     _commentCount = commentCount;
     [self.commentButton setTitle:[NSString stringWithFormat:@"%ld", (long)commentCount] forState:UIControlStateNormal];
 }

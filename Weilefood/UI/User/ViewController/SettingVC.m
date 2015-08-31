@@ -81,7 +81,6 @@ static NSString* pickerCamera = @"拍照";
             return 50;
         }];
         [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
-            _strong_check(self, nil);
             if (path.row == 0) {
                 SettingAvatarCell *cell = [view dequeueReusableCellWithIdentifier:[SettingAvatarCell reuseIdentify]];
                 if (!cell) {

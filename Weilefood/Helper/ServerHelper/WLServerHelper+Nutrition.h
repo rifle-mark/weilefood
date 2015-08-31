@@ -19,7 +19,7 @@
  *  @param nutritionId 营养推荐ID
  *  @param callback
  */
-- (void)nutrition_getInfoWithNutritionId:(NSUInteger)nutritionId callback:(void (^)(WLApiInfoModel *apiInfo, WLNutritionModel *apiResult, NSError *error))callback;
+- (void)nutrition_getInfoWithNutritionId:(long long)nutritionId callback:(void (^)(WLApiInfoModel *apiInfo, WLNutritionModel *apiResult, NSError *error))callback;
 
 /**
  *  首页推荐营养列表。(NSArray<WLNutritionModel>)apiResult
