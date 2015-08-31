@@ -31,6 +31,7 @@ static CGFloat const kImageHeightScale = 0.788;
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        _showFavorite = YES;
         [self.contentView addSubview:self.imageView];
         [self.contentView addSubview:self.playImageView];
         [self.contentView addSubview:self.titleLabel];
@@ -62,6 +63,11 @@ static CGFloat const kImageHeightScale = 0.788;
 - (void)setIsFavorite:(BOOL)isFavorite {
     _isFavorite = isFavorite;
     self.favoriteButton.highlighted = isFavorite;
+}
+
+- (void)setShowFavorite:(BOOL)showFavorite {
+    _showFavorite = showFavorite;
+    self.favoriteButton.hidden = !showFavorite;
 }
 
 - (void)favoriteBlock:(void (^)(VideoCollectionCell *))block {

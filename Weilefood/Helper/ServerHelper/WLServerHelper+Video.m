@@ -36,4 +36,9 @@
     [self httpGET:apiUrl parameters:nil resultItemsClass:[WLVideoModel class] callback:callback];
 }
 
+- (void)video_getMyListWithPageIndex:(NSUInteger)pageIndex pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"video", @"mylist", @(pageIndex), @(pageSize)]];
+    [self httpGET:apiUrl parameters:nil resultItemsClass:[WLVideoModel class] callback:callback];
+}
+
 @end

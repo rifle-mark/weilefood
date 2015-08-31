@@ -19,8 +19,8 @@
 #import "UserOrderListVC.h"
 #import "MyShareVC.h"
 #import "MyMessageVC.h"
-#import "MyShopCarVC.h"
-#import "MyVedioVC.h"
+#import "ShoppingCartVC.h"
+#import "MyVideoVC.h"
 #import "MyFavoriteVC.h"
 #import "MyCommentVC.h"
 #import "FeedBackVC.h"
@@ -166,7 +166,7 @@ static NSInteger const kSectionList   = 2;
                     [cell onShopCarClickBlock:^(){
                         [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                             _strong_check(self);
-                            MyShopCarVC *vc = [[MyShopCarVC alloc] init];
+                            ShoppingCartVC *vc = [[ShoppingCartVC alloc] init];
                             [self.navigationController pushViewController:vc animated:YES];
                         }];
                     }];
@@ -206,7 +206,7 @@ static NSInteger const kSectionList   = 2;
                     }
                         break;
                     case MyVedio: {
-                        MyVedioVC *vc = [[MyVedioVC alloc] init];
+                        MyVideoVC *vc = [[MyVideoVC alloc] init];
                         [self.navigationController pushViewController:vc animated:YES];
                     }
                         break;

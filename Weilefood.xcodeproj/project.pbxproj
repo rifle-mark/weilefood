@@ -215,12 +215,11 @@
 		4D4252791B90428800F481E3 /* UserCenterUserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252781B90428800F481E3 /* UserCenterUserInfoCell.m */; };
 		4D42527C1B9042BC00F481E3 /* UserCenterMiddleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D42527B1B9042BC00F481E3 /* UserCenterMiddleCell.m */; };
 		4D42527F1B9042FD00F481E3 /* UserCenterListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D42527E1B9042FD00F481E3 /* UserCenterListCell.m */; };
-		4D4252851B91961400F481E3 /* MyVedioVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252841B91961400F481E3 /* MyVedioVC.m */; };
+		4D4252851B91961400F481E3 /* MyVideoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252841B91961400F481E3 /* MyVideoVC.m */; };
 		4D4252881B91962100F481E3 /* MyShareVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252871B91962100F481E3 /* MyShareVC.m */; };
 		4D42528B1B91962F00F481E3 /* MyCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D42528A1B91962F00F481E3 /* MyCommentVC.m */; };
 		4D42528E1B91964300F481E3 /* MyFavoriteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D42528D1B91964300F481E3 /* MyFavoriteVC.m */; };
 		4D4252911B9196B900F481E3 /* MyMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252901B9196B900F481E3 /* MyMessageVC.m */; };
-		4D4252941B9196C700F481E3 /* MyShopCarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252931B9196C700F481E3 /* MyShopCarVC.m */; };
 		4D4252971B9196DA00F481E3 /* FeedBackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252961B9196DA00F481E3 /* FeedBackVC.m */; };
 		4D42529A1B91994E00F481E3 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252991B91994E00F481E3 /* SettingVC.m */; };
 		4D42529D1B91999500F481E3 /* UserPointVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D42529C1B91999500F481E3 /* UserPointVC.m */; };
@@ -696,8 +695,8 @@
 		4D42527B1B9042BC00F481E3 /* UserCenterMiddleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterMiddleCell.m; sourceTree = "<group>"; };
 		4D42527D1B9042FD00F481E3 /* UserCenterListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterListCell.h; sourceTree = "<group>"; };
 		4D42527E1B9042FD00F481E3 /* UserCenterListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterListCell.m; sourceTree = "<group>"; };
-		4D4252831B91961400F481E3 /* MyVedioVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyVedioVC.h; sourceTree = "<group>"; };
-		4D4252841B91961400F481E3 /* MyVedioVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyVedioVC.m; sourceTree = "<group>"; };
+		4D4252831B91961400F481E3 /* MyVideoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyVideoVC.h; sourceTree = "<group>"; };
+		4D4252841B91961400F481E3 /* MyVideoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyVideoVC.m; sourceTree = "<group>"; };
 		4D4252861B91962100F481E3 /* MyShareVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyShareVC.h; sourceTree = "<group>"; };
 		4D4252871B91962100F481E3 /* MyShareVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShareVC.m; sourceTree = "<group>"; };
 		4D4252891B91962F00F481E3 /* MyCommentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentVC.h; sourceTree = "<group>"; };
@@ -706,8 +705,6 @@
 		4D42528D1B91964300F481E3 /* MyFavoriteVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFavoriteVC.m; sourceTree = "<group>"; };
 		4D42528F1B9196B900F481E3 /* MyMessageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageVC.h; sourceTree = "<group>"; };
 		4D4252901B9196B900F481E3 /* MyMessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMessageVC.m; sourceTree = "<group>"; };
-		4D4252921B9196C700F481E3 /* MyShopCarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyShopCarVC.h; sourceTree = "<group>"; };
-		4D4252931B9196C700F481E3 /* MyShopCarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShopCarVC.m; sourceTree = "<group>"; };
 		4D4252951B9196DA00F481E3 /* FeedBackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackVC.h; sourceTree = "<group>"; };
 		4D4252961B9196DA00F481E3 /* FeedBackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackVC.m; sourceTree = "<group>"; };
 		4D4252981B91994E00F481E3 /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
@@ -1158,8 +1155,8 @@
 				24E66DC71B6277190081324A /* ResetPasswordVC.m */,
 				4D4252741B903EF100F481E3 /* UserCenterVC.h */,
 				4D4252751B903EF100F481E3 /* UserCenterVC.m */,
-				4D4252831B91961400F481E3 /* MyVedioVC.h */,
-				4D4252841B91961400F481E3 /* MyVedioVC.m */,
+				4D4252831B91961400F481E3 /* MyVideoVC.h */,
+				4D4252841B91961400F481E3 /* MyVideoVC.m */,
 				4D4252861B91962100F481E3 /* MyShareVC.h */,
 				4D4252871B91962100F481E3 /* MyShareVC.m */,
 				4D4252891B91962F00F481E3 /* MyCommentVC.h */,
@@ -1168,8 +1165,6 @@
 				4D42528D1B91964300F481E3 /* MyFavoriteVC.m */,
 				4D42528F1B9196B900F481E3 /* MyMessageVC.h */,
 				4D4252901B9196B900F481E3 /* MyMessageVC.m */,
-				4D4252921B9196C700F481E3 /* MyShopCarVC.h */,
-				4D4252931B9196C700F481E3 /* MyShopCarVC.m */,
 				4D4252951B9196DA00F481E3 /* FeedBackVC.h */,
 				4D4252961B9196DA00F481E3 /* FeedBackVC.m */,
 				4D4252981B91994E00F481E3 /* SettingVC.h */,
@@ -2228,7 +2223,7 @@
 				24B8C0661B5242BC001C5722 /* AGImagePickerController.m in Sources */,
 				24EC87DA1B84B807007B289A /* UITextView+Placeholder.m in Sources */,
 				24CDCBFD1B4F792E00BDE8CB /* UISearchBar+GCDelegateBlock.m in Sources */,
-				4D4252851B91961400F481E3 /* MyVedioVC.m in Sources */,
+				4D4252851B91961400F481E3 /* MyVideoVC.m in Sources */,
 				240FB70C1B6921F800DF5CE4 /* MarketSearchVC.m in Sources */,
 				24CDCBF61B4F792E00BDE8CB /* UIGestureRecognizer+GCDelegateBlock.m in Sources */,
 				4D4252A91B91D9D700F481E3 /* SettingNicknameCell.m in Sources */,
@@ -2385,7 +2380,6 @@
 				4DE8BA521B885D1F00E8608E /* GCPageView.m in Sources */,
 				24CDCBEE1B4F792E00BDE8CB /* UITabbarControllerDelegateImplementationProxy.m in Sources */,
 				24CDCBF91B4F792E00BDE8CB /* UINavigationController+GCDelegateBlock.m in Sources */,
-				4D4252941B9196C700F481E3 /* MyShopCarVC.m in Sources */,
 				4DE8BA531B885D1F00E8608E /* GCPageViewCell.m in Sources */,
 				24AE12501B9186E900654AEC /* DoctorDescriptionCell.m in Sources */,
 				249B9B291B6340C3000A85B0 /* MainPageVC.m in Sources */,
