@@ -80,9 +80,8 @@
     
     [self.arrawV mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.arrawV.superview);
-        make.right.equalTo(self.arrawV.superview.mas_right).offset(-12);
-        make.width.equalTo(@(self.arrawV.image.size.width));
-        make.height.equalTo(@(self.arrawV.image.size.height));
+        make.right.equalTo(self.arrawV.superview.mas_right).offset(-20);
+        make.size.mas_equalTo(self.arrawV.image.size);
     }];
     
     [self.lineV mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -155,6 +154,7 @@
 - (UIImageView *)arrawV {
     if (!_arrawV) {
         _arrawV = [[UIImageView alloc] init];
+        _arrawV.image = [UIImage imageNamed:@"discovery_all_icon_n"];
     }
     
     return _arrawV;
