@@ -130,7 +130,7 @@ static NSInteger const kPageSize       = 10;
         layout.minimumLineSpacing = kCellMargin;
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
-        _collectionView.backgroundColor = [UIColor whiteColor];
+        _collectionView.backgroundColor = k_COLOR_WHITE;
         [_collectionView registerClass:[VideoCollectionCell class] forCellWithReuseIdentifier:kCellIdentifier];
         [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kHeaderIdentifier];
         _weak(self);
@@ -151,11 +151,11 @@ static NSInteger const kPageSize       = 10;
             [headerView addSubview:self.bannerImageView];
             [headerView addSubview:self.lineView];
             [self.bannerImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.topMargin.leftMargin.rightMargin.equalTo(@0);
+                make.top.left.right.equalTo(self.bannerImageView.superview);
                 make.height.equalTo(@(self.bannerImageHeight));
             }];
             [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.leftMargin.rightMargin.bottomMargin.equalTo(@0);
+                make.bottom.left.right.equalTo(self.lineView.superview);
                 make.top.equalTo(self.bannerImageView.mas_bottom);
             }];
             return headerView;
@@ -201,7 +201,24 @@ static NSInteger const kPageSize       = 10;
         [_collectionView withBlockForItemDidSelect:^(UICollectionView *view, NSIndexPath *path) {
             _strong_check(self);
             WLVideoModel *video = self.videoList[path.item];
-            [self.navigationController pushViewController:[[VideoInfoVC alloc] initWithVideo:video] animated:YES];
+            if (video.isBuy || video.points <= 0) {
+                [self.navigationController pushViewController:[[VideoInfoVC alloc] initWithVideo:video] animated:YES];
+                return;
+            }
+            NSString *msg = [NSString stringWithFormat:@"确定使用%lu积分兑换此视频？", (unsigned long)video.points];
+            GCAlertView *alertView = [[GCAlertView alloc] initWithTitle:msg andMessage:nil];
+            [alertView setCancelButtonWithTitle:@"取消" actionBlock:nil];
+            [alertView addOtherButtonWithTitle:@"确定" actionBlock:^{
+                [MBProgressHUD showLoadingWithMessage:nil];
+                [[WLServerHelper sharedInstance] video_buyWithVideoId:video.videoId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                    [MBProgressHUD hideLoading];
+                    _strong_check(self);
+                    ServerHelperErrorHandle;
+                    video.isBuy = YES;
+                    [self.navigationController pushViewController:[[VideoInfoVC alloc] initWithVideo:video] animated:YES];
+                }];
+            }];
+            [alertView show];
         }];
     }
     return _collectionView;

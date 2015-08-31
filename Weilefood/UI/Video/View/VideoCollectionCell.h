@@ -21,6 +21,8 @@
 @property (nonatomic, assign) BOOL      isVideo;
 /// 已收藏
 @property (nonatomic, assign) BOOL      isFavorite;
+/// 是否显示收藏按钮(默认YES)
+@property (nonatomic, assign) BOOL      showFavorite;
 
 /**
  *  Cell展示所需要的高度

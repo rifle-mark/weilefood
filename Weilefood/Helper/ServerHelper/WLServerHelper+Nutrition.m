@@ -11,7 +11,7 @@
 
 @implementation WLServerHelper (Nutrition)
 
-- (void)nutrition_getInfoWithNutritionId:(NSUInteger)nutritionId callback:(void (^)(WLApiInfoModel *apiInfo, WLNutritionModel *apiResult, NSError *error))callback {
+- (void)nutrition_getInfoWithNutritionId:(long long)nutritionId callback:(void (^)(WLApiInfoModel *apiInfo, WLNutritionModel *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"classroom", @"detail", @(nutritionId)]];
     [self httpGET:apiUrl parameters:nil resultClass:[WLNutritionModel class] callback:callback];
 }
@@ -22,13 +22,8 @@
 }
 
 - (void)nutrition_getListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
-    NSString *apiUrl = [self getApiUrlWithPaths:@[@"classroom", @"list"]];
-    NSDictionary *parameters = @{@"pageindex"   : @1,
-                                 @"pagesize"    : @(pageSize),
-                                 @"type"        : @1,
-                                 @"maxdate"     : @([maxDate millisecondIntervalSince1970]),
-                                 };
-    [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLNutritionModel class] callback:callback];
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"classroom", @"list", @1, @(pageSize), @1, @([maxDate millisecondIntervalSince1970])]];
+    [self httpGET:apiUrl parameters:nil resultItemsClass:[WLNutritionModel class] callback:callback];
 }
 
 @end

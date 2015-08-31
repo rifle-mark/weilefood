@@ -21,21 +21,26 @@
 #import "ProductInfoVC.h"
 #import "ForwardBuyInfoVC.h"
 #import "ActivityInfoVC.h"
+#import "VideoInfoVC.h"
+#import "NutritionInfoVC.h"
+#import "DoctorInfoVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
-@interface DiscoveryVC () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface DiscoveryVC () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout> {
+    CGFloat _cellWidth;
+}
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, weak) DiscoveryCollectionHeaderView *headerView;
 
-@property (nonatomic, strong) NSArray *bannerAdDatas;
+@property (nonatomic, strong) NSArray  *bannerAdDatas;
 @property (nonatomic, strong) NSString *videoAdImage;
-@property (nonatomic, strong) NSArray *sectionDataProducts;
-@property (nonatomic, strong) NSArray *sectionDataForwardBuys;
-@property (nonatomic, strong) NSArray *sectionDataNutritions;
-@property (nonatomic, strong) NSArray *sectionDataActivitys;
+@property (nonatomic, strong) NSArray  *sectionDataProducts;
+@property (nonatomic, strong) NSArray  *sectionDataForwardBuys;
+@property (nonatomic, strong) NSArray  *sectionDataNutritions;
+@property (nonatomic, strong) NSArray  *sectionDataActivitys;
 
 @end
 
@@ -55,6 +60,7 @@ static NSInteger const kSectionIndexActivity   = 4;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _cellWidth = (SCREEN_WIDTH - kCellMargin * 3) / 2.0;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"发现"
@@ -144,11 +150,17 @@ static NSInteger const kSectionIndexActivity   = 4;
                     break;
                 }
                 case WLAdTypeNutrition: {
+                    WLNutritionModel *nutrition = [[WLNutritionModel alloc] init];
+                    nutrition.classId = ad.refId;
+                    [self.navigationController pushViewController:[[NutritionInfoVC alloc] initWithNutrition:nutrition] animated:YES];
                     break;
                 }
-                case WLAdTypeVideo: {
-                    break;
-                }
+//                case WLAdTypeVideo: {
+//                    WLVideoModel *video = [[WLVideoModel alloc] init];
+//                    video.videoId = ad.refId;
+//                    [self.navigationController pushViewController:[[VideoInfoVC alloc] initWithVideo:video] animated:YES];
+//                    break;
+//                }
                 case WLAdTypeUrl: {
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ad.url]];
                     break;
@@ -157,6 +169,9 @@ static NSInteger const kSectionIndexActivity   = 4;
                     break;
                 }
                 case WLAdTypeDoctor: {
+                    WLDoctorModel *doctor = [[WLDoctorModel alloc] init];
+                    doctor.doctorId = ad.refId;
+                    [self.navigationController pushViewController:[[DoctorInfoVC alloc] initWithDoctor:doctor] animated:YES];
                     break;
                 }
                 default:
@@ -230,33 +245,34 @@ static NSInteger const kSectionIndexActivity   = 4;
     NSString *imageUrl = nil;
     NSString *title = nil;
     CGFloat money = 0;
+    BOOL showMoney = YES;
     switch (indexPath.section) {
         case kSectionIndexProduct: {
             WLProductModel *product = self.sectionDataProducts[indexPath.item];
             imageUrl = product.images;
-            title = product.productName;
-            money = product.price;
+            title    = product.productName;
+            money    = product.price;
             break;
         }
         case kSectionIndexForwardBuy: {
             WLForwardBuyModel *forwardBuy = self.sectionDataForwardBuys[indexPath.item];
             imageUrl = forwardBuy.banner;
-            title = forwardBuy.title;
-            money = forwardBuy.price;
+            title    = forwardBuy.title;
+            money    = forwardBuy.price;
             break;
         }
         case kSectionIndexNutrition: {
             WLNutritionModel *nutrition = self.sectionDataNutritions[indexPath.item];
-            imageUrl = nutrition.images;
-            title = nutrition.title;
-            money = 0;
+            imageUrl  = nutrition.images;
+            title     = nutrition.title;
+            showMoney = NO;
             break;
         }
         case kSectionIndexActivity: {
             WLActivityModel *activity = self.sectionDataActivitys[indexPath.item];
             imageUrl = activity.banner;
-            title = activity.title;
-            money = activity.price;
+            title    = activity.title;
+            money    = activity.price;
             break;
         }
         default:
@@ -266,9 +282,10 @@ static NSInteger const kSectionIndexActivity   = 4;
     
     DiscoveryCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier
                                                                               forIndexPath:indexPath];
-    cell.imageUrl = imageUrl;
-    cell.title = title;
-    cell.money = money;
+    cell.imageUrl  = imageUrl;
+    cell.title     = title;
+    cell.money     = money;
+    cell.showMoney = showMoney;
     return cell;
 }
 
@@ -281,6 +298,10 @@ static NSInteger const kSectionIndexActivity   = 4;
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsMake(0, kCellMargin, section == kSectionIndexHeader ? 0 : kCellMargin, kCellMargin);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(_cellWidth, [DiscoveryCollectionCell cellHeightWithCellWidth:_cellWidth showMoney:indexPath.section != kSectionIndexNutrition]);
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -303,7 +324,8 @@ static NSInteger const kSectionIndexActivity   = 4;
             break;
         }
         case kSectionIndexNutrition: {
-            DLog(@"TODO");
+            WLNutritionModel *nutrition = self.sectionDataNutritions[indexPath.item];
+            [self.navigationController pushViewController:[[NutritionInfoVC alloc] initWithNutrition:nutrition] animated:YES];
             break;
         }
         default:
@@ -389,10 +411,7 @@ static NSInteger const kSectionIndexActivity   = 4;
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        CGFloat cellWidth = (V_W_([UIApplication sharedApplication].keyWindow) - kCellMargin * 3) / 2.0;
-        layout.itemSize = CGSizeMake(cellWidth, [DiscoveryCollectionCell cellHeightWithCellWidth:cellWidth]);
         layout.minimumLineSpacing = kCellMargin;
-        
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
