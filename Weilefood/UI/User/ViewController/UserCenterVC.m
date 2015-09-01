@@ -134,7 +134,12 @@ static NSInteger const kSectionList   = 2;
                     cell.user = [WLDatabaseHelper user_find];
                     [cell onImageClickBlock:^(){
                         _strong_check(self);
-                        [self _openSetting:nil];
+                        if ([WLDatabaseHelper user_find]) {
+                            [self _openSetting:nil];
+                        }
+                        else {
+                            [LoginVC needsLoginWithLoggedBlock:nil];
+                        }
                     }];
                     [cell onPointClickBlock:^(){
                         [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {

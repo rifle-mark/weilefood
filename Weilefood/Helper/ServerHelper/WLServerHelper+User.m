@@ -12,10 +12,11 @@
 
 @implementation WLServerHelper (User)
 
-- (void)user_regWithUserName:(NSString *)userName password:(NSString *)password callback:(void (^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback {
+- (void)user_regWithUserName:(NSString *)userName password:(NSString *)password nickname:(NSString *)nickname callback:(void (^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"user", @"reg"]];
     NSDictionary *parameters = @{@"regUser": @{@"UserName": userName,
                                                @"Password": password,
+                                               @"NickName": nickname,
                                                }};
     [self httpPOST:apiUrl parameters:parameters resultClass:[WLUserModel class] callback:callback];
 }
