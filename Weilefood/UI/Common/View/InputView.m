@@ -51,6 +51,7 @@ static NSInteger const kContentMargin = 15;
     [self addSubview:self.titleLabel];
     [self addSubview:self.textField];
     [self addSubview:self.textView];
+    [self setNeedsUpdateConstraints];
 }
 
 - (void)updateConstraints {

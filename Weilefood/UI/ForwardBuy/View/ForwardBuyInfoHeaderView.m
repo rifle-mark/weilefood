@@ -49,6 +49,7 @@ static NSInteger const kNumberHeight        = 20;
         
         [self.timeView addSubview:self.timeIconImageView];
         [self.timeView addSubview:self.beginEndDateLabel];
+        [self setNeedsUpdateConstraints];
     }
     return self;
 }

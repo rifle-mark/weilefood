@@ -239,7 +239,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:self.tableHeaderView.frame style:UITableViewStylePlain];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.sectionHeaderHeight = [ProductInfoSectionHeaderView viewHeight];
         _tableView.tableHeaderView = self.tableHeaderView;

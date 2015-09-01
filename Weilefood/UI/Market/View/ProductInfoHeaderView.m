@@ -39,13 +39,12 @@ static NSInteger const kNumberHeight    = 20;
         [self addSubview:self.titleLabel];
         [self addSubview:self.numberLabel];
         [self addSubview:self.priceLabel];
+        [self setNeedsUpdateConstraints];
     }
     return self;
 }
 
 - (void)updateConstraints {
-    [super updateConstraints];
-    
     [self.numberLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel);
         make.bottom.equalTo(self);
@@ -72,6 +71,7 @@ static NSInteger const kNumberHeight    = 20;
         make.left.right.equalTo(self).insets(UIEdgeInsetsMake(0, 10, 0, 10));
         make.top.equalTo(self.swipeView.mas_bottom).offset(kTitleTopMargin);
     }];
+    [super updateConstraints];
 }
 
 #pragma mark - public property methods

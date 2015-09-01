@@ -470,6 +470,7 @@ static NSInteger kViewSpaced = 5;
         _weak(self);
         [_sexButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
+            [[self.contentView findFirstResponder] resignFirstResponder];
             if (!self.sexActionSheet) {
                 self.sexActionSheet = [[UIActionSheet alloc] initWithTitle:self.sexView.titleLabel.text delegate:self cancelButtonTitle:@"男" destructiveButtonTitle:@"女" otherButtonTitles:nil];
             }
@@ -488,6 +489,7 @@ static NSInteger kViewSpaced = 5;
         _weak(self);
         [_isChronicButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
+            [[self.contentView findFirstResponder] resignFirstResponder];
             if (!self.isChronicActionSheet) {
                 self.isChronicActionSheet = [[UIActionSheet alloc] initWithTitle:self.isChronicView.titleLabel.text delegate:self cancelButtonTitle:@"否" destructiveButtonTitle:@"是" otherButtonTitles:nil];
             }
