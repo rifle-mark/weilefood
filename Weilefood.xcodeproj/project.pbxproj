@@ -22,7 +22,7 @@
 		24134EBF1B6A718500E5BE07 /* VideoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24134EBE1B6A718500E5BE07 /* VideoListVC.m */; };
 		2438A7621B7ECC77003404BF /* WLDoctorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2438A7611B7ECC77003404BF /* WLDoctorModel.m */; };
 		2438A7651B7ECF09003404BF /* WLServerHelper+Doctor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2438A7641B7ECF09003404BF /* WLServerHelper+Doctor.m */; };
-		2438A7681B7ED1AD003404BF /* WLServerHelper+ShareUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2438A7671B7ED1AD003404BF /* WLServerHelper+ShareUrl.m */; };
+		2438A7681B7ED1AD003404BF /* WLServerHelper+Url.m in Sources */ = {isa = PBXBuildFile; fileRef = 2438A7671B7ED1AD003404BF /* WLServerHelper+Url.m */; };
 		245936A31B5A2C62008FFAB8 /* WLServerHelper+Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A21B5A2C62008FFAB8 /* WLServerHelper+Channel.m */; };
 		245936A61B5A2ECF008FFAB8 /* WLServerHelper+Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A51B5A2ECF008FFAB8 /* WLServerHelper+Product.m */; };
 		245936A91B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A81B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m */; };
@@ -196,6 +196,7 @@
 		24D3F9BD1B7BA825005F63DB /* NSDate+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D3F9BC1B7BA825005F63DB /* NSDate+Ext.m */; };
 		24D3F9C61B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D3F9C51B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m */; };
 		24D55DE61B67EB2400EC6373 /* UIBarButtonItem+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */; };
+		24D628981B95E2CD0078944F /* DoctorRecommendInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D628971B95E2CD0078944F /* DoctorRecommendInfoVC.m */; };
 		24DED3201B94888500F8FB31 /* NutritionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DED31F1B94888500F8FB31 /* NutritionCell.m */; };
 		24E627871B7CDF7700743B51 /* ShareOnPlatformVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E627861B7CDF7700743B51 /* ShareOnPlatformVC.m */; };
 		24E6278A1B7D043600743B51 /* InputQuantityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E627891B7D043600743B51 /* InputQuantityVC.m */; };
@@ -299,8 +300,8 @@
 		2438A7611B7ECC77003404BF /* WLDoctorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLDoctorModel.m; sourceTree = "<group>"; };
 		2438A7631B7ECF09003404BF /* WLServerHelper+Doctor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Doctor.h"; sourceTree = "<group>"; };
 		2438A7641B7ECF09003404BF /* WLServerHelper+Doctor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Doctor.m"; sourceTree = "<group>"; };
-		2438A7661B7ED1AD003404BF /* WLServerHelper+ShareUrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+ShareUrl.h"; sourceTree = "<group>"; };
-		2438A7671B7ED1AD003404BF /* WLServerHelper+ShareUrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+ShareUrl.m"; sourceTree = "<group>"; };
+		2438A7661B7ED1AD003404BF /* WLServerHelper+Url.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Url.h"; sourceTree = "<group>"; };
+		2438A7671B7ED1AD003404BF /* WLServerHelper+Url.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Url.m"; sourceTree = "<group>"; };
 		245936A11B5A2C62008FFAB8 /* WLServerHelper+Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Channel.h"; sourceTree = "<group>"; };
 		245936A21B5A2C62008FFAB8 /* WLServerHelper+Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Channel.m"; sourceTree = "<group>"; };
 		245936A41B5A2ECF008FFAB8 /* WLServerHelper+Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Product.h"; sourceTree = "<group>"; };
@@ -656,6 +657,8 @@
 		24D3F9C51B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefreshDefault.m"; sourceTree = "<group>"; };
 		24D55DE41B67EB2400EC6373 /* UIBarButtonItem+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Ext.h"; sourceTree = "<group>"; };
 		24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Ext.m"; sourceTree = "<group>"; };
+		24D628961B95E2CD0078944F /* DoctorRecommendInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorRecommendInfoVC.h; sourceTree = "<group>"; };
+		24D628971B95E2CD0078944F /* DoctorRecommendInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorRecommendInfoVC.m; sourceTree = "<group>"; };
 		24DED31E1B94888500F8FB31 /* NutritionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NutritionCell.h; sourceTree = "<group>"; };
 		24DED31F1B94888500F8FB31 /* NutritionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NutritionCell.m; sourceTree = "<group>"; };
 		24E627851B7CDF7700743B51 /* ShareOnPlatformVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareOnPlatformVC.h; sourceTree = "<group>"; };
@@ -1221,8 +1224,8 @@
 				249A73B71B569D2300F46F3D /* WLServerHelperHeader.h */,
 				249A73B51B569D2300F46F3D /* WLServerHelper.h */,
 				249A73B61B569D2300F46F3D /* WLServerHelper.m */,
-				2438A7661B7ED1AD003404BF /* WLServerHelper+ShareUrl.h */,
-				2438A7671B7ED1AD003404BF /* WLServerHelper+ShareUrl.m */,
+				2438A7661B7ED1AD003404BF /* WLServerHelper+Url.h */,
+				2438A7671B7ED1AD003404BF /* WLServerHelper+Url.m */,
 				24CAC42D1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.h */,
 				24CAC42E1B57DF1800E3C4D5 /* WLServerHelper+UploadImage.m */,
 				249A73B31B569D2300F46F3D /* WLServerHelper+User.h */,
@@ -1348,6 +1351,8 @@
 				24AE12591B91885D00654AEC /* UserOrderListVC.m */,
 				24054E801B92C236008018F2 /* SubmitUserHealthInfoVC.h */,
 				24054E811B92C236008018F2 /* SubmitUserHealthInfoVC.m */,
+				24D628961B95E2CD0078944F /* DoctorRecommendInfoVC.h */,
+				24D628971B95E2CD0078944F /* DoctorRecommendInfoVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2323,7 +2328,7 @@
 				24CDCC141B4F792E00BDE8CB /* UITextView+GCDelegate.m in Sources */,
 				249A9BA61B7249F3008203C8 /* WLActivityCityModel.m in Sources */,
 				24CDCC071B4F792E00BDE8CB /* UICollectionView+GCDelegateAndDataSource.m in Sources */,
-				2438A7681B7ED1AD003404BF /* WLServerHelper+ShareUrl.m in Sources */,
+				2438A7681B7ED1AD003404BF /* WLServerHelper+Url.m in Sources */,
 				24AE12361B9186AE00654AEC /* OrderInfoHeaderCell.m in Sources */,
 				4DE8BA4F1B885D1F00E8608E /* GCPageViewCellStoreHelper.m in Sources */,
 				24CDCBEA1B4F792E00BDE8CB /* UIPickerViewDelegateImplementationProxy.m in Sources */,
@@ -2359,6 +2364,7 @@
 				24134EB61B6A711900E5BE07 /* ActivityListVC.m in Sources */,
 				24CDCC0A1B4F792E00BDE8CB /* UINavigationBar+GCDelegate.m in Sources */,
 				249A73D21B569D4100F46F3D /* WLUserModel.m in Sources */,
+				24D628981B95E2CD0078944F /* DoctorRecommendInfoVC.m in Sources */,
 				24B8C06A1B5242BC001C5722 /* AGIPCGridCell.m in Sources */,
 				4DE8B9BB1B885CD400E8608E /* PictureShowVC.m in Sources */,
 				24AE124F1B9186E900654AEC /* DoctorCell.m in Sources */,
