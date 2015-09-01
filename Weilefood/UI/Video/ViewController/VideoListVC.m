@@ -130,7 +130,7 @@ static NSInteger const kPageSize       = 10;
         layout.minimumLineSpacing = kCellMargin;
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
-        _collectionView.backgroundColor = [UIColor whiteColor];
+        _collectionView.backgroundColor = k_COLOR_WHITE;
         [_collectionView registerClass:[VideoCollectionCell class] forCellWithReuseIdentifier:kCellIdentifier];
         [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kHeaderIdentifier];
         _weak(self);
@@ -151,11 +151,11 @@ static NSInteger const kPageSize       = 10;
             [headerView addSubview:self.bannerImageView];
             [headerView addSubview:self.lineView];
             [self.bannerImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.topMargin.leftMargin.rightMargin.equalTo(@0);
+                make.top.left.right.equalTo(self.bannerImageView.superview);
                 make.height.equalTo(@(self.bannerImageHeight));
             }];
             [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.leftMargin.rightMargin.bottomMargin.equalTo(@0);
+                make.bottom.left.right.equalTo(self.lineView.superview);
                 make.top.equalTo(self.bannerImageView.mas_bottom);
             }];
             return headerView;
@@ -199,9 +199,11 @@ static NSInteger const kPageSize       = 10;
             return cell;
         }];
         [_collectionView withBlockForItemDidSelect:^(UICollectionView *view, NSIndexPath *path) {
-            _strong_check(self);
-            WLVideoModel *video = self.videoList[path.item];
-            [self.navigationController pushViewController:[[VideoInfoVC alloc] initWithVideo:video] animated:YES];
+            [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+                _strong_check(self);
+                WLVideoModel *video = self.videoList[path.item];
+                [self.navigationController pushViewController:[[VideoInfoVC alloc] initWithVideo:video] animated:YES];
+            }];
         }];
     }
     return _collectionView;

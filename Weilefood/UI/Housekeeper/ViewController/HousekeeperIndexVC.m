@@ -7,8 +7,10 @@
 //
 
 #import "HousekeeperIndexVC.h"
+#import "NutritionCell.h"
 #import "DoctorCell.h"
 
+#import "NutritionInfoVC.h"
 #import "DoctorInfoVC.h"
 
 #import "WLServerHelperHeader.h"
@@ -45,7 +47,7 @@ static NSInteger const kPageSize       = 10;
     
     [self _addObserve];
     
-    self.selectedDoctor = YES;
+    self.selectedDoctor = NO;
     [self.tableView.header beginRefreshing];
 }
 
@@ -104,15 +106,8 @@ static NSInteger const kPageSize       = 10;
         [[WLServerHelper sharedInstance] doctor_getListWithMaxDate:maxDate pageSize:kPageSize callback:callback];
     }
     else {
-        if (self.tableView.header.isRefreshing) {
-            [self.tableView.header endRefreshing];
-        }
-        if (self.tableView.footer.isRefreshing) {
-            [self.tableView.footer endRefreshing];
-        }
-        self.dataList = nil;
-//        NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLNutritionModel *)[self.dataList lastObject]).createDate;
-//        [[WLServerHelper sharedInstance] nutrition_getListWithMaxDate:maxDate pageSize:kPageSize callback:callback];
+        NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLNutritionModel *)[self.dataList lastObject]).createDate;
+        [[WLServerHelper sharedInstance] nutrition_getListWithMaxDate:maxDate pageSize:kPageSize callback:callback];
     }
 }
 
@@ -177,6 +172,7 @@ static NSInteger const kPageSize       = 10;
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_tableView registerClass:[NutritionCell class] forCellReuseIdentifier:[NutritionCell reuseIdentifier]];
         [_tableView registerClass:[DoctorCell class] forCellReuseIdentifier:[DoctorCell reuseIdentifier]];
         _weak(self);
         [_tableView headerWithRefreshingBlock:^{
@@ -197,7 +193,7 @@ static NSInteger const kPageSize       = 10;
                 WLDoctorModel *doctor = self.dataList[path.row];
                 return [DoctorCell cellHeightWithDesc:doctor.desc];
             }
-            return 0;
+            return [NutritionCell cellHeight];
         }];
         [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
             _strong_check(self, nil);
@@ -212,14 +208,23 @@ static NSInteger const kPageSize       = 10;
                 cell.desc         = doctor.desc;
                 return cell;
             }
-            return nil;
+            NutritionCell *cell = [view dequeueReusableCellWithIdentifier:[NutritionCell reuseIdentifier] forIndexPath:path];
+            WLNutritionModel *nutrition = self.dataList[path.row];
+            cell.imageUrl     = nutrition.images;
+            cell.name         = nutrition.title;
+            cell.actionCount  = nutrition.actionCount;
+            cell.commentCount = nutrition.commentCount;
+            return cell;
         }];
         [_tableView withBlockForRowDidSelect:^(UITableView *view, NSIndexPath *path) {
             _strong_check(self);
             if (self.selectedDoctor) {
                 WLDoctorModel *doctor = self.dataList[path.row];
                 [self.navigationController pushViewController:[[DoctorInfoVC alloc] initWithDoctor:doctor] animated:YES];
+                return;
             }
+            WLNutritionModel *nutrition = self.dataList[path.row];
+            [self.navigationController pushViewController:[[NutritionInfoVC alloc] initWithNutrition:nutrition] animated:YES];
         }];
     }
     return _tableView;

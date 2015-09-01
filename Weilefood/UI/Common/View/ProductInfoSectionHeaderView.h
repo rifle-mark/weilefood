@@ -14,9 +14,9 @@
 /// 是否已赞
 @property (nonatomic, assign) BOOL      hasAction;
 /// 赞数量
-@property (nonatomic, assign) NSInteger actionCount;
+@property (nonatomic, assign) long long actionCount;
 /// 评论数量
-@property (nonatomic, assign) NSInteger commentCount;
+@property (nonatomic, assign) long long commentCount;
 
 /**
  *  展示所需要的高度

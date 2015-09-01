@@ -1,5 +1,5 @@
 //
-//  MyVedioVC.h
+//  MyVideoVC.h
 //  Weilefood
 //
 //  Created by makewei on 15/8/29.
@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyVedioVC : UIViewController
+/// 我的视频
+@interface MyVideoVC : UIViewController
 
 @end

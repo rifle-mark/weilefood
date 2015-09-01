@@ -13,6 +13,14 @@
 @interface WLServerHelper (Video)
 
 /**
+ *  购买视频
+ *
+ *  @param videoId  视频ID
+ *  @param callback
+ */
+- (void)video_buyWithVideoId:(NSUInteger)videoId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback;
+
+/**
  *  获取视频栏目在首页和列表界面的广告图
  *
  *  @param callback
@@ -44,5 +52,14 @@
  *  @param callback
  */
 - (void)video_getListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
+
+/**
+ *  我的主题视频列表。(NSArray<WLVideoModel>)apiResult
+ *
+ *  @param pageIndex 第几页数据，从1开始
+ *  @param pageSize  返回的最大记录数
+ *  @param callback
+ */
+- (void)video_getMyListWithPageIndex:(NSUInteger)pageIndex pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
 
 @end

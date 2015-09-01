@@ -18,11 +18,12 @@
 
 /// Cell中图片高度=图片宽度*此数据
 static CGFloat const kImageHeightScale = 0.788;
+#define kMoneyFont [UIFont boldSystemFontOfSize:13]
 
 @implementation DiscoveryCollectionCell
 
-+ (CGFloat)cellHeightWithCellWidth:(CGFloat)cellWidth {
-    return cellWidth * kImageHeightScale + 68;
++ (CGFloat)cellHeightWithCellWidth:(CGFloat)cellWidth showMoney:(BOOL)showMoney {
+    return cellWidth * kImageHeightScale + 68 - (showMoney ? 0 : kMoneyFont.lineHeight);
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -51,6 +52,11 @@ static CGFloat const kImageHeightScale = 0.788;
 - (void)setMoney:(CGFloat)money {
     _money = money;
     self.moneyLabel.text = [NSString stringWithFormat:@"￥%.2f", money];
+}
+
+- (void)setShowMoney:(BOOL)showMoney {
+    _showMoney = showMoney;
+    self.moneyLabel.hidden = !showMoney;
 }
 
 #pragma mark - private methons
@@ -94,7 +100,7 @@ static CGFloat const kImageHeightScale = 0.788;
 - (UILabel *)moneyLabel {
     if (!_moneyLabel) {
         _moneyLabel = [[UILabel alloc] init];
-        _moneyLabel.font = [UIFont boldSystemFontOfSize:13];
+        _moneyLabel.font = kMoneyFont;
         _moneyLabel.textColor = k_COLOR_GOLDENROD;
     }
     return _moneyLabel;

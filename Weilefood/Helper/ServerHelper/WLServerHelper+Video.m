@@ -11,6 +11,11 @@
 
 @implementation WLServerHelper (Video)
 
+- (void)video_buyWithVideoId:(NSUInteger)videoId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"video", @"buy"]];
+    [self httpPOST:apiUrl parameters:@{@"videoid" : @(videoId)} callback:callback];
+}
+
 - (void)video_getAdImageWithCallback:(void (^)(WLApiInfoModel *apiInfo, WLVideoAdImageModel *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"pconfig", @"detail"]];
     [self httpGET:apiUrl parameters:nil resultClass:[WLVideoAdImageModel class] callback:callback];
@@ -28,6 +33,11 @@
 
 - (void)video_getListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"video", @"list", @(1), @(pageSize), @([maxDate millisecondIntervalSince1970])]];
+    [self httpGET:apiUrl parameters:nil resultItemsClass:[WLVideoModel class] callback:callback];
+}
+
+- (void)video_getMyListWithPageIndex:(NSUInteger)pageIndex pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"video", @"mylist", @(pageIndex), @(pageSize)]];
     [self httpGET:apiUrl parameters:nil resultItemsClass:[WLVideoModel class] callback:callback];
 }
 

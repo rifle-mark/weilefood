@@ -1,13 +1,12 @@
 //
-//  VideoInfoVC.m
+//  NutritionInfoVC.m
 //  Weilefood
 //
-//  Created by kelei on 15/8/12.
+//  Created by kelei on 15/8/31.
 //  Copyright (c) 2015年 kelei. All rights reserved.
 //
 
-#import "VideoInfoVC.h"
-
+#import "NutritionInfoVC.h"
 #import "CommentListVC.h"
 #import "LoginVC.h"
 #import "ShareOnPlatformVC.h"
@@ -16,7 +15,7 @@
 #import "WLModelHeader.h"
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface VideoInfoVC ()
+@interface NutritionInfoVC ()
 
 @property (nonatomic, strong) UIView   *statusBarView;
 @property (nonatomic, strong) UIButton *favoriteButton;
@@ -26,27 +25,25 @@
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView       *contentView;
-@property (nonatomic, strong) UIImageView  *videoImageView;
-@property (nonatomic, strong) UIButton     *playButton;
+@property (nonatomic, strong) UIImageView  *imageView;
 @property (nonatomic, strong) UILabel      *titleLabel;
-@property (nonatomic, strong) UILabel      *pointsLabel;
 @property (nonatomic, strong) UIView       *lineView;
 @property (nonatomic, strong) UIWebView    *webView;
 
-@property (nonatomic, strong) WLVideoModel *video;
+@property (nonatomic, strong) WLNutritionModel *nutrition;
 
 @end
 
-@implementation VideoInfoVC
+@implementation NutritionInfoVC
 
 - (id)init {
-    NSAssert(NO, @"请使用initWithVideo:方法来初始化本界面");
+    NSAssert(NO, @"请使用initWithNutrition:方法来初始化本界面");
     return nil;
 }
 
-- (instancetype)initWithVideo:(WLVideoModel *)video {
+- (id)initWithNutrition:(WLNutritionModel *)nutrition {
     if (self= [super init]) {
-        self.video = video;
+        self.nutrition = nutrition;
     }
     return self;
 }
@@ -68,10 +65,8 @@
     
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.contentView];
-    [self.contentView addSubview:self.videoImageView];
-    [self.contentView addSubview:self.playButton];
+    [self.contentView addSubview:self.imageView];
     [self.contentView addSubview:self.titleLabel];
-    [self.contentView addSubview:self.pointsLabel];
     [self.contentView addSubview:self.lineView];
     [self.contentView addSubview:self.webView];
     
@@ -88,29 +83,17 @@
     [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.width.equalTo(self.scrollView);
     }];
-    [self.videoImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self.contentView);
-        if (self.videoImageView.hidden) {
-            make.height.equalTo(@0);
-        }
-        else {
-            make.height.equalTo(self.videoImageView.mas_width).offset(3.0 / 4.0);
-        }
-    }];
-    [self.playButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.videoImageView);
+        make.height.equalTo(self.imageView.mas_width).offset(3.0 / 4.0);
     }];
     [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.contentView).insets(UIEdgeInsetsMake(0, 15, 0, 15));
-        make.top.equalTo(self.videoImageView.mas_bottom).offset(20);
-    }];
-    [self.pointsLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleLabel);
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
+        make.top.equalTo(self.imageView.mas_bottom).offset(20);
     }];
     [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.titleLabel);
-        make.top.equalTo(self.pointsLabel.mas_baseline).offset(18);
+        make.top.equalTo(self.titleLabel.mas_baseline).offset(18);
         make.height.equalTo(@k1pxWidth);
     }];
     [self.webView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -151,26 +134,21 @@
 #pragma mark - private methods
 
 - (void)_showData {
-    self.favoriteButton.highlighted = self.video.isFav;
-    self.actionButton.enabled = !self.video.isLike;
-    [self.actionButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.video.actionCount] forState:UIControlStateNormal];
-    [self.commentButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.video.commentCount] forState:UIControlStateNormal];
-    self.videoImageView.hidden = !self.video.videoUrl || self.video.videoUrl.length <= 0;
-    self.playButton.hidden = self.videoImageView.hidden;
-    if (!self.videoImageView.hidden) {
-        [self.videoImageView my_setImageWithURL:[NSURL URLWithString:self.video.images]];
-    }
-    self.titleLabel.text = self.video.title;
-    self.pointsLabel.text = [NSString stringWithFormat:@"观看积分 %lu", (unsigned long)self.video.points];
-    [self.webView loadHTMLString:self.video.desc baseURL:nil];
+    self.favoriteButton.highlighted = self.nutrition.isFav;
+    self.actionButton.enabled = !self.nutrition.isLike;
+    [self.actionButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.nutrition.actionCount] forState:UIControlStateNormal];
+    [self.commentButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.nutrition.commentCount] forState:UIControlStateNormal];
+    [self.imageView my_setImageWithURL:[NSURL URLWithString:self.nutrition.images]];
+    self.titleLabel.text = self.nutrition.title;
+    [self.webView loadHTMLString:self.nutrition.desc baseURL:nil];
 }
 
 - (void)_loadData {
     _weak(self);
-    [[WLServerHelper sharedInstance] video_getInfoWithVideoId:self.video.videoId callback:^(WLApiInfoModel *apiInfo, WLVideoModel *apiResult, NSError *error) {
+    [[WLServerHelper sharedInstance] nutrition_getInfoWithNutritionId:self.nutrition.classId callback:^(WLApiInfoModel *apiInfo, WLNutritionModel *apiResult, NSError *error) {
         _strong_check(self);
         ServerHelperErrorHandle;
-        self.video = apiResult;
+        self.nutrition = apiResult;
         [self _showData];
     }];
 }
@@ -195,19 +173,19 @@
         [_favoriteButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                if (self.video.isFav) {
-                    [[WLServerHelper sharedInstance] action_deleteFavoriteWithObjectType:WLActionTypeVideo objectId:self.video.videoId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                if (self.nutrition.isFav) {
+                    [[WLServerHelper sharedInstance] action_deleteFavoriteWithObjectType:WLActionTypeNutrition objectId:self.nutrition.classId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
                         _strong_check(self);
                         ServerHelperErrorHandle;
-                        self.video.isFav = NO;
+                        self.nutrition.isFav = NO;
                         [self _showData];
                     }];
                 }
                 else {
-                    [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeFavorite objectType:WLActionTypeVideo objectId:self.video.videoId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                    [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeFavorite objectType:WLActionTypeNutrition objectId:self.nutrition.classId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
                         _strong_check(self);
                         ServerHelperErrorHandle;
-                        self.video.isFav = YES;
+                        self.nutrition.isFav = YES;
                         [self _showData];
                     }];
                 }
@@ -231,11 +209,11 @@
         [_actionButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
-                [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeApproval objectType:WLActionTypeVideo objectId:self.video.videoId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeApproval objectType:WLActionTypeNutrition objectId:self.nutrition.classId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
                     _strong_check(self);
                     ServerHelperErrorHandle;
-                    self.video.actionCount++;
-                    self.video.isLike = YES;
+                    self.nutrition.actionCount++;
+                    self.nutrition.isLike = YES;
                     [self _showData];
                 }];
             }];
@@ -255,7 +233,7 @@
         _weak(self);
         [_commentButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            [CommentListVC showWithType:WLCommentTypeVideo refId:self.video.videoId];
+            [CommentListVC showWithType:WLCommentTypeNutrition refId:self.nutrition.classId];
         }];
     }
     return _commentButton;
@@ -269,8 +247,8 @@
         _weak(self);
         [_shareButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            NSString *url = [[WLServerHelper sharedInstance] getShareUrlWithType:WLServerHelperShareTypeVideo objectId:self.video.videoId];
-            [ShareOnPlatformVC shareWithImageUrl:self.video.images title:self.video.title shareUrl:url];
+            NSString *url = [[WLServerHelper sharedInstance] getShareUrlWithType:WLServerHelperShareTypeNutrition objectId:self.nutrition.classId];
+            [ShareOnPlatformVC shareWithImageUrl:self.nutrition.images title:self.nutrition.title shareUrl:url];
         }];
     }
     return _shareButton;
@@ -292,51 +270,13 @@
     return _contentView;
 }
 
-- (UIImageView  *)videoImageView {
-    if (!_videoImageView) {
-        _videoImageView = [[UIImageView alloc] init];
-        _videoImageView.contentMode = UIViewContentModeScaleAspectFill;
-        _videoImageView.clipsToBounds = YES;
+- (UIImageView *)imageView {
+    if (!_imageView) {
+        _imageView = [[UIImageView alloc] init];
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
+        _imageView.clipsToBounds = YES;
     }
-    return _videoImageView;
-}
-
-- (UIButton  *)playButton {
-    if (!_playButton) {
-        _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_playButton setImage:[UIImage imageNamed:@"video_play"] forState:UIControlStateNormal];
-        _weak(self);
-        [_playButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
-            _strong_check(self);
-            
-            void (^playVideo)() = ^{
-                NSURL *url = [NSURL URLWithString:self.video.videoUrl];
-                MPMoviePlayerViewController *pvc = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
-                [self presentViewController:pvc animated:YES completion:nil];
-            };
-            
-            if (self.video.isBuy || self.video.points <= 0) {
-                playVideo();
-            }
-            else {
-                NSString *msg = [NSString stringWithFormat:@"确定使用%lu积分兑换此视频？", (unsigned long)self.video.points];
-                GCAlertView *alertView = [[GCAlertView alloc] initWithTitle:msg andMessage:nil];
-                [alertView setCancelButtonWithTitle:@"取消" actionBlock:nil];
-                [alertView addOtherButtonWithTitle:@"确定" actionBlock:^{
-                    [MBProgressHUD showLoadingWithMessage:nil];
-                    [[WLServerHelper sharedInstance] video_buyWithVideoId:self.video.videoId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
-                        [MBProgressHUD hideLoading];
-                        _strong_check(self);
-                        ServerHelperErrorHandle;
-                        self.video.isBuy = YES;
-                        playVideo();
-                    }];
-                }];
-                [alertView show];
-            }
-        }];
-    }
-    return _playButton;
+    return _imageView;
 }
 
 - (UILabel *)titleLabel {
@@ -347,16 +287,6 @@
         _titleLabel.numberOfLines = 2;
     }
     return _titleLabel;
-}
-
-- (UILabel *)pointsLabel {
-    if (!_pointsLabel) {
-        _pointsLabel = [[UILabel alloc] init];
-        _pointsLabel.font = [UIFont systemFontOfSize:13];
-        _pointsLabel.textColor = k_COLOR_GOLDENROD;
-        _pointsLabel.numberOfLines = 2;
-    }
-    return _pointsLabel;
 }
 
 - (UIView *)lineView {
