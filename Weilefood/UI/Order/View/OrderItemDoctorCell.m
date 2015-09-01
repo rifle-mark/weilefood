@@ -40,6 +40,7 @@ static NSInteger const kLineHeight = 7;
         [self.contentView addSubview:self.serviceNameLabel];
         [self.contentView addSubview:self.moneyLabel];
         [self.contentView addSubview:self.lineView];
+        [self setNeedsUpdateConstraints];
     }
     return self;
 }

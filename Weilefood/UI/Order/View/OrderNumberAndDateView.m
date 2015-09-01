@@ -24,6 +24,7 @@
     if (self = [super init]) {
         self.backgroundColor = k_COLOR_WHITESMOKE;
         [self addSubview:self.label];
+        [self setNeedsUpdateConstraints];
     }
     return self;
 }

@@ -35,6 +35,7 @@ static NSInteger const kScoreBottomMargin = 6;
         [self addSubview:self.picImageView];
         [self addSubview:self.nameLabel];
         [self addSubview:self.scoreView];
+        [self setNeedsUpdateConstraints];
     }
     return self;
 }

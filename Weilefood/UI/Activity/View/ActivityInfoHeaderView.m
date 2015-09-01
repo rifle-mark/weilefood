@@ -34,6 +34,7 @@ static NSInteger const kTimeHeight     = 14;
         [self addSubview:self.imageView];
         [self addSubview:self.titleLabel];
         [self addSubview:self.beginEndDateLabel];
+        [self setNeedsUpdateConstraints];
     }
     return self;
 }

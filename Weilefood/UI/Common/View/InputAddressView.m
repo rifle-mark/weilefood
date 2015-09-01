@@ -16,7 +16,6 @@
 @property (nonatomic, strong) InputView *phoneInputView;
 @property (nonatomic, strong) InputView *cityInputView;
 @property (nonatomic, strong) InputView *addressInputView;
-//@property (nonatomic, strong) UITextView *addressTextView;
 @property (nonatomic, strong) InputView *zipCodeInputView;
 
 @end
@@ -55,7 +54,7 @@ static NSInteger const kTitleWidth = 80;
     [self addSubview:self.cityInputView];
     [self addSubview:self.addressInputView];
     [self addSubview:self.zipCodeInputView];
-//    [self.addressInputView addSubview:self.addressTextView];
+    [self setNeedsUpdateConstraints];
 }
 
 - (void)updateConstraints {
@@ -75,9 +74,6 @@ static NSInteger const kTitleWidth = 80;
         make.top.equalTo(self.cityInputView.mas_bottom).offset(kInputSpacing);
         make.height.equalTo(@(kAddressHeight));
     }];
-//    [self.addressTextView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.equalTo(self.addressInputView).insets(UIEdgeInsetsMake(15, 15, 15, 15));
-//    }];
     [self.zipCodeInputView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.addressInputView);
         make.top.equalTo(self.addressInputView.mas_bottom).offset(kInputSpacing);
@@ -266,33 +262,12 @@ static NSInteger const kTitleWidth = 80;
     return _addressInputView;
 }
 
-//- (UITextView *)addressTextView {
-//    if (!_addressTextView) {
-//        _addressTextView = [[UITextView alloc] init];
-//        _addressTextView.placeholder = @"输入详细地址";
-//        _addressTextView.font = self.addressInputView.textField.font;
-//        _addressTextView.backgroundColor = self.addressInputView.backgroundColor;
-//        _addressTextView.returnKeyType = UIReturnKeyNext;
-//        _addressTextView.textContainerInset = UIEdgeInsetsZero;
-//        _addressTextView.textContainer.lineFragmentPadding = 0;
-//        _weak(self);
-//        [_addressTextView withBlockForShouldChangeText:^BOOL(UITextView *view, NSRange range, NSString *text) {
-//            _strong_check(self, NO);
-//            if ([text isEqualToString:@"\n"]) {
-//                [self.zipCodeInputView.textField becomeFirstResponder];
-//                return NO;
-//            }
-//            return YES;
-//        }];
-//    }
-//    return _addressTextView;
-//}
-
 - (InputView *)zipCodeInputView {
     if (!_zipCodeInputView) {
         _zipCodeInputView = [[InputView alloc] init];
         _zipCodeInputView.titleWidth = kTitleWidth;
         _zipCodeInputView.titleLabel.text = @"邮政编码";
+        _zipCodeInputView.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         _zipCodeInputView.textField.returnKeyType = UIReturnKeyDone;
         [_zipCodeInputView.textField withBlockForShouldReturn:^BOOL(UITextField *view) {
             [view resignFirstResponder];

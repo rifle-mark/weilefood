@@ -37,6 +37,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self.contentView addSubview:self.typeLabel];
         [self.contentView addSubview:self.titleLabel];
+        [self setNeedsUpdateConstraints];
     }
     return self;
 }
@@ -77,6 +78,7 @@
     if (!_typeLabel) {
         _typeLabel = [[UILabel alloc] init];
         _typeLabel.font = [UIFont boldSystemFontOfSize:15];
+        [_typeLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
         [_typeLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     }
     return _typeLabel;
