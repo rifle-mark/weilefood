@@ -54,6 +54,8 @@ static NSInteger kPageSize = 20;
         make.left.right.bottom.equalTo(self.tableView.superview);
         make.top.equalTo(self.tableView.superview).with.offset(self.topLayoutGuide.length);
     }];
+    
+    FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 #pragma mark - private

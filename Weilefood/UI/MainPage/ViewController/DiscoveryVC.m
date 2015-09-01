@@ -12,6 +12,7 @@
 #import "DiscoveryCollectionSectionHeaderView.h"
 #import "DiscoveryCollectionCell.h"
 
+#import "LoginVC.h"
 #import "MarketIndexPageVC.h"
 #import "ForwardBuyListVC.h"
 #import "ActivityListVC.h"
@@ -155,12 +156,15 @@ static NSInteger const kSectionIndexActivity   = 4;
                     [self.navigationController pushViewController:[[NutritionInfoVC alloc] initWithNutrition:nutrition] animated:YES];
                     break;
                 }
-//                case WLAdTypeVideo: {
-//                    WLVideoModel *video = [[WLVideoModel alloc] init];
-//                    video.videoId = ad.refId;
-//                    [self.navigationController pushViewController:[[VideoInfoVC alloc] initWithVideo:video] animated:YES];
-//                    break;
-//                }
+                case WLAdTypeVideo: {
+                    [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+                        _strong_check(self);
+                        WLVideoModel *video = [[WLVideoModel alloc] init];
+                        video.videoId = ad.refId;
+                        [self.navigationController pushViewController:[[VideoInfoVC alloc] initWithVideo:video] animated:YES];
+                    }];
+                    break;
+                }
                 case WLAdTypeUrl: {
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ad.url]];
                     break;

@@ -7,46 +7,42 @@
 //
 
 #import "NutritionInfoVC.h"
-#import "NutritionInfoHeaderView.h"
-#import "ProductInfoSectionHeaderView.h"
-
 #import "CommentListVC.h"
 #import "LoginVC.h"
 #import "ShareOnPlatformVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
-
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface NutritionInfoVC ()
 
-@property (nonatomic, strong) UIBarButtonItem *favoriteItem;
-
-@property (nonatomic, strong) UIView   *navView;
-@property (nonatomic, strong) UIButton *backButton;
+@property (nonatomic, strong) UIView   *statusBarView;
 @property (nonatomic, strong) UIButton *favoriteButton;
+@property (nonatomic, strong) UIButton *actionButton;
+@property (nonatomic, strong) UIButton *commentButton;
+@property (nonatomic, strong) UIButton *shareButton;
 
-@property (nonatomic, strong) NutritionInfoHeaderView      *tableHeaderView;
-@property (nonatomic, strong) ProductInfoSectionHeaderView *sectionHeaderView;
-@property (nonatomic, strong) UIWebView                    *webView;
-@property (nonatomic, strong) UITableView                  *tableView;
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIView       *contentView;
+@property (nonatomic, strong) UIImageView  *imageView;
+@property (nonatomic, strong) UILabel      *titleLabel;
+@property (nonatomic, strong) UIView       *lineView;
+@property (nonatomic, strong) UIWebView    *webView;
 
 @property (nonatomic, strong) WLNutritionModel *nutrition;
-@property (nonatomic, assign) CGFloat          headerHeight;
 
 @end
 
 @implementation NutritionInfoVC
 
 - (id)init {
-    NSAssert(NO, @"请使用initWithNutrition:方法初始化本界面");
+    NSAssert(NO, @"请使用initWithNutrition:方法来初始化本界面");
     return nil;
 }
 
 - (id)initWithNutrition:(WLNutritionModel *)nutrition {
-    NSParameterAssert(nutrition);
-    if (self = [super init]) {
-        _headerHeight = [NutritionInfoHeaderView viewHeight];
+    if (self= [super init]) {
         self.nutrition = nutrition;
     }
     return self;
@@ -56,12 +52,23 @@
     [super viewDidLoad];
     self.view.backgroundColor = k_COLOR_WHITE;
     
-    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], self.favoriteItem];
+    NSArray *barItems = @[self.shareButton,
+                          self.commentButton,
+                          self.actionButton,
+                          self.favoriteButton];
+    NSMutableArray *rightItems = [NSMutableArray array];
+    [rightItems addObject:[UIBarButtonItem createNavigationFixedItem]];
+    for (UIView *view in barItems) {
+        [rightItems addObject:[[UIBarButtonItem alloc] initWithCustomView:view]];
+    }
+    self.navigationItem.rightBarButtonItems = rightItems;
     
-    [self.view addSubview:self.tableView];
-    [self.view addSubview:self.navView];
-    [self.navView addSubview:self.backButton];
-    [self.navView addSubview:self.favoriteButton];
+    [self.view addSubview:self.scrollView];
+    [self.scrollView addSubview:self.contentView];
+    [self.contentView addSubview:self.imageView];
+    [self.contentView addSubview:self.titleLabel];
+    [self.contentView addSubview:self.lineView];
+    [self.contentView addSubview:self.webView];
     
     [self _showData];
     [self _loadData];
@@ -70,32 +77,71 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
-    [self.navView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.top.equalTo(self.view).offset(20);
-    }];
-    [self.backButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.navView).offset(6);
-        make.left.equalTo(self.navView).offset(10);
-    }];
-    [self.favoriteButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.navView).offset(6);
-        make.right.equalTo(self.navView).offset(-10);
-    }];
-    
-    [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.scrollView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.width.equalTo(self.scrollView);
+    }];
+    [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.equalTo(self.contentView);
+        make.height.equalTo(self.imageView.mas_width).offset(3.0 / 4.0);
+    }];
+    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.contentView).insets(UIEdgeInsetsMake(0, 15, 0, 15));
+        make.top.equalTo(self.imageView.mas_bottom).offset(20);
+    }];
+    [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.titleLabel);
+        make.top.equalTo(self.titleLabel.mas_baseline).offset(18);
+        make.height.equalTo(@k1pxWidth);
+    }];
+    [self.webView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.lineView);
+        make.top.equalTo(self.lineView).offset(20);
+        make.bottom.equalTo(self.contentView);
+        make.height.equalTo(@(self.webView.scrollView.contentSize.height ?: 10));
+    }];
+    
     FixesViewDidLayoutSubviewsiOS7Error;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-    self.headerHeight = V_H_(self.tableHeaderView);
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.tintColor = k_COLOR_ORANGE;
+    self.navigationController.navigationBar.backgroundColor = [k_COLOR_WHITESMOKE colorWithAlphaComponent:0.9];
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    [self.navigationController.navigationBar addSubview:self.statusBarView];
+    self.statusBarView.backgroundColor = self.navigationController.navigationBar.backgroundColor;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.statusBarView removeFromSuperview];
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.tintColor = k_COLOR_THEME_NAVIGATIONBAR_TEXT;
+    self.navigationController.navigationBar.backgroundColor = nil;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 }
 
 #pragma mark - private methods
+
+- (void)_showData {
+    self.favoriteButton.highlighted = self.nutrition.isFav;
+    self.actionButton.enabled = !self.nutrition.isLike;
+    [self.actionButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.nutrition.actionCount] forState:UIControlStateNormal];
+    [self.commentButton setTitle:[NSString stringWithFormat:@"%lu", (unsigned long)self.nutrition.commentCount] forState:UIControlStateNormal];
+    [self.imageView my_setImageWithURL:[NSURL URLWithString:self.nutrition.images]];
+    self.titleLabel.text = self.nutrition.title;
+    [self.webView loadHTMLString:self.nutrition.desc baseURL:nil];
+}
 
 - (void)_loadData {
     _weak(self);
@@ -107,111 +153,60 @@
     }];
 }
 
-- (void)_showData {
-    self.title = self.nutrition.title;
-    
-    [self _resetFavoriteItemColor];
-    self.favoriteButton.highlighted = self.nutrition.isFav;
-    
-    self.tableHeaderView.imageUrl = self.nutrition.images;
-    self.tableHeaderView.title  = self.nutrition.title;
-    
-    self.sectionHeaderView.hasAction = self.nutrition.isLike;
-    self.sectionHeaderView.actionCount = self.nutrition.actionCount;
-    self.sectionHeaderView.commentCount = self.nutrition.commentCount;
-    
-    if (self.webView.superview) {
-        [self.webView loadHTMLString:self.nutrition.desc baseURL:nil];
-    }
-    
-    [self.tableView reloadData];
-}
-
-- (void)_favoriteClick {
-    _weak(self);
-    [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
-        _strong_check(self);
-        if (self.nutrition.isFav) {
-            [[WLServerHelper sharedInstance] action_deleteFavoriteWithObjectType:WLActionTypeNutrition objectId:self.nutrition.classId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
-                _strong_check(self);
-                ServerHelperErrorHandle;
-                self.nutrition.isFav = NO;
-                [self _showData];
-            }];
-        }
-        else {
-            [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeFavorite objectType:WLActionTypeNutrition objectId:self.nutrition.classId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
-                _strong_check(self);
-                ServerHelperErrorHandle;
-                self.nutrition.isFav = YES;
-                [self _showData];
-            }];
-        }
-    }];
-}
-
-- (void)_resetFavoriteItemColor {
-    self.favoriteItem.tintColor = [(self.nutrition.isFav ? k_COLOR_ORANGE : k_COLOR_WHITE) colorWithAlphaComponent:self.navigationBarAlpha];
-}
-
-- (void)_resetWebViewHeight {
-    if (self.webView.superview) {
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-    }
-}
-
 #pragma mark - private property methods
 
-- (UIBarButtonItem *)favoriteItem {
-    if (!_favoriteItem) {
-        _favoriteItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"doctorinfo_icon_favorite_n"]
-                                                         style:UIBarButtonItemStyleDone
-                                                        target:self
-                                                        action:@selector(_favoriteClick)];
+- (UIView *)statusBarView {
+    if (!_statusBarView) {
+        _statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -20, SCREEN_WIDTH, 20)];
     }
-    return _favoriteItem;
-}
-
-- (UIView *)navView {
-    if (!_navView) {
-        _navView = [[UIView alloc] init];
-    }
-    return _navView;
-}
-
-- (UIButton *)backButton {
-    if (!_backButton) {
-        _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_backButton setImage:[UIImage imageNamed:@"btn_back_n"] forState:UIControlStateNormal];
-        [_backButton setImage:[UIImage imageNamed:@"btn_back_h"] forState:UIControlStateHighlighted];
-    }
-    return _backButton;
+    return _statusBarView;
 }
 
 - (UIButton *)favoriteButton {
     if (!_favoriteButton) {
         _favoriteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_favoriteButton setImage:[UIImage imageNamed:@"doctorinfo_btn_favorite_n"] forState:UIControlStateNormal];
-        [_favoriteButton setImage:[UIImage imageNamed:@"doctorinfo_btn_favorite_h"] forState:UIControlStateHighlighted];
+        _actionButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        _favoriteButton.frame = CGRectMake(0, 0, 45, 25);
+        [_favoriteButton setImage:[UIImage imageNamed:@"videoinfo_icon_favorite_n"] forState:UIControlStateNormal];
+        [_favoriteButton setImage:[UIImage imageNamed:@"videoinfo_icon_favorite_h"] forState:UIControlStateHighlighted];
+        _weak(self);
+        [_favoriteButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+                _strong_check(self);
+                if (self.nutrition.isFav) {
+                    [[WLServerHelper sharedInstance] action_deleteFavoriteWithObjectType:WLActionTypeNutrition objectId:self.nutrition.classId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                        _strong_check(self);
+                        ServerHelperErrorHandle;
+                        self.nutrition.isFav = NO;
+                        [self _showData];
+                    }];
+                }
+                else {
+                    [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeFavorite objectType:WLActionTypeNutrition objectId:self.nutrition.classId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                        _strong_check(self);
+                        ServerHelperErrorHandle;
+                        self.nutrition.isFav = YES;
+                        [self _showData];
+                    }];
+                }
+            }];
+        }];
     }
     return _favoriteButton;
 }
 
-- (NutritionInfoHeaderView *)tableHeaderView {
-    if (!_tableHeaderView) {
-        CGRect frame = CGRectMake(0, 0, SCREEN_WIDTH, [NutritionInfoHeaderView viewHeight] - 64);
-        _tableHeaderView = [[NutritionInfoHeaderView alloc] initWithFrame:frame];
-        _tableHeaderView.backgroundColor = k_COLOR_WHITE;
-    }
-    return _tableHeaderView;
-}
-
-- (ProductInfoSectionHeaderView *)sectionHeaderView {
-    if (!_sectionHeaderView) {
-        _sectionHeaderView = [[ProductInfoSectionHeaderView alloc] init];
-        _sectionHeaderView.backgroundColor = k_COLOR_WHITE;
+- (UIButton *)actionButton {
+    if (!_actionButton) {
+        _actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _actionButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        _actionButton.frame = CGRectMake(0, 0, 40, 25);
+        _actionButton.titleLabel.font = [UIFont systemFontOfSize:10];
+        [_actionButton setTitleColor:k_COLOR_DARKGRAY forState:UIControlStateNormal];
+        [_actionButton setImage:[UIImage imageNamed:@"videoinfo_icon_action_n"] forState:UIControlStateNormal];
+        [_actionButton setImage:[UIImage imageNamed:@"videoinfo_icon_action_h"] forState:UIControlStateHighlighted];
+        [_actionButton setImage:[UIImage imageNamed:@"videoinfo_icon_action_h"] forState:UIControlStateDisabled];
         _weak(self);
-        [_sectionHeaderView actionBlock:^{
+        [_actionButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
                 [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeApproval objectType:WLActionTypeNutrition objectId:self.nutrition.classId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
@@ -223,17 +218,83 @@
                 }];
             }];
         }];
-        [_sectionHeaderView commentBlock:^{
+    }
+    return _actionButton;
+}
+
+- (UIButton *)commentButton {
+    if (!_commentButton) {
+        _commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _commentButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        _commentButton.frame = CGRectMake(0, 0, 40, 25);
+        _commentButton.titleLabel.font = [UIFont systemFontOfSize:10];
+        [_commentButton setTitleColor:k_COLOR_DARKGRAY forState:UIControlStateNormal];
+        [_commentButton setImage:[UIImage imageNamed:@"videoinfo_icon_comment"] forState:UIControlStateNormal];
+        _weak(self);
+        [_commentButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            [CommentListVC showWithType:WLCommentTypeDoctor refId:self.nutrition.classId];
+            [CommentListVC showWithType:WLCommentTypeNutrition refId:self.nutrition.classId];
         }];
-        [_sectionHeaderView shareBlock:^{
+    }
+    return _commentButton;
+}
+
+- (UIButton *)shareButton {
+    if (!_shareButton) {
+        _shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _shareButton.frame = CGRectMake(0, 0, 35, 28);
+        [_shareButton setImage:[UIImage imageNamed:@"videoinfo_bg_share"] forState:UIControlStateNormal];
+        _weak(self);
+        [_shareButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
             NSString *url = [[WLServerHelper sharedInstance] getShareUrlWithType:WLServerHelperShareTypeNutrition objectId:self.nutrition.classId];
             [ShareOnPlatformVC shareWithImageUrl:self.nutrition.images title:self.nutrition.title shareUrl:url];
         }];
     }
-    return _sectionHeaderView;
+    return _shareButton;
+}
+
+- (UIScrollView *)scrollView {
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] init];
+        _scrollView.backgroundColor = self.view.backgroundColor;
+        _scrollView.clipsToBounds = NO;
+    }
+    return _scrollView;
+}
+
+- (UIView *)contentView {
+    if (!_contentView) {
+        _contentView = [[UIView alloc] init];
+    }
+    return _contentView;
+}
+
+- (UIImageView *)imageView {
+    if (!_imageView) {
+        _imageView = [[UIImageView alloc] init];
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
+        _imageView.clipsToBounds = YES;
+    }
+    return _imageView;
+}
+
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.font = [UIFont systemFontOfSize:22];
+        _titleLabel.textColor = k_COLOR_MAROOM;
+        _titleLabel.numberOfLines = 2;
+    }
+    return _titleLabel;
+}
+
+- (UIView *)lineView {
+    if (!_lineView) {
+        _lineView = [[UIView alloc] init];
+        _lineView.backgroundColor = k_COLOR_DARKGRAY;
+    }
+    return _lineView;
 }
 
 - (UIWebView *)webView {
@@ -244,69 +305,10 @@
         _weak(self);
         [_webView withBlockForDidFinishLoad:^(UIWebView *view) {
             _strong_check(self);
-            [self performSelector:@selector(_resetWebViewHeight) withObject:nil afterDelay:0.1];
+            [self.view setNeedsLayout];
         }];
     }
     return _webView;
-}
-
-- (UITableView *)tableView {
-    if (!_tableView) {
-        static NSString *const kCellIdentifier = @"MYCELL";
-        _tableView = [[UITableView alloc] initWithFrame:self.tableHeaderView.bounds style:UITableViewStylePlain];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.sectionHeaderHeight = [ProductInfoSectionHeaderView viewHeight];
-        _tableView.tableHeaderView = self.tableHeaderView;
-        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
-        _weak(self);
-        [_tableView withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {
-            return 1;
-        }];
-        [_tableView withBlockForHeaderView:^UIView *(UITableView *view, NSInteger section) {
-            _strong_check(self, nil);
-            return self.sectionHeaderView;
-        }];
-        [_tableView withBlockForRowHeight:^CGFloat(UITableView *view, NSIndexPath *path) {
-            _strong_check(self, 0);
-            return self.webView.scrollView.contentSize.height ?: 300;
-        }];
-        [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
-            _strong_check(self, nil);
-            UITableViewCell *cell = [view dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:path];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell.contentView addSubview:self.webView];
-            [self.webView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.edges.equalTo(self.webView.superview);
-            }];
-            if (!self.webView.request && self.nutrition.desc && self.nutrition.desc.length > 0) {
-                [self.webView loadHTMLString:self.nutrition.desc baseURL:nil];
-            }
-            return cell;
-        }];
-        [_tableView withBlockForDidScroll:^(UIScrollView *view) {
-            _strong_check(self);
-            CGPoint offset = view.contentOffset;
-            static CGFloat const navBarHeight = 64;
-            CGFloat alpha = 1;
-            if (offset.y < (self.headerHeight - navBarHeight * 2)) {
-                alpha = 0;
-            }
-            else if (offset.y >= self.headerHeight - navBarHeight) {
-                alpha = 1;
-            }
-            else  {
-                alpha = (offset.y - (self.headerHeight - navBarHeight * 2)) / navBarHeight;
-            }
-            self.navigationBarAlpha = alpha;
-        }];
-    }
-    return _tableView;
-}
-
-- (void)setNavigationBarAlpha:(CGFloat)navigationBarAlpha {
-    [super setNavigationBarAlpha:navigationBarAlpha];
-    self.navView.alpha = 1 - navigationBarAlpha;
-    [self _resetFavoriteItemColor];
 }
 
 @end
