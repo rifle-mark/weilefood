@@ -20,6 +20,7 @@
 		24134EB61B6A711900E5BE07 /* ActivityListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24134EB51B6A711900E5BE07 /* ActivityListVC.m */; };
 		24134EB91B6A712F00E5BE07 /* ActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24134EB81B6A712F00E5BE07 /* ActivityCell.m */; };
 		24134EBF1B6A718500E5BE07 /* VideoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24134EBE1B6A718500E5BE07 /* VideoListVC.m */; };
+		2418F79A1B95EF84002F0005 /* MyFavoriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2418F7991B95EF84002F0005 /* MyFavoriteCell.m */; };
 		2438A7621B7ECC77003404BF /* WLDoctorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2438A7611B7ECC77003404BF /* WLDoctorModel.m */; };
 		2438A7651B7ECF09003404BF /* WLServerHelper+Doctor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2438A7641B7ECF09003404BF /* WLServerHelper+Doctor.m */; };
 		2438A7681B7ED1AD003404BF /* WLServerHelper+Url.m in Sources */ = {isa = PBXBuildFile; fileRef = 2438A7671B7ED1AD003404BF /* WLServerHelper+Url.m */; };
@@ -197,6 +198,7 @@
 		24D3F9C61B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D3F9C51B7BAE03005F63DB /* UIScrollView+MJRefreshDefault.m */; };
 		24D55DE61B67EB2400EC6373 /* UIBarButtonItem+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */; };
 		24D628981B95E2CD0078944F /* DoctorRecommendInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D628971B95E2CD0078944F /* DoctorRecommendInfoVC.m */; };
+		24D6289B1B95EC040078944F /* WLActionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D6289A1B95EC040078944F /* WLActionModel.m */; };
 		24DED3201B94888500F8FB31 /* NutritionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DED31F1B94888500F8FB31 /* NutritionCell.m */; };
 		24E627871B7CDF7700743B51 /* ShareOnPlatformVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E627861B7CDF7700743B51 /* ShareOnPlatformVC.m */; };
 		24E6278A1B7D043600743B51 /* InputQuantityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E627891B7D043600743B51 /* InputQuantityVC.m */; };
@@ -296,6 +298,8 @@
 		24134EB81B6A712F00E5BE07 /* ActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCell.m; sourceTree = "<group>"; };
 		24134EBD1B6A718500E5BE07 /* VideoListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoListVC.h; sourceTree = "<group>"; };
 		24134EBE1B6A718500E5BE07 /* VideoListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoListVC.m; sourceTree = "<group>"; };
+		2418F7981B95EF84002F0005 /* MyFavoriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFavoriteCell.h; sourceTree = "<group>"; };
+		2418F7991B95EF84002F0005 /* MyFavoriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFavoriteCell.m; sourceTree = "<group>"; };
 		2438A7601B7ECC77003404BF /* WLDoctorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLDoctorModel.h; sourceTree = "<group>"; };
 		2438A7611B7ECC77003404BF /* WLDoctorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLDoctorModel.m; sourceTree = "<group>"; };
 		2438A7631B7ECF09003404BF /* WLServerHelper+Doctor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Doctor.h"; sourceTree = "<group>"; };
@@ -659,6 +663,8 @@
 		24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Ext.m"; sourceTree = "<group>"; };
 		24D628961B95E2CD0078944F /* DoctorRecommendInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorRecommendInfoVC.h; sourceTree = "<group>"; };
 		24D628971B95E2CD0078944F /* DoctorRecommendInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorRecommendInfoVC.m; sourceTree = "<group>"; };
+		24D628991B95EC040078944F /* WLActionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLActionModel.h; sourceTree = "<group>"; };
+		24D6289A1B95EC040078944F /* WLActionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLActionModel.m; sourceTree = "<group>"; };
 		24DED31E1B94888500F8FB31 /* NutritionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NutritionCell.h; sourceTree = "<group>"; };
 		24DED31F1B94888500F8FB31 /* NutritionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NutritionCell.m; sourceTree = "<group>"; };
 		24E627851B7CDF7700743B51 /* ShareOnPlatformVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareOnPlatformVC.h; sourceTree = "<group>"; };
@@ -1143,6 +1149,8 @@
 				4D4252AB1B91D9E400F481E3 /* SettingClearCacheCell.m */,
 				4D4252AD1B91D9F700F481E3 /* SettingLogOutCell.h */,
 				4D4252AE1B91D9F700F481E3 /* SettingLogOutCell.m */,
+				2418F7981B95EF84002F0005 /* MyFavoriteCell.h */,
+				2418F7991B95EF84002F0005 /* MyFavoriteCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1313,6 +1321,8 @@
 				2482E6491B5E9B6E005815E8 /* WLPointsModel.m */,
 				4D42529E1B91CAEF00F481E3 /* WLPointRulerModel.h */,
 				4D42529F1B91CAEF00F481E3 /* WLPointRulerModel.m */,
+				24D628991B95EC040078944F /* WLActionModel.h */,
+				24D6289A1B95EC040078944F /* WLActionModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2247,6 +2257,7 @@
 				249745F61B6A5E190019ADDA /* ProductInfoVC.m in Sources */,
 				2482E64A1B5E9B6E005815E8 /* WLPointsModel.m in Sources */,
 				24AE12531B9186E900654AEC /* DoctorInfoVC.m in Sources */,
+				24D6289B1B95EC040078944F /* WLActionModel.m in Sources */,
 				249EF30D1B64BEDA00AAEBE0 /* MarketIndexPageVC.m in Sources */,
 				240606341B774ECE00C6F373 /* CommentListVC.m in Sources */,
 				24E66DBF1B62717A0081324A /* UIScrollView+Keyboard.m in Sources */,
@@ -2280,6 +2291,7 @@
 				24CDCBFB1B4F792E00BDE8CB /* UIPopoverController+GCDelegateBlock.m in Sources */,
 				24CDCC041B4F792E00BDE8CB /* UIWebView+GCDelegateBlock.m in Sources */,
 				24CDCC0D1B4F792E00BDE8CB /* UIPopoverController+GCDelegate.m in Sources */,
+				2418F79A1B95EF84002F0005 /* MyFavoriteCell.m in Sources */,
 				4DE8BA551B885D1F00E8608E /* ApiXml.mm in Sources */,
 				2482E62F1B5E7C72005815E8 /* WLOrderModel.m in Sources */,
 				24CDCBE91B4F792E00BDE8CB /* UINavigationControllerDelegateImplementionProxy.m in Sources */,

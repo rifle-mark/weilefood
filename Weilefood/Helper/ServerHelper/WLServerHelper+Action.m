@@ -24,4 +24,13 @@
     [self httpPOST:apiUrl parameters:parameters callback:callback];
 }
 
+- (void)action_myFavoriteListWithType:(WLActionType)type maxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"action", @"myfav"]];
+    NSDictionary *parameters = @{@"type"       : @(type),
+                                 @"pagesize"   : @(pageSize),
+                                 @"createdate" : @([maxDate millisecondIntervalSince1970]),
+                                 };
+    [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLActionModel class] callback:callback];
+}
+
 @end
