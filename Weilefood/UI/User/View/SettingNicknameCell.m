@@ -80,6 +80,13 @@
         _strong_check(self);
         self.nickNameL.text = self.user.nickName;
     }];
+    
+    [self addObserverForNotificationName:kNotificationUserInfoUpdate usingBlock:^(NSNotification *notification) {
+        _strong_check(self);
+        if (self.user.userId == [WLDatabaseHelper user_find].userId) {
+            self.user = [WLDatabaseHelper user_find];
+        }
+    }];
 }
 
 #pragma mark - property
