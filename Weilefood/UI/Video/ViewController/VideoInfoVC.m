@@ -308,9 +308,32 @@
         _weak(self);
         [_playButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            NSURL *url = [NSURL URLWithString:self.video.videoUrl];
-            MPMoviePlayerViewController *pvc = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
-            [self presentViewController:pvc animated:YES completion:nil];
+            
+            void (^playVideo)() = ^{
+                NSURL *url = [NSURL URLWithString:self.video.videoUrl];
+                MPMoviePlayerViewController *pvc = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
+                [self presentViewController:pvc animated:YES completion:nil];
+            };
+            
+            if (self.video.isBuy || self.video.points <= 0) {
+                playVideo();
+            }
+            else {
+                NSString *msg = [NSString stringWithFormat:@"确定使用%lu积分兑换此视频？", (unsigned long)self.video.points];
+                GCAlertView *alertView = [[GCAlertView alloc] initWithTitle:msg andMessage:nil];
+                [alertView setCancelButtonWithTitle:@"取消" actionBlock:nil];
+                [alertView addOtherButtonWithTitle:@"确定" actionBlock:^{
+                    [MBProgressHUD showLoadingWithMessage:nil];
+                    [[WLServerHelper sharedInstance] video_buyWithVideoId:self.video.videoId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                        [MBProgressHUD hideLoading];
+                        _strong_check(self);
+                        ServerHelperErrorHandle;
+                        self.video.isBuy = YES;
+                        playVideo();
+                    }];
+                }];
+                [alertView show];
+            }
         }];
     }
     return _playButton;
