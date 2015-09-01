@@ -7,6 +7,7 @@
 //
 
 #import "ResetPasswordVC.h"
+#import "InputView.h"
 #import "WLServerHelperHeader.h"
 #import "WLDatabaseHelperHeader.h"
 #import "WLModelHeader.h"
@@ -16,27 +17,21 @@
 @property (nonatomic, strong) UIView       *fixView;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView       *contentView;
-
-@property (nonatomic, strong) UIView       *phoneBGView;
-@property (nonatomic, strong) UILabel      *phoneNameLabel;
-@property (nonatomic, strong) UITextField  *phoneTextField;
-@property (nonatomic, strong) UIView       *securityCodeBGView;
-@property (nonatomic, strong) UILabel      *securityCodeNameLabel;
-@property (nonatomic, strong) UITextField  *securityCodeTextField;
-@property (nonatomic, strong) UIView       *passwordBGView;
-@property (nonatomic, strong) UILabel      *passwordNameLabel;
-@property (nonatomic, strong) UITextField  *passwordTextField;
-@property (nonatomic, strong) UIView       *passwordConfirmBGView;
-@property (nonatomic, strong) UILabel      *passwordConfirmNameLabel;
-@property (nonatomic, strong) UITextField  *passwordConfirmTextField;
-
+@property (nonatomic, strong) InputView    *phoneView;
+@property (nonatomic, strong) InputView    *securityCodeView;
+@property (nonatomic, strong) InputView    *passwordView;
+@property (nonatomic, strong) InputView    *passwordConfirmView;
 @property (nonatomic, strong) UIButton     *securityCodeButton;
 @property (nonatomic, strong) UIButton     *submitButton;
 
+/// 最近一次获取到的手机验证码的手机号
+@property (nonatomic, copy  ) NSString     *lastPhone;
 /// 最近一次获取到的手机验证码
 @property (nonatomic, copy  ) NSString     *lastSecurityCode;
 
 @end
+
+static NSInteger const kTitleWidth = 85;
 
 @implementation ResetPasswordVC
 
@@ -50,20 +45,14 @@
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.contentView];
     
-    [self.contentView addSubview:self.phoneBGView];
-    [self.contentView addSubview:self.phoneNameLabel];
-    [self.contentView addSubview:self.phoneTextField];
-    [self.contentView addSubview:self.securityCodeBGView];
-    [self.contentView addSubview:self.securityCodeNameLabel];
-    [self.contentView addSubview:self.securityCodeTextField];
-    [self.contentView addSubview:self.passwordBGView];
-    [self.contentView addSubview:self.passwordNameLabel];
-    [self.contentView addSubview:self.passwordTextField];
-    [self.contentView addSubview:self.passwordConfirmBGView];
-    [self.contentView addSubview:self.passwordConfirmNameLabel];
-    [self.contentView addSubview:self.passwordConfirmTextField];
+    [self.contentView addSubview:self.phoneView];
+    [self.contentView addSubview:self.securityCodeView];
+    [self.contentView addSubview:self.passwordView];
+    [self.contentView addSubview:self.passwordConfirmView];
     [self.contentView addSubview:self.securityCodeButton];
     [self.contentView addSubview:self.submitButton];
+    
+    [self.securityCodeView addSubview:self.securityCodeButton];
     
     [self.scrollView handleKeyboard];
 }
@@ -80,54 +69,34 @@
         make.width.equalTo(self.view);
     }];
     
-    NSArray *textFieldViews = @[@[self.phoneBGView, self.phoneNameLabel, self.phoneTextField],
-                                @[self.securityCodeBGView, self.securityCodeNameLabel, self.securityCodeTextField],
-                                @[self.passwordBGView, self.passwordNameLabel, self.passwordTextField],
-                                @[self.passwordConfirmBGView, self.passwordConfirmNameLabel, self.passwordConfirmTextField],
-                                ];
-    UIView *prevView = nil;
-    for (NSArray *array in textFieldViews) {
-        UIView *bgView = array[0];
-        UILabel *nameLabel = array[1];
-        UITextField *textField = array[2];
-        if (prevView) {
-            [bgView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.right.height.equalTo(prevView);
-                make.top.equalTo(prevView.mas_bottom).offset(5);
-            }];
-        }
-        else {
-            [bgView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.top.right.equalTo(self.contentView).insets(UIEdgeInsetsMake(15, 15, 0, 15));
-                make.height.equalTo(@40);
-            }];
-        }
-        [nameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(bgView).offset(15);
-            make.centerY.equalTo(bgView);
-            make.width.equalTo(@85);
-        }];
-        [textField mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(nameLabel.mas_right).offset(15);
-            make.right.equalTo(bgView).offset(-15);
-            make.centerY.height.equalTo(bgView);
-        }];
-        prevView = bgView;
-    }
+    [self.phoneView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.equalTo(self.contentView).insets(UIEdgeInsetsMake(15, 15, 0, 15));
+    }];
+    [self.securityCodeView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.phoneView);
+        make.top.equalTo(self.phoneView.mas_bottom).offset(5);
+    }];
     [self.securityCodeButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self.securityCodeBGView);
-        make.right.equalTo(self.phoneBGView);
+        make.right.top.bottom.equalTo(self.securityCodeView);
         make.width.equalTo(@100);
     }];
-    [self.securityCodeTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.securityCodeNameLabel.mas_right).offset(15);
+    [self.securityCodeView.textField mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.securityCodeView.titleLabel.mas_right).offset(10);
         make.right.equalTo(self.securityCodeButton.mas_left);
-        make.centerY.height.equalTo(self.securityCodeBGView);
+        make.top.bottom.equalTo(self.securityCodeView);
+    }];
+    [self.passwordView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.securityCodeView);
+        make.top.equalTo(self.securityCodeView.mas_bottom).offset(5);
+    }];
+    [self.passwordConfirmView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.passwordView);
+        make.top.equalTo(self.passwordView.mas_bottom).offset(5);
     }];
     
     [self.submitButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.passwordConfirmTextField.mas_bottom).offset(15);
-        make.left.right.height.equalTo(self.phoneBGView);
+        make.top.equalTo(self.passwordConfirmView.mas_bottom).offset(15);
+        make.left.right.height.equalTo(self.passwordConfirmView);
         make.bottom.equalTo(self.submitButton.superview).offset(-15);
     }];
     FixesViewDidLayoutSubviewsiOS7Error;
@@ -136,18 +105,21 @@
 #pragma mark - private methons
 
 - (void)_securityCodeAction {
-    NSString *phoneNum = self.phoneTextField.text;
+    NSString *phoneNum = self.phoneView.text;
     if (![phoneNum length]) {
         [MBProgressHUD showErrorWithMessage:@"请输入手机号"];
         return;
     }
     
+    self.lastPhone = nil;
+    self.lastSecurityCode = nil;
     _weak(self);
     self.securityCodeButton.enabled = NO;
     [[WLServerHelper sharedInstance] user_getPhoneCodeWithPhoneNum:phoneNum callback:^(WLApiInfoModel *apiInfo, NSString *phoneCode, NSError *error) {
         _strong_check(self);
         self.securityCodeButton.enabled = YES;
         ServerHelperErrorHandle;
+        self.lastPhone = phoneNum;
         self.lastSecurityCode = phoneCode;
         DLog(@"验证码获取成功:%@", phoneCode);
         self.securityCodeButton.enabled = NO;
@@ -160,36 +132,40 @@
 }
 
 - (BOOL)_checkInput {
-    if (![self.phoneTextField.text length]) {
+    if (![self.phoneView.text length]) {
         [MBProgressHUD showErrorWithMessage:@"请输入手机号"];
         return NO;
     }
-    if (![self.securityCodeTextField.text length]) {
+    if (![self.securityCodeView.text length]) {
         [MBProgressHUD showErrorWithMessage:@"请输入验证码"];
         return NO;
     }
-    if (![self.passwordTextField.text length]) {
+    if (![self.passwordView.text length]) {
         [MBProgressHUD showErrorWithMessage:@"请输入新密码"];
         return NO;
     }
-    if (![self.passwordConfirmTextField.text length]) {
+    if (![self.passwordConfirmView.text length]) {
         [MBProgressHUD showErrorWithMessage:@"请输入重复密码"];
         return NO;
     }
     
-    if (!self.lastSecurityCode) {
+    if (!self.lastPhone || !self.lastSecurityCode) {
         [MBProgressHUD showErrorWithMessage:@"请获取手机验证码"];
         return NO;
     }
-    if (![[self.securityCodeTextField.text uppercaseString] isEqualToString:self.lastSecurityCode]) {
+    if (![self.lastPhone isEqualToString:self.phoneView.text]) {
+        [MBProgressHUD showErrorWithMessage:@"请重新获取手机验证码"];
+        return NO;
+    }
+    if (![[self.securityCodeView.text uppercaseString] isEqualToString:self.lastSecurityCode]) {
         [MBProgressHUD showErrorWithMessage:@"验证码错误"];
         return NO;
     }
-    if (self.passwordTextField.text.length < 6) {
+    if (self.passwordView.text.length < 6) {
         [MBProgressHUD showErrorWithMessage:@"密码不能少于6个字符"];
         return NO;
     }
-    if (![self.passwordTextField.text isEqualToString:self.passwordConfirmTextField.text]) {
+    if (![self.passwordView.text isEqualToString:self.passwordConfirmView.text]) {
         [MBProgressHUD showErrorWithMessage:@"两次密码输入不一致"];
         return NO;
     }
@@ -204,11 +180,12 @@
     
     _weak(self);
     self.submitButton.enabled = NO;
-    [[WLServerHelper sharedInstance] user_resetPasswordWithPhoneNum:self.phoneTextField.text password:self.passwordTextField.text callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+    [[WLServerHelper sharedInstance] user_resetPasswordWithPhoneNum:self.phoneView.text password:self.passwordView.text callback:^(WLApiInfoModel *apiInfo, NSError *error) {
         _strong_check(self);
         self.submitButton.enabled = YES;
         ServerHelperErrorHandle;
         [MBProgressHUD showSuccessWithMessage:@"新密码设置成功！"];
+        [self.navigationController popViewControllerAnimated:YES];
     }];
 }
 
@@ -235,134 +212,66 @@
     return _contentView;
 }
 
-- (UIView *)phoneBGView {
-    if (!_phoneBGView) {
-        _phoneBGView = [[UIView alloc] init];
-        _phoneBGView.backgroundColor = k_COLOR_WHITESMOKE;
-        _phoneBGView.layer.cornerRadius = 4;
+- (InputView *)phoneView {
+    if (!_phoneView) {
+        _phoneView = [[InputView alloc] init];
+        _phoneView.titleWidth = kTitleWidth;
+        _phoneView.titleLabel.text = @"用户名";
+        _phoneView.textField.placeholder = @"请输入手机号码";
+        _phoneView.textField.keyboardType = UIKeyboardTypePhonePad;
     }
-    return _phoneBGView;
+    return _phoneView;
 }
 
-- (UILabel *)phoneNameLabel {
-    if (!_phoneNameLabel) {
-        _phoneNameLabel = [[UILabel alloc] init];
-        _phoneNameLabel.text = @"用户名";
-        _phoneNameLabel.textColor = k_COLOR_DIMGRAY;
-        _phoneNameLabel.font = [UIFont systemFontOfSize:14];
-    }
-    return _phoneNameLabel;
-}
-
-- (UITextField *)phoneTextField {
-    if (!_phoneTextField) {
-        _phoneTextField = [[UITextField alloc] init];
-        _phoneTextField.placeholder = @"请输入手机号码";
-        _phoneTextField.keyboardType = UIKeyboardTypePhonePad;
-    }
-    return _phoneTextField;
-}
-
-- (UIView *)securityCodeBGView {
-    if (!_securityCodeBGView) {
-        _securityCodeBGView = [[UIView alloc] init];
-        _securityCodeBGView.backgroundColor = k_COLOR_WHITESMOKE;
-        _securityCodeBGView.layer.cornerRadius = 4;
-    }
-    return _securityCodeBGView;
-}
-
-- (UILabel *)securityCodeNameLabel {
-    if (!_securityCodeNameLabel) {
-        _securityCodeNameLabel = [[UILabel alloc] init];
-        _securityCodeNameLabel.text = @"验证码";
-        _securityCodeNameLabel.textColor = k_COLOR_DIMGRAY;
-        _securityCodeNameLabel.font = [UIFont systemFontOfSize:14];
-    }
-    return _securityCodeNameLabel;
-}
-
-- (UITextField *)securityCodeTextField {
-    if (!_securityCodeTextField) {
-        _securityCodeTextField = [[UITextField alloc] init];
-        _securityCodeTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-        _securityCodeTextField.returnKeyType = UIReturnKeyNext;
+- (InputView *)securityCodeView {
+    if (!_securityCodeView) {
+        _securityCodeView = [[InputView alloc] init];
+        _securityCodeView.titleWidth = kTitleWidth;
+        _securityCodeView.titleLabel.text = @"验证码";
+        _securityCodeView.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+        _securityCodeView.textField.returnKeyType = UIReturnKeyNext;
         _weak(self);
-        [_securityCodeTextField withBlockForShouldReturn:^BOOL(UITextField *view) {
+        [_securityCodeView.textField withBlockForShouldReturn:^BOOL(UITextField *view) {
             _strong_check(self, NO);
-            [self.passwordTextField becomeFirstResponder];
+            [self.passwordView.textField becomeFirstResponder];
             return NO;
         }];
     }
-    return _securityCodeTextField;
+    return _securityCodeView;
 }
 
-- (UIView *)passwordBGView {
-    if (!_passwordBGView) {
-        _passwordBGView = [[UIView alloc] init];
-        _passwordBGView.backgroundColor = k_COLOR_WHITESMOKE;
-        _passwordBGView.layer.cornerRadius = 4;
-    }
-    return _passwordBGView;
-}
-
-- (UILabel *)passwordNameLabel {
-    if (!_passwordNameLabel) {
-        _passwordNameLabel = [[UILabel alloc] init];
-        _passwordNameLabel.text = @"新密码";
-        _passwordNameLabel.textColor = k_COLOR_DIMGRAY;
-        _passwordNameLabel.font = [UIFont systemFontOfSize:14];
-    }
-    return _passwordNameLabel;
-}
-
-- (UITextField *)passwordTextField {
-    if (!_passwordTextField) {
-        _passwordTextField = [[UITextField alloc] init];
-        _passwordTextField.secureTextEntry = YES;
-        _passwordTextField.returnKeyType = UIReturnKeyNext;
+- (InputView *)passwordView {
+    if (!_passwordView) {
+        _passwordView = [[InputView alloc] init];
+        _passwordView.titleWidth = kTitleWidth;
+        _passwordView.titleLabel.text = @"密码";
+        _passwordView.textField.secureTextEntry = YES;
+        _passwordView.textField.returnKeyType = UIReturnKeyNext;
         _weak(self);
-        [_passwordTextField withBlockForShouldReturn:^BOOL(UITextField *view) {
+        [_passwordView.textField withBlockForShouldReturn:^BOOL(UITextField *view) {
             _strong_check(self, NO);
-            [self.passwordConfirmTextField becomeFirstResponder];
+            [self.passwordConfirmView.textField becomeFirstResponder];
             return NO;
         }];
     }
-    return _passwordTextField;
+    return _passwordView;
 }
 
-- (UIView *)passwordConfirmBGView {
-    if (!_passwordConfirmBGView) {
-        _passwordConfirmBGView = [[UIView alloc] init];
-        _passwordConfirmBGView.backgroundColor = k_COLOR_WHITESMOKE;
-        _passwordConfirmBGView.layer.cornerRadius = 4;
-    }
-    return _passwordConfirmBGView;
-}
-
-- (UILabel *)passwordConfirmNameLabel {
-    if (!_passwordConfirmNameLabel) {
-        _passwordConfirmNameLabel = [[UILabel alloc] init];
-        _passwordConfirmNameLabel.text = @"再次输入密码";
-        _passwordConfirmNameLabel.textColor = k_COLOR_DIMGRAY;
-        _passwordConfirmNameLabel.font = [UIFont systemFontOfSize:14];
-    }
-    return _passwordConfirmNameLabel;
-}
-
-- (UITextField *)passwordConfirmTextField {
-    if (!_passwordConfirmTextField) {
-        _passwordConfirmTextField = [[UITextField alloc] init];
-        _passwordConfirmTextField.secureTextEntry = YES;
-        _passwordConfirmTextField.returnKeyType = UIReturnKeyDone;
+- (InputView *)passwordConfirmView {
+    if (!_passwordConfirmView) {
+        _passwordConfirmView = [[InputView alloc] init];
+        _passwordConfirmView.titleWidth = kTitleWidth;
+        _passwordConfirmView.titleLabel.text = @"再次输入密码";
+        _passwordConfirmView.textField.secureTextEntry = YES;
+        _passwordConfirmView.textField.returnKeyType = UIReturnKeyDone;
         _weak(self);
-        [_passwordConfirmTextField withBlockForShouldReturn:^BOOL(UITextField *view) {
+        [_passwordConfirmView.textField withBlockForShouldReturn:^BOOL(UITextField *view) {
             _strong_check(self, NO);
             [self _registerAction];
             return NO;
         }];
     }
-    return _passwordConfirmTextField;
+    return _passwordConfirmView;
 }
 
 - (UIButton *)securityCodeButton {

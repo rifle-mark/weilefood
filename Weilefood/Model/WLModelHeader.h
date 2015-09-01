@@ -32,5 +32,6 @@
 #import "WLPointRulerModel.h"
 #import "WLNutritionModel.h"
 #import "WLDoctorModel.h"
+#import "WLActionModel.h"
 
 #endif

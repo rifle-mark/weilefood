@@ -15,6 +15,7 @@
 #import "SelectPayPlatformVC.h"
 #import "OrderInfoVC.h"
 #import "SubmitUserHealthInfoVC.h"
+#import "DoctorRecommendInfoVC.h"
 
 #import "WLPayHelper.h"
 #import "WLServerHelperHeader.h"
@@ -699,7 +700,9 @@ static NSString *const kTextCompleted      = @"已完成";
                     case WLOrderStateConfirmed: {
                         [cell setRightButtonWithTitle:@"查看回复" actionBlock:^(OrderItemHeaderCell *cell) {
                             _strong_check(self);
-                            DLog(@"");
+                            NSIndexPath *path = [self.doctorTableView indexPathForCell:cell];
+                            WLOrderModel *order = self.doctorList[path.section];
+                            [self.navigationController pushViewController:[[DoctorRecommendInfoVC alloc] initWithOrderId:order.orderId] animated:YES];
                         }];
                         break;
                     }

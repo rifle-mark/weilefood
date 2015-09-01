@@ -1,5 +1,5 @@
 //
-//  WLServerHelper+ShareUrl.h
+//  WLServerHelper+Url.h
 //  Weilefood
 //
 //  Created by kelei on 15/8/15.
@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, WLServerHelperShareType) {
 };
 
 /// 分享链接相关
-@interface WLServerHelper (ShareUrl)
+@interface WLServerHelper (Url)
 
 /**
  *  取得对象分享到公众平台的链接
@@ -36,5 +36,14 @@ typedef NS_ENUM(NSInteger, WLServerHelperShareType) {
  *  @return 链接
  */
 - (NSString *)getShareUrlWithType:(WLServerHelperShareType)type objectId:(long long)objectId;
+
+/**
+ *  取得营养师回复的餐食建议搭配表信息页链接
+ *
+ *  @param orderId 营养师服务订单ID
+ *
+ *  @return 链接
+ */
+- (NSString *)getDoctorRecommendInfoUrlWithOrderId:(long long)orderId;
 
 @end

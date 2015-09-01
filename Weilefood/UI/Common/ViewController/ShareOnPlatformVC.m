@@ -150,7 +150,7 @@ static NSInteger const kLabelTopMargin = 10;
 }
 
 - (void)_shareWithType:(NSString *)type {
-    NSString *content = self.desc;
+    NSString *content = [NSString stringWithFormat:@"味了-分享美食分享爱 %@", self.desc];
     if (type == UMShareToSina) {
         // 微博分享将网址加到分享内容后面
         content = [NSString stringWithFormat:@"%@ %@", content, self.shareUrl];

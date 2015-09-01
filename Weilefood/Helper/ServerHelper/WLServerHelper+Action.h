@@ -9,30 +9,9 @@
 #import "WLServerHelper.h"
 
 /// 点赞/收藏 目标对象的类型
-typedef NS_ENUM(NSUInteger, WLActionType) {
-    /// 分享
-    WLActionTypeShare = 1,
-    /// 市集产品
-    WLActionTypeProduct = 2,
-    /// 活动
-    WLActionTypeActivity = 3,
-    /// 预购
-    WLActionTypeForwardBuy = 4,
-    /// 营养推荐
-    WLActionTypeNutrition = 5,
-    /// 主题视频
-    WLActionTypeVideo = 6,
-    /// 营养师
-    WLActionTypeDoctor = 7,
-};
-
+typedef NS_ENUM(NSInteger, WLActionType);
 /// 点赞/收藏
-typedef NS_ENUM(NSUInteger, WLActionActType) {
-    /// 点赞
-    WLActionActTypeApproval = 1,
-    /// 收藏
-    WLActionActTypeFavorite = 2,
-};
+typedef NS_ENUM(NSInteger, WLActionActType);
 
 @interface WLServerHelper (Action)
 
@@ -54,5 +33,15 @@ typedef NS_ENUM(NSUInteger, WLActionActType) {
  *  @param callback
  */
 - (void)action_deleteFavoriteWithObjectType:(WLActionType)objectType objectId:(long long)objectId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback;
+
+/**
+ *  获取我的收藏列表。(NSArray<WLActionModel>)apiResult
+ *
+ *  @param type     关联对象类型。0=所有
+ *  @param maxDate  加载最新数据传0，加载更多数据传列表最后一条数据的时间
+ *  @param pageSize 返回的最大记录数
+ *  @param callback
+ */
+- (void)action_myFavoriteListWithType:(WLActionType)type maxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
 
 @end
