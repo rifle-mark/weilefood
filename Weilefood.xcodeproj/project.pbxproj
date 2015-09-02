@@ -235,6 +235,7 @@
 		4DAA2BA81B7F73B9004E5601 /* ShareEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BA61B7F73B9004E5601 /* ShareEditVC.m */; };
 		4DAA2BAE1B7FACFC004E5601 /* UIImage+AdjustmentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BAD1B7FACFC004E5601 /* UIImage+AdjustmentSize.m */; };
 		4DAA2BB11B7FD751004E5601 /* UIMenuController+UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BB01B7FD751004E5601 /* UIMenuController+UserInfo.m */; };
+		4DD52F7D1B957BEC001CB01F /* MyCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD52F7C1B957BEC001CB01F /* MyCommentCell.m */; };
 		4DE1B19D1B798691006F9F0E /* WLShareCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1B19A1B798691006F9F0E /* WLShareCell.m */; };
 		4DE1B19E1B798691006F9F0E /* WLShareSubCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1B19C1B798691006F9F0E /* WLShareSubCommentCell.m */; };
 		4DE8B9BB1B885CD400E8608E /* PictureShowVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8B9BA1B885CD400E8608E /* PictureShowVC.m */; };
@@ -735,6 +736,8 @@
 		4DAA2BAD1B7FACFC004E5601 /* UIImage+AdjustmentSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AdjustmentSize.m"; sourceTree = "<group>"; };
 		4DAA2BAF1B7FD751004E5601 /* UIMenuController+UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIMenuController+UserInfo.h"; sourceTree = "<group>"; };
 		4DAA2BB01B7FD751004E5601 /* UIMenuController+UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIMenuController+UserInfo.m"; sourceTree = "<group>"; };
+		4DD52F7B1B957BEC001CB01F /* MyCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentCell.h; sourceTree = "<group>"; };
+		4DD52F7C1B957BEC001CB01F /* MyCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentCell.m; sourceTree = "<group>"; };
 		4DE1B1991B798691006F9F0E /* WLShareCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLShareCell.h; sourceTree = "<group>"; };
 		4DE1B19A1B798691006F9F0E /* WLShareCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLShareCell.m; sourceTree = "<group>"; };
 		4DE1B19B1B798691006F9F0E /* WLShareSubCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLShareSubCommentCell.h; sourceTree = "<group>"; };
@@ -1140,6 +1143,8 @@
 				4D4252AB1B91D9E400F481E3 /* SettingClearCacheCell.m */,
 				4D4252AD1B91D9F700F481E3 /* SettingLogOutCell.h */,
 				4D4252AE1B91D9F700F481E3 /* SettingLogOutCell.m */,
+				4DD52F7B1B957BEC001CB01F /* MyCommentCell.h */,
+				4DD52F7C1B957BEC001CB01F /* MyCommentCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2310,6 +2315,7 @@
 				2482E6471B5E96FE005815E8 /* WLServerHelper+Message.m in Sources */,
 				24CDCBDF1B4F792E00BDE8CB /* GCImplementationProxy.m in Sources */,
 				247EA7271B70FB9600E6A161 /* VideoCollectionCell.m in Sources */,
+				4DD52F7D1B957BEC001CB01F /* MyCommentCell.m in Sources */,
 				24B8C0641B5242BC001C5722 /* AGImagePickerController+Helper.m in Sources */,
 				4D42527C1B9042BC00F481E3 /* UserCenterMiddleCell.m in Sources */,
 				24CDCC011B4F792E00BDE8CB /* UITextField+GCDelegateBlock.m in Sources */,
