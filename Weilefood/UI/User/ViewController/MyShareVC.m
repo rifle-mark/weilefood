@@ -17,11 +17,16 @@
 #import "LoginVC.h"
 #import "PictureShowVC.h"
 
+#import "ShareEditVC.h"
+#import "MyMessageInfoVC.h"
+
 @interface MyShareVC ()
 
 @property(nonatomic,strong)UITableView      *tableView;
+@property(nonatomic,strong)UIBarButtonItem  *rightBarItem;
 
 @property(nonatomic,strong)NSArray          *shareList;
+@property(nonatomic,copy)NSString           *nickName;
 
 @end
 
@@ -34,8 +39,7 @@ static NSInteger kPageSize = 20;
     // Do any additional setup after loading the view.
     WLUserModel *currentUser = [WLDatabaseHelper user_find];
     self.navigationItem.title = self.userId == currentUser.userId?@"我的发帖":@"用户发帖";
-    // TODO:
-    // 右上角添加操作：发帖
+    self.navigationItem.rightBarButtonItem = self.rightBarItem;
     
     [self.view addSubview:self.tableView];
     [self _setupObserver];
@@ -92,6 +96,13 @@ static NSInteger kPageSize = 20;
     }];
 }
 
+- (void)_addShare:(id)sender {
+    
+}
+
+- (void)_sendMessage:(id)sender {
+    
+}
 #pragma mark - propertys 
 - (UITableView *)tableView {
     if (!_tableView) {
@@ -144,6 +155,7 @@ static NSInteger kPageSize = 20;
                         ServerHelperErrorHandle;
                         
                         cell.user = apiResult;
+                        self.nickName = apiResult.nickName;
                     }];
                 }
                 [cell hidUserPoint];
@@ -193,6 +205,33 @@ static NSInteger kPageSize = 20;
     }
     
     return _tableView;
+}
+
+- (UIBarButtonItem *)rightBarItem {
+    if (!_rightBarItem) {
+        NSString *imageName = self.userId == [WLDatabaseHelper user_find].userId?@"nav_addShare":@"nav_sendMessage";
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+        btn.frame = CGRectMake(0, 0, 70, 30);
+        
+        _weak(self);
+        [btn addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            _strong_check(self);
+            if (self.userId == [WLDatabaseHelper user_find].userId) {
+                ShareEditVC *vc = [[ShareEditVC alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            else {
+                MyMessageInfoVC *vc = [[MyMessageInfoVC alloc] init];
+                vc.userId = self.userId;
+                vc.nickName = self.nickName;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }];
+        _rightBarItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+
+    }
+    return _rightBarItem;
 }
 
 @end

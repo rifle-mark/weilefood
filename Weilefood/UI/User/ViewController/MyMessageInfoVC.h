@@ -10,4 +10,7 @@
 
 @interface MyMessageInfoVC : UIViewController
 
+@property(nonatomic,assign)NSUInteger       userId;
+@property(nonatomic,copy)NSString           *nickName;
+
 @end

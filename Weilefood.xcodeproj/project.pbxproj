@@ -238,6 +238,9 @@
 		4DAA2BA81B7F73B9004E5601 /* ShareEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BA61B7F73B9004E5601 /* ShareEditVC.m */; };
 		4DAA2BAE1B7FACFC004E5601 /* UIImage+AdjustmentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BAD1B7FACFC004E5601 /* UIImage+AdjustmentSize.m */; };
 		4DAA2BB11B7FD751004E5601 /* UIMenuController+UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BB01B7FD751004E5601 /* UIMenuController+UserInfo.m */; };
+		4DAB29031B972A2500E52A9F /* MessageDialogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAB29021B972A2500E52A9F /* MessageDialogCell.m */; };
+		4DAB29061B972A3300E52A9F /* MessageOwnInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAB29051B972A3300E52A9F /* MessageOwnInfoCell.m */; };
+		4DAB29091B972D7500E52A9F /* MessageUserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAB29081B972D7500E52A9F /* MessageUserInfoCell.m */; };
 		4DD52F7D1B957BEC001CB01F /* MyCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD52F7C1B957BEC001CB01F /* MyCommentCell.m */; };
 		4DD52F801B96DE11001CB01F /* MyMessageInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD52F7F1B96DE11001CB01F /* MyMessageInfoVC.m */; };
 		4DD52F831B96EEF2001CB01F /* WLServerHelper+FeedBack.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD52F821B96EEF2001CB01F /* WLServerHelper+FeedBack.m */; };
@@ -747,6 +750,12 @@
 		4DAA2BAD1B7FACFC004E5601 /* UIImage+AdjustmentSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AdjustmentSize.m"; sourceTree = "<group>"; };
 		4DAA2BAF1B7FD751004E5601 /* UIMenuController+UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIMenuController+UserInfo.h"; sourceTree = "<group>"; };
 		4DAA2BB01B7FD751004E5601 /* UIMenuController+UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIMenuController+UserInfo.m"; sourceTree = "<group>"; };
+		4DAB29011B972A2500E52A9F /* MessageDialogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDialogCell.h; sourceTree = "<group>"; };
+		4DAB29021B972A2500E52A9F /* MessageDialogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDialogCell.m; sourceTree = "<group>"; };
+		4DAB29041B972A3300E52A9F /* MessageOwnInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageOwnInfoCell.h; sourceTree = "<group>"; };
+		4DAB29051B972A3300E52A9F /* MessageOwnInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageOwnInfoCell.m; sourceTree = "<group>"; };
+		4DAB29071B972D7500E52A9F /* MessageUserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageUserInfoCell.h; sourceTree = "<group>"; };
+		4DAB29081B972D7500E52A9F /* MessageUserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageUserInfoCell.m; sourceTree = "<group>"; };
 		4DD52F7B1B957BEC001CB01F /* MyCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentCell.h; sourceTree = "<group>"; };
 		4DD52F7C1B957BEC001CB01F /* MyCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentCell.m; sourceTree = "<group>"; };
 		4DD52F7E1B96DE11001CB01F /* MyMessageInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageInfoVC.h; sourceTree = "<group>"; };
@@ -1162,6 +1171,12 @@
 				4DD52F7C1B957BEC001CB01F /* MyCommentCell.m */,
 				2418F7981B95EF84002F0005 /* MyFavoriteCell.h */,
 				2418F7991B95EF84002F0005 /* MyFavoriteCell.m */,
+				4DAB29011B972A2500E52A9F /* MessageDialogCell.h */,
+				4DAB29021B972A2500E52A9F /* MessageDialogCell.m */,
+				4DAB29041B972A3300E52A9F /* MessageOwnInfoCell.h */,
+				4DAB29051B972A3300E52A9F /* MessageOwnInfoCell.m */,
+				4DAB29071B972D7500E52A9F /* MessageUserInfoCell.h */,
+				4DAB29081B972D7500E52A9F /* MessageUserInfoCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2370,6 +2385,7 @@
 				4DE1B19E1B798691006F9F0E /* WLShareSubCommentCell.m in Sources */,
 				24B8C0701B5242BC001C5722 /* UIButton+AGIPC.m in Sources */,
 				248EFB181B94906B00936C0F /* NutritionInfoHeaderView.m in Sources */,
+				4DAB29031B972A2500E52A9F /* MessageDialogCell.m in Sources */,
 				24CDCBFA1B4F792E00BDE8CB /* UIPickerView+GCDelegateAndDataSourceBlock.m in Sources */,
 				24CDCBED1B4F792E00BDE8CB /* UISearchBarDelegateImplementationProxy.m in Sources */,
 				24CDCC0C1B4F792E00BDE8CB /* UIPickerView+GCDelegateAndDataSource.m in Sources */,
@@ -2388,6 +2404,7 @@
 				24E66DC81B6277190081324A /* ResetPasswordVC.m in Sources */,
 				24CDCC061B4F792E00BDE8CB /* AVAudioRecorder+GCDelegate.m in Sources */,
 				24CAC4481B580A5800E3C4D5 /* WLCommentModel.m in Sources */,
+				4DAB29091B972D7500E52A9F /* MessageUserInfoCell.m in Sources */,
 				2467B7271B50E30E001202A4 /* BPushHelper.m in Sources */,
 				4D4252A31B91CF2000F481E3 /* PointRulerCell.m in Sources */,
 				24134EB61B6A711900E5BE07 /* ActivityListVC.m in Sources */,
@@ -2410,6 +2427,7 @@
 				24AE121D1B916B0E00654AEC /* WLPayHelper.m in Sources */,
 				24D55DE61B67EB2400EC6373 /* UIBarButtonItem+Ext.m in Sources */,
 				24B8C06B1B5242BC001C5722 /* AGIPCGridItem.m in Sources */,
+				4DAB29061B972A3300E52A9F /* MessageOwnInfoCell.m in Sources */,
 				4DD52F801B96DE11001CB01F /* MyMessageInfoVC.m in Sources */,
 				4D8B1A6D1B7CDBF6008F0925 /* WLAPIAddressGenerator.m in Sources */,
 				24CDCC1C1B4F792E00BDE8CB /* NSTimer+GCBlock.m in Sources */,
