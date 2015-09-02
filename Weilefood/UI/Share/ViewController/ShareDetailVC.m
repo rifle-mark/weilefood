@@ -46,9 +46,17 @@ static NSString *const kHintText = @"在这里说点什么吧...";
     // Do any additional setup after loading the view.
     
     self.navigationItem.title = @"分享详情";
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"举报" style:UIBarButtonItemStyleDone target:self action:@selector(_policeShare:)];
-    rightItem.tintColor = k_COLOR_WHITE;
-    self.navigationItem.rightBarButtonItem = rightItem;
+    WLUserModel *currentUser = [WLDatabaseHelper user_find];
+    if (self.share.userId == currentUser.userId) {
+        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"删除" style:UIBarButtonItemStylePlain target:self action:@selector(_deleteShare:)];
+        rightItem.tintColor = k_COLOR_WHITE;
+        self.navigationItem.rightBarButtonItem = rightItem;
+    }
+    else {
+        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"举报" style:UIBarButtonItemStyleDone target:self action:@selector(_policeShare:)];
+        rightItem.tintColor = k_COLOR_WHITE;
+        self.navigationItem.rightBarButtonItem = rightItem;
+    }
     
     [self.view addSubview:self.commentDetailTableV];
     [self.view addSubview:self.deleteActionV];
@@ -512,6 +520,24 @@ static NSString *const kHintText = @"在这里说点什么吧...";
             ServerHelperErrorHandle;
             
             [MBProgressHUD showSuccessWithMessage:@"举报成功"];
+        }];
+    }];
+}
+
+- (void)_deleteShare:(id)sender {
+    _weak(self);
+    [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+        _strong_check(self);
+        if (self.share.userId != user.userId) {
+            [MBProgressHUD showErrorWithMessage:@"无法删除"];
+            return;
+        }
+        
+        [[WLServerHelper sharedInstance] share_deleteWithShareId:self.share.shareId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+            _strong_check(self);
+            ServerHelperErrorHandle;
+            [self.navigationController popViewControllerAnimated:YES];
+            [MBProgressHUD showSuccessWithMessage:@"删除成功"];
         }];
     }];
 }
