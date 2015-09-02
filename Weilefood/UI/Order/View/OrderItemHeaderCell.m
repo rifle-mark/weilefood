@@ -30,6 +30,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self.contentView addSubview:self.numberAndDateView];
+        [self setNeedsUpdateConstraints];
     }
     return self;
 }

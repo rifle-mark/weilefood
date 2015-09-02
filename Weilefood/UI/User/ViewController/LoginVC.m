@@ -9,6 +9,7 @@
 #import "LoginVC.h"
 #import "RegisterVC.h"
 #import "ResetPasswordVC.h"
+#import "InputView.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLDatabaseHelperHeader.h"
@@ -20,12 +21,8 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView       *contentView;
 
-@property (nonatomic, strong) UIView       *phoneBGView;
-@property (nonatomic, strong) UILabel      *phoneNameLabel;
-@property (nonatomic, strong) UITextField  *phoneTextField;
-@property (nonatomic, strong) UIView       *passwordBGView;
-@property (nonatomic, strong) UILabel      *passwordNameLabel;
-@property (nonatomic, strong) UITextField  *passwordTextField;
+@property (nonatomic, strong) InputView *phoneView;
+@property (nonatomic, strong) InputView *passwordView;
 @property (nonatomic, strong) UIButton     *resetPasswordButton;
 @property (nonatomic, strong) UIButton     *registerButton;
 @property (nonatomic, strong) UIButton     *loginButton;
@@ -74,12 +71,8 @@
     [self.scrollView addSubview:self.contentView];
     
     
-    [self.contentView addSubview:self.phoneBGView];
-    [self.contentView addSubview:self.phoneNameLabel];
-    [self.contentView addSubview:self.phoneTextField];
-    [self.contentView addSubview:self.passwordBGView];
-    [self.contentView addSubview:self.passwordNameLabel];
-    [self.contentView addSubview:self.passwordTextField];
+    [self.contentView addSubview:self.phoneView];
+    [self.contentView addSubview:self.passwordView];
     [self.contentView addSubview:self.resetPasswordButton];
     [self.contentView addSubview:self.registerButton];
     [self.contentView addSubview:self.loginButton];
@@ -107,45 +100,25 @@
     }];
     
     
-    [self.phoneBGView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.phoneView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self.contentView).insets(UIEdgeInsetsMake(15, 15, 0, 15));
-        make.height.equalTo(@40);
     }];
-    [self.phoneNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.phoneBGView).offset(15);
-        make.centerY.equalTo(self.phoneBGView);
+    [self.passwordView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.phoneView);
+        make.top.equalTo(self.phoneView.mas_bottom).offset(5);
     }];
-    [self.phoneTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.phoneBGView).offset(75);
-        make.right.equalTo(self.phoneBGView).offset(-15);
-        make.centerY.height.equalTo(self.phoneBGView);
-    }];
-    [self.passwordBGView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.phoneBGView);
-        make.top.equalTo(self.phoneBGView.mas_bottom).offset(5);
-        make.height.equalTo(self.phoneBGView);
-    }];
-    [self.passwordNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.passwordBGView).offset(15);
-        make.centerY.equalTo(self.passwordBGView);
-    }];
-    [self.passwordTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.phoneTextField);
-        make.centerY.height.equalTo(self.passwordBGView);
-    }];
-    
     [self.resetPasswordButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.passwordTextField.mas_bottom);
-        make.left.equalTo(self.passwordBGView);
+        make.top.equalTo(self.passwordView.mas_bottom);
+        make.left.equalTo(self.phoneView);
     }];
     [self.registerButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.passwordBGView);
+        make.left.equalTo(self.phoneView);
         make.top.equalTo(self.resetPasswordButton.mas_bottom).offset(15);
         make.height.equalTo(@40);
         make.width.equalTo(self.loginButton);
     }];
     [self.loginButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.passwordBGView);
+        make.right.equalTo(self.phoneView);
         make.top.width.height.equalTo(self.registerButton);
         make.left.equalTo(self.registerButton.mas_right).offset(15);
     }];
@@ -155,7 +128,7 @@
     }];
     [self.separateView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.hintLabel.mas_bottom).offset(5);
-        make.left.right.equalTo(self.passwordBGView);
+        make.left.right.equalTo(self.phoneView);
         make.height.equalTo(@1);
     }];
     
@@ -216,18 +189,18 @@
 }
 
 - (void)_loginAction {
-    if (![self.phoneTextField.text length]) {
+    if (![self.phoneView.text length]) {
         [MBProgressHUD showErrorWithMessage:@"请输入手机号"];
         return;
     }
-    if (![self.passwordTextField.text length]) {
+    if (![self.passwordView.text length]) {
         [MBProgressHUD showErrorWithMessage:@"请输入密码"];
         return;
     }
     
     _weak(self);
     self.loginButton.enabled = NO;
-    [[WLServerHelper sharedInstance] user_loginWithUserName:self.phoneTextField.text password:self.passwordTextField.text callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
+    [[WLServerHelper sharedInstance] user_loginWithUserName:self.phoneView.text password:self.passwordView.text callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
         _strong_check(self);
         self.loginButton.enabled = YES;
         ServerHelperErrorHandle;
@@ -259,9 +232,10 @@
     _weak(self);
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:type];
     snsPlatform.loginClickHandler(self, [UMSocialControllerService defaultControllerService], YES, ^(UMSocialResponseEntity *response){
+        _strong_check(self);
         if (response.responseCode == UMSResponseCodeSuccess) {
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:type];
-            NSLog(@"昵称:%@, uid:%@, token:%@, 头像链接:%@", snsAccount.userName, snsAccount.usid, snsAccount.accessToken, snsAccount.iconURL);
+            DLog(@"昵称:%@, uid:%@, token:%@, 头像链接:%@", snsAccount.userName, snsAccount.usid, snsAccount.accessToken, snsAccount.iconURL);
             
             [[WLServerHelper sharedInstance] user_socialLoginWithPlatform:platform openId:snsAccount.usid token:snsAccount.accessToken avatar:snsAccount.iconURL appId:@"" nickName:snsAccount.userName callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
                 _strong_check(self);
@@ -289,68 +263,33 @@
     return _contentView;
 }
 
-- (UIView *)phoneBGView {
-    if (!_phoneBGView) {
-        _phoneBGView = [[UIView alloc] init];
-        _phoneBGView.backgroundColor = k_COLOR_WHITESMOKE;
-        _phoneBGView.layer.cornerRadius = 4;
+- (InputView *)phoneView {
+    if (!_phoneView) {
+        _phoneView = [[InputView alloc] init];
+        _phoneView.titleWidth = 55;
+        _phoneView.titleLabel.text = @"用户名";
+        _phoneView.textField.placeholder = @"请输入手机号码";
+        _phoneView.textField.keyboardType = UIKeyboardTypePhonePad;
     }
-    return _phoneBGView;
+    return _phoneView;
 }
 
-- (UILabel *)phoneNameLabel {
-    if (!_phoneNameLabel) {
-        _phoneNameLabel = [[UILabel alloc] init];
-        _phoneNameLabel.text = @"用户名";
-        _phoneNameLabel.textColor = k_COLOR_DIMGRAY;
-        _phoneNameLabel.font = [UIFont systemFontOfSize:14];
-    }
-    return _phoneNameLabel;
-}
-
-- (UITextField *)phoneTextField {
-    if (!_phoneTextField) {
-        _phoneTextField = [[UITextField alloc] init];
-        _phoneTextField.placeholder = @"请输入手机号码";
-        _phoneTextField.keyboardType = UIKeyboardTypePhonePad;
-        _phoneTextField.font = [UIFont systemFontOfSize:14];
-    }
-    return _phoneTextField;
-}
-
-- (UIView *)passwordBGView {
-    if (!_passwordBGView) {
-        _passwordBGView = [[UIView alloc] init];
-        _passwordBGView.backgroundColor = k_COLOR_WHITESMOKE;
-        _passwordBGView.layer.cornerRadius = 4;
-    }
-    return _passwordBGView;
-}
-
-- (UILabel *)passwordNameLabel {
-    if (!_passwordNameLabel) {
-        _passwordNameLabel = [[UILabel alloc] init];
-        _passwordNameLabel.text = @"密码";
-        _passwordNameLabel.textColor = k_COLOR_DIMGRAY;
-        _passwordNameLabel.font = [UIFont systemFontOfSize:14];
-    }
-    return _passwordNameLabel;
-}
-
-- (UITextField *)passwordTextField {
-    if (!_passwordTextField) {
-        _passwordTextField = [[UITextField alloc] init];
-        _passwordTextField.secureTextEntry = YES;
-        _passwordTextField.returnKeyType = UIReturnKeyDone;
+- (InputView *)passwordView {
+    if (!_passwordView) {
+        _passwordView = [[InputView alloc] init];
+        _passwordView.titleWidth = 55;
+        _passwordView.titleLabel.text = @"密码";
+        _passwordView.textField.secureTextEntry = YES;
+        _passwordView.textField.returnKeyType = UIReturnKeyDone;
         _weak(self);
-        [_passwordTextField withBlockForShouldReturn:^BOOL(UITextField *view) {
+        [_passwordView.textField withBlockForShouldReturn:^BOOL(UITextField *view) {
             _strong_check(self, NO);
             [view resignFirstResponder];
             [self _loginAction];
             return NO;
         }];
     }
-    return _passwordTextField;
+    return _passwordView;
 }
 
 - (UIButton *)resetPasswordButton {

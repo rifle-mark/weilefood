@@ -150,11 +150,10 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        CGRect frame = self.numberAndDateView.frame;
         // 使用头addressView.frame
         // 是因为_tableView.tableHeaderView=self.addressView时会设置self.addressView.widht=tableView.width
         // 这会导航addressView中的约束错误
-        _tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:self.numberAndDateView.frame style:UITableViewStylePlain];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.tableHeaderView = self.numberAndDateView;
         [_tableView registerClass:[OrderInfoHeaderCell class] forCellReuseIdentifier:[OrderInfoHeaderCell reuseIdentifier]];

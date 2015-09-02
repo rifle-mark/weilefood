@@ -11,7 +11,7 @@
 
 #import "WLServerHelper.h"
 #import "WLServerHelper+UploadImage.h"
-#import "WLServerHelper+ShareUrl.h"
+#import "WLServerHelper+Url.h"
 #import "WLServerHelper+User.h"
 #import "WLServerHelper+Share.h"
 #import "WLServerHelper+Channel.h"

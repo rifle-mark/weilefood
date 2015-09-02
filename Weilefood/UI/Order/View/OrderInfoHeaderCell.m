@@ -73,6 +73,7 @@ static NSInteger const kLine2Height         = 7;
         for (UIView *view in views) {
             [self.contentView addSubview:view];
         }
+        [self setNeedsUpdateConstraints];
     }
     return self;
 }

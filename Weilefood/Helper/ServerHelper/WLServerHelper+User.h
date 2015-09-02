@@ -35,9 +35,10 @@ typedef NS_ENUM(NSUInteger, WLUserPlatform){
  *
  *  @param userName 登录名
  *  @param password 密码明文
+ *  @param nickname 昵称
  *  @param callback 完成时回调
  */
-- (void)user_regWithUserName:(NSString *)userName password:(NSString *)password callback:(void (^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback;
+- (void)user_regWithUserName:(NSString *)userName password:(NSString *)password nickname:(NSString *)nickname callback:(void (^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback;
 
 /**
  *  用户登录

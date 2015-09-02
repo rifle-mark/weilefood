@@ -28,6 +28,7 @@ static NSInteger const kTitleTopMargin      = 15;
     if (self = [super initWithFrame:frame]) {
         [self addSubview:self.imageView];
         [self addSubview:self.titleLabel];
+        [self setNeedsUpdateConstraints];
     }
     return self;
 }
