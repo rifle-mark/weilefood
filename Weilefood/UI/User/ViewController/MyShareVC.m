@@ -32,7 +32,8 @@ static NSInteger kPageSize = 20;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = @"我的发帖";
+    WLUserModel *currentUser = [WLDatabaseHelper user_find];
+    self.navigationItem.title = self.userId == currentUser.userId?@"我的发帖":@"用户发帖";
     // TODO:
     // 右上角添加操作：发帖
     
@@ -59,9 +60,10 @@ static NSInteger kPageSize = 20;
 }
 
 #pragma mark - private
-- (void)_loadMyShareAtDate:(NSDate *)date pageSize:(NSUInteger)pageSize {
+- (void)_loadShareAtDate:(NSDate *)date pageSize:(NSUInteger)pageSize {
     _weak(self);
-    [[WLServerHelper sharedInstance] share_getMyListWithMaxDate:date pageSize:pageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
+    WLUserModel *currentUser = [WLDatabaseHelper user_find];
+    void (^loadCallback)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) = ^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         if ([self.tableView.header isRefreshing]) {
             [self.tableView.header endRefreshing];
@@ -72,7 +74,14 @@ static NSInteger kPageSize = 20;
         ServerHelperErrorHandle;
         self.shareList = [date timeIntervalSince1970]==0?apiResult:[self.shareList arrayByAddingObjectsFromArray:apiResult];
         self.tableView.footer.hidden = !apiResult || apiResult.count < pageSize;
-    }];
+    };
+    if (self.userId == currentUser.userId) {
+        [[WLServerHelper sharedInstance] share_getMyListWithMaxDate:date pageSize:pageSize callback:loadCallback];
+    }
+    else {
+        [[WLServerHelper sharedInstance] share_getListWithUserId:self.userId MaxDate:date pageSize:pageSize callback:loadCallback];
+    }
+    
 }
 
 - (void)_setupObserver {
@@ -96,11 +105,11 @@ static NSInteger kPageSize = 20;
         _weak(self);
         [_tableView headerWithRefreshingBlock:^{
             _strong_check(self);
-            [self _loadMyShareAtDate:[NSDate dateWithTimeIntervalSince1970:0] pageSize:kPageSize];
+            [self _loadShareAtDate:[NSDate dateWithTimeIntervalSince1970:0] pageSize:kPageSize];
         }];
         [_tableView footerWithRefreshingBlock:^{
             _strong_check(self);
-            [self _loadMyShareAtDate:[[self.shareList lastObject] createDate] pageSize:kPageSize];
+            [self _loadShareAtDate:[[self.shareList lastObject] createDate] pageSize:kPageSize];
         }];
         
         [_tableView withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {
@@ -124,8 +133,20 @@ static NSInteger kPageSize = 20;
                 if (!cell) {
                     cell = [[UserCenterUserInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[UserCenterUserInfoCell reuseIdentify]];
                 }
-                cell.user = [WLDatabaseHelper user_find];
-                
+                WLUserModel *currentUser = [WLDatabaseHelper user_find];
+                if (self.userId == currentUser.userId) {
+                    cell.user = [WLDatabaseHelper user_find];
+                }
+                else {
+                    _weak(cell);
+                    [[WLServerHelper sharedInstance] user_getUserBaseInfoWithUserId:self.userId callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
+                        _strong_check(cell);
+                        ServerHelperErrorHandle;
+                        
+                        cell.user = apiResult;
+                    }];
+                }
+                [cell hidUserPoint];
                 return cell;
             }
             

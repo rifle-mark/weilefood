@@ -7,6 +7,14 @@
 //
 
 #import "MyCommentVC.h"
+#import "MyShareVC.h"
+#import "ShareDetailVC.h"
+#import "ProductInfoVC.h"
+#import "ActivityInfoVC.h"
+#import "ForwardBuyInfoVC.h"
+#import "NutritionInfoVC.h"
+#import "VideoInfoVC.h"
+#import "DoctorInfoVC.h"
 
 #import "WLDatabaseHelperHeader.h"
 #import "WLServerHelperHeader.h"
@@ -126,12 +134,81 @@ static NSInteger    kPageSize = 20;
             }
             cell.comment = self.commentList[path.row];
             cell.subjectClickBlock = ^(WLCommentModel* comment){
-                // TODO:
                 NSLog(@"subject %@ clicked", comment.title);
+                switch (comment.type) {
+                    case WLCommentTypeShare: {
+                        [[WLServerHelper sharedInstance] share_getShareInfoWithShareId:comment.refId callback:^(WLApiInfoModel *apiInfo, WLShareModel *apiResult, NSError *error) {
+                            _strong_check(self);
+                            ServerHelperErrorHandle;
+                            ShareDetailVC *vc = [[ShareDetailVC alloc] init];
+                            vc.share = apiResult;
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }];
+                    }
+                        break;
+                    case WLCommentTypeProduct: {
+                        [[WLServerHelper sharedInstance] product_getInfoWithProductId:comment.refId callback:^(WLApiInfoModel *apiInfo, WLProductModel *apiResult, NSError *error) {
+                            _strong_check(self);
+                            ServerHelperErrorHandle;
+                            ProductInfoVC *vc = [[ProductInfoVC alloc] initWithProduct:apiResult];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }];
+                    }
+                        break;
+                    case WLCommentTypeActivity: {
+                        [[WLServerHelper sharedInstance] activity_getInfoWithActivityId:comment.refId callback:^(WLApiInfoModel *apiInfo, WLActivityModel *apiResult, NSError *error) {
+                            _strong_check(self);
+                            ServerHelperErrorHandle;
+                            ActivityInfoVC *vc = [[ActivityInfoVC alloc] initWithActivity:apiResult];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }];
+                    }
+                        break;
+                    case WLCommentTypeForwardBuy: {
+                        [[WLServerHelper sharedInstance] forwardBuy_getInfoWithForwardBuylId:comment.refId callback:^(WLApiInfoModel *apiInfo, WLForwardBuyModel *apiResult, NSError *error) {
+                            _strong_check(self);
+                            ServerHelperErrorHandle;
+                            ForwardBuyInfoVC *vc = [[ForwardBuyInfoVC alloc] initWithForwardBuy:apiResult];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }];
+                    }
+                        break;
+                    case WLCommentTypeNutrition: {
+                        [[WLServerHelper sharedInstance] nutrition_getInfoWithNutritionId:comment.refId callback:^(WLApiInfoModel *apiInfo, WLNutritionModel *apiResult, NSError *error) {
+                            _strong_check(self);
+                            ServerHelperErrorHandle;
+                            NutritionInfoVC *vc = [[NutritionInfoVC alloc] initWithNutrition:apiResult];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }];
+                    }
+                        break;
+                    case WLCommentTypeVideo: {
+                        [[WLServerHelper sharedInstance] video_getInfoWithVideoId:comment.refId callback:^(WLApiInfoModel *apiInfo, WLVideoModel *apiResult, NSError *error) {
+                            _strong_check(self);
+                            ServerHelperErrorHandle;
+                            VideoInfoVC *vc = [[VideoInfoVC alloc] initWithVideo:apiResult];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }];
+                    }
+                        break;
+                    case WLCommentTypeDoctor: {
+                        [[WLServerHelper sharedInstance] doctor_getInfoWithDoctorId:comment.refId callback:^(WLApiInfoModel *apiInfo, WLDoctorModel *apiResult, NSError *error) {
+                            _strong_check(self);
+                            ServerHelperErrorHandle;
+                            DoctorInfoVC *vc = [[DoctorInfoVC alloc] initWithDoctor:apiResult];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }];
+                    }
+                        break;
+                    default:
+                        break;
+                }
             };
             cell.userClickBlock = ^(WLCommentModel* comment){
-                // TODO:
-                NSLog(@"user %@ clicked", comment.toNickName);
+                _strong_check(self);
+                MyShareVC *vc = [[MyShareVC alloc] init];
+                vc.userId = comment.toUserId;
+                [self.navigationController pushViewController:vc animated:YES];
             };
             
             return cell;

@@ -303,6 +303,7 @@ static NSString *const kHintText = @"在这里说点什么吧...";
         _textField.layer.borderWidth = k1pxWidth;
         _textField.layer.cornerRadius = 4;
         _textField.text = kHintText;
+        _weak(self);
         [_textField withBlockForShouldBeginEditing:^BOOL(UITextView *view) {
             if (![WLDatabaseHelper user_find])
             {
@@ -314,6 +315,7 @@ static NSString *const kHintText = @"在这里说点什么吧...";
             }
         }];
         [_textField withBlockForShouldChangeText:^BOOL(UITextView *view, NSRange range, NSString *text) {
+            _strong_check(self, NO);
             if ([view.text isEqualToString:[NSString stringWithFormat:@"回复:%@",self.aimComment.nickName]] || [view.text isEqualToString:kHintText] ) {
                 view.text = @"";
             }
@@ -424,7 +426,7 @@ static NSString *const kHintText = @"在这里说点什么吧...";
     }];
     
     [self startObserveObject:self forKeyPath:@"commentList" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
-        _strong(self);
+        _strong_check(self);
         [self.commentDetailTableV reloadData];
     }];
     
@@ -445,7 +447,7 @@ static NSString *const kHintText = @"在这里说点什么吧...";
     _weak(self);
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] init];
     [tap withBlockForShouldReceiveTouch:^BOOL(UIGestureRecognizer *gesture, UITouch *touch) {
-        _strong(self);
+        _strong_check(self, NO);
         if (!CGRectContainsPoint(self.deleteActionV.frame, [touch locationInView:self.deleteActionV])) {
             [self.deleteActionV setHidden:YES];
         }

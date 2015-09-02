@@ -11,7 +11,7 @@
 @class WLShareModel;
 @interface ShareDetailVC : UIViewController
 
-@property(nonatomic,strong)WLShareModel       *share;
+@property(nonatomic,strong)WLShareModel     *share;
 
 - (void)showCommentViewWithShare:(WLShareModel*)share;
 

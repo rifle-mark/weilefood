@@ -21,4 +21,6 @@ typedef void(^OnUserInfoPointClickBlock)();
 
 - (void)onImageClickBlock:(OnUserInfoImageClickBlock)block;
 - (void)onPointClickBlock:(OnUserInfoPointClickBlock)block;
+
+- (void)hidUserPoint;
 @end

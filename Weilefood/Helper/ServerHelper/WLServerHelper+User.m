@@ -29,6 +29,11 @@
     [self httpPOST:apiUrl parameters:parameters resultClass:[WLUserModel class] callback:callback];
 }
 
+- (void)user_getUserBaseInfoWithUserId:(NSUInteger)userId callback:(void(^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"user", @"userinfo", @(userId)]];
+    [self httpGET:apiUrl parameters:nil resultClass:[WLUserModel class] callback:callback];
+}
+
 - (void)user_socialLoginWithPlatform:(WLUserPlatform)platform openId:(NSString *)openId token:(NSString *)token avatar:(NSString *)avatar appId:(NSString *)appId nickName:(NSString *)nickName callback:(void (^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"user", @"social", @"login"]];
     NSDictionary *parameters = @{@"socialuser": @{@"Platform"   : @(platform),

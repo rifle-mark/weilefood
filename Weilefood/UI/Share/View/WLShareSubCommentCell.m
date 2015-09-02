@@ -71,6 +71,14 @@
         self.avatarV = [[UIImageView alloc] init];
         self.avatarV.clipsToBounds = YES;
         self.avatarV.layer.cornerRadius = 22;
+        self.avatarV.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(UIGestureRecognizer *gesture) {
+            _strong_check(self);
+            GCBlockInvoke(self.userClickBlock, self.comment);
+        }];
+        [self.avatarV addGestureRecognizer:tap];
+        
         [self.contentView addSubview:self.avatarV];
         [self.avatarV mas_makeConstraints:^(MASConstraintMaker *make) {
             _strong(self);
