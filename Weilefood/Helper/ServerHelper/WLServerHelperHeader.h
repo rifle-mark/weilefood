@@ -27,5 +27,6 @@
 #import "WLServerHelper+Points.h"
 #import "WLServerHelper+Nutrition.h"
 #import "WLServerHelper+Doctor.h"
+#import "WLServerHelper+FeedBack.h"
 
 #endif

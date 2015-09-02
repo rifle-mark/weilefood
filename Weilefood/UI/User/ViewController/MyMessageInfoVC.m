@@ -1,22 +1,18 @@
 //
-//  MyMessageVC.m
+//  MyMessageInfoVC.m
 //  Weilefood
 //
-//  Created by makewei on 15/8/29.
+//  Created by makewei on 15/9/2.
 //  Copyright (c) 2015年 kelei. All rights reserved.
 //
 
-#import "MyMessageVC.h"
+#import "MyMessageInfoVC.h"
 
-@interface MyMessageVC ()
-
-@property(nonatomic,strong)UITableView      *tableView;
-
-@property(nonatomic,strong)NSArray          *messageList;
+@interface MyMessageInfoVC ()
 
 @end
 
-@implementation MyMessageVC
+@implementation MyMessageInfoVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
