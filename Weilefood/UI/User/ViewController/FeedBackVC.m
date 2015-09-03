@@ -32,6 +32,7 @@ static NSString *userInfoPlaceHolder = @"请输入QQ/邮箱/手机号";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationItem.title = @"意见反馈";
     self.navigationItem.rightBarButtonItem = self.sendBarItem;
     
     [self.view addSubview:self.scrollerV];
