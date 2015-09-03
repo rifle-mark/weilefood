@@ -144,6 +144,10 @@ static NSUInteger kPageSize = 20;
                 
                 ShareDetailVC *detailVC = [[ShareDetailVC alloc] init];
                 detailVC.share = self.shareList[path.row];
+                detailVC.shareDeleteSuccessBlock = ^(){
+                    _strong_check(self);
+                    [self.shareListTableV.header beginRefreshing];
+                };
                 [self.navigationController pushViewController:detailVC animated:YES];
             }];
             v;

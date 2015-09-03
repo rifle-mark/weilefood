@@ -538,6 +538,7 @@ static NSString *const kHintText = @"在这里说点什么吧...";
             ServerHelperErrorHandle;
             [self.navigationController popViewControllerAnimated:YES];
             [MBProgressHUD showSuccessWithMessage:@"删除成功"];
+            GCBlockInvoke(self.shareDeleteSuccessBlock);
         }];
     }];
 }

@@ -21,13 +21,13 @@
 
 - (void)share_deleteWithShareId:(NSUInteger)shareId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"share", @"delete"]];
-    NSDictionary *parameters = @{@"share": @(shareId)};
+    NSDictionary *parameters = @{@"shareid": @(shareId)};
     [self httpPOST:apiUrl parameters:parameters callback:callback];
 }
 
 - (void)share_policeWithShareId:(NSUInteger)shareId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"share", @"police"]];
-    NSDictionary *parameters = @{@"share": @(shareId)};
+    NSDictionary *parameters = @{@"shareid": @(shareId)};
     [self httpPOST:apiUrl parameters:parameters callback:callback];
 }
 

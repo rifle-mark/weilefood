@@ -12,6 +12,7 @@
 @interface ShareDetailVC : UIViewController
 
 @property(nonatomic,strong)WLShareModel     *share;
+@property(nonatomic,copy)void(^shareDeleteSuccessBlock)();
 
 - (void)showCommentViewWithShare:(WLShareModel*)share;
 
