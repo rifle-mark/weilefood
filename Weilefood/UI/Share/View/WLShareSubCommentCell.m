@@ -41,7 +41,7 @@
                           NSBackgroundColorAttributeName:k_COLOR_CLEAR,
                           NSParagraphStyleAttributeName:ps};
     
-    NSString *content = [NSString stringWithFormat:@"%@%@%@", [NSString isNilEmptyOrBlankString:comment.toNickName]?@"":@"回复 ", [NSString isNilEmptyOrBlankString:comment.toNickName]?@"":comment.toNickName, [NSString stringWithFormat:@": %@", comment.content]];
+    NSString *content = [NSString stringWithFormat:@"%@%@", [NSString isNilEmptyOrBlankString:comment.toNickName]?@"":[NSString stringWithFormat:@"回复 %@: ", comment.toNickName], [NSString stringWithFormat:@"%@", comment.content]];
 
     NSAttributedString *str = [[NSAttributedString alloc] initWithString:content attributes:att];
     return str;

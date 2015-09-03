@@ -18,6 +18,7 @@
 
 #import "UIMenuController+UserInfo.h"
 #import "PictureShowVC.h"
+#import "MyShareVC.h"
 
 @interface ShareDetailVC ()
 
@@ -185,6 +186,12 @@ static NSString *const kHintText = @"在这里说点什么吧...";
                         picVC.currentIndex = index;
                         [self.navigationController pushViewController:picVC animated:YES];
                     };
+                    cell.userClickBlock = ^(WLShareModel *share){
+                        _strong_check(self);
+                        MyShareVC *vc = [[MyShareVC alloc] init];
+                        vc.userId = share.userId;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    };
                     return cell;
                 }
                 else {
@@ -215,6 +222,12 @@ static NSString *const kHintText = @"在这里说点什么吧...";
                             [menu setMenuVisible:YES animated:YES];
                         }];
                         
+                    };
+                    cell.userClickBlock = ^(WLCommentModel *comment){
+                        _strong_check(self);
+                        MyShareVC *vc = [[MyShareVC alloc] init];
+                        vc.userId = (NSUInteger)comment.userId;
+                        [self.navigationController pushViewController:vc animated:YES];
                     };
                     return cell;
                 }
