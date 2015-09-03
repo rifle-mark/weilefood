@@ -219,6 +219,10 @@ static NSInteger kPageSize = 20;
             _strong_check(self);
             if (self.userId == [WLDatabaseHelper user_find].userId) {
                 ShareEditVC *vc = [[ShareEditVC alloc] init];
+                vc.addSuccessBlock = ^(){
+                    _strong_check(self);
+                    [self.tableView.header beginRefreshing];
+                };
                 [self.navigationController pushViewController:vc animated:YES];
             }
             else {
