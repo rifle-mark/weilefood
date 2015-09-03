@@ -241,11 +241,6 @@ static NSUInteger kPageSize = 20;
         _textField.layer.cornerRadius = 4;
         _textField.placeholder = kHintText;
         _textField.placeholderColor = k_COLOR_DARKGRAY;
-        _weak(self);
-        [_textField withBlockForShouldChangeText:^BOOL(UITextView *view, NSRange range, NSString *text) {
-            _strong_check(self, NO);
-            return YES;
-        }];
         [_textField withBlockForDidEndEditing:^(UITextView *view) {
             if (!view.text || view.text.length <= 0) {
                 view.text = @"";

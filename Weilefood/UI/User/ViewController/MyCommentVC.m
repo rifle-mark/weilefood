@@ -137,7 +137,7 @@ static NSInteger    kPageSize = 20;
                 NSLog(@"subject %@ clicked", comment.title);
                 switch (comment.type) {
                     case WLCommentTypeShare: {
-                        [[WLServerHelper sharedInstance] share_getShareInfoWithShareId:comment.refId callback:^(WLApiInfoModel *apiInfo, WLShareModel *apiResult, NSError *error) {
+                        [[WLServerHelper sharedInstance] share_getShareInfoWithShareId:(NSUInteger)comment.refId callback:^(WLApiInfoModel *apiInfo, WLShareModel *apiResult, NSError *error) {
                             _strong_check(self);
                             ServerHelperErrorHandle;
                             ShareDetailVC *vc = [[ShareDetailVC alloc] init];
@@ -147,7 +147,7 @@ static NSInteger    kPageSize = 20;
                     }
                         break;
                     case WLCommentTypeProduct: {
-                        [[WLServerHelper sharedInstance] product_getInfoWithProductId:comment.refId callback:^(WLApiInfoModel *apiInfo, WLProductModel *apiResult, NSError *error) {
+                        [[WLServerHelper sharedInstance] product_getInfoWithProductId:(NSUInteger)comment.refId callback:^(WLApiInfoModel *apiInfo, WLProductModel *apiResult, NSError *error) {
                             _strong_check(self);
                             ServerHelperErrorHandle;
                             ProductInfoVC *vc = [[ProductInfoVC alloc] initWithProduct:apiResult];
@@ -156,7 +156,7 @@ static NSInteger    kPageSize = 20;
                     }
                         break;
                     case WLCommentTypeActivity: {
-                        [[WLServerHelper sharedInstance] activity_getInfoWithActivityId:comment.refId callback:^(WLApiInfoModel *apiInfo, WLActivityModel *apiResult, NSError *error) {
+                        [[WLServerHelper sharedInstance] activity_getInfoWithActivityId:(NSUInteger)comment.refId callback:^(WLApiInfoModel *apiInfo, WLActivityModel *apiResult, NSError *error) {
                             _strong_check(self);
                             ServerHelperErrorHandle;
                             ActivityInfoVC *vc = [[ActivityInfoVC alloc] initWithActivity:apiResult];
@@ -165,7 +165,7 @@ static NSInteger    kPageSize = 20;
                     }
                         break;
                     case WLCommentTypeForwardBuy: {
-                        [[WLServerHelper sharedInstance] forwardBuy_getInfoWithForwardBuylId:comment.refId callback:^(WLApiInfoModel *apiInfo, WLForwardBuyModel *apiResult, NSError *error) {
+                        [[WLServerHelper sharedInstance] forwardBuy_getInfoWithForwardBuylId:(NSUInteger)comment.refId callback:^(WLApiInfoModel *apiInfo, WLForwardBuyModel *apiResult, NSError *error) {
                             _strong_check(self);
                             ServerHelperErrorHandle;
                             ForwardBuyInfoVC *vc = [[ForwardBuyInfoVC alloc] initWithForwardBuy:apiResult];
@@ -183,7 +183,7 @@ static NSInteger    kPageSize = 20;
                     }
                         break;
                     case WLCommentTypeVideo: {
-                        [[WLServerHelper sharedInstance] video_getInfoWithVideoId:comment.refId callback:^(WLApiInfoModel *apiInfo, WLVideoModel *apiResult, NSError *error) {
+                        [[WLServerHelper sharedInstance] video_getInfoWithVideoId:(NSUInteger)comment.refId callback:^(WLApiInfoModel *apiInfo, WLVideoModel *apiResult, NSError *error) {
                             _strong_check(self);
                             ServerHelperErrorHandle;
                             VideoInfoVC *vc = [[VideoInfoVC alloc] initWithVideo:apiResult];
@@ -207,7 +207,7 @@ static NSInteger    kPageSize = 20;
             cell.userClickBlock = ^(WLCommentModel* comment){
                 _strong_check(self);
                 MyShareVC *vc = [[MyShareVC alloc] init];
-                vc.userId = comment.toUserId;
+                vc.userId = (NSUInteger)comment.toUserId;
                 [self.navigationController pushViewController:vc animated:YES];
             };
             
