@@ -238,6 +238,7 @@
 		4DAA2BA81B7F73B9004E5601 /* ShareEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BA61B7F73B9004E5601 /* ShareEditVC.m */; };
 		4DAA2BAE1B7FACFC004E5601 /* UIImage+AdjustmentSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BAD1B7FACFC004E5601 /* UIImage+AdjustmentSize.m */; };
 		4DAA2BB11B7FD751004E5601 /* UIMenuController+UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA2BB01B7FD751004E5601 /* UIMenuController+UserInfo.m */; };
+		4DAA7D631B99D5E200E51A8B /* LaunchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA7D621B99D5E200E51A8B /* LaunchVC.m */; };
 		4DAB29031B972A2500E52A9F /* MessageDialogCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAB29021B972A2500E52A9F /* MessageDialogCell.m */; };
 		4DAB29061B972A3300E52A9F /* MessageOwnInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAB29051B972A3300E52A9F /* MessageOwnInfoCell.m */; };
 		4DAB29091B972D7500E52A9F /* MessageUserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DAB29081B972D7500E52A9F /* MessageUserInfoCell.m */; };
@@ -750,6 +751,8 @@
 		4DAA2BAD1B7FACFC004E5601 /* UIImage+AdjustmentSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+AdjustmentSize.m"; sourceTree = "<group>"; };
 		4DAA2BAF1B7FD751004E5601 /* UIMenuController+UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIMenuController+UserInfo.h"; sourceTree = "<group>"; };
 		4DAA2BB01B7FD751004E5601 /* UIMenuController+UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIMenuController+UserInfo.m"; sourceTree = "<group>"; };
+		4DAA7D611B99D5E200E51A8B /* LaunchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchVC.h; sourceTree = "<group>"; };
+		4DAA7D621B99D5E200E51A8B /* LaunchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchVC.m; sourceTree = "<group>"; };
 		4DAB29011B972A2500E52A9F /* MessageDialogCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDialogCell.h; sourceTree = "<group>"; };
 		4DAB29021B972A2500E52A9F /* MessageDialogCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDialogCell.m; sourceTree = "<group>"; };
 		4DAB29041B972A3300E52A9F /* MessageOwnInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageOwnInfoCell.h; sourceTree = "<group>"; };
@@ -1600,6 +1603,7 @@
 		24CDCB401B4F792D00BDE8CB /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				4DAA7D601B99D5CB00E51A8B /* Launch */,
 				240D798D1B5FEB42007E2E43 /* Common */,
 				240D79911B5FEB42007E2E43 /* MainPage */,
 				240D79941B5FEB42007E2E43 /* Market */,
@@ -1874,6 +1878,15 @@
 			);
 			name = Housekeeper;
 			path = Video/Housekeeper;
+			sourceTree = "<group>";
+		};
+		4DAA7D601B99D5CB00E51A8B /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				4DAA7D611B99D5E200E51A8B /* LaunchVC.h */,
+				4DAA7D621B99D5E200E51A8B /* LaunchVC.m */,
+			);
+			path = Launch;
 			sourceTree = "<group>";
 		};
 		4DE8B9BC1B885D1E00E8608E /* AliPay */ = {
@@ -2240,6 +2253,7 @@
 				24CDCC0F1B4F792E00BDE8CB /* UISearchBar+GCDelegate.m in Sources */,
 				24CAC4331B57E9D800E3C4D5 /* WLServerHelper+Share.m in Sources */,
 				240FB7031B69025900DF5CE4 /* UIButton+ImagePosition.m in Sources */,
+				4DAA7D631B99D5E200E51A8B /* LaunchVC.m in Sources */,
 				24CDCBE11B4F792E00BDE8CB /* AVAudioPlayer+GCDelegateBlock.m in Sources */,
 				24CDCC0E1B4F792E00BDE8CB /* UIScrollView+GCDelegate.m in Sources */,
 				24B8C06C1B5242BC001C5722 /* AGIPCPreviewController.m in Sources */,
