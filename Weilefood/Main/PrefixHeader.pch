@@ -41,5 +41,6 @@
 #import "UIScrollView+MJRefreshDefault.h"
 #import "UIImageView+SDWebImage.h"
 #import "MBProgressHUD+Message.h"
+#import "UIApplication+Ext.h"
 
 #endif

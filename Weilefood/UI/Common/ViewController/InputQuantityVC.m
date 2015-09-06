@@ -34,7 +34,8 @@ static NSInteger const kButtonHeight = 49;
 + (void)inputQuantityWithEnterBlock:(EnterQuantityBlock)enterBlock {
     InputQuantityVC *vc = [[InputQuantityVC alloc] init];
     vc.enterQuantityBlock = enterBlock;
-    UIViewController *pvc = [UIApplication sharedApplication].keyWindow.rootViewController;
+    UIViewController *pvc = [[UIApplication sharedApplication] currentViewController];
+    pvc.modalPresentationCapturesStatusBarAppearance = YES;
     if (SYSTEM_VERSION_LESS_THAN(@"8")) {
         vc.pvcOldModalPresentationStyle = pvc.modalPresentationStyle;
         pvc.modalPresentationStyle = UIModalPresentationCurrentContext;
@@ -122,6 +123,10 @@ static NSInteger const kButtonHeight = 49;
 #pragma mark - public methods
 
 - (void)dismissSelf {
+    [self dismissSelfWithCompletedBlock:nil];
+}
+
+- (void)dismissSelfWithCompletedBlock:(void(^)())completedBlock {
     [UIView animateWithDuration:0.3 animations:^{
         self.view.layer.backgroundColor = k_COLOR_CLEAR.CGColor;
         self.isShowContent = NO;
@@ -131,7 +136,9 @@ static NSInteger const kButtonHeight = 49;
         if (self.presentingViewController && SYSTEM_VERSION_LESS_THAN(@"8")) {
             self.presentingViewController.modalPresentationStyle = self.pvcOldModalPresentationStyle;
         }
-        [self dismissViewControllerAnimated:NO completion:nil];
+        [self dismissViewControllerAnimated:NO completion:^{
+            GCBlockInvoke(completedBlock);
+        }];
     }];
 }
 

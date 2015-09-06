@@ -335,17 +335,17 @@ static NSString *const kCellIdentifier = @"MYCELL";
         [_buyButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 [InputQuantityVC inputQuantityWithEnterBlock:^(InputQuantityVC *inputQuantityVC, NSInteger quantity) {
-                    _strong_check(self);
-                    [inputQuantityVC dismissSelf];
-                    
-                    WLOrderProductModel *product = [[WLOrderProductModel alloc] init];
-                    product.type  = WLOrderProductTypeForwardBuy;
-                    product.refId = self.forwardBuy.forwardBuyId;
-                    product.count = quantity;
-                    product.price = self.forwardBuy.price;
-                    product.title = self.forwardBuy.title;
-                    product.image = self.forwardBuy.banner;
-                    [self.navigationController pushViewController:[[OrderConfirmVC alloc] initWithProductList:@[product]] animated:YES];
+                    [inputQuantityVC dismissSelfWithCompletedBlock:^{
+                        _strong_check(self);
+                        WLOrderProductModel *product = [[WLOrderProductModel alloc] init];
+                        product.type  = WLOrderProductTypeForwardBuy;
+                        product.refId = self.forwardBuy.forwardBuyId;
+                        product.count = quantity;
+                        product.price = self.forwardBuy.price;
+                        product.title = self.forwardBuy.title;
+                        product.image = self.forwardBuy.banner;
+                        [self.navigationController pushViewController:[[OrderConfirmVC alloc] initWithProductList:@[product]] animated:YES];
+                    }];
                 }];
             }];
         }];
