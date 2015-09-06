@@ -14,7 +14,6 @@
 
 @interface RegisterVC ()
 
-@property (nonatomic, strong) UIView       *fixView;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView       *contentView;
 @property (nonatomic, strong) InputView    *phoneView;
@@ -25,10 +24,12 @@
 @property (nonatomic, strong) UIButton     *securityCodeButton;
 @property (nonatomic, strong) UIButton     *submitButton;
 
+@property (nonatomic, assign) BOOL      securityCodeButtonEnabled;
+@property (nonatomic, assign) NSInteger securityCodeCountdown;
 /// 最近一次获取到的手机验证码的手机号
-@property (nonatomic, copy  ) NSString     *lastPhone;
+@property (nonatomic, copy  ) NSString  *lastPhone;
 /// 最近一次获取到的手机验证码
-@property (nonatomic, copy  ) NSString     *lastSecurityCode;
+@property (nonatomic, copy  ) NSString  *lastSecurityCode;
 
 @end
 
@@ -43,8 +44,8 @@ static NSInteger const kSecurityCodeInterval = 60;//秒
     
     self.title = @"注册";
     self.view.backgroundColor = [UIColor whiteColor];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
-    [self.view addSubview:self.fixView];
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.contentView];
     
@@ -127,21 +128,29 @@ static NSInteger const kSecurityCodeInterval = 60;//秒
     self.lastPhone = nil;
     self.lastSecurityCode = nil;
     _weak(self);
-    self.securityCodeButton.enabled = NO;
+    self.securityCodeButtonEnabled = NO;
     [[WLServerHelper sharedInstance] user_getPhoneCodeWithPhoneNum:phoneNum callback:^(WLApiInfoModel *apiInfo, NSString *phoneCode, NSError *error) {
         _strong_check(self);
-        self.securityCodeButton.enabled = YES;
+        self.securityCodeButtonEnabled = YES;
         ServerHelperErrorHandle;
         self.lastPhone = phoneNum;
         self.lastSecurityCode = phoneCode;
         DLog(@"验证码获取成功:%@", phoneCode);
-        self.securityCodeButton.enabled = NO;
-        [self performSelector:@selector(_enabledSecurityCodeButton) withObject:nil afterDelay:kSecurityCodeInterval];
+        self.securityCodeButtonEnabled = NO;
+        self.securityCodeCountdown = kSecurityCodeInterval;
+        [self.securityCodeButton setTitle:[NSString stringWithFormat:@"%ld", (long)self.securityCodeCountdown] forState:UIControlStateDisabled];
+        [NSTimer scheduledTimerWithTimeInterval:1 repeats:YES action:^(NSTimer *timer) {
+            _strong_check(self);
+            self.securityCodeCountdown--;
+            if (self.securityCodeCountdown <= 0) {
+                [timer invalidate];
+                self.securityCodeButtonEnabled = YES;
+            }
+            else {
+                [self.securityCodeButton setTitle:[NSString stringWithFormat:@"%ld", (long)self.securityCodeCountdown] forState:UIControlStateDisabled];
+            }
+        }];
     }];
-}
-
-- (void)_enabledSecurityCodeButton {
-    self.securityCodeButton.enabled = YES;
 }
 
 - (BOOL)_checkInput {
@@ -213,11 +222,9 @@ static NSInteger const kSecurityCodeInterval = 60;//秒
 
 #pragma mark - private property methons
 
-- (UIView *)fixView{
-    if (!_fixView) {
-        _fixView = [[UIView alloc] init];
-    }
-    return _fixView;
+- (void)setSecurityCodeButtonEnabled:(BOOL)securityCodeButtonEnabled {
+    self.securityCodeButton.enabled = securityCodeButtonEnabled;
+    self.securityCodeButton.backgroundColor = securityCodeButtonEnabled ? k_COLOR_ORANGE : k_COLOR_STAR_DUST;
 }
 
 - (UIScrollView *)scrollView {
@@ -320,8 +327,6 @@ static NSInteger const kSecurityCodeInterval = 60;//秒
         _securityCodeButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_securityCodeButton setTitleColor:k_COLOR_WHITE forState:UIControlStateNormal];
         [_securityCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
-        NSString *str = [NSString stringWithFormat:@"%ld秒后再获取", (long)kSecurityCodeInterval];
-        [_securityCodeButton setTitle:str forState:UIControlStateDisabled];
         [_securityCodeButton addTarget:self action:@selector(_securityCodeAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _securityCodeButton;
