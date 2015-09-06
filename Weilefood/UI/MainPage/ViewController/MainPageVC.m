@@ -49,10 +49,7 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    [self.footerView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.right.equalTo(self.view);
-        make.height.equalTo(@49);
-    }];
+    self.footerView.frame = CGRectMake(0, V_H_(self.view) - 49, V_W_(self.view), 49);
     [self.discoveryButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.discoveryButton.superview);
         make.right.equalTo(self.addShareButton.mas_left);
