@@ -34,7 +34,7 @@ static NSInteger const kButtonHeight = 49;
 + (void)inputQuantityWithEnterBlock:(EnterQuantityBlock)enterBlock {
     InputQuantityVC *vc = [[InputQuantityVC alloc] init];
     vc.enterQuantityBlock = enterBlock;
-    UIViewController *pvc = [[UIApplication sharedApplication] currentViewController];
+    UIViewController *pvc = [UIApplication sharedApplication].keyWindow.rootViewController;
     pvc.modalPresentationCapturesStatusBarAppearance = YES;
     if (SYSTEM_VERSION_LESS_THAN(@"8")) {
         vc.pvcOldModalPresentationStyle = pvc.modalPresentationStyle;
