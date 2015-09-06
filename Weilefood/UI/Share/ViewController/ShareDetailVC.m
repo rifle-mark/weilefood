@@ -18,6 +18,7 @@
 
 #import "UIMenuController+UserInfo.h"
 #import "PictureShowVC.h"
+#import "MyShareVC.h"
 
 @interface ShareDetailVC ()
 
@@ -46,9 +47,17 @@ static NSString *const kHintText = @"在这里说点什么吧...";
     // Do any additional setup after loading the view.
     
     self.navigationItem.title = @"分享详情";
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"举报" style:UIBarButtonItemStyleDone target:self action:@selector(_policeShare:)];
-    rightItem.tintColor = k_COLOR_WHITE;
-    self.navigationItem.rightBarButtonItem = rightItem;
+    WLUserModel *currentUser = [WLDatabaseHelper user_find];
+    if (self.share.userId == currentUser.userId) {
+        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"删除" style:UIBarButtonItemStylePlain target:self action:@selector(_deleteShare:)];
+        rightItem.tintColor = k_COLOR_WHITE;
+        self.navigationItem.rightBarButtonItem = rightItem;
+    }
+    else {
+        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"举报" style:UIBarButtonItemStyleDone target:self action:@selector(_policeShare:)];
+        rightItem.tintColor = k_COLOR_WHITE;
+        self.navigationItem.rightBarButtonItem = rightItem;
+    }
     
     [self.view addSubview:self.commentDetailTableV];
     [self.view addSubview:self.deleteActionV];
@@ -177,6 +186,12 @@ static NSString *const kHintText = @"在这里说点什么吧...";
                         picVC.currentIndex = index;
                         [self.navigationController pushViewController:picVC animated:YES];
                     };
+                    cell.userClickBlock = ^(WLShareModel *share){
+                        _strong_check(self);
+                        MyShareVC *vc = [[MyShareVC alloc] init];
+                        vc.userId = share.userId;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    };
                     return cell;
                 }
                 else {
@@ -207,6 +222,12 @@ static NSString *const kHintText = @"在这里说点什么吧...";
                             [menu setMenuVisible:YES animated:YES];
                         }];
                         
+                    };
+                    cell.userClickBlock = ^(WLCommentModel *comment){
+                        _strong_check(self);
+                        MyShareVC *vc = [[MyShareVC alloc] init];
+                        vc.userId = (NSUInteger)comment.userId;
+                        [self.navigationController pushViewController:vc animated:YES];
                     };
                     return cell;
                 }
@@ -303,6 +324,7 @@ static NSString *const kHintText = @"在这里说点什么吧...";
         _textField.layer.borderWidth = k1pxWidth;
         _textField.layer.cornerRadius = 4;
         _textField.text = kHintText;
+        _weak(self);
         [_textField withBlockForShouldBeginEditing:^BOOL(UITextView *view) {
             if (![WLDatabaseHelper user_find])
             {
@@ -314,6 +336,7 @@ static NSString *const kHintText = @"在这里说点什么吧...";
             }
         }];
         [_textField withBlockForShouldChangeText:^BOOL(UITextView *view, NSRange range, NSString *text) {
+            _strong_check(self, NO);
             if ([view.text isEqualToString:[NSString stringWithFormat:@"回复:%@",self.aimComment.nickName]] || [view.text isEqualToString:kHintText] ) {
                 view.text = @"";
             }
@@ -345,7 +368,7 @@ static NSString *const kHintText = @"在这里说点什么吧...";
                 [MBProgressHUD showErrorWithMessage:@"请填写评论内容"];
                 return;
             }
-            if (!self.textField.text || self.textField.text.length <= 5) {
+            if (!self.textField.text || self.textField.text.length <= 2) {
                 
                 [MBProgressHUD showErrorWithMessage:@"评论内容太少，多写一点吧"];
                 return;
@@ -424,7 +447,7 @@ static NSString *const kHintText = @"在这里说点什么吧...";
     }];
     
     [self startObserveObject:self forKeyPath:@"commentList" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
-        _strong(self);
+        _strong_check(self);
         [self.commentDetailTableV reloadData];
     }];
     
@@ -445,7 +468,7 @@ static NSString *const kHintText = @"在这里说点什么吧...";
     _weak(self);
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] init];
     [tap withBlockForShouldReceiveTouch:^BOOL(UIGestureRecognizer *gesture, UITouch *touch) {
-        _strong(self);
+        _strong_check(self, NO);
         if (!CGRectContainsPoint(self.deleteActionV.frame, [touch locationInView:self.deleteActionV])) {
             [self.deleteActionV setHidden:YES];
         }
@@ -510,6 +533,25 @@ static NSString *const kHintText = @"在这里说点什么吧...";
             ServerHelperErrorHandle;
             
             [MBProgressHUD showSuccessWithMessage:@"举报成功"];
+        }];
+    }];
+}
+
+- (void)_deleteShare:(id)sender {
+    _weak(self);
+    [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+        _strong_check(self);
+        if (self.share.userId != user.userId) {
+            [MBProgressHUD showErrorWithMessage:@"无法删除"];
+            return;
+        }
+        
+        [[WLServerHelper sharedInstance] share_deleteWithShareId:self.share.shareId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
+            _strong_check(self);
+            ServerHelperErrorHandle;
+            [self.navigationController popViewControllerAnimated:YES];
+            [MBProgressHUD showSuccessWithMessage:@"删除成功"];
+            GCBlockInvoke(self.shareDeleteSuccessBlock);
         }];
     }];
 }

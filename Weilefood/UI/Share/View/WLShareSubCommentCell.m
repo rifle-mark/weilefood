@@ -41,7 +41,7 @@
                           NSBackgroundColorAttributeName:k_COLOR_CLEAR,
                           NSParagraphStyleAttributeName:ps};
     
-    NSString *content = [NSString stringWithFormat:@"%@%@%@", [NSString isNilEmptyOrBlankString:comment.toNickName]?@"":@"回复 ", [NSString isNilEmptyOrBlankString:comment.toNickName]?@"":comment.toNickName, [NSString stringWithFormat:@": %@", comment.content]];
+    NSString *content = [NSString stringWithFormat:@"%@%@", [NSString isNilEmptyOrBlankString:comment.toNickName]?@"":[NSString stringWithFormat:@"回复 %@: ", comment.toNickName], [NSString stringWithFormat:@"%@", comment.content]];
 
     NSAttributedString *str = [[NSAttributedString alloc] initWithString:content attributes:att];
     return str;
@@ -71,6 +71,14 @@
         self.avatarV = [[UIImageView alloc] init];
         self.avatarV.clipsToBounds = YES;
         self.avatarV.layer.cornerRadius = 22;
+        self.avatarV.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(UIGestureRecognizer *gesture) {
+            _strong_check(self);
+            GCBlockInvoke(self.userClickBlock, self.comment);
+        }];
+        [self.avatarV addGestureRecognizer:tap];
+        
         [self.contentView addSubview:self.avatarV];
         [self.avatarV mas_makeConstraints:^(MASConstraintMaker *make) {
             _strong(self);

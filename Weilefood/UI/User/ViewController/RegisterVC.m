@@ -34,6 +34,7 @@
 
 #define kPhoneNumberRegex @"^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$"
 static NSInteger const kTitleWidth = 85;
+static NSInteger const kSecurityCodeInterval = 60;//秒
 
 @implementation RegisterVC
 
@@ -135,7 +136,7 @@ static NSInteger const kTitleWidth = 85;
         self.lastSecurityCode = phoneCode;
         DLog(@"验证码获取成功:%@", phoneCode);
         self.securityCodeButton.enabled = NO;
-        [self performSelector:@selector(_enabledSecurityCodeButton) withObject:self afterDelay:20];
+        [self performSelector:@selector(_enabledSecurityCodeButton) withObject:nil afterDelay:kSecurityCodeInterval];
     }];
 }
 
@@ -319,6 +320,8 @@ static NSInteger const kTitleWidth = 85;
         _securityCodeButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_securityCodeButton setTitleColor:k_COLOR_WHITE forState:UIControlStateNormal];
         [_securityCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+        NSString *str = [NSString stringWithFormat:@"%ld秒后再获取", (long)kSecurityCodeInterval];
+        [_securityCodeButton setTitle:str forState:UIControlStateDisabled];
         [_securityCodeButton addTarget:self action:@selector(_securityCodeAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _securityCodeButton;

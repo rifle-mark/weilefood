@@ -51,6 +51,8 @@ typedef NS_ENUM(NSUInteger, WLCommentType) {
 @property (nonatomic, assign) long long refId;
 /// 评论对象类型
 @property (nonatomic, assign) WLCommentType type;
+/// 评论对像标题
+@property (nonatomic, copy) NSString *title;
 
 
 @end

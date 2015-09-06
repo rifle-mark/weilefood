@@ -8,6 +8,7 @@
 
 #import "SharedAllListVC.h"
 #import "ShareDetailVC.h"
+#import "MyShareVC.h"
 
 #import "WLShareCell.h"
 
@@ -72,6 +73,7 @@ static NSUInteger kPageSize = 20;
             v.separatorStyle = UITableViewCellSeparatorStyleNone;
             v.showsVerticalScrollIndicator = NO;
             v.showsHorizontalScrollIndicator = NO;
+            v.delaysContentTouches = NO;
             
             _weak(self);
             [v headerWithRefreshingBlock:^{
@@ -101,6 +103,12 @@ static NSUInteger kPageSize = 20;
                 }
                 cell.share = self.shareList[path.row];
                 _weak(cell);
+                cell.userClickBlock = ^(WLShareModel *share) {
+                    _strong_check(self);
+                    MyShareVC *vc = [[MyShareVC alloc] init];
+                    vc.userId = share.userId;
+                    [self.navigationController pushViewController:vc animated:YES];
+                };
                 cell.likeActionBlock = ^(WLShareModel *share){
                     [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                         [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeApproval objectType:WLActionTypeShare objectId:share.shareId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
@@ -136,6 +144,10 @@ static NSUInteger kPageSize = 20;
                 
                 ShareDetailVC *detailVC = [[ShareDetailVC alloc] init];
                 detailVC.share = self.shareList[path.row];
+                detailVC.shareDeleteSuccessBlock = ^(){
+                    _strong_check(self);
+                    [self.shareListTableV.header beginRefreshing];
+                };
                 [self.navigationController pushViewController:detailVC animated:YES];
             }];
             v;

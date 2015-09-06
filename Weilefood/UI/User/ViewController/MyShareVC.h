@@ -10,4 +10,6 @@
 
 @interface MyShareVC : UIViewController
 
+@property(nonatomic,assign)NSUInteger userId;
+
 @end

@@ -50,7 +50,6 @@ static NSString *const kHeaderIdentifier        = @"HEADER";
 static NSString *const kSectionHeaderIdentifier = @"SECTIONHEADER";
 static NSInteger const kCellMargin              = 10;
 
-static NSInteger const kSectionCount           = 5;
 static NSInteger const kSectionIndexHeader     = 0;
 static NSInteger const kSectionIndexProduct    = 1;
 static NSInteger const kSectionIndexForwardBuy = 2;
@@ -87,7 +86,7 @@ static NSInteger const kSectionIndexActivity   = 4;
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return kSectionCount;
+    return kSectionIndexActivity + (self.sectionDataActivitys && self.sectionDataActivitys.count > 0 ? 1 : 0);
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -364,7 +363,7 @@ static NSInteger const kSectionIndexActivity   = 4;
     }];
     [self startObserveObject:self forKeyPath:@"sectionDataActivitys" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
-        [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:kSectionIndexActivity]];
+        [self.collectionView reloadData];
     }];
 }
 

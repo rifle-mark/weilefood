@@ -55,4 +55,21 @@
  */
 - (void)share_getMyListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
 
+/**
+ *  获取用户的分享列表。(NSArray<WLShareModel>)apiResult
+ *
+ *  @param userId   用户ID
+ *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param pageSize 返回的最大记录数
+ *  @param callback
+ */
+- (void)share_getListWithUserId:(NSUInteger)userId MaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
+
+/**
+ *  通过ShareId获取Share信息
+ *
+ *  @param shareId  shareId
+ *  @param callback
+ */
+- (void)share_getShareInfoWithShareId:(NSUInteger)shareId callback:(void(^)(WLApiInfoModel *apiInfo, WLShareModel *apiResult, NSError *error))callback;
 @end

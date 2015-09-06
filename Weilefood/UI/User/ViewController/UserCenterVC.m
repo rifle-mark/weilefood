@@ -158,6 +158,7 @@ static NSInteger const kSectionList   = 2;
                         [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                             _strong_check(self);
                             MyShareVC *vc = [[MyShareVC alloc] init];
+                            vc.userId = user.userId;
                             [self.navigationController pushViewController:vc animated:YES];
                         }];
                     }];

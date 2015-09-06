@@ -21,13 +21,13 @@
 
 - (void)share_deleteWithShareId:(NSUInteger)shareId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"share", @"delete"]];
-    NSDictionary *parameters = @{@"share": @(shareId)};
+    NSDictionary *parameters = @{@"shareid": @(shareId)};
     [self httpPOST:apiUrl parameters:parameters callback:callback];
 }
 
 - (void)share_policeWithShareId:(NSUInteger)shareId callback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"share", @"police"]];
-    NSDictionary *parameters = @{@"share": @(shareId)};
+    NSDictionary *parameters = @{@"shareid": @(shareId)};
     [self httpPOST:apiUrl parameters:parameters callback:callback];
 }
 
@@ -47,6 +47,21 @@
                                  @"maxdate": @([maxDate millisecondIntervalSince1970]),
                                  };
     [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLShareModel class] callback:callback];
+}
+
+- (void)share_getListWithUserId:(NSUInteger)userId MaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"share", @"listforuser"]];
+    NSDictionary *parameters = @{@"pageindex": @(1),
+                                 @"pagesize": @(pageSize),
+                                 @"userid": @(userId),
+                                 @"maxdate": @([maxDate millisecondIntervalSince1970]),
+                                 };
+    [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLShareModel class] callback:callback];
+}
+
+- (void)share_getShareInfoWithShareId:(NSUInteger)shareId callback:(void(^)(WLApiInfoModel *apiInfo, WLShareModel *apiResult, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"share", @"detail", @(shareId)]];
+    [self httpGET:apiUrl parameters:nil resultClass:[WLShareModel class] callback:callback];
 }
 
 @end

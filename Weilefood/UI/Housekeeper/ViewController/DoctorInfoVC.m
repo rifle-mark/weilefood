@@ -266,19 +266,21 @@
             cell.desc  = service.remark;
             cell.price = service.price;
             [cell buyClickBlock:^(DoctorServiceCell *cell) {
-                _strong_check(self);
-                NSIndexPath *path = [self.tableView indexPathForCell:cell];
-                WLDoctorServiceModel *service = self.doctor.service[path.row - 1];
-                DLog(@"%@", service);
-                
-                WLOrderProductModel *product = [[WLOrderProductModel alloc] init];
-                product.type  = WLOrderProductTypeDoctor;
-                product.refId = service.doctorServiceId;
-                product.count = 1;
-                product.price = service.price;
-                product.title = [NSString stringWithFormat:@"%@ %@", self.doctor.trueName, service.title];
-                product.image = self.doctor.images;
-                [self.navigationController pushViewController:[[OrderConfirmVC alloc] initWithProductList:@[product]] animated:YES];
+                [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+                    _strong_check(self);
+                    NSIndexPath *path = [self.tableView indexPathForCell:cell];
+                    WLDoctorServiceModel *service = self.doctor.service[path.row - 1];
+                    DLog(@"%@", service);
+                    
+                    WLOrderProductModel *product = [[WLOrderProductModel alloc] init];
+                    product.type  = WLOrderProductTypeDoctor;
+                    product.refId = service.doctorServiceId;
+                    product.count = 1;
+                    product.price = service.price;
+                    product.title = [NSString stringWithFormat:@"%@ %@", self.doctor.trueName, service.title];
+                    product.image = self.doctor.images;
+                    [self.navigationController pushViewController:[[OrderConfirmVC alloc] initWithProductList:@[product] needAddress:NO] animated:YES];
+                }];
             }];
             return cell;
         }];

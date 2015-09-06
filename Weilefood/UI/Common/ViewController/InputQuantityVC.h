@@ -26,5 +26,6 @@ typedef void (^EnterQuantityBlock)(InputQuantityVC *inputQuantityVC, NSInteger q
  *  关闭自己
  */
 - (void)dismissSelf;
+- (void)dismissSelfWithCompletedBlock:(void(^)())completedBlock;
 
 @end

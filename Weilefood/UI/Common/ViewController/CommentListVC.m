@@ -272,7 +272,7 @@ static NSInteger const kPageSize = 10;
                 [self.textView becomeFirstResponder];
                 return;
             }
-            if (!self.textView.text || self.textView.text.length <= 5) {
+            if (!self.textView.text || self.textView.text.length <= 2) {
                 [MBProgressHUD showErrorWithMessage:@"评论内容太少，多写一点吧"];
                 [self.textView becomeFirstResponder];
                 return;

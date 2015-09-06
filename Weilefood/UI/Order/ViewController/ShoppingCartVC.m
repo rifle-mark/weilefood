@@ -252,7 +252,7 @@
                 [MBProgressHUD showErrorWithMessage:@"请选择要购买的商品"];
                 return;
             }
-            [self.navigationController pushViewController:[[OrderConfirmVC alloc] initWithProductList:productList] animated:YES];
+            [self.navigationController pushViewController:[[OrderConfirmVC alloc] initWithProductList:productList needAddress:YES] animated:YES];
         }];
     }
     return _buyButton;

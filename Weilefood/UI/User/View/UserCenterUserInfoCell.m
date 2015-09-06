@@ -41,11 +41,15 @@
         [self.contentView addSubview:self.nickNameL];
         [self.contentView addSubview:self.pointBtn];
         
-        [self _layoutSubView];
-        
         [self _setupObserver];
+        [self setNeedsUpdateConstraints];
     }
     return self;
+}
+
+- (void)updateConstraints {
+    [self _layoutSubView];
+    [super updateConstraints];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -60,6 +64,10 @@
 }
 - (void)onPointClickBlock:(OnUserInfoPointClickBlock)block {
     self.pointClickBlock = block;
+}
+
+- (void)hidUserPoint {
+    self.pointBtn.hidden = YES;
 }
 
 #pragma mark - private method
@@ -92,7 +100,6 @@
         }
         [self.avatarV my_setImageWithURL:[WLAPIAddressGenerator urlOfPictureWith:80 height:80 urlString:self.user.avatar]];
         self.nickNameL.text = self.user.nickName;
-        self.pointBtn.hidden = NO;
         [self.pointBtn setTitle:[NSString stringWithFormat:@"  积分%ld >  ", (long)self.user.points] forState:UIControlStateNormal];
     }];
     

@@ -144,10 +144,15 @@ static CGFloat controlHeight = 47;
         [self.contentV addSubview:self.contentL];
         [self.contentV addSubview:self.picsV];
         
-        [self _layoutViews];
         [self _setupObserver];
+        [self setNeedsUpdateConstraints];
     }
     return self;
+}
+
+- (void)updateConstraints {
+    [self _layoutViews];
+    [super updateConstraints];
 }
 
 - (void)awakeFromNib {
@@ -162,11 +167,6 @@ static CGFloat controlHeight = 47;
 
 - (void)_layoutViews {
     _weak(self);
-    if (!SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
-        [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.right.bottom.equalTo(self.contentView.superview);
-        }];
-    }
     [self.splitV mas_makeConstraints:^(MASConstraintMaker *make) {
         _strong(self);
         make.top.left.right.equalTo(self.contentView);
@@ -309,6 +309,14 @@ static CGFloat controlHeight = 47;
         _avatarV = [[UIImageView alloc] init];
         _avatarV.clipsToBounds = YES;
         _avatarV.layer.cornerRadius = 22;
+        _avatarV.userInteractionEnabled = YES;
+        
+        _weak(self);
+        UIGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithActionBlock:^(UIGestureRecognizer *gesture) {
+            _strong_check(self);
+            GCBlockInvoke(self.userClickBlock, self.share);
+        }];
+        [_avatarV addGestureRecognizer:tap];
     }
     return _avatarV;
 }

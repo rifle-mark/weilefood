@@ -26,6 +26,7 @@
 @property(nonatomic,copy)void(^commentActionBlock)(WLShareModel *comment);
 @property(nonatomic,copy)void(^actionBlock)(WLShareCell *cell);
 @property(nonatomic,copy)void(^picShowBlock)(NSArray *picUrlArray, NSInteger index);
+@property(nonatomic,copy)void(^userClickBlock)(WLShareModel *share);
 
 + (NSString *)reuseIdentify;
 + (CGFloat)heightWithComment:(WLShareModel *)comment screenWidth:(CGFloat)width;
