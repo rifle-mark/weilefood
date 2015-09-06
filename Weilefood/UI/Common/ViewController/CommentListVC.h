@@ -10,17 +10,20 @@
 
 typedef NS_ENUM(NSUInteger, WLCommentType);
 
+typedef void(^CommentListVCDismissBlock)(NSInteger addCount);
+
 /// 对象的评论列表
 @interface CommentListVC : UIViewController
 
 /**
  *  弹出评论列表界面
  *
- *  @param type  评论类型
- *  @param refId 评论对象ID
+ *  @param type         评论类型
+ *  @param refId        评论对象ID
+ *  @param dismissBlock 界面关闭前回调
  *
  *  @return 界面实例
  */
-+ (void)showWithType:(WLCommentType)type refId:(long long)refId;
++ (void)showWithType:(WLCommentType)type refId:(long long)refId dismissBlock:(CommentListVCDismissBlock)dismissBlock;
 
 @end

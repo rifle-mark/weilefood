@@ -255,7 +255,11 @@
         _weak(self);
         [_commentButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            [CommentListVC showWithType:WLCommentTypeVideo refId:self.video.videoId];
+            [CommentListVC showWithType:WLCommentTypeVideo refId:self.video.videoId dismissBlock:^(NSInteger addCount) {
+                _strong_check(self);
+                self.video.commentCount += addCount;
+                [self _showData];
+            }];
         }];
     }
     return _commentButton;

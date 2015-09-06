@@ -217,7 +217,11 @@
         }];
         [_sectionHeaderView commentBlock:^{
             _strong_check(self);
-            [CommentListVC showWithType:WLCommentTypeDoctor refId:self.doctor.doctorId];
+            [CommentListVC showWithType:WLCommentTypeDoctor refId:self.doctor.doctorId dismissBlock:^(NSInteger addCount) {
+                _strong_check(self);
+                self.doctor.commentCount += addCount;
+                [self _showData];
+            }];
         }];
         [_sectionHeaderView shareBlock:^{
             _strong_check(self);
