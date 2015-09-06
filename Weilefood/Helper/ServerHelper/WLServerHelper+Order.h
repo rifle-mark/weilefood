@@ -15,7 +15,7 @@
 /**
  *  生成订单
  *
- *  @param address     收货人信息
+ *  @param address     收货人信息，不需要收货人信息传nil
  *  @param productList 购买的商品列表<WLOrderProductModel>
  *  @param callback
  */

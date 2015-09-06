@@ -161,11 +161,11 @@
         _weak(self);
         [_tableView withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {
             _strong_check(self, 0);
-            return (self.orderMoreInfo && self.orderMoreInfo.orderDetail ? self.orderMoreInfo.orderDetail.count : 0) + 1;
+            return (self.orderMoreInfo.orderAddress ? 1 : 0) + (self.orderMoreInfo && self.orderMoreInfo.orderDetail ? self.orderMoreInfo.orderDetail.count : 0);
         }];
         [_tableView withBlockForRowHeight:^CGFloat(UITableView *view, NSIndexPath *path) {
             _strong_check(self, 0);
-            if (path.row == 0) {
+            if (path.row == 0 && self.orderMoreInfo.orderAddress) {
                 NSString *address = self.orderMoreInfo.orderAddress.address;
                 return [OrderInfoHeaderCell cellHeightWithAddress:address isShowExpressInfo:self.orderBaseInfo.state == WLOrderStateShipped];
             }
@@ -173,7 +173,7 @@
         }];
         [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
             _strong_check(self, nil);
-            if (path.row == 0) {
+            if (path.row == 0 && self.orderMoreInfo.orderAddress) {
                 OrderInfoHeaderCell *cell = [view dequeueReusableCellWithIdentifier:[OrderInfoHeaderCell reuseIdentifier] forIndexPath:path];
                 cell.name = self.orderMoreInfo.orderAddress.userName;
                 cell.phone = self.orderMoreInfo.orderAddress.tel;
@@ -185,7 +185,7 @@
                 return cell;
             }
             ShoppingCartProductCell *cell = [view dequeueReusableCellWithIdentifier:[ShoppingCartProductCell reuseIdentifier] forIndexPath:path];
-            WLOrderProductModel *item = self.orderMoreInfo.orderDetail[path.row - 1];
+            WLOrderProductModel *item = self.orderMoreInfo.orderDetail[path.row - (self.orderMoreInfo.orderAddress ? 1 : 0)];
             cell.imageUrl               = item.image;
             cell.name                   = item.title;
             cell.price                  = item.price;

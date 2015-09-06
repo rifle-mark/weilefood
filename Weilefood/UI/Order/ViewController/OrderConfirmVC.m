@@ -26,6 +26,7 @@
 @property (nonatomic, strong) UIButton         *submitButton;
 
 @property (nonatomic, strong) NSArray *productList;
+@property (nonatomic, assign) BOOL needAddress;
 @property (nonatomic, assign) BOOL isDidAppear;
 
 @end
@@ -43,10 +44,11 @@ static NSString *const kOrderAddressKeyZipCode = @"OrderAddressKeyZipCode";
     return nil;
 }
 
-- (instancetype)initWithProductList:(NSArray *)productList {
+- (instancetype)initWithProductList:(NSArray *)productList needAddress:(BOOL)needAddress {
     NSParameterAssert(productList);
     if (self = [super init]) {
         _productList = productList;
+        _needAddress = needAddress;
     }
     return self;
 }
@@ -62,6 +64,10 @@ static NSString *const kOrderAddressKeyZipCode = @"OrderAddressKeyZipCode";
     [self.footerView addSubview:self.lineView];
     [self.footerView addSubview:self.moneyLabel];
     [self.footerView addSubview:self.submitButton];
+    
+    if (!self.needAddress) {
+        self.tableView.tableHeaderView = nil;
+    }
     
     [self _resetMoneyText];
     [self.tableView handleKeyboard];
@@ -203,21 +209,25 @@ static NSString *const kOrderAddressKeyZipCode = @"OrderAddressKeyZipCode";
         _weak(self);
         [_submitButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            if (![self.addressView checkInput]) {
-                return;
+            
+            WLOrderAddressModel *address = nil;
+            if (self.needAddress) {
+                if (![self.addressView checkInput]) {
+                    return;
+                }
+                [self _saveAddress];
+                
+                address = [[WLOrderAddressModel alloc] init];
+                address.userName = self.addressView.name;
+                address.tel = self.addressView.phone;
+                address.address = [self.addressView.city stringByAppendingString:self.addressView.address];
+                address.postCode = self.addressView.zipCode;
             }
-            [self _saveAddress];
             
             if (self.productList.count <= 0) {
                 [MBProgressHUD showErrorWithMessage:@"缺少商品"];
                 return;
             }
-            
-            WLOrderAddressModel *address = [[WLOrderAddressModel alloc] init];
-            address.userName = self.addressView.name;
-            address.tel = self.addressView.phone;
-            address.address = [self.addressView.city stringByAppendingString:self.addressView.address];
-            address.postCode = self.addressView.zipCode;
             
             [MBProgressHUD showLoadingWithMessage:nil];
             [[WLServerHelper sharedInstance] order_createWithAddress:address productList:self.productList callback:^(WLApiInfoModel *apiInfo, WLOrderModel *apiResult, NSError *error) {

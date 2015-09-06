@@ -621,11 +621,6 @@ static NSString *const kTextCompleted      = @"已完成";
             cell.displayQuantityControl = NO;
             return cell;
         }];
-        [_activityTableView withBlockForRowDidSelect:^(UITableView *view, NSIndexPath *path) {
-            _strong_check(self);
-            WLOrderModel *order = self.activityList[path.section];
-            [self.navigationController pushViewController:[[OrderInfoVC alloc] initWithOrder:order] animated:YES];
-        }];
     }
     return _activityTableView;
 }
@@ -715,11 +710,6 @@ static NSString *const kTextCompleted      = @"已完成";
             cell.serviceName = order.title;
             cell.money       = order.totalMoney;
             return cell;
-        }];
-        [_doctorTableView withBlockForRowDidSelect:^(UITableView *view, NSIndexPath *path) {
-            _strong_check(self);
-            WLOrderModel *order = self.doctorList[path.section];
-            [self.navigationController pushViewController:[[OrderInfoVC alloc] initWithOrder:order] animated:YES];
         }];
     }
     return _doctorTableView;

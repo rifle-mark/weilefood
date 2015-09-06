@@ -350,7 +350,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
                 product.price = self.activity.price;
                 product.title = self.activity.title;
                 product.image = self.activity.banner;
-                [self.navigationController pushViewController:[[OrderConfirmVC alloc] initWithProductList:@[product]] animated:YES];
+                [self.navigationController pushViewController:[[OrderConfirmVC alloc] initWithProductList:@[product] needAddress:NO] animated:YES];
             }];
         }];
     }

@@ -20,12 +20,16 @@
                                 @"Count": @(product.count),
                                 }];
     }
-    NSDictionary *parameters = @{@"orderDetail": detailList,
-                                 @"orderAddress": @{@"UserName" : address.userName,
-                                                    @"Tel"      : address.tel,
-                                                    @"Address"  : address.address,
-                                                    @"PostCode" : address.postCode,
-                                                    }};
+    NSDictionary *orderAddress = nil;
+    if (address) {
+        orderAddress = @{@"UserName" : address.userName,
+                         @"Tel"      : address.tel,
+                         @"Address"  : address.address,
+                         @"PostCode" : address.postCode,
+                         };
+    }
+    NSDictionary *parameters = @{@"orderDetail"  : detailList,
+                                 @"orderAddress" : orderAddress ?: [NSNull null]};
     
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"orderform", @"order"]];
     [self httpPOST:apiUrl parameters:parameters resultClass:[WLOrderModel class] callback:callback];

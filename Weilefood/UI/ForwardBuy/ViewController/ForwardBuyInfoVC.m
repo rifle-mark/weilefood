@@ -344,7 +344,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
                         product.price = self.forwardBuy.price;
                         product.title = self.forwardBuy.title;
                         product.image = self.forwardBuy.banner;
-                        [self.navigationController pushViewController:[[OrderConfirmVC alloc] initWithProductList:@[product]] animated:YES];
+                        [self.navigationController pushViewController:[[OrderConfirmVC alloc] initWithProductList:@[product] needAddress:YES] animated:YES];
                     }];
                 }];
             }];
