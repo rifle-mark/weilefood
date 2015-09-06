@@ -202,7 +202,11 @@ static NSString *const kCellIdentifier = @"MYCELL";
         }];
         [_sectionHeaderView commentBlock:^{
             _strong_check(self);
-            [CommentListVC showWithType:WLCommentTypeForwardBuy refId:self.forwardBuy.forwardBuyId];
+            [CommentListVC showWithType:WLCommentTypeForwardBuy refId:self.forwardBuy.forwardBuyId dismissBlock:^(NSInteger addCount) {
+                _strong_check(self);
+                self.forwardBuy.commentCount += addCount;
+                [self _showData];
+            }];
         }];
         [_sectionHeaderView shareBlock:^{
             _strong_check(self);

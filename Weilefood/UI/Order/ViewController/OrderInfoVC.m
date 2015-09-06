@@ -13,6 +13,7 @@
 
 #import "OrderConfirmVC.h"
 #import "SelectPayPlatformVC.h"
+#import "SubmitUserHealthInfoVC.h"
 
 #import "UIViewController+BackButtonHandler.h"
 #import "WLPayHelper.h"
@@ -27,6 +28,7 @@
 @property (nonatomic, strong) UIView                 *lineView;
 @property (nonatomic, strong) UILabel                *moneyLabel;
 @property (nonatomic, strong) UIButton               *payButton;
+@property (nonatomic, strong) UIButton               *submitButton;
 
 // 有两个订单信息属性是因为
 // 列表上的订单信息和详情接口返回的订单信息互不冗余
@@ -61,6 +63,7 @@
     [self.footerView addSubview:self.lineView];
     [self.footerView addSubview:self.moneyLabel];
     [self.footerView addSubview:self.payButton];
+    [self.footerView addSubview:self.submitButton];
     
     [self _showData];
     [self _loadData];
@@ -91,6 +94,9 @@
         make.right.bottom.equalTo(self.payButton.superview);
         make.top.equalTo(self.lineView.mas_bottom);
         make.width.equalTo(@122);
+    }];
+    [self.submitButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.payButton);
     }];
     
     FixesViewDidLayoutSubviewsiOS7Error;
@@ -126,6 +132,17 @@
     self.moneyLabel.attributedText = attributedText;
     
     self.payButton.hidden = self.orderBaseInfo.state != WLOrderStateUnpaid;
+    
+    BOOL existDoctor = NO;
+    if (self.orderMoreInfo && self.orderMoreInfo.orderDetail) {
+        for (WLOrderProductModel *item in self.orderMoreInfo.orderDetail) {
+            if (item.type == WLOrderProductTypeDoctor) {
+                existDoctor = YES;
+                break;
+            }
+        }
+    }
+    self.submitButton.hidden = !existDoctor || self.orderBaseInfo.state != WLOrderStatePaid;
 }
 
 - (void)_loadData {
@@ -249,6 +266,22 @@
         }];
     }
     return _payButton;
+}
+
+- (UIButton *)submitButton {
+    if (!_submitButton) {
+        _submitButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _submitButton.backgroundColor = k_COLOR_ORANGE;
+        _submitButton.titleLabel.font = [UIFont systemFontOfSize:16];
+        [_submitButton setTitleColor:k_COLOR_WHITE forState:UIControlStateNormal];
+        [_submitButton setTitle:@"提交咨询" forState:UIControlStateNormal];
+        _weak(self);
+        [_submitButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            _strong_check(self);
+            [self.navigationController pushViewController:[[SubmitUserHealthInfoVC alloc] initWithOrderId:self.orderBaseInfo.orderId] animated:YES];
+        }];
+    }
+    return _submitButton;
 }
 
 @end

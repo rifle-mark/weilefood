@@ -22,10 +22,12 @@
 @property (nonatomic, strong) UITextView  *textView;
 @property (nonatomic, strong) UIButton    *sendButton;
 
-@property (nonatomic, assign) CGFloat       keyboardHeight;
-@property (nonatomic, assign) WLCommentType type;
-@property (nonatomic, assign) long long     refId;
-@property (nonatomic, strong) NSArray       *commentList;
+@property (nonatomic, assign) CGFloat                   keyboardHeight;
+@property (nonatomic, assign) WLCommentType             type;
+@property (nonatomic, assign) long long                 refId;
+@property (nonatomic, copy  ) CommentListVCDismissBlock dismissBlock;
+@property (nonatomic, assign) NSInteger                 addCount;
+@property (nonatomic, strong) NSArray                   *commentList;
 
 @property (nonatomic, strong) WLCommentModel *replyComment;
 
@@ -36,21 +38,23 @@ static NSInteger const kPageSize = 10;
 
 @implementation CommentListVC
 
-+ (void)showWithType:(WLCommentType)type refId:(long long)refId {
-    CommentListVC *vc = [[CommentListVC alloc] initWithType:type refId:refId];
++ (void)showWithType:(WLCommentType)type refId:(long long)refId dismissBlock:(CommentListVCDismissBlock)dismissBlock {
+    CommentListVC *vc = [[CommentListVC alloc] initWithType:type refId:refId dismissBlock:dismissBlock];
     UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nc animated:YES completion:nil];
 }
 
 - (id)init {
-    NSAssert(NO, @"请使用initWithType:refId:方法来实例化本界面");
+    NSAssert(NO, @"请使用initWithType:refId:dismissBlock:方法来实例化本界面");
     return nil;
 }
 
-- (id)initWithType:(WLCommentType)type refId:(long long)refId {
+- (id)initWithType:(WLCommentType)type refId:(long long)refId dismissBlock:(CommentListVCDismissBlock)dismissBlock {
     if (self = [super init]) {
+        self.addCount = 0;
         self.type = type;
         self.refId = refId;
+        self.dismissBlock = dismissBlock;
     }
     return self;
 }
@@ -102,6 +106,11 @@ static NSInteger const kPageSize = 10;
     }];
     
     FixesViewDidLayoutSubviewsiOS7Error;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    GCBlockInvoke(self.dismissBlock, self.addCount);
 }
 
 #pragma mark - private methods
@@ -272,7 +281,7 @@ static NSInteger const kPageSize = 10;
                 [self.textView becomeFirstResponder];
                 return;
             }
-            if (!self.textView.text || self.textView.text.length <= 2) {
+            if (!self.textView.text || self.textView.text.length < 2) {
                 [MBProgressHUD showErrorWithMessage:@"评论内容太少，多写一点吧"];
                 [self.textView becomeFirstResponder];
                 return;
@@ -282,6 +291,7 @@ static NSInteger const kPageSize = 10;
                 [MBProgressHUD hideLoading];
                 _strong_check(self);
                 ServerHelperErrorHandle;
+                self.addCount++;
                 [self.textView resignFirstResponder];
                 [self.tableView.header beginRefreshing];
                 [MBProgressHUD showSuccessWithMessage:@"已发布"];

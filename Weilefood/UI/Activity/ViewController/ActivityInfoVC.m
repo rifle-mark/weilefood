@@ -212,7 +212,11 @@ static NSString *const kCellIdentifier = @"MYCELL";
         }];
         [_sectionHeaderView commentBlock:^{
             _strong_check(self);
-            [CommentListVC showWithType:WLCommentTypeActivity refId:self.activity.activityId];
+            [CommentListVC showWithType:WLCommentTypeActivity refId:self.activity.activityId dismissBlock:^(NSInteger addCount) {
+                _strong_check(self);
+                self.activity.commentCount += addCount;
+                [self _showData];
+            }];
         }];
         [_sectionHeaderView shareBlock:^{
             _strong_check(self);

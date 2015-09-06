@@ -233,7 +233,11 @@
         _weak(self);
         [_commentButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            [CommentListVC showWithType:WLCommentTypeNutrition refId:self.nutrition.classId];
+            [CommentListVC showWithType:WLCommentTypeNutrition refId:self.nutrition.classId dismissBlock:^(NSInteger addCount) {
+                _strong_check(self);
+                self.nutrition.commentCount += addCount;
+                [self _showData];
+            }];
         }];
     }
     return _commentButton;
