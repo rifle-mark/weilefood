@@ -54,7 +54,6 @@
         [self.contentView addSubview:self.avatarV];
         [self.contentView addSubview:self.messageBgV];
         [self.messageBgV addSubview:self.messageL];
-        [self setNeedsUpdateConstraints];
         
         [self _setupObserver];
     }
@@ -64,6 +63,7 @@
 - (void)updateConstraints {
     [self.timeL mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.timeL.superview);
+        make.top.equalTo(@0);
         make.height.equalTo(@20);
     }];
     
@@ -72,33 +72,12 @@
         make.top.equalTo(self.timeL.mas_bottom).with.offset(5);
         make.width.height.equalTo(@(44));
     }];
-    
-    if (self.message) {
-        NSAttributedString *text = [[self class] _messageAttributedStringWithMessage:self.message];
-        CGRect textRect = [text boundingRectWithSize:ccs([UIScreen mainScreen].bounds.size.width-116, 10000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-        if (textRect.size.width < [UIScreen mainScreen].bounds.size.width-116) {
-            [self.messageBgV mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(self.avatarV);
-                make.right.equalTo(self.avatarV.mas_left);
-                make.bottom.equalTo(self.messageBgV.superview);
-                make.width.equalTo(@(textRect.size.width+37));
-            }];
-        }
-    }
-    else {
-        [self.messageBgV mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.avatarV);
-            make.right.equalTo(self.avatarV.mas_left);
-            make.bottom.equalTo(self.messageBgV.superview);
-            make.left.equalTo(self.messageBgV.superview).with.offset(45);
-        }];
-    }
-    
+    [self.messageBgV mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.avatarV);
+        make.right.equalTo(self.avatarV.mas_left);
+    }];
     [self.messageL mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.messageL.superview).with.offset(14);
-        make.left.equalTo(self.messageL.superview).with.offset(18);
-        make.right.equalTo(self.messageL.superview).with.offset(-15);
-        make.bottom.equalTo(self.messageL.superview).with.offset(-13);
+        make.edges.equalTo(self.messageBgV).insets(UIEdgeInsetsMake(12, 10, 6, 16));
     }];
     
     [super updateConstraints];
@@ -116,17 +95,17 @@
         NSString *time = nil;
         if ([self.message.createDate isToday]) {
             if ([self.message.createDate hour] < 12) {
-                time = [self.message.createDate formattedDateWithFormat:@"上午 HH:ss"];
+                time = [self.message.createDate formattedDateWithFormat:@"上午 HH:mm"];
             }
             else {
-                time = [self.message.createDate formattedDateWithFormat:@"下午 HH:ss"];
+                time = [self.message.createDate formattedDateWithFormat:@"下午 HH:mm"];
             }
         }
         else if ([self.message.createDate isYesterday]) {
-            time = [self.message.createDate formattedDateWithFormat:@"昨天 HH:ss"];
+            time = [self.message.createDate formattedDateWithFormat:@"昨天 HH:mm"];
         }
         else {
-            time = [self.message.createDate formattedDateWithFormat:@"YYYY年MM月DD日 HH:ss"];
+            time = [self.message.createDate formattedDateWithFormat:@"yyyy年MM月dd日 HH:mm"];
         }
         self.timeL.text = [NSString stringWithFormat:@" %@ ", time];
     }];
@@ -147,7 +126,7 @@
     if (!_messageL) {
         _messageL = [[UILabel alloc] init];
         _messageL.numberOfLines = 0;
-        _messageL.backgroundColor = k_COLOR_CLEAR;
+        _messageL.preferredMaxLayoutWidth = SCREEN_WIDTH - 116;
     }
     return _messageL;
 }

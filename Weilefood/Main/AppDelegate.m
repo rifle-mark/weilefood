@@ -81,6 +81,7 @@
     [UINavigationBar appearance].barStyle = UIBarStyleBlack;
     [UINavigationBar appearance].barTintColor = k_COLOR_THEME_NAVIGATIONBAR;
     [UINavigationBar appearance].tintColor = k_COLOR_THEME_NAVIGATIONBAR_TEXT;
+    [UINavigationBar appearance].titleTextAttributes = @{NSFontAttributeName : [UIFont systemFontOfSize:20]};
     [UINavigationController aspect_hookSelector:NSSelectorFromString(@"initWithRootViewController:") withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo) {
         ((UINavigationController *)aspectInfo.instance).navigationBar.translucent = NO;
     } error:NULL];

@@ -13,10 +13,6 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIImageView *playImageView;
 @property (nonatomic, strong) UILabel     *titleLabel;
-@property (nonatomic, strong) UILabel     *pointsLabel;
-@property (nonatomic, strong) UIButton    *favoriteButton;
-
-@property (nonatomic, copy) void (^favoriteBlock)(VideoCollectionCell *cell);
 
 @end
 
@@ -26,17 +22,14 @@ static CGFloat const kImageHeightScale = 0.788;
 @implementation VideoCollectionCell
 
 + (CGFloat)cellHeightWithCellWidth:(CGFloat)cellWidth {
-    return cellWidth * kImageHeightScale + 68;
+    return cellWidth * kImageHeightScale + 48;
 }
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        _showFavorite = YES;
         [self.contentView addSubview:self.imageView];
         [self.contentView addSubview:self.playImageView];
         [self.contentView addSubview:self.titleLabel];
-        [self.contentView addSubview:self.pointsLabel];
-        [self.contentView addSubview:self.favoriteButton];
         
         [self _makeConstraints];
     }
@@ -55,25 +48,6 @@ static CGFloat const kImageHeightScale = 0.788;
     self.titleLabel.text = title;
 }
 
-- (void)setPoints:(NSInteger)points {
-    _points = points;
-    self.pointsLabel.text = [NSString stringWithFormat:@"观看积分 %ld", (long)points];
-}
-
-- (void)setIsFavorite:(BOOL)isFavorite {
-    _isFavorite = isFavorite;
-    self.favoriteButton.highlighted = isFavorite;
-}
-
-- (void)setShowFavorite:(BOOL)showFavorite {
-    _showFavorite = showFavorite;
-    self.favoriteButton.hidden = !showFavorite;
-}
-
-- (void)favoriteBlock:(void (^)(VideoCollectionCell *))block {
-    self.favoriteBlock = block;
-}
-
 #pragma mark - private methons
 
 - (void)_makeConstraints {
@@ -87,14 +61,6 @@ static CGFloat const kImageHeightScale = 0.788;
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.imageView.mas_bottom).offset(8);
         make.left.right.equalTo(self.contentView);
-    }];
-    [self.pointsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.contentView);
-        make.bottom.equalTo(self.pointsLabel.superview).offset(-7);
-    }];
-    [self.favoriteButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.favoriteButton.superview);
-        make.centerY.equalTo(self.pointsLabel);
     }];
 }
 
@@ -125,29 +91,6 @@ static CGFloat const kImageHeightScale = 0.788;
         _titleLabel.numberOfLines = 2;
     }
     return _titleLabel;
-}
-
-- (UILabel *)pointsLabel {
-    if (!_pointsLabel) {
-        _pointsLabel = [[UILabel alloc] init];
-        _pointsLabel.font = [UIFont boldSystemFontOfSize:13];
-        _pointsLabel.textColor = k_COLOR_GOLDENROD;
-    }
-    return _pointsLabel;
-}
-
-- (UIButton *)favoriteButton {
-    if (!_favoriteButton) {
-        _favoriteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_favoriteButton setImage:[UIImage imageNamed:@"video_icon_favorite_n"] forState:UIControlStateNormal];
-        [_favoriteButton setImage:[UIImage imageNamed:@"video_icon_favorite_h"] forState:UIControlStateHighlighted];
-        _weak(self);
-        [_favoriteButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
-            _strong_check(self);
-            GCBlockInvoke(self.favoriteBlock, self);
-        }];
-    }
-    return _favoriteButton;
 }
 
 @end

@@ -180,7 +180,7 @@ static NSInteger const kNumberHeight        = 20;
     if (!_pageControl) {
         _pageControl = [[UIPageControl alloc] init];
         _pageControl.userInteractionEnabled = NO;
-        _pageControl.backgroundColor = [k_COLOR_BLACK colorWithAlphaComponent:0.7];
+        _pageControl.backgroundColor = [k_COLOR_BLACK colorWithAlphaComponent:0.2];
         _pageControl.layer.cornerRadius = 7;
     }
     return _pageControl;

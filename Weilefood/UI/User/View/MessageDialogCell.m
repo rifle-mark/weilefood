@@ -53,19 +53,19 @@
         make.left.equalTo(self.avatarV.mas_right).with.offset(13);
     }];
     [self.timeL mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.timeL.superview).with.offset(15);
+        make.centerY.equalTo(self.nickNameL);
         make.right.equalTo(self.timeL.superview).with.offset(-10);
     }];
     [self.messageL mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.nickNameL.mas_bottom).with.offset(6);
         make.left.equalTo(self.nickNameL);
-        make.right.equalTo(self.timeL.mas_left);
+        make.right.equalTo(self.timeL);
     }];
     [self.lineV mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.avatarV);
         make.right.equalTo(self.timeL);
         make.bottom.equalTo(self.lineV.superview);
-        make.height.equalTo(@0.4);
+        make.height.equalTo(@k1pxWidth);
     }];
     
     [super updateConstraints];
@@ -122,7 +122,6 @@
         _timeL = [[UILabel alloc] init];
         _timeL.font = [UIFont systemFontOfSize:12];
         _timeL.textColor = k_COLOR_DARKGRAY;
-        _timeL.textAlignment = NSTextAlignmentRight;
     }
     return _timeL;
 }
@@ -132,8 +131,6 @@
         _messageL = [[UILabel alloc] init];
         _messageL.font = [UIFont systemFontOfSize:14];
         _messageL.textColor = k_COLOR_STAR_DUST;
-        _messageL.numberOfLines = 1;
-        _messageL.lineBreakMode = NSLineBreakByTruncatingTail;
     }
     return _messageL;
 }

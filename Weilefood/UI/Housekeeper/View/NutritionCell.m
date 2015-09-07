@@ -23,7 +23,7 @@
 @implementation NutritionCell
 
 + (CGFloat)cellHeight {
-    return 10 + (SCREEN_WIDTH - 20) * 2.0 / 3.0 + 69;
+    return 10 + (SCREEN_WIDTH - 20) * 2.0 / 3.0 + 72;
 }
 
 + (NSString *)reuseIdentifier {
@@ -77,7 +77,7 @@
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.picImageView);
-        make.top.equalTo(self.picImageView.mas_bottom).offset(7);
+        make.top.equalTo(self.picImageView.mas_bottom).offset(10);
         make.height.equalTo(@(self.nameLabel.font.lineHeight));
     }];
     

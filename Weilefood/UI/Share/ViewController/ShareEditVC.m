@@ -449,7 +449,7 @@ static NSString* pickerCamera = @"拍照";
             _strong_check(self);
             NSMutableArray *newImages = [NSMutableArray array];
             for (ALAsset *asset in info) {
-                UIImage *image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
+                UIImage *image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]];
                 image = [image adjustedToStandardSize];
                 [newImages addObject:image];
             }

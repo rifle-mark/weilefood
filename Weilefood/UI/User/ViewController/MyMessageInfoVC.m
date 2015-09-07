@@ -40,7 +40,8 @@ static NSUInteger kPageSize = 20;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.navigationItem.title = self.nickName;
+    self.title = self.nickName;
+    self.automaticallyAdjustsScrollViewInsets = NO;
 
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.footerView];
@@ -61,8 +62,7 @@ static NSUInteger kPageSize = 20;
     [super viewDidLayoutSubviews];
     
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.tableView.superview).with.offset(self.topLayoutGuide.length);
-        make.left.right.equalTo(self.tableView.superview);
+        make.top.left.right.equalTo(self.tableView.superview);
         make.bottom.equalTo(self.lineView.mas_top);
     }];
     
@@ -173,6 +173,7 @@ static NSUInteger kPageSize = 20;
         _tableView.backgroundColor = k_COLOR_WHITESMOKE;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 19)];
         [_tableView registerClass:[MessageUserInfoCell class] forCellReuseIdentifier:[MessageUserInfoCell reuseIdentify]];
         [_tableView registerClass:[MessageOwnInfoCell class] forCellReuseIdentifier:[MessageOwnInfoCell reuseIdentify]];
         
@@ -278,8 +279,7 @@ static NSUInteger kPageSize = 20;
             [[WLServerHelper sharedInstance] message_addWithToUserId:self.userId content:content callback:^(WLApiInfoModel *apiInfo, WLMessageModel *apiResult, NSError *error) {
                 _strong_check(self);
                 ServerHelperErrorHandle;
-                
-                self.messageList = [self.messageList arrayByAddingObject:apiResult];
+                self.messageList = self.messageList ? [self.messageList arrayByAddingObject:apiResult] : @[apiResult];
             }];
         }];
     }

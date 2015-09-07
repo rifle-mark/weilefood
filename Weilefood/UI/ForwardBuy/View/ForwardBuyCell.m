@@ -29,7 +29,7 @@
 @implementation ForwardBuyCell
 
 + (CGFloat)cellHeight {
-    return 10 + (V_W_([UIApplication sharedApplication].keyWindow) - 20) * 2.0 / 3.0 + 95.7;
+    return 10 + (SCREEN_WIDTH - 20) * 2.0 / 3.0 + 101.7;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -137,12 +137,12 @@
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.picImageView);
-        make.top.equalTo(self.timeView.mas_bottom).offset(7);
+        make.top.equalTo(self.timeView.mas_bottom).offset(10);
         make.height.equalTo(@(self.nameLabel.font.lineHeight));
     }];
     [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nameLabel);
-        make.top.equalTo(self.nameLabel.mas_baseline).offset(7);
+        make.top.equalTo(self.nameLabel.mas_baseline).offset(10);
     }];
     
     [self.commentCountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
