@@ -9,7 +9,6 @@
 #import "MJRefreshAutoFooter.h"
 
 @interface MJRefreshAutoFooter()
-@property (strong, nonatomic) UIPanGestureRecognizer *pan;
 @end
 
 @implementation MJRefreshAutoFooter
@@ -20,12 +19,16 @@
     [super willMoveToSuperview:newSuperview];
     
     if (newSuperview) { // 新的父控件
-        self.scrollView.mj_insetB += self.mj_h;
+        if (self.hidden == NO) {
+            self.scrollView.mj_insetB += self.mj_h;
+        }
         
-        // 重新调整frame
-        [self scrollViewContentSizeDidChange:nil];
+        // 设置位置
+        self.mj_y = _scrollView.mj_contentH;
     } else { // 被移除了
-        self.scrollView.mj_insetB -= self.mj_h;
+        if (self.hidden == NO) {
+            self.scrollView.mj_insetB -= self.mj_h;
+        }
     }
 }
 
@@ -39,9 +42,6 @@
     
     // 设置为默认状态
     self.automaticallyRefresh = YES;
-    
-    // 默认是自动隐藏
-    self.automaticallyHidden = YES;
 }
 
 - (void)scrollViewContentSizeDidChange:(NSDictionary *)change
@@ -68,13 +68,6 @@
             
             // 当底部刷新控件完全出现时，才刷新
             [self beginRefreshing];
-            
-            // 如果正在减速，并且希望阻止连续刷新
-            if (self.scrollView.isDecelerating && self.preventContinuousRefreshing) {
-                CGPoint offset = self.scrollView.contentOffset;
-                offset.y = _scrollView.mj_contentH - _scrollView.mj_h + self.mj_h + _scrollView.mj_insetB - self.mj_h;
-                [self.scrollView setContentOffset:offset animated:YES];
-            }
         }
     }
 }
@@ -103,7 +96,9 @@
     MJRefreshCheckState
     
     if (state == MJRefreshStateRefreshing) {
-        [self executeRefreshingCallback];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self executeRefreshingCallback];
+        });
     }
 }
 
@@ -115,11 +110,13 @@
     
     if (!lastHidden && hidden) {
         self.state = MJRefreshStateIdle;
-        _scrollView.mj_insetB -= self.mj_h;
-    } else if (lastHidden && !hidden) {
-        _scrollView.mj_insetB += self.mj_h;
         
-        [self scrollViewContentSizeDidChange:nil];
+        self.scrollView.mj_insetB -= self.mj_h;
+    } else if (lastHidden && !hidden) {
+        self.scrollView.mj_insetB += self.mj_h;
+        
+        // 设置位置
+        self.mj_y = _scrollView.mj_contentH;
     }
 }
 @end

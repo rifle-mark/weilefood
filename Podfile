@@ -28,6 +28,8 @@ target 'Weilefood' do
   pod 'DateTools'
   # 循环分页视图，占用资源少
   pod 'SwipeView'
+  # NavigationBar消息提示组件
+  pod 'CWStatusBarNotification'
 
 end
 
