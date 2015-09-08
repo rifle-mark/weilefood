@@ -49,7 +49,7 @@
 - (void)user_updateWithNickName:(NSString *)nickName avatar:(NSString *)avatar callback:(void (^)(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"user", @"update"]];
     NSDictionary *parameters = @{@"userInfo": @{@"NickName"   : nickName,
-                                                @"Avatar"     : avatar,
+                                                @"Avatar"     : avatar ?: [NSNull null],
                                                 }};
     [self httpPOST:apiUrl parameters:parameters resultClass:[WLUserModel class] callback:callback];
 }

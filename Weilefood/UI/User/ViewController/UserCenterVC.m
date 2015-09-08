@@ -13,6 +13,7 @@
 #import "UserCenterListCell.h"
 
 #import "WLDatabaseHelperHeader.h"
+#import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
 
 #import "LoginVC.h"
@@ -20,7 +21,6 @@
 #import "MyShareVC.h"
 #import "MyMessageVC.h"
 #import "ShoppingCartVC.h"
-#import "MyVideoVC.h"
 #import "MyFavoriteVC.h"
 #import "MyCommentVC.h"
 #import "FeedBackVC.h"
@@ -44,7 +44,7 @@ static NSInteger const kSectionList   = 2;
     self.navigationItem.title = @"我的帐户";
     UIBarButtonItem *settingItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(_openSetting:)];
     settingItem.tintColor = k_COLOR_WHITE;
-    self.navigationItem.rightBarButtonItem = settingItem;
+    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], settingItem];
     
     [self.view addSubview:self.tableView];
 }
@@ -63,6 +63,24 @@ static NSInteger const kSectionList   = 2;
     }];
     
     FixesViewDidLayoutSubviewsiOS7Error;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    _weak(self);
+    WLUserModel *user = [WLDatabaseHelper user_find];
+    if (user) {
+        [[WLServerHelper sharedInstance] user_getUserBaseInfoWithUserId:user.userId callback:^(WLApiInfoModel *apiInfo, WLUserModel *apiResult, NSError *error) {
+            _strong_check(self);
+            if (!error && apiInfo.isSuc) {
+                user.nickName = apiResult.nickName;
+                user.avatar = apiResult.avatar;
+                user.points = apiResult.points;
+                [WLDatabaseHelper user_save:user];
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kSectionInfo] withRowAnimation:UITableViewRowAnimationNone];
+            }
+        }];
+    }
 }
 
 #pragma mark - private method
@@ -99,7 +117,7 @@ static NSInteger const kSectionList   = 2;
                     return 73;
                     break;
                 case kSectionList:
-                    if (path.row == 1 || path.row == 3 || path.row == 4) {
+                    if (path.row == 0 || path.row == 2 || path.row == 3) {
                         return 70;
                     }
                     else {
@@ -120,7 +138,7 @@ static NSInteger const kSectionList   = 2;
                     return 1;
                     break;
                 case kSectionList:
-                    return 5;
+                    return 4;
                     break;
                 default:
                     return 0;
@@ -208,11 +226,6 @@ static NSInteger const kSectionList   = 2;
                 switch (cell.itemType) {
                     case MyOrder: {
                         UserOrderListVC *vc = [[UserOrderListVC alloc] init];
-                        [self.navigationController pushViewController:vc animated:YES];
-                    }
-                        break;
-                    case MyVedio: {
-                        MyVideoVC *vc = [[MyVideoVC alloc] init];
                         [self.navigationController pushViewController:vc animated:YES];
                     }
                         break;

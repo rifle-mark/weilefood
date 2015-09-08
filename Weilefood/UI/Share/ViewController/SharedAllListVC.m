@@ -56,12 +56,15 @@ static NSUInteger kPageSize = 20;
     [super viewDidLayoutSubviews];
     
     [self.shareListTableV mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.top.equalTo(self.view).with.offset(self.topLayoutGuide.length);
-        make.bottom.equalTo(self.view).with.offset(self.bottomLayoutGuide.length);
+        make.edges.equalTo(self.view);
     }];
     
     FixesViewDidLayoutSubviewsiOS7Error;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.shareListTableV reloadData];
 }
 
 - (UITableView *)shareListTableV {

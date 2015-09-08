@@ -10,7 +10,6 @@
 
 typedef NS_ENUM(NSUInteger, UserCenterListItemType) {
     MyOrder,
-    MyVedio,
     MyFavorite,
     MyComment,
     FeedBack

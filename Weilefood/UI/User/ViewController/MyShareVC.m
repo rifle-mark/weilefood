@@ -39,7 +39,7 @@ static NSInteger kPageSize = 20;
     // Do any additional setup after loading the view.
     WLUserModel *currentUser = [WLDatabaseHelper user_find];
     self.navigationItem.title = self.userId == currentUser.userId?@"我的发帖":@"用户发帖";
-    self.navigationItem.rightBarButtonItem = self.rightBarItem;
+    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], self.rightBarItem];
     
     [self.view addSubview:self.tableView];
     [self _setupObserver];

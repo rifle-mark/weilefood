@@ -170,32 +170,7 @@ static NSInteger const kPageSize       = 10;
             WLVideoModel *video = self.videoList[path.item];
             cell.imageUrl = video.images;
             cell.title    = video.title;
-            cell.points   = video.points;
-            cell.isFavorite = video.isFav;
             cell.isVideo  = video.videoUrl && (video.videoUrl.length > 0);
-            [cell favoriteBlock:^(VideoCollectionCell *cell) {
-                _strong_check(self);
-                NSIndexPath *path = [self.collectionView indexPathForCell:cell];
-                WLVideoModel *video = self.videoList[path.item];
-                [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
-                    if (video.isFav) {
-                        [[WLServerHelper sharedInstance] action_deleteFavoriteWithObjectType:WLActionTypeVideo objectId:video.videoId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
-                            _strong_check(self);
-                            ServerHelperErrorHandle;
-                            video.isFav = NO;
-                            [self.collectionView reloadItemsAtIndexPaths:@[path]];
-                        }];
-                    }
-                    else {
-                        [[WLServerHelper sharedInstance] action_addWithActType:WLActionActTypeFavorite objectType:WLActionTypeVideo objectId:video.videoId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
-                            _strong_check(self);
-                            ServerHelperErrorHandle;
-                            video.isFav = YES;
-                            [self.collectionView reloadItemsAtIndexPaths:@[path]];
-                        }];
-                    }
-                }];
-            }];
             return cell;
         }];
         [_collectionView withBlockForItemDidSelect:^(UICollectionView *view, NSIndexPath *path) {

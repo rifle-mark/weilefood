@@ -122,6 +122,7 @@
     [self.subjectBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.fromL);
         make.left.equalTo(self.fromL.mas_right).with.offset(5);
+        make.right.equalTo(self.commentContentT);
     }];
     
     [self.seperatorV mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -189,6 +190,7 @@
         _fromL.font = [UIFont boldSystemFontOfSize:14];
         _fromL.textColor = k_COLOR_STAR_DUST;
         _fromL.text = @"来自: ";
+        [_fromL setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     }
     return _fromL;
 }
@@ -200,7 +202,7 @@
         [_subjectBtn setTitleColor:k_COLOR_GOLDENROD forState:UIControlStateNormal];
         _subjectBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         _subjectBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
-        
+        _subjectBtn.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _weak(self);
         [_subjectBtn addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);

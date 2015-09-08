@@ -100,11 +100,6 @@
                 self.titleL.text = @"我的订单";
             }
                 break;
-            case MyVedio: {
-                self.iconV.image = [UIImage imageNamed:@"myvedio_icon"];
-                self.titleL.text = @"我的视频";
-            }
-                break;
             case MyFavorite: {
                 self.iconV.image = [UIImage imageNamed:@"myfavorite_icon"];
                 self.titleL.text = @"我的收藏";

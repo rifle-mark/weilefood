@@ -29,7 +29,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:22]};
     self.title = @"味了";
     self.view.backgroundColor = [UIColor whiteColor];
     self.tabBar.translucent = NO;

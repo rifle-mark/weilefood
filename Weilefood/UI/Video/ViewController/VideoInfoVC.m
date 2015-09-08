@@ -29,7 +29,6 @@
 @property (nonatomic, strong) UIImageView  *videoImageView;
 @property (nonatomic, strong) UIButton     *playButton;
 @property (nonatomic, strong) UILabel      *titleLabel;
-@property (nonatomic, strong) UILabel      *pointsLabel;
 @property (nonatomic, strong) UIView       *lineView;
 @property (nonatomic, strong) UIWebView    *webView;
 
@@ -71,7 +70,6 @@
     [self.contentView addSubview:self.videoImageView];
     [self.contentView addSubview:self.playButton];
     [self.contentView addSubview:self.titleLabel];
-    [self.contentView addSubview:self.pointsLabel];
     [self.contentView addSubview:self.lineView];
     [self.contentView addSubview:self.webView];
     
@@ -104,13 +102,9 @@
         make.left.right.equalTo(self.contentView).insets(UIEdgeInsetsMake(0, 15, 0, 15));
         make.top.equalTo(self.videoImageView.mas_bottom).offset(20);
     }];
-    [self.pointsLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleLabel);
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
-    }];
     [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.titleLabel);
-        make.top.equalTo(self.pointsLabel.mas_baseline).offset(18);
+        make.top.equalTo(self.titleLabel.mas_baseline).offset(18);
         make.height.equalTo(@k1pxWidth);
     }];
     [self.webView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -161,7 +155,6 @@
         [self.videoImageView my_setImageWithURL:[NSURL URLWithString:self.video.images]];
     }
     self.titleLabel.text = self.video.title;
-    self.pointsLabel.text = [NSString stringWithFormat:@"观看积分 %lu", (unsigned long)self.video.points];
     [self.webView loadHTMLString:self.video.desc baseURL:nil];
 }
 
@@ -312,32 +305,9 @@
         _weak(self);
         [_playButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            
-            void (^playVideo)() = ^{
-                NSURL *url = [NSURL URLWithString:self.video.videoUrl];
-                MPMoviePlayerViewController *pvc = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
-                [self presentViewController:pvc animated:YES completion:nil];
-            };
-            
-            if (self.video.isBuy || self.video.points <= 0) {
-                playVideo();
-            }
-            else {
-                NSString *msg = [NSString stringWithFormat:@"确定使用%lu积分兑换此视频？", (unsigned long)self.video.points];
-                GCAlertView *alertView = [[GCAlertView alloc] initWithTitle:msg andMessage:nil];
-                [alertView setCancelButtonWithTitle:@"取消" actionBlock:nil];
-                [alertView addOtherButtonWithTitle:@"确定" actionBlock:^{
-                    [MBProgressHUD showLoadingWithMessage:nil];
-                    [[WLServerHelper sharedInstance] video_buyWithVideoId:self.video.videoId callback:^(WLApiInfoModel *apiInfo, NSError *error) {
-                        [MBProgressHUD hideLoading];
-                        _strong_check(self);
-                        ServerHelperErrorHandle;
-                        self.video.isBuy = YES;
-                        playVideo();
-                    }];
-                }];
-                [alertView show];
-            }
+            NSURL *url = [NSURL URLWithString:self.video.videoUrl];
+            MPMoviePlayerViewController *pvc = [[MPMoviePlayerViewController alloc] initWithContentURL:url];
+            [self presentViewController:pvc animated:YES completion:nil];
         }];
     }
     return _playButton;
@@ -351,16 +321,6 @@
         _titleLabel.numberOfLines = 2;
     }
     return _titleLabel;
-}
-
-- (UILabel *)pointsLabel {
-    if (!_pointsLabel) {
-        _pointsLabel = [[UILabel alloc] init];
-        _pointsLabel.font = [UIFont systemFontOfSize:13];
-        _pointsLabel.textColor = k_COLOR_GOLDENROD;
-        _pointsLabel.numberOfLines = 2;
-    }
-    return _pointsLabel;
 }
 
 - (UIView *)lineView {

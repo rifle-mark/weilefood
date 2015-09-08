@@ -21,12 +21,12 @@
 @property (nonatomic, copy) NSString *videoUrl;
 /// 赞数
 @property (nonatomic, assign) NSUInteger actionCount;
-/// 积分数
-@property (nonatomic, assign) NSUInteger points;
 /// 评论数
 @property (nonatomic, assign) NSUInteger commentCount;
+/// 积分数
+//@property (nonatomic, assign) NSUInteger points;
 /// 是否已购买
-@property (nonatomic, assign) BOOL isBuy;
+//@property (nonatomic, assign) BOOL isBuy;
 /// 介绍
 @property (nonatomic, copy) NSString *desc;
 /// 是否已收藏

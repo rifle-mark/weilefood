@@ -107,7 +107,11 @@ static NSString *const kCellIdentifier = @"MYCELL";
         _searchTextField.frame = CGRectMake(0, 0, V_W_([UIApplication sharedApplication].keyWindow) - 50, 35);
         _searchTextField.returnKeyType = UIReturnKeySearch;
         _searchTextField.tintColor = k_COLOR_THEME_NAVIGATIONBAR;
+        _searchTextField.textColor = k_COLOR_WHITE;
+        _searchTextField.backgroundColor = k_COLOR_MEDIUMTURQUOISE;
         _searchTextField.placeholder = @"请输入关键字进行搜索";
+        NSAttributedString *attr = [[NSAttributedString alloc] initWithString:@"请输入关键字进行搜索" attributes:@{NSForegroundColorAttributeName : _searchTextField.textColor}];
+        _searchTextField.attributedPlaceholder = attr;
         _weak(self);
         [_searchTextField withBlockForShouldReturn:^BOOL(UITextField *view) {
             _strong_check(self, NO);

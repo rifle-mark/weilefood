@@ -24,7 +24,7 @@
 @implementation ActivityCell
 
 + (CGFloat)cellHeight {
-    return 10 + (V_W_([UIApplication sharedApplication].keyWindow) - 20) * 2.0 / 3.0 + 65;
+    return 10 + (SCREEN_WIDTH - 20) * 2.0 / 3.0 + 71;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -98,12 +98,12 @@
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.picImageView);
-        make.top.equalTo(self.picImageView.mas_bottom).offset(7);
+        make.top.equalTo(self.picImageView.mas_bottom).offset(10);
         make.height.equalTo(@(self.nameLabel.font.lineHeight));
     }];
     [self.beginEndDateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nameLabel);
-        make.top.equalTo(self.nameLabel.mas_bottom).offset(7);
+        make.top.equalTo(self.nameLabel.mas_bottom).offset(10);
     }];
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.beginEndDateLabel.mas_right).offset(5);
