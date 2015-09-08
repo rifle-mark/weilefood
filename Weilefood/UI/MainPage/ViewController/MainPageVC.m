@@ -7,6 +7,7 @@
 //
 
 #import "MainPageVC.h"
+#import <CWStatusBarNotification/CWStatusBarNotification.h>
 
 #import "DiscoveryVC.h"
 #import "SharedAllListVC.h"
@@ -14,6 +15,8 @@
 #import "LoginVC.h"
 
 @interface MainPageVC ()
+
+@property (nonatomic, strong) CWStatusBarNotification *noNetworkMessage;
 
 @property (nonatomic, strong) UIBarButtonItem *userItem;
 @property (nonatomic, assign) BOOL isSetedSelectedIndex;
@@ -43,6 +46,7 @@
     [self.footerView addSubview:self.addShareButton];
     [self.footerView addSubview:self.sharedListButton];
     
+    [self _setupObserve];
     [self _isSelectedDiscoveryTabBar:YES];
 }
 
@@ -73,6 +77,27 @@
 }
 
 #pragma mark - private methons
+
+- (void)_setupObserve {
+    _weak(self);
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        _strong_check(self);
+        if (status <= AFNetworkReachabilityStatusNotReachable) {
+            if (!self.noNetworkMessage) {
+                self.noNetworkMessage = [[CWStatusBarNotification alloc] init];
+                self.noNetworkMessage.notificationLabelBackgroundColor = [UIColor redColor];
+                self.noNetworkMessage.notificationAnimationInStyle = CWNotificationAnimationStyleTop;
+                self.noNetworkMessage.notificationAnimationOutStyle = CWNotificationAnimationStyleTop;
+                self.noNetworkMessage.notificationStyle = CWNotificationStyleStatusBarNotification;
+            }
+            [self.noNetworkMessage displayNotificationWithMessage:@"网络连接不可用" completion:nil];
+        }
+        else {
+            [self.noNetworkMessage dismissNotification];
+        }
+    }];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+}
 
 - (void)_isSelectedDiscoveryTabBar:(BOOL)isSelectedDiscoveryTabBar {
     if (isSelectedDiscoveryTabBar) {
