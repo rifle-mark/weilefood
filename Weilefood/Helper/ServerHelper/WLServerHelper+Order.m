@@ -8,6 +8,7 @@
 
 #import "WLServerHelper+Order.h"
 #import "WLModelHeader.h"
+#import "WLDictionaryHelper.h"
 
 @implementation WLServerHelper (Order)
 
@@ -43,7 +44,31 @@
 
 - (void)order_getDetailWithOrderId:(long long)orderId callback:(void (^)(WLApiInfoModel *apiInfo, WLOrderModel *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"orderform", @"detail", @(orderId)]];
-    [self httpGET:apiUrl parameters:nil resultClass:[WLOrderModel class] callback:callback];
+    [[self httpManager] GET:apiUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *responseDic = [WLDictionaryHelper validModelDictionary:responseObject];
+        WLApiInfoModel *apiInfo = [WLApiInfoModel objectWithKeyValues:responseDic];
+        WLOrderModel *apiResult = nil;
+        if (apiInfo.isSuc) {
+            NSDictionary *dic = responseDic[API_RESULT_KEYNAME];
+            apiResult = [WLOrderModel objectWithKeyValues:dic];
+            
+            NSDictionary *orderForm = [dic valueForKey:@"OrderForm"];
+            if (orderForm) {
+                apiResult.orderDate = [orderForm valueForKey:@"OrderDate"];
+                apiResult.orderId = [[orderForm valueForKey:@"OrderId"] longLongValue];
+                apiResult.orderNum = [orderForm valueForKey:@"OrderNum"];
+                apiResult.orderType = [[orderForm valueForKey:@"OrderType"] integerValue];
+                apiResult.paymentDate = [orderForm valueForKey:@"PaymentDate"];
+                apiResult.paymentId = [[orderForm valueForKey:@"PaymentId"] longLongValue];
+                apiResult.state = [[orderForm valueForKey:@"State"] integerValue];
+                apiResult.totalMoney = [[orderForm valueForKey:@"TotalMoney"] floatValue];
+                apiResult.userId = [[orderForm valueForKey:@"UserId"] longLongValue];
+            }
+        }
+        GCBlockInvoke(callback, apiInfo, apiResult, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        GCBlockInvoke(callback, nil, nil, error);
+    }];
 }
 
 - (void)order_getDoctorListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {

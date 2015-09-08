@@ -30,11 +30,7 @@
 @property (nonatomic, strong) UIButton               *payButton;
 @property (nonatomic, strong) UIButton               *submitButton;
 
-// 有两个订单信息属性是因为
-// 列表上的订单信息和详情接口返回的订单信息互不冗余
-// 只有列表上的订单信息加上订单详情信息才是完整的订单信息。
 @property (nonatomic, strong) WLOrderModel *orderBaseInfo;
-@property (nonatomic, strong) WLOrderModel *orderMoreInfo;
 
 @end
 
@@ -64,6 +60,8 @@
     [self.footerView addSubview:self.moneyLabel];
     [self.footerView addSubview:self.payButton];
     [self.footerView addSubview:self.submitButton];
+    
+    [self _addObserver];
     
     [self _showData];
     [self _loadData];
@@ -120,6 +118,20 @@
 
 #pragma mark - private methods
 
+- (void)_addObserver {
+    _weak(self);
+    [self addObserverForNotificationName:kNotificationOrderInfoChanged usingBlock:^(NSNotification *notification) {
+        _strong_check(self);
+        if (![notification.object isKindOfClass:[NSNumber class]]) {
+            return;
+        }
+        long long orderId = [notification.object longLongValue];
+        if (self.orderBaseInfo.orderId == orderId) {
+            [self _loadData];
+        }
+    }];
+}
+
 - (void)_showData {
     self.numberAndDateView.orderNum = self.orderBaseInfo.orderNum;
     self.numberAndDateView.date = self.orderBaseInfo.orderDate;
@@ -134,8 +146,8 @@
     self.payButton.hidden = self.orderBaseInfo.state != WLOrderStateUnpaid;
     
     BOOL existDoctor = NO;
-    if (self.orderMoreInfo && self.orderMoreInfo.orderDetail) {
-        for (WLOrderProductModel *item in self.orderMoreInfo.orderDetail) {
+    if (self.orderBaseInfo && self.orderBaseInfo.orderDetail) {
+        for (WLOrderProductModel *item in self.orderBaseInfo.orderDetail) {
             if (item.type == WLOrderProductTypeDoctor) {
                 existDoctor = YES;
                 break;
@@ -150,7 +162,7 @@
     [[WLServerHelper sharedInstance] order_getDetailWithOrderId:self.orderBaseInfo.orderId callback:^(WLApiInfoModel *apiInfo, WLOrderModel *apiResult, NSError *error) {
         _strong_check(self);
         ServerHelperErrorHandle;
-        self.orderMoreInfo = apiResult;
+        self.orderBaseInfo = apiResult;
         [self _showData];
     }];
 }
@@ -178,31 +190,31 @@
         _weak(self);
         [_tableView withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {
             _strong_check(self, 0);
-            return (self.orderMoreInfo.orderAddress ? 1 : 0) + (self.orderMoreInfo && self.orderMoreInfo.orderDetail ? self.orderMoreInfo.orderDetail.count : 0);
+            return (self.orderBaseInfo.orderAddress ? 1 : 0) + (self.orderBaseInfo && self.orderBaseInfo.orderDetail ? self.orderBaseInfo.orderDetail.count : 0);
         }];
         [_tableView withBlockForRowHeight:^CGFloat(UITableView *view, NSIndexPath *path) {
             _strong_check(self, 0);
-            if (path.row == 0 && self.orderMoreInfo.orderAddress) {
-                NSString *address = self.orderMoreInfo.orderAddress.address;
+            if (path.row == 0 && self.orderBaseInfo.orderAddress) {
+                NSString *address = self.orderBaseInfo.orderAddress.address;
                 return [OrderInfoHeaderCell cellHeightWithAddress:address isShowExpressInfo:self.orderBaseInfo.state == WLOrderStateShipped];
             }
             return [ShoppingCartProductCell cellHeight];
         }];
         [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
             _strong_check(self, nil);
-            if (path.row == 0 && self.orderMoreInfo.orderAddress) {
+            if (path.row == 0 && self.orderBaseInfo.orderAddress) {
                 OrderInfoHeaderCell *cell = [view dequeueReusableCellWithIdentifier:[OrderInfoHeaderCell reuseIdentifier] forIndexPath:path];
-                cell.name = self.orderMoreInfo.orderAddress.userName;
-                cell.phone = self.orderMoreInfo.orderAddress.tel;
-                cell.address = self.orderMoreInfo.orderAddress.address;
-                cell.zipCode = self.orderMoreInfo.orderAddress.postCode;
+                cell.name              = self.orderBaseInfo.orderAddress.userName;
+                cell.phone             = self.orderBaseInfo.orderAddress.tel;
+                cell.address           = self.orderBaseInfo.orderAddress.address;
+                cell.zipCode           = self.orderBaseInfo.orderAddress.postCode;
                 cell.isShowExpressInfo = self.orderBaseInfo.state == WLOrderStateShipped;
-                cell.expressName = self.orderMoreInfo.deliver.expressName;
-                cell.expressNum = self.orderMoreInfo.deliver.expressNum;
+                cell.expressName       = self.orderBaseInfo.deliver.expressName;
+                cell.expressNum        = self.orderBaseInfo.deliver.expressNum;
                 return cell;
             }
             ShoppingCartProductCell *cell = [view dequeueReusableCellWithIdentifier:[ShoppingCartProductCell reuseIdentifier] forIndexPath:path];
-            WLOrderProductModel *item = self.orderMoreInfo.orderDetail[path.row - (self.orderMoreInfo.orderAddress ? 1 : 0)];
+            WLOrderProductModel *item = self.orderBaseInfo.orderDetail[path.row - (self.orderBaseInfo.orderAddress ? 1 : 0)];
             cell.imageUrl               = item.image;
             cell.name                   = item.title;
             cell.price                  = item.price;
