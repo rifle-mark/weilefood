@@ -15,6 +15,7 @@
 #import "WLModelHeader.h"
 #import "AlipayHeader.h"
 
+#import "LaunchVC.h"
 #import "MainPageVC.h"
 
 @implementation AppDelegate
@@ -86,13 +87,20 @@
         ((UINavigationController *)aspectInfo.instance).navigationBar.translucent = NO;
     } error:NULL];
     
-    // UI入口
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    MainPageVC *vc = [[MainPageVC alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
-    self.window.rootViewController = navController;
+    // 启动动画
+//    _weak(self);
+//    LaunchVC *vc = [[LaunchVC alloc] init];
+//    [vc finishBlock:^{
+//        // 显示首页
+//        _strong_check(self);
+        MainPageVC *vc = [[MainPageVC alloc] init];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
+        self.window.rootViewController = navController;
+//    }];
+//    self.window.rootViewController = vc;
     
     return YES;
 }

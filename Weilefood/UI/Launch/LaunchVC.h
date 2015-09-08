@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^LaunchVCFinishBlock)();
+
 @interface LaunchVC : UIViewController
+
+- (void)finishBlock:(LaunchVCFinishBlock)finishBlock;
 
 @end
