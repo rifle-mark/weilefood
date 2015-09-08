@@ -8,8 +8,7 @@
 
 #import "WLPayHelper.h"
 #import "AlipayHeader.h"
-
-//@
+#import "YeepayVC.h"
 
 @implementation WLPayHelper
 
@@ -23,14 +22,17 @@
 }
 
 + (void)payWithPlatform:(WLPayPlatform)platform orderNum:(NSString *)orderNum money:(CGFloat)money callback:(WLPayHelperPayCallback)callback {
-    NSString *productName = [NSString stringWithFormat:@"<味了>订单%@", orderNum];
     if (platform == WLPayPlatformWeixin) {
         
     }
     else if (platform == WLPayPlatformYeepay) {
-        
+        NSString *payUrl = [kServerUrl stringByAppendingFormat:@"/ybpay/pay.aspx?ordernum=%@", orderNum];
+        [YeepayVC payWithUrl:payUrl payBlock:^(BOOL isSuccess) {
+            GCBlockInvoke(callback, isSuccess, nil);
+        }];
     }
     else if (platform == WLPayPlatformAlipay) {
+        NSString *productName = [NSString stringWithFormat:@"<味了>订单%@", orderNum];
         [AlipayRequestConfig alipayWithTradeNO:orderNum
                                    productName:productName
                             productDescription:productName

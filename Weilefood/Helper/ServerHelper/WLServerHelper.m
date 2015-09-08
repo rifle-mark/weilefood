@@ -36,7 +36,8 @@ NSString * const API_RESULT_ITEMS_KEYNAME = @"Items";
 #pragma mark - public methods
 
 - (NSString *)getApiUrlWithPaths:(NSArray *)urlPaths {
-    NSMutableString *ret = [NSMutableString stringWithString:kServerApiUrl];
+    NSMutableString *ret = [NSMutableString stringWithString:kServerUrl];
+    [ret appendString:@"/api"];
     for (id item in urlPaths) {
         [ret appendFormat:@"/%@", item];
     }

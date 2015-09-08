@@ -13,8 +13,8 @@
 @property (nonatomic, strong) UIButton *closeButton;
 @property (nonatomic, strong) UIView   *contentView;
 @property (nonatomic, strong) UILabel  *moneyLabel;
+//@property (nonatomic, strong) UIButton *weixinButton;
 @property (nonatomic, strong) UIButton *alipayButton;
-@property (nonatomic, strong) UIButton *weixinButton;
 @property (nonatomic, strong) UIButton *yeepayButton;
 
 @property (nonatomic, assign) BOOL isShowContent;
@@ -52,8 +52,8 @@
     [self.view addSubview:self.closeButton];
     [self.view addSubview:self.contentView];
     [self.contentView addSubview:self.moneyLabel];
+//    [self.contentView addSubview:self.weixinButton];
     [self.contentView addSubview:self.alipayButton];
-    [self.contentView addSubview:self.weixinButton];
     [self.contentView addSubview:self.yeepayButton];
 }
 
@@ -76,14 +76,20 @@
         make.left.right.top.equalTo(self.contentView).insets(UIEdgeInsetsMake(0, 11, 0, 11));
         make.height.equalTo(@46);
     }];
-    [self.weixinButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+//    [self.weixinButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.equalTo(self.moneyLabel);
+//        make.top.equalTo(self.moneyLabel.mas_bottom);
+//        make.height.equalTo(@40);
+//    }];
+//    [self.alipayButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.height.equalTo(self.weixinButton);
+//        make.top.equalTo(self.weixinButton.mas_bottom).offset(8);
+//    }];
+    
+    [self.alipayButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.moneyLabel);
         make.top.equalTo(self.moneyLabel.mas_bottom);
         make.height.equalTo(@40);
-    }];
-    [self.alipayButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.height.equalTo(self.weixinButton);
-        make.top.equalTo(self.weixinButton.mas_bottom).offset(8);
     }];
     [self.yeepayButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.height.equalTo(self.alipayButton);
@@ -189,18 +195,18 @@
     return _moneyLabel;
 }
 
+//- (UIButton *)weixinButton {
+//    if (!_weixinButton) {
+//        _weixinButton = [self _createButtonWithPlatform:SelectPayPlatformWeixin];
+//    }
+//    return _weixinButton;
+//}
+
 - (UIButton *)alipayButton {
     if (!_alipayButton) {
         _alipayButton = [self _createButtonWithPlatform:SelectPayPlatformAlipay];
     }
     return _alipayButton;
-}
-
-- (UIButton *)weixinButton {
-    if (!_weixinButton) {
-        _weixinButton = [self _createButtonWithPlatform:SelectPayPlatformWeixin];
-    }
-    return _weixinButton;
 }
 
 - (UIButton *)yeepayButton {

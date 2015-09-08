@@ -224,6 +224,7 @@
 		24E93CF21B821AC900E41615 /* WLDatabaseHelper+ShoppingCartItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E93CF11B821AC900E41615 /* WLDatabaseHelper+ShoppingCartItem.m */; };
 		24EC87DA1B84B807007B289A /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EC87D91B84B807007B289A /* UITextView+Placeholder.m */; };
 		24ECD7B41B78FCEE00AED422 /* TransparentNavigationBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ECD7B31B78FCEE00AED422 /* TransparentNavigationBarVC.m */; };
+		24F659181B9F43AD0058B1AA /* YeepayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F659171B9F43AD0058B1AA /* YeepayVC.m */; };
 		4D3A89CE1B8D5C6600B609CD /* GCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3A89CD1B8D5C6600B609CD /* GCAlertView.m */; };
 		4D4252761B903EF100F481E3 /* UserCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252751B903EF100F481E3 /* UserCenterVC.m */; };
 		4D4252791B90428800F481E3 /* UserCenterUserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252781B90428800F481E3 /* UserCenterUserInfoCell.m */; };
@@ -722,6 +723,8 @@
 		24EC87D91B84B807007B289A /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
 		24ECD7B21B78FCEE00AED422 /* TransparentNavigationBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentNavigationBarVC.h; sourceTree = "<group>"; };
 		24ECD7B31B78FCEE00AED422 /* TransparentNavigationBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransparentNavigationBarVC.m; sourceTree = "<group>"; };
+		24F659161B9F43AD0058B1AA /* YeepayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YeepayVC.h; sourceTree = "<group>"; };
+		24F659171B9F43AD0058B1AA /* YeepayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YeepayVC.m; sourceTree = "<group>"; };
 		27B0DAFB8AFA7EC3AE1728AE /* libPods-Weilefood.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weilefood.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D3A89CC1B8D5C6600B609CD /* GCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCAlertView.h; sourceTree = "<group>"; };
 		4D3A89CD1B8D5C6600B609CD /* GCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCAlertView.m; sourceTree = "<group>"; };
@@ -975,6 +978,8 @@
 				24E627861B7CDF7700743B51 /* ShareOnPlatformVC.m */,
 				24E627881B7D043600743B51 /* InputQuantityVC.h */,
 				24E627891B7D043600743B51 /* InputQuantityVC.m */,
+				24F659161B9F43AD0058B1AA /* YeepayVC.h */,
+				24F659171B9F43AD0058B1AA /* YeepayVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2518,6 +2523,7 @@
 				24E93CEF1B82179700E41615 /* WLShoppingCartItemModel.m in Sources */,
 				24CDCBF41B4F792E00BDE8CB /* UIWebViewDelegateImplementationProxy.m in Sources */,
 				4DE8BA501B885D1F00E8608E /* GCScrollView.m in Sources */,
+				24F659181B9F43AD0058B1AA /* YeepayVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
