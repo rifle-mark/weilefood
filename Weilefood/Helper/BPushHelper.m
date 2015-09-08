@@ -30,7 +30,6 @@
     // 通过点击消息启动
     NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfo) {
-        NSLog(@"%@ | 从消息启动 | %@", selfClassName, userInfo);
         [BPush handleNotification:userInfo];
     }
     //角标清0
@@ -46,10 +45,11 @@
     
     err = nil;
     [appDelegate aspect_hookSelector:@selector(application:didRegisterForRemoteNotificationsWithDeviceToken:) withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> aspectInfo, UIApplication *application, NSData *deviceToken) {
-        NSLog(@"%@ | DeviceToken | %@", selfClassName, deviceToken);
         [BPush registerDeviceToken:deviceToken];
         [BPush bindChannelWithCompleteHandler:^(id result, NSError *error) {
-            NSLog(@"%@ | %@ | %@", selfClassName, BPushRequestMethodBind, result);
+            if (error) {
+                DLog(@"%@", error);
+            }
         }];
     } error:&err];
     NSAssert(!err, @"appDlegate未实现application:didRegisterForRemoteNotificationsWithDeviceToken:方法");

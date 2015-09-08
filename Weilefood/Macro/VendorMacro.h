@@ -18,7 +18,7 @@
 /**
  *  百度
  */
-#define BPushApiKey                     @"DF0eNG6TNUqEvrVyQhIRU0Ea"
+#define BPushApiKey                     @"FGvbKHztvfw1MfxU2fcGWzQ6"
 
 /**
  *  微博
