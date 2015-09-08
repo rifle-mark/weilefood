@@ -169,6 +169,8 @@ static NSString *const kHintText = @"在这里说点什么吧...";
                                 _strong_check(cell);
                                 cell.isLike = YES;
                                 [cell addUpCount];
+                                self.share.isLike = YES;
+                                self.share.actionCount++;
                             }];
                         }];
                     };
