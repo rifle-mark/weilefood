@@ -35,29 +35,22 @@
     
     // 设置自己的高度
     self.mj_h = MJRefreshFooterHeight;
+    
+    // 默认是自动隐藏
+    self.automaticallyHidden = YES;
 }
 
-
-- (void)scrollViewContentSizeDidChange:(NSDictionary *)change
+- (void)willMoveToSuperview:(UIView *)newSuperview
 {
-    [super scrollViewContentSizeDidChange:change];
+    [super willMoveToSuperview:newSuperview];
     
-    if ([self.scrollView isKindOfClass:[UITableView class]]) {
-        UITableView *tableView = (UITableView *)self.scrollView;
-        NSInteger count = 0;
-        NSInteger sections = [tableView numberOfSections];
-        for (NSInteger i = 0; i < sections; i++) {
-            count += [tableView numberOfRowsInSection:i];
-        }
-        self.hidden = (count == 0);
-    } else if ([self.scrollView isKindOfClass:[UICollectionView class]]) {
-        UICollectionView *collectionView = (UICollectionView *)self.scrollView;
-        NSInteger count = 0;
-        NSInteger sections = [collectionView numberOfSections];
-        for (NSInteger i = 0; i < sections; i++) {
-            count += [collectionView numberOfItemsInSection:i];
-        }
-        self.hidden = (count == 0);
+    if (newSuperview) {
+        // 监听scrollView数据的变化
+        [self.scrollView setReloadDataBlock:^(NSInteger totalDataCount) {
+            if (self.isAutomaticallyHidden) {
+                self.hidden = (self.scrollView.totalDataCount == 0);
+            }
+        }];
     }
 }
 

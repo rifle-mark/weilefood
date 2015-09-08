@@ -10,13 +10,16 @@
 #import "NSObject+MJProperty.h"
 #import "NSString+MJExtension.h"
 #import "MJProperty.h"
-#import "MJType.h"
+#import "MJPropertyType.h"
 #import "MJExtensionConst.h"
 #import "MJFoundation.h"
 #import "NSString+MJExtension.h"
+#import "NSObject+MJClass.h"
 
 @implementation NSObject (MJKeyValue)
 
+#pragma mark - 模型 -> 字典时的参考
+/** 模型转字典时，字典的key是否参考replacedKeyFromPropertyName等方法（父类设置了，子类也会继承下来） */
 static const char MJReferenceReplacedKeyWhenCreatingKeyValuesKey = '\0';
 
 + (void)referenceReplacedKeyWhenCreatingKeyValues:(BOOL)reference
@@ -38,14 +41,135 @@ static const char MJReferenceReplacedKeyWhenCreatingKeyValuesKey = '\0';
 }
 
 #pragma mark - --常用的对象--
-static NSNumberFormatter *_numberFormatter;
+static NSNumberFormatter *numberFormatter_;
 + (void)load
 {
-    _numberFormatter = [[NSNumberFormatter alloc] init];
+    numberFormatter_ = [[NSNumberFormatter alloc] init];
 }
 
 #pragma mark - --公共方法--
 #pragma mark - 字典 -> 模型
+- (instancetype)setKeyValues:(id)keyValues
+{
+    return [self setKeyValues:keyValues error:nil];
+}
+
+- (instancetype)setKeyValues:(id)keyValues error:(NSError *__autoreleasing *)error
+{
+    return [self setKeyValues:keyValues context:nil error:error];
+}
+
+- (instancetype)setKeyValues:(id)keyValues context:(NSManagedObjectContext *)context
+{
+    return [self setKeyValues:keyValues context:context error:nil];
+}
+
+/**
+ 核心代码：
+ */
+- (instancetype)setKeyValues:(id)keyValues context:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error
+{
+    // 获得JSON对象
+    keyValues = [keyValues JSONObject];
+    
+    MJExtensionAssertError([keyValues isKindOfClass:[NSDictionary class]], self, error, @"keyValues参数不是一个字典");
+    
+    @try {
+        Class aClass = [self class];
+        NSArray *allowedPropertyNames = [aClass totalAllowedPropertyNames];
+        NSArray *ignoredPropertyNames = [aClass totalIgnoredPropertyNames];
+        
+        //通过封装的方法回调一个通过运行时编写的，用于返回属性列表的方法。
+        [aClass enumerateProperties:^(MJProperty *property, BOOL *stop) {
+            // 0.检测是否被忽略
+            if (allowedPropertyNames.count && ![allowedPropertyNames containsObject:property.name]) return;
+            if ([ignoredPropertyNames containsObject:property.name]) return;
+            
+            // 1.取出属性值
+            id value;
+            NSArray *propertyKeyses = [property propertyKeysForClass:aClass];
+            for (NSArray *propertyKeys in propertyKeyses) {
+                value = keyValues;
+                for (MJPropertyKey *propertyKey in propertyKeys) {
+                    value = [propertyKey valueInObject:value];
+                }
+                if (value) break;
+            }
+            
+            // 值的过滤
+            id newValue = [aClass getNewValueFromObject:self oldValue:value property:property];
+            if (newValue) value = newValue;
+            
+            // 如果没有值，就直接返回
+            if (!value || value == [NSNull null]) return;
+            
+            // 2.如果是模型属性
+            MJPropertyType *type = property.type;
+            Class typeClass = type.typeClass;
+            Class objectClass = [property objectClassInArrayForClass:[self class]];
+            if (!type.isFromFoundation && typeClass) {
+                value = [typeClass objectWithKeyValues:value context:context error:error];
+            } else if (objectClass) {
+                // string array -> url array
+                if (objectClass == [NSURL class] && [value isKindOfClass:[NSArray class]]) {
+                    NSMutableArray *urlArray = [NSMutableArray array];
+                    for (NSString *string in value) {
+                        if (![string isKindOfClass:[NSString class]]) continue;
+                        [urlArray addObject:string.url];
+                    }
+                    value = urlArray;
+                } else {
+                    // 3.字典数组-->模型数组
+                    value = [objectClass objectArrayWithKeyValuesArray:value context:context error:error];
+                }
+            } else if (typeClass == [NSString class]) {
+                if ([value isKindOfClass:[NSNumber class]]) {
+                    // NSNumber -> NSString
+                    value = [value description];
+                } else if ([value isKindOfClass:[NSURL class]]) {
+                    // NSURL -> NSString
+                    value = [value absoluteString];
+                }
+            } else if ([value isKindOfClass:[NSString class]]) {
+                if (typeClass == [NSURL class]) {
+                    // NSString -> NSURL
+                    // 字符串转码
+                    value = [value url];
+                } else if (type.isNumberType) {
+                    NSString *oldValue = value;
+                    
+                    // NSString -> NSNumber
+                    value = [numberFormatter_ numberFromString:oldValue];
+                    
+                    // 如果是BOOL
+                    if (type.isBoolType) {
+                        // 字符串转BOOL（字符串没有charValue方法）
+                        // 系统会调用字符串的charValue转为BOOL类型
+                        NSString *lower = [oldValue lowercaseString];
+                        if ([lower isEqualToString:@"yes"] || [lower isEqualToString:@"true"]) {
+                            value = @YES;
+                        } else if ([lower isEqualToString:@"no"] || [lower isEqualToString:@"false"]) {
+                            value = @NO;
+                        }
+                    }
+                }
+            }
+            
+            // 4.赋值
+            [property setValue:value forObject:self];
+        }];
+        
+        // 转换完毕
+        if ([self respondsToSelector:@selector(keyValuesDidFinishConvertingToObject)]) {
+            [self keyValuesDidFinishConvertingToObject];
+        }
+    } @catch (NSException *exception) {
+        MJExtensionBuildError(error, exception.reason);
+        NSLog(@"%@", exception);
+    }
+    return self;
+}
+
 + (instancetype)objectWithKeyValues:(id)keyValues
 {
     return [self objectWithKeyValues:keyValues error:nil];
@@ -92,125 +216,6 @@ static NSNumberFormatter *_numberFormatter;
     MJExtensionAssertError(file != nil, nil, error, @"file参数为nil");
     
     return [self objectWithKeyValues:[NSDictionary dictionaryWithContentsOfFile:file] error:error];
-}
-
-- (instancetype)setKeyValues:(id)keyValues
-{
-    return [self setKeyValues:keyValues error:nil];
-}
-
-- (instancetype)setKeyValues:(id)keyValues error:(NSError *__autoreleasing *)error
-{
-    return [self setKeyValues:keyValues context:nil error:error];
-}
-
-- (instancetype)setKeyValues:(id)keyValues context:(NSManagedObjectContext *)context
-{
-    return [self setKeyValues:keyValues context:context error:nil];
-}
-
-/**
- 核心代码：
- */
-- (instancetype)setKeyValues:(id)keyValues context:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error
-{
-    keyValues = [keyValues JSONObject];
-    
-    MJExtensionAssertError([keyValues isKindOfClass:[NSDictionary class]], self, error, @"keyValues参数不是一个字典");
-    
-    @try {
-        Class aClass = [self class];
-        NSArray *allowedPropertyNames = [aClass totalAllowedPropertyNames];
-        NSArray *ignoredPropertyNames = [aClass totalIgnoredPropertyNames];
-        
-        //通过封装的方法回调一个通过运行时编写的，用于返回属性列表的方法。
-        [aClass enumerateProperties:^(MJProperty *property, BOOL *stop) {
-            // 0.检测是否被忽略
-            if (allowedPropertyNames.count && ![allowedPropertyNames containsObject:property.name]) return;
-            if ([ignoredPropertyNames containsObject:property.name]) return;
-            
-            // 1.取出属性值
-            id value = keyValues ;
-            NSArray *propertyKeys = [property propertyKeysFromClass:[self class]];
-            for (MJPropertyKey *propertyKey in propertyKeys) {
-                value = [propertyKey valueInObject:value];
-            }
-            
-            // 值的过滤
-            if ([self respondsToSelector:@selector(newValueFromOldValue:property:)]) {
-                value = [self newValueFromOldValue:value property:property];
-            } else {
-                id newValue = [aClass getNewValueFormOldValue:value object:self property:property];
-                if (newValue) value = newValue;
-            }
-            
-            if (!value || value == [NSNull null]) return;
-                
-            // 2.如果是模型属性
-            MJType *type = property.type;
-            Class typeClass = type.typeClass;
-            Class objectClass = [property objectClassInArrayFromClass:[self class]];
-            if (!type.isFromFoundation && typeClass) {
-                value = [typeClass objectWithKeyValues:value context:context error:error];
-            } else if (objectClass) {
-                // string array -> url array
-                if (objectClass == [NSURL class] && [value isKindOfClass:[NSArray class]]) {
-                    NSMutableArray *urlArray = [NSMutableArray array];
-                    for (NSString *string in value) {
-                        if (![string isKindOfClass:[NSString class]]) continue;
-                        [urlArray addObject:string.url];
-                    }
-                    value = urlArray;
-                } else {
-                    // 3.字典数组-->模型数组
-                    value = [objectClass objectArrayWithKeyValuesArray:value context:context error:error];
-                }
-            } else if (typeClass == [NSString class]) {
-                if ([value isKindOfClass:[NSNumber class]]) {
-                    // NSNumber -> NSString
-                    value = [value description];
-                } else if ([value isKindOfClass:[NSURL class]]) {
-                    // NSURL -> NSString
-                    value = [value absoluteString];
-                }
-            } else if ([value isKindOfClass:[NSString class]]) {
-                if (typeClass == [NSURL class]) {
-                    // NSString -> NSURL
-                    // 字符串转码
-                    value = [value url];
-                } else if (type.isNumberType) {
-                    NSString *oldValue = value;
-                    
-                    // NSString -> NSNumber
-                    value = [_numberFormatter numberFromString:oldValue];
-                    
-                    // 如果是BOOL
-                    if (type.isBoolType) {
-                        // 字符串转BOOL（字符串没有charValue方法）
-                        // 系统会调用字符串的charValue转为BOOL类型
-                        NSString *lower = [oldValue lowercaseString];
-                        if ([lower isEqualToString:@"yes"] || [lower isEqualToString:@"true"]) {
-                            value = @YES;
-                        } else if ([lower isEqualToString:@"no"] || [lower isEqualToString:@"false"]) {
-                            value = @NO;
-                        }
-                    }
-                }
-            }
-            
-            // 4.赋值
-            [property setValue:value forObject:self];
-        }];
-        
-        // 转换完毕
-        if ([self respondsToSelector:@selector(keyValuesDidFinishConvertingToObject)]) {
-            [self keyValuesDidFinishConvertingToObject];
-        }
-    } @catch (NSException *exception) {
-        MJExtensionBuildError(error, exception.reason);
-        NSLog(@"%@", exception);
-    }
-    return self;
 }
 
 #pragma mark - 字典数组 -> 模型数组
@@ -296,14 +301,14 @@ static NSNumberFormatter *_numberFormatter;
     return [self keyValuesWithKeys:keys error:nil];
 }
 
-- (NSMutableDictionary *)keyValuesWithIgnoredKeys:(NSArray *)ignoredKeys
-{
-    return [self keyValuesWithIgnoredKeys:ignoredKeys error:nil];
-}
-
 - (NSMutableDictionary *)keyValuesWithKeys:(NSArray *)keys error:(NSError *__autoreleasing *)error
 {
     return [self keyValuesWithKeys:keys ignoredKeys:nil error:error];
+}
+
+- (NSMutableDictionary *)keyValuesWithIgnoredKeys:(NSArray *)ignoredKeys
+{
+    return [self keyValuesWithIgnoredKeys:ignoredKeys error:nil];
 }
 
 - (NSMutableDictionary *)keyValuesWithIgnoredKeys:(NSArray *)ignoredKeys error:(NSError *__autoreleasing *)error
@@ -335,7 +340,7 @@ static NSNumberFormatter *_numberFormatter;
             if (!value) return;
             
             // 2.如果是模型属性
-            MJType *type = property.type;
+            MJPropertyType *type = property.type;
             Class typeClass = type.typeClass;
             if (!type.isFromFoundation && typeClass) {
                 value = [value keyValues];
@@ -348,7 +353,7 @@ static NSNumberFormatter *_numberFormatter;
             
             // 4.赋值
             if ([aClass isReferenceReplacedKeyWhenCreatingKeyValues]) {
-                NSArray *propertyKeys = [property propertyKeysFromClass:aClass];
+                NSArray *propertyKeys = [[property propertyKeysForClass:aClass] firstObject];
                 NSUInteger keyCount = propertyKeys.count;
                 // 创建字典
                 __block id innerContainer = keyValues;
