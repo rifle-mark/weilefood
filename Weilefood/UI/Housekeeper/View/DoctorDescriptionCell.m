@@ -10,25 +10,20 @@
 
 @interface DoctorDescriptionCell ()
 
-@property (nonatomic, strong) UILabel *descLabel;
+@property (nonatomic, strong) UIWebView *webView;
 @property (nonatomic, strong) UIView  *lineView;
+
+@property (nonatomic, copy  ) DoctorDescriptionCellResetHeightBlock resetHeightBlock;
 
 @end
 
-static NSInteger const kDescTopMargin       = 5;
+static NSInteger const kDescTopBottomMargin = 10;
 static NSInteger const kDescLeftRightMargin = 12;
-static NSInteger const kDescBottomMargin    = 20;
 static NSInteger const kLineHeight          = 7;
 
 #define kDescFont [UIFont systemFontOfSize:14]
 
 @implementation DoctorDescriptionCell
-
-+ (CGFloat)cellHeightWithDesc:(NSString *)desc {
-    CGFloat descWidth = SCREEN_WIDTH - kDescLeftRightMargin * 2;
-    CGFloat descHeight = [desc boundingRectWithSize:CGSizeMake(descWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: kDescFont} context:nil].size.height;
-    return kDescTopMargin + descHeight + kDescBottomMargin + kLineHeight;
-}
 
 + (NSString *)reuseIdentifier {
     return @"DoctorDescriptionCell";
@@ -37,7 +32,7 @@ static NSInteger const kLineHeight          = 7;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        [self.contentView addSubview:self.descLabel];
+        [self.contentView addSubview:self.webView];
         [self.contentView addSubview:self.lineView];
         [self _remakeConstraints];
     }
@@ -45,8 +40,9 @@ static NSInteger const kLineHeight          = 7;
 }
 
 - (void)_remakeConstraints {
-    [self.descLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.equalTo(self.contentView).insets(UIEdgeInsetsMake(kDescTopMargin, kDescLeftRightMargin, 0, kDescLeftRightMargin));
+    [self.webView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.equalTo(self.contentView).insets(UIEdgeInsetsMake(kDescTopBottomMargin, kDescLeftRightMargin, 0, kDescLeftRightMargin));
+        make.bottom.equalTo(self.lineView.mas_top).offset(-kDescTopBottomMargin);
     }];
     [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.contentView);
@@ -58,19 +54,30 @@ static NSInteger const kLineHeight          = 7;
 
 - (void)setDesc:(NSString *)desc {
     _desc = [desc copy];
-    self.descLabel.text = desc;
+    [self.webView loadHTMLString:desc baseURL:nil];
+}
+
+- (void)resetHeightBlock:(DoctorDescriptionCellResetHeightBlock)resetHeightBlock {
+    self.resetHeightBlock = resetHeightBlock;
 }
 
 #pragma mark - private property methods
 
-- (UILabel *)descLabel {
-    if (!_descLabel) {
-        _descLabel = [[UILabel alloc] init];
-        _descLabel.font = kDescFont;
-        _descLabel.textColor = k_COLOR_STAR_DUST;
-        _descLabel.numberOfLines = 0;
+- (UIWebView *)webView {
+    if (!_webView) {
+        _webView = [[UIWebView alloc] init];
+        _webView.scalesPageToFit = YES;
+        _webView.scrollView.scrollEnabled = NO;
+        _weak(self);
+        [_webView withBlockForDidFinishLoad:^(UIWebView *view) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                _strong_check(self);
+                CGFloat newHeight = kDescTopBottomMargin + self.webView.scrollView.contentSize.height + kDescTopBottomMargin + kLineHeight;
+                GCBlockInvoke(self.resetHeightBlock, newHeight);
+            });
+        }];
     }
-    return _descLabel;
+    return _webView;
 }
 
 - (UIView *)lineView {

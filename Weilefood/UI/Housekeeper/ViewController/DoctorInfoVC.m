@@ -32,6 +32,7 @@
 @property (nonatomic, strong) ProductInfoSectionHeaderView *sectionHeaderView;
 @property (nonatomic, strong) UITableView                  *tableView;
 
+@property (nonatomic, assign) CGFloat       descRowHeight;
 @property (nonatomic, strong) WLDoctorModel *doctor;
 @property (nonatomic, assign) CGFloat       headerHeight;
 
@@ -47,6 +48,7 @@
 - (id)initWithDoctor:(WLDoctorModel *)doctor {
     NSParameterAssert(doctor);
     if (self = [super init]) {
+        _descRowHeight = 0;
         _headerHeight = [DoctorInfoHeaderView viewHeight];
         self.doctor = doctor;
     }
@@ -252,7 +254,7 @@
         [_tableView withBlockForRowHeight:^CGFloat(UITableView *view, NSIndexPath *path) {
             _strong_check(self, 0);
             if (path.row == 0) {
-                return [DoctorDescriptionCell cellHeightWithDesc:self.doctor.desc];
+                return self.descRowHeight ?: 100;
             }
             WLDoctorServiceModel *service = self.doctor.service[path.row - 1];
             return [DoctorServiceCell cellHeightWithDesc:service.remark];
@@ -262,6 +264,13 @@
             if (path.row == 0) {
                 DoctorDescriptionCell *cell = [view dequeueReusableCellWithIdentifier:[DoctorDescriptionCell reuseIdentifier] forIndexPath:path];
                 cell.desc = self.doctor.desc;
+                [cell resetHeightBlock:^(CGFloat newHeight) {
+                    _strong_check(self);
+                    if (self.descRowHeight <= 0) {
+                        self.descRowHeight = newHeight;
+                        [self.tableView reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationNone];
+                    }
+                }];
                 return cell;
             }
             DoctorServiceCell *cell = [view dequeueReusableCellWithIdentifier:[DoctorServiceCell reuseIdentifier] forIndexPath:path];

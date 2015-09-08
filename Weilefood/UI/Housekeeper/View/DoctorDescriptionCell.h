@@ -8,20 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^DoctorDescriptionCellResetHeightBlock)(CGFloat newHeight);
+
 /// 营养师详情界面 - 介绍部分
 @interface DoctorDescriptionCell : UITableViewCell
 
-/// 介绍
+/// 介绍html
 @property (nonatomic, copy) NSString *desc;
 
-/**
- *  Cell展示所需要的高度
- *
- *  @param desc 介绍文字
- *
- *  @return 高度
- */
-+ (CGFloat)cellHeightWithDesc:(NSString *)desc;
 + (NSString *)reuseIdentifier;
+
+/// 回调：加载介绍html，根据内容返回Cell最终高度
+- (void)resetHeightBlock:(DoctorDescriptionCellResetHeightBlock)resetHeightBlock;
 
 @end
