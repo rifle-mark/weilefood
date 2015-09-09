@@ -57,12 +57,12 @@
         _webView.scalesPageToFit = YES;
         _weak(self);
         [_webView withBlockForDidFinishLoad:^(UIWebView *view) {
-            static float const waitParam = 0.15;
+            static float const waitParam = 0.7;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(waitParam * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 _strong_check(self);
                 [self.view bringSubviewToFront:self.webView];
             });
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 _strong_check(self);
                 GCBlockInvoke(self.finishBlock);
             });

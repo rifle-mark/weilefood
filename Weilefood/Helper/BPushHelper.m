@@ -13,7 +13,6 @@
 
 + (void)registerAppDelegate:(UIResponder<UIApplicationDelegate> *)appDelegate launchOptions:(NSDictionary *)launchOptions apiKey:(NSString *)apikey pushMode:(BPushMode)mode withFirstAction:(NSString *)leftAction withSecondAction:(NSString *)rightAction withCategory:(NSString *)category isDebug:(BOOL)isdebug isClearBadgeNumber:(BOOL)isClearBadgeNumber {
     
-    NSString *selfClassName = NSStringFromClass([self class]);
     UIApplication *app = [UIApplication sharedApplication];
     // 应用注册运程通知
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
@@ -56,7 +55,6 @@
     
     err = nil;
     [appDelegate aspect_hookSelector:@selector(application:didReceiveRemoteNotification:) withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo, UIApplication *application, NSDictionary *userInfo) {
-        NSLog(@"%@ | 收到运程通知 | %@", selfClassName, userInfo);
         [BPush handleNotification:userInfo];
     } error:&err];
     NSAssert(!err, @"appDlegate未实现application:didReceiveRemoteNotification:方法");
