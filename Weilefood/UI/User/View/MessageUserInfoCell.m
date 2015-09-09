@@ -75,8 +75,16 @@
         make.top.equalTo(self.avatarV);
         make.left.equalTo(self.avatarV.mas_right);
     }];
+    
+    CGFloat width = 10;
+    if (self.message) {
+        NSAttributedString *text = [[self class] _messageAttributedStringWithMessage:self.message];
+        CGRect textRect = [text boundingRectWithSize:ccs(SCREEN_WIDTH - 116, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+        width = textRect.size.width;
+    }
     [self.messageL mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.messageBgV).insets(UIEdgeInsetsMake(12, 16, 6, 10));
+        make.width.equalTo(@(width));
     }];
     
     [super updateConstraints];
@@ -125,7 +133,6 @@
     if (!_messageL) {
         _messageL = [[UILabel alloc] init];
         _messageL.numberOfLines = 0;
-        _messageL.preferredMaxLayoutWidth = SCREEN_WIDTH - 116;
     }
     return _messageL;
 }

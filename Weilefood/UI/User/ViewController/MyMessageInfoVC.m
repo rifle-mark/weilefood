@@ -28,6 +28,7 @@
 @property(nonatomic, assign)CGFloat         keyboardHeight;
 
 @property(nonatomic,strong)NSArray          *messageList;
+@property(nonatomic,strong)WLUserModel      *user;
 
 @end
 
@@ -42,10 +43,11 @@ static NSUInteger kPageSize = 20;
     
     self.title = self.nickName;
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.user = [WLDatabaseHelper user_find];
 
     [self.view addSubview:self.tableView];
-    [self.view addSubview:self.footerView];
     [self.view addSubview:self.lineView];
+    [self.view addSubview:self.footerView];
     [self.footerView addSubview:self.textField];
     [self.footerView addSubview:self.sendButton];
     
@@ -53,17 +55,12 @@ static NSUInteger kPageSize = 20;
     [self _loadMessageListWithLatest:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(self.tableView.superview);
-        make.bottom.equalTo(self.lineView.mas_top);
+        make.top.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.footerView.mas_top);
     }];
     
     [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -172,7 +169,7 @@ static NSUInteger kPageSize = 20;
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.backgroundColor = k_COLOR_WHITESMOKE;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
+        _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 19)];
         [_tableView registerClass:[MessageUserInfoCell class] forCellReuseIdentifier:[MessageUserInfoCell reuseIdentify]];
         [_tableView registerClass:[MessageOwnInfoCell class] forCellReuseIdentifier:[MessageOwnInfoCell reuseIdentify]];
@@ -183,13 +180,13 @@ static NSUInteger kPageSize = 20;
             [self _loadMessageListWithLatest:NO];
         }];
         [_tableView withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {
-            _strong_check(self,0);
+            _strong_check(self, 0);
             return [self.messageList count];
         }];
         [_tableView withBlockForRowHeight:^CGFloat(UITableView *view, NSIndexPath *path) {
             _strong_check(self, 0);
             WLMessageModel *message = self.messageList[path.row];
-            if (message.userId == [WLDatabaseHelper user_find].userId) {
+            if (message.userId == self.user.userId) {
                 return [MessageOwnInfoCell cellHeightWithMessage:message];
             }
             else {
@@ -199,7 +196,7 @@ static NSUInteger kPageSize = 20;
         [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
             _strong_check(self, nil);
             WLMessageModel *message = self.messageList[path.row];
-            if (message.userId == [WLDatabaseHelper user_find].userId) {
+            if (message.userId == self.user.userId) {
                 MessageOwnInfoCell *cell = [view dequeueReusableCellWithIdentifier:[MessageOwnInfoCell reuseIdentify] forIndexPath:path];
                 cell.message = message;
                 return cell;
@@ -260,8 +257,11 @@ static NSUInteger kPageSize = 20;
         [_sendButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
             
-            if (![WLDatabaseHelper user_find]) {
-                [LoginVC needsLoginWithLoggedBlock:nil];
+            if (!self.user) {
+                [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
+                    _strong_check(self);
+                    self.user = user;
+                }];
                 return;
             }
             if ([self.textField.text isEqualToString:kHintText]) {
