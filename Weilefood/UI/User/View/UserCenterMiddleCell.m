@@ -13,6 +13,7 @@
 @property(nonatomic,strong)UIButton             *shareBtn;
 @property(nonatomic,strong)UIButton             *msgBtn;
 @property(nonatomic,strong)UIButton             *shopCarBtn;
+@property(nonatomic,strong)UIImageView          *newMessageImageView;
 
 @property(nonatomic,copy)OnShareClickBlock      shareBlock;
 @property(nonatomic,copy)OnMsgClickBlock        msgBlock;
@@ -24,9 +25,6 @@
 + (NSString*)reuseIdentify {
     return @"UserCenterMiddleCellIdentify";
 }
-- (void)awakeFromNib {
-    // Initialization code
-}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -36,19 +34,14 @@
         [self.contentView addSubview:self.shareBtn];
         [self.contentView addSubview:self.msgBtn];
         [self.contentView addSubview:self.shopCarBtn];
+        [self.contentView addSubview:self.newMessageImageView];
         
+        self.displayNewMessage = NO;
         [self _layoutSubViews];
         
     }
     return self;
 }
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
 
 - (void)onMsgClickBlock:(OnMsgClickBlock)block {
     self.msgBlock = block;
@@ -58,6 +51,13 @@
 }
 - (void)onShopCarClickBlock:(OnShopCarClickBlock)block {
     self.shopCarBlock = block;
+}
+
+#pragma mark - public methods
+
+- (void)setDisplayNewMessage:(BOOL)displayNewMessage {
+    _displayNewMessage = displayNewMessage;
+    self.newMessageImageView.hidden = !displayNewMessage;
 }
 
 #pragma mark - private method
@@ -82,9 +82,14 @@
         CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
         make.centerX.equalTo(self.msgBtn.mas_right).with.offset((screenWidth-100)/4);
     }];
+    
+    [self.newMessageImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.msgBtn).offset(10);
+    }];
 }
 
 #pragma mark - propertys
+
 - (UIButton *)shareBtn {
     if (!_shareBtn) {
         _shareBtn = [[UIButton alloc] init];
@@ -139,4 +144,13 @@
     }
     return _shopCarBtn;
 }
+
+- (UIImageView *)newMessageImageView {
+    if (!_newMessageImageView) {
+        _newMessageImageView = [[UIImageView alloc] init];
+        _newMessageImageView.image = [UIImage imageNamed:@"icon_newmessage"];
+    }
+    return _newMessageImageView;
+}
+
 @end

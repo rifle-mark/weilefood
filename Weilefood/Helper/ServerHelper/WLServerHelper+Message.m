@@ -32,4 +32,11 @@
     [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLMessageModel class] callback:callback];
 }
 
+- (void)message_hasUnreadWithCallback:(void (^)(WLApiInfoModel *apiInfo, BOOL apiResult, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"message", @"hasnotread"]];
+    [self httpGET:apiUrl parameters:nil resultClass:[NSNumber class] callback:^(WLApiInfoModel *apiInfo, id apiResult, NSError *error) {
+        GCBlockInvoke(callback, apiInfo, apiResult ? [apiResult boolValue] : NO, error);
+    }];
+}
+
 @end

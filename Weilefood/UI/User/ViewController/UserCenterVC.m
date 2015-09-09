@@ -30,6 +30,8 @@
 @interface UserCenterVC ()
 
 @property(nonatomic,strong)UITableView      *tableView;
+@property(nonatomic,assign)BOOL hasUnreadMessage;
+
 @end
 
 static NSInteger const kSectionInfo   = 0;
@@ -78,6 +80,13 @@ static NSInteger const kSectionList   = 2;
                 user.points = apiResult.points;
                 [WLDatabaseHelper user_save:user];
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kSectionInfo] withRowAnimation:UITableViewRowAnimationNone];
+            }
+        }];
+        [[WLServerHelper sharedInstance] message_hasUnreadWithCallback:^(WLApiInfoModel *apiInfo, BOOL apiResult, NSError *error) {
+            _strong_check(self);
+            if (!error && apiInfo.isSuc) {
+                self.hasUnreadMessage = YES;//apiResult;
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kSectionMiddle] withRowAnimation:UITableViewRowAnimationNone];
             }
         }];
     }
@@ -172,6 +181,7 @@ static NSInteger const kSectionList   = 2;
                     break;
                 case kSectionMiddle: {
                     UserCenterMiddleCell *cell = [view dequeueReusableCellWithIdentifier:[UserCenterMiddleCell reuseIdentify]];
+                    cell.displayNewMessage = self.hasUnreadMessage;
                     [cell onShareClickBlock:^(){
                         [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                             _strong_check(self);

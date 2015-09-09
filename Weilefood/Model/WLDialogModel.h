@@ -21,6 +21,8 @@
 @property (nonatomic, copy) NSString *nickName;
 /// 对方头像
 @property (nonatomic, copy) NSString *avatar;
+/// 未读消息数量
+@property (nonatomic, assign) NSInteger notReadCount;
 /// 我的ID
 @property (nonatomic, assign) NSUInteger userId;
 ///

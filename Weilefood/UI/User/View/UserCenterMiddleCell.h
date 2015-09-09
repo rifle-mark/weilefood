@@ -14,6 +14,9 @@ typedef void(^OnShopCarClickBlock)();
 
 @interface UserCenterMiddleCell : UITableViewCell
 
+/// 是否显示有新消息标记。默认=NO
+@property (nonatomic, assign) BOOL displayNewMessage;
+
 + (NSString*)reuseIdentify;
 
 - (void)onShareClickBlock:(OnShareClickBlock)block;

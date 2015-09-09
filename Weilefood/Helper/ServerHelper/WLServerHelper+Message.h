@@ -40,4 +40,11 @@
  */
 - (void)message_getMessageListWithUserId:(NSUInteger)userId maxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
 
+/**
+ *  获取当前用户是否有未读私信
+ *
+ *  @param callback
+ */
+- (void)message_hasUnreadWithCallback:(void (^)(WLApiInfoModel *apiInfo, BOOL apiResult, NSError *error))callback;
+
 @end

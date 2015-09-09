@@ -16,6 +16,7 @@
 @property(nonatomic,strong)UILabel          *messageL;
 @property(nonatomic,strong)UILabel          *timeL;
 @property(nonatomic,strong)UIView           *lineV;
+@property(nonatomic,strong)UIImageView      *messageV;
 
 @end
 
@@ -30,6 +31,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = k_COLOR_CLEAR;
         [self.contentView addSubview:self.avatarV];
+        [self.contentView addSubview:self.messageV];
         [self.contentView addSubview:self.nickNameL];
         [self.contentView addSubview:self.timeL];
         [self.contentView addSubview:self.messageL];
@@ -46,6 +48,10 @@
         make.centerY.equalTo(self.avatarV.superview);
         make.left.equalTo(self.avatarV.superview).with.offset(10);
         make.width.height.equalTo(@44);
+    }];
+    [self.messageV mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.avatarV).offset(-2);
+        make.top.equalTo(self.avatarV).offset(2);
     }];
     
     [self.nickNameL mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -78,6 +84,7 @@
         _strong_check(self);
         [self.avatarV my_setImageWithURL:[WLAPIAddressGenerator urlOfPictureWith:44 height:44 urlString:self.dialog.avatar]];
         self.nickNameL.text = self.dialog.nickName;
+        self.messageV.hidden = self.dialog.notReadCount <= 0;
         self.messageL.text = self.dialog.content;
         NSString *time = nil;
         if ([self.dialog.followDate isToday]) {
@@ -142,4 +149,13 @@
     }
     return _lineV;
 }
+
+- (UIImageView *)messageV {
+    if (!_messageV) {
+        _messageV = [[UIImageView alloc] init];
+        _messageV.image = [UIImage imageNamed:@"icon_newmessage"];
+    }
+    return _messageV;
+}
+
 @end
