@@ -33,5 +33,6 @@
 #import "WLNutritionModel.h"
 #import "WLDoctorModel.h"
 #import "WLActionModel.h"
+#import "WLAppVersionModel.h"
 
 #endif

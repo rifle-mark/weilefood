@@ -13,9 +13,9 @@
 - (void)feedBack_addWithContent:(NSString*)content userInfo:(NSString*)userInfo callback:(void(^)(WLApiInfoModel* apiInfo, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"feedback", @"add"]];
     NSDictionary *parameters = @{@"feedback": @{@"Email": userInfo,
-                                               @"Content": content,
-                                               }};
-    
+                                                @"Content": content,
+                                                }};
     [self httpPOST:apiUrl parameters:parameters callback:callback];
 }
+
 @end

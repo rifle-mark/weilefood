@@ -11,4 +11,5 @@
 @interface WLServerHelper (FeedBack)
 
 - (void)feedBack_addWithContent:(NSString*)content userInfo:(NSString*)userInfo callback:(void(^)(WLApiInfoModel* apiInfo, NSError *error))callback;
+
 @end

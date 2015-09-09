@@ -25,6 +25,9 @@
 		2438A7621B7ECC77003404BF /* WLDoctorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2438A7611B7ECC77003404BF /* WLDoctorModel.m */; };
 		2438A7651B7ECF09003404BF /* WLServerHelper+Doctor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2438A7641B7ECF09003404BF /* WLServerHelper+Doctor.m */; };
 		2438A7681B7ED1AD003404BF /* WLServerHelper+Url.m in Sources */ = {isa = PBXBuildFile; fileRef = 2438A7671B7ED1AD003404BF /* WLServerHelper+Url.m */; };
+		244D5AFC1BA09026007C081B /* WLServerHelper+AppVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 244D5AFB1BA09026007C081B /* WLServerHelper+AppVersion.m */; };
+		244D5AFF1BA0907B007C081B /* WLAppVersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 244D5AFE1BA0907B007C081B /* WLAppVersionModel.m */; };
+		244D5B021BA0923E007C081B /* WLAppCheckUpdateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 244D5B011BA0923E007C081B /* WLAppCheckUpdateHelper.m */; };
 		245936A31B5A2C62008FFAB8 /* WLServerHelper+Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A21B5A2C62008FFAB8 /* WLServerHelper+Channel.m */; };
 		245936A61B5A2ECF008FFAB8 /* WLServerHelper+Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A51B5A2ECF008FFAB8 /* WLServerHelper+Product.m */; };
 		245936A91B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m in Sources */ = {isa = PBXBuildFile; fileRef = 245936A81B5A34F4008FFAB8 /* WLServerHelper+ForwardBuy.m */; };
@@ -324,6 +327,12 @@
 		2438A7641B7ECF09003404BF /* WLServerHelper+Doctor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Doctor.m"; sourceTree = "<group>"; };
 		2438A7661B7ED1AD003404BF /* WLServerHelper+Url.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Url.h"; sourceTree = "<group>"; };
 		2438A7671B7ED1AD003404BF /* WLServerHelper+Url.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Url.m"; sourceTree = "<group>"; };
+		244D5AFA1BA09026007C081B /* WLServerHelper+AppVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+AppVersion.h"; sourceTree = "<group>"; };
+		244D5AFB1BA09026007C081B /* WLServerHelper+AppVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+AppVersion.m"; sourceTree = "<group>"; };
+		244D5AFD1BA0907B007C081B /* WLAppVersionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLAppVersionModel.h; sourceTree = "<group>"; };
+		244D5AFE1BA0907B007C081B /* WLAppVersionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLAppVersionModel.m; sourceTree = "<group>"; };
+		244D5B001BA0923E007C081B /* WLAppCheckUpdateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLAppCheckUpdateHelper.h; sourceTree = "<group>"; };
+		244D5B011BA0923E007C081B /* WLAppCheckUpdateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLAppCheckUpdateHelper.m; sourceTree = "<group>"; };
 		245936A11B5A2C62008FFAB8 /* WLServerHelper+Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Channel.h"; sourceTree = "<group>"; };
 		245936A21B5A2C62008FFAB8 /* WLServerHelper+Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WLServerHelper+Channel.m"; sourceTree = "<group>"; };
 		245936A41B5A2ECF008FFAB8 /* WLServerHelper+Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Product.h"; sourceTree = "<group>"; };
@@ -1333,6 +1342,8 @@
 				2482E64C1B5E9CBB005815E8 /* WLServerHelper+Points.m */,
 				4DD52F811B96EEF2001CB01F /* WLServerHelper+FeedBack.h */,
 				4DD52F821B96EEF2001CB01F /* WLServerHelper+FeedBack.m */,
+				244D5AFA1BA09026007C081B /* WLServerHelper+AppVersion.h */,
+				244D5AFB1BA09026007C081B /* WLServerHelper+AppVersion.m */,
 			);
 			path = ServerHelper;
 			sourceTree = "<group>";
@@ -1390,6 +1401,8 @@
 				4D42529F1B91CAEF00F481E3 /* WLPointRulerModel.m */,
 				24D628991B95EC040078944F /* WLActionModel.h */,
 				24D6289A1B95EC040078944F /* WLActionModel.m */,
+				244D5AFD1BA0907B007C081B /* WLAppVersionModel.h */,
+				244D5AFE1BA0907B007C081B /* WLAppVersionModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1598,6 +1611,8 @@
 				2467B7261B50E30E001202A4 /* BPushHelper.m */,
 				24AE121B1B916B0E00654AEC /* WLPayHelper.h */,
 				24AE121C1B916B0E00654AEC /* WLPayHelper.m */,
+				244D5B001BA0923E007C081B /* WLAppCheckUpdateHelper.h */,
+				244D5B011BA0923E007C081B /* WLAppCheckUpdateHelper.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -2296,6 +2311,7 @@
 				4DD52F831B96EEF2001CB01F /* WLServerHelper+FeedBack.m in Sources */,
 				24AE12571B91877F00654AEC /* ScoreView.m in Sources */,
 				24CDCC0F1B4F792E00BDE8CB /* UISearchBar+GCDelegate.m in Sources */,
+				244D5AFC1BA09026007C081B /* WLServerHelper+AppVersion.m in Sources */,
 				24CAC4331B57E9D800E3C4D5 /* WLServerHelper+Share.m in Sources */,
 				240FB7031B69025900DF5CE4 /* UIButton+ImagePosition.m in Sources */,
 				4DAA7D631B99D5E200E51A8B /* LaunchVC.m in Sources */,
@@ -2318,6 +2334,7 @@
 				2438A7651B7ECF09003404BF /* WLServerHelper+Doctor.m in Sources */,
 				24AE12171B91425100654AEC /* AlipayRequestConfig.m in Sources */,
 				24B8C0681B5242BC001C5722 /* AGIPCAlbumsController.m in Sources */,
+				244D5AFF1BA0907B007C081B /* WLAppVersionModel.m in Sources */,
 				4DAA2BAE1B7FACFC004E5601 /* UIImage+AdjustmentSize.m in Sources */,
 				24CDCC051B4F792E00BDE8CB /* AVAudioPlayer+GCDelegate.m in Sources */,
 				246F07821B56A6210086CD28 /* NSString+Ext.m in Sources */,
@@ -2374,6 +2391,7 @@
 				24B8C06E1B5242BC001C5722 /* AGPreviewScrollView.m in Sources */,
 				249A73BD1B569D2300F46F3D /* WLServerHelper.m in Sources */,
 				2413FBCF1B9C206A00BEC5BF /* UIApplication+Ext.m in Sources */,
+				244D5B021BA0923E007C081B /* WLAppCheckUpdateHelper.m in Sources */,
 				247EA72C1B7119B300E6A161 /* WLNutritionModel.m in Sources */,
 				24CDCC191B4F792E00BDE8CB /* NSObject+GCAOP.m in Sources */,
 				249745F91B6A63360019ADDA /* ForwardBuyListVC.m in Sources */,

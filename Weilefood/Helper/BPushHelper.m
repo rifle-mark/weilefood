@@ -47,7 +47,7 @@
         [BPush registerDeviceToken:deviceToken];
         [BPush bindChannelWithCompleteHandler:^(id result, NSError *error) {
             if (error) {
-                DLog(@"%@", error);
+                NSLog(@"BPush bindChannelWithCompleteHandler ERROR");
             }
         }];
     } error:&err];

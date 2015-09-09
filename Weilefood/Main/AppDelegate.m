@@ -14,6 +14,7 @@
 #import "WLDatabaseHelperHeader.h"
 #import "WLModelHeader.h"
 #import "AlipayHeader.h"
+#import "WLAppCheckUpdateHelper.h"
 
 #import "LaunchVC.h"
 #import "MainPageVC.h"
@@ -101,6 +102,9 @@
         self.window.rootViewController = navController;
     }];
     self.window.rootViewController = vc;
+    
+    // 检查更新
+    [WLAppCheckUpdateHelper check];
     
     return YES;
 }
