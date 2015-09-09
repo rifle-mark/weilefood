@@ -84,7 +84,8 @@
     }];
     
     [self.newMessageImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.msgBtn).offset(10);
+        make.top.equalTo(self.msgBtn).offset(4);
+        make.right.equalTo(self.msgBtn).offset(-27);
     }];
 }
 

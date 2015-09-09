@@ -85,7 +85,7 @@ static NSInteger const kSectionList   = 2;
         [[WLServerHelper sharedInstance] message_hasUnreadWithCallback:^(WLApiInfoModel *apiInfo, BOOL apiResult, NSError *error) {
             _strong_check(self);
             if (!error && apiInfo.isSuc) {
-                self.hasUnreadMessage = YES;//apiResult;
+                self.hasUnreadMessage = apiResult;
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kSectionMiddle] withRowAnimation:UITableViewRowAnimationNone];
             }
         }];

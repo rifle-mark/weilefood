@@ -32,12 +32,6 @@ static NSUInteger kPageSize = 20;
     [self.view addSubview:self.tableView];
     
     [self _setupObserver];
-    [self.tableView.header beginRefreshing];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewDidLayoutSubviews {
@@ -49,6 +43,11 @@ static NSUInteger kPageSize = 20;
     }];
     
     FixesViewDidLayoutSubviewsiOS7Error;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView.header beginRefreshing];
 }
 
 #pragma mark - private

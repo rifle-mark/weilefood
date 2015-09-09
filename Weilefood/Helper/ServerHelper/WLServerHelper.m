@@ -113,8 +113,13 @@ NSString * const API_RESULT_ITEMS_KEYNAME = @"Items";
         WLApiInfoModel *apiInfo = [WLApiInfoModel objectWithKeyValues:responseDic];
         id apiResult = nil;
         if (apiInfo.isSuc) {
-            NSDictionary *dic = responseDic[API_RESULT_KEYNAME];
-            apiResult = [resultClass objectWithKeyValues:dic];
+            if ([NSStringFromClass(resultClass) isEqualToString:@"NSNumber"]) {
+                apiResult = responseDic[API_RESULT_KEYNAME];
+            }
+            else {
+                NSDictionary *dic = responseDic[API_RESULT_KEYNAME];
+                apiResult = [resultClass objectWithKeyValues:dic];
+            }
         }
         GCBlockInvoke(callback, apiInfo, apiResult, nil);
     };
