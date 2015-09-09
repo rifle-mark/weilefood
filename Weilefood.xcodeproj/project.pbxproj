@@ -22,16 +22,6 @@
 		24134EBF1B6A718500E5BE07 /* VideoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24134EBE1B6A718500E5BE07 /* VideoListVC.m */; };
 		2413FBCF1B9C206A00BEC5BF /* UIApplication+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 2413FBCE1B9C206A00BEC5BF /* UIApplication+Ext.m */; };
 		2418F79A1B95EF84002F0005 /* MyFavoriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2418F7991B95EF84002F0005 /* MyFavoriteCell.m */; };
-		241F4CD31B9F157000666084 /* edge.4.0.0.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 241F4CC81B9F157000666084 /* edge.4.0.0.min.js */; };
-		241F4CD41B9F157000666084 /* jquery-2.0.3.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 241F4CC91B9F157000666084 /* jquery-2.0.3.min.js */; };
-		241F4CD51B9F157000666084 /* 启动画面01－5s.png in Resources */ = {isa = PBXBuildFile; fileRef = 241F4CCB1B9F157000666084 /* 启动画面01－5s.png */; };
-		241F4CD61B9F157000666084 /* 启动画面01－5s2.png in Resources */ = {isa = PBXBuildFile; fileRef = 241F4CCC1B9F157000666084 /* 启动画面01－5s2.png */; };
-		241F4CD71B9F157000666084 /* 启动画面02－5s.png in Resources */ = {isa = PBXBuildFile; fileRef = 241F4CCD1B9F157000666084 /* 启动画面02－5s.png */; };
-		241F4CD81B9F157000666084 /* 启动画面02－5s2.png in Resources */ = {isa = PBXBuildFile; fileRef = 241F4CCE1B9F157000666084 /* 启动画面02－5s2.png */; };
-		241F4CD91B9F157000666084 /* weile.html in Resources */ = {isa = PBXBuildFile; fileRef = 241F4CCF1B9F157000666084 /* weile.html */; };
-		241F4CDA1B9F157000666084 /* weile_edge.js in Resources */ = {isa = PBXBuildFile; fileRef = 241F4CD01B9F157000666084 /* weile_edge.js */; };
-		241F4CDB1B9F157000666084 /* weile_edgeActions.js in Resources */ = {isa = PBXBuildFile; fileRef = 241F4CD11B9F157000666084 /* weile_edgeActions.js */; };
-		241F4CDC1B9F157000666084 /* weile_edgePreload.js in Resources */ = {isa = PBXBuildFile; fileRef = 241F4CD21B9F157000666084 /* weile_edgePreload.js */; };
 		2438A7621B7ECC77003404BF /* WLDoctorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2438A7611B7ECC77003404BF /* WLDoctorModel.m */; };
 		2438A7651B7ECF09003404BF /* WLServerHelper+Doctor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2438A7641B7ECF09003404BF /* WLServerHelper+Doctor.m */; };
 		2438A7681B7ED1AD003404BF /* WLServerHelper+Url.m in Sources */ = {isa = PBXBuildFile; fileRef = 2438A7671B7ED1AD003404BF /* WLServerHelper+Url.m */; };
@@ -210,6 +200,14 @@
 		24D55DE61B67EB2400EC6373 /* UIBarButtonItem+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D55DE51B67EB2400EC6373 /* UIBarButtonItem+Ext.m */; };
 		24D628981B95E2CD0078944F /* DoctorRecommendInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D628971B95E2CD0078944F /* DoctorRecommendInfoVC.m */; };
 		24D6289B1B95EC040078944F /* WLActionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D6289A1B95EC040078944F /* WLActionModel.m */; };
+		24D990D21B9FC725003C6635 /* edge.4.0.0.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 24D990CA1B9FC725003C6635 /* edge.4.0.0.min.js */; };
+		24D990D31B9FC725003C6635 /* jquery-2.0.3.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 24D990CB1B9FC725003C6635 /* jquery-2.0.3.min.js */; };
+		24D990D41B9FC725003C6635 /* L015s2.png in Resources */ = {isa = PBXBuildFile; fileRef = 24D990CC1B9FC725003C6635 /* L015s2.png */; };
+		24D990D51B9FC725003C6635 /* L025s2.png in Resources */ = {isa = PBXBuildFile; fileRef = 24D990CD1B9FC725003C6635 /* L025s2.png */; };
+		24D990D61B9FC725003C6635 /* weile_edge.js in Resources */ = {isa = PBXBuildFile; fileRef = 24D990CE1B9FC725003C6635 /* weile_edge.js */; };
+		24D990D71B9FC725003C6635 /* weile_edgeActions.js in Resources */ = {isa = PBXBuildFile; fileRef = 24D990CF1B9FC725003C6635 /* weile_edgeActions.js */; };
+		24D990D81B9FC725003C6635 /* weile_edgePreload.js in Resources */ = {isa = PBXBuildFile; fileRef = 24D990D01B9FC725003C6635 /* weile_edgePreload.js */; };
+		24D990D91B9FC725003C6635 /* weile.html in Resources */ = {isa = PBXBuildFile; fileRef = 24D990D11B9FC725003C6635 /* weile.html */; };
 		24DED3201B94888500F8FB31 /* NutritionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DED31F1B94888500F8FB31 /* NutritionCell.m */; };
 		24E627871B7CDF7700743B51 /* ShareOnPlatformVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E627861B7CDF7700743B51 /* ShareOnPlatformVC.m */; };
 		24E6278A1B7D043600743B51 /* InputQuantityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E627891B7D043600743B51 /* InputQuantityVC.m */; };
@@ -320,16 +318,6 @@
 		2413FBCE1B9C206A00BEC5BF /* UIApplication+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+Ext.m"; sourceTree = "<group>"; };
 		2418F7981B95EF84002F0005 /* MyFavoriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFavoriteCell.h; sourceTree = "<group>"; };
 		2418F7991B95EF84002F0005 /* MyFavoriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFavoriteCell.m; sourceTree = "<group>"; };
-		241F4CC81B9F157000666084 /* edge.4.0.0.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = edge.4.0.0.min.js; sourceTree = "<group>"; };
-		241F4CC91B9F157000666084 /* jquery-2.0.3.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-2.0.3.min.js"; sourceTree = "<group>"; };
-		241F4CCB1B9F157000666084 /* 启动画面01－5s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动画面01－5s.png"; sourceTree = "<group>"; };
-		241F4CCC1B9F157000666084 /* 启动画面01－5s2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动画面01－5s2.png"; sourceTree = "<group>"; };
-		241F4CCD1B9F157000666084 /* 启动画面02－5s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动画面02－5s.png"; sourceTree = "<group>"; };
-		241F4CCE1B9F157000666084 /* 启动画面02－5s2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动画面02－5s2.png"; sourceTree = "<group>"; };
-		241F4CCF1B9F157000666084 /* weile.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = weile.html; sourceTree = "<group>"; };
-		241F4CD01B9F157000666084 /* weile_edge.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = weile_edge.js; sourceTree = "<group>"; };
-		241F4CD11B9F157000666084 /* weile_edgeActions.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = weile_edgeActions.js; sourceTree = "<group>"; };
-		241F4CD21B9F157000666084 /* weile_edgePreload.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = weile_edgePreload.js; sourceTree = "<group>"; };
 		2438A7601B7ECC77003404BF /* WLDoctorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLDoctorModel.h; sourceTree = "<group>"; };
 		2438A7611B7ECC77003404BF /* WLDoctorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLDoctorModel.m; sourceTree = "<group>"; };
 		2438A7631B7ECF09003404BF /* WLServerHelper+Doctor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WLServerHelper+Doctor.h"; sourceTree = "<group>"; };
@@ -695,6 +683,14 @@
 		24D628971B95E2CD0078944F /* DoctorRecommendInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorRecommendInfoVC.m; sourceTree = "<group>"; };
 		24D628991B95EC040078944F /* WLActionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLActionModel.h; sourceTree = "<group>"; };
 		24D6289A1B95EC040078944F /* WLActionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLActionModel.m; sourceTree = "<group>"; };
+		24D990CA1B9FC725003C6635 /* edge.4.0.0.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = edge.4.0.0.min.js; sourceTree = "<group>"; };
+		24D990CB1B9FC725003C6635 /* jquery-2.0.3.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-2.0.3.min.js"; sourceTree = "<group>"; };
+		24D990CC1B9FC725003C6635 /* L015s2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L015s2.png; sourceTree = "<group>"; };
+		24D990CD1B9FC725003C6635 /* L025s2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L025s2.png; sourceTree = "<group>"; };
+		24D990CE1B9FC725003C6635 /* weile_edge.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = weile_edge.js; sourceTree = "<group>"; };
+		24D990CF1B9FC725003C6635 /* weile_edgeActions.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = weile_edgeActions.js; sourceTree = "<group>"; };
+		24D990D01B9FC725003C6635 /* weile_edgePreload.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = weile_edgePreload.js; sourceTree = "<group>"; };
+		24D990D11B9FC725003C6635 /* weile.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = weile.html; sourceTree = "<group>"; };
 		24DED31E1B94888500F8FB31 /* NutritionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NutritionCell.h; sourceTree = "<group>"; };
 		24DED31F1B94888500F8FB31 /* NutritionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NutritionCell.m; sourceTree = "<group>"; };
 		24E627851B7CDF7700743B51 /* ShareOnPlatformVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareOnPlatformVC.h; sourceTree = "<group>"; };
@@ -1274,34 +1270,16 @@
 		241F4CC61B9F157000666084 /* LaunchHTML */ = {
 			isa = PBXGroup;
 			children = (
-				241F4CC71B9F157000666084 /* edge_includes */,
-				241F4CCA1B9F157000666084 /* images */,
-				241F4CCF1B9F157000666084 /* weile.html */,
-				241F4CD01B9F157000666084 /* weile_edge.js */,
-				241F4CD11B9F157000666084 /* weile_edgeActions.js */,
-				241F4CD21B9F157000666084 /* weile_edgePreload.js */,
+				24D990CA1B9FC725003C6635 /* edge.4.0.0.min.js */,
+				24D990CB1B9FC725003C6635 /* jquery-2.0.3.min.js */,
+				24D990CC1B9FC725003C6635 /* L015s2.png */,
+				24D990CD1B9FC725003C6635 /* L025s2.png */,
+				24D990CE1B9FC725003C6635 /* weile_edge.js */,
+				24D990CF1B9FC725003C6635 /* weile_edgeActions.js */,
+				24D990D01B9FC725003C6635 /* weile_edgePreload.js */,
+				24D990D11B9FC725003C6635 /* weile.html */,
 			);
 			path = LaunchHTML;
-			sourceTree = "<group>";
-		};
-		241F4CC71B9F157000666084 /* edge_includes */ = {
-			isa = PBXGroup;
-			children = (
-				241F4CC81B9F157000666084 /* edge.4.0.0.min.js */,
-				241F4CC91B9F157000666084 /* jquery-2.0.3.min.js */,
-			);
-			path = edge_includes;
-			sourceTree = "<group>";
-		};
-		241F4CCA1B9F157000666084 /* images */ = {
-			isa = PBXGroup;
-			children = (
-				241F4CCB1B9F157000666084 /* 启动画面01－5s.png */,
-				241F4CCC1B9F157000666084 /* 启动画面01－5s2.png */,
-				241F4CCD1B9F157000666084 /* 启动画面02－5s.png */,
-				241F4CCE1B9F157000666084 /* 启动画面02－5s2.png */,
-			);
-			path = images;
 			sourceTree = "<group>";
 		};
 		2467B7191B50D06F001202A4 /* BPush */ = {
@@ -2213,19 +2191,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				241F4CDC1B9F157000666084 /* weile_edgePreload.js in Resources */,
-				241F4CD41B9F157000666084 /* jquery-2.0.3.min.js in Resources */,
-				241F4CDB1B9F157000666084 /* weile_edgeActions.js in Resources */,
-				241F4CD51B9F157000666084 /* 启动画面01－5s.png in Resources */,
-				241F4CDA1B9F157000666084 /* weile_edge.js in Resources */,
-				241F4CD81B9F157000666084 /* 启动画面02－5s2.png in Resources */,
-				241F4CD31B9F157000666084 /* edge.4.0.0.min.js in Resources */,
-				241F4CD91B9F157000666084 /* weile.html in Resources */,
+				24D990D41B9FC725003C6635 /* L015s2.png in Resources */,
+				24D990D31B9FC725003C6635 /* jquery-2.0.3.min.js in Resources */,
+				24D990D71B9FC725003C6635 /* weile_edgeActions.js in Resources */,
+				24D990D91B9FC725003C6635 /* weile.html in Resources */,
+				24D990D61B9FC725003C6635 /* weile_edge.js in Resources */,
+				24D990D21B9FC725003C6635 /* edge.4.0.0.min.js in Resources */,
 				247EA7291B7103B400E6A161 /* Images.xcassets in Resources */,
+				24D990D81B9FC725003C6635 /* weile_edgePreload.js in Resources */,
 				24B8C0651B5242BC001C5722 /* AGImagePickerController.bundle in Resources */,
-				241F4CD61B9F157000666084 /* 启动画面01－5s2.png in Resources */,
+				24D990D51B9FC725003C6635 /* L025s2.png in Resources */,
 				4DE8BA3F1B885D1F00E8608E /* AlipaySDK.bundle in Resources */,
-				241F4CD71B9F157000666084 /* 启动画面02－5s.png in Resources */,
 				24E66DC41B6271870081324A /* MBProgressHUDImage.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

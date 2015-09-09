@@ -91,16 +91,16 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     // 启动动画
-//    _weak(self);
-//    LaunchVC *vc = [[LaunchVC alloc] init];
-//    [vc finishBlock:^{
-//        // 显示首页
-//        _strong_check(self);
+    _weak(self);
+    LaunchVC *vc = [[LaunchVC alloc] init];
+    [vc finishBlock:^{
+        // 显示首页
+        _strong_check(self);
         MainPageVC *vc = [[MainPageVC alloc] init];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
         self.window.rootViewController = navController;
-//    }];
-//    self.window.rootViewController = vc;
+    }];
+    self.window.rootViewController = vc;
     
     return YES;
 }

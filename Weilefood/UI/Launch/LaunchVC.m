@@ -28,7 +28,6 @@
     NSURL *url = [NSURL fileURLWithPath:path];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];
-//    [self.webView performSelectorInBackground:@selector(loadRequest:) withObject:];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -83,17 +82,19 @@
 - (UIImageView *)backView {
     if (!_backView) {
         _backView = [[UIImageView alloc] init];
-        if ([[UIScreen mainScreen] bounds].size.height == 480) {
-            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"启动画面01－5s.png"]];
+        _backView.contentMode = UIViewContentModeScaleAspectFit;
+        CGFloat height = [[UIScreen mainScreen] bounds].size.height;
+        if (height == 480) {
+            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"L015s2.png"]];
         }
-        if ([[UIScreen mainScreen] bounds].size.height == 568) {
-            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"launch_5.png"]];
+        if (height == 568) {
+            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"L015s2.png"]];
         }
-        if ([[UIScreen mainScreen] bounds].size.height == 667) {
-            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"launch_6.png"]];
+        if (height == 667) {
+            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"L015s2.png"]];
         }
-        if ([[UIScreen mainScreen] bounds].size.height == 736) {
-            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"launch_6plus.png"]];
+        if (height == 736) {
+            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"L015s2.png"]];
         }
     }
     return _backView;
