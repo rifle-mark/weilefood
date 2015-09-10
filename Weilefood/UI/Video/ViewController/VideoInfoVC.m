@@ -7,6 +7,7 @@
 //
 
 #import "VideoInfoVC.h"
+#import "CommentCell.h"
 
 #import "CommentListVC.h"
 #import "LoginVC.h"
@@ -32,9 +33,19 @@
 @property (nonatomic, strong) UIView       *lineView;
 @property (nonatomic, strong) UIWebView    *webView;
 
+@property (nonatomic, strong) UIView       *lineView2;
+@property (nonatomic, strong) UITableView  *commentTableView;
+
 @property (nonatomic, strong) WLVideoModel *video;
+@property (nonatomic, strong) NSArray *commentList;
+@property (nonatomic, strong) NSArray *commentHeightList;
+@property (nonatomic, assign) CGFloat tableViewHeight;
 
 @end
+
+static NSInteger const kTableHeaderHeight = 45;
+static NSInteger const kCommentButtonTopBottomMargin = 15;
+static NSInteger const kCommentButtonHeight = 40;
 
 @implementation VideoInfoVC
 
@@ -53,6 +64,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = k_COLOR_WHITE;
+    self.tableViewHeight = kTableHeaderHeight + kCommentButtonTopBottomMargin * 2 + kCommentButtonHeight;
     
     NSArray *barItems = @[self.shareButton,
                           self.commentButton,
@@ -72,6 +84,8 @@
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.lineView];
     [self.contentView addSubview:self.webView];
+    [self.contentView addSubview:self.lineView2];
+    [self.contentView addSubview:self.commentTableView];
     
     [self _showData];
     [self _loadData];
@@ -110,8 +124,18 @@
     [self.webView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.lineView);
         make.top.equalTo(self.lineView).offset(20);
-        make.bottom.equalTo(self.contentView);
         make.height.equalTo(@(self.webView.scrollView.contentSize.height ?: 10));
+    }];
+    [self.lineView2 mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.contentView);
+        make.top.equalTo(self.webView.mas_bottom);
+        make.height.equalTo(@7);
+    }];
+    [self.commentTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.contentView);
+        make.top.equalTo(self.lineView2.mas_bottom);
+        make.height.equalTo(@(self.tableViewHeight));
+        make.bottom.equalTo(self.contentView);
     }];
     
     FixesViewDidLayoutSubviewsiOS7Error;
@@ -165,6 +189,35 @@
         ServerHelperErrorHandle;
         self.video = apiResult;
         [self _showData];
+    }];
+    [[WLServerHelper sharedInstance] comment_getListWithType:WLCommentTypeVideo refId:self.video.videoId maxDate:0 pageSize:5 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
+        _strong_check(self);
+        if (error || !apiInfo.isSuc) {
+            return;
+        }
+        self.commentList = apiResult;
+        self.tableViewHeight = kTableHeaderHeight + kCommentButtonTopBottomMargin * 2 + kCommentButtonHeight;
+        NSMutableArray *heights = [[NSMutableArray alloc] init];
+        for (int i = 0; i < apiResult.count; i++) {
+            WLCommentModel *comment = apiResult[i];
+            CGFloat height = [CommentCell cellHeightWithToName:comment.toNickName content:comment.content];
+            [heights addObject:@(height)];
+            self.tableViewHeight += height;
+        }
+        self.commentHeightList = heights;
+        [self.commentTableView reloadData];
+        [self.view setNeedsLayout];
+    }];
+}
+
+- (void)_commentAction:(id)sender {
+    _weak(self);
+    BOOL nowEnter = sender && (sender != self.commentButton);
+    [CommentListVC showWithType:WLCommentTypeVideo refId:self.video.videoId nowEnter:nowEnter dismissBlock:^(NSInteger addCount) {
+        _strong_check(self);
+        if (addCount > 0) {
+            [self _loadData];
+        }
     }];
 }
 
@@ -245,15 +298,7 @@
         _commentButton.titleLabel.font = [UIFont systemFontOfSize:10];
         [_commentButton setTitleColor:k_COLOR_DARKGRAY forState:UIControlStateNormal];
         [_commentButton setImage:[UIImage imageNamed:@"videoinfo_icon_comment"] forState:UIControlStateNormal];
-        _weak(self);
-        [_commentButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
-            _strong_check(self);
-            [CommentListVC showWithType:WLCommentTypeVideo refId:self.video.videoId dismissBlock:^(NSInteger addCount) {
-                _strong_check(self);
-                self.video.commentCount += addCount;
-                [self _showData];
-            }];
-        }];
+        [_commentButton addTarget:self action:@selector(_commentAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _commentButton;
 }
@@ -343,6 +388,97 @@
         }];
     }
     return _webView;
+}
+
+- (UIView *)lineView2 {
+    if (!_lineView2) {
+        _lineView2 = [[UIView alloc] init];
+        _lineView2.backgroundColor = k_COLOR_LAVENDER;
+    }
+    return _lineView2;
+}
+
+- (UITableView *)commentTableView {
+    if (!_commentTableView) {
+        
+        UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, kCommentButtonTopBottomMargin * 2 + kCommentButtonHeight)];
+        UIButton *commentBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        commentBtn.backgroundColor = k_COLOR_ORANGE;
+        commentBtn.frame = CGRectMake(12, kCommentButtonTopBottomMargin, SCREEN_WIDTH - 12 * 2, kCommentButtonHeight);
+        commentBtn.layer.cornerRadius = 4;
+        [commentBtn setTitle:@"发布评论" forState:UIControlStateNormal];
+        [commentBtn setTitleColor:k_COLOR_WHITE forState:UIControlStateNormal];
+        [commentBtn addTarget:self action:@selector(_commentAction:) forControlEvents:UIControlEventTouchUpInside];
+        [footerView addSubview:commentBtn];
+        
+        static NSString *const kHeaderIdentifier = @"HEADERCELL";
+        static NSString *const kCellIdentifier = @"MYCELL";
+        _commentTableView = [[UITableView alloc] init];
+        _commentTableView.backgroundColor = self.view.backgroundColor;
+        _commentTableView.tableFooterView = footerView;
+        _commentTableView.separatorColor = k_COLOR_LAVENDER;
+        _commentTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        _commentTableView.scrollEnabled = NO;
+        [_commentTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kHeaderIdentifier];
+        [_commentTableView registerClass:[CommentCell class] forCellReuseIdentifier:kCellIdentifier];
+        _weak(self);
+        [_commentTableView withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {
+            _strong_check(self, 0);
+            return 1 + (self.commentList ? self.commentList.count : 0);
+        }];
+        [_commentTableView withBlockForRowHeight:^CGFloat(UITableView *view, NSIndexPath *path) {
+            _strong_check(self, 0);
+            return path.row == 0 ? kTableHeaderHeight : [self.commentHeightList[path.row - 1] floatValue];
+        }];
+        [_commentTableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
+            _strong_check(self, nil);
+            if (path.row == 0) {
+                UILabel *titleLabel = [[UILabel alloc] init];
+                titleLabel.textColor = k_COLOR_DIMGRAY;
+                titleLabel.font = [UIFont boldSystemFontOfSize:16];
+                titleLabel.text = @"评论";
+                UIButton *allButton = [UIButton buttonWithType:UIButtonTypeCustom];
+                allButton.titleLabel.font = [UIFont systemFontOfSize:13];
+                [allButton setTitle:@"查看全部" forState:UIControlStateNormal];
+                [allButton setTitleColor:k_COLOR_DARKGRAY forState:UIControlStateNormal];
+                [allButton setImage:[UIImage imageNamed:@"discovery_all_icon_n"] forState:UIControlStateNormal];
+                [allButton setImage:[UIImage imageNamed:@"discovery_all_icon_h"] forState:UIControlStateHighlighted];
+                // 图标居右
+                [allButton sizeToFit];
+                allButton.titleEdgeInsets = UIEdgeInsetsMake(0, -allButton.imageView.frame.size.width - 4, 0, allButton.imageView.frame.size.width + 4);
+                allButton.imageEdgeInsets = UIEdgeInsetsMake(0, allButton.titleLabel.frame.size.width, 0, -allButton.titleLabel.frame.size.width);
+                
+                UITableViewCell *cell = [view dequeueReusableCellWithIdentifier:kHeaderIdentifier forIndexPath:path];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                [cell.contentView addSubview:titleLabel];
+                [cell.contentView addSubview:allButton];
+                [titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.left.equalTo(@14);
+                    make.centerY.equalTo(@0);
+                }];
+                [allButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.right.equalTo(allButton.superview).offset(-14);
+                    make.centerY.equalTo(@0);
+                }];
+                return cell;
+            }
+            CommentCell *cell = [view dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:path];
+            WLCommentModel *comment = self.commentList[path.row - 1];
+            cell.avatarUrl = comment.avatar;
+            cell.name      = comment.nickName;
+            cell.toName    = comment.toNickName;
+            cell.content   = comment.content;
+            cell.time      = comment.createDate;
+            return cell;
+        }];
+        [_commentTableView withBlockForRowDidSelect:^(UITableView *view, NSIndexPath *path) {
+            _strong_check(self);
+            if (path.row == 0) {
+                [self _commentAction:nil];
+            }
+        }];
+    }
+    return _commentTableView;
 }
 
 @end

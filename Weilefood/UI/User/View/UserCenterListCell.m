@@ -104,7 +104,7 @@
     [self.lineV mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.lineV.superview).with.offset(12);
         make.right.equalTo(self.lineV.superview).with.offset(-12);
-        make.height.equalTo(@0.4);
+        make.height.equalTo(@k1pxWidth);
     }];
 }
 - (void)_setupObserver {

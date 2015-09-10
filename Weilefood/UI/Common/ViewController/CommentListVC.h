@@ -26,4 +26,14 @@ typedef void(^CommentListVCDismissBlock)(NSInteger addCount);
  */
 + (void)showWithType:(WLCommentType)type refId:(long long)refId dismissBlock:(CommentListVCDismissBlock)dismissBlock;
 
+/**
+ *  弹出评论列表界面
+ *
+ *  @param type         评论类型
+ *  @param refId        评论对象ID
+ *  @param nowEnter     立即弹出评论键盘
+ *  @param dismissBlock 界面关闭前回调
+ */
++ (void)showWithType:(WLCommentType)type refId:(long long)refId nowEnter:(BOOL)nowEnter dismissBlock:(CommentListVCDismissBlock)dismissBlock;
+
 @end

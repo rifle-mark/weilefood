@@ -25,6 +25,7 @@
 @property (nonatomic, assign) CGFloat                   keyboardHeight;
 @property (nonatomic, assign) WLCommentType             type;
 @property (nonatomic, assign) long long                 refId;
+@property (nonatomic, assign) BOOL                      nowEnter;
 @property (nonatomic, copy  ) CommentListVCDismissBlock dismissBlock;
 @property (nonatomic, assign) NSInteger                 addCount;
 @property (nonatomic, strong) NSArray                   *commentList;
@@ -39,7 +40,11 @@ static NSInteger const kPageSize = 10;
 @implementation CommentListVC
 
 + (void)showWithType:(WLCommentType)type refId:(long long)refId dismissBlock:(CommentListVCDismissBlock)dismissBlock {
-    CommentListVC *vc = [[CommentListVC alloc] initWithType:type refId:refId dismissBlock:dismissBlock];
+    [self showWithType:type refId:refId nowEnter:NO dismissBlock:dismissBlock];
+}
+
++ (void)showWithType:(WLCommentType)type refId:(long long)refId nowEnter:(BOOL)nowEnter dismissBlock:(CommentListVCDismissBlock)dismissBlock {
+    CommentListVC *vc = [[CommentListVC alloc] initWithType:type refId:refId nowEnter:nowEnter dismissBlock:dismissBlock];
     UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nc animated:YES completion:nil];
 }
@@ -49,11 +54,12 @@ static NSInteger const kPageSize = 10;
     return nil;
 }
 
-- (id)initWithType:(WLCommentType)type refId:(long long)refId dismissBlock:(CommentListVCDismissBlock)dismissBlock {
+- (id)initWithType:(WLCommentType)type refId:(long long)refId nowEnter:(BOOL)nowEnter dismissBlock:(CommentListVCDismissBlock)dismissBlock {
     if (self = [super init]) {
         self.addCount = 0;
         self.type = type;
         self.refId = refId;
+        self.nowEnter = nowEnter;
         self.dismissBlock = dismissBlock;
     }
     return self;
@@ -106,6 +112,13 @@ static NSInteger const kPageSize = 10;
     }];
     
     FixesViewDidLayoutSubviewsiOS7Error;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (self.nowEnter) {
+        [self.textView becomeFirstResponder];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
