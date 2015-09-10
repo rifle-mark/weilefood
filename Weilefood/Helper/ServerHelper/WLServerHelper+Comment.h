@@ -54,4 +54,13 @@ typedef NS_ENUM(NSUInteger, WLCommentType);
  */
 - (void)comment_getMyListWithType:(WLCommentType)type refId:(long long)refId maxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
 
+/**
+ *  获取回复我的列表。(NSArray<WLCommentModel>)apiResult
+ *
+ *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param pageSize 返回的最大记录数
+ *  @param callback
+ */
+- (void)comment_getReplyMeListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback;
+
 @end

@@ -65,9 +65,7 @@
 - (void)_layoutSubViews {
     
     [self.msgBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.msgBtn.superview);
-        make.top.equalTo(self.shareBtn.superview).with.offset(15);
-        make.bottom.equalTo(self.shareBtn.superview).with.offset(-4);
+        make.center.equalTo(self.msgBtn.superview);
         make.width.equalTo(@100);
     }];
     

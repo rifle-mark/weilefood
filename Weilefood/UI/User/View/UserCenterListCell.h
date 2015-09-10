@@ -12,12 +12,15 @@ typedef NS_ENUM(NSUInteger, UserCenterListItemType) {
     MyOrder,
     MyFavorite,
     MyComment,
-    FeedBack
+    ReplyMe,
+    FeedBack,
 };
 
 @interface UserCenterListCell : UITableViewCell
 
 @property(nonatomic,assign)UserCenterListItemType itemType;
+/// 显示红点。默认NO
+@property(nonatomic,assign)BOOL displayRedDot;
 
 + (NSString*)reuseIdentify;
 @end

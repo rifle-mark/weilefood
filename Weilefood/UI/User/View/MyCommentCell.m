@@ -18,6 +18,9 @@
 @property(nonatomic,strong)UIButton     *subjectBtn;
 @property(nonatomic,strong)UIView       *seperatorV;
 
+@property (nonatomic,strong) WLCommentModel    *comment;
+@property (nonatomic,assign) MyCommentCellMode mode;
+
 @end
 
 @implementation MyCommentCell
@@ -26,7 +29,7 @@
     return @"MyCommentCellIdentify";
 }
 
-+ (CGFloat)heightOfCellWithComment:(WLCommentModel*)comment {
++ (CGFloat)heightOfCellWithComment:(WLCommentModel*)comment mode:(MyCommentCellMode)mode {
     return  20/*top margin*/
             + 20/*content<-->time*/
             + 12/*time height*/
@@ -34,24 +37,24 @@
             + 14/*from height*/
             + 15/*bottom margin*/
             + 5/*separator height*/
-            + ceil([[[self class] contentAttributedStringOfComment:comment] boundingRectWithSize:ccs([UIScreen mainScreen].bounds.size.width-30, 1000) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size.height);
+            + ceil([[[self class] contentAttributedStringOfComment:comment mode:mode] boundingRectWithSize:ccs([UIScreen mainScreen].bounds.size.width-30, 1000) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size.height);
 }
 
-+ (NSAttributedString *)contentAttributedStringOfComment:(WLCommentModel *)comment {
++ (NSAttributedString *)contentAttributedStringOfComment:(WLCommentModel *)comment mode:(MyCommentCellMode)mode {
     
     NSMutableAttributedString *replyString = nil;
     NSMutableAttributedString *contentString = nil;
     if (comment.parentId != 0) {
         NSMutableParagraphStyle *ps = [[NSMutableParagraphStyle alloc] init];
         ps.lineSpacing = 5;
-        NSString *replyStr = [NSString stringWithFormat:@"回复 %@: ", comment.toNickName];
+        NSString *replyStr = mode == MyCommentCellModeMyReply ? [NSString stringWithFormat:@"回复 %@: ", comment.toNickName] : [NSString stringWithFormat:@"%@ 回复: ", comment.nickName];
         replyString = [[NSMutableAttributedString alloc]
                        initWithString:replyStr
                        attributes:@{NSParagraphStyleAttributeName:ps,
                                     NSFontAttributeName:[UIFont boldSystemFontOfSize:16],
                                     NSForegroundColorAttributeName:k_COLOR_SLATEGRAY}];
-        [replyString addAttribute:NSLinkAttributeName value:@"foodcircle://userClick" range:[[replyString string] rangeOfString:[NSString stringWithFormat:@"%@", comment.toNickName]]];
-        [replyString addAttribute:NSForegroundColorAttributeName value:k_COLOR_GOLDENROD range:[[replyString string] rangeOfString:[NSString stringWithFormat:@"%@", comment.toNickName]]];
+        [replyString addAttribute:NSLinkAttributeName value:@"foodcircle://userClick" range:[[replyString string] rangeOfString:[NSString stringWithFormat:@"%@", mode == MyCommentCellModeMyReply ? comment.toNickName : comment.nickName]]];
+        [replyString addAttribute:NSForegroundColorAttributeName value:k_COLOR_GOLDENROD range:[[replyString string] rangeOfString:[NSString stringWithFormat:@"%@", mode == MyCommentCellModeMyReply ? comment.toNickName : comment.nickName]]];
     }
     NSMutableParagraphStyle *ps1 = [[NSMutableParagraphStyle alloc] init];
     ps1.lineSpacing = 5;
@@ -67,16 +70,6 @@
     else {
         return contentString;
     }
-}
-
-- (void)awakeFromNib {
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -99,6 +92,17 @@
     [self _layoutSubViews];
     [super updateConstraints];
 }
+
+#pragma mark - public
+
+- (void)setComment:(WLCommentModel *)comment mode:(MyCommentCellMode)mode {
+    self.comment = comment;
+    self.mode = mode;
+    self.commentContentT.attributedText = [[self class] contentAttributedStringOfComment:comment mode:self.mode];
+    self.timeL.text = [self.comment.createDate timeAgoSinceNow];
+    [self.subjectBtn setTitle:self.comment.title forState:UIControlStateNormal];
+}
+
 #pragma mark - private
 
 - (void)_layoutSubViews {
@@ -133,23 +137,10 @@
 }
 - (void)_setupObserver {
     _weak(self);
-    [self startObserveObject:self forKeyPath:@"comment" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
-        _strong_check(self);
-        
-        [self _setContentLabelWithComment:self.comment];
-        self.timeL.text = [self.comment.createDate timeAgoSinceNow];
-        [self.subjectBtn setTitle:self.comment.title forState:UIControlStateNormal];
-        
-    }];
-    
     [self startObserveObject:self forKeyPath:@"needSeperator" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
         self.seperatorV.hidden = !self.needSeperator;
     }];
-}
-
-- (void)_setContentLabelWithComment:(WLCommentModel*)comment {
-    self.commentContentT.attributedText = [[self class] contentAttributedStringOfComment:comment];
 }
 
 #pragma mark - property

@@ -12,6 +12,7 @@
 
 @property(nonatomic,strong)UIView           *mainV;
 @property(nonatomic,strong)UIImageView      *iconV;
+@property(nonatomic,strong)UIImageView      *redDotV;
 @property(nonatomic,strong)UILabel          *titleL;
 @property(nonatomic,strong)UIImageView      *arrawV;
 @property(nonatomic,strong)UIView           *lineV;
@@ -35,9 +36,12 @@
         
         [self.contentView addSubview:self.mainV];
         [self.mainV addSubview:self.iconV];
+        [self.mainV addSubview:self.redDotV];
         [self.mainV addSubview:self.titleL];
         [self.mainV addSubview:self.arrawV];
         [self.mainV addSubview:self.lineV];
+        
+        self.displayRedDot = NO;
         
         [self _layoutSubViews];
         [self _setupObserver];
@@ -59,7 +63,15 @@
     }];
 }
 
+#pragma mark - public methods
+
+- (void)setDisplayRedDot:(BOOL)displayRedDot {
+    _displayRedDot = displayRedDot;
+    self.redDotV.hidden = !displayRedDot;
+}
+
 #pragma mark - private method
+
 - (void)_layoutSubViews {
     [self.mainV mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self.contentView);
@@ -70,6 +82,11 @@
         make.left.equalTo(self.iconV.superview).with.offset(12);
         make.centerY.equalTo(self.iconV.superview);
         make.size.mas_equalTo(ccs(27, 27));
+    }];
+    
+    [self.redDotV mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.iconV.mas_right);
+        make.centerY.equalTo(self.iconV.mas_top);
     }];
     
     [self.titleL mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -110,6 +127,11 @@
                 self.titleL.text = @"我的评论";
             }
                 break;
+            case ReplyMe: {
+                self.iconV.image = [UIImage imageNamed:@"replyme_icon"];
+                self.titleL.text = @"回复我的";
+            }
+                break;
             case FeedBack: {
                 self.iconV.image = [UIImage imageNamed:@"feedback_icon"];
                 self.titleL.text = @"意见反馈";
@@ -129,11 +151,20 @@
     }
     return _mainV;
 }
+
 - (UIImageView *)iconV {
     if (!_iconV) {
         _iconV = [[UIImageView alloc] init];
     }
     return _iconV;
+}
+
+- (UIImageView *)redDotV {
+    if (!_redDotV) {
+        _redDotV = [[UIImageView alloc] init];
+        _redDotV.image = [UIImage imageNamed:@"icon_newmessage"];
+    }
+    return _redDotV;
 }
 
 - (UILabel *)titleL {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		240435A41BA1B18E007538EE /* WebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240435A31BA1B18E007538EE /* WebVC.m */; };
+		240435A71BA1C94A007538EE /* ReplyMeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240435A61BA1C94A007538EE /* ReplyMeVC.m */; };
 		24054E7F1B92B39E008018F2 /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 24054E7E1B92B39E008018F2 /* UIViewController+BackButtonHandler.m */; };
 		24054E821B92C236008018F2 /* SubmitUserHealthInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24054E811B92C236008018F2 /* SubmitUserHealthInfoVC.m */; };
 		2406062F1B772F9100C6F373 /* CitySelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2406062E1B772F9100C6F373 /* CitySelectVC.m */; };
@@ -293,6 +294,8 @@
 		060F4AADF217CE753F362849 /* Pods-Weilefood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weilefood.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weilefood/Pods-Weilefood.release.xcconfig"; sourceTree = "<group>"; };
 		240435A21BA1B18E007538EE /* WebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebVC.h; sourceTree = "<group>"; };
 		240435A31BA1B18E007538EE /* WebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebVC.m; sourceTree = "<group>"; };
+		240435A51BA1C94A007538EE /* ReplyMeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyMeVC.h; sourceTree = "<group>"; };
+		240435A61BA1C94A007538EE /* ReplyMeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyMeVC.m; sourceTree = "<group>"; };
 		24054E7D1B92B39E008018F2 /* UIViewController+BackButtonHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BackButtonHandler.h"; sourceTree = "<group>"; };
 		24054E7E1B92B39E008018F2 /* UIViewController+BackButtonHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BackButtonHandler.m"; sourceTree = "<group>"; };
 		24054E801B92C236008018F2 /* SubmitUserHealthInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitUserHealthInfoVC.h; sourceTree = "<group>"; };
@@ -1234,6 +1237,8 @@
 				4D4252871B91962100F481E3 /* MyShareVC.m */,
 				4D4252891B91962F00F481E3 /* MyCommentVC.h */,
 				4D42528A1B91962F00F481E3 /* MyCommentVC.m */,
+				240435A51BA1C94A007538EE /* ReplyMeVC.h */,
+				240435A61BA1C94A007538EE /* ReplyMeVC.m */,
 				4D42528C1B91964300F481E3 /* MyFavoriteVC.h */,
 				4D42528D1B91964300F481E3 /* MyFavoriteVC.m */,
 				4D42528F1B9196B900F481E3 /* MyMessageVC.h */,
@@ -2436,6 +2441,7 @@
 				24AE12401B9186AE00654AEC /* ShoppingCartVC.m in Sources */,
 				4DE8BA4E1B885D1F00E8608E /* GCPageScrollView.m in Sources */,
 				245936A61B5A2ECF008FFAB8 /* WLServerHelper+Product.m in Sources */,
+				240435A71BA1C94A007538EE /* ReplyMeVC.m in Sources */,
 				24CDCC091B4F792E00BDE8CB /* UIImagePickerController+GCDelegate.m in Sources */,
 				24CAC43F1B5806BF00E3C4D5 /* WLForwardBuyModel.m in Sources */,
 				2482E6471B5E96FE005815E8 /* WLServerHelper+Message.m in Sources */,

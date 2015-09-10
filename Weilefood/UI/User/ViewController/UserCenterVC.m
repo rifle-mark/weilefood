@@ -26,11 +26,13 @@
 #import "FeedBackVC.h"
 #import "SettingVC.h"
 #import "UserPointVC.h"
+#import "ReplyMeVC.h"
 
 @interface UserCenterVC ()
 
 @property(nonatomic,strong)UITableView      *tableView;
 @property(nonatomic,assign)BOOL hasUnreadMessage;
+@property(nonatomic,assign)BOOL hasUnreadReply;
 
 @end
 
@@ -49,11 +51,6 @@ static NSInteger const kSectionList   = 2;
     self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], settingItem];
     
     [self.view addSubview:self.tableView];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewDidLayoutSubviews {
@@ -86,7 +83,8 @@ static NSInteger const kSectionList   = 2;
             _strong_check(self);
             if (!error && apiInfo.isSuc) {
                 self.hasUnreadMessage = hasUnreadMessage;
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kSectionMiddle] withRowAnimation:UITableViewRowAnimationNone];
+                self.hasUnreadReply = hasUnreadReply;
+                [self.tableView reloadData];
             }
         }];
     }
@@ -123,10 +121,10 @@ static NSInteger const kSectionList   = 2;
                     return 170;
                     break;
                 case kSectionMiddle:
-                    return 73;
+                    return 80;
                     break;
                 case kSectionList:
-                    if (path.row == 0 || path.row == 2 || path.row == 3) {
+                    if (path.row == 0 || path.row == 3 || path.row == 4) {
                         return 70;
                     }
                     else {
@@ -147,7 +145,7 @@ static NSInteger const kSectionList   = 2;
                     return 1;
                     break;
                 case kSectionList:
-                    return 4;
+                    return 5;
                     break;
                 default:
                     return 0;
@@ -210,6 +208,10 @@ static NSInteger const kSectionList   = 2;
                 default: {
                     UserCenterListCell *cell = [view dequeueReusableCellWithIdentifier:[UserCenterListCell reuseIdentify]];
                     cell.itemType = (UserCenterListItemType)path.row;
+                    cell.displayRedDot = NO;
+                    if (cell.itemType == ReplyMe && self.hasUnreadReply) {
+                        cell.displayRedDot = YES;
+                    }
                     return cell;
                 }
                     break;
@@ -233,24 +235,25 @@ static NSInteger const kSectionList   = 2;
             
             [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
                 _strong_check(self);
+                UIViewController *vc = nil;
                 switch (cell.itemType) {
-                    case MyOrder: {
-                        UserOrderListVC *vc = [[UserOrderListVC alloc] init];
-                        [self.navigationController pushViewController:vc animated:YES];
-                    }
+                    case MyOrder:
+                        vc = [[UserOrderListVC alloc] init];
                         break;
-                    case MyFavorite: {
-                        MyFavoriteVC *vc = [[MyFavoriteVC alloc] init];
-                        [self.navigationController pushViewController:vc animated:YES];
-                    }
+                    case MyFavorite:
+                        vc = [[MyFavoriteVC alloc] init];
                         break;
-                    case MyComment: {
-                        MyCommentVC *vc = [[MyCommentVC alloc] init];
-                        [self.navigationController pushViewController:vc animated:YES];
-                    }
+                    case MyComment:
+                        vc = [[MyCommentVC alloc] init];
+                        break;
+                    case ReplyMe:
+                        vc = [[ReplyMeVC alloc] init];
                         break;
                     default:
                         break;
+                }
+                if (vc) {
+                    [self.navigationController pushViewController:vc animated:YES];
                 }
             }];
         }];

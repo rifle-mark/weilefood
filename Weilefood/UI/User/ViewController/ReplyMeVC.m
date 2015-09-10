@@ -1,12 +1,12 @@
 //
-//  MyCommentVC.m
+//  ReplyMeVC.m
 //  Weilefood
 //
-//  Created by makewei on 15/8/29.
+//  Created by kelei on 15/9/10.
 //  Copyright (c) 2015年 kelei. All rights reserved.
 //
 
-#import "MyCommentVC.h"
+#import "ReplyMeVC.h"
 #import "MyShareVC.h"
 #import "ShareDetailVC.h"
 #import "ProductInfoVC.h"
@@ -21,23 +21,21 @@
 
 #import "MyCommentCell.h"
 
-@interface MyCommentVC ()
+@interface ReplyMeVC ()
 
-@property(nonatomic,strong)UITableView      *tableView;
-
-@property(nonatomic,strong)NSArray          *commentList;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSArray     *commentList;
 
 @end
 
 static NSInteger    kPageSize = 20;
 
-@implementation MyCommentVC
+@implementation ReplyMeVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    self.navigationItem.title = @"我的评论";
+    self.navigationItem.title = @"回复我的";
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self.view addSubview:self.tableView];
     
@@ -45,23 +43,18 @@ static NSInteger    kPageSize = 20;
     [self.tableView.header beginRefreshing];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.tableView.superview).with.offset(self.topLayoutGuide.length);
-        make.left.right.bottom.equalTo(self.tableView.superview);
+        make.edges.equalTo(self.view);
     }];
     
     FixesViewDidLayoutSubviewsiOS7Error;
 }
 
 #pragma mark - private
+
 - (void)_setupObserver {
     _weak(self);
     [self startObserveObject:self forKeyPath:@"commentList" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
@@ -73,7 +66,7 @@ static NSInteger    kPageSize = 20;
 - (void)_loadDataWithIsLatest:(BOOL)isLatest {
     _weak(self);
     NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLCommentModel *)[self.commentList lastObject]).createDate;
-    [[WLServerHelper sharedInstance] comment_getMyListWithType:0 refId:0 maxDate:maxDate pageSize:kPageSize  callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
+    [[WLServerHelper sharedInstance] comment_getReplyMeListWithMaxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         if (self.tableView.header.isRefreshing) {
             [self.tableView.header endRefreshing];
@@ -119,7 +112,7 @@ static NSInteger    kPageSize = 20;
                 return 0;
             }
             WLCommentModel *comment = self.commentList[path.row];
-            return [MyCommentCell heightOfCellWithComment:comment mode:MyCommentCellModeMyReply];
+            return [MyCommentCell heightOfCellWithComment:comment mode:MyCommentCellModeReplyMe];
         }];
         
         [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
@@ -131,7 +124,7 @@ static NSInteger    kPageSize = 20;
             if (!cell) {
                 cell = [[MyCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[MyCommentCell reuseIdentify]];
             }
-            [cell setComment:self.commentList[path.row] mode:MyCommentCellModeMyReply];
+            [cell setComment:self.commentList[path.row] mode:MyCommentCellModeReplyMe];
             cell.subjectClickBlock = ^(WLCommentModel* comment){
                 switch (comment.type) {
                     case WLCommentTypeShare: {
