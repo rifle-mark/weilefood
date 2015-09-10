@@ -54,7 +54,7 @@
 }
 
 - (UIViewController *)currentViewController {
-    UIViewController* viewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    UIViewController* viewController = self.keyWindow.rootViewController;
     return [UIApplication _findBestViewController:viewController];
 }
 

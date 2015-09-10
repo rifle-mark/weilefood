@@ -18,17 +18,15 @@
 #import "ActivityListVC.h"
 #import "VideoListVC.h"
 #import "HousekeeperIndexVC.h"
-#import "WebVC.h"
 
 #import "ProductInfoVC.h"
 #import "ForwardBuyInfoVC.h"
 #import "ActivityInfoVC.h"
-#import "VideoInfoVC.h"
 #import "NutritionInfoVC.h"
-#import "DoctorInfoVC.h"
 
 #import "WLServerHelperHeader.h"
 #import "WLModelHeader.h"
+#import "WLAdHelper.h"
 
 @interface DiscoveryVC () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout> {
     CGFloat _cellWidth;
@@ -128,60 +126,7 @@ static NSInteger const kSectionIndexActivity   = 4;
         [headerView bannerImageClickBlock:^(NSInteger index) {
             _strong_check(self);
             WLAdModel *ad = self.bannerAdDatas[index];
-            switch (ad.type) {
-                case WLAdTypeShare: {
-                    break;
-                }
-                case WLAdTypeProduct: {
-                    WLProductModel *product = [[WLProductModel alloc] init];
-                    product.productId = ad.refId;
-                    [self.navigationController pushViewController:[[ProductInfoVC alloc] initWithProduct:product] animated:YES];
-                    break;
-                }
-                case WLAdTypeActivity: {
-                    WLActivityModel *activity = [[WLActivityModel alloc] init];
-                    activity.activityId = ad.refId;
-                    [self.navigationController pushViewController:[[ActivityInfoVC alloc] initWithActivity:activity] animated:YES];
-                    break;
-                }
-                case WLAdTypeForwardBuy: {
-                    WLForwardBuyModel *forwardBuy = [[WLForwardBuyModel alloc] init];
-                    forwardBuy.forwardBuyId = ad.refId;
-                    [self.navigationController pushViewController:[[ForwardBuyInfoVC alloc] initWithForwardBuy:forwardBuy] animated:YES];
-                    break;
-                }
-                case WLAdTypeNutrition: {
-                    WLNutritionModel *nutrition = [[WLNutritionModel alloc] init];
-                    nutrition.classId = ad.refId;
-                    [self.navigationController pushViewController:[[NutritionInfoVC alloc] initWithNutrition:nutrition] animated:YES];
-                    break;
-                }
-                case WLAdTypeVideo: {
-                    [LoginVC needsLoginWithLoggedBlock:^(WLUserModel *user) {
-                        _strong_check(self);
-                        WLVideoModel *video = [[WLVideoModel alloc] init];
-                        video.videoId = ad.refId;
-                        [self.navigationController pushViewController:[[VideoInfoVC alloc] initWithVideo:video] animated:YES];
-                    }];
-                    break;
-                }
-                case WLAdTypeUrl: {
-                    WebVC *vc = [[WebVC alloc] initWithTitle:ad.name URL:ad.url];
-                    [self.navigationController pushViewController:vc animated:YES];
-                    break;
-                }
-                case WLAdTypeNoUrl: {
-                    break;
-                }
-                case WLAdTypeDoctor: {
-                    WLDoctorModel *doctor = [[WLDoctorModel alloc] init];
-                    doctor.doctorId = ad.refId;
-                    [self.navigationController pushViewController:[[DoctorInfoVC alloc] initWithDoctor:doctor] animated:YES];
-                    break;
-                }
-                default:
-                    break;
-            }
+            [WLAdHelper openWithAd:ad];
         }];
         [headerView marketClickBlock:^{
             _strong_check(self);

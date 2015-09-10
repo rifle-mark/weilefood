@@ -15,6 +15,8 @@
 #import "WLModelHeader.h"
 #import "AlipayHeader.h"
 #import "WLAppCheckUpdateHelper.h"
+#import "WLModelHeader.h"
+#import "WLAdHelper.h"
 
 #import "LaunchVC.h"
 #import "MainPageVC.h"
@@ -100,6 +102,16 @@
         MainPageVC *vc = [[MainPageVC alloc] init];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:vc];
         self.window.rootViewController = navController;
+        
+        NSDictionary *userInfo = [launchOptions objectForKey:@"UIApplicationLaunchOptionsRemoteNotificationKey"];
+        if (userInfo) {
+            WLAdModel *ad = [self _createAdWithUserInfo:userInfo];
+            if (application.applicationState == UIApplicationStateInactive) {
+                if (ad.type != WLAdTypeNoUrl) {
+                    [WLAdHelper openWithAd:ad];
+                }
+            }
+        }
     }];
     self.window.rootViewController = vc;
     
@@ -148,7 +160,25 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     // BPushHelper要求实现此方法(空内容及可)
-    NSLog(@"App Received Remote Notification:\n%@", userInfo);
+    WLAdModel *ad = [self _createAdWithUserInfo:userInfo];
+    if (application.applicationState == UIApplicationStateInactive) {
+        if (ad.type != WLAdTypeNoUrl) {
+            [WLAdHelper openWithAd:ad];
+        }
+    }
+    else {
+        GCAlertView *alertView = [[GCAlertView alloc] initWithTitle:@"消息" andMessage:ad.name];
+        if (ad.type == WLAdTypeNoUrl) {
+            [alertView setCancelButtonWithTitle:@"知道了" actionBlock:nil];
+        }
+        else {
+            [alertView setCancelButtonWithTitle:@"查看" actionBlock:^{
+                [WLAdHelper openWithAd:ad];
+            }];
+            [alertView addOtherButtonWithTitle:@"知道了" actionBlock:nil];
+        }
+        [alertView show];
+    }
 }
 
 #pragma mark - Share
@@ -174,6 +204,31 @@
         }];
     }
     return [UMSocialSnsService handleOpenURL:url];
+}
+
+#pragma mark - private
+
+- (WLAdModel *)_createAdWithUserInfo:(NSDictionary *)userInfo {
+    WLAdModel *ad = [[WLAdModel alloc] init];
+    ad.name = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    ad.refId = [[userInfo objectForKey:@"rel_id"] integerValue];
+    NSInteger type = [[userInfo objectForKey:@"rel_type"] integerValue];
+    switch (type) {
+        case 0: ad.type = WLAdTypeNoUrl; break;
+        case 1: ad.type = WLAdTypeShare; break;
+        case 2: ad.type = WLAdTypeProduct; break;
+        case 3: ad.type = WLAdTypeActivity; break;
+        case 4: ad.type = WLAdTypeForwardBuy; break;
+        case 5: ad.type = WLAdTypeNutrition; break;
+        case 6: ad.type = WLAdTypeVideo; break;
+        case 7: ad.type = WLAdTypeDoctor; break;
+        default: break;
+    }
+    return ad;
+}
+
+- (void)_openAd:(WLAdModel *)ad {
+    
 }
 
 @end
