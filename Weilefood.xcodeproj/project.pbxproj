@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		240435A41BA1B18E007538EE /* WebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240435A31BA1B18E007538EE /* WebVC.m */; };
 		24054E7F1B92B39E008018F2 /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 24054E7E1B92B39E008018F2 /* UIViewController+BackButtonHandler.m */; };
 		24054E821B92C236008018F2 /* SubmitUserHealthInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24054E811B92C236008018F2 /* SubmitUserHealthInfoVC.m */; };
 		2406062F1B772F9100C6F373 /* CitySelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2406062E1B772F9100C6F373 /* CitySelectVC.m */; };
@@ -290,6 +291,8 @@
 
 /* Begin PBXFileReference section */
 		060F4AADF217CE753F362849 /* Pods-Weilefood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weilefood.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weilefood/Pods-Weilefood.release.xcconfig"; sourceTree = "<group>"; };
+		240435A21BA1B18E007538EE /* WebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebVC.h; sourceTree = "<group>"; };
+		240435A31BA1B18E007538EE /* WebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebVC.m; sourceTree = "<group>"; };
 		24054E7D1B92B39E008018F2 /* UIViewController+BackButtonHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BackButtonHandler.h"; sourceTree = "<group>"; };
 		24054E7E1B92B39E008018F2 /* UIViewController+BackButtonHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BackButtonHandler.m"; sourceTree = "<group>"; };
 		24054E801B92C236008018F2 /* SubmitUserHealthInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitUserHealthInfoVC.h; sourceTree = "<group>"; };
@@ -985,6 +988,8 @@
 				24E627891B7D043600743B51 /* InputQuantityVC.m */,
 				24F659161B9F43AD0058B1AA /* YeepayVC.h */,
 				24F659171B9F43AD0058B1AA /* YeepayVC.m */,
+				240435A21BA1B18E007538EE /* WebVC.h */,
+				240435A31BA1B18E007538EE /* WebVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2390,6 +2395,7 @@
 				24CDCC081B4F792E00BDE8CB /* UIGestureRecognizer+GCDelegate.m in Sources */,
 				24B8C06E1B5242BC001C5722 /* AGPreviewScrollView.m in Sources */,
 				249A73BD1B569D2300F46F3D /* WLServerHelper.m in Sources */,
+				240435A41BA1B18E007538EE /* WebVC.m in Sources */,
 				2413FBCF1B9C206A00BEC5BF /* UIApplication+Ext.m in Sources */,
 				244D5B021BA0923E007C081B /* WLAppCheckUpdateHelper.m in Sources */,
 				247EA72C1B7119B300E6A161 /* WLNutritionModel.m in Sources */,

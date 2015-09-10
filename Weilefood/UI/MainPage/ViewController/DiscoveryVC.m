@@ -18,6 +18,7 @@
 #import "ActivityListVC.h"
 #import "VideoListVC.h"
 #import "HousekeeperIndexVC.h"
+#import "WebVC.h"
 
 #import "ProductInfoVC.h"
 #import "ForwardBuyInfoVC.h"
@@ -165,7 +166,8 @@ static NSInteger const kSectionIndexActivity   = 4;
                     break;
                 }
                 case WLAdTypeUrl: {
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ad.url]];
+                    WebVC *vc = [[WebVC alloc] initWithTitle:ad.name URL:ad.url];
+                    [self.navigationController pushViewController:vc animated:YES];
                     break;
                 }
                 case WLAdTypeNoUrl: {
