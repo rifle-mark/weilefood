@@ -79,4 +79,23 @@
     }];
 }
 
+- (void)user_hasUnreadWithCallback:(void (^)(WLApiInfoModel *apiInfo, BOOL hasUnreadMessage, BOOL hasUnreadReply, NSError *error))callback {
+    AFHTTPRequestOperationManager *manager = [self httpManager];
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"user", @"hasnotread"]];
+    [manager GET:apiUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *responseDic = [WLDictionaryHelper validModelDictionary:responseObject];
+        WLApiInfoModel *apiInfo = [WLApiInfoModel objectWithKeyValues:responseDic];
+        BOOL hasUnreadMessage = NO;
+        BOOL hasUnreadReply = NO;
+        if (apiInfo.isSuc) {
+            NSDictionary *dic = responseDic[API_RESULT_KEYNAME];
+            hasUnreadMessage = [[dic objectForKey:@"MessageNotRead"] boolValue];
+            hasUnreadReply = [[dic objectForKey:@"ReplyNotRead"] boolValue];
+        }
+        GCBlockInvoke(callback, apiInfo, hasUnreadMessage, hasUnreadReply, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        GCBlockInvoke(callback, nil, NO, NO, error);
+    }];
+}
+
 @end

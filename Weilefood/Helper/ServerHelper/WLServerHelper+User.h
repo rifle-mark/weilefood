@@ -95,4 +95,11 @@ typedef NS_ENUM(NSUInteger, WLUserPlatform){
  */
 - (void)user_getPhoneCodeWithPhoneNum:(NSString *)phoneNum callback:(void (^)(WLApiInfoModel *apiInfo, NSString *phoneCode, NSError *error))callback;
 
+/**
+ *  获取当前用户是否有未读私信和回复
+ *
+ *  @param callback
+ */
+- (void)user_hasUnreadWithCallback:(void (^)(WLApiInfoModel *apiInfo, BOOL hasUnreadMessage, BOOL hasUnreadReply, NSError *error))callback;
+
 @end

@@ -17,8 +17,10 @@
 
 /**
  *  返回应用级别的“用户”BarButtonItem按钮
+ *
+ *  @param vc 所属视图，会为viewWillAppear方法增加切片
  */
-+ (UIBarButtonItem *)createUserBarButtonItem;
++ (UIBarButtonItem *)createUserBarButtonItemWithVC:(UIViewController *)vc;
 
 /**
  *  返回应用级别的“关闭”BarButtonItem按钮

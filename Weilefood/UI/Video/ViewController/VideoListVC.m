@@ -46,7 +46,7 @@ static NSInteger const kPageSize       = 10;
     [super viewDidLoad];
     self.title = @"视频";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], [UIBarButtonItem createUserBarButtonItem]];
+    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], [UIBarButtonItem createUserBarButtonItemWithVC:self]];
     
     [self.view addSubview:self.collectionView];
     

@@ -51,7 +51,7 @@ static NSInteger const kPageSize = 10;
     [super viewDidLoad];
     self.title = @"集市";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], [UIBarButtonItem createUserBarButtonItem], self.searchButtonItem];
+    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], [UIBarButtonItem createUserBarButtonItemWithVC:self], self.searchButtonItem];
     
     [self.channelsView addSubview:self.channelButton1];
     [self.channelsView addSubview:self.channelButton2];

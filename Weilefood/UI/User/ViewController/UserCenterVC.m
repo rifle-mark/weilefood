@@ -82,10 +82,10 @@ static NSInteger const kSectionList   = 2;
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kSectionInfo] withRowAnimation:UITableViewRowAnimationNone];
             }
         }];
-        [[WLServerHelper sharedInstance] message_hasUnreadWithCallback:^(WLApiInfoModel *apiInfo, BOOL apiResult, NSError *error) {
+        [[WLServerHelper sharedInstance] user_hasUnreadWithCallback:^(WLApiInfoModel *apiInfo, BOOL hasUnreadMessage, BOOL hasUnreadReply, NSError *error) {
             _strong_check(self);
             if (!error && apiInfo.isSuc) {
-                self.hasUnreadMessage = apiResult;
+                self.hasUnreadMessage = hasUnreadMessage;
                 [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:kSectionMiddle] withRowAnimation:UITableViewRowAnimationNone];
             }
         }];

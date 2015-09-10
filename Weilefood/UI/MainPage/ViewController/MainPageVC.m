@@ -35,6 +35,7 @@
     self.title = @"味了";
     self.view.backgroundColor = [UIColor whiteColor];
     self.tabBar.translucent = NO;
+    self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], self.userItem];
     
     NSArray *vcs = @[[[DiscoveryVC alloc] init],
                      [[SharedAllListVC alloc] init],
@@ -116,7 +117,7 @@
 
 - (UIBarButtonItem *)userItem {
     if (!_userItem) {
-        _userItem = [UIBarButtonItem createUserBarButtonItem];
+        _userItem = [UIBarButtonItem createUserBarButtonItemWithVC:self];
     }
     return _userItem;
 }

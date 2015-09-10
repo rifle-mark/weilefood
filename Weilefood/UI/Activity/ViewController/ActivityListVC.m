@@ -36,7 +36,7 @@ static NSInteger const kPageSize       = 10;
     self.view.backgroundColor = [UIColor whiteColor];
     
     UIBarButtonItem *cityItem = [[UIBarButtonItem alloc] initWithCustomView:self.cityButton];
-    UIBarButtonItem *userItem = [UIBarButtonItem createUserBarButtonItem];
+    UIBarButtonItem *userItem = [UIBarButtonItem createUserBarButtonItemWithVC:self];
     self.navigationItem.rightBarButtonItems = @[[UIBarButtonItem createNavigationFixedItem], userItem, cityItem];
     
     [self.view addSubview:self.tableView];
