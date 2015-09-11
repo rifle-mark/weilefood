@@ -25,7 +25,7 @@ case $1 in
 esac
 
 IPAFILES_PATH="`pwd`/IPAFiles"
-if [ ! -d $IPAFILES_PATH ]; then
+if [ ! -d "$IPAFILES_PATH" ]; then
     mkdir -p "${IPAFILES_PATH}"
 fi
 IPAFILE_NAME="Weilefood_$1_`date +%m%d%H`"

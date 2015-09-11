@@ -41,23 +41,23 @@ do
             ;;
     esac
 done
-if [ -z $P12_FILE_PATH ]; then
+if [ -z "$P12_FILE_PATH" ]; then
     echo "缺少参数-p"
     exit 1
 fi
-if [ -z $PROVISION_FILE_PATH ]; then
+if [ -z "$PROVISION_FILE_PATH" ]; then
     echo "缺少参数-m"
     exit 1
 fi
-if [ -z $XCODEPROJ_FILE_PATH ]; then
+if [ -z "$XCODEPROJ_FILE_PATH" ]; then
     echo "缺少参数-x"
     exit 1
 fi
-if [ -z $XCODEPROJ_SCHEME ]; then
+if [ -z "$XCODEPROJ_SCHEME" ]; then
     echo "缺少参数-s"
     exit 1
 fi
-if [ -z $IPA_FILE_PATH ]; then
+if [ -z "$IPA_FILE_PATH" ]; then
     echo "缺少参数-i"
     exit 1
 fi
@@ -79,7 +79,8 @@ PROVISION_ExpirationDate=`echo $PROVISION_XML | sed "s/^.*<key>ExpirationDate<\/
 PROVISION_UUID=`echo $PROVISION_XML | sed "s/^.*<key>UUID<\/key> *<string>\([^<]*\).*/\1/"`
 
 # 导入证书
-if [ -z `security find-certificate -a -c "${P12NAME}" -Z | grep ^SHA-1` ]; then
+TEMP_V=`security find-certificate -a -c "${P12NAME}" -Z | grep ^SHA-1`
+if [ -z "$TEMP_V" ]; then
     echo "导入证书${P12NAME}"
     KEYCHAIN_FILE_PATH="/Users/BuildServer/Library/Keychains/login.keychain"
     `security unlock-keychain -p "${SYSTEM_USER_PASW}" "${KEYCHAIN_FILE_PATH}"`
@@ -131,7 +132,7 @@ APP_FILE_PATH=$BUILT_PRODUCTS_DIR/$XCODEPROJ_SCHEME.app
 APPdSYM_FILE_PATH=$BUILT_PRODUCTS_DIR/$XCODEPROJ_SCHEME.app.dSYM
 
 # 生成ipa包
-if [ -a $APP_FILE_PATH ]; then
+if [ -a "$APP_FILE_PATH" ]; then
     xcrun \
         -sdk iphoneos PackageApplication \
         -v $APP_FILE_PATH \
