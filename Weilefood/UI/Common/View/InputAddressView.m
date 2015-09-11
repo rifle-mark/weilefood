@@ -155,7 +155,7 @@ static NSInteger const kTitleWidth = 80;
         [self.cityInputView.textField becomeFirstResponder];
         return NO;
     }
-    if (self.city.length < 6) {
+    if (self.city.length < 2) {
         NSString *msg = [NSString stringWithFormat:@"%@ 内容太少，请补充", self.cityInputView.titleLabel.text];
         [MBProgressHUD showErrorWithMessage:msg];
         [self.cityInputView.textField becomeFirstResponder];
