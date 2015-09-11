@@ -119,6 +119,8 @@ static NSUInteger kPageSize = 20;
                             ServerHelperErrorHandle;
                             cell.isLike = YES;
                             [cell addUpCount];
+                            share.isLike = YES;
+                            share.actionCount++;
                         }];
                     }];
                 };

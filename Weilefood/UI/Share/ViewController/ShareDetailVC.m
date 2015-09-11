@@ -370,9 +370,8 @@ static NSString *const kHintText = @"在这里说点什么吧...";
                 [MBProgressHUD showErrorWithMessage:@"请填写评论内容"];
                 return;
             }
-            if (!self.textField.text || self.textField.text.length <= 2) {
-                
-                [MBProgressHUD showErrorWithMessage:@"评论内容太少，多写一点吧"];
+            if (!self.textField.text || self.textField.text.length <= 0) {
+                [MBProgressHUD showErrorWithMessage:@"请填写评论内容"];
                 return;
             }
             NSString *content = self.textField.text;

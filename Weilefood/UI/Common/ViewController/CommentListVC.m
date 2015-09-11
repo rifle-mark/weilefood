@@ -289,13 +289,8 @@ static NSInteger const kPageSize = 10;
         _weak(self);
         [_sendButton addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
             _strong_check(self);
-            if ([self.textView.text isEqualToString:kHintText]) {
+            if (!self.textView.text || self.textView.text.length <= 0 || [self.textView.text isEqualToString:kHintText]) {
                 [MBProgressHUD showErrorWithMessage:@"请填写评论内容"];
-                [self.textView becomeFirstResponder];
-                return;
-            }
-            if (!self.textView.text || self.textView.text.length < 2) {
-                [MBProgressHUD showErrorWithMessage:@"评论内容太少，多写一点吧"];
                 [self.textView becomeFirstResponder];
                 return;
             }
