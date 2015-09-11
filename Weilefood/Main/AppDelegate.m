@@ -106,11 +106,7 @@
         NSDictionary *userInfo = [launchOptions objectForKey:@"UIApplicationLaunchOptionsRemoteNotificationKey"];
         if (userInfo) {
             WLAdModel *ad = [self _createAdWithUserInfo:userInfo];
-            if (application.applicationState == UIApplicationStateInactive) {
-                if (ad.type != WLAdTypeNoUrl) {
-                    [WLAdHelper openWithAd:ad];
-                }
-            }
+            [WLAdHelper openWithAd:ad];
         }
     }];
     self.window.rootViewController = vc;
@@ -162,9 +158,7 @@
     // BPushHelper要求实现此方法(空内容及可)
     WLAdModel *ad = [self _createAdWithUserInfo:userInfo];
     if (application.applicationState == UIApplicationStateInactive) {
-        if (ad.type != WLAdTypeNoUrl) {
-            [WLAdHelper openWithAd:ad];
-        }
+        [WLAdHelper openWithAd:ad];
     }
     else {
         GCAlertView *alertView = [[GCAlertView alloc] initWithTitle:@"消息" andMessage:ad.name];

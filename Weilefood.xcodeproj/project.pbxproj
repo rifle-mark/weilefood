@@ -2665,7 +2665,7 @@
 					"$(PROJECT_DIR)/Weilefood/Vendor/AliPay/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b4e21f12-d710-4fed-9bc4-0876203266f9";
+				PROVISIONING_PROFILE = "9ba8223a-7042-4937-8bed-bdd03a9cb9ad";
 			};
 			name = Debug;
 		};
@@ -2707,7 +2707,7 @@
 					"$(PROJECT_DIR)/Weilefood/Vendor/AliPay/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b4e21f12-d710-4fed-9bc4-0876203266f9";
+				PROVISIONING_PROFILE = "9ba8223a-7042-4937-8bed-bdd03a9cb9ad";
 			};
 			name = Release;
 		};
