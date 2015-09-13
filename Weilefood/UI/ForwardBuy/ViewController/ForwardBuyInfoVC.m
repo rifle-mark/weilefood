@@ -38,8 +38,6 @@
 
 @end
 
-static NSString *const kCellIdentifier = @"MYCELL";
-
 @implementation ForwardBuyInfoVC
 
 - (id)init {
@@ -148,6 +146,16 @@ static NSString *const kCellIdentifier = @"MYCELL";
     }
     
     self.favoriteButton.highlighted = self.forwardBuy.isFav;
+    if (self.forwardBuy.state == WLForwardBuyStateStarted) {
+        self.buyButton.enabled = YES;
+        self.buyButton.backgroundColor = k_COLOR_ORANGE;
+    }
+    else {
+        NSString *title = self.forwardBuy.state == WLForwardBuyStateNotStarted ? @"未开始" : @"已结束";
+        self.buyButton.enabled = NO;
+        self.buyButton.backgroundColor = k_COLOR_DARKGRAY;
+        [self.buyButton setTitle:title forState:UIControlStateDisabled];
+    }
 }
 
 - (void)_resetWebViewHeight {
@@ -233,6 +241,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
 
 - (UITableView *)tableView {
     if (!_tableView) {
+        static NSString *const kCellIdentifier = @"MYCELL";
         _tableView = [[UITableView alloc] initWithFrame:self.tableHeaderView.frame style:UITableViewStylePlain];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.sectionHeaderHeight = [ProductInfoSectionHeaderView viewHeight];
@@ -331,7 +340,6 @@ static NSString *const kCellIdentifier = @"MYCELL";
 - (UIButton *)buyButton {
     if (!_buyButton) {
         _buyButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _buyButton.backgroundColor = k_COLOR_ORANGE;
         _buyButton.titleLabel.font = [UIFont systemFontOfSize:16];
         [_buyButton setTitleColor:k_COLOR_WHITE forState:UIControlStateNormal];
         [_buyButton setTitle:@"立即购买" forState:UIControlStateNormal];
