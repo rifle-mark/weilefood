@@ -15,8 +15,8 @@
 @property (nonatomic, strong) UIImageView *statusImageView;
 @property (nonatomic, strong) UILabel     *beginEndDateLabel;
 @property (nonatomic, strong) UILabel     *nameLabel;
-@property (nonatomic, strong) UIView      *lineView;
 @property (nonatomic, strong) UILabel     *participatedLabel;
+@property (nonatomic, strong) UIView      *lineView;
 @property (nonatomic, strong) UIView      *footerView;
 
 @end
@@ -24,7 +24,7 @@
 @implementation ActivityCell
 
 + (CGFloat)cellHeight {
-    return 10 + (SCREEN_WIDTH - 20) * 2.0 / 3.0 + 71;
+    return 10 + (SCREEN_WIDTH - 20) * 1.0 / 2.0 + 71;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -75,13 +75,13 @@
     _state = state;
     switch (state) {
         case WLActivityStateNotStarted:
-            self.statusImageView.image = [UIImage imageNamed:@"item_state_notStarted"];
+            self.statusImageView.image = [UIImage imageNamed:@"activity_item_state_notStarted"];
             break;
         case WLActivityStateEnded:
-            self.statusImageView.image = [UIImage imageNamed:@"item_state_ended"];
+            self.statusImageView.image = [UIImage imageNamed:@"activity_item_state_ended"];
             break;
         default:
-            self.statusImageView.image = [UIImage imageNamed:@"item_state_started"];
+            self.statusImageView.image = [UIImage imageNamed:@"activity_item_state_started"];
             break;
     }
 }

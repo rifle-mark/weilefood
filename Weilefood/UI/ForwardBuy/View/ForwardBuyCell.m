@@ -96,17 +96,17 @@
     switch (state) {
         case WLForwardBuyStateNotStarted: {
             self.timeView.backgroundColor = k_COLOR_MEDIUM_AQUAMARINE;
-            self.statusImageView.image = [UIImage imageNamed:@"item_state_notStarted"];
+            self.statusImageView.image = [UIImage imageNamed:@"fb_item_state_notStarted"];
             break;
         }
         case WLForwardBuyStateEnded: {
             self.timeView.backgroundColor = k_COLOR_DARKGRAY;
-            self.statusImageView.image = [UIImage imageNamed:@"item_state_ended"];
+            self.statusImageView.image = [UIImage imageNamed:@"fb_item_state_ended"];
             break;
         }
         default: {
             self.timeView.backgroundColor = k_COLOR_ANZAC;
-            self.statusImageView.image = [UIImage imageNamed:@"item_state_started"];
+            self.statusImageView.image = [UIImage imageNamed:@"fb_item_state_started"];
             break;
         }
     }
