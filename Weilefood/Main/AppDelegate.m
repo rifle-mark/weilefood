@@ -49,7 +49,19 @@
     // 为友盟配置微信
     [UMSocialWechatHandler setWXAppId:WXAppId appSecret:WXAppSecret url:WXAppUrl];
     // 百度推送
-    [BPushHelper registerAppDelegate:self launchOptions:launchOptions apiKey:BPushApiKey pushMode:BPushModeDevelopment withFirstAction:nil withSecondAction:nil withCategory:nil isDebug:YES isClearBadgeNumber:YES];
+    BOOL pushIsDebug = NO;
+#ifdef DEBUG
+    pushIsDebug = YES;
+#endif
+    [BPushHelper registerAppDelegate:self
+                       launchOptions:launchOptions
+                              apiKey:BPushApiKey
+                            pushMode:pushIsDebug ? BPushModeDevelopment : BPushModeProduction
+                     withFirstAction:nil
+                    withSecondAction:nil
+                        withCategory:nil
+                             isDebug:pushIsDebug
+                  isClearBadgeNumber:YES];
     
     // 加载CoreData数据库
     [MagicalRecord setupCoreDataStackWithStoreNamed:kCoreDataStoreName];
