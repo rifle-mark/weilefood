@@ -54,6 +54,7 @@
 - (UIWebView *)webView {
     if (!_webView) {
         _webView = [[UIWebView alloc] init];
+        _webView.scrollView.scrollEnabled = NO;
         _webView.scalesPageToFit = YES;
         _weak(self);
         [_webView withBlockForDidFinishLoad:^(UIWebView *view) {
@@ -66,14 +67,6 @@
                 _strong_check(self);
                 GCBlockInvoke(self.finishBlock);
             });
-            
-//            [UIView animateWithDuration:.3 delay:2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-//                _strong_check(self);
-//                self.view.alpha = 0;
-//            } completion:^(BOOL finished) {
-//                _strong_check(self);
-//                GCBlockInvoke(self.finishBlock);
-//            }];
         }];
     }
     return _webView;
