@@ -46,7 +46,7 @@
     _weak(self);
     [self startObserveObject:self forKeyPath:@"picUrl" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong(self);
-        [self.picV sd_setImageWithURL:[NSURL URLWithString:self.picUrl] placeholderImage:[UIImage imageNamed:@"default_top_width"]];
+        [self.picV my_setImageWithURL:[NSURL URLWithString:self.picUrl]];
     }];
 }
 @end

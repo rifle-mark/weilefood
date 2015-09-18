@@ -240,7 +240,7 @@ static CGFloat controlHeight = 47;
     _weak(self);
     [self startObserveObject:self forKeyPath:@"share" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong(self);
-        [self.avatarV sd_setImageWithURL:[WLAPIAddressGenerator urlOfPictureWith:42 height:42 urlString:self.share.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+        [self.avatarV my_setImageWithURL:[WLAPIAddressGenerator urlOfPictureWith:42 height:42 urlString:self.share.avatar]];
         self.nameL.text = self.share.nickName;
         self.time2L.text = [self.share.createDate formattedDateWithFormat:@"yyyy-MM-dd HH:mm:ss"];
         self.contentL.attributedText = [[self class] _contentAttributeStringWithComment:self.share];
@@ -438,15 +438,9 @@ static CGFloat controlHeight = 47;
             if (!cell) {
                 cell = [[WLSharePicCell alloc] init];
             }
-            _weak(cell);
-            [cell.imgV sd_setImageWithURL:[NSURL URLWithString:self.picUrlVArray[path.row]] placeholderImage:[UIImage imageNamed:@"default_placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                if (!error) {
-                    _strong_check(cell);
-                    cell.imgV.contentMode = UIViewContentModeScaleAspectFill;
-                    cell.imgV.clipsToBounds = YES;
-                    cell.imgV.image = image;
-                }
-            }];
+            cell.imgV.contentMode = UIViewContentModeScaleAspectFill;
+            cell.imgV.clipsToBounds = YES;
+            [cell.imgV my_setImageWithURL:[NSURL URLWithString:self.picUrlVArray[path.row]]];
             
             return cell;
         }];
