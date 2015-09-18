@@ -208,8 +208,6 @@
 		24D6289B1B95EC040078944F /* WLActionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D6289A1B95EC040078944F /* WLActionModel.m */; };
 		24D990D21B9FC725003C6635 /* edge.4.0.0.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 24D990CA1B9FC725003C6635 /* edge.4.0.0.min.js */; };
 		24D990D31B9FC725003C6635 /* jquery-2.0.3.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 24D990CB1B9FC725003C6635 /* jquery-2.0.3.min.js */; };
-		24D990D41B9FC725003C6635 /* L015s2.png in Resources */ = {isa = PBXBuildFile; fileRef = 24D990CC1B9FC725003C6635 /* L015s2.png */; };
-		24D990D51B9FC725003C6635 /* L025s2.png in Resources */ = {isa = PBXBuildFile; fileRef = 24D990CD1B9FC725003C6635 /* L025s2.png */; };
 		24D990D61B9FC725003C6635 /* weile_edge.js in Resources */ = {isa = PBXBuildFile; fileRef = 24D990CE1B9FC725003C6635 /* weile_edge.js */; };
 		24D990D71B9FC725003C6635 /* weile_edgeActions.js in Resources */ = {isa = PBXBuildFile; fileRef = 24D990CF1B9FC725003C6635 /* weile_edgeActions.js */; };
 		24D990D81B9FC725003C6635 /* weile_edgePreload.js in Resources */ = {isa = PBXBuildFile; fileRef = 24D990D01B9FC725003C6635 /* weile_edgePreload.js */; };
@@ -228,6 +226,8 @@
 		24E93CF21B821AC900E41615 /* WLDatabaseHelper+ShoppingCartItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E93CF11B821AC900E41615 /* WLDatabaseHelper+ShoppingCartItem.m */; };
 		24EC87DA1B84B807007B289A /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EC87D91B84B807007B289A /* UITextView+Placeholder.m */; };
 		24ECD7B41B78FCEE00AED422 /* TransparentNavigationBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ECD7B31B78FCEE00AED422 /* TransparentNavigationBarVC.m */; };
+		24F410741BABDD5F007D8826 /* weile015s.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F410721BABDD5F007D8826 /* weile015s.png */; };
+		24F410751BABDD5F007D8826 /* weile025s.png in Resources */ = {isa = PBXBuildFile; fileRef = 24F410731BABDD5F007D8826 /* weile025s.png */; };
 		24F659181B9F43AD0058B1AA /* YeepayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F659171B9F43AD0058B1AA /* YeepayVC.m */; };
 		4D3A89CE1B8D5C6600B609CD /* GCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3A89CD1B8D5C6600B609CD /* GCAlertView.m */; };
 		4D4252761B903EF100F481E3 /* UserCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4252751B903EF100F481E3 /* UserCenterVC.m */; };
@@ -703,8 +703,6 @@
 		24D6289A1B95EC040078944F /* WLActionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WLActionModel.m; sourceTree = "<group>"; };
 		24D990CA1B9FC725003C6635 /* edge.4.0.0.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = edge.4.0.0.min.js; sourceTree = "<group>"; };
 		24D990CB1B9FC725003C6635 /* jquery-2.0.3.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-2.0.3.min.js"; sourceTree = "<group>"; };
-		24D990CC1B9FC725003C6635 /* L015s2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L015s2.png; sourceTree = "<group>"; };
-		24D990CD1B9FC725003C6635 /* L025s2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L025s2.png; sourceTree = "<group>"; };
 		24D990CE1B9FC725003C6635 /* weile_edge.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = weile_edge.js; sourceTree = "<group>"; };
 		24D990CF1B9FC725003C6635 /* weile_edgeActions.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = weile_edgeActions.js; sourceTree = "<group>"; };
 		24D990D01B9FC725003C6635 /* weile_edgePreload.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = weile_edgePreload.js; sourceTree = "<group>"; };
@@ -737,6 +735,8 @@
 		24EC87D91B84B807007B289A /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
 		24ECD7B21B78FCEE00AED422 /* TransparentNavigationBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentNavigationBarVC.h; sourceTree = "<group>"; };
 		24ECD7B31B78FCEE00AED422 /* TransparentNavigationBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransparentNavigationBarVC.m; sourceTree = "<group>"; };
+		24F410721BABDD5F007D8826 /* weile015s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weile015s.png; sourceTree = "<group>"; };
+		24F410731BABDD5F007D8826 /* weile025s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weile025s.png; sourceTree = "<group>"; };
 		24F659161B9F43AD0058B1AA /* YeepayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YeepayVC.h; sourceTree = "<group>"; };
 		24F659171B9F43AD0058B1AA /* YeepayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YeepayVC.m; sourceTree = "<group>"; };
 		27B0DAFB8AFA7EC3AE1728AE /* libPods-Weilefood.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Weilefood.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1294,12 +1294,12 @@
 			children = (
 				24D990CA1B9FC725003C6635 /* edge.4.0.0.min.js */,
 				24D990CB1B9FC725003C6635 /* jquery-2.0.3.min.js */,
-				24D990CC1B9FC725003C6635 /* L015s2.png */,
-				24D990CD1B9FC725003C6635 /* L025s2.png */,
 				24D990CE1B9FC725003C6635 /* weile_edge.js */,
 				24D990CF1B9FC725003C6635 /* weile_edgeActions.js */,
 				24D990D01B9FC725003C6635 /* weile_edgePreload.js */,
 				24D990D11B9FC725003C6635 /* weile.html */,
+				24F410721BABDD5F007D8826 /* weile015s.png */,
+				24F410731BABDD5F007D8826 /* weile025s.png */,
 			);
 			path = LaunchHTML;
 			sourceTree = "<group>";
@@ -2221,7 +2221,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24D990D41B9FC725003C6635 /* L015s2.png in Resources */,
 				24D990D31B9FC725003C6635 /* jquery-2.0.3.min.js in Resources */,
 				24D990D71B9FC725003C6635 /* weile_edgeActions.js in Resources */,
 				24D990D91B9FC725003C6635 /* weile.html in Resources */,
@@ -2230,7 +2229,8 @@
 				247EA7291B7103B400E6A161 /* Images.xcassets in Resources */,
 				24D990D81B9FC725003C6635 /* weile_edgePreload.js in Resources */,
 				24B8C0651B5242BC001C5722 /* AGImagePickerController.bundle in Resources */,
-				24D990D51B9FC725003C6635 /* L025s2.png in Resources */,
+				24F410751BABDD5F007D8826 /* weile025s.png in Resources */,
+				24F410741BABDD5F007D8826 /* weile015s.png in Resources */,
 				4DE8BA3F1B885D1F00E8608E /* AlipaySDK.bundle in Resources */,
 				24E66DC41B6271870081324A /* MBProgressHUDImage.xcassets in Resources */,
 			);

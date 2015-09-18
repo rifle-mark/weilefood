@@ -55,7 +55,7 @@
     if (!_webView) {
         _webView = [[UIWebView alloc] init];
         _webView.scrollView.scrollEnabled = NO;
-        _webView.scalesPageToFit = YES;
+//        _webView.scalesPageToFit = YES;
         _weak(self);
         [_webView withBlockForDidFinishLoad:^(UIWebView *view) {
             static float const waitParam = 0.7;
@@ -75,20 +75,20 @@
 - (UIImageView *)backView {
     if (!_backView) {
         _backView = [[UIImageView alloc] init];
-        _backView.contentMode = UIViewContentModeScaleAspectFit;
-        CGFloat height = [[UIScreen mainScreen] bounds].size.height;
-        if (height == 480) {
-            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"L015s2.png"]];
-        }
-        if (height == 568) {
-            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"L015s2.png"]];
-        }
-        if (height == 667) {
-            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"L015s2.png"]];
-        }
-        if (height == 736) {
-            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"L015s2.png"]];
-        }
+        _backView.contentMode = UIViewContentModeScaleAspectFill;
+//        CGFloat height = [[UIScreen mainScreen] bounds].size.height;
+//        if (height == 480) {
+            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"weile015s.png"]];
+//        }
+//        if (height == 568) {
+//            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"L015s2.png"]];
+//        }
+//        if (height == 667) {
+//            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"L015s2.png"]];
+//        }
+//        if (height == 736) {
+//            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"L015s2.png"]];
+//        }
     }
     return _backView;
 }
