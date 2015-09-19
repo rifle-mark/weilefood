@@ -55,11 +55,9 @@
     if (!_webView) {
         _webView = [[UIWebView alloc] init];
         _webView.scrollView.scrollEnabled = NO;
-//        _webView.scalesPageToFit = YES;
         _weak(self);
         [_webView withBlockForDidFinishLoad:^(UIWebView *view) {
-            static float const waitParam = 0.7;
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(waitParam * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 _strong_check(self);
                 [self.view bringSubviewToFront:self.webView];
             });
@@ -75,20 +73,19 @@
 - (UIImageView *)backView {
     if (!_backView) {
         _backView = [[UIImageView alloc] init];
-        _backView.contentMode = UIViewContentModeScaleAspectFill;
-//        CGFloat height = [[UIScreen mainScreen] bounds].size.height;
-//        if (height == 480) {
-            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"weile015s.png"]];
-//        }
-//        if (height == 568) {
-//            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"L015s2.png"]];
-//        }
-//        if (height == 667) {
-//            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"L015s2.png"]];
-//        }
-//        if (height == 736) {
-//            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"L015s2.png"]];
-//        }
+        CGFloat height = [[UIScreen mainScreen] bounds].size.height;
+        if (height == 480) {
+            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"启动画面01-4.png"]];
+        }
+        else if (height == 568) {
+            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"启动画面01-5.png"]];
+        }
+        else if (height == 667) {
+            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"启动画面01-6.png"]];
+        }
+        else if (height == 736) {
+            _backView.image = [UIImage imageWithContentsOfFile:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"启动画面01-6plus.png"]];
+        }
     }
     return _backView;
 }

@@ -213,6 +213,10 @@
 		24D990D81B9FC725003C6635 /* weile_edgePreload.js in Resources */ = {isa = PBXBuildFile; fileRef = 24D990D01B9FC725003C6635 /* weile_edgePreload.js */; };
 		24D990D91B9FC725003C6635 /* weile.html in Resources */ = {isa = PBXBuildFile; fileRef = 24D990D11B9FC725003C6635 /* weile.html */; };
 		24DED3201B94888500F8FB31 /* NutritionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DED31F1B94888500F8FB31 /* NutritionCell.m */; };
+		24E46DA81BAD4D2B00EF3EC7 /* 启动画面01-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 24E46DA41BAD4D2B00EF3EC7 /* 启动画面01-4.png */; };
+		24E46DA91BAD4D2B00EF3EC7 /* 启动画面01-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 24E46DA51BAD4D2B00EF3EC7 /* 启动画面01-5.png */; };
+		24E46DAA1BAD4D2B00EF3EC7 /* 启动画面01-6.png in Resources */ = {isa = PBXBuildFile; fileRef = 24E46DA61BAD4D2B00EF3EC7 /* 启动画面01-6.png */; };
+		24E46DAB1BAD4D2B00EF3EC7 /* 启动画面01-6plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 24E46DA71BAD4D2B00EF3EC7 /* 启动画面01-6plus.png */; };
 		24E627871B7CDF7700743B51 /* ShareOnPlatformVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E627861B7CDF7700743B51 /* ShareOnPlatformVC.m */; };
 		24E6278A1B7D043600743B51 /* InputQuantityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E627891B7D043600743B51 /* InputQuantityVC.m */; };
 		24E66DBF1B62717A0081324A /* UIScrollView+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E66DBE1B62717A0081324A /* UIScrollView+Keyboard.m */; };
@@ -709,6 +713,10 @@
 		24D990D11B9FC725003C6635 /* weile.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = weile.html; sourceTree = "<group>"; };
 		24DED31E1B94888500F8FB31 /* NutritionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NutritionCell.h; sourceTree = "<group>"; };
 		24DED31F1B94888500F8FB31 /* NutritionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NutritionCell.m; sourceTree = "<group>"; };
+		24E46DA41BAD4D2B00EF3EC7 /* 启动画面01-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动画面01-4.png"; sourceTree = "<group>"; };
+		24E46DA51BAD4D2B00EF3EC7 /* 启动画面01-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动画面01-5.png"; sourceTree = "<group>"; };
+		24E46DA61BAD4D2B00EF3EC7 /* 启动画面01-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动画面01-6.png"; sourceTree = "<group>"; };
+		24E46DA71BAD4D2B00EF3EC7 /* 启动画面01-6plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动画面01-6plus.png"; sourceTree = "<group>"; };
 		24E627851B7CDF7700743B51 /* ShareOnPlatformVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareOnPlatformVC.h; sourceTree = "<group>"; };
 		24E627861B7CDF7700743B51 /* ShareOnPlatformVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareOnPlatformVC.m; sourceTree = "<group>"; };
 		24E627881B7D043600743B51 /* InputQuantityVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputQuantityVC.h; sourceTree = "<group>"; };
@@ -1300,6 +1308,10 @@
 				24D990D11B9FC725003C6635 /* weile.html */,
 				24F410721BABDD5F007D8826 /* weile015s.png */,
 				24F410731BABDD5F007D8826 /* weile025s.png */,
+				24E46DA41BAD4D2B00EF3EC7 /* 启动画面01-4.png */,
+				24E46DA51BAD4D2B00EF3EC7 /* 启动画面01-5.png */,
+				24E46DA61BAD4D2B00EF3EC7 /* 启动画面01-6.png */,
+				24E46DA71BAD4D2B00EF3EC7 /* 启动画面01-6plus.png */,
 			);
 			path = LaunchHTML;
 			sourceTree = "<group>";
@@ -2221,18 +2233,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24E46DA91BAD4D2B00EF3EC7 /* 启动画面01-5.png in Resources */,
 				24D990D31B9FC725003C6635 /* jquery-2.0.3.min.js in Resources */,
 				24D990D71B9FC725003C6635 /* weile_edgeActions.js in Resources */,
 				24D990D91B9FC725003C6635 /* weile.html in Resources */,
+				24E46DAA1BAD4D2B00EF3EC7 /* 启动画面01-6.png in Resources */,
 				24D990D61B9FC725003C6635 /* weile_edge.js in Resources */,
 				24D990D21B9FC725003C6635 /* edge.4.0.0.min.js in Resources */,
 				247EA7291B7103B400E6A161 /* Images.xcassets in Resources */,
+				24E46DA81BAD4D2B00EF3EC7 /* 启动画面01-4.png in Resources */,
 				24D990D81B9FC725003C6635 /* weile_edgePreload.js in Resources */,
 				24B8C0651B5242BC001C5722 /* AGImagePickerController.bundle in Resources */,
 				24F410751BABDD5F007D8826 /* weile025s.png in Resources */,
 				24F410741BABDD5F007D8826 /* weile015s.png in Resources */,
 				4DE8BA3F1B885D1F00E8608E /* AlipaySDK.bundle in Resources */,
 				24E66DC41B6271870081324A /* MBProgressHUDImage.xcassets in Resources */,
+				24E46DAB1BAD4D2B00EF3EC7 /* 启动画面01-6plus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
