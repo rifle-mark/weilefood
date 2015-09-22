@@ -9,6 +9,7 @@
 #import "OrderInfoVC.h"
 #import "OrderNumberAndDateView.h"
 #import "OrderInfoHeaderCell.h"
+#import "OrderPostAgeCell.h"
 #import "ShoppingCartProductCell.h"
 
 #import "OrderConfirmVC.h"
@@ -179,6 +180,9 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
+        static NSInteger const kSectionAddressInfo = 0;
+        static NSInteger const kSectionPostAge = 1;
+        static NSInteger const kSectionProduct = 2;
         // 使用头addressView.frame
         // 是因为_tableView.tableHeaderView=self.addressView时会设置self.addressView.widht=tableView.width
         // 这会导航addressView中的约束错误
@@ -187,41 +191,67 @@
         _tableView.tableHeaderView = self.numberAndDateView;
         [_tableView registerClass:[OrderInfoHeaderCell class] forCellReuseIdentifier:[OrderInfoHeaderCell reuseIdentifier]];
         [_tableView registerClass:[ShoppingCartProductCell class] forCellReuseIdentifier:[ShoppingCartProductCell reuseIdentifier]];
+        [_tableView registerClass:[OrderPostAgeCell class] forCellReuseIdentifier:[OrderPostAgeCell reuseIdentifier]];
         _weak(self);
+        [_tableView withBlockForSectionNumber:^NSInteger(UITableView *view) {
+            return kSectionProduct + 1;
+        }];
         [_tableView withBlockForRowNumber:^NSInteger(UITableView *view, NSInteger section) {
             _strong_check(self, 0);
-            return (self.orderBaseInfo.orderAddress ? 1 : 0) + (self.orderBaseInfo && self.orderBaseInfo.orderDetail ? self.orderBaseInfo.orderDetail.count : 0);
+            switch (section) {
+                case kSectionAddressInfo:
+                    return self.orderBaseInfo && self.orderBaseInfo.orderAddress ? 1 : 0;
+                case kSectionPostAge:
+                    return self.orderBaseInfo && self.orderBaseInfo.postAge > 0 ? 1 : 0;
+                default:
+                    return self.orderBaseInfo && self.orderBaseInfo.orderDetail ? self.orderBaseInfo.orderDetail.count : 0;
+            }
         }];
         [_tableView withBlockForRowHeight:^CGFloat(UITableView *view, NSIndexPath *path) {
             _strong_check(self, 0);
-            if (path.row == 0 && self.orderBaseInfo.orderAddress) {
-                NSString *address = self.orderBaseInfo.orderAddress.address;
-                return [OrderInfoHeaderCell cellHeightWithAddress:address isShowExpressInfo:self.orderBaseInfo.state == WLOrderStateShipped];
+            switch (path.section) {
+                case kSectionAddressInfo: {
+                    NSString *address = self.orderBaseInfo.orderAddress.address;
+                    return [OrderInfoHeaderCell cellHeightWithAddress:address isShowExpressInfo:self.orderBaseInfo.state == WLOrderStateShipped];
+                }
+                case kSectionPostAge: {
+                    return [OrderPostAgeCell cellHeight];
+                }
+                default:
+                    return [ShoppingCartProductCell cellHeight];
             }
-            return [ShoppingCartProductCell cellHeight];
         }];
         [_tableView withBlockForRowCell:^UITableViewCell *(UITableView *view, NSIndexPath *path) {
             _strong_check(self, nil);
-            if (path.row == 0 && self.orderBaseInfo.orderAddress) {
-                OrderInfoHeaderCell *cell = [view dequeueReusableCellWithIdentifier:[OrderInfoHeaderCell reuseIdentifier] forIndexPath:path];
-                cell.name              = self.orderBaseInfo.orderAddress.userName;
-                cell.phone             = self.orderBaseInfo.orderAddress.tel;
-                cell.address           = self.orderBaseInfo.orderAddress.address;
-                cell.zipCode           = self.orderBaseInfo.orderAddress.postCode;
-                cell.isShowExpressInfo = self.orderBaseInfo.state == WLOrderStateShipped;
-                cell.expressName       = self.orderBaseInfo.deliver.expressName;
-                cell.expressNum        = self.orderBaseInfo.deliver.expressNum;
-                return cell;
+            switch (path.section) {
+                case kSectionAddressInfo: {
+                    OrderInfoHeaderCell *cell = [view dequeueReusableCellWithIdentifier:[OrderInfoHeaderCell reuseIdentifier] forIndexPath:path];
+                    cell.name              = self.orderBaseInfo.orderAddress.userName;
+                    cell.phone             = self.orderBaseInfo.orderAddress.tel;
+                    cell.address           = self.orderBaseInfo.orderAddress.address;
+                    cell.zipCode           = self.orderBaseInfo.orderAddress.postCode;
+                    cell.isShowExpressInfo = self.orderBaseInfo.state == WLOrderStateShipped;
+                    cell.expressName       = self.orderBaseInfo.deliver.expressName;
+                    cell.expressNum        = self.orderBaseInfo.deliver.expressNum;
+                    return cell;
+                }
+                case kSectionPostAge: {
+                    OrderPostAgeCell *cell = [view dequeueReusableCellWithIdentifier:[OrderPostAgeCell reuseIdentifier] forIndexPath:path];
+                    cell.postAge = self.orderBaseInfo.postAge;
+                    return cell;
+                }
+                default: {
+                    ShoppingCartProductCell *cell = [view dequeueReusableCellWithIdentifier:[ShoppingCartProductCell reuseIdentifier] forIndexPath:path];
+                    WLOrderProductModel *item   = self.orderBaseInfo.orderDetail[path.row];
+                    cell.imageUrl               = item.image;
+                    cell.name                   = item.title;
+                    cell.price                  = item.price;
+                    cell.quantity               = item.count;
+                    cell.displaySelectControl   = NO;
+                    cell.displayQuantityControl = NO;
+                    return cell;
+                }
             }
-            ShoppingCartProductCell *cell = [view dequeueReusableCellWithIdentifier:[ShoppingCartProductCell reuseIdentifier] forIndexPath:path];
-            WLOrderProductModel *item = self.orderBaseInfo.orderDetail[path.row - (self.orderBaseInfo.orderAddress ? 1 : 0)];
-            cell.imageUrl               = item.image;
-            cell.name                   = item.title;
-            cell.price                  = item.price;
-            cell.quantity               = item.count;
-            cell.displaySelectControl   = NO;
-            cell.displayQuantityControl = NO;
-            return cell;
         }];
     }
     return _tableView;

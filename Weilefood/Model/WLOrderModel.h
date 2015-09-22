@@ -41,6 +41,8 @@ typedef NS_ENUM(NSInteger, WLOrderState) {
 @property (nonatomic, copy  ) NSDate       *paymentDate;
 /// 状态
 @property (nonatomic, assign) WLOrderState state;
+/// 邮费
+@property (nonatomic, assign) CGFloat      postAge;
 ///
 @property (nonatomic, assign) NSInteger    orderType;
 ///

@@ -63,6 +63,7 @@
                 apiResult.state = [[orderForm valueForKey:@"State"] integerValue];
                 apiResult.totalMoney = [[orderForm valueForKey:@"TotalMoney"] floatValue];
                 apiResult.userId = [[orderForm valueForKey:@"UserId"] longLongValue];
+                apiResult.postAge = [[orderForm valueForKey:@"PostAge"] floatValue];
             }
         }
         GCBlockInvoke(callback, apiInfo, apiResult, nil);

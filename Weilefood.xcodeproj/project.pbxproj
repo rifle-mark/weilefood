@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2402AC301BB195CB007A7775 /* OrderPostAgeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402AC2F1BB195CB007A7775 /* OrderPostAgeCell.m */; };
 		240435A41BA1B18E007538EE /* WebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240435A31BA1B18E007538EE /* WebVC.m */; };
 		240435A71BA1C94A007538EE /* ReplyMeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 240435A61BA1C94A007538EE /* ReplyMeVC.m */; };
 		240435AA1BA1EA7D007538EE /* WLAdHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 240435A91BA1EA7D007538EE /* WLAdHelper.m */; };
@@ -297,6 +298,8 @@
 
 /* Begin PBXFileReference section */
 		060F4AADF217CE753F362849 /* Pods-Weilefood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weilefood.release.xcconfig"; path = "Pods/Target Support Files/Pods-Weilefood/Pods-Weilefood.release.xcconfig"; sourceTree = "<group>"; };
+		2402AC2E1BB195CB007A7775 /* OrderPostAgeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPostAgeCell.h; sourceTree = "<group>"; };
+		2402AC2F1BB195CB007A7775 /* OrderPostAgeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderPostAgeCell.m; sourceTree = "<group>"; };
 		240435A21BA1B18E007538EE /* WebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebVC.h; sourceTree = "<group>"; };
 		240435A31BA1B18E007538EE /* WebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebVC.m; sourceTree = "<group>"; };
 		240435A51BA1C94A007538EE /* ReplyMeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyMeVC.h; sourceTree = "<group>"; };
@@ -1437,6 +1440,8 @@
 			children = (
 				24AE121F1B9186AE00654AEC /* OrderInfoHeaderCell.h */,
 				24AE12201B9186AE00654AEC /* OrderInfoHeaderCell.m */,
+				2402AC2E1BB195CB007A7775 /* OrderPostAgeCell.h */,
+				2402AC2F1BB195CB007A7775 /* OrderPostAgeCell.m */,
 				24AE12231B9186AE00654AEC /* OrderNumberAndDateView.h */,
 				24AE12241B9186AE00654AEC /* OrderNumberAndDateView.m */,
 				24AE122B1B9186AE00654AEC /* ShoppingCartProductCell.h */,
@@ -2522,6 +2527,7 @@
 				24CDCC0A1B4F792E00BDE8CB /* UINavigationBar+GCDelegate.m in Sources */,
 				249A73D21B569D4100F46F3D /* WLUserModel.m in Sources */,
 				24D628981B95E2CD0078944F /* DoctorRecommendInfoVC.m in Sources */,
+				2402AC301BB195CB007A7775 /* OrderPostAgeCell.m in Sources */,
 				24B8C06A1B5242BC001C5722 /* AGIPCGridCell.m in Sources */,
 				4DE8B9BB1B885CD400E8608E /* PictureShowVC.m in Sources */,
 				24AE124F1B9186E900654AEC /* DoctorCell.m in Sources */,

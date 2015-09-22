@@ -160,9 +160,10 @@ static NSInteger const kSectionList   = 2;
                     [cell onSignInClickBlock:^{
                         [MBProgressHUD showLoadingWithMessage:nil];
                         [[WLServerHelper sharedInstance] user_signWithCallback:^(WLApiInfoModel *apiInfo, NSError *error) {
-                            _strong_check(self);
                             [MBProgressHUD hideLoading];
+                            _strong_check(self);
                             ServerHelperErrorHandle;
+                            [MBProgressHUD showSuccessWithMessage:@"签到成功"];
                             WLUserModel *user = [WLDatabaseHelper user_find];
                             user.lastSignInDate = [[NSDate date] formattedDateWithFormat:@"yyyyMMdd"];
                             [WLDatabaseHelper user_save:user];
