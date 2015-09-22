@@ -98,4 +98,9 @@
     }];
 }
 
+- (void)user_signWithCallback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback {
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"user", @"sign"]];
+    [self httpPOST:apiUrl parameters:nil callback:callback];
+}
+
 @end

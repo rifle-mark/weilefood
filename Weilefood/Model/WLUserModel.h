@@ -84,6 +84,8 @@ typedef NS_ENUM(NSUInteger, WLUserAudit){
 @property (nonatomic, assign) NSInteger communityId;
 ///
 @property (nonatomic, assign) NSInteger couponCount;
+/// 最近签到日期
+@property (nonatomic, copy) NSString *lastSignInDate;
 
 @end
 
@@ -117,5 +119,6 @@ typedef NS_ENUM(NSUInteger, WLUserAudit){
 @property (nonatomic, retain) NSNumber * type;
 @property (nonatomic, retain) NSNumber * communityId;
 @property (nonatomic, retain) NSNumber * couponCount;
+@property (nonatomic, retain) NSString * lastSignInDate;
 
 @end

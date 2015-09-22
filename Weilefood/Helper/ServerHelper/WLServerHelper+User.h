@@ -102,4 +102,11 @@ typedef NS_ENUM(NSUInteger, WLUserPlatform){
  */
 - (void)user_hasUnreadWithCallback:(void (^)(WLApiInfoModel *apiInfo, BOOL hasUnreadMessage, BOOL hasUnreadReply, NSError *error))callback;
 
+/**
+ *  签到
+ *
+ *  @param callback
+ */
+- (void)user_signWithCallback:(void (^)(WLApiInfoModel *apiInfo, NSError *error))callback;
+
 @end

@@ -218,7 +218,7 @@
                 case kChannelID_YX_YSBT: {
                     cell.iconImage         = [UIImage imageNamed:@"mc_icon_YSBT_n"];
                     cell.checkedIconImage = [UIImage imageNamed:@"mc_icon_YSBT_h"];
-                    cell.name              = @"养生煲汤";
+                    cell.name              = @"味了搭配";
                     break;
                 }
                 case kChannelID_YX_TSMS: {

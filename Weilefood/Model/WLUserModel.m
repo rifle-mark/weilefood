@@ -50,5 +50,6 @@
 @dynamic type;
 @dynamic communityId;
 @dynamic couponCount;
+@dynamic lastSignInDate;
 
 @end

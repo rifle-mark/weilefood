@@ -14,11 +14,13 @@
 @interface UserCenterUserInfoCell ()
 
 @property(nonatomic,strong)UIImageView          *avatarV;
+@property(nonatomic,strong)UIButton             *signInB;
 @property(nonatomic,strong)UILabel              *nickNameL;
 @property(nonatomic,strong)UIButton             *pointBtn;
 
 @property(nonatomic,copy)OnUserInfoImageClickBlock imageClickBlock;
 @property(nonatomic,copy)OnUserInfoPointClickBlock pointClickBlock;
+@property(nonatomic,copy)GCAOPInterceptorBlock signInClickBlock;
 
 @end
 
@@ -38,6 +40,7 @@
         self.backgroundColor = k_COLOR_TURQUOISE;
         
         [self.contentView addSubview:self.avatarV];
+        [self.contentView addSubview:self.signInB];
         [self.contentView addSubview:self.nickNameL];
         [self.contentView addSubview:self.pointBtn];
         
@@ -62,8 +65,13 @@
 - (void)onImageClickBlock:(OnUserInfoImageClickBlock)block {
     self.imageClickBlock = block;
 }
+
 - (void)onPointClickBlock:(OnUserInfoPointClickBlock)block {
     self.pointClickBlock = block;
+}
+
+- (void)onSignInClickBlock:(GCAOPInterceptorBlock)block {
+    self.signInClickBlock = block;
 }
 
 - (void)hidUserPoint {
@@ -77,6 +85,10 @@
         make.centerX.equalTo(self.avatarV.superview);
         make.top.equalTo(self.avatarV.superview).with.offset(8);
         make.width.height.equalTo(@80);
+    }];
+    [self.signInB mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.signInB.superview);
+        make.top.equalTo(self.avatarV);
     }];
     [self.nickNameL mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@18);
@@ -96,10 +108,13 @@
             [self.avatarV my_setImageWithURL:nil];
             self.nickNameL.text = @"点击登录";
             self.pointBtn.hidden = YES;
+            self.signInB.hidden = YES;
             return;
         }
         [self.avatarV my_setImageWithURL:[WLAPIAddressGenerator urlOfPictureWith:80 height:80 urlString:self.user.avatar]];
         self.nickNameL.text = self.user.nickName;
+        NSString *nowDate = [[NSDate date] formattedDateWithFormat:@"yyyyMMdd"];
+        self.signInB.enabled = ![nowDate isEqualToString:self.user.lastSignInDate];
         [self.pointBtn setTitle:[NSString stringWithFormat:@"  积分%ld >  ", (long)self.user.points] forState:UIControlStateNormal];
     }];
     
@@ -135,6 +150,20 @@
         [_avatarV addGestureRecognizer:tap];
     }
     return _avatarV;
+}
+
+- (UIButton *)signInB {
+    if (!_signInB) {
+        _signInB = [[UIButton alloc] init];
+        [_signInB setImage:[UIImage imageNamed:@"user_signin_btn_n"] forState:UIControlStateNormal];
+        [_signInB setImage:[UIImage imageNamed:@"user_signin_btn_d"] forState:UIControlStateDisabled];
+        _weak(self);
+        [_signInB addControlEvents:UIControlEventTouchUpInside action:^(UIControl *control, NSSet *touches) {
+            _strong_check(self);
+            GCBlockInvoke(self.signInClickBlock);
+        }];
+    }
+    return _signInB;
 }
 
 - (UILabel *)nickNameL {

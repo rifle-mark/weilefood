@@ -157,6 +157,18 @@ static NSInteger const kSectionList   = 2;
                 case kSectionInfo: {
                     UserCenterUserInfoCell *cell = [view dequeueReusableCellWithIdentifier:[UserCenterUserInfoCell reuseIdentify]];
                     cell.user = [WLDatabaseHelper user_find];
+                    [cell onSignInClickBlock:^{
+                        [MBProgressHUD showLoadingWithMessage:nil];
+                        [[WLServerHelper sharedInstance] user_signWithCallback:^(WLApiInfoModel *apiInfo, NSError *error) {
+                            _strong_check(self);
+                            [MBProgressHUD hideLoading];
+                            ServerHelperErrorHandle;
+                            WLUserModel *user = [WLDatabaseHelper user_find];
+                            user.lastSignInDate = [[NSDate date] formattedDateWithFormat:@"yyyyMMdd"];
+                            [WLDatabaseHelper user_save:user];
+                            [self.tableView reloadData];
+                        }];
+                    }];
                     [cell onImageClickBlock:^(){
                         _strong_check(self);
                         if ([WLDatabaseHelper user_find]) {
