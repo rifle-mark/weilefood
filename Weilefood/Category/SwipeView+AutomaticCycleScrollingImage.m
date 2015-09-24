@@ -13,7 +13,7 @@ static char const kPropertyCurrentItemIndexDidChangeBlockKey = 0;
 static char const kPropertyDidSelectItemAtIndexBlockKey = 0;
 static NSInteger const kImageChangeDelay = 4;
 
-@implementation SwipeView (AutomaticCycleScrollingImage) 
+@implementation SwipeView (AutomaticCycleScrollingImage)
 
 + (instancetype)acsi_create {
     SwipeView *ret = [[SwipeView alloc] init];
@@ -75,7 +75,6 @@ static NSInteger const kImageChangeDelay = 4;
         imageView = [[UIImageView alloc] init];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.clipsToBounds = YES;
-        imageView.frame = swipeView.bounds;
     }
     else {
         imageView = (UIImageView *)view;
@@ -86,6 +85,10 @@ static NSInteger const kImageChangeDelay = 4;
 }
 
 #pragma mark - SwipeViewDelegate
+
+- (CGSize)swipeViewItemSize:(SwipeView *)swipeView {
+    return swipeView.bounds.size;
+}
 
 - (void)swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView {
     GCBlockInvoke(self.acsi_currentItemIndexDidChangeBlock, swipeView);
@@ -106,12 +109,14 @@ static NSInteger const kImageChangeDelay = 4;
 #pragma mark - private methods
 
 - (void)_autoNextImage {
-    if (self.numberOfPages > 0 && !self.decelerating) {
-        NSInteger newPage = self.currentPage + 1;
-        if (newPage >= self.numberOfPages) {
-            newPage = 0;
+    if (self.window) {
+        if (self.numberOfPages > 0 && !self.decelerating) {
+            NSInteger newPage = self.currentPage + 1;
+            if (newPage >= self.numberOfPages) {
+                newPage = 0;
+            }
+            [self scrollToPage:newPage duration:0.3];
         }
-        [self scrollToPage:newPage duration:0.3];
     }
     [self performSelector:@selector(_autoNextImage) withObject:nil afterDelay:kImageChangeDelay];
 }
