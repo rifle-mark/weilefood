@@ -99,6 +99,7 @@ static NSInteger const kLineHeight = 7;
         _picImageView = [[UIImageView alloc] init];
         _picImageView.layer.cornerRadius = kImageHeight * 0.5;
         _picImageView.clipsToBounds = YES;
+        _picImageView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _picImageView;
 }
