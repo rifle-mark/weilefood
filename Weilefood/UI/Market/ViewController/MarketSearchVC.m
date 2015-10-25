@@ -64,25 +64,24 @@ static NSString *const kCellIdentifier = @"MYCELL";
     _weak(self);
     [self startObserveObject:self forKeyPath:@"productList" usingBlock:^(NSObject *target, NSString *keyPath, NSDictionary *change) {
         _strong_check(self);
-        self.tableView.footer.hidden = (self.productList.count < kPageSize) || (self.productList.count % kPageSize != 0);
         [self.tableView reloadData];
     }];
 }
 
 - (void)_search {
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:0];
     _weak(self);
     [MBProgressHUD showLoadingWithMessage:@"正在搜索..."];
-    [[WLServerHelper sharedInstance] product_searchWithKeyword:self.searchTextField.text maxDate:date pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
+    [[WLServerHelper sharedInstance] product_searchWithKeyword:self.searchTextField.text maxDate:nil pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         [MBProgressHUD hideLoading];
         _strong_check(self);
         ServerHelperErrorHandle;
         self.productList = apiResult;
+        self.tableView.footer.hidden = !apiResult || apiResult.count < kPageSize;
     }];
 }
 
 - (void)_loadMore {
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:0];
+    NSDate *date = nil;
     if (self.productList && (self.productList.count > 0)) {
         WLProductModel *product = [self.productList lastObject];
         date = product.createDate;
@@ -95,6 +94,7 @@ static NSString *const kCellIdentifier = @"MYCELL";
         }
         ServerHelperErrorHandle;
         self.productList = [self.productList arrayByAddingObjectsFromArray:apiResult];
+        self.tableView.footer.hidden = !apiResult || apiResult.count < kPageSize;
     }];
 }
 

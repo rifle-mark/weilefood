@@ -40,7 +40,7 @@
 /**
  *  获取 我的营养师订单列表。(NSArray<WLOrderModel>)apiResult
  *
- *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param maxDate  加载最新数据传nil，加载更多数据传lastItem.Date
  *  @param pageSize 返回的最大记录数
  *  @param callback
  */
@@ -49,7 +49,7 @@
 /**
  *  获取 我的预购订单列表。(NSArray<WLOrderModel>)apiResult
  *
- *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param maxDate  加载最新数据传nil，加载更多数据传lastItem.Date
  *  @param pageSize 返回的最大记录数
  *  @param callback
  */
@@ -58,7 +58,7 @@
 /**
  *  获取 我的活动订单列表。(NSArray<WLOrderModel>)apiResult
  *
- *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param maxDate  加载最新数据传nil，加载更多数据传lastItem.Date
  *  @param pageSize 返回的最大记录数
  *  @param callback
  */
@@ -67,7 +67,7 @@
 /**
  *  获取 我的集市商品订单列表。(NSArray<WLOrderModel>)apiResult
  *
- *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param maxDate  加载最新数据传nil，加载更多数据传lastItem.Date
  *  @param pageSize 返回的最大记录数
  *  @param callback
  */

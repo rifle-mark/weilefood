@@ -80,7 +80,7 @@ static NSInteger const kPageSize       = 10;
 - (void)_loadDataWithIsLatest:(BOOL)isLatest {
     _weak(self);
     NSString *cityName = self.city ? self.city.city : @"";
-    NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLActivityModel *)[self.activityList lastObject]).createDate;
+    NSDate *maxDate = isLatest ? nil : ((WLActivityModel *)[self.activityList lastObject]).createDate;
     [[WLServerHelper sharedInstance] activity_getListWithCity:cityName maxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         if (self.tableView.header.isRefreshing) {

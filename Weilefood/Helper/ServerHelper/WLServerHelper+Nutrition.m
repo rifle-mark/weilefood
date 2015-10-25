@@ -22,7 +22,7 @@
 }
 
 - (void)nutrition_getListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
-    NSString *apiUrl = [self getApiUrlWithPaths:@[@"classroom", @"list", @1, @(pageSize), @1, @([maxDate millisecondIntervalSince1970])]];
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"classroom", @"list", @1, @(pageSize), @1, @(maxDate ? [maxDate millisecondIntervalSince1970_Beijing] : 0)]];
     [self httpGET:apiUrl parameters:nil resultItemsClass:[WLNutritionModel class] callback:callback];
 }
 

@@ -140,7 +140,7 @@ static NSString *const kTextCompleted      = @"已完成";
 
 - (void)_loadProuctListWithIsLatest:(BOOL)isLatest {
     _weak(self);
-    NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLOrderModel *)[self.prouctList lastObject]).orderDate;
+    NSDate *maxDate = isLatest ? nil : ((WLOrderModel *)[self.prouctList lastObject]).orderDate;
     [[WLServerHelper sharedInstance] order_getProductListWithMaxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         if (self.prouctTableView.header.isRefreshing) {
@@ -158,7 +158,7 @@ static NSString *const kTextCompleted      = @"已完成";
 
 - (void)_loadForwardBuyListWithIsLatest:(BOOL)isLatest {
     _weak(self);
-    NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLOrderModel *)[self.forwardBuyList lastObject]).orderDate;
+    NSDate *maxDate = isLatest ? nil : ((WLOrderModel *)[self.forwardBuyList lastObject]).orderDate;
     [[WLServerHelper sharedInstance] order_getForwardbuyListWithMaxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         if (self.forwardBuyTableView.header.isRefreshing) {
@@ -176,7 +176,7 @@ static NSString *const kTextCompleted      = @"已完成";
 
 - (void)_loadActivityListWithIsLatest:(BOOL)isLatest {
     _weak(self);
-    NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLOrderModel *)[self.activityList lastObject]).orderDate;
+    NSDate *maxDate = isLatest ? nil : ((WLOrderModel *)[self.activityList lastObject]).orderDate;
     [[WLServerHelper sharedInstance] order_getActivityListWithMaxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         if (self.activityTableView.header.isRefreshing) {
@@ -194,7 +194,7 @@ static NSString *const kTextCompleted      = @"已完成";
 
 - (void)_loadDoctorListWithIsLatest:(BOOL)isLatest {
     _weak(self);
-    NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLOrderModel *)[self.doctorList lastObject]).orderDate;
+    NSDate *maxDate = isLatest ? nil : ((WLOrderModel *)[self.doctorList lastObject]).orderDate;
     [[WLServerHelper sharedInstance] order_getDoctorListWithMaxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         if (self.doctorTableView.header.isRefreshing) {

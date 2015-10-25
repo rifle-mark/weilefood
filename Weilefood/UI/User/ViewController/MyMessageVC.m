@@ -60,7 +60,7 @@ static NSUInteger kPageSize = 20;
 }
 
 - (void)_loadDialogListIsLatest:(BOOL)islatest {
-    NSDate *maxDate = islatest?[NSDate dateWithTimeIntervalSince1970:0]:[[self.messageList lastObject] followDate];
+    NSDate *maxDate = islatest ? nil : [[self.messageList lastObject] followDate];
     _weak(self);
     [[WLServerHelper sharedInstance] message_getDialogListWithMaxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);

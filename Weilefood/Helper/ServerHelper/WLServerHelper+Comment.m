@@ -28,17 +28,17 @@
 }
 
 - (void)comment_getListWithType:(WLCommentType)type refId:(long long)refId maxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
-    NSString *apiUrl = [self getApiUrlWithPaths:@[@"comment", @"list", @(type), @(refId), @(1), @(pageSize), @([maxDate millisecondIntervalSince1970])]];
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"comment", @"list", @(type), @(refId), @(1), @(pageSize), @(maxDate ? [maxDate millisecondIntervalSince1970_Beijing] : 0)]];
     [self httpGET:apiUrl parameters:nil resultItemsClass:[WLCommentModel class] callback:callback];
 }
 
 - (void)comment_getMyListWithType:(WLCommentType)type refId:(long long)refId maxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
-    NSString *apiUrl = [self getApiUrlWithPaths:@[@"comment", @"mylist", @(type), @(refId), @(1), @(pageSize), @([maxDate millisecondIntervalSince1970])]];
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"comment", @"mylist", @(type), @(refId), @(1), @(pageSize), @(maxDate ? [maxDate millisecondIntervalSince1970_Beijing] : 0)]];
     [self httpGET:apiUrl parameters:nil resultItemsClass:[WLCommentModel class] callback:callback];
 }
 
 - (void)comment_getReplyMeListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
-    NSString *apiUrl = [self getApiUrlWithPaths:@[@"comment", @"replylist", @(1), @(pageSize), @([maxDate millisecondIntervalSince1970])]];
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"comment", @"replylist", @(1), @(pageSize), @(maxDate ? [maxDate millisecondIntervalSince1970_Beijing] : 0)]];
     [self httpGET:apiUrl parameters:nil resultItemsClass:[WLCommentModel class] callback:callback];
 }
 

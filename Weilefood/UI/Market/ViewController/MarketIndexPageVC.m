@@ -116,7 +116,7 @@ static NSInteger const kPageSize = 10;
 
 - (void)_loadDataWithIsLatest:(BOOL)isLatest {
     _weak(self);
-    NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLProductModel *)[self.productList lastObject]).createDate;
+    NSDate *maxDate = isLatest ? nil : ((WLProductModel *)[self.productList lastObject]).createDate;
     [[WLServerHelper sharedInstance] product_getListWithChannelId:self.selectChanneID maxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         if (self.tableView.header.isRefreshing) {

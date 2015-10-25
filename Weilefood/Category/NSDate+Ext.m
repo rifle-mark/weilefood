@@ -14,4 +14,8 @@
     return [self timeIntervalSince1970] * 1000;
 }
 
+- (NSTimeInterval)millisecondIntervalSince1970_Beijing {
+    return ([self timeIntervalSince1970] + 8 * 60 * 60) * 1000;
+}
+
 @end

@@ -102,11 +102,11 @@ static NSInteger const kPageSize       = 10;
     };
     
     if (self.selectedDoctor) {
-        NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLDoctorModel *)[self.dataList lastObject]).createDate;
+        NSDate *maxDate = isLatest ? nil : ((WLDoctorModel *)[self.dataList lastObject]).createDate;
         [[WLServerHelper sharedInstance] doctor_getListWithMaxDate:maxDate pageSize:kPageSize callback:callback];
     }
     else {
-        NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLNutritionModel *)[self.dataList lastObject]).createDate;
+        NSDate *maxDate = isLatest ? nil : ((WLNutritionModel *)[self.dataList lastObject]).createDate;
         [[WLServerHelper sharedInstance] nutrition_getListWithMaxDate:maxDate pageSize:kPageSize callback:callback];
     }
 }
@@ -128,6 +128,7 @@ static NSInteger const kPageSize       = 10;
 
 - (void)setSelectedDoctor:(BOOL)selectedDoctor {
     _selectedDoctor = selectedDoctor;
+    self.dataList = [NSArray array];
     [self _setTextColorWithChannelButton:self.channelButton1 isSelected:!selectedDoctor];
     [self _setTextColorWithChannelButton:self.channelButton2 isSelected:selectedDoctor];
 }

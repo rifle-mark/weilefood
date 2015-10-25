@@ -20,14 +20,14 @@
 }
 
 - (void)message_getDialogListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
-    NSString *apiUrl = [self getApiUrlWithPaths:@[@"message", @"list", @(pageSize), @([maxDate millisecondIntervalSince1970])]];
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"message", @"list", @(pageSize), @(maxDate ? [maxDate millisecondIntervalSince1970_Beijing] : 0)]];
     [self httpGET:apiUrl parameters:nil resultItemsClass:[WLDialogModel class] callback:callback];
 }
 
 - (void)message_getMessageListWithUserId:(NSUInteger)userId maxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"message", @"dialog"]];
     NSDictionary *parameters = @{@"pagesize":@(pageSize),
-                                 @"maxdate":@([maxDate millisecondIntervalSince1970]),
+                                 @"maxdate":@(maxDate ? [maxDate millisecondIntervalSince1970_Beijing] : 0),
                                  @"touserid":@(userId)};
     [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLMessageModel class] callback:callback];
 }

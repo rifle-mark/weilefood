@@ -190,7 +190,7 @@ static NSInteger const kCommentButtonHeight = 40;
         self.video = apiResult;
         [self _showData];
     }];
-    [[WLServerHelper sharedInstance] comment_getListWithType:WLCommentTypeVideo refId:self.video.videoId maxDate:0 pageSize:5 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
+    [[WLServerHelper sharedInstance] comment_getListWithType:WLCommentTypeVideo refId:self.video.videoId maxDate:nil pageSize:5 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         if (error || !apiInfo.isSuc) {
             return;

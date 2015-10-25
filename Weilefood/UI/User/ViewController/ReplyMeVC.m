@@ -65,7 +65,7 @@ static NSInteger    kPageSize = 20;
 
 - (void)_loadDataWithIsLatest:(BOOL)isLatest {
     _weak(self);
-    NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLCommentModel *)[self.commentList lastObject]).createDate;
+    NSDate *maxDate = isLatest ? nil : ((WLCommentModel *)[self.commentList lastObject]).createDate;
     [[WLServerHelper sharedInstance] comment_getReplyMeListWithMaxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         if (self.tableView.header.isRefreshing) {

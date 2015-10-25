@@ -182,13 +182,13 @@ static NSUInteger kPageSize = 20;
             [self.shareListTableV.footer endRefreshing];
         }
         ServerHelperErrorHandle;
-        self.shareList = [date timeIntervalSince1970]==0?apiResult:[self.shareList arrayByAddingObjectsFromArray:apiResult];
+        self.shareList = date ? [self.shareList arrayByAddingObjectsFromArray:apiResult] : apiResult;
         self.shareListTableV.footer.hidden = !apiResult || apiResult.count < pageSize;
     }];
 }
 
 - (void)_refreshCommentList {
-    [self _loadShareAtDate:[NSDate dateWithTimeIntervalSince1970:0] pageSize:kPageSize];
+    [self _loadShareAtDate:nil pageSize:kPageSize];
 }
 
 - (void)_loadMoreComment {

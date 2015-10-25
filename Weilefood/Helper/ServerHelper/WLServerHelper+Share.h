@@ -40,7 +40,7 @@
 /**
  *  获取分享列表。(NSArray<WLShareModel>)apiResult
  *
- *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param maxDate  加载最新数据传nil，加载更多数据传lastItem.Date
  *  @param pageSize 返回的最大记录数
  *  @param callback
  */
@@ -49,7 +49,7 @@
 /**
  *  获取我的分享列表。(NSArray<WLShareModel>)apiResult
  *
- *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param maxDate  加载最新数据传nil，加载更多数据传lastItem.Date
  *  @param pageSize 返回的最大记录数
  *  @param callback
  */
@@ -59,7 +59,7 @@
  *  获取用户的分享列表。(NSArray<WLShareModel>)apiResult
  *
  *  @param userId   用户ID
- *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param maxDate  加载最新数据传nil，加载更多数据传lastItem.Date
  *  @param pageSize 返回的最大记录数
  *  @param callback
  */

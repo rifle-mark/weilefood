@@ -17,7 +17,7 @@
 }
 
 - (void)doctor_getListWithMaxDate:(NSDate *)maxDate pageSize:(NSUInteger)pageSize callback:(void (^)(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error))callback {
-    NSString *apiUrl = [self getApiUrlWithPaths:@[@"doctor", @"list", @1, @(pageSize), @([maxDate millisecondIntervalSince1970])]];
+    NSString *apiUrl = [self getApiUrlWithPaths:@[@"doctor", @"list", @1, @(pageSize), @(maxDate ? [maxDate millisecondIntervalSince1970_Beijing] : 0)]];
     [self httpGET:apiUrl parameters:nil resultItemsClass:[WLDoctorModel class] callback:callback];
 }
 

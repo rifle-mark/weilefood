@@ -24,7 +24,7 @@
 /**
  *  营养师列表。(NSArray<WLDoctorModel>)apiResult
  *
- *  @param maxDate   加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param maxDate   加载最新数据传nil，加载更多数据传lastItem.Date
  *  @param pageSize  返回的最大记录数
  *  @param callback
  */

@@ -17,4 +17,11 @@
  */
 - (NSTimeInterval)millisecondIntervalSince1970;
 
+/**
+ *  实例时间相对与1970年的毫秒数，并加上北京时区+8小时
+ *
+ *  @return 北京时区+8小时毫秒数
+ */
+- (NSTimeInterval)millisecondIntervalSince1970_Beijing;
+
 @end

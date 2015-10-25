@@ -497,7 +497,7 @@ static NSString *const kHintText = @"在这里说点什么吧...";
         return;
     }
     _weak(self);
-    [[WLServerHelper sharedInstance] comment_getListWithType:WLCommentTypeShare refId:self.share.shareId maxDate:[NSDate dateWithTimeIntervalSince1970:0] pageSize:20 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
+    [[WLServerHelper sharedInstance] comment_getListWithType:WLCommentTypeShare refId:self.share.shareId maxDate:nil pageSize:20 callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         [self.commentDetailTableV.header endRefreshing];
         [self.commentDetailTableV.footer endRefreshing];

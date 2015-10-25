@@ -135,7 +135,7 @@ static NSUInteger kPageSize = 20;
 
 - (void)_loadMessageListWithLatest:(BOOL)islatest {
     _weak(self);
-    NSDate *maxDate = islatest?[NSDate dateWithTimeIntervalSince1970:0]:[self.messageList[0] createDate];
+    NSDate *maxDate = islatest ? nil : [self.messageList[0] createDate];
     [[WLServerHelper sharedInstance] message_getDialogListWithMaxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         ServerHelperErrorHandle;
@@ -145,7 +145,7 @@ static NSUInteger kPageSize = 20;
         _strong_check(self);
         ServerHelperErrorHandle;
         
-        if ([maxDate timeIntervalSince1970] == 0) {
+        if (!maxDate) {
             self.messageList = [[apiResult reverseObjectEnumerator] allObjects];
         }
         else {

@@ -33,7 +33,7 @@
  *  根据市集栏目获取市集产品列表。(NSArray<WLProductModel>)apiResult
  *
  *  @param channelId 市集栏目ID
- *  @param maxDate   加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param maxDate   加载最新数据传nil，加载更多数据传lastItem.Date
  *  @param pageSize  返回的最大记录数
  *  @param callback
  */
@@ -43,7 +43,7 @@
  *  搜索市集栏目产品。(NSArray<WLProductModel>)apiResult
  *
  *  @param keyword  搜索关键字
- *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param maxDate  加载最新数据传nil，加载更多数据传lastItem.Date
  *  @param pageSize 返回的最大记录数
  *  @param callback
  */

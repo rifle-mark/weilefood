@@ -37,7 +37,7 @@ typedef NS_ENUM(NSUInteger, WLCommentType);
  *
  *  @param type     评论对象的类型
  *  @param refId    对象ID
- *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param maxDate  加载最新数据传nil，加载更多数据传lastItem.Date
  *  @param pageSize 返回的最大记录数
  *  @param callback
  */
@@ -48,7 +48,7 @@ typedef NS_ENUM(NSUInteger, WLCommentType);
  *
  *  @param type     评论对象的类型
  *  @param refId    对象ID
- *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param maxDate  加载最新数据传nil，加载更多数据传lastItem.Date
  *  @param pageSize 返回的最大记录数
  *  @param callback
  */
@@ -57,7 +57,7 @@ typedef NS_ENUM(NSUInteger, WLCommentType);
 /**
  *  获取回复我的列表。(NSArray<WLCommentModel>)apiResult
  *
- *  @param maxDate  加载最新数据传0，加载更多数据传MIN(Date)
+ *  @param maxDate  加载最新数据传nil，加载更多数据传lastItem.Date
  *  @param pageSize 返回的最大记录数
  *  @param callback
  */

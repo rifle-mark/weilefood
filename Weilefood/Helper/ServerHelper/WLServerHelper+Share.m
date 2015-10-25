@@ -35,7 +35,7 @@
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"share", @"list"]];
     NSDictionary *parameters = @{@"pageindex": @(1),
                                  @"pagesize": @(pageSize),
-                                 @"maxdate": @([maxDate millisecondIntervalSince1970]),
+                                 @"maxdate": @(maxDate ? [maxDate millisecondIntervalSince1970_Beijing] : 0),
                                  };
     [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLShareModel class] callback:callback];
 }
@@ -44,7 +44,7 @@
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"share", @"mylist"]];
     NSDictionary *parameters = @{@"pageindex": @(1),
                                  @"pagesize": @(pageSize),
-                                 @"maxdate": @([maxDate millisecondIntervalSince1970]),
+                                 @"maxdate": @(maxDate ? [maxDate millisecondIntervalSince1970_Beijing] : 0),
                                  };
     [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLShareModel class] callback:callback];
 }
@@ -54,7 +54,7 @@
     NSDictionary *parameters = @{@"pageindex": @(1),
                                  @"pagesize": @(pageSize),
                                  @"userid": @(userId),
-                                 @"maxdate": @([maxDate millisecondIntervalSince1970]),
+                                 @"maxdate": @(maxDate ? [maxDate millisecondIntervalSince1970_Beijing] : 0),
                                  };
     [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLShareModel class] callback:callback];
 }

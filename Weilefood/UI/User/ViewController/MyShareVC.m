@@ -76,7 +76,7 @@ static NSInteger kPageSize = 20;
             [self.tableView.footer endRefreshing];
         }
         ServerHelperErrorHandle;
-        self.shareList = [date timeIntervalSince1970]==0?apiResult:[self.shareList arrayByAddingObjectsFromArray:apiResult];
+        self.shareList = date ? [self.shareList arrayByAddingObjectsFromArray:apiResult] : apiResult;
         self.tableView.footer.hidden = !apiResult || apiResult.count < pageSize;
     };
     if (self.userId == currentUser.userId) {
@@ -116,7 +116,7 @@ static NSInteger kPageSize = 20;
         _weak(self);
         [_tableView headerWithRefreshingBlock:^{
             _strong_check(self);
-            [self _loadShareAtDate:[NSDate dateWithTimeIntervalSince1970:0] pageSize:kPageSize];
+            [self _loadShareAtDate:nil pageSize:kPageSize];
         }];
         [_tableView footerWithRefreshingBlock:^{
             _strong_check(self);
@@ -194,7 +194,7 @@ static NSInteger kPageSize = 20;
         
         [_tableView withBlockForRowDidSelect:^(UITableView *view, NSIndexPath *path) {
             _strong_check(self);
-            if (path.row >= [self.shareList count]+1) {
+            if (path.row < 1) {
                 return;
             }
             

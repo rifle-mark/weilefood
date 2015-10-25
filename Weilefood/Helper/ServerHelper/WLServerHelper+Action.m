@@ -28,7 +28,7 @@
     NSString *apiUrl = [self getApiUrlWithPaths:@[@"action", @"myfav"]];
     NSDictionary *parameters = @{@"type"       : @(type),
                                  @"pagesize"   : @(pageSize),
-                                 @"createdate" : @([maxDate millisecondIntervalSince1970]),
+                                 @"createdate" : @(maxDate ? [maxDate millisecondIntervalSince1970_Beijing] : 0),
                                  };
     [self httpPOST:apiUrl parameters:parameters resultItemsClass:[WLActionModel class] callback:callback];
 }

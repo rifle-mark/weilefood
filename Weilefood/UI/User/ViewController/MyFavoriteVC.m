@@ -51,7 +51,7 @@
 - (void)_loadDataWithIsLatest:(BOOL)isLatest {
     static NSUInteger const kPageSize = 10;
     _weak(self);
-    NSDate *maxDate = isLatest ? [NSDate dateWithTimeIntervalSince1970:0] : ((WLActionModel *)[self.actionList lastObject]).createDate;
+    NSDate *maxDate = isLatest ? nil : ((WLActionModel *)[self.actionList lastObject]).createDate;
     [[WLServerHelper sharedInstance] action_myFavoriteListWithType:WLActionTypeAll maxDate:maxDate pageSize:kPageSize callback:^(WLApiInfoModel *apiInfo, NSArray *apiResult, NSError *error) {
         _strong_check(self);
         if (self.tableView.header.isRefreshing) {
