@@ -13,7 +13,6 @@
 
 @property (nonatomic, strong) SwipeView     *bannerView;
 @property (nonatomic, strong) UIPageControl *pageControl;
-@property (nonatomic, strong) UIView        *lineView;
 @property (nonatomic, strong) UIImageView   *leftImageView;
 @property (nonatomic, strong) UILabel       *leftLabel;
 @property (nonatomic, strong) UIButton      *leftButton;
@@ -34,7 +33,6 @@
 @end
 
 static NSInteger const kHeaderBannerHeight  = 160;
-static NSInteger const kHeaderLineHeight    = 8;
 static NSInteger const kHeaderButtonWidth   = 80;
 static NSInteger const kHeaderButtonHeight  = 126;
 static NSInteger const kHeaderAdHeight      = 88;
@@ -42,12 +40,12 @@ static NSInteger const kHeaderAdHeight      = 88;
 @implementation DiscoveryCollectionHeaderView
 
 + (CGFloat)viewHeight {
-    return kHeaderBannerHeight + kHeaderLineHeight + kHeaderButtonHeight + kHeaderAdHeight;
+    return kHeaderBannerHeight + kHeaderButtonHeight + kHeaderAdHeight;
 }
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        NSArray *array = @[self.bannerView,         self.pageControl,   self.lineView,
+        NSArray *array = @[self.bannerView,         self.pageControl,
                            self.leftImageView,      self.leftLabel,     self.leftButton,
                            self.middleImageView,    self.middleLabel,   self.middleButton,
                            self.rightImageView,     self.rightLabel,    self.rightButton,
@@ -74,13 +72,8 @@ static NSInteger const kHeaderAdHeight      = 88;
         make.bottom.equalTo(self.bannerView).offset(-10);
         make.size.mas_equalTo(size);
     }];
-    [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.lineView.superview);
-        make.top.equalTo(self.bannerView.mas_bottom);
-        make.height.equalTo(@(kHeaderLineHeight));
-    }];
     [self.middleButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.lineView.mas_bottom);
+        make.top.equalTo(self.bannerView.mas_bottom);
         make.centerX.equalTo(@0);
         make.size.mas_equalTo(CGSizeMake(kHeaderButtonWidth, kHeaderButtonHeight));
     }];
@@ -190,14 +183,6 @@ static NSInteger const kHeaderAdHeight      = 88;
         _pageControl.layer.cornerRadius = 7;
     }
     return _pageControl;
-}
-
-- (UIView *)lineView {
-    if (!_lineView) {
-        _lineView = [[UIView alloc] init];
-        _lineView.backgroundColor = k_COLOR_LAVENDER;
-    }
-    return _lineView;
 }
 
 - (UIImageView *)leftImageView {
