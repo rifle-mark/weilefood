@@ -73,7 +73,9 @@ static NSInteger const kImageChangeDelay = 4;
     UIImageView *imageView = nil;
     if (!view) {
         imageView = [[UIImageView alloc] init];
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        // fixed by mark, 改成scaletofill免得以后运营过程图片尺寸稍稍不对导致切图。
+//        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.contentMode = UIViewContentModeScaleToFill;
         imageView.clipsToBounds = YES;
     }
     else {

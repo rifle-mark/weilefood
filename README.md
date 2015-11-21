@@ -73,6 +73,11 @@ Duang123
 
 ViewController代码结构请看./Documents/ViewController_CodeStructure<br>
 
+####后台地址
+地址: 	http://web.ifeicai.com/admin/login.aspx<br>
+用户名:	admin<br>
+密码:	123<br>
+
 ####第三方组件
 __支付宝__      https://github.com/winann/IntegratedAlipay<br>
 __MOB短信验证__ http://mob.com/Download/detail?type=4&plat=2<br>

@@ -32,7 +32,7 @@
 
 @end
 
-static NSInteger const kHeaderBannerHeight  = 160;
+//static NSInteger const kHeaderBannerHeight  = 160;
 static NSInteger const kHeaderButtonWidth   = 80;
 static NSInteger const kHeaderButtonHeight  = 126;
 static NSInteger const kHeaderAdHeight      = 88;
@@ -40,7 +40,7 @@ static NSInteger const kHeaderAdHeight      = 88;
 @implementation DiscoveryCollectionHeaderView
 
 + (CGFloat)viewHeight {
-    return kHeaderBannerHeight + kHeaderButtonHeight + kHeaderAdHeight;
+    return ceilf([UIScreen mainScreen].bounds.size.width/2.0) + kHeaderButtonHeight + kHeaderAdHeight;
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -62,7 +62,7 @@ static NSInteger const kHeaderAdHeight      = 88;
 - (void)_remakeConstraints {
     [self.bannerView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self.bannerView.superview);
-        make.height.equalTo(@(kHeaderBannerHeight));
+        make.height.equalTo(@(ceilf([UIScreen mainScreen].bounds.size.width/2.0)));
     }];
     CGSize size = [self.pageControl sizeForNumberOfPages:self.pageControl.numberOfPages];
     size.width += 8;
@@ -272,7 +272,9 @@ static NSInteger const kHeaderAdHeight      = 88;
 - (UIImageView *)videoImageView {
     if (!_videoImageView) {
         _videoImageView = [[UIImageView alloc] init];
-        _videoImageView.contentMode = UIViewContentModeScaleAspectFill;
+        // fixed by mark, 改成scaletofill免得以后运营过程图片尺寸稍稍不对导致切图。
+//        _videoImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _videoImageView.contentMode = UIViewContentModeScaleToFill;
         _videoImageView.clipsToBounds = YES;
         _videoImageView.userInteractionEnabled = YES;
         _weak(self);
